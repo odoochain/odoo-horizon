@@ -1,5 +1,3 @@
-![be-cloud.be](http://www.be-cloud.be/images/logo-226x110.png)
-
 # Horizon sur GitHub
 
 Ce repository contient les modules Odoo développés dans le cadre du projet 
