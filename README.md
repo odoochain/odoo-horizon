@@ -1,17 +1,10 @@
 ![be-cloud.be](http://www.be-cloud.be/images/logo-226x110.png)
 
-# odoo-modules
+# Horizon sur GitHub
 
-##beta
+Ce repository contient les modules Odoo développés dans le cadre du projet 
+Horizon qui vise à offrir une plateforme IT performante pour la gestion d'
+institutions d'études supérieures en Wallonie.
 
-- document_gdrive : use GDrive to store attachements
+## Description des modules
 
-##alpha
-
-- account_bank_statement_import_multiline : import from Lux Multiline Service
-- web_keyboard_navigation : add keayboard navigation to forms
-
-##early stage
-
-- account_bank_transfert : transfert between bank accounts
-- realestate : first idea of a real estate management app
