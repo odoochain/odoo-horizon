@@ -41,6 +41,7 @@
           <field name="arch" type="xml">
             <kanban class="o_student_group_kanban">
               <field name="name" />
+              <field name="staff_ids"/>
               <field name="participant_count"/>
               <field name="type"/>
               <templates>
