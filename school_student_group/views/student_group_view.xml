@@ -248,16 +248,14 @@
             <field name="inherit_id" ref="school_management.individual_bloc_form" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='image']" position="before">
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_view_group"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-pencil-square-o"
-                            attrs="{'invisible': [('group_count', '=', 0)]}">
-                            <field name="group_count" widget="statinfo" string="Groups"/>
-                        </button>
-                    </div>
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="action_view_group"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-pencil-square-o"
+                        attrs="{'invisible': [('group_count', '=', 0)]}">
+                        <field name="group_count" widget="statinfo" string="Groups"/>
+                    </button>
                 </xpath>
             </field>
         </record>
