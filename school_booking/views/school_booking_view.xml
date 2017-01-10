@@ -423,11 +423,9 @@
     
     -->
 
-    <template id="assets_backend" name="school_booking_assets" inherit_id="web_calendar.assets_backend">
+    <template id="assets_backend" name="school_booking_assets" inherit_id="web_scheduler.assets_backend">
       <xpath expr="." position="inside">
-          <link rel="stylesheet" href="/school_booking/static/src/css/scheduler.css" />
           <link rel="stylesheet" href="/school_booking/static/src/css/school_booking.css" />
-          <script type="text/javascript" src="/school_booking/static/src/js/scheduler.js"></script>
           <script type="text/javascript" src="/school_booking/static/src/js/school_booking.js"></script>
       </xpath>
     </template>
