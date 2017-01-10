@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="Browser">
+        <!--<header>
+            <div class="container">
+                <a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+            <ul id="nav-mobile" class="side-nav fixed">
+                <li class="logo">
+                    <img src='/web/binary/company_logo' />
+                </li>
+                <li class="search">
+                    <div class="search-wrapper card">
+                        <input id="search"><i class="material-icons">search</i></input>
+                        <div class="search-results"></div>
+                    </div>
+                </li>
+                <li class="bold"><a href="/booking/editor" class="waves-effect waves-yellow"><i class="material-icons dp48">vpn_key</i>Edit your bookings</a></li>
+                <li class="bold"><a href="getting-started.html" class="waves-effect waves-yellow"><i class="material-icons dp48">live_help</i>Help</a></li>
+            </ul>
+        </header>
+        <main>-->
+            <div class="section no-pad-bot">
+                <div class="container">
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        <!--</main>-->
+        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+          <a class="btn-floating btn-large waves-effect waves-light red">
+            <i class="material-icons">add</i>
+          </a>
+        </div>
+    </t>
+</templates>
