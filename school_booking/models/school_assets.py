@@ -29,7 +29,9 @@ class Asset(models.Model):
     _name = 'school.asset'
     _description = 'School Asset'
     _inherit = ['mail.thread']
+    _order = 'sequence'
     
+    sequence = fields.Integer(string='Sequence')
     name = fields.Char(required=True, translate=True)
     active = fields.Boolean(name="Active", default=True)
     asset_type_id = fields.Many2one('school.asset_type', string='Asset Type')

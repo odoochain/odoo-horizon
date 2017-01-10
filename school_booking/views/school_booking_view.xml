@@ -139,6 +139,7 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Assets">
+          <field name="sequence"/>
           <field name="name"/>
           <field name="building_id"/>
           <field name="asset_type_id"/>
@@ -174,6 +175,7 @@
               <field name="tag_ids" widget="many2many_tags"/>
             </group>
             <group col="4">
+              <field name="sequence"/>
               <field name="require_validation"/>
               <field name="responsible_id" attrs="{'invisible': [('require_validation','=',False)]}"/>
               <field name="linked_to_room"/>
@@ -343,7 +345,7 @@
         <field name="model">school.booking</field>
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
-            <calendar string="Bookings" date_start="start_datetime" color="asset_id" date_delay="duration">
+            <calendar string="Bookings" date_start="start_datetime" color="asset_id" date_delay="duration" scheduler_group="asset_id">
                 <field name="partner_id"/>
                 <field name="asset_id"/>
             </calendar>
