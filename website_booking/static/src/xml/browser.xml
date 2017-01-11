@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     <t t-name="Browser">
-        <!--<header>
-            <div class="container">
-                <a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only">
-                    <i class="material-icons">menu</i>
-                </a>
+        <nav class="nav-extended">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo"><img src='/website_booking/static/src/img/logo.png' /></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="sass.html">Sass</a></li>
+                    <li><a href="badges.html">Components</a></li>
+                    <li><a href="collapsible.html">JavaScript</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="sass.html">Sass</a></li>
+                    <li><a href="badges.html">Components</a></li>
+                    <li><a href="collapsible.html">JavaScript</a></li>
+                </ul>
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a href="#test1">Test 1</a></li>
+                    <li class="tab"><a class="active" href="#test2">Test 2</a></li>
+                    <li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
+                    <li class="tab"><a href="#test4">Test 4</a></li>
+                </ul>
             </div>
-            <ul id="nav-mobile" class="side-nav fixed">
-                <li class="logo">
-                    <img src='/web/binary/company_logo' />
-                </li>
-                <li class="search">
-                    <div class="search-wrapper card">
-                        <input id="search"><i class="material-icons">search</i></input>
-                        <div class="search-results"></div>
+        </nav>
+        <nav>
+            <div class="nav-wrapper">
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" required="" />
+                        <label for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
                     </div>
-                </li>
-                <li class="bold"><a href="/booking/editor" class="waves-effect waves-yellow"><i class="material-icons dp48">vpn_key</i>Edit your bookings</a></li>
-                <li class="bold"><a href="getting-started.html" class="waves-effect waves-yellow"><i class="material-icons dp48">live_help</i>Help</a></li>
-            </ul>
-        </header>
-        <main>-->
-            <div class="section no-pad-bot">
-                <div class="container">
-                    <div id='calendar'></div>
-                </div>
+                </form>
             </div>
-        <!--</main>-->
+        </nav>
+        <div id="test1" class="col s12">Test 1</div>
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div id='calendar'></div>
+            </div>
+        </div>
         <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-          <a class="btn-floating btn-large waves-effect waves-light red">
-            <i class="material-icons">add</i>
-          </a>
+            <a class="btn-floating btn-large waves-effect waves-light light-blue">
+                <i class="material-icons">add</i>
+            </a>
         </div>
     </t>
 </templates>

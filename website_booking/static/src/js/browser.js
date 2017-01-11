@@ -46,6 +46,7 @@ var Browser = BaseWidget.extend({
     				right:'',
     			},
     			height: 800,
+    			locale: 'fr',
     			defaultDate: moment(),
     			defaultView: 'agendaDay',
     			minTime: "07:00:00",
@@ -60,6 +61,7 @@ var Browser = BaseWidget.extend({
                             } else if (!this.date_delay) {
                                 extend_domain.push([this.date_start, '>=', moment_to_str(start)]);
                             }
+                            extend_domain.push(['buiding_id', '=', 1]);
                             // read_slice is launched uncoditionally, when quickly
                             // changing the range in the calender view, all of
                             // these RPC calls will race each other. Because of
@@ -103,6 +105,7 @@ var Browser = BaseWidget.extend({
     			},
     			resources: function(callback) {
     			    self.resourceObjects = [];
+    			    self.scheduler_domain = [['building_id', '=', 1]];
                     new Model('school.asset').query(["name"]).filter(self.scheduler_domain).all().then(function(result) {
                         _.each(result, function(item) {
                             self.resourceObjects.push({

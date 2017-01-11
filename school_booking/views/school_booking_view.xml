@@ -138,7 +138,7 @@
       <field name="model">school.asset</field>
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
-        <tree string="Assets">
+        <tree string="Assets" editable="bottom">
           <field name="sequence"/>
           <field name="name"/>
           <field name="building_id"/>
