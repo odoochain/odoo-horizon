@@ -36,8 +36,25 @@ var Browser = BaseWidget.extend({
         this._super(parent, options);
     },
     
+    preprocess_node: function(node){
+        console.log(node);
+    },
+    
     start: function() {
         var self = this;
+        // Fill navigation panel
+        new Model('school.building').query(["name"]).all().then(function(result) {
+            self.asset_selection = [];
+            _.each(result, function(item) {
+                self.buildings.push({
+                    id : item.id,
+                    title : item.name,
+                });
+            })
+            var $grid = $(QWeb.render("AssetSelectionGrid", this));
+            self.$(".asset-selection-gird").html($grid);
+        });
+        // Fill calendar panel
         self.$calendar = this.$("#calendar");
         self.$calendar.fullCalendar({
     			header: {
@@ -121,6 +138,7 @@ var Browser = BaseWidget.extend({
     		});
     		setTimeout(function() {
                     self.$calendar.fullCalendar('changeView');
+                    componentHandler.upgradeAllRegistered();
                 }, 100);
     },
     

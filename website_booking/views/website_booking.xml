@@ -23,15 +23,17 @@
 <openerp>
     <data>
         <template id="assets" name="website_booking assets">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-            <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-pink.css" />
+            <!--Import MDL css-->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+            <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-pink.min.css" />
             
             <!--Import Fullcalendar css-->
             <link rel="stylesheet" href="/web_calendar/static/lib/fullcalendar/css/fullcalendar.css"/>
             <link rel="stylesheet" href="/web_scheduler/static/lib/fullcalendar/scheduler.css" />
+            
             <link rel="stylesheet" href="/website_booking/static/src/css/main.css"/>
             
-            <script defer="1" src="https://code.getmdl.io/1.3.0/material.js"></script>
+            <script type="text/javascript" src="/website_booking/static/lib/mdl/material.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/base.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser.js"></script>
         </template>
