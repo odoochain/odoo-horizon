@@ -1,13 +1,16 @@
 odoo.define('website_booking.browser', function (require) {
 "use strict";
 
+/* global moment, time */
+
 var core = require('web.core');
-var data = require('web.data');
-var BaseWidget = require('website_booking.BaseWidget');
-var Model = require('web.DataModel');
+var ajax = require('web.ajax');
+var Widget = require('web.Widget');
 
 var _t = core._t;
-var QWeb = core.qweb;
+var qweb = core.qweb;
+
+ajax.loadXML('/website_booking/static/src/xml/browser.xml', qweb);
 
 /**
  * Converts a Moment javascript object to a string using OpenERP's
@@ -29,121 +32,226 @@ function moment_to_str (obj) {
     return obj.format('YYYY-MM-DD hh:mm:ss');
 }
 
-var Browser = BaseWidget.extend({
-    template: 'Browser',
+var MDLWidget = Widget.extend({
     
-    init: function(parent, options) {
-        this._super(parent, options);
+    start: function () {
+        this._super.apply(this, arguments);
+        componentHandler.upgradeElements(this.$el);
     },
     
-    preprocess_node: function(node){
-        console.log(node);
+});
+
+var NavigationCard = MDLWidget.extend({
+    template: 'website_booking.browser_navigation_card',
+    
+    events: {
+        "click .navbar-card": function (event) {
+            event.preventDefault();
+            var self = this;
+            self.getParent().$('.navbar-card.active').removeClass('active');
+            self.$(event.currentTarget).addClass('active');
+            var category_id = self.$(event.currentTarget).data('category-id');
+            if(self.to_parent) {
+                self.trigger_up('up_category', {'category' : self.category});
+            } else {
+                self.trigger_up('click_category', {'category' : self.category});
+            }
+        },
     },
     
-    start: function() {
+    init: function(parent, category, to_parent) {
+        this._super(parent);
+        this.category = category;
+        this.to_parent = to_parent;
+    },
+    
+    set_active: function() {
+        this.getParent().$el.find('.navbar-card.mdl-shadow--8dp').removeClass('mdl-shadow--8dp').addClass('mdl-shadow--2dp')
+        this.$el.find('.navbar-card').removeClass('mdl-shadow--2dp').addClass('mdl-shadow--8dp');
+    },
+    
+});
+
+var Navigation = MDLWidget.extend({
+    template: 'website_booking.browser_navigation',
+    
+    custom_events: {
+        'click_category' : 'click_category',
+        'up_category' : 'up_category',
+    },
+    
+    renderElement: function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        self.cat_path = [];
+        self.parent_category = false;
+        ajax.jsonRpc('/booking/categories', 'call', {}).done(function(categories){
+                self.categories = categories;
+                self.set_categories(self.categories,false);
+            }
+        );
+    },
+    
+    set_categories: function(categories, up_category) {
+        var self = this;
+        self.$(".categories").empty();
+        self.categories.forEach(function(category) {
+            var card = new NavigationCard(self, category, false);
+            card.appendTo(self.$(".categories"));
+        });
+        if(up_category) {
+            var card = new NavigationCard(self, up_category, true);
+            card.appendTo(self.$(".categories"));
+        }
+    },
+    
+    click_category : function(event) {
+        var self = this;
+        console.log("Navigator switch_category");
+        var cat = event.data.category;
+        ajax.jsonRpc('/booking/categories', 'call', {'parent_id':cat.id}).done(function(categories){
+                if(categories.length > 0) {
+                    self.cat_path.push(self.parent_category);
+                    self.parent_category = cat;
+                    self.categories = categories;
+                    self.set_categories(self.categories,self.parent_category);
+                } else {
+                    // We are on a leaf
+                    event.target.set_active();
+                }
+            }
+        );
+        self.trigger_up('switch_category', {'category' : cat});
+    },
+    
+    up_category : function(event) {
+        var self = this;
+        self.parent_category = self.cat_path.pop();
+        ajax.jsonRpc('/booking/categories', 'call', {'parent_id':self.parent_category ? self.parent_category.id : false}).done(function(categories){
+                if(categories.length > 0) {
+                    self.categories = categories;
+                    self.set_categories(self.categories,self.parent_category);
+                }
+            }
+        );
+        self.trigger_up('switch_category', {'category' : self.parent_category});
+    },
+    
+});
+
+var Calendar = MDLWidget.extend({
+    template: 'website_booking.browser_calendar',
+
+    renderElement: function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        self.$calendar = this.$el;
+        self.$calendar.fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right:'',
+			},
+			height: 800,
+			locale: 'fr',
+			titleFormat: 'dddd, D MMMM',
+			defaultDate: moment(),
+			defaultView: 'agendaDay',
+			minTime: "07:00:00",
+			maxTime: "20:00:00",
+			navLinks: true, // can click day/week names to navigate views
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			events: self.fetch_events.bind(this),
+			resources: self.fetch_resources.bind(this),
+            refetchResourcesOnNavigate : false,
+		});
+    },
+    
+    start : function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        // Force a refresh to get it right
+        setTimeout(function() {
+            self.$calendar.fullCalendar('changeView');
+        }, 100);
+    },
+    
+    fetch_resources : function(callback) {
+        var self = this;
+        self.ressources = [];
+	    ajax.jsonRpc('/booking/assets', 'call', {'category_id':self.category_id}).done(function(assets){
+                assets.forEach(function(asset) {
+                    self.ressources.push({
+                        'id' : asset.id,
+                        'title' : asset.name,
+                    });
+                });
+                callback(self.ressources);
+            }
+        );
+    },
+    
+    fetch_events: function(start, end, timezone, callback) {
+        var self = this;
+        var self = this;
+		self.events = [];
+	    ajax.jsonRpc('/booking/events', 'call', {
+	    		'category_id':self.category_id,
+				'start' : start,
+				'end' : end,
+	    	}).done(function(events){
+                events.forEach(function(evt) {
+                    self.events.push({
+                        'start': moment(evt.start).format('YYYY-MM-DD HH:mm:ss'),
+                        'end': moment(evt.stop).format('YYYY-MM-DD HH:mm:ss'),
+                        'title': evt.partner_id[1] + " - " + evt.name,
+                        'allDay': evt.allday,
+                        'id': evt.id,
+                        'resourceId':evt.asset_id[0],
+                    });
+                });
+                callback(self.events);
+            }
+        );
+        
+    },
+    
+    switch_category : function(category) {
+        console.log('Calendar switch_category ' + category.name);
+        this.category_id = category.id;
+        this.$calendar.fullCalendar( 'refetchResources' );
+        this.$calendar.fullCalendar( 'refetchEvents' );
+    },
+            
+});
+
+var Browser = MDLWidget.extend({
+    template: 'website_booking.browser',
+    
+    custom_events: {
+        'switch_category' : 'switch_category',    
+    },
+    
+    renderElement: function() {
+        this._super.apply(this, arguments);
         var self = this;
         // Fill navigation panel
-        new Model('school.building').query(["name"]).all().then(function(result) {
-            self.asset_selection = [];
-            _.each(result, function(item) {
-                self.buildings.push({
-                    id : item.id,
-                    title : item.name,
-                });
-            })
-            var $grid = $(QWeb.render("AssetSelectionGrid", this));
-            self.$(".asset-selection-gird").html($grid);
-        });
-        // Fill calendar panel
-        self.$calendar = this.$("#calendar");
-        self.$calendar.fullCalendar({
-    			header: {
-    				left: 'prev,next today',
-    				center: 'title',
-    				right:'',
-    			},
-    			height: 800,
-    			locale: 'fr',
-    			defaultDate: moment(),
-    			defaultView: 'agendaDay',
-    			minTime: "07:00:00",
-    			maxTime: "20:00:00",
-    			navLinks: true, // can click day/week names to navigate views
-    			editable: true,
-    			eventLimit: true, // allow "more" link when too many events
-    			events: function(start, end, timezone, callback){
-                            var extend_domain = [[this.date_start, '<=', moment_to_str(end)]];
-                            if (this.date_stop) {
-                                extend_domain.push([this.date_stop, '>=', moment_to_str(start)]);
-                            } else if (!this.date_delay) {
-                                extend_domain.push([this.date_start, '>=', moment_to_str(start)]);
-                            }
-                            extend_domain.push(['buiding_id', '=', 1]);
-                            // read_slice is launched uncoditionally, when quickly
-                            // changing the range in the calender view, all of
-                            // these RPC calls will race each other. Because of
-                            // this we keep track of the current range of the
-                            // calendar view.
-                            self.current_start = start.toDate();
-                            self.current_end = end.toDate();
-                            self.dataset.read_slice(['id', 'name','start','stop','allday','asset_id','partner_id'], {
-                                offset: 0,
-                                domain: extend_domain,
-                                context: {},
-                            }).done(function(events) {
-                                // undo the read_slice if it the range has changed since it launched
-                                if (self.current_start.getTime() != start.toDate().getTime() || self.current_end.getTime() != end.toDate().getTime()) {
-                                    self.dataset.ids = self.previous_ids;
-                                    return;
-                                }
-                                self.previous_ids = self.dataset.ids.slice();
-                                if (self.dataset.index === null) {
-                                    if (events.length) {
-                                        self.dataset.index = 0;
-                                    }
-                                } else if (self.dataset.index >= events.length) {
-                                    self.dataset.index = events.length ? 0 : null;
-                                }
-                                var fc_events = [];
-                                for (var evt_id in events) {
-                                    var evt = events[evt_id];
-                                    var r = {
-                                        'start': moment(evt.start).format('YYYY-MM-DD HH:mm:ss'),
-                                        'end': moment(evt.stop).format('YYYY-MM-DD HH:mm:ss'),
-                                        'title': evt.partner_id[1] + " - " + evt.name,
-                                        'allDay': evt.allday,
-                                        'id': evt.id,
-                                        'resourceId':evt.asset_id[0],
-                                    };
-                                    fc_events.push(r);
-                                }
-                                callback(fc_events);
-                            });
-    			},
-    			resources: function(callback) {
-    			    self.resourceObjects = [];
-    			    self.scheduler_domain = [['building_id', '=', 1]];
-                    new Model('school.asset').query(["name"]).filter(self.scheduler_domain).all().then(function(result) {
-                        _.each(result, function(item) {
-                            self.resourceObjects.push({
-                                id : item.id,
-                                title : item.name,
-                            });
-                        });
-                    }).done(function() {
-                        callback(self.resourceObjects);
-                    });
-                },
-                refetchResourcesOnNavigate : false,
-    		});
-    		setTimeout(function() {
-                    self.$calendar.fullCalendar('changeView');
-                    componentHandler.upgradeAllRegistered();
-                }, 100);
+        self.nav = new Navigation(this);
+        self.nav.appendTo(this.$(".navbar"));
+        self.cal = new Calendar(this);
+        self.cal.appendTo(this.$(".calendar"));
+    },
+    
+    switch_category: function(event) {
+        //console.log('Browser switch_category');
+        this.cal.switch_category(event.data.category);
     },
     
 });
 
 core.action_registry.add('website_booking.browser', Browser);
+
+return Browser;
 
 });

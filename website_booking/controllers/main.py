@@ -19,6 +19,7 @@
 #
 ##############################################################################
 import logging
+import time
 import werkzeug.utils
 
 from openerp import http
@@ -26,13 +27,49 @@ from openerp.http import request
 
 _logger = logging.getLogger(__name__)
 
-
 class BookingController(http.Controller):
 
-    @http.route('/booking', type='http', auth='user', website=True)
+    @http.route('/booking', type='http', auth='public', website=True)
     def booking_browser(self, debug=False, **k):
         return request.render('website_booking.index')
 
+    @http.route('/booking/categories', type='json', auth='public', website=True)
+    def booking_categories(self, parent_id=False, debug=False, **k):
+        return request.env['school.asset.category'].sudo().search_read([('parent_id', '=', parent_id)],['name','display_name','sequence','parent_id'])
+
+    @http.route('/booking/categories/image/<int:category_id>', type='http', auth='public', website=True)
+    def booking_category_image(self, category_id, debug=False, **k):
+        category = request.env['school.asset.category'].sudo().browse(category_id)
+        if category.image:
+            response = werkzeug.wrappers.Response()
+            response.mimetype = 'image/png'
+            response.headers['Cache-Control'] = 'public, max-age=604800'
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            response.headers['Access-Control-Allow-Methods'] = 'GET, POST'
+            response.headers['Connection'] = 'close'
+            response.headers['Date'] = time.strftime("%a, %d-%b-%Y %T GMT", time.gmtime())
+            response.headers['Expires'] = time.strftime("%a, %d-%b-%Y %T GMT", time.gmtime(time.time()+604800*60))
+            response.data = category.image.decode('base64')
+            return response
+        else :
+            return werkzeug.exceptions.NotFound('No image found for this category.')
+    
+    @http.route('/booking/assets', type='json', auth='public', website=True)
+    def booking_assets(self, category_id=False, debug=False, **k):
+        if category_id:
+            return request.env['school.asset'].sudo().search_read([('category_id', '=', category_id)],['name'])
+        else:
+            return [];
+        
+    @http.route('/booking/events', type='json', auth='public', website=True)
+    def booking_events(self, start, end, timezone=False, category_id=False):
+        domain = [
+            ('start_datetime', '>=', start),    
+            ('stop_datetime', '<=', end),
+            ('asset_id.category_id', '=', category_id),
+        ]
+        return request.env['school.booking'].sudo().search_read(domain,['name','start','stop','allday','asset_id','partner_id'])
+        
     @http.route('/booking/editor', type='http', auth='user', website=True)
     def booking_editor(self, debug=False, **k):
         return request.render('website_booking.editor')

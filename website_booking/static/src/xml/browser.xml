@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-    <t t-name="TypePicker">
-
-    </t>
-
-    <t t-name="Browser">
+    
+    <t t-name="website_booking.browser">
         <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <header class="header mdl-layout__header">
                 <div class="mdl-layout__header-row">
@@ -32,11 +29,11 @@
                 </div>
             </header>
             <main class="mdl-layout__content">
-                <div class="asset-selection-gird"/>
+                <div class="navbar"/>
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
                     <div class="mdl-color--white mdl-shadow--4dp content mdl-cell mdl-cell--10-col">
-                        <div id='calendar'></div>
+                        <div class='calendar'/>
                     </div>
                 </div>
                 <button id="add-booking-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast"><i class="material-icons">add</i></button>
@@ -44,19 +41,39 @@
         </div>
     </t>
     
-    <t t-name="AssetSelectionGrid">
+    <t t-name="website_booking.browser_calendar">
+        <div id='fc_calendar'/>
+    </t>
+    
+    <t t-name="website_booking.browser_navigation">
         <table>
-            <tr>
-                <td class="asset-selection-cell">
-                    <div class="asset-selection-card mdl-card mdl-shadow--2dp">
-                        <div class="mdl-card__title mdl-card--expand"></div>
-                        <div class="mdl-card__actions">
-                            <span class="asset-selection-name">Image.jpg</span>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+            <tr class="categories"/>
         </table>
+    </t>
+    
+    <t t-name="website_booking.browser_navigation_card">
+        <td>
+            <t t-if="!widget.to_parent">
+            <div class="navbar-card mdl-card mdl-shadow--2dp  mdl-js-ripple-effect" t-attf-style="background: url('/booking/categories/image/#{widget.category.id}')  center / cover;" t-att-data-category-id="widget.category.id" >
+                <div class="mdl-card__title mdl-card--expand">
+                    <span class="mdl-ripple"></span>
+                </div>
+                <div class="navbar-card__actions mdl-card__actions">
+                    <span t-esc="widget.category.display_name"/>
+                </div>
+            </div>
+            </t>
+            <t t-if="widget.to_parent">
+            <div class="navbar-card mdl-card mdl-shadow--2dp mdl-js-ripple-effect" t-attf-style="background: url('/website_booking/static/src/img/up.png')  center / cover;" t-att-data-category-id="widget.category.id">
+                <div class="mdl-card__title mdl-card--expand">
+                    <span class="mdl-ripple"></span>
+                </div>
+                <div class="navbar-card__actions mdl-card__actions">
+                    Previous
+                </div>
+            </div>
+            </t>
+        </td>
     </t>
     
 </templates>

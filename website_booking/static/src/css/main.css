@@ -1,0 +1,44 @@
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  overflow:hidden;
+}
+
+.navbar {
+  overflow-x:auto;
+}
+
+.navbar > table {
+  margin: 5px auto 0 auto;
+}
+
+.navbar-card {
+  margin: 16px;
+}
+
+.navbar-card.mdl-card {
+  width: 200px;
+  height: 200px;
+  min-height: 200px;
+}
+
+.navbar-card__actions.mdl-card__actions {
+  height: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fc-toolbar {
+  padding: 5px;
+}
+
+#add-booking-button {
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  z-index: 900;
+}
