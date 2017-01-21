@@ -152,7 +152,8 @@ var Calendar = MDLWidget.extend({
 				center: 'title',
 				right:'',
 			},
-			height: 800,
+			editable: false,
+			height: 640,
 			locale: 'fr',
 			titleFormat: 'dddd, D MMMM',
 			defaultDate: moment(),
@@ -174,6 +175,8 @@ var Calendar = MDLWidget.extend({
         // Force a refresh to get it right
         setTimeout(function() {
             self.$calendar.fullCalendar('changeView');
+            self.$('.fc-button').removeClass('fc-button').addClass('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast');
+            componentHandler.upgradeElements(self.$calendar);
         }, 100);
     },
     
@@ -205,12 +208,14 @@ var Calendar = MDLWidget.extend({
                     self.events.push({
                         'start': moment(evt.start).format('YYYY-MM-DD HH:mm:ss'),
                         'end': moment(evt.stop).format('YYYY-MM-DD HH:mm:ss'),
-                        'title': evt.partner_id[1] + " - " + evt.name,
+                        'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                         'allDay': evt.allday,
                         'id': evt.id,
                         'resourceId':evt.asset_id[0],
+                        'color': '#FA8FB1',
                     });
                 });
+                //console.log([start, end, events])
                 callback(self.events);
             }
         );

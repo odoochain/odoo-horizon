@@ -32,6 +32,8 @@
             <link rel="stylesheet" href="/web_scheduler/static/lib/fullcalendar/scheduler.css" />
             
             <link rel="stylesheet" href="/website_booking/static/src/css/main.css"/>
+            <link rel="stylesheet" href="/website_booking/static/src/css/fc-material.css"/>
+            <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"/>
             
             <script type="text/javascript" src="/web_calendar/static/lib/fullcalendar/js/fullcalendar.js"></script>
             <script type="text/javascript" src="/web_calendar/static/lib/fullcalendar/js/locale-all.js"></script>

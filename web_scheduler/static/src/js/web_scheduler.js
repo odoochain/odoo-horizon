@@ -107,9 +107,13 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
         
         event_data_transform: function(evt) {
             var self = this;
-            return $.extend(self._super(evt),{
-                'resourceId' : evt[self.scheduler_group][0],
-            });
+            if(self.scheduler_group){
+                return $.extend(self._super(evt),{
+                    'resourceId' : evt[self.scheduler_group][0],
+                });
+            } else {
+                return self._super(evt);
+            }
         },
         
     });

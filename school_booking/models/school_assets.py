@@ -19,7 +19,7 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models, _, tools
 from openerp.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -37,6 +37,7 @@ class Asset(models.Model):
     asset_type_id = fields.Many2one('school.asset_type', string='Asset Type')
     building_id = fields.Many2one('school.building', string='Building')
     tag_ids = fields.Many2many('school.asset.tag', 'school_asset_tag_rel', 'asset_id', 'tag_id', string='Tags', copy=True)
+    category_id = fields.Many2one('school.asset.category', string='Category')
     
     require_validation = fields.Boolean(related='asset_type_id.require_validation')
     has_responsible = fields.Boolean(related='asset_type_id.has_responsible')
@@ -56,6 +57,55 @@ class Asset(models.Model):
         help="Small-sized photo of the employee. It is automatically "
              "resized as a 64x64px image, with aspect ratio preserved. "
              "Use this field anywhere a small image is required.")
+
+class AssetCategory(models.Model):
+    _name = "school.asset.category"
+    _description = "Asset Category"
+    _order = "sequence, name"
+
+    @api.constrains('parent_id')
+    def _check_category_recursion(self):
+        if not self._check_recursion():
+            raise ValueError(_('Error ! You cannot create recursive categories.'))
+
+    name = fields.Char(required=True, translate=True)
+    parent_id = fields.Many2one('school.asset.category', string='Parent Category', index=True)
+    child_id = fields.One2many('school.asset.category', 'parent_id', string='Children Categories')
+    sequence = fields.Integer(help="Gives the sequence order when displaying a list of asset categories.")
+    # NOTE: there is no 'default image', because by default we don't show
+    # thumbnails for categories. However if we have a thumbnail for at least one
+    # category, then we display a default image on the other, so that the
+    # buttons have consistent styling.
+    image = fields.Binary(attachment=True,
+        help="This field holds the image used as image for the cateogry, limited to 1024x1024px.")
+    image_medium = fields.Binary(string="Medium-sized image", attachment=True,
+        help="Medium-sized image of the category. It is automatically "
+             "resized as a 128x128px image, with aspect ratio preserved. "
+             "Use this field in form views or some kanban views.")
+    image_small = fields.Binary(string="Small-sized image", attachment=True,
+        help="Small-sized image of the category. It is automatically "
+             "resized as a 64x64px image, with aspect ratio preserved. "
+             "Use this field anywhere a small image is required.")
+
+    @api.model
+    def create(self, vals):
+        tools.image_resize_images(vals)
+        return super(AssetCategory, self).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        tools.image_resize_images(vals)
+        return super(AssetCategory, self).write(vals)
+
+    @api.multi
+    def name_get(self):
+        def get_names(cat):
+            res = []
+            while cat:
+                res.append(cat.name)
+                cat = cat.parent_id
+            return res
+        return [(cat.id, " / ".join(reversed(get_names(cat)))) for cat in self]
 
 class AssetTag(models.Model):
     _name = 'school.asset.tag'
@@ -131,26 +181,8 @@ class Building(models.Model):
              "resized as a 64x64px image, with aspect ratio preserved. "
              "Use this field anywhere a small image is required.")
     
-class Booking(models.Model):
+class Event(models.Model):
     """ Model for Calendar Event """
-    _name = 'school.booking'
-    _description = "Booking"
-    _order = "id desc"
-    _inherits = {'calendar.event': "event_id"}
-    
-    event_id = fields.Many2one('calendar.event', string='Event', ondelete='cascade', required=True, auto_join=True)
+    _inherit = 'calendar.event'
     
     asset_id = fields.Many2one('school.asset', string='Asset', required=True)
-    partner_id = fields.Many2one('res.partner', string='Partner', domain="[('type','=','contact')]", required=True, default=lambda self: self.env.user.partner_id)
-    
-    def onchange_allday(self, cr, uid, ids, start=False, end=False, starttime=False, endtime=False, startdatetime=False, enddatetime=False, checkallday=False, context=None):
-        return self.pool['calendar.event'].onchange_allday(cr, uid, ids, start, end, starttime, endtime, startdatetime, enddatetime, checkallday, context)
-        
-    def onchange_duration(self, cr, uid, ids, start=False, duration=False, context=None):
-        return self.pool['calendar.event'].onchange_duration(cr, uid, ids, start, duration, context)
-        
-    def onchange_dates(self, cr, uid, ids, fromtype, start=False, end=False, checkallday=False, allday=False, context=None):
-        return self.pool['calendar.event'].onchange_dates(cr, uid, ids, fromtype, start, end, checkallday, allday, context)
-        
-    def onchange_partner_ids(self, cr, uid, ids, value, context=None):
-        return self.pool['calendar.event'].onchange_partner_ids(cr, uid, ids, value, context)
