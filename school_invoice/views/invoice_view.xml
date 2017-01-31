@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+##############################################################################
+#
+#    Copyright (c) 2015 be-cloud.be
+#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<openerp>
+    <data>
+
+        <!-- Add invoice to Individual Program form view -->
+        <record id="individual_bloc_invoice_form" model="ir.ui.view">
+            <field name="name">school.individual_bloc.invoice.view</field>
+            <field name="model">school.individual_bloc</field>
+            <field name="inherit_id" ref="school_evaluations.individual_bloc_eval_form" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='set_to_progress']" position="replace">
+                    <button name="set_to_progress" type="object" states="invoiced" string="Progress" class="oe_highlight" />
+                    <button name="action_invoice_create" type="object" states="draft" string="Invoice" class="oe_highlight" />
+                </xpath>
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,invoiced,progress,awarded,abandonned" />
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>
