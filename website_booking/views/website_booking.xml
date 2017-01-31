@@ -23,10 +23,12 @@
 <openerp>
     <data>
         <template id="assets" name="website_booking assets">
-            <!--Import MDL css-->
-            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-            <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-pink.min.css" />
-            
+            <!--Import Google Icon Font-->
+            <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <!--Import materialize.css-->
+            <link type="text/css" rel="stylesheet" href="/website_booking/static/lib/materialize/css/materialize.css"  media="screen,projection"/>
+      
+                  
             <!--Import Fullcalendar css-->
             <link rel="stylesheet" href="/web_calendar/static/lib/fullcalendar/css/fullcalendar.css"/>
             <link rel="stylesheet" href="/web_scheduler/static/lib/fullcalendar/scheduler.css" />
@@ -38,7 +40,7 @@
             <script type="text/javascript" src="/web_calendar/static/lib/fullcalendar/js/fullcalendar.js"></script>
             <script type="text/javascript" src="/web_calendar/static/lib/fullcalendar/js/locale-all.js"></script>
             <script type="text/javascript" src="/web_scheduler/static/lib/fullcalendar/scheduler.js"></script>
-            <script type="text/javascript" src="/website_booking/static/lib/mdl/material.js"></script>
+            <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser.js"></script>
         </template>
     </data>
