@@ -180,9 +180,3 @@ class Building(models.Model):
         help="Small-sized photo of the employee. It is automatically "
              "resized as a 64x64px image, with aspect ratio preserved. "
              "Use this field anywhere a small image is required.")
-    
-class Event(models.Model):
-    """ Model for Calendar Event """
-    _inherit = 'calendar.event'
-    
-    asset_id = fields.Many2one('school.asset', string='Asset', required=True)

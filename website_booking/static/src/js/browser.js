@@ -6,6 +6,7 @@ odoo.define('website_booking.browser', function (require) {
 var core = require('web.core');
 var ajax = require('web.ajax');
 var Widget = require('web.Widget');
+var Dialog = require("web.Dialog");
 
 var _t = core._t;
 var qweb = core.qweb;
@@ -39,6 +40,20 @@ var MDLWidget = Widget.extend({
         componentHandler.upgradeElements(this.$el);
     },
     
+});
+
+var NewBookingDialog = Dialog.extend({
+    template: 'website_booking.new_booking_dialog',
+    
+    init: function(parent, options) {
+        this._super.apply(this, arguments);
+        this.ressources = parent.ressources;
+    },
+    
+    start: function () {
+        this._super.apply(this, arguments);
+        componentHandler.upgradeElements(this.$el);
+    },
 });
 
 var NavigationCard = MDLWidget.extend({
@@ -211,7 +226,7 @@ var Calendar = MDLWidget.extend({
                         'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                         'allDay': evt.allday,
                         'id': evt.id,
-                        'resourceId':evt.asset_id[0],
+                        'resourceId':evt.room_id[0],
                         'color': '#FA8FB1',
                     });
                 });
@@ -233,6 +248,14 @@ var Calendar = MDLWidget.extend({
 
 var Browser = MDLWidget.extend({
     template: 'website_booking.browser',
+    
+    events: {
+        "click #add-booking-button": function (event) {
+            var self = this;
+            event.preventDefault();
+            new NewBookingDialog(this, {title : _t('New Booking')}).open();
+        },
+    },
     
     custom_events: {
         'switch_category' : 'switch_category',    

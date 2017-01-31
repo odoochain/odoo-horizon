@@ -103,6 +103,7 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
                     refetchResourcesOnNavigate : false,
                 });
             }
+            return this._super();
         },
         
         event_data_transform: function(evt) {
