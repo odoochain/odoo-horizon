@@ -36,23 +36,26 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
             self = this;
             self.scheduler_group = attrs.scheduler_group;
             self.scheduler_domain = attrs.scheduler_domain;
+            self.slot_duration = attrs.slot_duration;
             self._super(fv);
         },
         
         render_buttons: function($node) {
             var self = this;
             self._super($node);
-            var bindCalendarButton = function(selector, arg1, arg2) {
-                self.$buttons.on('click', selector, _.bind(self.$calendar.fullCalendar, self.$calendar, arg1, arg2));
+            if(self.scheduler_group) {
+                var bindCalendarButton = function(selector, arg1, arg2) {
+                    self.$buttons.on('click', selector, _.bind(self.$calendar.fullCalendar, self.$calendar, arg1, arg2));
+                }
+                bindCalendarButton('.o_calendar_button_timeline', 'changeView', 'timelineDay');
             }
-            bindCalendarButton('.o_calendar_button_timeline', 'changeView', 'timelineMonth');
         },
          
         get_fc_init_options: function () {
             var self = this;
             if(self.scheduler_group) {
                 self.resourceObjects = [];
-                return $.extend(this._super(),{
+                var ret = $.extend(this._super(),{
                     
                     viewRender: function(view) {
                         var mode;
@@ -63,7 +66,7 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
                             case "agendaWeek":
                                 mode = "week" ;
                                 break;
-                            case "timelineMonth":
+                            case "timelineDay":
                                 mode = "timeline" ;
                                 break;
                             default:
@@ -78,7 +81,7 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
                         var title = self.title + ' (' + ((mode === "week")? _t("Week ") : "") + view.title + ")"; 
                         self.set({'title': title});
         
-                        self.$calendar.fullCalendar('option', 'height', Math.max(290, parseInt(self.$('.o_calendar_view').height())));
+                        self.$calendar.fullCalendar('option', 'height', Math.max(290, parseInt(self.$('.o_calendar_view').height())-30));
         
                         setTimeout(function() {
                             var $fc_view = self.$calendar.find('.fc-view');
@@ -102,6 +105,15 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
                     },
                     refetchResourcesOnNavigate : false,
                 });
+                ret.views = $.extend(ret.views, {
+                    timelineDay: { // name of view
+                        titleFormat: 'DD/MM/YYYY',
+                        minTime: {hours : 7},
+                        maxTime: {hours : 21},
+                        slotDuration: {hours : 1},
+                    },    
+                });
+                return ret;
             }
             return this._super();
         },

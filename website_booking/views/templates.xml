@@ -25,8 +25,8 @@
         <template id="index" name="Booking Index" page="True">
             <t t-call="web.layout">
                 <t t-set="head">
-                    <t t-call-assets="web.assets_common"/>
-                    <t t-call-assets="website.assets_frontend"/>
+                    <t t-call-assets="web.assets_common" t-css="false"/>
+                    <t t-call-assets="website.assets_frontend" t-css="false"/>
                     <t t-call-assets="website_booking.assets"/>
                     <script type="text/javascript">
                         $(function() {

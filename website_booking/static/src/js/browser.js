@@ -8,6 +8,8 @@ var ajax = require('web.ajax');
 var Widget = require('web.Widget');
 var Dialog = require("web.Dialog");
 
+var Model = require("web.Model");
+
 var _t = core._t;
 var qweb = core.qweb;
 
@@ -33,30 +35,193 @@ function moment_to_str (obj) {
     return obj.format('YYYY-MM-DD hh:mm:ss');
 }
 
-var MDLWidget = Widget.extend({
+var CalendarWidget = Widget.extend({
+    template: 'website_booking.browser_calendar',
     
-    start: function () {
+    get_fc_init_options: function() {
+        return {
+            header: {
+    			left: 'prev,next today',
+    			center: 'title',
+    			right:'',
+    		},
+    		editable: false,
+    		height: 720,
+    		locale: 'fr',
+    		titleFormat: 'dddd, D MMMM',
+    		defaultDate: moment(),
+    		defaultView: 'agendaDay',
+    		minTime: "07:00:00",
+    		maxTime: "20:00:00",
+    		navLinks: true, // can click day/week names to navigate views
+    		eventLimit: true, // allow "more" link when too many events
+    		refetchResourcesOnNavigate : false,
+    		timezone : 'locale',
+        }
+    },
+    
+    renderElement: function() {
         this._super.apply(this, arguments);
-        componentHandler.upgradeElements(this.$el);
+        var self = this;
+        self.$calendar = this.$el;
+        self.$calendar.fullCalendar(
+		    self.get_fc_init_options()
+		);
+    },
+    
+    start : function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        // Force a refresh to get it right
+        setTimeout(function() {
+            self.$calendar.fullCalendar('changeView');
+            self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
+        }, 100);
+    },
+    
+    refetch_events: function() {
+        this.$calendar.fullCalendar('refetchEvents');
+    },
+     
+});
+
+var Schedule =  CalendarWidget.extend({
+
+    init: function(parent, options) {
+        this._super.apply(this, arguments);
+        this.date = parent.date;
+        this.asset_id = false;
+    },
+
+    get_fc_init_options: function() {
+        var self = this;
+        return $.extend(this._super(),{
+            header: {
+                left: '',
+    			center: '',
+    			right:'',
+    		},
+            defaultDate: this.date,
+            height: 640,
+            events: self.fetch_events.bind(this),
+            allDaySlot: false,
+            dayClick: self.day_click.bind(this),
+        });
+    },
+    
+    day_click : function(date, jsEvent, view) {
+        this.trigger_up('click_scheduler', {'date' : date, 'jsEvent' : jsEvent, 'view' : view});
+    },
+    
+    fetch_events: function(start, end, timezone, callback) {
+        var self = this;
+        if(self.asset_id) {
+            self.events = [];
+    	    ajax.jsonRpc('/booking/events', 'call', {
+    	    		'asset_id':this.asset_id,
+    				'start' : start,
+    				'end' : end,
+    	    	}).done(function(events){
+                    events.forEach(function(evt) {
+                        self.events.push({
+                            'start': moment(evt.start).format('YYYY-MM-DD HH:mm:ss'),
+                            'end': moment(evt.stop).format('YYYY-MM-DD HH:mm:ss'),
+                            'title': /*evt.partner_id[1] + " - " +*/ evt.name,
+                            'allDay': evt.allday,
+                            'id': evt.id,
+                            'resourceId':evt.room_id[0],
+                            'color': '#FA8FB1',
+                        });
+                    });
+                    //console.log([start, end, events])
+                    callback(self.events);
+                }
+            );
+        }
+    },
+    
+    set_asset_id: function(asset_id) {
+        this.asset_id = asset_id;
+        this.refetch_events();
     },
     
 });
 
-var NewBookingDialog = Dialog.extend({
+var NewBookingDialog = Widget.extend({
     template: 'website_booking.new_booking_dialog',
+    
+    events: {
+        "click .request-booking": function (event) {
+            var self = this;
+            var fromTime = self.$('#from_hour').timepicker('getTime');
+            var toTime = self.$('#to_hour').timepicker('getTime');
+            var start = moment(self.date).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
+            var stop = moment(self.date).set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+            
+            new Model('calendar.event').call('create', [{
+                'name' : self.$('#textarea1').val(),
+                'start': start.format('YYYY-MM-DD HH:mm:ss'),
+                'stop': stop.format('YYYY-MM-DD HH:mm:ss'),
+                'room_id': parseInt(self.$( "select.select-asset-id" ).val()),
+            }]).then(function (id) {
+                self.trigger_up('newEvent', {'id': id});
+            });
+        },
+        "change .select-asset-id": function (event) {
+            this.schedule.set_asset_id(parseInt(this.$( "select.select-asset-id" ).val()));
+        },
+    },
+    
+    custom_events: {
+        'click_scheduler' : 'click_scheduler',
+    },
     
     init: function(parent, options) {
         this._super.apply(this, arguments);
-        this.ressources = parent.ressources;
+        this.ressources = parent.cal.ressources;
+        this.date = parent.cal.$calendar.fullCalendar( 'getDate' );
+    },
+
+    renderElement: function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        // Fill navigation panel
+        self.schedule = new Schedule(this);
+        self.schedule.appendTo(this.$(".schedule"));
+    },
+
+    start: function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        self.$('select').material_select();
+        self.$('#from_hour').timepicker({
+            'timeFormat': 'H:i',
+        });
+        self.$('#from_hour').on('change', function() {
+            var newTime = self.$('#from_hour').timepicker('getTime');
+            if (newTime) { // Not null
+                self.$('#to_hour').timepicker('option', 'minTime', newTime);
+            }
+        });
+        self.$('#to_hour').timepicker({
+            'timeFormat': 'H:i',
+            'showDuration': true,
+        });
+    },
+
+    click_scheduler: function(event) {
+        var requested_date = event.data.date;
+        
+        this.$('#from_hour').timepicker('setTime', requested_date.format("HH:mm"));
+        this.$('#to_hour').timepicker('option', 'minTime', requested_date.format("HH:mm"));
+        requested_date.add(1, 'hours');
+        this.$('#to_hour').timepicker('setTime', requested_date.format("HH:mm"));
+        Materialize.updateTextFields();
     },
     
-    start: function () {
-        this._super.apply(this, arguments);
-        componentHandler.upgradeElements(this.$el);
-    },
 });
 
-var NavigationCard = MDLWidget.extend({
+var NavigationCard = Widget.extend({
     template: 'website_booking.browser_navigation_card',
     
     events: {
@@ -81,13 +246,13 @@ var NavigationCard = MDLWidget.extend({
     },
     
     set_active: function() {
-        this.getParent().$el.find('.navbar-card.mdl-shadow--8dp').removeClass('mdl-shadow--8dp').addClass('mdl-shadow--2dp')
-        this.$el.find('.navbar-card').removeClass('mdl-shadow--2dp').addClass('mdl-shadow--8dp');
+        this.getParent().$el.find('.z-depth-5').removeClass('z-depth-5')
+        this.$el.find('.navbar-card').addClass('z-depth-5');
     },
     
 });
 
-var Navigation = MDLWidget.extend({
+var Navigation = Widget.extend({
     template: 'website_booking.browser_navigation',
     
     custom_events: {
@@ -154,47 +319,16 @@ var Navigation = MDLWidget.extend({
     
 });
 
-var Calendar = MDLWidget.extend({
-    template: 'website_booking.browser_calendar',
+var Calendar = CalendarWidget.extend({
 
-    renderElement: function() {
-        this._super.apply(this, arguments);
+    get_fc_init_options: function() {
         var self = this;
-        self.$calendar = this.$el;
-        self.$calendar.fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right:'',
-			},
-			editable: false,
-			height: 640,
-			locale: 'fr',
-			titleFormat: 'dddd, D MMMM',
-			defaultDate: moment(),
-			defaultView: 'agendaDay',
-			minTime: "07:00:00",
-			maxTime: "20:00:00",
-			navLinks: true, // can click day/week names to navigate views
-			editable: true,
-			eventLimit: true, // allow "more" link when too many events
-			events: self.fetch_events.bind(this),
-			resources: self.fetch_resources.bind(this),
-            refetchResourcesOnNavigate : false,
-		});
+        return $.extend(this._super(),{
+            events: self.fetch_events.bind(this),
+    		resources: self.fetch_resources.bind(this),
+        });
     },
-    
-    start : function() {
-        this._super.apply(this, arguments);
-        var self = this;
-        // Force a refresh to get it right
-        setTimeout(function() {
-            self.$calendar.fullCalendar('changeView');
-            self.$('.fc-button').removeClass('fc-button').addClass('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast');
-            componentHandler.upgradeElements(self.$calendar);
-        }, 100);
-    },
-    
+           
     fetch_resources : function(callback) {
         var self = this;
         self.ressources = [];
@@ -206,6 +340,7 @@ var Calendar = MDLWidget.extend({
                     });
                 });
                 callback(self.ressources);
+                self.trigger_up('switch_ressources', {'ressources' : self.ressources});
             }
         );
     },
@@ -227,7 +362,7 @@ var Calendar = MDLWidget.extend({
                         'allDay': evt.allday,
                         'id': evt.id,
                         'resourceId':evt.room_id[0],
-                        'color': '#FA8FB1',
+                        'color': evt.recurrency ? '#ffb74d' : '#64b5f6',
                     });
                 });
                 //console.log([start, end, events])
@@ -243,22 +378,28 @@ var Calendar = MDLWidget.extend({
         this.$calendar.fullCalendar( 'refetchResources' );
         this.$calendar.fullCalendar( 'refetchEvents' );
     },
-            
+    
 });
 
-var Browser = MDLWidget.extend({
+var Browser = Widget.extend({
     template: 'website_booking.browser',
     
     events: {
         "click #add-booking-button": function (event) {
             var self = this;
             event.preventDefault();
-            new NewBookingDialog(this, {title : _t('New Booking')}).open();
+            var dialog = new NewBookingDialog(this);
+            dialog.appendTo(self.main_modal.empty());
+            self.main_modal.modal('open');
         },
     },
     
     custom_events: {
-        'switch_category' : 'switch_category',    
+        'switch_category' : 'switch_category',
+        'switch_ressources' : 'switch_ressources',
+        'newEvent': function(event) {
+            this.cal.refetch_events();
+        },
     },
     
     renderElement: function() {
@@ -271,9 +412,24 @@ var Browser = MDLWidget.extend({
         self.cal.appendTo(this.$(".calendar"));
     },
     
+    start: function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        /* TODO : why this.$('#main-modal') does not work ? */
+        self.main_modal = this.$('.modal-content').parent().modal();
+    },
+    
     switch_category: function(event) {
         //console.log('Browser switch_category');
         this.cal.switch_category(event.data.category);
+    },
+    
+    switch_ressources: function(event) {
+        if(event.data.ressources.length == 0) {
+            this.$('#add-booking-button').addClass('hide');
+        } else {
+            this.$('#add-booking-button').removeClass('hide');
+        }
     },
     
 });

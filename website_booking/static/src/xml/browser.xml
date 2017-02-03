@@ -2,64 +2,74 @@
 <templates id="template" xml:space="preserve">
     
     <t t-name="website_booking.new_booking_dialog">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield hour_from" type="text"/>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield hour_to" type="text"/>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="comments" ></textarea>
-                    <label class="mdl-textfield__label" for="comments">Comments...</label>
-                </div>
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="col s6">
+                            <div class="input-field col s12">
+                                <select class="select-asset-id">
+                                    <option value="" disabled="" selected="">Choose your room</option>
+                                    <t t-foreach="widget.ressources" t-as="ressource">
+                                    <option t-att-value="ressource.id"><span t-esc="ressource.title"/></option>
+                                    </t>
+                                </select>
+                                <label>Room</label>
+                            </div>
+                            <div class='schedule'/>
+                        </div>
+                        <div class="col s6">
+                            <div class="row">
+                              <div class="input-field col s6">
+                                <input id="from_hour" type="text" data-length="10"/>
+                                <label for="input_text">From Hour</label>
+                              </div>
+                              <div class="input-field col s6">
+                                <input id="to_hour" type="text" data-length="10"/>
+                                <label for="input_text">To Hour</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <textarea id="textarea1" class="materialize-textarea" data-length="360"></textarea>
+                                <label for="textarea1">Textarea</label>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield hour_from" type="text"/>
-                </div>
-            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="request-booking modal-action modal-close waves-effect waves-green btn-flat">Request Booking</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
     </t>
     
     <t t-name="website_booking.browser">
-        <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <header class="header mdl-layout__header">
-                <div class="mdl-layout__header-row">
-                    <span class="mdl-layout-title"><img src="/website_booking/static/src/img/logo.png"/></span>
-                    <div class="mdl-layout-spacer"></div>
-                    <span class="mdl-layout-title">Horizon Booking</span>
-                    <div class="mdl-layout-spacer"></div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                        <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-                            <i class="material-icons">search</i>
-                        </label>
-                        <div class="mdl-textfield__expandable-holder">
-                            <input class="mdl-textfield__input" type="text" id="search" />
-                            <label class="mdl-textfield__label" for="search">Enter your query...</label>
-                        </div>
-                    </div>
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-                        <i class="material-icons">more_vert</i>
-                    </button>
-                    <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                        <li class="mdl-menu__item">About</li>
-                        <li class="mdl-menu__item">Contact</li>
-                        <li class="mdl-menu__item">Legal information</li>
-                    </ul>
+        <header class="no-padding">
+            <nav style="height: 100px;">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo"><img style="margin: 0 10px 0 10px;" src="/website_booking/static/src/img/logo.png"/><span class="nav-title">Horizon Booking</span></a>
+                    <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal hide" id="add-booking-button">
+                        <i class="material-icons">add</i>
+                    </a>
                 </div>
-            </header>
-            <main class="mdl-layout__content">
-                <div class="navbar"/>
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-                    <div class="mdl-color--white mdl-shadow--4dp content mdl-cell mdl-cell--10-col">
+            </nav>
+        </header>
+        <main>
+            <div class="navbar"/>
+            <div class="container start-splash-container">
+                <div class="row">
+                    <div class="col s12 l12">
                         <div class='calendar'/>
                     </div>
                 </div>
-                <button id="add-booking-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast"><i class="material-icons">add</i></button>
-            </main>
+            </div>
+        </main>
+        <div id="#main-modal" class="modal">
+            <div class="modal-content"/>
+            <div class="modal-footer"/>
         </div>
     </t>
     
@@ -76,22 +86,16 @@
     <t t-name="website_booking.browser_navigation_card">
         <td>
             <t t-if="!widget.to_parent">
-            <div class="navbar-card mdl-card mdl-shadow--2dp  mdl-js-ripple-effect" t-attf-style="background: url('/booking/categories/image/#{widget.category.id}')  center / cover;" t-att-data-category-id="widget.category.id" >
-                <div class="mdl-card__title mdl-card--expand">
-                    <span class="mdl-ripple"></span>
-                </div>
-                <div class="navbar-card__actions mdl-card__actions">
-                    <span t-esc="widget.category.display_name"/>
+            <div class="card navbar-card waves-effect waves-block waves-light" t-att-data-category-id="widget.category.id" t-attf-style="background: url('/booking/categories/image/#{widget.category.id}')  center / cover;">
+                <div class="navbar-card-title">
+                  <span class="card-title"><span t-esc="widget.category.display_name"/></span>
                 </div>
             </div>
             </t>
             <t t-if="widget.to_parent">
-            <div class="navbar-card mdl-card mdl-shadow--2dp mdl-js-ripple-effect" t-attf-style="background: url('/website_booking/static/src/img/up.png')  center / cover;" t-att-data-category-id="widget.category.id">
-                <div class="mdl-card__title mdl-card--expand">
-                    <span class="mdl-ripple"></span>
-                </div>
-                <div class="navbar-card__actions mdl-card__actions">
-                    Previous
+            <div class="card navbar-card waves-effect waves-block waves-light" t-att-data-category-id="widget.category.id" style="background: url('/website_booking/static/src/img/up.png')  center / cover;">
+                <div class="navbar-card-title">
+                  <span class="card-title">Previous</span>
                 </div>
             </div>
             </t>
