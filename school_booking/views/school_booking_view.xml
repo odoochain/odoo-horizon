@@ -109,9 +109,10 @@
         <field name="model">calendar.event</field>
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
-            <calendar string="Bookings" date_start="start_datetime" color="room_id" date_delay="duration" scheduler_group="room_id">
-                <!--<field name="partner_id"/>-->
+            <calendar string="Bookings" date_start="start" date_stop="stop" date_delay="duration" all_day="allday" display="[name]" color="main_categ_id" event_open_popup="898" scheduler_group="room_id">
+                <field name="name"/>
                 <field name="room_id"/>
+                <field name="main_categ_id" invisible="1"/>
             </calendar>
         </field>
     </record>
@@ -171,6 +172,12 @@
       <field name="sequence" eval="2" />
       <field name="view_mode">form</field>
       <field name="view_id" ref="booking_form" />
+      <field name="act_window_id" ref="action_booking_tree" />
+    </record>
+    <record id="action_booking_calendar" model="ir.actions.act_window.view">
+      <field name="sequence" eval="3" />
+      <field name="view_mode">calendar</field>
+      <field name="view_id" ref="booking_calendar_view" />
       <field name="act_window_id" ref="action_booking_tree" />
     </record>
 

@@ -7,6 +7,7 @@ var core = require('web.core');
 var ajax = require('web.ajax');
 var Widget = require('web.Widget');
 var Dialog = require("web.Dialog");
+var time = require('web.time');
 
 var Model = require("web.Model");
 
@@ -14,26 +15,6 @@ var _t = core._t;
 var qweb = core.qweb;
 
 ajax.loadXML('/website_booking/static/src/xml/browser.xml', qweb);
-
-/**
- * Converts a Moment javascript object to a string using OpenERP's
- * datetime string format (exemple: '2011-12-01 15:12:35').
- * 
- * The time zone of the Date object is assumed to be the one of the
- * browser and it will be converted to UTC (standard for OpenERP 6.1).
- * 
- * @param {Date} obj
- * @returns {String} A string representing a datetime.
- */
-function moment_to_str (obj) {
-    if (!obj) {
-        return false;
-    }
-    if(obj instanceof Date){
-        return time.datetime_to_str(obj);
-    }
-    return obj.format('YYYY-MM-DD hh:mm:ss');
-}
 
 var CalendarWidget = Widget.extend({
     template: 'website_booking.browser_calendar',
@@ -46,7 +27,7 @@ var CalendarWidget = Widget.extend({
     			right:'',
     		},
     		locale: moment.locale,
-    		timezone: "UTC",
+    		timezone: "locale",
     		editable: false,
     		height: 720,
     		locale: 'fr',
@@ -117,12 +98,21 @@ var Schedule =  CalendarWidget.extend({
     
     fetch_events: function(start, end, timezone, callback) {
         var self = this;
+        // Ambuigus time moment are confusing for Odoo, needs UTC
+        try {
+            if(!start.hasTime()) {
+                start = moment(start.format())        
+            }
+            if(!end.hasTime()) {
+                end = moment(end.format())        
+            }
+        } catch(e) {}
         if(self.asset_id) {
             self.events = [];
             ajax.jsonRpc('/booking/events', 'call', {
     	    		'asset_id':this.asset_id,
-    				'start' : moment(start).format('YYYY-MM-DD HH:mm:ss'),
-    				'end' : moment(end).format('YYYY-MM-DD HH:mm:ss'),
+    				'start' : time.moment_to_str(start),
+    				'end' : time.moment_to_str(end),
     	    	}).done(function(events){
                     events.forEach(function(evt) {
                         self.events.push({
@@ -350,15 +340,19 @@ var Calendar = CalendarWidget.extend({
         var self = this;
         var self = this;
 		self.events = [];
-		console.log({
-    	    		'asset_id':this.asset_id,
-    				'start' : moment(start).format('YYYY-MM-DD HH:mm:ss'),
-    				'end' : moment(end).format('YYYY-MM-DD HH:mm:ss'),
-    	});
+		// Ambuigus time moment are confusing for Odoo, needs UTC
+        try {
+            if(!start.hasTime()) {
+                start = moment(start.format())        
+            }
+            if(!end.hasTime()) {
+                end = moment(end.format())        
+            }
+        } catch(e) {}
 	    ajax.jsonRpc('/booking/events', 'call', {
 	    		'category_id':self.category_id,
-				'start' : moment(start).format('YYYY-MM-DD HH:mm:ss'),
-				'end' : moment(end).format('YYYY-MM-DD HH:mm:ss'),
+    				'start' : time.moment_to_str(start),
+    				'end' : time.moment_to_str(end),
 	    	}).done(function(events){
                 events.forEach(function(evt) {
                     self.events.push({

@@ -63,21 +63,22 @@ class BookingController(http.Controller):
         
     @http.route('/booking/events', type='json', auth='public', website=True)
     def booking_events(self, start, end, timezone=False, category_id=False, asset_id=False):
+        _logger.info([start, end, timezone, category_id, asset_id])
         # TODO : ugply transform
         start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         fields = ['name','start','stop','allday','room_id','partner_id','final_date','recurrency']
         if(category_id):
             domain = [
-                ('start', '<=', start),    
-                ('stop', '>=', end),
+                ('start', '>=', start),    
+                ('stop', '<=', end),
                 '|',('asset_ids.category_id', '=', category_id),('room_id.category_id', '=', category_id),
             ]
             ret = request.env['calendar.event'].sudo().with_context(search_default_recurring='0').search_read(domain,fields)
         else:
             domain = [
-                ('start', '<=', start),    
-                ('stop', '>=', end),
+                ('start', '>=', start),    
+                ('stop', '<=', end),
                 '|',('asset_ids', '=', asset_id),('room_id', '=', asset_id),
             ]
             ret = request.env['calendar.event'].sudo().with_context(search_default_recurring='0').search_read(domain,fields)
