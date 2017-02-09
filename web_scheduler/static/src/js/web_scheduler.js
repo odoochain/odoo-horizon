@@ -51,6 +51,17 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
             }
         },
          
+        calendarMiniChanged: function (context) {
+            return function(datum,obj) {
+                var curView = context.$calendar.fullCalendar('getView');
+                
+                if (curView.name != "timelineDay") {
+                    context.$calendar.fullCalendar('changeView','timelineDay');
+                }
+                context.$calendar.fullCalendar('gotoDate', curDate);
+            };
+        },
+        
         get_fc_init_options: function () {
             var self = this;
             if(self.scheduler_group) {
