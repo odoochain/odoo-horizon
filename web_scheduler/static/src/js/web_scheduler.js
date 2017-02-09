@@ -54,6 +54,7 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
         calendarMiniChanged: function (context) {
             return function(datum,obj) {
                 var curView = context.$calendar.fullCalendar('getView');
+                var curDate = moment([obj.currentYear , obj.currentMonth, obj.currentDay]);
                 
                 if (curView.name != "timelineDay") {
                     context.$calendar.fullCalendar('changeView','timelineDay');
