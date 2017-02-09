@@ -45,6 +45,8 @@ var CalendarWidget = Widget.extend({
     			center: 'title',
     			right:'',
     		},
+    		locale: moment.locale,
+    		timezone: "UTC",
     		editable: false,
     		height: 720,
     		locale: 'fr',
@@ -117,10 +119,10 @@ var Schedule =  CalendarWidget.extend({
         var self = this;
         if(self.asset_id) {
             self.events = [];
-    	    ajax.jsonRpc('/booking/events', 'call', {
+            ajax.jsonRpc('/booking/events', 'call', {
     	    		'asset_id':this.asset_id,
-    				'start' : start,
-    				'end' : end,
+    				'start' : moment(start).format('YYYY-MM-DD HH:mm:ss'),
+    				'end' : moment(end).format('YYYY-MM-DD HH:mm:ss'),
     	    	}).done(function(events){
                     events.forEach(function(evt) {
                         self.events.push({
@@ -287,7 +289,6 @@ var Navigation = Widget.extend({
     
     click_category : function(event) {
         var self = this;
-        console.log("Navigator switch_category");
         var cat = event.data.category;
         ajax.jsonRpc('/booking/categories', 'call', {'parent_id':cat.id}).done(function(categories){
                 if(categories.length > 0) {
@@ -349,10 +350,15 @@ var Calendar = CalendarWidget.extend({
         var self = this;
         var self = this;
 		self.events = [];
+		console.log({
+    	    		'asset_id':this.asset_id,
+    				'start' : moment(start).format('YYYY-MM-DD HH:mm:ss'),
+    				'end' : moment(end).format('YYYY-MM-DD HH:mm:ss'),
+    	});
 	    ajax.jsonRpc('/booking/events', 'call', {
 	    		'category_id':self.category_id,
-				'start' : start,
-				'end' : end,
+				'start' : moment(start).format('YYYY-MM-DD HH:mm:ss'),
+				'end' : moment(end).format('YYYY-MM-DD HH:mm:ss'),
 	    	}).done(function(events){
                 events.forEach(function(evt) {
                     self.events.push({
@@ -373,7 +379,6 @@ var Calendar = CalendarWidget.extend({
     },
     
     switch_category : function(category) {
-        console.log('Calendar switch_category ' + category.name);
         this.category_id = category.id;
         this.$calendar.fullCalendar( 'refetchResources' );
         this.$calendar.fullCalendar( 'refetchEvents' );

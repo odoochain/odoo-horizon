@@ -24,6 +24,13 @@
 <openerp>
   <data>
 
+    <template id="assets_backend" name="school calendar assets" inherit_id="calendar.assets_backend">
+        <xpath expr="." position="inside">
+            <!--<link rel="stylesheet" href="/school_booking/static/src/css/booking_calendar.css"/>
+            <script type="text/javascript" src="/school_booking/static/src/js/booking_calendar.js"></script>-->
+        </xpath>
+    </template>
+
     <!-- School Calendar Form View -->
     <record model="ir.ui.view" id="calendar_form">
       <field name="name">school.calendar.view</field>
@@ -89,8 +96,10 @@
         <field eval="25" name="priority" />
         <field name="arch" type="xml">
             <xpath expr="//h2" position="after">
-              <label for="room_id" string="Room" class="oe_edit_only"/>
-              <field name="room_id" class="oe_inline"/>
+              <group>
+                <field name="room_id"/>
+                <field name="asset_ids" widget="many2many_tags"/>
+              </group>
             </xpath>
         </field>
     </record>
@@ -142,7 +151,6 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
-      <field name="context">{"virtual_id": False,'search_default_recurring':1}</field>
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a recurring booking.

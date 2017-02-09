@@ -69,40 +69,25 @@ class BookingController(http.Controller):
         fields = ['name','start','stop','allday','room_id','partner_id','final_date','recurrency']
         if(category_id):
             domain = [
-                ('recurrency', '=', 0),
-                ('start', '>=', start),    
-                ('stop', '<=', end),
+                ('start', '<=', start),    
+                ('stop', '>=', end),
                 '|',('asset_ids.category_id', '=', category_id),('room_id.category_id', '=', category_id),
             ]
-            ret = request.env['calendar.event'].sudo().search_read(domain,fields)
-            domain_rec = [
-                ('recurrency', '=', 1),    
-                #('start_date', '>=', start),
-                ('stop', '<=', end),
-                #('final_date', '>=', start),
-                '|',('asset_ids.category_id', '=', category_id),('room_id.category_id', '=', category_id),
-            ]
-            ret_rec = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain_rec,fields)
+            ret = request.env['calendar.event'].sudo().with_context(search_default_recurring='0').search_read(domain,fields)
         else:
             domain = [
-                ('recurrency', '=', 0),
-                ('start', '>=', start),    
-                ('stop', '<=', end),
+                ('start', '<=', start),    
+                ('stop', '>=', end),
                 '|',('asset_ids', '=', asset_id),('room_id', '=', asset_id),
             ]
-            ret = request.env['calendar.event'].sudo().search_read(domain,fields)
-            domain_rec = [
-                ('recurrency', '=', 1),    
-                #('start_date', '>=', start),
-                ('stop', '<=', end),
-                #('final_date', '>=', start),
-                '|',('asset_ids', '=', asset_id),('room_id', '=', asset_id),
-            ]
-            ret_rec = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain_rec,fields)
-        # TODO : Post Filter, ugly but how can we do otherwise
-        ret_rec = [rec for rec in ret_rec if rec['start'] >= start]
-        return ret + ret_rec
+            ret = request.env['calendar.event'].sudo().with_context(search_default_recurring='0').search_read(domain,fields)
+        _logger.info(domain)
+        _logger.info(ret)
+        return ret
         
     @http.route('/booking/editor', type='http', auth='user', website=True)
     def booking_editor(self, debug=False, **k):
         return request.render('website_booking.editor')
+        
+        
+        
