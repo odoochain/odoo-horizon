@@ -149,14 +149,16 @@ var NewBookingDialog = Widget.extend({
             var toTime = self.$('#to_hour').timepicker('getTime');
             var start = moment(self.date).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
-            
-            new Model('calendar.event').call('create', [{
-                'name' : self.$('#textarea1').val(),
-                'start': start.format('YYYY-MM-DD HH:mm:ss'),
-                'stop': stop.format('YYYY-MM-DD HH:mm:ss'),
-                'room_id': parseInt(self.$( "select.select-asset-id" ).val()),
-            }]).then(function (id) {
-                self.trigger_up('newEvent', {'id': id});
+            new Model('ir.model.data').call('get_object_reference', ['school_booking', 'school_student_event_type']).then(function(categ) {
+                new Model('calendar.event').call('create', [{
+                    'name' : self.$('#textarea1').val(),
+                    'start': start.format('YYYY-MM-DD HH:mm:ss'),
+                    'stop': stop.format('YYYY-MM-DD HH:mm:ss'),
+                    'room_id': parseInt(self.$( "select.select-asset-id" ).val()),
+                    'categ_ids': [[4, categ[1]]],
+                }]).then(function (id) {
+                    self.trigger_up('newEvent', {'id': id});
+                });
             });
         },
         "change .select-asset-id": function (event) {

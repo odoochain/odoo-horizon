@@ -124,6 +124,9 @@
         <search string="Search Booking">
           <field name="name" filter_domain="[('name','ilike',self)]" />
           <filter string="Recurring" name="recurring" domain="[('recurrency','=',True)]" />
+          <filter string="Student Booking" name="student" domain="[('categ_ids.name','=','Student Booking')]" />
+          <filter string="Teacher Booking" name="teacher" domain="[('categ_ids.name','=','Teacher Booking')]" />
+          <filter string="Management Booking" name="management" domain="[('categ_ids.name','=','Management Booking')]" />
         </search>
       </field>
     </record>
@@ -145,13 +148,14 @@
       </field>
     </record>
 
-    <record id="action_booking_rec_tree" model="ir.actions.act_window">
-      <field name="name">Recurrent Bookings</field>
+    <record id="action_booking_stud_tree" model="ir.actions.act_window">
+      <field name="name">Student Bookings</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">calendar.event</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
+      <field name="context">{"search_default_student":1}</field>
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a recurring booking.
@@ -183,6 +187,6 @@
 
     <menuitem id="menu_booking_tree" parent="menu_main_booking" action="action_booking_tree" sequence="49" />
     
-    <menuitem id="menu_booking_rec_tree" parent="menu_main_booking" action="action_booking_rec_tree" sequence="99" />
+    <menuitem id="menu_booking_rec_tree" parent="menu_main_booking" action="action_booking_stud_tree" sequence="99" />
   </data>
 </openerp>
