@@ -3,6 +3,10 @@ html, body {
   overflow:hidden;
 }
 
+main {
+  height: 100%;
+}
+
 .navbar {
   overflow-x:auto;
 }

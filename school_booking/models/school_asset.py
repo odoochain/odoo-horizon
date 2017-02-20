@@ -70,7 +70,8 @@ class AssetCategory(models.Model):
 
     name = fields.Char(required=True, translate=True)
     parent_id = fields.Many2one('school.asset.category', string='Parent Category', index=True)
-    child_id = fields.One2many('school.asset.category', 'parent_id', string='Children Categories')
+    child_ids = fields.One2many('school.asset.category', 'parent_id', string='Children Categories')
+    is_leaf = fields.Boolean('Is Leaf', compute='_compute_is_leaf')
     sequence = fields.Integer(help="Gives the sequence order when displaying a list of asset categories.")
     # NOTE: there is no 'default image', because by default we don't show
     # thumbnails for categories. However if we have a thumbnail for at least one
@@ -87,6 +88,10 @@ class AssetCategory(models.Model):
              "resized as a 64x64px image, with aspect ratio preserved. "
              "Use this field anywhere a small image is required.")
 
+    @api.one
+    def _compute_is_leaf(self):
+        self.is_leaf = len(self.child_ids) == 0 
+        
     @api.model
     def create(self, vals):
         tools.image_resize_images(vals)

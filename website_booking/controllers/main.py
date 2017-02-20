@@ -21,11 +21,19 @@
 import logging
 import time
 import werkzeug.utils
+import json
 
 from openerp import http
 from openerp.http import request
+from openerp.addons.auth_oauth.controllers.main import OAuthLogin as Home
 
 _logger = logging.getLogger(__name__)
+
+class BookingLoginController(Home):
+    
+    @http.route('/booking/login_providers', type='json', auth="none")
+    def booking_login(self, redirect=None, *args, **kw):
+        return self.list_providers()
 
 class BookingController(http.Controller):
 
@@ -33,9 +41,18 @@ class BookingController(http.Controller):
     def booking_browser(self, debug=False, **k):
         return request.render('website_booking.index')
 
+    @http.route('/booking/category', type='json', auth='public', website=True)
+    def booking_category(self, id=False, debug=False, **k):
+        return request.env['school.asset.category'].sudo().search_read([('id', '=', id)],['name','display_name','sequence','parent_id','is_leaf'])
+
     @http.route('/booking/categories', type='json', auth='public', website=True)
-    def booking_categories(self, parent_id=False, debug=False, **k):
-        return request.env['school.asset.category'].sudo().search_read([('parent_id', '=', parent_id)],['name','display_name','sequence','parent_id'])
+    def booking_categories(self, root=False, parent_id=False, debug=False, **k):
+        if root :
+            _logger.info('Get Root Categories')
+            return request.env['school.asset.category'].sudo().search_read([('parent_id', '=', False)],['name','display_name','sequence','parent_id','is_leaf'])
+        else :
+            _logger.info('Get Leaf Categories')
+            return request.env['school.asset.category'].sudo().search_read([('parent_id', '=', parent_id)],['name','display_name','sequence','parent_id','is_leaf'])
 
     @http.route('/booking/categories/image/<int:category_id>', type='http', auth='public', website=True)
     def booking_category_image(self, category_id, debug=False, **k):
@@ -70,18 +87,18 @@ class BookingController(http.Controller):
         fields = ['name','start','stop','allday','room_id','partner_id','final_date','recurrency']
         if(category_id):
             domain = [
-                ('start', '>=', start),    
-                ('stop', '<=', end),
+                ('start', '<=', end),    
+                ('stop', '>=', start),
                 '|',('asset_ids.category_id', '=', category_id),('room_id.category_id', '=', category_id),
             ]
-            ret = request.env['calendar.event'].sudo().with_context(search_default_recurring='0').search_read(domain,fields)
+            ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
         else:
             domain = [
-                ('start', '>=', start),    
-                ('stop', '<=', end),
+                ('start', '<=', end),    
+                ('stop', '>=', start),
                 '|',('asset_ids', '=', asset_id),('room_id', '=', asset_id),
             ]
-            ret = request.env['calendar.event'].sudo().with_context(search_default_recurring='0').search_read(domain,fields)
+            ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
         _logger.info(domain)
         _logger.info(ret)
         return ret

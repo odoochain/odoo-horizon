@@ -26,7 +26,7 @@
             <t t-call="web.layout">
                 <t t-set="head">
                     <t t-call-assets="web.assets_common" t-css="false"/>
-                    <t t-call-assets="website.assets_frontend" t-css="false"/>
+                    <t t-call-assets="website.assets_backend" t-css="false"/>
                     <t t-call-assets="website_booking.assets"/>
                     <script type="text/javascript">
                         $(function() {
