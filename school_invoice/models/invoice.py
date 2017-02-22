@@ -32,52 +32,37 @@ class IndividualBloc(models.Model):
         'account.invoice', 'Invoice',
         copy=False, readonly=True, track_visibility="onchange")
         
-    state = fields.Selection(selection_add=[('invoiced', 'Invoiced')])
-    
+    is_invoiced = fields.Boolean(compute=lambda self: True if self.invoice_id else False)
+        
     @api.multi
     def action_invoice_create(self):
         """ Creates invoice(s) for individual bloc.
         @return: Invoice Ids.
         """
         self.ensure_one()
-        res = dict.fromkeys(self.ids, False)
+        invoice_ids = []
         InvoiceLine = self.env['account.invoice.line']
         Invoice = self.env['account.invoice']
-        invoice = False
-        for bloc in self.filtered(lambda bloc: not bloc.invoice_id):
-            invoice = Invoice.create({
-                'name': bloc.name,
-                'origin': bloc.name,
-                'type': 'out_invoice',
-                'partner_id': bloc.student_id.id,
-                'date_invoice': "2016-09-15",
-                
-            })
-            bloc.write({'invoiced': True, 'invoice_id': invoice.id})
-            
-            # if bloc.source_bloc_id.product_id:
-            #     product = bloc.source_bloc_id.product_id
-            #     invoice_line = InvoiceLine.create({
-            #         'invoice_id': invoice.id,
-            #         'name': product.name,
-            #         'origin': bloc.name,
-            #         'quantity': 1,
-            #         'uom_id': product.uom.id,
-            #         'price_unit': product.price_unit,
-            #         'price_subtotal': product.uom_qty * product.price_unit,
-            #         'product_id': product.id
-            #     })
-            # invoice.compute_taxes()
-            res[bloc.id] = invoice.id
-        if not invoice:
-            invoice = self.invoice_id    
-        self.write({
-            'state' : 'invoiced',
-        })
+        invoice = None
+        for bloc in self:
+            if bloc.invoice_id :
+                invoice_ids.append(self.invoice_id.id)
+            else :
+                invoice = Invoice.create({
+                    'name': bloc.name,
+                    'origin': bloc.name,
+                    'type': 'out_invoice',
+                    'partner_id': bloc.student_id.id,
+                    'date_invoice': "2016-09-15",
+                    
+                })
+                bloc.write({'invoice_id': invoice.id})
+                invoice_ids.append(invoice.id)
+        invoice_ids = tuple(invoice_ids)
         return {
-            'domain': [('id', 'in', res.values())],
+            'domain': [('id', 'in', invoice_ids)],
             'name': 'Invoices',
-            'res_id': invoice.id or self.invoice_id.id,
+            'res_id': invoice_ids[0],
             'view_type': 'form',
             'view_mode': 'form,tree',
             'res_model': 'account.invoice',
