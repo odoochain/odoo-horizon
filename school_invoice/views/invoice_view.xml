@@ -31,8 +31,11 @@
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//div[@class='oe_button_box']" position="inside">
-                     <button name="action_invoice_create" type="object" class="oe_stat_button" icon="fa-eur">
-                        <field name="is_invoiced" widget="boolean_button" />
+                    <button name="action_invoice_create"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o">
+                            <field name="invoice_count" widget="statinfo" string="Invoices"/>
                     </button>
                 </xpath>
             </field>
