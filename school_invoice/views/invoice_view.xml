@@ -41,6 +41,19 @@
             </field>
         </record>
         
+        <record id="view_individual_bloc_filter_invoice" model="ir.ui.view">
+            <field name="name">individual_bloc.select.invoice</field>
+            <field name="model">school.individual_bloc</field>
+            <field name="inherit_id" ref="school_management.view_individual_bloc_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="before">
+                    <separator/>
+                    <filter name="to_invoice" string="To invoice" domain="[('invoice_count', '=', 0)]" />
+                    <filter name="invoiced" string="Invoiced" domain="[('invoice_count', '=', 1)]" />
+                </xpath>
+            </field>
+        </record>
+        
         <record id="view_payment_term_line_school_form" model="ir.ui.view">
             <field name="name">account.payment.term.line.form.school</field>
             <field name="model">account.payment.term.line</field>

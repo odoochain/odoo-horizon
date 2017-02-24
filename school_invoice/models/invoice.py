@@ -34,7 +34,12 @@ class IndividualBloc(models.Model):
         'account.invoice', 'Invoice',
         copy=False, readonly=True, track_visibility="onchange")
         
-    is_invoiced = fields.Boolean(compute=lambda self: True if self.invoice_id else False)
+    invoice_count = fields.Integer(compute='_compute_invoice_count',store=True)
+     
+    @api.depends('invoice_id')  
+    @api.one
+    def _compute_invoice_count(self):
+        self.invoice_count = 1 if self.invoice_id else 0
         
     @api.multi
     def action_invoice_create(self):
