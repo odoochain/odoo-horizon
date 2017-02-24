@@ -38,5 +38,44 @@
             </field>
         </record>
         
+        <record id="view_payment_term_line_school_form" model="ir.ui.view">
+            <field name="name">account.payment.term.line.form.school</field>
+            <field name="model">account.payment.term.line</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form" position="replace">
+                    <form string="Payment Terms">
+                        <group>
+                            <group string="Term Type">
+                                <field name="value" widget="radio"/>
+                                <label for="value_amount" attrs="{'invisible':[('value','=', 'balance')]}"/>
+                                <div attrs="{'invisible':[('value','=', 'balance')]}">
+                                    <field name="value_amount" class="oe_inline"/>
+                                    <label string="%" class="oe_inline" attrs="{'invisible':[('value','!=','percent')]}"/>
+                                </div>
+                                <field name="sequence" invisible="1"/>
+                            </group>
+                            <group string="Due Date Computation">
+                                <label for="days"/>
+                                <div>
+                                    <field name="option" widget="radio"/>
+                                    <div class="o_row" attrs="{'invisible': [('option', 'in', ['last_day_following_month', 'last_day_current_month','next_day_in_year'])]}">
+                                        <field name="days"/>
+                                        days
+                                    </div>
+                                    <div class="o_row" attrs="{'invisible': [('option', 'not in', ['next_day_in_year'])]}">
+                                        Day <field name="day"/>
+                                    </div>
+                                    <div class="o_row" attrs="{'invisible': [('option', 'not in', ['next_day_in_year'])]}">
+                                        Month <field name="month"/>
+                                    </div>
+                                </div>
+                            </group>
+                        </group>
+                    </form>
+                </xpath>
+            </field>
+        </record>
+        
     </data>
 </openerp>
