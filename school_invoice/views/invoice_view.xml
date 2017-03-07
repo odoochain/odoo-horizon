@@ -50,6 +50,8 @@
                     <separator/>
                     <filter name="to_invoice" string="To Invoice" domain="[('invoice_count', '=', 0)]" />
                     <filter name="invoiced" string="Invoiced" domain="[('invoice_count', '=', 1)]" />
+                    <filter name="open" string="Open" domain="[('invoice_id.state', '=','open')])]" />
+                    <filter name="paid" string="Paid" domain="[('invoice_id.state', '=', 'paid')]" />
                 </xpath>
             </field>
         </record>

@@ -26,6 +26,24 @@ from openerp.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
+class Invoice(models.Model):
+    _inherit = 'account.invoice'
+    
+    final_payment_date = fields.Date(compute='_compute_final_payment_date')
+    
+    @api.depends('residual')
+    def _compute_final_payment_date(self):
+        if self.residual == 0 :
+            for payment in self.payment_move_line_ids:
+                date = self.final_payment_date
+                if date:
+                    date = date if date > payment.date else payment.date
+                else :
+                    date = payment.date
+                self.final_payment_date = date
+        else:
+            self.final_payment_date = False
+
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'

@@ -163,6 +163,7 @@
       <field name="arch" type="xml">
         <tree string="Individual Bloc" create="false">
           <field name="year_id" />
+          <field name="is_final_bloc" />
           <field name="student_id" />
           <field name="source_bloc_name" />
           <field name="total_credits" />
@@ -224,7 +225,8 @@
             </div>
             <group col="4">
               <field name="program_id" colspan="4"/>
-              <field name="year_id" colspan="4"/>
+              <field name="year_id"/>
+              <field name="is_final_bloc" />
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
