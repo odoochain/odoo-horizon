@@ -260,7 +260,7 @@ var NewBookingDialog = Widget.extend({
             'timeFormat': 'H:i',
             'showDuration': true,
         });
-        self.$('#description').val(session.username);
+        self.$('#description').val(session.partner.name);
     },
 
     click_scheduler: function(event) {
@@ -576,10 +576,15 @@ var Toolbar = Widget.extend({
     init : function() {
         this._super.apply(this, arguments);
         var self = this;
-        session.session_reload().then(function(){
+        session.session_bind().then(function(){
             if (session.uid) {
                 self.is_logged = true;
                 self.uid = session.uid;
+                new Model('res.partner').call("search_read", 
+                    [[["id", "=", session.partner_id]], ["id","name"]],
+                    {context: session.context}).then(function (partner_ids) {
+                        session.partner = partner_ids[0];
+                });
                 self.avatar_src = session.url('/web/image', {model:'res.users', field: 'image_small', id: session.uid});
                 self.$el.html(qweb.render('website_booking.toolbar_log', {widget : self}));
                 self.$el.openFAB();
