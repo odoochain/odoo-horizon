@@ -28,20 +28,20 @@ var CalendarWidget = Widget.extend({
     			center: 'title',
     			right:'',
     		},
+    		allDaySlot : false,
     		locale: moment.locale,
-    		timezone: "locale",
+    		timezone: "local",
     		editable: false,
-    		height: 720,
+    		height: 730,
     		locale: 'fr',
-    		titleFormat: 'dddd, D MMMM',
+    		titleFormat: 'dddd D MMMM YYYY',
     		defaultDate: moment(),
     		defaultView: 'agendaDay',
-    		minTime: "07:00:00",
-    		maxTime: "20:00:00",
+    		minTime: "08:00:00",
+    		maxTime: "22:00:00",
     		navLinks: true, // can click day/week names to navigate views
     		eventLimit: true, // allow "more" link when too many events
     		refetchResourcesOnNavigate : false,
-    		timezone : 'locale',
         }
     },
     
@@ -59,19 +59,26 @@ var CalendarWidget = Widget.extend({
         var self = this;
         // Force a refresh to get it right
         setTimeout(function() {
-            self.$calendar.fullCalendar('changeView');
-            self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
+            self.$calendar.fullCalendar('changeView','agendaDay');
+            //self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
         }, 100);
     },
     
     refetch_events: function() {
         this.$calendar.fullCalendar('refetchEvents');
     },
-     
+    
     do_show : function() {
         this._super.apply(this, arguments);
-        this.$calendar.fullCalendar('changeView','agendaDay');
+        var self = this;
+        setTimeout(function() {
+            self.$calendar.fullCalendar('refetchEvents').then(function(){
+                self.$calendar.fullCalendar('changeView','agendaDay');    
+            });
+            //self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
+        }, 100);
     },
+    
 });
 
 var Schedule =  CalendarWidget.extend({
@@ -122,8 +129,8 @@ var Schedule =  CalendarWidget.extend({
     	    	}).done(function(events){
                     events.forEach(function(evt) {
                         self.events.push({
-                            'start': moment(evt.start).format('YYYY-MM-DD HH:mm:ss'),
-                            'end': moment(evt.stop).format('YYYY-MM-DD HH:mm:ss'),
+                            'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
+                            'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
                             'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                             'allDay': evt.allday,
                             'id': evt.id,
@@ -153,14 +160,14 @@ var NewBookingDialog = Widget.extend({
             var self = this;
             var fromTime = self.$('#from_hour').timepicker('getTime');
             var toTime = self.$('#to_hour').timepicker('getTime');
-            var start = moment(self.date).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
-            var stop = moment(self.date).set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
+            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
             var roomId = parseInt(self.$( "select.select-asset-id" ).val());
             new Model('ir.model.data').call('get_object_reference', ['school_booking', 'school_student_event_type']).then(function(categ) {
                 new Model('calendar.event').call('create', [{
                     'name' : self.$('#description').val(),
-                    'start': start.format('YYYY-MM-DD HH:mm:ss'),
-                    'stop': stop.format('YYYY-MM-DD HH:mm:ss'),
+                    'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                    'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
                     'room_id': roomId,
                     'categ_ids': [[4, categ[1]]],
                 }]).then(function (id) {
@@ -231,8 +238,15 @@ var NewBookingDialog = Widget.extend({
     
     init: function(parent, options) {
         this._super.apply(this, arguments);
-        this.ressources = parent.cal.ressources;
-        this.date = parent.cal.$calendar.fullCalendar( 'getDate' );
+        if(options && options.event){
+            console.log(options.event);
+            this.ressources = parent.cal.ressources;
+            this.date = options.event.start;
+            this.event = options.event;
+        } else {
+            this.ressources = parent.cal.ressources;
+            this.date = parent.cal.$calendar.fullCalendar( 'getDate' );
+        }
     },
 
     renderElement: function() {
@@ -261,6 +275,7 @@ var NewBookingDialog = Widget.extend({
             'showDuration': true,
         });
         self.$('#description').val(session.partner.name);
+        Materialize.updateTextFields();
     },
 
     click_scheduler: function(event) {
@@ -301,7 +316,7 @@ var NavigationCard = Widget.extend({
     template: 'website_booking.browser_navigation_card',
     
     events: {
-        "click .navbar-card": function (event) {
+        "click .cat_button": function (event) {
             event.preventDefault();
             var self = this;
             self.getParent().$('.navbar-card.active').removeClass('active');
@@ -477,14 +492,19 @@ var Calendar = CalendarWidget.extend({
     		viewRender: function(view,element){
     		     self.trigger_up('switch_date', {'date' : self.$calendar.fullCalendar( 'getDate' )});
     		},
+    		eventClick: function(calEvent, jsEvent, view) {
+                var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
+                dialog.appendTo(self.getParent().main_modal.empty());
+                self.getParent().main_modal.modal('open');
+            },
         });
     },
     
     start: function() {
         this._super.apply(this, arguments);
-        var state = this.getParent()._current_state;
-        if(state.date) {
-            this.$calendar.fullCalendar( 'gotoDate', moment(state.date));
+        this.init_state = this.getParent()._current_state;
+        if(this.init_state.date) {
+            this.$calendar.fullCalendar( 'gotoDate', moment(this.init_state.date));
         }
     },
            
@@ -523,13 +543,13 @@ var Calendar = CalendarWidget.extend({
 	    	}).done(function(events){
                 events.forEach(function(evt) {
                     self.events.push({
-                        'start': moment(evt.start).format('YYYY-MM-DD HH:mm:ss'),
-                        'end': moment(evt.stop).format('YYYY-MM-DD HH:mm:ss'),
+                        'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
+                        'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
                         'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                         'allDay': evt.allday,
                         'id': evt.id,
                         'resourceId':evt.room_id[0],
-                        'color': evt.recurrency ? '#ffb74d' : '#64b5f6',
+                        'color': evt.recurrency ? '#00838f' : session.uid == evt.user_id[0] ? '#fdd835' : '#00bcd4', 
                     });
                 });
                 //console.log([start, end, events])

@@ -31,9 +31,9 @@ Colors: Use the following - https://www.google.com/design/spec/style/color.html#
 
 /* Make buttons bigger */
 .fc button {
-    height: 64px;
+    height: 30px;
     padding: 10px;
-    font-size: 1em;
+    font-size: 0.7em;
 }
 
 /* Capitaliser titlesr */
@@ -64,7 +64,7 @@ Colors: Use the following - https://www.google.com/design/spec/style/color.html#
 
 /* Remove the header border from Schedule */
 .fc td, .fc th {
-  border-style: dotted !important;
+  /*border-style: dotted !important;*/
   /*border-width: 1px !important;*/
   padding: 0 !important;
   vertical-align: top !important;
