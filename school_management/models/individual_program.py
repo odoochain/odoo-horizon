@@ -72,6 +72,8 @@ class IndividualBloc(models.Model):
     
     year_id = fields.Many2one('school.year', string='Year')
     
+    is_final_bloc = fields.Boolean(string='Is final bloc')
+    
     student_id = fields.Many2one(related='program_id.student_id', string='Student', domain="[('student', '=', '1')]", readonly=True, store=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     

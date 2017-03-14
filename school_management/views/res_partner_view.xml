@@ -41,7 +41,14 @@
                     <field name="supplier" invisible="True" />
                     <field name="customer" invisible="True" />
                 </xpath>
+<<<<<<< HEAD
+                <page name="sales_purchases" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </page>
+                <!--<page name="accounting" position="attributes">
+=======
                 <!--<page name="sales_purchases" position="replace"/>
+>>>>>>> origin/reservation
                     <attribute name="invisible">1</attribute>
                 </page>-->
             </field>
@@ -133,6 +140,7 @@
                 <xpath expr="//group[@name='personal_information_group']" position="inside">
                     <field name="birthplace"/>
                     <field name="reg_number" />
+                    <field name="mat_number"/>
                 </xpath>
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="programs_list" string="Programs" attrs="{'invisible': [('student','=',False)]}">
