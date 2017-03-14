@@ -1,4 +1,3 @@
-/*
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -9,6 +8,7 @@
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
 #    License, or (at your option) any later version.
+#
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -18,23 +18,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-*/
-.table {
-    width: 96%;
-}
-
-.bloc_header {
-    position: relative; 
-    height: 200px; 
-    width: 100%;
-}
-
-.bloc_details {
-    position: relative; 
-    overflow: auto; 
-    width: 100%;
-}
-
-.result_table .text_right {
-    text-align: right;        
+{
+    'name': 'School Booking',
+    'version': '0.1',
+    'license': 'AGPL-3',
+    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'website': '',
+    'category': 'School Management',
+    'depends': ['school_management','web_calendar','web_scheduler'],
+    'init_xml': [],
+    'update_xml': [
+        'views/school_booking_view.xml',
+        'views/school_asset_view.xml',
+        'security/ir.model.access.csv',
+        'data/school_booking.xml',
+    ],
+    'demo_xml': [],
+    'description': '''
+        This modules add room reservation, assets management,...
+    ''',
+    'qweb': ['static/src/xml/*.xml'],
+    'active': False,
+    'installable': True,
+    'application': True,
 }
