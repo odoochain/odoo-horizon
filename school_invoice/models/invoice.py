@@ -26,6 +26,11 @@ from openerp.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
+
+class Partner(models.Model):
+    _inherit = 'res.partner'
+    out_inv_comm_algorithm = fields.Selection(selection_add=[('student_id', 'Student Id')])
+
 class Invoice(models.Model):
     _inherit = 'account.invoice'
     
