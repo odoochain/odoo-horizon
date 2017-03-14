@@ -32,7 +32,6 @@
         'data/school.stat_domain.csv',
     ],
     'update_xml': [
-        'wizard/saturn_editor.xml',
         'views/saturn_view.xml',
     ],
     'demo_xml': [],

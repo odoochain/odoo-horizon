@@ -41,14 +41,10 @@
                     <field name="supplier" invisible="True" />
                     <field name="customer" invisible="True" />
                 </xpath>
-<<<<<<< HEAD
                 <page name="sales_purchases" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </page>
                 <!--<page name="accounting" position="attributes">
-=======
-                <!--<page name="sales_purchases" position="replace"/>
->>>>>>> origin/reservation
                     <attribute name="invisible">1</attribute>
                 </page>-->
             </field>
