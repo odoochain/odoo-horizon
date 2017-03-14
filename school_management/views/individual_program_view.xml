@@ -100,15 +100,19 @@
     </record>
     
     
-    <record id="view_individual_program_courses_filter" model="ir.ui.view">
-      <field name="name">individual_course.select</field>
-      <field name="model">school.individual_course</field>
+    <record id="view_individual_program_filter" model="ir.ui.view">
+      <field name="name">program.select</field>
+      <field name="model">school.individual_program</field>
       <field name="arch" type="xml">
-        <search string="Search Courses">
-          <field name="bloc_id" />
-          <separator/>
-          <filter name="dispensed" string="Dispensed" domain="[('dispense', '=', True)]"/>
-          <filter name="not_dispensed" string="Not Dispensed" domain="[('dispense', '=', False)]"/>
+        <search string="Search Blocs">
+          <field name="student_id" domain="[('type', '=', 'contact')]"/>
+          <group expand="1" string="Group By">
+            <filter string="Domain" context="{'group_by':'domain_id'}" />
+            <filter string="Cycle" context="{'group_by':'cycle_id'}" />
+            <filter string="Section" context="{'group_by':'section_id'}" />
+            <filter string="Track" context="{'group_by':'track_id'}" />
+            <filter string="Speciality" context="{'group_by':'speciality_id'}" />
+          </group>
         </search>
       </field>
     </record>
@@ -121,7 +125,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
       <field name="context">{}</field>
-      <field name="search_view_id" ref="view_individual_program_courses_filter" />
+      <field name="search_view_id" ref="view_individual_program_filter" />
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Please add individual program from Student view.
@@ -172,7 +176,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{'search_default_bloc_id': active_id}</field>
-        <field name="search_view_id" ref="view_individual_program_courses_filter" />
+        <field name="search_view_id" ref="view_individual_courses_filter" />
         <field name="help" type="html">
           <p class="oe_view_nocontent_create">
             Create a Course Group and add Courses to the program.
