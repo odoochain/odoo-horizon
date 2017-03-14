@@ -46,8 +46,8 @@ class Partner(models.Model):
     reg_number = fields.Char('Registration Number')
     mat_number = fields.Char('Matricule Number')
     
-    minerval_ids = fields.One2many('school.minerval', 'student_id', string='Minerval')
-    has_paid_current_minerval = fields.Boolean(compute='_has_paid_current_minerval',string="Has paid current minerval", store=True)
+    #minerval_ids = fields.One2many('school.minerval', 'student_id', string='Minerval')
+    #has_paid_current_minerval = fields.Boolean(compute='_has_paid_current_minerval',string="Has paid current minerval", store=True)
     
     student_current_program_id = fields.Many2one('school.individual_bloc', compute='_get_student_current_program_id', string='Program', store=True)
     student_current_program_name = fields.Char(related='student_current_program_id.source_bloc_name', string='Current Program', store=True)
@@ -69,17 +69,17 @@ class Partner(models.Model):
     def _get_student_current_individual_course_ids(self):
         self.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', self.id]])
 
-    @api.one
-    @api.depends('minerval_ids')
-    def _has_paid_current_minerval(self):
-        res = self.env['school.minerval'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', self.id]])
-        self.has_paid_current_minerval = len(res) > 0
+    #@api.one
+    #@api.depends('minerval_ids')
+    #def _has_paid_current_minerval(self):
+    #    res = self.env['school.minerval'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', self.id]])
+    #    self.has_paid_current_minerval = len(res) > 0
         
-    @api.one
-    @api.depends('has_paid_current_minerval')
-    def pay_current_minerval(self):
-        if not self.has_paid_current_minerval:
-            self.env['school.minerval'].create({'student_id': self.id,'year_id': self.env.user.current_year_id.id})
+    #@api.one
+    #@api.depends('has_paid_current_minerval')
+    #def pay_current_minerval(self):
+    #    if not self.has_paid_current_minerval:
+    #        self.env['school.minerval'].create({'student_id': self.id,'year_id': self.env.user.current_year_id.id})
         
     @api.one
     @api.depends('student_program_ids')
@@ -108,10 +108,10 @@ class Partner(models.Model):
         else:
             return super(Partner, self)._get_default_image(is_company, colorize)
         
-class Minerval(models.Model):
-    '''Minerval'''
-    _name = 'school.minerval'
-    
-    year_id = fields.Many2one('school.year', string='Year', readonly=True)
-    student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", readonly=True)
-    payment_date = fields.Date(string='Payment Date',default=fields.Date.context_today)
+#class Minerval(models.Model):
+#    '''Minerval'''
+#    _name = 'school.minerval'
+#    
+#    year_id = fields.Many2one('school.year', string='Year', readonly=True)
+#    student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", readonly=True)
+#    payment_date = fields.Date(string='Payment Date',default=fields.Date.context_today)
