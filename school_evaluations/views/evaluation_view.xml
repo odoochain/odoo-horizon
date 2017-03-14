@@ -25,7 +25,7 @@
 
         <template id="assets_backend" name="school_evaluations_assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/metisMenu.min.css" />
+                <link rel="stylesheet" href="/school_evaluations/static/src/css/metisMenu.min.css" /> <!-- TODO : change to not min version -->
                 <link rel="stylesheet" href="/school_evaluations/static/src/css/sb-admin-2.css" />
                 <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_bloc.css" />
                 <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluations.css" />

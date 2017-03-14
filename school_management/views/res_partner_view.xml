@@ -41,8 +41,7 @@
                     <field name="supplier" invisible="True" />
                     <field name="customer" invisible="True" />
                 </xpath>
-                <page name="sales_purchases" position="replace"/>
-                <!--
+                <!--<page name="sales_purchases" position="replace"/>
                     <attribute name="invisible">1</attribute>
                 </page>-->
             </field>

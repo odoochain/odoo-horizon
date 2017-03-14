@@ -19,22 +19,7 @@
 #
 ##############################################################################
 */
-.table {
-    width: 96%;
-}
 
-.bloc_header {
-    position: relative; 
-    height: 200px; 
-    width: 100%;
-}
-
-.bloc_details {
-    position: relative; 
-    overflow: auto; 
-    width: 100%;
-}
-
-.result_table .text_right {
-    text-align: right;        
+.fc-timeline th, .fc-timeline td {
+    text-align: left;
 }

@@ -1,5 +1,5 @@
-/*
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -9,6 +9,7 @@
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
 #    License, or (at your option) any later version.
+#
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -18,23 +19,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-*/
-.table {
-    width: 96%;
-}
-
-.bloc_header {
-    position: relative; 
-    height: 200px; 
-    width: 100%;
-}
-
-.bloc_details {
-    position: relative; 
-    overflow: auto; 
-    width: 100%;
-}
-
-.result_table .text_right {
-    text-align: right;        
-}
+-->
+<odoo>
+  <template id="assets_backend" name="school_booking_assets" inherit_id="web_calendar.assets_backend">
+    <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/web_scheduler/static/lib/fullcalendar/scheduler.css" />
+        <link rel="stylesheet" href="/web_scheduler/static/src/css/web_scheduler.css" />
+        <script type="text/javascript" src="/web_scheduler/static/lib/fullcalendar/scheduler.js"></script>
+        <script type="text/javascript" src="/web_scheduler/static/src/js/web_scheduler.js"></script>
+    </xpath>
+  </template>
+</odoo>
