@@ -145,13 +145,15 @@ class IndividualBloc(models.Model):
             ('awarded_first_session', 'Awarded in First Session'),
             ('awarded_second_session', 'Awarded in Second Session'),
             ('failed', 'Failed'),
+            ('abandoned','Abandoned'),
         ], string='Status', index=True, default='draft',
         copy=False,
         help=" * The 'Draft' status is used when results are not confirmed yet.\n"
              " * The 'In Progress' status is used during the courses.\n"
              " * The 'Postponed' status is used when a second session is required.\n"
              " * The 'Awarded' status is used when the bloc is awarded in either first or second session.\n"
-             " * The 'Failed' status is used during the bloc is definitively considered as failed.\n"
+             " * The 'Failed' status is used when the bloc is definitively considered as failed.\n"
+             " * The 'Abandoned' status is when the student abandoned his bloc.\n"
              ,track_visibility='onchange')
     
     total_acquiered_credits = fields.Integer(string="Acquiered Credits",compute="compute_credits", store=True)
@@ -203,6 +205,10 @@ class IndividualBloc(models.Model):
             context = decision
             decision = None
         return self.write({'state': 'failed','decision' : decision})
+    
+    @api.multi
+    def set_to_abandoned(self, decision=None, context=None):
+        return self.write({'state': 'abandoned','decision' : None})
         
     @api.multi
     def report_send(self):
