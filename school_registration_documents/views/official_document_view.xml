@@ -23,7 +23,7 @@
 <openerp>
     <data>
         
-        <menuitem name="Official Documents" id="menu_official_document" icon="fa-book" web_icon="website_portal_sale,static/description/icon.png" sequence="65" />
+        <!--<menuitem name="Official Documents" id="menu_official_document" icon="fa-book" web_icon="website_portal_sale,static/description/icon.png" sequence="65" />-->
         
         <!-- Official Document List View -->
         <record id="view_official_document_list" model="ir.ui.view">
@@ -86,9 +86,9 @@
             <field name="act_window_id" ref="action_official_document_list" />
         </record>
         
-        <menuitem id="menu_official_document_form" parent="menu_official_document" action="action_official_document_list" sequence="10" />
+        <menuitem id="menu_official_document_form" parent="school_management.menu_individual_bloc" action="action_official_document_list" sequence="999" />
         
-        <menuitem id="menu_partner_id_numbers_form" parent="menu_official_document" action="partner_identification.action_partner_id_numbers_form" sequence="20" />
+        <!--<menuitem id="menu_partner_id_numbers_form" parent="school_management.menu_individual_bloc" action="partner_identification.action_partner_id_numbers_form" sequence="20" />-->
         
     </data>
 </openerp>

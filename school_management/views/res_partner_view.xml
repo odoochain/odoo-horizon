@@ -51,7 +51,7 @@
         </record>
 
         <!-- Top menu item -->
-        <menuitem name="Contacts" id="menu_contacts" icon="fa-user" web_icon="website_mail_channel,static/description/icon.png" sequence="40" />
+        <menuitem name="Contacts" id="menu_contacts" icon="fa-user" web_icon="school_management,static/description/icon_contact.png" sequence="40" />
 
         <!-- <menuitem name="Contacts" parent="menu_main_contacts" id="menu_contacts" sequence="1" /> -->
 
@@ -363,6 +363,7 @@
             <field name="view_id" ref="base.view_partner_form" />
             <field name="act_window_id" ref="action_other_form" />
         </record>
+        
         <menuitem id="menu_other_form" parent="menu_contacts" action="action_other_form" sequence="90" />
 
 

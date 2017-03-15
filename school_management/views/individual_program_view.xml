@@ -54,16 +54,15 @@
       <field name="arch" type="xml">
         <form string="Individual Program">
           <sheet>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
-            <div class="oe_title" style="padding-left: 130px;">
+            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
+            <div class="oe_title" style="padding-left: 260px;">
               <h1>
-               <field name="name"/>
+                <field name="student_id"/>
+                <field name="cycle_id"/>
+                <field name="speciality_id"/>
               </h1>
             </div>
             <group col="4">
-              <field name="student_id" colspan="4"/>
-              <field name="cycle_id"  colspan="4"/>
-              <field name="speciality_id" colspan="4"/>
               <field name="required_credits" colspan="4" readonly="1"/>
             </group>
             <field name="bloc_ids">
