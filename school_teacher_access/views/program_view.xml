@@ -24,9 +24,9 @@
     <data>
         
         <!-- Top menu item -->
-        <menuitem name="Teachers" id="menu_main_program" icon="fa-book" web_icon="school,static/description/icon.png" sequence="1" />
+        <menuitem name="Teachers" id="menu_main_program" icon="fa-book" web_icon="membership,static/description/icon.png" sequence="1" />
     
-        <menuitem name="My Information" parent="menu_main_program" id="menu_information" sequence="10" />
+        <!-- <menuitem name="My Information" parent="menu_main_program" id="menu_information" sequence="10" /> -->
 
         <!-- Teacher dashboard view -->
         
@@ -125,7 +125,7 @@
           <field name="act_window_id" ref="action_report_school_groups" />
         </record>
 
-        <menuitem name="My Courses" parent="menu_information" id="menu_courses" action="action_report_school_groups" sequence="20" /> -->
+        <menuitem name="My Courses" parent="menu_main_program" id="menu_courses" action="action_report_school_groups" sequence="20" /> -->
         
         <record id="view_individual_students_filter" model="ir.ui.view">
             <field name="name">student.select</field>
@@ -166,7 +166,7 @@
           <field name="act_window_id" ref="action_report_school_student" />
         </record>
         
-        <menuitem name="My Students" parent="menu_information" id="menu_student" action="action_report_school_student" sequence="40"/>
+        <menuitem name="My Students" parent="menu_main_program" id="menu_student" action="action_report_school_student" sequence="40"/>
 
         <!-- Individual Course Tree View -->
         <record id="view_individual_course_dispense_tree" model="ir.ui.view">
@@ -194,7 +194,7 @@
             <field name="context">{"search_default_my_current_courses":1,"search_default_dispensed":1}</field>
         </record>
         
-        <menuitem name="My Dispenses" parent="menu_information" id="menu_dispense" action="action_report_school_dispense" sequence="50"/>
+        <menuitem name="My Dispenses" parent="menu_main_program" id="menu_dispense" action="action_report_school_dispense" sequence="50"/>
         
     </data>
 </openerp>
