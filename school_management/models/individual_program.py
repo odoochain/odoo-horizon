@@ -94,6 +94,7 @@ class IndividualBloc(models.Model):
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups',track_visibility='onchange')
     
     total_credits = fields.Integer(compute='_get_courses_total', string='Credits')
+    total_credits_na = fields.Integer(compute='_get_courses_total', string='Credits Not Acquiered')
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours')
     total_weight = fields.Float(compute='_get_courses_total', string='Weight')
 

@@ -143,7 +143,6 @@ class IndividualBloc(models.Model):
             ('progress','In Progress'),
             ('postponed', 'Postponed'),
             ('awarded_first_session', 'Awarded in First Session'),
-            ('awarded_second_session', 'Awarded in Second Session'),
             ('failed', 'Failed'),
             ('abandoned','Abandoned'),
         ], string='Status', index=True, default='draft',
@@ -156,7 +155,9 @@ class IndividualBloc(models.Model):
              " * The 'Abandoned' status is when the student abandoned his bloc.\n"
              ,track_visibility='onchange')
     
+    total_not_dispensed_credits = fields.Integer(string="Credits Not Dispensed",compute="compute_credits", store=True)
     total_acquiered_credits = fields.Integer(string="Acquiered Credits",compute="compute_credits", store=True)
+    
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
     decision = fields.Text(string="Decision",track_visibility='onchange')
     exclude_from_deliberation = fields.Boolean(string='Exclude from Deliberation', default=False)
@@ -243,6 +244,7 @@ class IndividualBloc(models.Model):
     def compute_credits(self):
         _logger.debug('Trigger "compute_credits" on Bloc %s' % self.name)
         self.total_acquiered_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.acquiered == 'A'])
+        self.total_not_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if not icg.dispense ])
       
     @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered')
     @api.one
