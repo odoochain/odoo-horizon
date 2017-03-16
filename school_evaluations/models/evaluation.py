@@ -239,7 +239,7 @@ class IndividualBloc(models.Model):
             'context': ctx,
         }
         
-    @api.depends('course_group_ids.total_credits','course_group_ids.acquiered')
+    @api.depends('course_group_ids.total_credits','course_group_ids.acquiered','course_group_ids.dispense')
     @api.one
     def compute_credits(self):
         _logger.debug('Trigger "compute_credits" on Bloc %s' % self.name)
