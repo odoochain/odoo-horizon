@@ -162,7 +162,7 @@
         <record id="action_student_form_view2" model="ir.actions.act_window.view">
           <field name="sequence" eval="2" />
           <field name="view_mode">form</field>
-          <field name="view_id" ref="school_management.view_student_form_school" />
+          <field name="view_id" ref="school_management.view_partners_form_school" />
           <field name="act_window_id" ref="action_report_school_student" />
         </record>
         

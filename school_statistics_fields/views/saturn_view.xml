@@ -286,7 +286,7 @@
         <record id="view_partners_form_school_stat_fields" model="ir.ui.view">
             <field name="name">view.res.partner.form.school.stat_fields</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="school_management.view_student_form_school" />
+            <field name="inherit_id" ref="school_management.view_partners_form_school" />
             <field eval="18" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//notebook[last()]" position="inside">

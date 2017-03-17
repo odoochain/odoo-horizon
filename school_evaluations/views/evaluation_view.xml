@@ -43,7 +43,7 @@
         <record id="view_partners_form_school_eval" model="ir.ui.view">
             <field name="name">view.res.partner.form.school.eval</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="school_management.view_student_form_school" />
+            <field name="inherit_id" ref="school_management.view_partners_form_school" />
             <field eval="18" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='source_bloc_name']" position="after">
