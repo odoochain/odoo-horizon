@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!--
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -19,16 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
--->
-<openerp>
-    <data>
-        <record id="action_documentation" model="ir.actions.act_url">
-            <field name="name">Documentation</field>
-            <field name="type">ir.actions.act_url</field>
-            <field name="url">/school_documentation/static/html/index.html</field>
-            <field name="target">new</field>
-        </record>
 
-        <menuitem name="Documentation" id="menu_school_doc" icon="fa-calendar" web_icon="hr_timesheet_sheet,static/description/icon.png" sequence="90" action="action_documentation" />
-    </data>
-</openerp>

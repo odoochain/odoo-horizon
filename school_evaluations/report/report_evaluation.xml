@@ -436,8 +436,10 @@
             <form string="Evaluations by teatcher">
                 <group col="4">
                     <field name="year_id" create="false" delete='false' colspan="4"/>
+                    <field name="teacher_ids" colspan="4" widget="many2many_tags"/>
                     <field name="display_results" />
                     <field name="freeze_first_session" />
+                    <h3>Message</h3>
                     <field name="message" colspan="4" nolabel="1" default="Merci de ramener le document au secrétariat." />
                 </group>
                 <footer>
@@ -466,7 +468,7 @@
         <field name="target">new</field>
     </record>
 
-    <!-- <menuitem id="menu_evaluation_report_by_teacher" name="Evaluation by Teacher" action="action_evaluation_report_by_teacher" parent="school_management.menu_individual_bloc" /> -->
+    <menuitem id="menu_evaluation_report_by_teacher" name="Evaluation by Teacher" action="action_evaluation_report_by_teacher" parent="menu_main_evaluation" sequence="900" />
 
     <!--  Add wizard -->
     <act_window name="Evaluation by Teacher"
