@@ -146,7 +146,7 @@
       <field name="act_window_id" ref="action_individual_program_form" />
     </record>
     
-    <menuitem id="menu_individual_program_form" parent="menu_individual_bloc" action="action_individual_program_form" sequence="1" />
+    <menuitem id="menu_individual_program_form" parent="menu_individual_bloc" action="action_individual_program_form" sequence="50" />
 
     <!--
     
@@ -435,7 +435,7 @@
       <field name="act_window_id" ref="action_individual_course_group_form" />
     </record>
 
-    <menuitem id="menu_individual_course_group_form" parent="menu_individual_bloc" action="action_individual_course_group_form" sequence="40" />
+    <menuitem id="menu_individual_course_group_form" parent="menu_individual_bloc" action="action_individual_course_group_form" sequence="60" />
 
     <!--
     
@@ -570,7 +570,7 @@
       <field name="act_window_id" ref="action_individual_course_form" />
     </record>
 
-    <menuitem id="menu_individual_course_form" parent="menu_individual_bloc" action="action_individual_course_form" sequence="50" />
+    <menuitem id="menu_individual_course_form" parent="menu_individual_bloc" action="action_individual_course_form" sequence="70" />
 
   </data>
 </openerp>
