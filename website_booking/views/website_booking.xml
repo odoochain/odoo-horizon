@@ -49,13 +49,13 @@
         </template>
         
         <record id="action_website_booking" model="ir.actions.act_url">
-            <field name="name">Booking</field>
+            <field name="name">Online Booking</field>
             <field name="type">ir.actions.act_url</field>
             <field name="url">/booking#category_id=11</field>
             <field name="target">new</field>
         </record>
 
-        <menuitem name="Booking" id="menu_school_booking" icon="fa-calendar" web_icon="hr_timesheet_sheet,static/description/icon.png" sequence="90" action="action_website_booking" />
+        <menuitem name="Online Booking" id="menu_school_booking" icon="fa-calendar" web_icon="hr_timesheet_sheet,static/description/icon.png" sequence="90" action="action_website_booking" />
 
     </data>
 </openerp>
