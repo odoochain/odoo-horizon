@@ -87,9 +87,75 @@
             </div>
         </section>
         <section class="row" t-foreach="program.bloc_ids" t-as="bloc">
-            <t t-call="school_management.school_bloc"/>
+            <t t-call="school_management.website_school_bloc"/>
         </section>
         <hr/>
+    </template>
+    
+    <template id="website_school_bloc" name="Bloc">
+        <div class="col-md-12">
+            <t t-call="website_portal_school_management.no_description"/>
+            <table class="table table-condensed oe_school_program_table">
+                <caption style="font-size: 100%;">Grille du bloc - <t t-esc="bloc.name"/></caption>
+                <colgroup>
+                    <col style="width:75px"/>
+                    <col style="width:100%"/>
+                    <col style="width:60px"/>
+                    <col style="width:60px"/>
+                    <col style="width:60px"/>
+                    <col style="width:100px"/>
+                    <col style="width:100px"/>
+                    <col style="width:100px"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Code UE</th> 
+                        <th>Unités d’enseignement</th> 
+                        <th class="text-center">Heures</th> 
+                        <th class="text-center">ECTS</th>
+                        <th class="text-center">Pond</th>
+                        <th>Pré/Co-requis</th>
+                        <th>Quadrimestre</th>
+                        <th>Référentiel</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <t t-foreach="bloc.course_group_ids" t-as="course_group">
+                    <tr class="oe_school_course_group">
+                        <td><t t-esc="course_group.code_ue"/></td>
+                        <td><t t-esc="course_group.title"/></td>
+                        <td class="text-center"><t t-esc="course_group.total_hours"/></td>
+                        <td class="text-center"><t t-esc="course_group.total_credits"/></td>
+                        <td></td>
+                        <td class="text-center">Aucun</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr t-foreach="course_group.course_ids" t-as="course">
+                        <td></td>
+                        <td t-if="course.url_ref"><a t-esc="course.title" t-att-href="course.url_ref" target="new" style="cursor: pointer;"/></td>
+                        <td t-if="not course.url_ref"><a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/></td>
+                        <td class="text-center"><t t-esc="course.hours"/></td>
+                        <td class="text-center"><t t-esc="course.credits"/></td>
+                        <td class="text-center"><t t-esc="course.weight"/></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </t>
+                    <tr>
+                        <td></td>
+                        <td class="text-right">Total :</td>
+                        <td class="text-center"><t t-esc="bloc.total_hours"/></td>
+                        <td class="text-center"><t t-esc="bloc.total_credits"/></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </template>
 
     <template id="report_program_details_content">
