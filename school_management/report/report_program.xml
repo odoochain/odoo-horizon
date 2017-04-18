@@ -94,7 +94,6 @@
     
     <template id="website_school_bloc" name="Bloc">
         <div class="col-md-12">
-            <t t-call="website_portal_school_management.no_description"/>
             <table class="table table-condensed oe_school_program_table">
                 <caption style="font-size: 100%;">Grille du bloc - <t t-esc="bloc.name"/></caption>
                 <colgroup>
