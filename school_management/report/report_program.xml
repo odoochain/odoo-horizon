@@ -87,7 +87,7 @@
             </div>
         </section>
         <section class="row" t-foreach="program.bloc_ids" t-as="bloc">
-            <t t-call="school_bloc"/>
+            <t t-call="school_management.school_bloc"/>
         </section>
         <hr/>
     </template>
