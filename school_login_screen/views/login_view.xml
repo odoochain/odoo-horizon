@@ -43,6 +43,19 @@
                 <div class="mdl-layout mdl-layout--fixed-header mdl-js-layout  mdl-color--white-100">
             		<main class="mdl-layout__content main_content">
             		    <div class="login-form-div mdl-grid mdl-shadow--2dp">
+            			    <div class="pull-right">
+                                <t t-foreach="providers" t-as="p">
+                                <div>
+                                    <h2><a t-att-href="p['auth_link']" class="btn btn-link">
+                                        <i class="fa fa-google-plus-square"></i>
+                                        <t t-esc="p['body']"/>
+                                    </a>
+                                    </h2>
+                                </div>
+                                </t>
+                            </div>
+            			</div>
+            		    <div class="login-form-div mdl-grid mdl-shadow--2dp">
             			    <form role="form" t-attf-action="/web/login{{ '?debug' if debug else '' }}" method="post" onsubmit="this.action = this.action + location.hash">
             				<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
             				<div class="mdl-cell mdl-cell--12-col cell_con">
@@ -62,16 +75,6 @@
             				</div>				
             				<div class="mdl-cell mdl-cell--12-col login-btn-con">
             					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary btn" type="submit">Login</button>
-                                <div class="pull-right">
-                                    <t t-foreach="providers" t-as="p">
-                                    <div>
-                                        <a t-att-href="p['auth_link']" class="btn btn-link">
-                                            <i class="fa fa-google-plus-square"></i>
-                                            <t t-esc="p['body']"/>
-                                        </a>
-                                    </div>
-                                    </t>
-                                </div>
             				</div>
             				<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet links">
                                   <a class="mdl-button--primary">Forgot password ?</a>
