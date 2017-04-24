@@ -36,6 +36,7 @@ class Invoice(models.Model):
     
     final_payment_date = fields.Date(compute='_compute_final_payment_date')
     
+    @api.one
     @api.depends('residual')
     def _compute_final_payment_date(self):
         if self.residual == 0 :
