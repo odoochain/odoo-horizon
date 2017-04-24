@@ -29,7 +29,11 @@
   overflow-x: hidden;
 }
 
-a {
+a.o_school_group_item {
+  color: white;
+}
+
+a.o_school_bloc_item {
   color: white;
 }
 
