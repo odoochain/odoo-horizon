@@ -21,11 +21,16 @@
 */
 .sub_navbar {
   position: absolute;
-  top: 280px;
+  top: 400px;
   bottom: 57px;
   left: 0;
   right: 0;
-  overflow:scroll;  
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+a {
+  color: white;
 }
 
 .bloc_form {
@@ -112,7 +117,12 @@
 
 .sidebar ul li a.active {
     color: #ffffff;
-    background-color: #337ab7;
+    background-color: #00545c;
+}
+
+.openerp .badge {
+    color: #ffffff;
+    background-color: #00545c !important;
 }
 
 .credits {
