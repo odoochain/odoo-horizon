@@ -28,11 +28,11 @@
     'depends': ['school_student_group'],
     'init_xml': [],
     'update_xml': [
+        'data/school_evaluations.xml',
         'views/evaluation_view.xml',
         'views/configuration_view.xml',
         'report/report_evaluation.xml',
         'wizard/evaluation_summary.xml',
-        'data/school_evaluations.xml',
     ],
     'demo_xml': [],
     'description': '''
