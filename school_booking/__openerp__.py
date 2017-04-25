@@ -30,8 +30,8 @@
     'update_xml': [
         'views/school_booking_view.xml',
         'views/school_asset_view.xml',
-        'security/ir.model.access.csv',
         'data/school_booking.xml',
+        'security/ir.model.access.csv',
     ],
     'demo_xml': [],
     'description': '''

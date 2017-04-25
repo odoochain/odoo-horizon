@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -18,28 +19,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School evaluations',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['school_student_group'],
-    'init_xml': [],
-    'update_xml': [
-        'views/evaluation_view.xml',
-        'views/configuration_view.xml',
-        'report/report_evaluation.xml',
-        'wizard/evaluation_summary.xml',
-        'data/school_evaluations.xml',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules add evaluation management for a school.
-    ''',
-    'qweb': ['static/src/xml/*.xml'],
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+-->
+<openerp>
+    <data>
+        <record id="group_booking_evaluation" model="res.groups">
+            <field name="name">Gestion des évaluations</field>
+        </record>
+    </data>
+</openerp>

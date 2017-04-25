@@ -24,7 +24,7 @@
     <data>
     
         <!-- Top menu item -->
-        <menuitem name="Evaluations" id="menu_main_evaluation" icon="fa-book" web_icon="survey,static/description/icon.png" sequence="65" />
+        <menuitem name="Evaluations" id="menu_main_evaluation" icon="fa-book" web_icon="survey,static/description/icon.png" sequence="65" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
 
         <template id="assets_backend" name="school_evaluations_assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
