@@ -155,6 +155,7 @@
             				    <field name="lang"/>
                                 <field name='email_personnel' />
                                 <field name="birthplace"/>
+                                <field name="birthdate_date"/>
                                 <field name="reg_number" />
                                 <field name="mat_number"/>
             				</group>
