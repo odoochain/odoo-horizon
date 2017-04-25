@@ -28,9 +28,9 @@
     'depends': ['school_management','calendar','web_calendar','web_scheduler'],
     'init_xml': [],
     'update_xml': [
+        'data/school_booking.xml',
         'views/school_booking_view.xml',
         'views/school_asset_view.xml',
-        'data/school_booking.xml',
         'security/ir.model.access.csv',
     ],
     'demo_xml': [],
