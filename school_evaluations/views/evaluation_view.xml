@@ -300,7 +300,7 @@
             <field name="model">school.individual_course</field>
             <field name="inherit_id" ref="individual_course_eval_tree" />
             <field eval="25" name="priority" />
-            <field name="groups_id" eval="[(6, 0, [ref('school_management.group_evaluation') ])]" />
+            <field name="groups_id" eval="[(6, 0, [ref('school_evaluations.group_evaluations') ])]" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='dispense']" position="replace">
                     <field name="dispense" string="Dis" />
