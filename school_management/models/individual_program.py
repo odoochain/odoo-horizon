@@ -118,6 +118,7 @@ class IndividualBloc(models.Model):
         _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
         self.total_hours = sum(course_group.total_hours for course_group in self.course_group_ids)
         self.total_credits = sum(course_group.total_credits for course_group in self.course_group_ids)
+        self.total_credits_na = sum(course_group.total_credits if not course_group.acquiered else 0 for course_group in self.course_group_ids)
         self.total_weight = sum(course_group.total_weight for course_group in self.course_group_ids)
 
     @api.one
