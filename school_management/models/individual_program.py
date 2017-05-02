@@ -112,7 +112,7 @@ class IndividualBloc(models.Model):
             _logger.info(courses)
             cg.write({'course_ids': courses})
 
-    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight')
+    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight','course_group_ids.acquiered')
     @api.one
     def _get_courses_total(self):
         _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
