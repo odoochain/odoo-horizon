@@ -49,7 +49,7 @@
                 <xpath expr="//field[@name='source_bloc_name']" position="after">
                     <field name="state"/>
                     <field name="total_acquiered_credits"/>
-                     <field name="total_not_acquiered_credits"/>
+                    <field name="total_not_acquiered_credits"/>
                 </xpath>
                 <!--<xpath expr="//notebook[last()]" position="inside">
                     <page name="credit_lines" string="Credit Lines" attrs="{'invisible': [('student','=',False)]}">
@@ -152,6 +152,7 @@
                     <group col="4">
                         <field name="evaluation" />
                         <field name="total_acquiered_credits" />
+                        <field name="total_not_acquiered_credits" />
                         <field name="exclude_from_deliberation" string="Exc Delib"/>
                         <newline/>
                         <field name="decision" colspan="4"/>
