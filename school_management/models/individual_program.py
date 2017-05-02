@@ -94,7 +94,6 @@ class IndividualBloc(models.Model):
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups',track_visibility='onchange')
     
     total_credits = fields.Integer(compute='_get_courses_total', string='Credits')
-    total_credits_na = fields.Integer(compute='_get_courses_total', string='Credits Not Acquiered')
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours')
     total_weight = fields.Float(compute='_get_courses_total', string='Weight')
 
@@ -112,13 +111,12 @@ class IndividualBloc(models.Model):
             _logger.info(courses)
             cg.write({'course_ids': courses})
 
-    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight','course_group_ids.acquiered')
+    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight')
     @api.one
     def _get_courses_total(self):
         _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
         self.total_hours = sum(course_group.total_hours for course_group in self.course_group_ids)
         self.total_credits = sum(course_group.total_credits for course_group in self.course_group_ids)
-        self.total_credits_na = sum(course_group.total_credits if not course_group.acquiered else 0 for course_group in self.course_group_ids)
         self.total_weight = sum(course_group.total_weight for course_group in self.course_group_ids)
 
     @api.one

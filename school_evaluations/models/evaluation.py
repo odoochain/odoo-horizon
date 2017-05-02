@@ -157,6 +157,7 @@ class IndividualBloc(models.Model):
     
     total_not_dispensed_credits = fields.Integer(string="Credits Not Dispensed",compute="compute_credits", store=True)
     total_acquiered_credits = fields.Integer(string="Acquiered Credits",compute="compute_credits", store=True)
+    total_not_acquiered_credits = fields.Integer(compute='compute_credits', string='Credits Not Acquiered', store=True)
     
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
     decision = fields.Text(string="Decision",track_visibility='onchange')
@@ -239,12 +240,13 @@ class IndividualBloc(models.Model):
             'context': ctx,
         }
         
-    @api.depends('course_group_ids.total_credits','course_group_ids.acquiered','course_group_ids.dispense')
+    @api.depends('course_group_ids.total_credits','course_group_ids.acquiered','course_group_ids.dispense','course_group_ids.acquiered')
     @api.one
     def compute_credits(self):
         _logger.debug('Trigger "compute_credits" on Bloc %s' % self.name)
         self.total_acquiered_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.acquiered == 'A'])
         self.total_not_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if not icg.dispense ])
+        self.total_not_acquiered_credits = self.total_credits - self.total_acquiered_credits
       
     @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered')
     @api.one
