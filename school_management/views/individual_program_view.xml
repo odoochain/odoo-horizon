@@ -165,6 +165,7 @@
           <field name="student_id" />
           <field name="source_bloc_name" />
           <field name="total_credits" />
+          <field name="total_credits_na" />
           <field name="is_final_bloc" />
         </tree>
       </field>
@@ -228,6 +229,7 @@
               <field name="is_final_bloc" />
               <field name="total_hours" />
               <field name="total_credits" />
+              <field name="total_credits_na" />
             </group>
             <field name="course_group_ids">
               <tree string="Course Groups" context="{'default_bloc_id':active_id}">
