@@ -81,11 +81,27 @@ class IndividualBloc(models.Model):
     source_bloc_name = fields.Char(related='source_bloc_id.name', string="Source Bloc Name", readonly=True, store=True)
     source_bloc_title = fields.Char(related='source_bloc_id.title', string="Source Bloc Title", readonly=True, store=True)
     source_bloc_level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),],related='source_bloc_id.level', string="Source Bloc Level", readonly=True, store=True)
-    source_bloc_domain_id = fields.Many2one(related='source_bloc_id.domain_id', string='Domain', readonly=True, store=True)
-    source_bloc_speciality_id = fields.Many2one(related='source_bloc_id.speciality_id', string='Speciality', readonly=True, store=True)
-    source_bloc_section_id = fields.Many2one(related='source_bloc_id.section_id', string='Section', readonly=True, store=True)
-    source_bloc_track_id = fields.Many2one(related='source_bloc_id.track_id', string='Track', readonly=True, store=True)
-    source_bloc_cycle_id = fields.Many2one(related='source_bloc_id.cycle_id', string='Cycle', readonly=True, store=True)
+    
+    source_bloc_domain_id = fields.Many2one('school.domain',compute='compute_speciality', string='Domain', readonly=True, store=True)
+    source_bloc_speciality_id = fields.Many2one('school.speciality',compute='compute_speciality', string='Speciality', readonly=True, store=True)
+    source_bloc_section_id = fields.Many2one('school.section',compute='compute_speciality', string='Section', readonly=True, store=True)
+    source_bloc_track_id = fields.Many2one('school.track',compute='compute_speciality', string='Track', readonly=True, store=True)
+    source_bloc_cycle_id = fields.Many2one('school.cycle',compute='compute_speciality', string='Cycle', readonly=True, store=True)
+    
+    @api.depends('source_bloc_id.speciality_id','program_id.speciality_id')
+    @api.multi
+    def compute_speciality(self):
+        for bloc in self:
+            if bloc.source_bloc_id.speciality_id :
+                bloc.source_bloc_speciality_id = bloc.source_bloc_id.speciality_id
+                bloc.source_bloc_domain_id = bloc.source_bloc_id.domain_id
+                bloc.source_bloc_section_id = bloc.source_bloc_id.section_id
+                bloc.source_bloc_track_id = bloc.source_bloc_id.track_id
+            elif bloc.program_id.speciality_id :
+                bloc.source_bloc_speciality_id = bloc.program_id.speciality_id
+                bloc.source_bloc_domain_id = bloc.program_id.domain_id
+                bloc.source_bloc_section_id = bloc.program_id.section_id
+                bloc.source_bloc_track_id = bloc.program_id.track_id
     
     image = fields.Binary('Image', attachment=True, related='student_id.image')
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
