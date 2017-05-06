@@ -254,17 +254,17 @@
                     <tr>
                         <td></td>
                         <td class="text-right">Total :</td>
-                        <td class="text-center"><t t-esc="bloc.total_hours"/></td>
-                        <td class="text-center"><t t-esc="bloc.total_credits"/></td>
+                        <td class="text-center"><t t-esc="bloc.total_not_dispensed_hours"/></td>
+                        <td class="text-center"><t t-esc="bloc.total_not_dispensed_credits"/></td>
                         <td></td>
                         <!--<td></td>-->
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td class="text-right">Whose to be acquiered :</td>
+                        <td class="text-right">Whose already acquiered :</td>
                         <td class="text-center"></td>
-                        <td class="text-center"><t t-esc="bloc.total_not_acquiered_credits"/></td>
+                        <td class="text-center"><t t-esc="bloc.total_acquiered_credits"/></td>
                         <td></td>
                         <td></td>
                         <!--<td></td>-->
