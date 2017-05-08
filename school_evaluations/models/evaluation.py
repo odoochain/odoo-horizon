@@ -159,7 +159,7 @@ class IndividualBloc(models.Model):
     total_not_acquiered_credits = fields.Integer(compute='compute_credits', string='Credits Not Acquiered',store=True)
     total_not_acquiered_hours = fields.Integer(compute='compute_credits', string='Hours Not Acquiered',store=True)
     total_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Credits Not Dispensed",store=True)
-    total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Credits Not Acquiered',store=True)
+    total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Hours Not Dispensed',store=True)
     
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
     decision = fields.Text(string="Decision",track_visibility='onchange')
