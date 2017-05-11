@@ -36,10 +36,32 @@ body::before {
   }
 }
 
+.main-grid {
+    margin-bottom:200px;
+}
+
 .login-form-div {
     width: 500px;
     background: #fff;
     padding-top: 20px !important;
     padding-bottom: 20px !important;
     margin-top:50px;
+}
+
+.announcements-card {
+   background: #fff;
+   margin-top:58px;
+   padding-top: 20px !important;
+   padding-bottom: 20px !important;
+   height : 460px;
+   width: 500px;
+}
+
+.announcements-title {
+    padding: 20px;
+}
+
+.announcements-list {
+   height : 370px;
+   overflow: auto;
 }

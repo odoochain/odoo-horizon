@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -18,5 +19,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+-->
+<odoo>
+    <data>
 
-import controllers
+        <record id="announcements" model="res.groups">
+            <field name="name">Gestion des annonces</field>
+        </record>
+
+        <record model="mail.channel" id="channel_announce">
+            <field name="name">announcements</field>
+            <field name="group_ids" eval="[(4, ref('school_login_screen.announcements'))]"/>
+            <field name="group_public_id" eval="[(4, ref('school_login_screen.announcements'))]"/>
+            <field name="description">General announcements on the login screen.</field>
+        </record>
+
+    </data>
+</odoo>

@@ -18,5 +18,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import logging
+import time
+import werkzeug.utils
+import json
 
-import controllers
+from openerp import http
+from openerp.http import request
+from openerp.addons.auth_oauth.controllers.main import OAuthLogin as Home
+
+_logger = logging.getLogger(__name__)
+
+class AnnouncementsController(http.Controller):
+        
+    @http.route('/announcements', type='json', auth='public', website=True)
+    def announcements(self, debug=False, **k):
+        return request.env['mail.message'].sudo().search_read([('channel_ids', 'in', request.env.ref('school_login_screen.channel_announce').id)],['author_avatar','author_id','body','date'])
