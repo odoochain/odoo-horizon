@@ -46,10 +46,10 @@
             <field name="inherit_id" ref="school_management.view_partners_form_school" />
             <field eval="18" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='source_bloc_name']" position="after">
-                    <field name="state"/>
+                <xpath expr="//field[@name='total_credits']" position="after">
                     <field name="total_acquiered_credits"/>
                     <field name="total_not_acquiered_credits"/>
+                    <field name="state"/>
                 </xpath>
                 <!--<xpath expr="//notebook[last()]" position="inside">
                     <page name="credit_lines" string="Credit Lines" attrs="{'invisible': [('student','=',False)]}">
