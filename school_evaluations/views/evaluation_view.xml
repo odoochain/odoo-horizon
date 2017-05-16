@@ -74,9 +74,11 @@
             <field name="inherit_id" ref="school_management.view_individual_bloc_tree" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='source_bloc_name']" position="after">       
-                    <field name="state"/>
+                <xpath expr="//field[@name='total_credits']" position="after">
+                    <field name="total_acquiered_credits"/>
+                    <field name="total_dispensed_credits"/>
                     <field name="total_not_acquiered_credits"/>
+                    <field name="state"/>
                 </xpath>
             </field>
         </record>
@@ -149,15 +151,14 @@
                         <field name="state" widget="statusbar" states="awarded_first_session,awarded_second_session,failed,abandoned" statusbar_visible="awarded_first_session,awarded_second_session,failed,abandoned" />
                     </header>
                 </xpath>
-                <xpath expr="//field[@name='course_group_ids']" position="before">
-                    <group col="4">
-                        <field name="evaluation" />
-                        <field name="total_acquiered_credits" />
-                        <field name="total_not_acquiered_credits" />
-                        <field name="exclude_from_deliberation" string="Exc Delib"/>
-                        <newline/>
-                        <field name="decision" colspan="4"/>
-                    </group>
+                <xpath expr="//field[@name='total_credits']" position="after">
+                    <field name="total_dispensed_credits" />
+                    <field name="total_acquiered_credits" />
+                    <field name="total_not_acquiered_credits" />
+                    <newline/>
+                    <field name="evaluation" />
+                    <field name="exclude_from_deliberation" string="Exc Delib"/>
+                    <field name="decision" colspan="4"/>
                 </xpath>
                 <xpath expr="//field[@name='source_course_group_id']" position="before">
                     <field name="first_session_result" string="S1" />
