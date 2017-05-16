@@ -48,8 +48,7 @@ class IndividualProgram(models.Model):
     section_id = fields.Many2one(related='speciality_id.section_id', string='Section',store=True)
     track_id = fields.Many2one(related='speciality_id.track_id', string='Track',store=True)
     
-    required_credits = fields.Integer(related='cycle_id.required_credits',string='Required Credits')
-    required_credits = fields.Integer(related='cycle_id.required_credits',string='Required Credits')
+    required_credits = fields.Integer(related='cycle_id.required_credits',string='Requiered Credits')
     
     @api.one
     @api.depends('cycle_id.name','speciality_id.name','student_id.name')

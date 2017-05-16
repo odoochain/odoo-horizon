@@ -95,6 +95,15 @@ class IndividualProgram(models.Model):
     
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
     
+    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits')
+    
+    @api.depends('bloc_ids.total_acquiered_credits')
+    @api.one
+    def _get_total_acquiered_credits(self):
+        _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % self.name)
+        total = sum(bloc_id.total_acquiered_credits for bloc_id in self.bloc_ids)
+        self.total_acquiered_credits = total + self.historical_bloc_1_credits + self.historical_bloc_2_credits
+    
     @api.depends('grade')
     def _onchange_grade(self):
         if self.grade:
