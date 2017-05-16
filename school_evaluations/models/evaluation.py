@@ -156,8 +156,11 @@ class IndividualBloc(models.Model):
              ,track_visibility='onchange')
     
     total_acquiered_credits = fields.Integer(compute="compute_credits",string="Acquiered Credits",store=True)
+    total_acquiered_hours = fields.Integer(compute="compute_credits",string="Acquiered Credits",store=True)
     total_not_acquiered_credits = fields.Integer(compute='compute_credits', string='Credits Not Acquiered',store=True)
     total_not_acquiered_hours = fields.Integer(compute='compute_credits', string='Hours Not Acquiered',store=True)
+    total_dispensed_credits = fields.Integer(compute="compute_credits",string="Acquiered Credits",store=True)
+    total_dispensed_hours = fields.Integer(compute="compute_credits",string="Acquiered Credits",store=True)
     total_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Credits Not Dispensed",store=True)
     total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Hours Not Dispensed',store=True)
     
@@ -242,20 +245,21 @@ class IndividualBloc(models.Model):
             'context': ctx,
         }
         
-    @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.dispense','course_group_ids.acquiered')
+    @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.dispense')
     @api.one
     def compute_credits(self):
-        _logger.debug('Trigger "compute_credits" on Bloc %s' % self.name)
         self.total_acquiered_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.acquiered == 'A'])
+        self.total_acquiered_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.acquiered == 'A'])
         self.total_not_acquiered_credits = self.total_credits - self.total_acquiered_credits
-        self.total_not_acquiered_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.acquiered != 'A'])
-        self.total_not_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if not icg.dispense ])
-        self.total_not_dispensed_hours = sum([icg.total_hours for icg in self.course_group_ids if not icg.dispense ])
+        self.total_not_acquiered_hours = self.total_hours - self.total_acquiered_hours
+        self.total_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.dispense ])
+        self.total_dispensed_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.dispense ])
+        self.total_not_dispensed_credits = self.total_credits - self.total_dispensed_credits
+        self.total_not_dispensed_hours = self.total_hours - self.total_dispensed_hours
         
     @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered')
     @api.one
     def compute_evaluation(self):
-        _logger.debug('Trigger "compute_evaluation" on Bloc %s' % self.name)
         total = 0
         total_first = 0
         total_second = 0
