@@ -83,6 +83,21 @@
             </field>
         </record>
     
+        <!-- Add evaluation to Individual Course tree view -->
+        <record id="individual_program_eval_tree" model="ir.ui.view">
+            <field name="name">school.individual_program.eval.tree</field>
+            <field name="model">school.individual_program</field>
+            <field name="inherit_id" ref="school_management.view_individual_program_tree" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='required_credits']" position="after">
+                    <field name="total_acquiered_credits" />
+                    <field name="evaluation"/>
+                    <field name="state"/>
+                </xpath>
+            </field>
+        </record>
+    
         <!-- Add evaluation to Individual Program form view -->
         <record id="individual_program_eval_form" model="ir.ui.view">
             <field name="name">school.individual_program.eval.view</field>
@@ -102,14 +117,16 @@
                 <xpath expr="//field[@name='required_credits']" position="after">            
                     <field name="historical_bloc_1_eval"/>
                     <field name="historical_bloc_2_eval"/>
+                    <field name="total_acquiered_credits" />
                     <field name="evaluation" />
                     <field name="grade" />
                     <field name="grade_year_id" />
                     <field name="grade_comments" colspan="4"/>
                 </xpath>
                 <xpath expr="//field[@name='source_bloc_name']" position="after">
-                    <field name="state"/>
+                    <field name="total_acquiered_credits" />
                     <field name="evaluation"/>
+                    <field name="state"/>
                 </xpath>
             </field>
         </record>
