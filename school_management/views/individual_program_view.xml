@@ -42,6 +42,7 @@
           <field name="student_id" />
           <field name="cycle_id" />
           <field name="speciality_id" />
+          <field name="total_credits" />
         </tree>
       </field>
     </record>
