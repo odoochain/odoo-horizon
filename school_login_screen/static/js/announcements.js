@@ -7,11 +7,11 @@ $.ajax({
 }).done(function( data ) {
     console.log(data);
     $.each(data.result, function(i, announcement) {
-        $('<li class="mdl-list__item mdl-list__item--three-line">').append(
-            $('<span class="mdl-list__item-primary-content">').append(
+        $('<div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">').append(
+            $('<div class="mdl-card__title">').append(
                 announcement.author_avatar ? $('<img alt="Avatar" class="mdl-list__item-avatar">').attr("src","/web/image/res.partner/"+announcement.author_id[0]+"/image_small") : $('<i class="material-icons mdl-list__item-avatar">').text("person"),
                 $('<span>').text(announcement.author_id[1]),
-                $('<span class="mdl-list__item-text-body">').html(announcement.body))
+                $('<div class="mdl-card__supporting-text">').html(announcement.body))
         ).appendTo('.announcements-list');
     });
     

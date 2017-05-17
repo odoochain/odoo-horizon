@@ -96,7 +96,7 @@
                     		</div>
                     		<div class="announcements-card mdl-cell mdl-cell--6-col">
                     		    <h2 class="announcements-title mdl-card__title-text">Announcements</h2>
-                    		    <ul class="announcements-list mdl-list"/>
+                    		    <div class="announcements-list mdl-list"/>
                     		</div>
                     	</div>
             	    </main>
