@@ -81,7 +81,7 @@ class OfficialDocument(models.Model):
 
     def _compute_attachment_count(self):
         for doc in self:
-            doc.attachment_count = len(self.attachment_ids)
+            doc.attachment_count = len(doc.attachment_ids)
     
     note = fields.Text('Notes')
     
