@@ -59,7 +59,7 @@
                             <field name="type_id" />
                             <field name="is_available" />
                             <field name="has_expiry_date" invisible="1"/>
-                            <field name="expiry_date" attrs="{'required': [('has_expiry_date', '=', True),('is_available', '=', True)]}"/>
+                            <field name="expiry_date" attrs="{'invisible':[('has_expiry_date', '=', False)], required': [('has_expiry_date', '=', True),('is_available', '=', True)]}"/>
                             <field name="attachment_ids" widget="many2many_binary"/>
                             <field name="note" />
                         </group>
