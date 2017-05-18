@@ -41,8 +41,8 @@
 
     <template id="report_attendance_for_student_content">
         <t t-call="report.html_container">
-            <t t-set="data_report_margin_top" t-value="45"/>
-            <t t-set="data_report_header_spacing" t-value="25"/>
+            <t t-set="data_report_margin_top" t-value="55"/>
+            <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-foreach="docs" t-as="o">
                 <t t-call="report.external_layout">
                 <div class="page">

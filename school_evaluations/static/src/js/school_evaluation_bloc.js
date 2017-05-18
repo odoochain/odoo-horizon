@@ -184,7 +184,6 @@ return Widget.extend({
         this._super.apply(this, arguments);
         this.title = title;
         this.parent = parent;
-        this.school_session = parent.school_session;
     },
     
     start: function() {
@@ -194,6 +193,7 @@ return Widget.extend({
     
     read_ids: function(ids,idx) {
         var self = this;
+        this.school_session = this.parent.school_session;
         idx = idx || 0;
         return this.dataset.read_ids(ids,[]).then(function (results) {
                 self.ids = ids;
