@@ -155,6 +155,7 @@
             				    <field name="title" options="{&quot;no_open&quot;: True}" attrs="{'invisible': [('is_company', '=', True)]}"/>
             				    <field name="lang"/>
                                 <field name='email_personnel' />
+                                <field name='nationality_id' />
                                 <field name="birthplace"/>
                                 <field name="birthdate_date"/>
                                 <field name="reg_number" />
