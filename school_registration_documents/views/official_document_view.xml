@@ -35,6 +35,7 @@
                     <field name="student_id" />
                     <field name="type_id" />
                     <field name="is_available"/>
+                    <field name="attachment_count"/>
                 </tree>
             </field>
         </record>

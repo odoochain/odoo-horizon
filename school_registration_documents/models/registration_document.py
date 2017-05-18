@@ -76,6 +76,12 @@ class OfficialDocument(models.Model):
     is_available = fields.Boolean('Is Available',default = False)
     
     attachment_ids = fields.Many2many('ir.attachment','official_document_ir_attachment_rel', 'official_document_id','ir_attachment_id', 'Attachments', domain="[('res_model','=','res.partner'),('res_id','=',student_id)]")
+   
+    attachment_count = fields.Integer(compute='_compute_attachment_count', string='# Attachments')
+
+    def _compute_attachment_count(self):
+        for doc in self:
+            doc.attachment_count = len(self.attachment_ids)
     
     note = fields.Text('Notes')
     
