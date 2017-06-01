@@ -641,7 +641,7 @@ class IndividualCourse(models.Model):
                     raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00".' % self.jun_result))
                     
         if self.type in ['S','D','T']:
-            f = False
+            f = -1
             if self.jan_result :
                 try:
                     f = self._parse_result(self.jan_result)
@@ -656,7 +656,7 @@ class IndividualCourse(models.Model):
                     self.first_session_result = 0
                     self.first_session_result_bool = False
                     raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00".' % self.jun_result))
-            if f :
+            if f >= 0 :
                 self.first_session_result = f
                 self.first_session_result_bool = True
             if self.sept_result :
