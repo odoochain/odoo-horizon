@@ -189,28 +189,57 @@ var EvaluationsAction = Widget.extend({
             },
             { 
                 'id' : 1, 
-                'title' : "Bloc 2",
+                'title' : "Bachelier",
                 'blocs' : [],
                 'school_session' : this.school_session,
             },
             { 
                 'id' : 2, 
-                'title' : "Bloc 3",
+                'title' : "Master",
                 'blocs' : [],
                 'school_session' : this.school_session,
             },
             
         ];
         var defs = [];
-        for (var i=0, ii=3; i<ii; i++) {
-            defs.push(this.model.query(['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state']).context(this.context).order_by('student_name').filter(self.build_domain()).filter([['source_bloc_level', '=', i+1]]).all().then(
-                function(data){
-                    if(data.length > 0){
-                        self.groups[data[0].source_bloc_level-1].blocs = data;
-                    }
+        
+        defs.push(this.model.query(['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'])
+                            .context(this.context)
+                            .order_by('student_name')
+                            .filter(self.build_domain())
+                            .filter([['source_bloc_level', '=', 1]])
+                            .all().then(
+            function(data){
+                if(data.length > 0){
+                    self.groups[0].blocs = data;
                 }
-            ));
-        }
+            }
+        ));
+        defs.push(this.model.query(['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'])
+                            .context(this.context)
+                            .order_by('student_name')
+                            .filter(self.build_domain())
+                            .filter(['|',['source_bloc_level', '=', 2],['source_bloc_level', '=', 3]])
+                            .all().then(
+            function(data){
+                if(data.length > 0){
+                    self.groups[1].blocs = data;
+                }
+            }
+        ));
+        defs.push(this.model.query(['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'])
+                            .context(this.context)
+                            .order_by('student_name')
+                            .filter(self.build_domain())
+                            .filter(['|',['source_bloc_level', '=', 4],['source_bloc_level', '=', 5]])
+                            .all().then(
+            function(data){
+                if(data.length > 0){
+                    self.groups[2].blocs = data;
+                }
+            }
+        ));
+
         $.when.apply($,defs).then(function(){
             self.render_sidebar();
         });  

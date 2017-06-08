@@ -251,7 +251,7 @@ return Widget.extend({
         if(self.school_session == 1) {
             switch(self.bloc.source_bloc_level) {
                 case "1" :
-                    if(self.bloc.total_acquiered_credits >= 60) {
+                    if(self.bloc.total_acquiered_credits >= self.bloc.total_credits) {
                         self.bloc_result = {
                             'message' : _t(self.bloc.total_acquiered_credits+" crédits ECTS acquis ou valorisés, autorisé(e) à poursuivre son parcours sans restriction." ),
                             'class' : "success",
@@ -269,7 +269,7 @@ return Widget.extend({
                     }
                     break;
                 case "2" :
-                    if(self.bloc.total_acquiered_credits >= 60) {
+                    if(self.bloc.total_acquiered_credits >= self.bloc.total_credits) {
                         self.bloc_result = {
                             'message' : _t(self.bloc.total_acquiered_credits+" crédits ECTS acquis ou valorisés, autorisé(e) à poursuivre son parcours sans restriction." ),
                             'class' : "success",
@@ -287,7 +287,7 @@ return Widget.extend({
                     }
                     break;
                 case "3" :
-                    if(self.bloc.total_acquiered_credits >= 60) {
+                    if(self.bloc.total_acquiered_credits >= self.bloc.total_credits) {
                         self.bloc_result = {
                             'message' : _t("180 crédits ECTS acquis ou valorisés, le jury confère le grade académique de Bachelier avec "),
                             'class' : "success",

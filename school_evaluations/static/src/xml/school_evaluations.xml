@@ -399,8 +399,8 @@
                         </span>
                     </div>
                     <div class="row vertical-align" style="margin-bottom: 10px;">
-                        <div class="col-md-1 text-center credits">
-                            crédits acquis<br/><span class="score_value"><t t-esc="widget.bloc.total_acquiered_credits"/></span>
+                        <div class="col-md-2 text-center credits">
+                            PAE<br/><span class="score_value"><t t-esc="widget.bloc.total_acquiered_credits"/>/<t t-esc="widget.bloc.total_credits"/></span>
                         </div>
                         
                         <t t-if="widget.school_session == 1">
@@ -410,7 +410,7 @@
                             <t t-set='focused_stade' t-value="'postponed'"/>
                         </t>
                             
-                        <t t-if="widget.bloc.source_bloc_level == 3">
+                        <!--<t t-if="widget.bloc.source_bloc_level == 3">
                         <t t-if="widget.bloc_result.grade">
                         <div class="col-md-1 text-center moyenne o_school_eval_details" t-if="widget.bloc.source_bloc_level == 3" role="button" >
                             moyenne du cycle<br/><span class="score_value"><t t-esc="Math.round(widget.program.evaluation*10)/10"/></span>
@@ -433,7 +433,7 @@
                         </div>    
                         </t>
                         </t>
-                        <t t-if="widget.bloc.source_bloc_level != 3">
+                        <t t-if="widget.bloc.source_bloc_level != 3">-->
                         <div class="col-md-9">
                             <div t-att-class="'alert alert-' + widget.bloc_result.class" role="alert"><t t-esc="widget.bloc_result.message"/></div>
                         </div>
@@ -441,6 +441,34 @@
                             <button t-if="widget.bloc.state == focused_stade" type="button" t-att-class="'btn btn-lg btn-' + widget.bloc_result.class + ' bloc_' + widget.bloc_result.next_action"><t t-esc="widget.bloc_result.button_text"/></button>
                             <button t-if="widget.bloc.state != focused_stade" type="button" t-att-class="'btn btn-lg disabled btn-' +widget.bloc_result.class"><t t-esc="widget.bloc_result.button_text"/></button>
                         </div>    
+                        <!--</t>-->
+                    </div>
+                    <div class="row vertical-align">
+                        <t t-if="widget.bloc.source_bloc_level == 1">
+                        <div class="progress" style="width:100%;">
+                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+widget.program.total_acquiered_credits/180*100+'%'">
+                                <span t-esc='widget.program.total_acquiered_credits'/>
+                            </div>
+                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+widget.bloc.total_acquiered_credits/180*100+'%'">
+                                <span t-esc='widget.bloc.total_acquiered_credits'/>
+                            </div>
+                            <div class="progress-bar progress-bar-warning" t-att-style="'width: '+(60-widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc="(60-widget.bloc.total_acquiered_credits)"/>
+                            </div>
+                        </div>
+                        </t>
+                        <t t-if="widget.bloc.source_bloc_level == 2 or widget.bloc.source_bloc_level == 3">
+                        <div class="progress" style="width:100%;">
+                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+widget.program.total_acquiered_credits/180*100+'%'">
+                                <span t-esc='widget.program.total_acquiered_credits'/>
+                            </div>
+                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+widget.bloc.total_acquiered_credits/180*100+'%'">
+                                <span t-esc='widget.bloc.total_acquiered_credits'/>
+                            </div>
+                            <div class="progress-bar progress-bar-warning" t-att-style="'width: '+(60-widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc="(60-widget.bloc.total_acquiered_credits)"/>
+                            </div>
+                        </div>
                         </t>
                     </div>
                 </div>
