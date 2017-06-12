@@ -458,7 +458,9 @@ class IndividualCourseGroup(models.Model):
     def compute_first_session_acquiered(self):
         _logger.debug('Trigger "compute_first_session_acquiered" on Course Group %s' % self.name)
         self.first_session_acquiered = 'NA'
-        if self.enable_exclusion_bool :
+        if self.first_session_deliberated_result_bool:
+            self.first_session_acquiered = 'A'
+        elif self.enable_exclusion_bool :
             if self.first_session_result >= 10 and (not self.first_session_computed_exclusion_result_bool or self.first_session_deliberated_result_bool):
                 self.first_session_acquiered = 'A'
         else:
@@ -492,7 +494,9 @@ class IndividualCourseGroup(models.Model):
     def compute_second_session_acquiered(self):
         _logger.debug('Trigger "compute_second_session_acquiered" on Course Group %s' % self.name)
         self.second_session_acquiered = self.first_session_acquiered
-        if self.enable_exclusion_bool :
+        if self.first_session_deliberated_result_bool:
+            self.first_session_acquiered = 'A'
+        elif self.enable_exclusion_bool :
             if self.second_session_result >= 10 and (not self.second_session_computed_exclusion_result_bool or self.second_session_deliberated_result_bool):
                 self.second_session_acquiered = 'A'
         else:    
