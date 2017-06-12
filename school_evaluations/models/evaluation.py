@@ -294,16 +294,18 @@ class IndividualCourseGroup(models.Model):
     
     # Actions
     @api.one
-    def set_deliberated_to_ten(self, session = 1):
+    def set_deliberated_to_ten(self, session = 1, message=''):
         if session == 1:
             self.write({
                 'first_session_deliberated_result' : max(self.first_session_computed_result, 10),
-                'first_session_deliberated_result_bool' : True
+                'first_session_deliberated_result_bool' : True,
+                'first_session_note': message,
             })
         else:
             self.write({
                 'second_session_deliberated_result' : max(self.second_session_computed_result, 10) if self.second_session_computed_result_bool else max(self.first_session_computed_result, 10),
-                'second_session_deliberated_result_bool' : True
+                'second_session_deliberated_result_bool' : True,
+                'second_session_note': message,
             })
     
     state = fields.Selection([

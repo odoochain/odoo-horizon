@@ -96,6 +96,58 @@ var DetailResultDialog = Dialog.extend({
     
 });
 
+var DeliberateCourseGroupDialog = Dialog.extend({
+    template: 'DeliberateCourseGroupDialog',
+    
+    events: {
+        'change #comment-list': 'change_message',
+    },
+    
+    init: function(parent, options) {
+        this._super.apply(this, arguments);
+        this.title = options.title;
+        this.course_group = options.course_group;
+        this.parent = parent;
+        this.school_session = parent.school_session;
+        this.messages = [
+            '',
+            'Pertinence et singularité du travail artistique',
+            'Qualité particulière du travail artistique',
+            'Participation active et régulière aux activités d’enseignement',
+            'Caractère accidentel des échecs',
+            'Echecs limités en qualité et quantité',
+            'Pourcentage global et importance relative des échecs',
+            'Progrès réalisés d’une session à l’autre',
+            'La réussite des activités de remédiation'
+        ];
+        this.message = '';
+        this.set_buttons([
+        {
+            text: _t("Ok"),
+            classes: 'btn-primary',
+            close: true,
+            click: this.confirm_callback
+        },
+        {
+            text: _t("Cancel"),
+            close: true,
+            click: this.cancel_callback
+        }]);
+    },
+    
+    change_message: function() {
+        var self = this;
+        self.message = this.$('#comment-list').val();
+    },
+    
+    confirm_callback: function() {
+        var self=this;
+        new Model('school.individual_course_group').call("set_deliberated_to_ten",[self.course_group.id,self.school_session, self.messages[self.message]]).then(function(result) {
+            self.parent.update();
+        });
+    }
+});
+
 return Widget.extend({
     template: "BlocEditor",
     events: {
@@ -169,14 +221,7 @@ return Widget.extend({
             var self = this;
             var cg_id = $(event.target).data('course-group-id');
             event.preventDefault();
-            Dialog.confirm(self, _t("Merci de confirmer la délibération de cette unité d'enseignement comme étant acquise."), {
-                confirm_callback: function() {
-                    new Model('school.individual_course_group').call("set_deliberated_to_ten",[cg_id,self.school_session]).then(function(result) {
-                        self.update();
-                    });
-                },
-                title: _t("Délibération de l'unité d'enseignement"),
-            });
+            new DeliberateCourseGroupDialog(this, {title : _t('Deliberate Course Group'), course_group : self.course_groups[self.course_group_id_map[cg_id]]}).open();
         },
     },
     

@@ -379,6 +379,27 @@
         </div>
     </t>
 
+    <t t-name="DeliberateCourseGroupDialog">
+        <t t-set="cg" t-value="widget.course_group" />
+        <div class="container" style="font-size:150%;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><t t-esc="widget.parent.bloc.student_name" /> - <t t-esc="cg.name" /></h2>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-md-3"><h3>Justification :</h3></div>
+                <div class="col-md-3">
+                    <select id="comment-list">
+                        <t t-foreach="widget.messages" t-as="message">
+                            <option t-att-value="message_index" ><t t-esc="message"/></option>
+                        </t>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </t>
+
     <t t-name="BlocEditor">
         <div>
             <div class="bloc_form highlight" t-if="widget.bloc">
