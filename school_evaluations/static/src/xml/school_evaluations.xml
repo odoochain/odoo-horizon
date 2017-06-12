@@ -383,24 +383,23 @@
         <div>
             <div class="bloc_form highlight" t-if="widget.bloc">
                 <div class="container bloc_header">
+                    <img border="1" name="image" t-att-src="widget.student_image" class="img" style="width: 180px;height: 180px;position:fixed;top:10px;left:0;z-index: 9999;"/>
                     <div class="row">
-                        <span class="oe_form_field oe_form_field_image oe_avatar" data-original-title="" title="">
-                            <img border="1" name="image" t-att-src="widget.student_image" class="img-rounded" style="width: 100px; height: 100px;margin-top: 10px;margin-bottom: 10px;"/>
+                        <span class="col-md-10">
+                            <h2><t t-esc="widget.bloc.student_name"/></h2>
                         </span>
                         <span class="col-md-10">
-                            <h2><t t-esc="widget.bloc.student_name"/> - <t t-esc="widget.bloc.source_bloc_title"/></h2>
+                            <h2 style="margin-top: 0;"><t t-esc="widget.bloc.source_bloc_title"/> - <t t-esc="widget.bloc.source_bloc_level"/></h2>
                         </span>
-                        <span class="col-md-10">
-                            <span class="input-group-btn text-right">
-                                <button class="btn btn-default o_reload_bloc" type="button">
-                                    <i class="fa fa-refresh fa-fw"></i>
-                                </button>
-                            </span>
+                        <span class="refresh_button">
+                            <button class="btn btn-default o_reload_bloc" type="button">
+                                <i class="fa fa-refresh fa-fw"></i>
+                            </button>
                         </span>
                     </div>
                     <div class="row vertical-align" style="margin-bottom: 10px;">
                         <div class="col-md-2 text-center credits">
-                            PAE<br/><span class="score_value"><t t-esc="widget.bloc.total_acquiered_credits"/>/<t t-esc="widget.bloc.total_credits"/></span>
+                            PAE<br/><span class="score_value"><t t-esc="widget.bloc.total_acquiered_credits-widget.bloc.total_dispensed_credits"/>/<t t-esc="widget.bloc.total_credits-widget.bloc.total_dispensed_credits"/></span>
                         </div>
                         
                         <t t-if="widget.school_session == 1">
@@ -446,27 +445,27 @@
                     <div class="row vertical-align">
                         <t t-if="widget.bloc.source_bloc_level == 1">
                         <div class="progress" style="width:100%;">
-                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+widget.program.total_acquiered_credits/180*100+'%'">
-                                <span t-esc='widget.program.total_acquiered_credits'/>
+                            <div class="progress-bar progress-bar-info" t-att-style="'width:'+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc='widget.program.total_acquiered_credits+widget.bloc.total_dispensed_credits'/>
                             </div>
-                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+widget.bloc.total_acquiered_credits/180*100+'%'">
-                                <span t-esc='widget.bloc.total_acquiered_credits'/>
+                            <div class="progress-bar progress-bar-success" t-att-style="'width:'+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc='widget.bloc.total_acquiered_credits-widget.bloc.total_dispensed_credits'/>
                             </div>
-                            <div class="progress-bar progress-bar-warning" t-att-style="'width: '+(60-widget.bloc.total_acquiered_credits)/180*100+'%'">
-                                <span t-esc="(60-widget.bloc.total_acquiered_credits)"/>
+                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc="(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)"/>
                             </div>
                         </div>
                         </t>
                         <t t-if="widget.bloc.source_bloc_level == 2 or widget.bloc.source_bloc_level == 3">
                         <div class="progress" style="width:100%;">
-                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+widget.program.total_acquiered_credits/180*100+'%'">
-                                <span t-esc='widget.program.total_acquiered_credits'/>
+                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc='(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
                             </div>
-                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+widget.bloc.total_acquiered_credits/180*100+'%'">
-                                <span t-esc='widget.bloc.total_acquiered_credits'/>
+                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
                             </div>
-                            <div class="progress-bar progress-bar-warning" t-att-style="'width: '+(60-widget.bloc.total_acquiered_credits)/180*100+'%'">
-                                <span t-esc="(60-widget.bloc.total_acquiered_credits)"/>
+                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc="(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)"/>
                             </div>
                         </div>
                         </t>
@@ -505,9 +504,6 @@
                                             <t t-esc="course_group.title" />
                                         </td>
                                         <td style=" text-align: right;">
-                                            <t t-if="course_group.dispense">
-                                                    Dis
-                                            </t>
                                             <t t-if="course_group.final_result_bool">
                                                     <t t-esc="Math.round(course_group.final_result*100)/100" />
                                             </t>
@@ -516,8 +512,13 @@
                                             <t t-esc="course_group.total_credits" />
                                         </td>
                                         <td>
-                                            <span class="label label-success" t-if="course_group.acquiered === 'A'">Acq</span>
-                                            <span class="label label-warning btn o_set_delib" t-if="course_group.acquiered === 'NA'" t-att-data-course-group-id="course_group.id">NoAcq</span>
+                                            <t t-if="course_group.dispense">
+                                                <span class="label label-info btn" t-att-data-course-group-id="course_group.id">Val</span>
+                                            </t>
+                                            <t t-if="!course_group.dispense">
+                                                <span class="label label-success" t-if="course_group.acquiered === 'A'">Acq</span>
+                                                <span class="label label-warning btn o_set_delib" t-if="course_group.acquiered === 'NA'" t-att-data-course-group-id="course_group.id">NoAcq</span>
+                                            </t>
                                         </td>
                                         <td>
                                             <i class="fa fa-search o_school_edit_icg" role="button" aria-hidden="true" t-att-data-cg-id="course_group.id"></i>
@@ -540,9 +541,6 @@
                                                     <font color="gray"><t t-esc="Math.round(course.first_session_result*100)/100"/></font>
                                                 </t>
                                                 </t>
-                                                <t t-if="(course.type == 'D') and !course.jun_result">
-                                                    Dis
-                                                </t>
                                             </td>
                                             </t>
                                             <t t-if="widget.school_session == 2">
@@ -562,9 +560,6 @@
                                                 <t t-if="(course.type == 'D') and course.jun_result">
                                                     <font color="gray"><t t-esc="Math.round(course.first_session_result*100)/100"/></font>
                                                 </t>
-                                                </t>
-                                                <t t-if="(course.type == 'D') and !course.jun_result">
-                                                    Dis
                                                 </t>
                                             </td>
                                             </t>

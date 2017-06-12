@@ -101,7 +101,7 @@ class IndividualProgram(models.Model):
     @api.one
     def _get_total_acquiered_credits(self):
         _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % self.name)
-        total = sum(bloc_id.total_acquiered_credits for bloc_id in self.bloc_ids)
+        total = sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in self.bloc_ids)
         self.total_acquiered_credits = total + self.historical_bloc_1_credits + self.historical_bloc_2_credits
     
     @api.depends('grade')

@@ -131,8 +131,8 @@ a.o_school_bloc_item {
 
 .credits {
   color: #ffffff;
-  background-color: #337ab7;
-  border-color: #2d6da3;
+  background-color: #00c853;
+  border-color: #00c853;
 }
 
 .openerp .badge {
@@ -174,4 +174,22 @@ a.o_school_bloc_item {
 .vertical-align {
   display: flex;
   align-items: center;
+}
+
+.label-success {
+    background-color: #00c853;
+}
+
+.progress {
+    height: 40px;
+}
+
+.progress-bar {
+    height: 100%;
+    font-size: 30px;
+    line-height: 40px;
+}
+
+.progress-bar-success {
+    background-color: #00c853;
 }

@@ -38,3 +38,12 @@
 .result_table .text_right {
     text-align: right;        
 }
+
+.refresh_button {
+    position: fixed;
+    right: 23px;
+    top: 23px;
+    padding-top: 15px;
+    margin-bottom: 0;
+    z-index: 998;
+}
