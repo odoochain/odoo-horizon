@@ -21,7 +21,7 @@
 */
 .sub_navbar {
   position: absolute;
-  top: 400px;
+  top: 460px;
   bottom: 57px;
   left: 0;
   right: 0;
@@ -141,8 +141,8 @@ a.o_school_bloc_item {
 
 .moyenne {
   color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #fbc02d;
+  border-color: #fbc02d;
   padding: 0;
 }
 

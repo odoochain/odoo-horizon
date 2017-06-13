@@ -36,6 +36,7 @@ class IndividualProgram(models.Model):
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
     student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", required=True)
+    student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
     image = fields.Binary('Image', attachment=True, related='student_id.image')
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')

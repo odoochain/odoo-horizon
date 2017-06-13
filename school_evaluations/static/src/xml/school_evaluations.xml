@@ -25,10 +25,11 @@
         <div class="o_school_evaluations">
             <div id="sidebar" class="sidebar" />
             <div id="page-wrapper">
-                <div class="o_evaluation_bloc_container">
+                <div class="o_startup_screen">
                     <p><img src="/school_evaluations/static/src/img/evaluations.jpg" width="1000" height="650"/></p>
                     <h2 class='o_school_deliberation_title'/>
                 </div>
+                <div class="o_evaluation_editor"/>
             </div>
         </div>
     </t>
@@ -401,7 +402,7 @@
     </t>
 
     <t t-name="BlocEditor">
-        <div>
+        <div class="editor">
             <div class="bloc_form highlight" t-if="widget.bloc">
                 <div class="container bloc_header">
                     <img border="1" name="image" t-att-src="widget.student_image" class="img" style="width: 180px;height: 180px;position:fixed;top:10px;left:0;z-index: 9999;"/>
@@ -600,5 +601,136 @@
             </div>
         </div>
     </t>
+
+    <t t-name="ProgramEditor">
+        <div class="editor">
+            <div class="program_form highlight" t-if="widget.program">
+                <div class="container program_header">
+                    <img border="1" name="image" t-att-src="widget.student_image" class="img" style="width: 180px;height: 180px;position:fixed;top:10px;left:0;z-index: 9999;"/>
+                    <div class="row">
+                        <span class="col-md-10">
+                            <h2><t t-esc="widget.program.student_name"/></h2>
+                        </span>
+                        <span class="col-md-10">
+                            <h2 style="margin-top: 0;"><t t-esc="widget.program.cycle_id[1]"/></h2>
+                        </span>
+                        <span class="col-md-10">
+                            <h2 style="margin-top: 0;"><t t-esc="widget.program.speciality_id[1]"/></h2>
+                        </span>
+                        <span class="refresh_button">
+                            <button class="btn btn-default o_reload_bloc" type="button">
+                                <i class="fa fa-refresh fa-fw"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="row vertical-align" style="margin-bottom: 10px;">
+                        <div class="col-md-2 text-center credits">
+                            Cycle<br/><span class="score_value"><t t-esc="widget.program.total_acquiered_credits"/></span>
+                        </div>
+                        <div class="col-md-2 text-center moyenne o_school_eval_details" >
+                            moyenne du cycle<br/><span class="score_value"><t t-esc="Math.round(widget.program.evaluation*10)/10"/></span>
+                        </div>  
+                        <div class="col-md-7">
+                            <div class="alert alert-success" role="alert">A obtenu 180 crédits ECTS et est sanctionné avec Distinction</div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-lg btn-success">Réussite</button>
+                        </div>    
+                    </div>
+                    <!--<div class="row vertical-align">
+                        <t t-if="widget.bloc.source_bloc_level == 1">
+                        <div class="progress" style="width:100%;">
+                            <div class="progress-bar progress-bar-info" t-att-style="'width:'+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc='widget.program.total_acquiered_credits+widget.bloc.total_dispensed_credits'/>
+                            </div>
+                            <div class="progress-bar progress-bar-success" t-att-style="'width:'+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc='widget.bloc.total_acquiered_credits-widget.bloc.total_dispensed_credits'/>
+                            </div>
+                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc="(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)"/>
+                            </div>
+                        </div>
+                        </t>
+                        <t t-if="widget.bloc.source_bloc_level == 2 or widget.bloc.source_bloc_level == 3">
+                        <div class="progress" style="width:100%;">
+                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc='(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
+                            </div>
+                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
+                            </div>
+                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/180*100+'%'">
+                                <span t-esc="(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)"/>
+                            </div>
+                        </div>
+                        </t>
+                    </div>-->
+                </div>
+                <div class="container bloc_details">
+                    <div class="row">
+                        <table class="table table-condensed table-bordered result_table" style="font-size:180%;">
+                            <colgroup>
+                                <col style="width:20px"/>
+                                <col style="width:30px"/>
+                                <col style="width:500px"/>
+                                <col style="width:20px"/>
+                                <col style="width:20px"/>
+                                <col style="width:20px"/>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Année</th>
+                                    <th>Intitulé</th>
+                                    <th>Rés</th>
+                                    <th>Cre</th>
+                                    <th>Acq</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="counter" t-value="1" />
+                                <t t-foreach="widget.course_groups" t-as="course_group">
+                                    <tr class="course_group">
+                                        <th scope="row" class="text-center">
+                                            <t t-esc="counter" />
+                                        </th>
+                                        <td>
+                                            <t t-if="current_year_id != course_group.year_id[1]" t-esc="course_group.year_id[1].replace('20','').replace('20','')" />
+                                            <t t-set="current_year_id" t-value="course_group.year_id[1]" />
+                                        </td>
+                                        <td>
+                                            <t t-esc="course_group.title" />
+                                        </td>
+                                        <td style=" text-align: right;">
+                                            <t t-if="course_group.first_session_deliberated_result_bool or course_group.second_session_deliberated_result_bool">
+                                                E
+                                            </t>
+                                            <t t-if="course_group.final_result_bool and !course_group.first_session_deliberated_result_bool and !course_group.second_session_deliberated_result_bool">
+                                                    <t t-esc="(Math.round(course_group.final_result*100)/100).toFixed(2)" />
+                                            </t>
+                                        </td>
+                                        <td style=" text-align: right;">
+                                            <t t-esc="course_group.total_credits" />
+                                        </td>
+                                        <td>
+                                            <t t-if="course_group.dispense">
+                                                <span class="label label-info btn" t-att-data-course-group-id="course_group.id">Val</span>
+                                            </t>
+                                            <t t-if="!course_group.dispense">
+                                                <span class="label label-success" t-if="course_group.acquiered === 'A'">Acq</span>
+                                                <span class="label label-warning btn o_set_delib" t-if="course_group.acquiered === 'NA'" t-att-data-course-group-id="course_group.id">NoAcq</span>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <t t-set="counter" t-value="counter + 1" />
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
 
 </templates>

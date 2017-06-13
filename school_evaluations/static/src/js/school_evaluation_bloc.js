@@ -278,13 +278,7 @@ return Widget.extend({
             self.bloc = self.datarecord;
             self._read_bloc_data().done(
                 function(){
-                    if(self.$el.parent().children().size() > 1) {
-                        self.$el.parent().children()[0].remove();
-                        self.$el.parent().children()[0].remove();
-                    } else {
-                        self.$el.empty();
-                        self.$el.append( "<div class='o_evaluation_bloc_container'></div>" );
-                    }
+                    self.parent.hide_startup();
                     self.renderElement();
                 });
         });
