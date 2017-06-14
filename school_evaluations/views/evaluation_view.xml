@@ -91,6 +91,7 @@
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='required_credits']" position="after">
+                    <field name="total_registered_credits" />
                     <field name="total_acquiered_credits" />
                     <field name="evaluation"/>
                     <field name="state"/>
