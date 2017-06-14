@@ -96,7 +96,7 @@ class IndividualProgram(models.Model):
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
     
     total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits')
-    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits')
+    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits')
     
     @api.depends('bloc_ids.total_acquiered_credits')
     @api.one
