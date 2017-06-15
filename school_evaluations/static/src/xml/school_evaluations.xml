@@ -490,6 +490,19 @@
                             </div>
                         </div>
                         </t>
+                        <t t-if="widget.bloc.source_bloc_level == 4 or widget.bloc.source_bloc_level == 5">
+                        <div class="progress" style="width:100%;">
+                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/120*100+'%'">
+                                <span t-esc='(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
+                            </div>
+                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/120*100+'%'">
+                                <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
+                            </div>
+                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/120*100+'%'">
+                                <span t-esc="(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)"/>
+                            </div>
+                        </div>
+                        </t>
                     </div>
                 </div>
                 <div class="container bloc_details">
