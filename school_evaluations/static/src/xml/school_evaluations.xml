@@ -600,7 +600,7 @@
                         </div>
                         <div class="col-md-2" >
                             <button class="btn btn_moyenne" type="button">
-                                Moyenne du cycle<br/><span class="score_value"><t t-esc="Math.round(widget.program.evaluation*10)/10"/></span>
+                                Moyenne<br/><span class="score_value"><t t-esc="Math.round(widget.program.evaluation*10)/10"/></span>
                             </button>
                         </div>  
                         <div class="col-md-7">
