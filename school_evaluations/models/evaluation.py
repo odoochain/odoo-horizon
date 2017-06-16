@@ -102,7 +102,7 @@ class IndividualProgram(models.Model):
 
     program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True)
 
-    @api.depends('bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
+    @api.depends('required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     @api.one
     def _get_total_acquiered_credits(self):
         _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % self.name)
