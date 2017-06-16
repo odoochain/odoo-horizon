@@ -36,6 +36,7 @@ class IndividualProgram(models.Model):
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
     student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", required=True)
+    student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
     image = fields.Binary('Image', attachment=True, related='student_id.image')
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
@@ -126,13 +127,13 @@ class IndividualBloc(models.Model):
             _logger.info(courses)
             cg.write({'course_ids': courses})
 
-    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight')
+    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight','course_group_ids.is_ghost_cg')
     @api.one
     def _get_courses_total(self):
         _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
-        self.total_hours = sum(course_group.total_hours for course_group in self.course_group_ids)
-        self.total_credits = sum(course_group.total_credits for course_group in self.course_group_ids)
-        self.total_weight = sum(course_group.total_weight for course_group in self.course_group_ids)
+        self.total_hours = sum(course_group.total_hours for course_group in self.course_group_ids if not course_group.is_ghost_cg)
+        self.total_credits = sum(course_group.total_credits for course_group in self.course_group_ids if not course_group.is_ghost_cg)
+        self.total_weight = sum(course_group.total_weight for course_group in self.course_group_ids if not course_group.is_ghost_cg)
 
     @api.one
     @api.depends('year_id.name','student_id.name')
@@ -210,6 +211,8 @@ class IndividualCourseGroup(models.Model):
     source_bloc_cycle_id = fields.Many2one(related='bloc_id.source_bloc_cycle_id', string='Cycle', readonly=True, store=True)
 
     course_ids = fields.One2many('school.individual_course', 'course_group_id', string='Courses',track_visibility='onchange')
+    
+    is_ghost_cg = fields.Boolean(string='Is Ghost Course Group', default=False)
     
     total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)

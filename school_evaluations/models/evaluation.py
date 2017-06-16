@@ -58,7 +58,7 @@ class IndividualProgram(models.Model):
         return self.write({'state': 'progress'})
     
     @api.multi
-    def set_to_awarded(self, context, grade=None, grade_year_id=None, grade_comments=None):
+    def set_to_awarded(self, context, grade_year_id, grade=None, grade_comments=None):
         # TODO use a workflow to make sure only valid changes are used.
         if(grade):
             self.write({'state': 'awarded',
@@ -66,7 +66,8 @@ class IndividualProgram(models.Model):
                            'grade_year_id' : grade_year_id,
                            'grade_comments' : grade_comments,})
         else:
-            self.write({'state': 'awarded'})
+            self.write({'state': 'awarded',
+                        'grade_year_id' : grade_year_id,})
         
     @api.multi
     def set_to_abandonned(self, context):
@@ -97,16 +98,20 @@ class IndividualProgram(models.Model):
     
     total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits')
     total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits')
-    
-    @api.depends('bloc_ids.total_acquiered_credits')
+    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True)
+
+    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True)
+
+    @api.depends('bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     @api.one
     def _get_total_acquiered_credits(self):
         _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % self.name)
         total = sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in self.bloc_ids)
-        total_current = sum(bloc_id.total_magic_credits if bloc_id.state in ['progress'] else 0 for bloc_id in self.bloc_ids)
+        total_current = sum(bloc_id.total_credits if bloc_id.state in ['progress'] else 0 for bloc_id in self.bloc_ids)
         self.total_acquiered_credits = total + self.historical_bloc_1_credits + self.historical_bloc_2_credits
         self.total_registered_credits = self.total_acquiered_credits + total_current
-    
+        self.program_completed = self.total_acquiered_credits >= self.required_credits
+
     @api.depends('grade')
     def _onchange_grade(self):
         if self.grade:
@@ -166,8 +171,6 @@ class IndividualBloc(models.Model):
              " * The 'Failed' status is used when the bloc is definitively considered as failed.\n"
              " * The 'Abandoned' status is when the student abandoned his bloc.\n"
              ,track_visibility='onchange')
-    
-    total_magic_credits = fields.Integer(compute="compute_credits",string="Magic Credits",store=True)
     
     total_acquiered_credits = fields.Integer(compute="compute_credits",string="Acquiered Credits",store=True)
     total_acquiered_hours = fields.Integer(compute="compute_credits",string="Acquiered Hours",store=True)
@@ -259,20 +262,19 @@ class IndividualBloc(models.Model):
             'context': ctx,
         }
         
-    @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.dispense', 'course_group_ids.first_session_computed_result_bool')
+    @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.dispense', 'course_group_ids.first_session_computed_result_bool', 'course_group_ids.is_ghost_cg')
     @api.one
     def compute_credits(self):
-        self.total_acquiered_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.acquiered == 'A'])
-        self.total_acquiered_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.acquiered == 'A'])
+        self.total_acquiered_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
+        self.total_acquiered_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
         self.total_not_acquiered_credits = self.total_credits - self.total_acquiered_credits
         self.total_not_acquiered_hours = self.total_hours - self.total_acquiered_hours
-        self.total_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.dispense ])
-        self.total_dispensed_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.dispense ])
+        self.total_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
+        self.total_dispensed_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
         self.total_not_dispensed_credits = self.total_credits - self.total_dispensed_credits
         self.total_not_dispensed_hours = self.total_hours - self.total_dispensed_hours
-        self.total_magic_credits = sum([icg.total_credits for icg in self.course_group_ids if not (icg.dispense and icg.first_session_computed_result_bool)])
         
-    @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered')
+    @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered', 'course_group_ids.is_ghost_cg')
     @api.one
     def compute_evaluation(self):
         total = 0
@@ -280,7 +282,7 @@ class IndividualBloc(models.Model):
         total_second = 0
         total_weight = 0
         for icg in self.course_group_ids:
-            if icg.acquiered == 'A' and icg.total_weight > 0 : # if total_weight == 0 means full dispense
+            if icg.acquiered == 'A' and icg.total_weight > 0 and not icg.is_ghost_cg : # if total_weight == 0 means full dispense
                 total += icg.final_result * icg.total_weight
                 total_first += icg.first_session_result * icg.total_weight
                 total_second += icg.second_session_result * icg.total_weight

@@ -30,12 +30,14 @@
             <xpath expr="." position="inside">
                 <link rel="stylesheet" href="/school_evaluations/static/src/css/metisMenu.min.css" /> <!-- TODO : change to not min version -->
                 <link rel="stylesheet" href="/school_evaluations/static/src/css/sb-admin-2.css" />
+                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_program.css" />
                 <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_bloc.css" />
                 <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluations.css" />
                 <script type="text/javascript" src="/school_evaluations/static/src/js/metisMenu.min.js"></script>
                 <script type="text/javascript" src="/school_evaluations/static/src/js/sb-admin-2.js"></script>
                 <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluations.js"></script>
                 <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluation_bloc.js"></script>
+                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluation_program.js"></script>
             </xpath>
         </template>
 
@@ -125,10 +127,10 @@
                     <field name="evaluation" />
                     <field name="grade" />
                     <field name="grade_year_id" />
+                    <newline/>
                     <field name="grade_comments" colspan="4"/>
                 </xpath>
                 <xpath expr="//field[@name='source_bloc_name']" position="after">
-                    <field name="total_magic_credits" />
                     <field name="total_acquiered_credits" />
                     <field name="evaluation"/>
                     <field name="state"/>
