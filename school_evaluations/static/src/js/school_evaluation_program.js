@@ -205,7 +205,7 @@ return Widget.extend({
                                 self.course_groups = [];
                                 return new Model('school.individual_course_group')
                                     .query(['id','name','title','course_ids','dispense','final_result_bool','acquiered','year_id','first_session_computed_result','first_session_deliberated_result_bool','second_session_computed_result','second_session_deliberated_result_bool','second_session_result_bool','final_result','total_credits','total_weight'])
-                                    .filter([['bloc_id', 'in', blocs.map(function(b){return b.id})]])
+                                    .filter([['bloc_id', 'in', blocs.map(function(b){return b.id})],['is_ghost_cg','=',false]])
                                     .order_by('year_id desc, sequence')
                                     .all().then(
                                     function(course_groups) {

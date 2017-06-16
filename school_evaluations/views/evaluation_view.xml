@@ -131,7 +131,6 @@
                     <field name="grade_comments" colspan="4"/>
                 </xpath>
                 <xpath expr="//field[@name='source_bloc_name']" position="after">
-                    <field name="total_magic_credits" />
                     <field name="total_acquiered_credits" />
                     <field name="evaluation"/>
                     <field name="state"/>
