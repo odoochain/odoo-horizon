@@ -322,11 +322,11 @@
                 <div class="container bloc_header">
                     <img border="1" name="image" t-att-src="widget.student_image" class="img" style="width: 180px;height: 180px;position:fixed;top:10px;left:0;z-index: 9999;"/>
                     <div class="row">
-                        <span class="col-md-10">
-                            <h2><t t-esc="widget.bloc.student_name"/></h2>
+                        <span class="col-md-10" style="min-height:66px;">
+                            <h2><t t-esc="widget.bloc.student_name"/> - <t t-esc="widget.bloc.source_bloc_title"/> - <t t-esc="widget.bloc.source_bloc_level"/></h2>
                         </span>
                         <span class="col-md-10">
-                            <h2 style="margin-top: 0;"><t t-esc="widget.bloc.source_bloc_title"/> - <t t-esc="widget.bloc.source_bloc_level"/></h2>
+                            <h2 style="margin-top: 0;"></h2>
                         </span>
                         <span class="refresh_button">
                             <button class="btn btn-default o_reload_bloc" type="button">
