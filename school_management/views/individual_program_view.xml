@@ -232,6 +232,7 @@
             </group>
             <field name="course_group_ids">
               <tree string="Course Groups" context="{'default_bloc_id':active_id}">
+                <field name="ue_id"/>
                 <field name="name" />
                 <field name="total_hours" string="Hrs"/>
                 <field name="total_credits" />
@@ -346,7 +347,7 @@
                <field name="name"/>
               </h1>
               <h3 class="oe_fade">
-               <field name="bloc_id" options='{"no_open":True}'/>
+               <field name="ue_id"/> - <field name="bloc_id" options='{"no_open":True}'/>
               </h3>
             </div>
             <group col="2" colspan="2">
@@ -383,6 +384,7 @@
       <field name="model">school.individual_course_group</field>
       <field name="arch" type="xml">
         <search string="Search Courses">
+          <field name="ue_id" string="UE Id"/>
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
           <field name="source_course_group_id" string="Activité"/>
           <filter name="bloc_1" string="Bloc 1" domain="[('source_bloc_level', '=', 1)]"/>
