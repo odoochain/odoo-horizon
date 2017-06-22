@@ -184,6 +184,7 @@ class IndividualCourseGroup(models.Model):
     _order = 'sequence'
     
     name = fields.Char(related="source_course_group_id.name", readonly=True)
+    ue_id = fields.Char(related="source_course_group_id.ue_id", readonly=True)
     title = fields.Char(related="source_course_group_id.title", readonly=True, store=True)
     
     sequence = fields.Integer(related="source_course_group_id.sequence", readonly=True, store=True)
