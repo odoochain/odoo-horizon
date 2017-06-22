@@ -213,9 +213,6 @@
             <field name="inherit_id" ref="school_management.view_individual_course_group_tree" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr='//tree' position="attributes">
-                    <attribute name="colors">green:acquiered</attribute>
-                </xpath>
                 <xpath expr="//field[@name='name']" position="after">
                     <field name="dispense" string="Dis" readonly="1" />
                     <field name="final_result" string="Res"/>
