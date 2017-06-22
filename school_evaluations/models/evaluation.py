@@ -28,8 +28,8 @@ class CourseGroup(models.Model):
     '''Course Group'''
     _inherit = 'school.course_group'
     
-    # TODO document this and add help field
-    enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=True)
+    ## If set a course with an evaluation < 10 will make this course group not acquiered.
+    enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=False)
     
 class IndividualProgram(models.Model):
     '''Individual Program'''
@@ -461,7 +461,7 @@ class IndividualCourseGroup(models.Model):
             self.first_session_result = 0
             self.first_session_result_bool = False
     
-    @api.depends('first_session_result_bool','first_session_result')
+    @api.depends('first_session_result_bool','first_session_result','first_session_computed_exclusion_result_bool')
     @api.one
     def compute_first_session_acquiered(self):
         _logger.debug('Trigger "compute_first_session_acquiered" on Course Group %s' % self.name)
