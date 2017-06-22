@@ -42,6 +42,7 @@
       <field name="arch" type="xml">
         <kanban class="o_course_group_kanban">
           <field name="name" />
+          <field name="ue_id" />
           <templates>
             <t t-name="kanban-box">
               <div class="oe_kanban_global_click o_course_group_kanban">
@@ -50,6 +51,7 @@
                     <div class="o_primary">
                       <strong><field name="name" /></strong>
                     </div>
+                    <div class="o_secondary"><field name="ue_id" /></div>
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
@@ -78,6 +80,7 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Course Group">
+          <field name="ue_id"/>
           <field name="speciality_id"/>
           <field name="cycle_id"/>
           <field name="name" />
@@ -111,6 +114,9 @@
               <h1>
                <field name="name"/>
               </h1>
+              <h3 class="oe_fade">
+                <field name="ue_id" class="oe_inline"/>
+              </h3>
             </div>
             <group col="4">
               <field name="speciality_id" colspan="4"/>

@@ -211,6 +211,7 @@ class CourseGroup(models.Model):
     bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', id1='group_id', id2='bloc_id',string='Blocs', copy=False)
     
     name = fields.Char(string='Name', compute='compute_ue_name', store=True)
+    ue_id = fields.Char(string="UE Id", compute='compute_ue_name', store=True)
     
     @api.depends('title','level','speciality_id.name', 'cycle_id.short_name')
     @api.multi
@@ -220,6 +221,7 @@ class CourseGroup(models.Model):
                 course_g.name = "%s - %s - %s%s" % (course_g.title, course_g.speciality_id.name, course_g.cycle_id.short_name, course_g.level)
             else:
                 course_g.name = "%s - %s - %s" % (course_g.title, course_g.speciality_id.name, course_g.cycle_id.short_name)
+            course_g.ue_id = "UE-%s" % course_g.id
             
     code_ue = fields.Char(string='Code UE', compute='compute_code_ue', store=True)
     
