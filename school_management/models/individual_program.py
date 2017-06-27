@@ -64,7 +64,7 @@ class IndividualProgram(models.Model):
     def _compute_highest_level(self):
         level = 0
         for bloc in self.bloc_ids:
-            if level < bloc.level:
+            if level < bloc.source_bloc_level:
                 level = bloc.source_bloc_level
         self.highest_level = level
 
