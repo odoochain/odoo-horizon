@@ -122,8 +122,9 @@ class IndividualProgram(models.Model):
         total = 0
         count = 0
         for bloc in self.bloc_ids:
-            total += bloc.evaluation
-            count += 1
+            if bloc.evaluation > 0 : # if all is granted do not count
+                total += bloc.evaluation
+                count += 1
         if self.historical_bloc_1_eval > 0:
             total += self.historical_bloc_1_eval
             count += 1
