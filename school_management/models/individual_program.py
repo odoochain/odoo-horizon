@@ -60,12 +60,12 @@ class IndividualProgram(models.Model):
     highest_level =  fields.Integer(compute='_compute_highest_level',string='Requiered Credits', store=True)
 
     @api.one
-    @api.depends('bloc_ids.level')
+    @api.depends('bloc_ids.source_bloc_level')
     def _compute_highest_level(self):
         level = 0
         for bloc in self.bloc_ids:
             if level < bloc.level:
-                level = bloc.level
+                level = bloc.source_bloc_level
         self.highest_level = level
 
 class IndividualBloc(models.Model):
