@@ -74,11 +74,11 @@ class IndividualProgram(models.Model):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'abandonned'})
     
-    historical_bloc_1_eval = fields.Float(string="Hist Bloc 1 Eval")
-    historical_bloc_1_credits = fields.Integer(string="Hist Bloc 1 ECTS")
+    historical_bloc_1_eval = fields.Float(string="Hist Bloc 1 Eval",track_visibility='onchange')
+    historical_bloc_1_credits = fields.Integer(string="Hist Bloc 1 ECTS",track_visibility='onchange')
     
-    historical_bloc_2_eval = fields.Float(string="Hist Bloc 2 Eval")
-    historical_bloc_2_credits = fields.Integer(string="Hist Bloc 2 ECTS")
+    historical_bloc_2_eval = fields.Float(string="Hist Bloc 2 Eval",track_visibility='onchange')
+    historical_bloc_2_credits = fields.Integer(string="Hist Bloc 2 ECTS",track_visibility='onchange')
     
     grade = fields.Selection([
             ('without','Without Grade'),
@@ -415,7 +415,6 @@ class IndividualCourseGroup(models.Model):
                 self.first_session_computed_result_bool = True
                 if ic.first_session_result < 10 :
                     self.first_session_computed_exclusion_result_bool = True
-                
             # Compute Second Session
             if ic.second_session_result_bool :
                 running_second_session_result += ic.second_session_result * ic.c_weight

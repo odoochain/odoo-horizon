@@ -112,7 +112,7 @@
                     <header>
                         <button name="set_to_progress" type="object" states="draft" string="Progress" class="oe_highlight" />
                         <button name="set_to_awarded" type="object" states="progress" string="Awarded" class="oe_highlight" />
-                        <button name="set_to_abandoned" type="object" states="progress" string="Abandoned" class="oe_highlight" />
+                        <button name="set_to_abandonned" type="object" states="progress" string="Abandoned" class="oe_highlight" />
                         <button name="set_to_draft" type="object" states="progress,awarded,abandoned" string="Reset to Draft" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,progress,awarded,abandoned" />
                     </header>

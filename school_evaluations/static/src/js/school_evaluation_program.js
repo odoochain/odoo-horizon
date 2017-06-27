@@ -193,6 +193,9 @@ return Widget.extend({
           case "first_class":
             self.program.grade_text = "avec la Plus Grande Distinction";
             break;
+          default:
+            self.program.grade_text = "sans grade";
+            break;
         };
         
         return new Model('school.individual_program').call('compute_evaluation_details', [self.program.id]).then(
