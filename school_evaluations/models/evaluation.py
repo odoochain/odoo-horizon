@@ -58,7 +58,7 @@ class IndividualProgram(models.Model):
         return self.write({'state': 'progress'})
     
     @api.multi
-    def set_to_awarded(self, context, grade_year_id, grade=None, grade_comments=None):
+    def set_to_awarded(self, context, grade_year_id=None, grade=None, grade_comments=None):
         # TODO use a workflow to make sure only valid changes are used.
         if(grade):
             self.write({'state': 'awarded',
