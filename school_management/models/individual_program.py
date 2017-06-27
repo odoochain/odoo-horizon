@@ -57,16 +57,16 @@ class IndividualProgram(models.Model):
         self.name = "%s - %s - %s" % (self.student_id.name,self.cycle_id.name,self.speciality_id.name)
         
     bloc_ids = fields.One2many('school.individual_bloc', 'program_id', string='Individual Blocs')
-    highest_level =  fields.Integer(compute='_compute_highest_level',string='Hioghest Level', store=True)
+    highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
 
     @api.one
     @api.depends('bloc_ids.source_bloc_level')
     def _compute_highest_level(self):
-        level = 0
-        for bloc in self.bloc_ids:
-            if level < bloc.source_bloc_level:
-                level = bloc.source_bloc_level
-        self.highest_level = level
+        levels = self.bloc_ids.mapped('source_bloc_level')
+        if levels:
+            self.highest_level = max(levels)
+        else:
+            self.highest_level = 0
 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
