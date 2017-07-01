@@ -88,7 +88,7 @@ class IndividualProgram(models.Model):
             ('first_class', 'First Class Honor'),
         ],string="Grade",track_visibility='onchange')
     
-    grade_year_id = fields.Many2one('school.year', string="Graduation year",track_visibility='onchange'
+    grade_year_id = fields.Many2one('school.year', string="Graduation year",track_visibility='onchange')
     
     grade_comments = fields.Text(string="Grade Comments",track_visibility='onchange')
     
