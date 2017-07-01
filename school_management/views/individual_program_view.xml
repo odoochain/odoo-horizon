@@ -87,13 +87,20 @@
       <field name="model">school.individual_program</field>
       <field name="arch" type="xml">
         <search string="Search Blocs">
+          <field name="grade_year_id"/>
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
+          <separator/>
+          <filter name="music" string="Musique" domain="[('domain_id', '=', 1)]"/>
+          <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
+          <separator/>
+          <filter name="program_completed" string="Completed" domain="[('program_completed', '=', True)]"/>
+          <separator/>
           <group expand="1" string="Group By">
-            <filter string="Domain" context="{'group_by':'domain_id'}" />
-            <filter string="Cycle" context="{'group_by':'cycle_id'}" />
-            <filter string="Section" context="{'group_by':'section_id'}" />
-            <filter string="Track" context="{'group_by':'track_id'}" />
-            <filter string="Speciality" context="{'group_by':'speciality_id'}" />
+            <filter string="Domain" context="{'group_by':'domain_id'}"/>
+            <filter string="Cycle" context="{'group_by':'cycle_id'}"/>
+            <filter string="Section" context="{'group_by':'section_id'}"/>
+            <filter string="Track" context="{'group_by':'track_id'}"/>
+            <filter string="Speciality" context="{'group_by':'speciality_id'}"/>
           </group>
         </search>
       </field>

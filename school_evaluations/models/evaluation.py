@@ -86,20 +86,18 @@ class IndividualProgram(models.Model):
             ('distinction','Distinction'),
             ('second_class', 'Second Class Honor'),
             ('first_class', 'First Class Honor'),
-        ],string="Grade")
+        ],string="Grade",track_visibility='onchange')
     
-    grade_year_id = fields.Many2one('school.year', string="Year")
+    grade_year_id = fields.Many2one('school.year', string="Graduation year",track_visibility='onchange'
     
-    graduation_date = fields.Date(string="Graduation date")
-    
-    grade_comments = fields.Text(string="Grade Comments")
+    grade_comments = fields.Text(string="Grade Comments",track_visibility='onchange')
     
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
     
-    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits')
-    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True)
+    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',track_visibility='onchange')
+    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True,track_visibility='onchange')
 
-    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True)
+    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True,track_visibility='onchange')
 
     @api.depends('required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     @api.one
