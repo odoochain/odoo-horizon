@@ -87,8 +87,8 @@
       <field name="model">school.individual_program</field>
       <field name="arch" type="xml">
         <search string="Search Blocs">
-          <field name="grade_year_id"/>
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
+          <field name="grade_year_id"/>
           <separator/>
           <filter name="music" string="Musique" domain="[('domain_id', '=', 1)]"/>
           <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
