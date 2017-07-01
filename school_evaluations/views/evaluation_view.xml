@@ -79,6 +79,11 @@
                     <separator/>
                     <field name="grade_year_id"/>
                     <filter name="program_completed" string="Completed" domain="[('program_completed', '=', True)]"/>
+                    <separator/>
+                    <filter name="draft" string="Draft" domain="[('state', 'in', ['draft'])]" />
+                    <filter name="progress" string="Progress" domain="[('state', 'in', ['progress'])]" />
+                    <filter name="awarded" string="Awarded" domain="[('state', 'in', ['awarded'])]" />
+                    <filter name="abandonned" string="Abandonned" domain="[('state', 'in', ['abandonned'])]" />
                 </xpath>
             </field>
         </record>
