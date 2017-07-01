@@ -113,7 +113,7 @@ class IndividualProgram(models.Model):
         total_current = sum(bloc_id.total_credits if bloc_id.state in ['progress'] else 0 for bloc_id in self.bloc_ids)
         self.total_acquiered_credits = total + self.historical_bloc_1_credits + self.historical_bloc_2_credits
         self.total_registered_credits = self.total_acquiered_credits + total_current
-        self.program_completed = self.total_acquiered_credits >= self.required_credits
+        self.program_completed = self.required_credits > 0 and self.total_acquiered_credits >= self.required_credits
 
     @api.depends('bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     @api.one
