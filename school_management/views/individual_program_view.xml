@@ -269,6 +269,9 @@
           <filter name="bloc_4" string="Master 1" domain="[('source_bloc_level', '=', 4)]"/>
           <filter name="bloc_5" string="Master 2" domain="[('source_bloc_level', '=', 5)]"/>
           <separator/>
+          <filter name="music" string="Musique" domain="[('source_bloc_domain_id', '=', 1)]"/>
+          <filter name="theatre" string="Théatre" domain="[('source_bloc_domain_id', '=', 2)]"/>
+          <separator/>
           <filter string="Current Year" name="current" domain="[('year_sequence','=','current')]" />
           <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
           <filter string="Previous Year" name="previous" domain="[('year_sequence','=','previous')]" />
