@@ -88,12 +88,9 @@
       <field name="arch" type="xml">
         <search string="Search Blocs">
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
-          <field name="grade_year_id"/>
           <separator/>
           <filter name="music" string="Musique" domain="[('domain_id', '=', 1)]"/>
           <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
-          <separator/>
-          <filter name="program_completed" string="Completed" domain="[('program_completed', '=', True)]"/>
           <separator/>
           <group expand="1" string="Group By">
             <filter string="Domain" context="{'group_by':'domain_id'}"/>
@@ -105,25 +102,6 @@
         </search>
       </field>
     </record>
-    
-    
-    <record id="view_individual_program_filter" model="ir.ui.view">
-      <field name="name">program.select</field>
-      <field name="model">school.individual_program</field>
-      <field name="arch" type="xml">
-        <search string="Search Blocs">
-          <field name="student_id" domain="[('type', '=', 'contact')]"/>
-          <group expand="1" string="Group By">
-            <filter string="Domain" context="{'group_by':'domain_id'}" />
-            <filter string="Cycle" context="{'group_by':'cycle_id'}" />
-            <filter string="Section" context="{'group_by':'section_id'}" />
-            <filter string="Track" context="{'group_by':'track_id'}" />
-            <filter string="Speciality" context="{'group_by':'speciality_id'}" />
-          </group>
-        </search>
-      </field>
-    </record>
-    
     
     <record id="action_individual_program_form" model="ir.actions.act_window">
       <field name="name">Individual Programs</field>
