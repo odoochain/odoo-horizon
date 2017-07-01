@@ -85,21 +85,6 @@
             </field>
         </record>
     
-        <record id="view_individual_program_filter_eval" model="ir.ui.view">
-            <field name="name">individual_program.select.eval</field>
-            <field name="model">school.individual_program</field>
-            <field name="inherit_id" ref="school_management.view_individual_program_filter" />
-            <field name="arch" type="xml">
-                <xpath expr="//group" position="before">
-                    <separator/>
-                    <filter name="draft" string="Draft" domain="[('state', 'in', ['draft'])]" />
-                    <filter name="awarded" string="Awarded" domain="[('state', 'in', ['awarded_first_session','awarded_second_session'])]" />
-                    <filter name="postponed" string="Postponed" domain="[('state', 'in', ['postponed'])]" />
-                </xpath>
-            </field>
-        </record>
-    
-        <!-- Add evaluation to Individual Course tree view -->
         <record id="view_individual_program_eval_filter" model="ir.ui.view">
             <field name="name">school.individual_program.eval.filter</field>
             <field name="model">school.individual_program</field>
