@@ -100,10 +100,10 @@
         </record>
     
         <!-- Add evaluation to Individual Course tree view -->
-        <record id="individual_program_eval_tree" model="ir.ui.view">
-            <field name="name">school.individual_program.eval.tree</field>
+        <record id="view_individual_program_eval_filter" model="ir.ui.view">
+            <field name="name">school.individual_program.eval.filter</field>
             <field name="model">school.individual_program</field>
-            <field name="inherit_id" ref="school_management.view_individual_program_tree" />
+            <field name="inherit_id" ref="school_management.view_individual_program_filter" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='student_id']" position="after">
