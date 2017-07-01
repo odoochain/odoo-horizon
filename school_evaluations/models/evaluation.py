@@ -64,10 +64,14 @@ class IndividualProgram(models.Model):
             self.write({'state': 'awarded',
                            'grade' : grade,
                            'grade_year_id' : grade_year_id,
-                           'grade_comments' : grade_comments,})
+                           'grade_comments' : grade_comments,
+                           'graduation_date' : fields.Date.today(),
+            })
         else:
             self.write({'state': 'awarded',
-                        'grade_year_id' : grade_year_id,})
+                        'grade_year_id' : grade_year_id,
+                        'graduation_date' : fields.Date.today(),
+            })
         
     @api.multi
     def set_to_abandonned(self, context):
@@ -90,6 +94,8 @@ class IndividualProgram(models.Model):
     
     grade_year_id = fields.Many2one('school.year', string="Graduation year",track_visibility='onchange')
     
+    graduation_date = fields.Date(string="Graduation Date",track_visibility='onchange')
+    
     grade_comments = fields.Text(string="Grade Comments",track_visibility='onchange')
     
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
@@ -109,11 +115,6 @@ class IndividualProgram(models.Model):
         self.total_registered_credits = self.total_acquiered_credits + total_current
         self.program_completed = self.total_acquiered_credits >= self.required_credits
 
-    @api.depends('grade')
-    def _onchange_grade(self):
-        if self.grade:
-            graduation_date = fields.Date.today()
-    
     @api.depends('bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     @api.one
     def compute_evaluation(self):
