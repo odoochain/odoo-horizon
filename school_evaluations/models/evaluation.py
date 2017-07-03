@@ -377,7 +377,7 @@ class IndividualCourseGroup(models.Model):
         if not self.final_result_bool:
             self.final_result_disp = ""
         if self.dispense:
-            self.final_result_disp = "D"
+            self.final_result_disp = "Val"
         else :
             self.final_result_disp = "%.2f" % self.final_result
     

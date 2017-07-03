@@ -186,7 +186,7 @@
                                 <!-- Table -->
                                 <table class="table table-condensed table-bordered result_table">
                                     <colgroup>
-                                        <col style="width:300px"/>
+                                        <col style="width:500px"/>
                                         <col style="width:75px"/>
                                         <col style="width:75px"/>
                                         <col style="width:75px"/>
