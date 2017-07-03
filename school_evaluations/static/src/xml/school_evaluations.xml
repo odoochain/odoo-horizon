@@ -387,7 +387,7 @@
                             <div class="progress-bar progress-bar-info" t-att-style="'width:'+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='widget.program.total_acquiered_credits+widget.bloc.total_dispensed_credits'/>
                             </div>
-                            <t t-if="widget.bloc.state != 'awarded_first_session and widget.bloc.state != 'awarded_second_session">
+                            <t t-if="(widget.bloc.state != 'awarded_first_session) and (widget.bloc.state != 'awarded_second_session)">
                             <div class="progress-bar progress-bar-success" t-att-style="'width:'+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='widget.bloc.total_acquiered_credits-widget.bloc.total_dispensed_credits'/>
                             </div>
@@ -402,7 +402,7 @@
                             <div class="progress-bar progress-bar-info" t-att-style="'width: '+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
                             </div>
-                            <t t-if="widget.bloc.state != 'awarded_first_session and widget.bloc.state != 'awarded_second_session">
+                            <t t-if="(widget.bloc.state != 'awarded_first_session) and (widget.bloc.state != 'awarded_second_session)">
                             <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
                             </div>
@@ -417,7 +417,7 @@
                             <div class="progress-bar progress-bar-info" t-att-style="'width: '+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
                             </div>
-                            <t t-if="widget.bloc.state != 'awarded_first_session and widget.bloc.state != 'awarded_second_session">
+                            <t t-if="(widget.bloc.state != 'awarded_first_session) and (widget.bloc.state != 'awarded_second_session)">
                             <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
                             </div>
