@@ -159,6 +159,7 @@ class IndividualBloc(models.Model):
             ('progress','In Progress'),
             ('postponed', 'Postponed'),
             ('awarded_first_session', 'Awarded in First Session'),
+            ('awarded_second_session', 'Awarded in Second Session'),
             ('failed', 'Failed'),
             ('abandoned','Abandoned'),
         ], string='Status', index=True, default='draft',
