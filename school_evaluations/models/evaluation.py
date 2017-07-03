@@ -586,7 +586,7 @@ class IndividualCourse(models.Model):
         if not self.first_session_result_bool:
             self.first_session_result_disp = ""
         if self.dispense:
-            self.first_session_result_disp = "D"
+            self.first_session_result_disp = "Val"
         else :
             self.first_session_result_disp = "%.2f" % self.first_session_result
     
