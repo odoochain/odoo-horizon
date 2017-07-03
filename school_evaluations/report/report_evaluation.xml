@@ -204,7 +204,7 @@
                                         <t t-foreach="o.course_group_ids" t-as="course_group">
                                             <tr class="course_group">
                                                 <td>
-                                                    <t t-esc="course_group.title"/><span t-if="course.source_course_id.has_second_session">*</span>
+                                                    <t t-esc="course_group.title"/>
                                                 </td>
                                                 <td style=" text-align: right;">
                                                     <t t-esc="course_group.final_result_disp"/>
@@ -222,7 +222,7 @@
                                             <t t-foreach="course_group.course_ids" t-as="course">
                                                 <tr style="font-style: italic;font-size:80%;">
                                                     <td>
-                                                        <t t-esc="course.title"/> - <t t-esc="course.level"/> <i t-if="course.teacher_id" class="oe_fade"> - <t t-esc="course.teacher_id.name"/></i></td>
+                                                        <t t-esc="course.title"/> - <t t-esc="course.level"/> <i t-if="course.teacher_id" class="oe_fade"> - <t t-esc="course.teacher_id.name"/><span t-if="course.source_course_id.has_second_session">*</span></i></td>
                                                     <td style=" text-align: right;">
                                                         <t t-if="course.second_session_result_bool">
                                                             <t t-esc="course.second_session_result_disp"/>
