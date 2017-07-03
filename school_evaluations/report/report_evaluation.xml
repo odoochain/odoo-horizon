@@ -297,8 +297,8 @@
 
     <template id="report_deliberation_annexe_content">
         <t t-call="report.html_container">
-            <t t-set="data_report_margin_top" t-value="30"/>
-            <t t-set="data_report_header_spacing" t-value="25"/>
+            <t t-set="data_report_margin_top" t-value="40"/>
+            <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-call="report.external_layout">
                 <div class="page">
                     <div class="container" style="margin-left:60px;margin-right:60px;">
@@ -346,14 +346,24 @@
                                                     <t t-esc="course_group.title"/>
                                                 </td>
                                                 <td style=" text-align: right;">
-                                                    <t t-esc="course_group.final_result_disp"/>
+                                                    <t t-if="course_group.first_session_deliberated_result_bool or course_group.second_session_deliberated_result_bool">
+                                                        E
+                                                    </t>
+                                                    <t t-if="course_group.final_result_bool and !course_group.first_session_deliberated_result_bool and !course_group.second_session_deliberated_result_bool">
+                                                        <t t-esc="course_group.final_result_disp"/>
+                                                    </t>
                                                 </td>
                                                 <td style=" text-align: right;">
                                                     <t t-esc="course_group.total_credits"/>
                                                 </td>
                                                 <td>
-                                                    <span class="label label-success" t-if="course_group.acquiered == 'A'">Acquis</span>
-                                                    <span class="label label-warning" t-if="course_group.acquiered == 'NA'">Non Acquis</span>
+                                                    <t t-if="course_group.dispense">
+                                                        <span class="label label-info btn" t-att-data-course-group-id="course_group.id">Val</span>
+                                                    </t>
+                                                    <t t-if="!course_group.dispense">
+                                                        <span class="label label-success" t-if="course_group.acquiered === 'A'">Acq</span>
+                                                        <span class="label label-warning btn o_set_delib" t-if="course_group.acquiered === 'NA'" t-att-data-course-group-id="course_group.id">NoAcq</span>
+                                                    </t>
                                                 </td>
                                             </tr>
                                             <t t-foreach="course_group.course_ids" t-as="course">
@@ -361,14 +371,14 @@
                                                     <td>
                                                         <t t-esc="course.title"/> - <t t-esc="course.level"/> <i t-if="course.teacher_id" class="oe_fade"> - <t t-esc="course.teacher_id.name"/></i></td>
                                                     <td style=" text-align: right;">
-                                                        
+                                                        <t t-if="course_group.final_result_bool and !course_group.first_session_deliberated_result_bool and !course_group.second_session_deliberated_result_bool">
                                                         <t t-if="course.second_session_result_bool">
                                                             <t t-esc="course.second_session_result_disp"/>
                                                         </t>
                                                         <t t-if="course.second_session_result_bool == False">
                                                             <t t-esc="course.first_session_result_disp"/>
                                                         </t>
-                                                        
+                                                        </t>
                                                     </td>
                                                     <td/>
                                                     <td/>
@@ -381,7 +391,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-10 col-xs-offset-1">
-                                <h4>A acquis <t t-esc="o.total_acquiered_credits"/> crédits ECTS. <t t-if="o.total_credits == o.total_acquiered_credits">A réussi l&#39;ensemble de son PAE.</t></h4>
+                                <h4>A acquis ou valorisé <t t-esc="o.total_acquiered_credits"/> crédits ECTS. <t t-if="o.total_credits == o.total_acquiered_credits">A réussi l&#39;ensemble de son PAE.</t></h4>
                             </div>
                         </div>
                         <!--<div class="row">
