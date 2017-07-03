@@ -222,7 +222,7 @@
                                             <t t-foreach="course_group.course_ids" t-as="course">
                                                 <tr style="font-style: italic;font-size:80%;">
                                                     <td>
-                                                        <t t-esc="course.title"/> - <t t-esc="course.level"/> <i t-if="course.teacher_id" class="oe_fade"> - <t t-esc="course.teacher_id.name"/><span t-if="course.source_course_id.has_second_session">*</span></i></td>
+                                                        <t t-esc="course.title"/> - <t t-esc="course.level"/> <i t-if="course.teacher_id" class="oe_fade"> - <t t-esc="course.teacher_id.name"/><span t-if="not course.source_course_id.has_second_session">*</span></i></td>
                                                     <td style=" text-align: right;">
                                                         <t t-if="course.second_session_result_bool">
                                                             <t t-esc="course.second_session_result_disp"/>
@@ -245,7 +245,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-10 col-xs-offset-1">
+                            <div class="col-xs-10 col-xs-offset-1" style="font-size:small">
                                 * Pas de seconde session possible pour cette activité.
                             </div>
                         </div>    
