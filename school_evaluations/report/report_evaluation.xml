@@ -212,8 +212,13 @@
                                                     <t t-esc="course_group.total_credits"/>
                                                 </td>
                                                 <td>
-                                                    <span class="label label-success" t-if="course_group.acquiered == 'A'">Acquis</span>
-                                                    <span class="label label-warning" t-if="course_group.acquiered == 'NA'">Non Acquis</span>
+                                                    <t t-if="course_group.dispense">
+                                                        <span class="label label-info">Val</span>
+                                                    </t>
+                                                    <t t-if="!course_group.dispense">
+                                                        <span class="label label-success" t-if="course_group.acquiered == 'A'">Acquis</span>
+                                                        <span class="label label-warning" t-if="course_group.acquiered == 'NA'">Non Acquis</span>
+                                                    </t>
                                                 </td>
                                             </tr>
                                             <t t-foreach="course_group.course_ids" t-as="course">
