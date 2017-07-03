@@ -381,6 +381,11 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-10 col-xs-offset-1">
+                                <h4>A acquis <t t-esc="o.total_acquiered_credits"/> crédits ECTS. <t t-if="o.total_credits == o.total_acquiered_credits">A réussi l&#39;ensemble de son PAE.</t></h4>
+                            </div>
+                        </div>
+                        <!--<div class="row">
+                            <div class="col-xs-10 col-xs-offset-1">
                                 <h4><t t-esc="o.decision"/>
                                 <t t-if="o.program_id.grade">
                                     <span t-field="o.program_id.grade"/>
@@ -389,7 +394,7 @@
                                     au motif <span t-field="o.program_id.grade_comments"/>
                                 </t></h4>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     </t>
                     <div class="container" style="margin-left:60px;margin-right:60px;page-break-before:always;">
