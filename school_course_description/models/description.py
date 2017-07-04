@@ -83,21 +83,17 @@ class CourseDocumentation(models.Model):
     learning_outcomes = fields.Text(string="Learning outcomes")
     references = fields.Text(string="References")
     evaluation_method = fields.Text(string="Evaluation method")
-    
     pre_co_requiered = fields.Text(string="Pre-Co requiered")
-    
     language = fields.Text(string="Language")
     
-    rooms = fields.Text(string="Rooms")
+class Course(models.Model):
+    '''Course'''
+    _inherit = 'school.course'
     
-# class Course(models.Model):
-#     '''Course'''
-#     _inherit = 'school.course'
+    documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
     
-#     documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
-    
-#     @api.one
-#     def compute_documentation_id(self):
-#         doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
-#         if doc_ids :
-#             self.documentation_id = doc_ids[0]
+    @api.one
+    def compute_documentation_id(self):
+        doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
+        if doc_ids :
+            self.documentation_id = doc_ids[0]
