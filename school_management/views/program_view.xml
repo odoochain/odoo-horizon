@@ -84,6 +84,7 @@
           <field name="speciality_id"/>
           <field name="cycle_id"/>
           <field name="name" />
+          <field name="teacher_id"/>
           <field name="total_hours" />
           <field name="total_credits" />
         </tree>
@@ -122,6 +123,7 @@
               <field name="speciality_id" colspan="4"/>
               <field name="cycle_id" colspan="4"/>
               <field name="title" colspan="4"/>
+              <field name="teacher_id" colspan="4"/>
               <field name="sequence" />
               <field name="level" />
               <field name="total_hours" />
