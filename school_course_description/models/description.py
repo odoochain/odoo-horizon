@@ -74,7 +74,7 @@ class CourseDocumentation(models.Model):
     staff_ids = fields.One2many('res.partner', string='Teacher', domain=[('teacher', '=', True)])
     volume = fields.Text(string="Volume")
     credits = fields.Integer(related='course_id.credits')
-    weigth = fields.Integer(related='course_id.weigth')
+    weigth = fields.Float(related='course_id.weigth')
     
     mandatory = fields.Text(string="Mandatory")
     schedule = fields.Text(string="Schedule")
