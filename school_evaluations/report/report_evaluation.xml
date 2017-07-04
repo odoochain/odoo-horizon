@@ -307,11 +307,10 @@
                         </div>
                         <t t-foreach="docs" t-as="o">
                         <div class="row">
-                            <div class="col-xs-12">
-                                <t t-if="o.student_id.gender == 'male'">Monsieur</t><t t-if="o.student_id.gender == 'female'">Madame</t> <span t-field="o.student_id"/><br/>
-                                a obtenu en l’année académique <span t-field="o.grade_year_id"/><br/>
-                                le grade académique de <span t-field="o.cycle_id.grade"/> en <span t-field="o.domain_id.long_name"/> : <span t-field="o.speciality_id"/> 
-                                <t t-if="o.grade == 'without'"><span t-field="o.grade"/></t><t t-if="o.grade != 'without'"> <br/> avec <span t-field="o.grade"/></t><br/>
+                            <div class="col-xs-12 mb-2">
+                                <t t-if="o.student_id.gender == 'male'">Monsieur</t><t t-if="o.student_id.gender == 'female'">Madame</t> <span t-field="o.student_id"/>
+                                a obtenu le grade académique de <br/><span t-field="o.cycle_id.grade"/> en <span t-field="o.domain_id.long_name"/> : <span t-field="o.speciality_id"/> 
+                                <br/><t t-if="o.grade == 'without'"><span t-field="o.grade"/></t><t t-if="o.grade != 'without'"> <br/> avec <span t-field="o.grade"/></t>
                                 <t t-if="o.grade_comments">au motif de <span t-field="o.grade_comments"/></t>
                             </div>
                         </div> 
