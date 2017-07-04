@@ -41,7 +41,7 @@ class CourseDocumentation(models.Model):
              " * The 'Published' status is when a program is published and available for use.\n"
              " * The 'Archived' status is used when a program is obsolete and not publihed anymore.")
     
-    course_id = fields.Many2one('school.course', string='Course')
+    course_id = fields.Many2one('school.course', string='Course', requiered=True)
     
     name = fields.Char(related='course_id.name')
     
@@ -71,24 +71,33 @@ class CourseDocumentation(models.Model):
     def archive(self):
         return self.write({'state': 'archived'})
 
+    staff_ids = fields.One2many('res.partner', string='Teacher', domain=[('teacher', '=', True)])
+    volume = fields.Text(string="Volume")
+    credits = fields.Integer(related='course_id.credits')
+    weigth = fields.Integer(related='course_id.weigth')
+    
+    mandatory = fields.Text(string="Mandatory")
+    schedule = fields.Text(string="Schedule")
     content = fields.Text(string="Content")
     method = fields.Text(string="Method")
     learning_outcomes = fields.Text(string="Learning outcomes")
-    competencies = fields.Text(string="Competencies")
+    references = fields.Text(string="References")
     evaluation_method = fields.Text(string="Evaluation method")
-    staff_ids = fields.One2many('res.partner', string='Teacher', domain=[('teacher', '=', True)])
+    
+    pre_co_requiered = fields.Text(string="Pre-Co requiered")
+    
     language = fields.Text(string="Language")
-    schedule = fields.Text(string="Schedule")
+    
     rooms = fields.Text(string="Rooms")
     
-class Course(models.Model):
-    '''Course'''
-    _inherit = 'school.course'
+# class Course(models.Model):
+#     '''Course'''
+#     _inherit = 'school.course'
     
-    documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
+#     documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
     
-    @api.one
-    def compute_documentation_id(self):
-        doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
-        if doc_ids :
-            self.documentation_id = doc_ids[0]
+#     @api.one
+#     def compute_documentation_id(self):
+#         doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
+#         if doc_ids :
+#             self.documentation_id = doc_ids[0]
