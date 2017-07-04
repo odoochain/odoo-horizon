@@ -100,8 +100,7 @@
                           <div class="panel-body">
                             <field name="staff_ids">
                                 <tree string="Staff">
-                                    <field name="teacher_id" />
-                                    <field name="role" />
+                                    <field name="name" />
                                 </tree>
                             </field>
                             </div>
