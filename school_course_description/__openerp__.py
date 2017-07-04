@@ -28,7 +28,7 @@
     'depends': ['school_management'],
     'init_xml': [],
     'update_xml': [
-        'views/templates.xml',
+        #'views/templates.xml',
         'views/description.xml',
     ],
     'demo_xml': [],

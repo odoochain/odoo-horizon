@@ -76,18 +76,10 @@ class CourseDocumentation(models.Model):
     learning_outcomes = fields.Text(string="Learning outcomes")
     competencies = fields.Text(string="Competencies")
     evaluation_method = fields.Text(string="Evaluation method")
-    staff_ids = fields.One2many("school.course_staff", 'doc_id', string='Staff', copy=True)
+    staff_ids = fields.One2many('res.partner', string='Teacher', domain=[('teacher', '=', True)])
     language = fields.Text(string="Language")
     schedule = fields.Text(string="Schedule")
     rooms = fields.Text(string="Rooms")
-    
-class CourseStaff(models.Model):
-    '''CourseStaff'''
-    _name = 'school.course_staff'
-    _description = 'Staff of a course'
-    doc_id = fields.Many2one('school.course_documentation', string='Documentation')
-    teacher_id = fields.Many2one('res.partner', string='Teacher', domain=[('teacher', '=', True)])
-    role = fields.Char(string="Role")
     
 class Course(models.Model):
     '''Course'''
