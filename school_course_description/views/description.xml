@@ -79,14 +79,6 @@
                         </div>
                         <div class="panel panel-default">
                           <div class="panel-heading">
-                            <h3 class="panel-title">Competencies</h3>
-                          </div>
-                          <div class="panel-body">
-                            <field name="competencies"/>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
                             <h3 class="panel-title">Evaluation method</h3>
                           </div>
                           <div class="panel-body">
