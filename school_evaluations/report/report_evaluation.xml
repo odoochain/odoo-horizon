@@ -283,6 +283,46 @@
     
     -->
 
+    <report id="report_deliberation_program_annexe" 
+            model="school.individual_program" 
+            string="Deliberation Report Program" 
+            report_type="qweb-pdf" 
+            name="school_evaluations.report_deliberation_annexe_program" 
+            file="school_evaluations.report_deliberation_annexe_program"
+    />
+
+
+    <template id="report_deliberation_annexe_program">
+        <t t-call="report.html_container">
+            <t t-set="data_report_margin_top" t-value="40"/>
+            <t t-set="data_report_header_spacing" t-value="35"/>
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="container" style="margin-left:60px;margin-right:60px;">
+                        <div class="row mb-4">
+                            <div class="col-xs-12 text-center">
+                                <h3>PROCÈS VERBAL DE DÉLIBÉRATION</h3>
+                                <h3>Conservatoire royal de Liège<br/>Boulevard Piercot, 29, 4000 LIÈGE</h3>
+                            </div>
+                        </div>
+                        <t t-foreach="docs" t-as="o">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <t t-if="o.student_id.gender == 'male'">Monsieur</t><t t-if="o.student_id.gender == 'female'">Madame</t> <span t-field="o.student_id"/><br/>
+                                a obtenu en l’année académique <span t-field="o.grade_year_id"/><br/>
+                                le grade académique de <span t-field="o.cycle_id.grade"/> en <span t-field="o.domain_id.long_name"/> : <span t-field="o.speciality_id"/> 
+                                <t t-if="o.grade == 'without'"><span t-field="o.grade"/></t><t t-if="o.grade != 'without'"> <br/> avec <span t-field="o.grade"/></t><br/>
+                                <t t-if="o.grade_comments">au motif de <span t-field="o.grade_comments"/></t>
+                            </div>
+                        </div> 
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
     <report id="report_deliberation_annexe" 
             model="school.individual_bloc" 
             string="Deliberation Report" 
