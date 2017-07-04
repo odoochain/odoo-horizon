@@ -71,7 +71,7 @@ class CourseDocumentation(models.Model):
     def archive(self):
         return self.write({'state': 'archived'})
 
-    staff_ids = fields.One2many('res.partner', string='Teacher', domain=[('teacher', '=', True)])
+    staff_ids = fields.One2many('res.partner', string='Teacher', domain=[('teacher', '=', 1)])
     volume = fields.Text(string="Volume")
     credits = fields.Integer(related='course_id.credits')
     weight = fields.Float(related='course_id.weight')
