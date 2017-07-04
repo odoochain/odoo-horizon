@@ -299,7 +299,7 @@
             <t t-call="report.external_layout">
                 <div class="page">
                     <div class="container" style="margin-left:60px;margin-right:60px;">
-                        <div class="row mb-4">
+                        <div class="row mb32">
                             <div class="col-xs-12 text-center">
                                 <h3>PROCÈS VERBAL DE DÉLIBÉRATION</h3>
                                 <h3>Conservatoire royal de Liège<br/>Boulevard Piercot, 29, 4000 LIÈGE</h3>
@@ -307,7 +307,7 @@
                         </div>
                         <t t-foreach="docs" t-as="o">
                         <div class="row">
-                            <div class="col-xs-12 mb-2">
+                            <div class="col-xs-12 mb16">
                                 <t t-if="o.student_id.gender == 'male'">Monsieur</t><t t-if="o.student_id.gender == 'female'">Madame</t> <span t-field="o.student_id"/>
                                 a obtenu le grade académique de <br/><span t-field="o.cycle_id.grade"/> en <span t-field="o.domain_id.long_name"/> : <span t-field="o.speciality_id"/> 
                                 <br/><t t-if="o.grade == 'without'"><span t-field="o.grade"/></t><t t-if="o.grade != 'without'"> <br/> avec <span t-field="o.grade"/></t>
