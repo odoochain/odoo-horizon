@@ -113,14 +113,6 @@
                             <field name="schedule"/>
                           </div>
                         </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Rooms</h3>
-                          </div>
-                          <div class="panel-body">
-                            <field name="rooms"/>
-                          </div>
-                        </div>
                     </sheet>
                 </form>
             </field>
