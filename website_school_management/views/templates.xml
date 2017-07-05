@@ -240,7 +240,7 @@
         <hr/>
     </template>
     
-        <template id="school_bloc" name="Bloc">
+    <template id="school_bloc" name="Bloc">
         <div class="col-md-12">
             <t t-call="website_school_management.no_description"/>
             <table class="table table-condensed oe_school_program_table">
@@ -269,8 +269,8 @@
                 </thead>
                 <tbody>
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
-                    <tr class="oe_school_course_group">
-                        <td><t t-esc="course_group.ue_id"/></td>
+                    <tr class="oe_school_course_group" style="font-weight: 600;">
+                        <td style="font-size: x-small;"><t t-esc="course_group.ue_id"/></td>
                         <td><t t-esc="course_group.title"/></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
@@ -291,7 +291,7 @@
                         <td></td>
                     </tr>
                     </t>
-                    <tr>
+                    <tr style="font-weight: 800;">
                         <td></td>
                         <td class="text-right">Total :</td>
                         <td class="text-center"><t t-esc="bloc.total_hours"/></td>
