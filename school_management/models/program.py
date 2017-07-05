@@ -225,13 +225,6 @@ class CourseGroup(models.Model):
                 course_g.name = "%s - %s - %s" % (course_g.title, course_g.speciality_id.name, course_g.cycle_id.short_name)
             course_g.ue_id = "UE-%s" % course_g.id
             
-    code_ue = fields.Char(string='Code UE', compute='compute_code_ue', store=True)
-    
-    @api.multi
-    def compute_code_ue(self):
-        for course_g in self:
-            course_g.code_ue = "UE " % ()
-    
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight')
