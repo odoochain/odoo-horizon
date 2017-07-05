@@ -91,12 +91,13 @@ class CourseDocumentation(models.Model):
     
     @api.model
     def default_get(self, fields):
-        res = dict()
+        res = super(CourseDocumentation, self).default_get(fields)
         if 'author_id' in fields:
             res['author_id'] = self.env.user.id
         if 'staff_ids' in fields:
             if self.env.user.partner_id:
                 res['staff_ids'] = [(6, _, [self.env.user.partner_id.id])]
+        return res
     
 class Course(models.Model):
     '''Course'''
