@@ -72,7 +72,7 @@ class CourseDocumentation(models.Model):
     def archive(self):
         return self.write({'state': 'archived'})
 
-    author_id = fields.Many2one('res.user', string='Author')
+    author_id = fields.Many2one('res.users', string='Author')
 
     staff_ids = fields.Many2many('res.partner', 'school_desc_res_partner_rel', 'desc_id', 'res_partner_id', string='Teachers', domain=[('teacher', '=', 1)])
     volume = fields.Text(string="Volume")

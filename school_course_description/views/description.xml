@@ -53,7 +53,7 @@
                             Course Description - <field name="course_id" class="oe_inline" style="width: 800px !important;"/>
                           </h1>
                           <h3 class="oe_fade">
-                            by <field name="author_id" readonly="1"/>
+                            by <field name="author_id" class="oe_inline" readonly="1"/>
                           </h3>
                           <h2>
                             Cursus : <field name="cycle_id" class="oe_inline" readonly="1"/>
