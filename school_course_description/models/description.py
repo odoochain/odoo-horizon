@@ -91,7 +91,8 @@ class CourseDocumentation(models.Model):
     def default_get(self, fields):
         res = dict()
         if 'staff_ids' in fields:
-            res['staff_ids'] = [(6, _, [self.env.user.partner_id.id])]
+            if self.env.user.partner_id:
+                res['staff_ids'] = [(6, _, [self.env.user.partner_id.id])]
     
 class Course(models.Model):
     '''Course'''
