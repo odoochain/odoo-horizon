@@ -72,6 +72,8 @@ class CourseDocumentation(models.Model):
     def archive(self):
         return self.write({'state': 'archived'})
 
+    author_id = fields.Many2one('res.user', string='Author')
+
     staff_ids = fields.Many2many('res.partner', 'school_desc_res_partner_rel', 'desc_id', 'res_partner_id', string='Teachers', domain=[('teacher', '=', 1)])
     volume = fields.Text(string="Volume")
     credits = fields.Integer(related='course_id.credits')
@@ -90,6 +92,8 @@ class CourseDocumentation(models.Model):
     @api.model
     def default_get(self, fields):
         res = dict()
+        if 'author_id' in fields:
+            res['author_id'] = self.env.user.id
         if 'staff_ids' in fields:
             if self.env.user.partner_id:
                 res['staff_ids'] = [(6, _, [self.env.user.partner_id.id])]
