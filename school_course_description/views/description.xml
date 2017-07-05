@@ -61,6 +61,23 @@
                           <h2>
                             Niveau : <field name="level" class="oe_inline" readonly="1"/>
                           </h2>
+                          <h2>
+                            Unité d'enseignemnet : <field name="course_group_id" class="oe_inline" readonly="1"/>
+                          </h2>
+                          <h2>
+                            Crédit associé : <field name="credits" class="oe_inline" readonly="1"/>
+                          </h2>
+                          <h2 class="mb16">
+                             Pondération : <field name="weight" class="oe_inline" readonly="1"/>
+                          </h2>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Volume</h3>
+                          </div>
+                          <div class="panel-body">
+                            <field name="volume"/>
+                          </div>
                         </div>
                         <div class="panel panel-default">
                           <div class="panel-heading">

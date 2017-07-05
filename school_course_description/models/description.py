@@ -45,6 +45,7 @@ class CourseDocumentation(models.Model):
     name = fields.Char(related='course_id.name')
     cycle_id = fields.Many2one(related='course_id.cycle_id')
     level = fields.Integer(related='course_id.level')
+    course_group_id = fields.Many2one(related='course_id.course_group_id')
     
     @api.model
     def _needaction_domain_get(self):
