@@ -42,8 +42,9 @@ class CourseDocumentation(models.Model):
              " * The 'Archived' status is used when a program is obsolete and not publihed anymore.")
     
     course_id = fields.Many2one('school.course', string='Course', requiered=True)
-    
     name = fields.Char(related='course_id.name')
+    cycle_id = fields.Char(related='course_id.cycle_id')
+    level = fields.Char(related='course_id.level')
     
     @api.model
     def _needaction_domain_get(self):
