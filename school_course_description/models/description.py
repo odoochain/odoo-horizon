@@ -96,7 +96,7 @@ class CourseDocumentation(models.Model):
             res['author_id'] = self.env.user.id
         if 'staff_ids' in fields:
             if self.env.user.partner_id:
-                res['staff_ids'] = [(6, _, [self.env.user.partner_id.id])]
+                res['staff_ids'] = [(6, False, [self.env.user.partner_id.id])]
         return res
     
 class Course(models.Model):
