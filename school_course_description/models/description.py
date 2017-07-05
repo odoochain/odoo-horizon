@@ -87,7 +87,6 @@ class CourseDocumentation(models.Model):
     pre_co_requiered = fields.Text(string="Pre-Co requiered")
     language = fields.Text(string="Language")
     
-    @api.models
     @api.model
     def default_get(self, fields):
         res = dict()
