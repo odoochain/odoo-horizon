@@ -41,7 +41,7 @@ class CourseDocumentation(models.Model):
              " * The 'Published' status is when a program is published and available for use.\n"
              " * The 'Archived' status is used when a program is obsolete and not publihed anymore.")
     
-    course_id = fields.Many2one('school.course', string='Course', requiered=True)
+    course_id = fields.Many2one('school.course', string='Course', required=True)
     name = fields.Char(related='course_id.name')
     cycle_id = fields.Many2one(related='course_id.cycle_id')
     level = fields.Integer(related='course_id.level')
@@ -82,7 +82,7 @@ class CourseDocumentation(models.Model):
     
     mandatory = fields.Boolean(string="Mandatory", default=True)
     
-    schedule = fields.Selection([('Q1','Q1'),('Q2','Q2'),('Q1Q2','Q1 & Q2'),('O','Others')], string="Schedule", requiered=True)
+    schedule = fields.Selection([('Q1','Q1'),('Q2','Q2'),('Q1Q2','Q1 & Q2'),('O','Others')], string="Schedule", required=True, default="Q1")
     schedule_text = fields.Text(string="Schedule Text")
     
     content = fields.Text(string="Content")

@@ -57,7 +57,7 @@
                           </h3>
                         </div>
                         <group col="4">
-                          <field name="cycle_id" readonly="1" colspan="2"/>
+                          <field name="cycle_id" readonly="1" colspan="4"/>
                           <field name="course_group_id" readonly="1"/>
                           <field name="level" readonly="1"/>
                           <field name="credits" readonly="1"/>
@@ -65,7 +65,7 @@
                           <field name="weight" readonly="1"/>
                           <field name="mandatory" />
                           <field name="schedule" />
-                          <field name="schedule_text" attrs="{'invisible':[('schedule','!=','O')]}" />
+                          <field name="schedule_text" attrs="{'invisible': [('schedule','not in',['O'])]}" placeholder="Please specify the schedule"/>
                         </group>
                         <div class="panel panel-default">
                           <div class="panel-heading">
@@ -117,14 +117,6 @@
                           </div>
                           <div class="panel-body">
                             <field name="language"/>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Schedule</h3>
-                          </div>
-                          <div class="panel-body">
-                            <field name="schedule"/>
                           </div>
                         </div>
                     </sheet>
