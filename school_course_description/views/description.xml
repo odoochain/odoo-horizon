@@ -77,7 +77,7 @@
                             <h3 class="panel-title">Content</h3>
                           </div>
                           <div class="panel-body">
-                            <field name="content"/>
+                            <field name="content" widget="html"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -85,7 +85,7 @@
                             <h3 class="panel-title">Method</h3>
                           </div>
                           <div class="panel-body">
-                            <field name="method"/>
+                            <field name="method" widget="html"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -93,7 +93,7 @@
                             <h3 class="panel-title">Learning outcomes</h3>
                           </div>
                           <div class="panel-body">
-                            <field name="learning_outcomes"/>
+                            <field name="learning_outcomes" widget="html"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -101,7 +101,7 @@
                             <h3 class="panel-title">References</h3>
                           </div>
                           <div class="panel-body">
-                            <field name="references"/>
+                            <field name="references" widget="html"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -109,7 +109,7 @@
                             <h3 class="panel-title">Evaluation method</h3>
                           </div>
                           <div class="panel-body">
-                            <field name="evaluation_method"/>
+                            <field name="evaluation_method" widget="html"/>
                           </div>
                         </div>
                     </sheet>
