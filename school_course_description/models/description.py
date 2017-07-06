@@ -76,11 +76,11 @@ class CourseDocumentation(models.Model):
     author_id = fields.Many2one('res.users', string='Author')
 
     staff_ids = fields.Many2many('res.partner', 'school_desc_res_partner_rel', 'desc_id', 'res_partner_id', string='Teachers', domain=[('teacher', '=', 1)])
-    volume = fields.Text(string="Volume")
     credits = fields.Integer(related='course_id.credits')
+    hours = fields.Integer(related='course_id.hours')
     weight = fields.Float(related='course_id.weight')
     
-    mandatory = fields.Text(string="Mandatory")
+    mandatory = fields.Boolean(string="Mandatory")
     schedule = fields.Text(string="Schedule")
     content = fields.Text(string="Content")
     method = fields.Text(string="Method")

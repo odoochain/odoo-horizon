@@ -55,30 +55,17 @@
                           <h3 class="oe_fade">
                             by <field name="author_id" class="oe_inline" readonly="1"/>
                           </h3>
-                          <h2>
-                            Cursus : <field name="cycle_id" class="oe_inline" readonly="1"/>
-                          </h2>
-                          <h2>
-                            Niveau : <field name="level" class="oe_inline" readonly="1"/>
-                          </h2>
-                          <h2>
-                            Unité d'enseignemnet : <field name="course_group_id" class="oe_inline" readonly="1"/>
-                          </h2>
-                          <h2>
-                            Crédit associé : <field name="credits" class="oe_inline" readonly="1"/>
-                          </h2>
-                          <h2 class="mb16">
-                             Pondération : <field name="weight" class="oe_inline" readonly="1"/>
-                          </h2>
                         </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Volume</h3>
-                          </div>
-                          <div class="panel-body">
-                            <field name="volume"/>
-                          </div>
-                        </div>
+                        <group col="4">
+                          <field name="cycle_id" class="oe_inline" readonly="1"/>
+                          <field name="level" class="oe_inline" readonly="1"/>
+                          <field name="course_group_id" class="oe_inline" readonly="1"/>
+                          <field name="credits" class="oe_inline" readonly="1"/>
+                          <field name="hours" class="oe_inline" readonly="1"/>
+                          <field name="weight" class="oe_inline" readonly="1"/>
+                          <field name="mandatory" class="oe_inline"/>
+                          <field name="schedule" class="oe_inline"/>
+                        </group>
                         <div class="panel panel-default">
                           <div class="panel-heading">
                             <h3 class="panel-title">Content</h3>
