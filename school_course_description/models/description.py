@@ -82,7 +82,7 @@ class CourseDocumentation(models.Model):
     
     mandatory = fields.Boolean(string="Mandatory", default=True)
     
-    schedule = fields.Selection([('Q1','Q1'),('Q2','Q2'),('Q1Q2','Q1 & Q2'),('O','Others')], string="Schedule", required=True, default="Q1")
+    schedule = fields.Selection([('Q1','Q1'),('Q2','Q2'),('Q1Q2','Q1 & Q2'),('O','Other')], string="Schedule", required=True, default="Q1")
     schedule_text = fields.Text(string="Schedule Text")
     
     content = fields.Text(string="Content")
@@ -91,7 +91,8 @@ class CourseDocumentation(models.Model):
     references = fields.Text(string="References")
     evaluation_method = fields.Text(string="Evaluation method")
     pre_co_requiered = fields.Text(string="Pre-Co requiered")
-    language = fields.Text(string="Language")
+    
+    language = fields.Selection([('F','French'),('E','English'),('O','Other')], string="Language", required=True, default="F")
     
     @api.model
     def default_get(self, fields):
