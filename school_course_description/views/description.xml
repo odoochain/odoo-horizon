@@ -67,6 +67,9 @@
                           <field name="mandatory" />
                           <field name="schedule" />
                           <field name="schedule_text" attrs="{'invisible': [('schedule','not in',['O'])]}" placeholder="Please specify the schedule"/>
+                          <newline/>
+                          <field name="language"/>
+                          <field name="staff_ids" colspan="4" widget="many2many_tags"/>
                         </group>
                         <div class="panel panel-default">
                           <div class="panel-heading">
@@ -98,26 +101,6 @@
                           </div>
                           <div class="panel-body">
                             <field name="evaluation_method"/>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Staff</h3>
-                          </div>
-                          <div class="panel-body">
-                            <field name="staff_ids">
-                                <tree string="Staff">
-                                    <field name="name" />
-                                </tree>
-                            </field>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Language</h3>
-                          </div>
-                          <div class="panel-body">
-                            <field name="language"/>
                           </div>
                         </div>
                     </sheet>
