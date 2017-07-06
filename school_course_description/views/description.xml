@@ -69,6 +69,7 @@
                           <field name="schedule_text" attrs="{'invisible': [('schedule','not in',['O'])]}" placeholder="Please specify the schedule"/>
                           <newline/>
                           <field name="language"/>
+                          <newline/>
                           <field name="staff_ids" colspan="4" widget="many2many_tags"/>
                         </group>
                         <div class="panel panel-default">
@@ -93,6 +94,14 @@
                           </div>
                           <div class="panel-body">
                             <field name="learning_outcomes"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">References</h3>
+                          </div>
+                          <div class="panel-body">
+                            <field name="references"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
