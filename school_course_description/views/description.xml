@@ -57,14 +57,15 @@
                           </h3>
                         </div>
                         <group col="4">
-                          <field name="cycle_id" readonly="1"/>
-                          <field name="level" readonly="1"/>
+                          <field name="cycle_id" readonly="1" colspan="2"/>
                           <field name="course_group_id" readonly="1"/>
+                          <field name="level" readonly="1"/>
                           <field name="credits" readonly="1"/>
                           <field name="hours" readonly="1"/>
                           <field name="weight" readonly="1"/>
                           <field name="mandatory" />
                           <field name="schedule" />
+                          <field name="schedule_text" attrs="{'invisible':[('schedule','<>','O')]}" />
                         </group>
                         <div class="panel panel-default">
                           <div class="panel-heading">
