@@ -80,9 +80,9 @@ class CourseDocumentation(models.Model):
     hours = fields.Integer(related='course_id.hours')
     weight = fields.Float(related='course_id.weight')
     
-    mandatory = fields.Boolean(string="Mandatory")
+    mandatory = fields.Boolean(string="Mandatory", default=True)
     
-    schedule = fields.Selection([('Q1','Q1'),('Q2','Q2'),('Q1Q2','Q1 & Q2'),('O','Others')], string="Schedule")
+    schedule = fields.Selection([('Q1','Q1'),('Q2','Q2'),('Q1Q2','Q1 & Q2'),('O','Others')], string="Schedule", requiered=True)
     schedule_text = fields.Text(string="Schedule Text")
     
     content = fields.Text(string="Content")
