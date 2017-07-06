@@ -141,7 +141,7 @@
         </record>
         
         <!-- Top menu item -->
-        <menuitem name="Course Description" id="menu_course_description" icon="fa-book" web_icon="survey,static/description/icon.png" sequence="61" groups="school_management.group_program_management,school_evaluations.group_evaluations,school_management.group_teacher"/>
+        <menuitem name="Course Description" id="menu_course_description" icon="fa-book" web_icon="note,static/description/icon.png" sequence="61" groups="school_management.group_program_management,school_evaluations.group_evaluations,school_management.group_teacher"/>
 
         <menuitem id="menu_course_documentation_list" parent="school_course_description.menu_course_description" action="action_course_documentation_list" sequence="10" />
         
