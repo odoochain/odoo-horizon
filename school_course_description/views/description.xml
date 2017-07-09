@@ -42,7 +42,17 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Course" create="0">
-                    <header>
+                    <script>
+                      // TODO : Hack as summernote seem to focus at the end
+                      $(function(){ //wait for document ready
+                      
+                        setTimeout(function(){
+                          $(".ui-autocomplete-input")[0].focus();
+                        }, 100) //execute your function after 2 seconds.
+                      
+                      });
+                    </script>
+                    <header groups="school_management.group_employee">
         	            <button name="publish" type="object" states="draft" string="Publish" class="oe_highlight" groups="school_management.group_employee"/>
                         <button name="unpublish" type="object" states="published,archived" string="Reset to Draft" groups="school_management.group_employee"/>
                         <button name="archive" type="object" states="published" string="Archive" groups="school_management.group_employee"/>
@@ -56,6 +66,24 @@
                           <h3 class="oe_fade">
                             by <field name="author_id" class="oe_inline" readonly="1"/>
                           </h3>
+                        </div>
+                        <div style="font-size:x-small;">
+                          <p>
+                          La mise à disposition aux étudiants des descriptifs est une obligation légale du décret « paysage ».
+                          </p>
+                          <p>
+                          Le descriptif d'unité d'enseignement est en réalité la forme officielle, mais celui-ci n'est en fait que la somme des descriptifs d'activités d'apprentissage qui le composent. Il existe cependant un responsable unique pour chaque unité d'enseignement. La liste de ces responsables d'unités a été validée en CGP et sera publiée dans le Règlement des Études.
+                          Toutes les activités d'apprentissage du programme (1er et 2ème cycle) doivent présenter un descriptif en bonne et due forme pour chaque année, même les cours à choix ! Ces descriptifs doivent correspondre fidèlement aux profils d'enseignement mis en ligne sur le site internet du conservatoire.
+                          </p>                          
+                          <p>
+                          La finalisation des descriptifs est attendue pour le 28 août 2017, à fin de publication sur le site internet du CrLg pour le 15 septembre. A cette date, ces documents deviennent les références légales pour chaque programme de cours de chaque étudiant.
+                          </p>                          
+                          <p>
+                          En principe, toutes les activités doivent s'organiser sur un seul quadrimestre. Il existe cependant une liste d'exemptions que l'on retrouve dans le vade-mecum du ComDel (http://www.comdel.be/wp-content/uploads/2017/03/VDM-Paysage_mars2017.pdf , Article 79, pages 115-116). Ainsi, nous profitons de la dérogation ouverte en premier cycle pour organiser l'ensemble des activités sous un mode annuel, avec une forte incitation à organiser une évaluation partielle en session de janvier. La liste des exemptions pour le second cycle (master) est plus limitée : « activités d’apprentissage qui, par leur nature, échappent à la quadrimestrialisation : évaluations, stages, activités d’intégration professionnelle, projets tels que le mémoire, le travail de fin d’études, le cours artistique principal, etc  ». A moins de remettre au CGP une raison valable attestant de l'impossibilité de quadrimestrialiser une activité sortant de cette liste, nous demandons aux pédagogues responsables de fonctionner sur cette règle quadrimestrielle.
+                          </p>                          
+                          <p>
+                          Le référentiel de compétences officiel de 2ème cycle (liste des acquis d'apprentissage terminaux de master) n'est toujours pas officialisé par le conseil d'administration de l'ARES. En réalité, la procédure de validation vient seulement d'être votée par l'ARES ce 27 juin dernier ! Un référentiel commun entre domaines musique des différentes ESA de la communauté française a été réalisé et avalisé par les directions respectives. A défaut de document officiel, nous vous proposons de conserver le pré-projet réalisé l'année passée.
+                          </p>
                         </div>
                         <group col="4">
                           <field name="cycle_id" readonly="1" colspan="4"/>

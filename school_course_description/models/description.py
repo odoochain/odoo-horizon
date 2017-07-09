@@ -76,7 +76,10 @@ class CourseDocumentation(models.Model):
     author_id = fields.Many2one('res.users', string='Author')
 
     staff_ids = fields.Many2many('res.partner', 'school_desc_res_partner_rel', 'desc_id', 'res_partner_id', string='Teachers', domain=[('teacher', '=', 1)])
-    credits = fields.Integer(related='course_id.credits')
+    credits = fields.Integer(related='course_id.credits', 
+        help="""Le nombre de crédits correspondant à l'activité est également une information préremplie par l'administration, en se  référant au profil d'enseignement du cursus. \\
+                ECTS signifie European Credits Transfer System, faisant référence au processus de Bologne. Au sens du décret paysage, 1 ECTS correspond à un investissement de temps de travail complet (cours, travaux, stages, travail personnel, évaluation,...) de la part de l'étudiant d'environ 30 heures.
+                Un programme annuel de 60 crédits correspond donc en moyenne à un investissement de temps de travail complet de la part de l'étudiant d'environ 1800 heures.""")
     hours = fields.Integer(related='course_id.hours')
     weight = fields.Float(related='course_id.weight')
     
