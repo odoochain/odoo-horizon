@@ -119,7 +119,12 @@ class CourseDocumentation(models.Model):
     evaluation_method = fields.Text(string="Evaluation method")
     pre_co_requiered = fields.Text(string="Pre-Co requiered")
     
-    language = fields.Selection([('F','French'),('E','English'),('O','Other')], string="Language", required=True, default="F")
+    language = fields.Selection([('F','French'),('E','English'),('O','Other')], string="Language", required=True, default="F",
+            help="""La langue d'enseignement et d'évaluation est en principe le français. L'obligation n'est totale que pour les masters à finalité didactique (pour lesquels une connaissance approfondie de la langue française est exigée). Des exceptions existent cependant au niveau des travaux de fin d'études, des enseignements de langues étrangères (évidemment...) et des activités d'intégration professionnelle.
+                D'après le décret paysage (article 75), «de manière générale, toute activité d'apprentissage d'un cursus de premier ou deuxième cycle peut être organisée et évaluée dans une autre langue si elle est organisée également en français; cette obligation est satisfaite pour les options ou pour les activités au choix individuel de l'étudiant, s'il existe au moins un autre choix possible d'options ou d'activités organisées en français.»
+                Pour le reste, «des activités peuvent être dispensées et évaluées dans une autre langue :
+                1° dans le premier cycle d'études, à raison d'au plus un quart des crédits;
+                2° pour les études menant au grade académique de master, sauf pour les crédits spécifiques à la finalité didactique, à raison de la moitié des crédits.»""")
     
     @api.model
     def default_get(self, fields):
