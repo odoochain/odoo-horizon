@@ -100,11 +100,11 @@ class CourseDocumentation(models.Model):
             
             La pondération n'est évidemment pas nécessaire si l'UE ne comprend qu'une AA...
             Exemple:
-            •	L'AA « banjo » vaut 23 crédits et possède donc une pondération 6 pour une cote finale d'évaluation sur 120 ;
-            •	L'AA « écoute critique de la discographie consacrée au banjo » vaut 1 crédit et possède donc une pondération 1 pour une cote finale d'évaluation sur 20 ;
-            •	L'UE « finalité principale » du «  formation instrumentale / cordes / banjo » vaut au final 24 crédits avec une cote finale sur 140, somme des cotes des 2 AA. Cette cote finale est ensuite ramenée sur 20 pour l'encodage sur « Horizon »
+            •	L'AA «banjo»vaut 23 crédits et possède donc une pondération 6 pour une cote finale d'évaluation sur 120;
+            •	L'AA «écoute critique de la discographie consacrée au banjo» vaut 1 crédit et possède donc une pondération 1 pour une cote finale d'évaluation sur 20;
+            •	L'UE «finalité principale» du « formation instrumentale / cordes / banjo» vaut au final 24 crédits avec une cote finale sur 140, somme des cotes des 2 AA. Cette cote finale est ensuite ramenée sur 20 pour l'encodage sur «Horizon»
             
-            Note : Il est conservé la notion de pondération de l'UE au sein du programme du cycle à fin de calcul de la moyenne d'année ou du cycle. Cette moyenne ne conserve qu'un intérêt informatif pour les décisions de réussite de certaines unités d'enseignement par le jury de cycle ou pour l'attribution des mentions en fin de cycle. La pondération n'est pas demandée dans les descriptifs d'activités, elle est prévue par l'article 96 du Règlement des Études.	
+            Note: Il est conservé la notion de pondération de l'UE au sein du programme du cycle à fin de calcul de la moyenne d'année ou du cycle. Cette moyenne ne conserve qu'un intérêt informatif pour les décisions de réussite de certaines unités d'enseignement par le jury de cycle ou pour l'attribution des mentions en fin de cycle. La pondération n'est pas demandée dans les descriptifs d'activités, elle est prévue par l'article 96 du Règlement des Études.	
             """)
     
     mandatory = fields.Boolean(string="Mandatory", default=True)
