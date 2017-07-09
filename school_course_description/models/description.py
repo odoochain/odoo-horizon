@@ -84,30 +84,19 @@ class CourseDocumentation(models.Model):
     weight = fields.Float(related='course_id.weight', 
         help="""Poids de l'évaluation de l'activité dans l'évaluation totale de l'unité. Cette pondération est définie par le tableau du règlement des études
             
-            Crédits de l'activité considérée        Coefficient multiplicateur    Cote finale sur
-                    1 à 3                                       1                       20
-                    4 à 6                                       2                       40
-            7 à 10
-            3
-            60
-            11 à 14
-            4
-            80
-            15 à 19
-            5
-            100
-            20 et plus (Domaine de la Musique)
-            6
-            120
-            20 à 23 (DTAP)
-            6
-            120
-            24 à 29 (DTAP)
-            9
-            180
-            30 et plus (DTAP)
-            12
-            240
+            Crédits de              Coefficient               Cote finale sur
+            l'activité              multiplicateur
+            considérée             
+                1 à 3                   1                       20
+                4 à 6                   2                       40
+                7 à 10                  3                       60
+                11 à 14                 4                       80
+                15 à 19                 5                       100
+                20 et plus              6                       120
+            (Domaine de la Musique)
+                20 à 23 (DTAP)          6                       120
+                24 à 29 (DTAP)          9                       180
+                30 et plus (DTAP)       12                      240
             
             La pondération n'est évidemment pas nécessaire si l'UE ne comprend qu'une AA...
             Exemple:
