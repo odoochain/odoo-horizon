@@ -77,11 +77,46 @@ class CourseDocumentation(models.Model):
 
     staff_ids = fields.Many2many('res.partner', 'school_desc_res_partner_rel', 'desc_id', 'res_partner_id', string='Teachers', domain=[('teacher', '=', 1)])
     credits = fields.Integer(related='course_id.credits', 
-        help="""Le nombre de crédits correspondant à l'activité est également une information préremplie par l'administration, en se  référant au profil d'enseignement du cursus. \\
-                ECTS signifie European Credits Transfer System, faisant référence au processus de Bologne. Au sens du décret paysage, 1 ECTS correspond à un investissement de temps de travail complet (cours, travaux, stages, travail personnel, évaluation,...) de la part de l'étudiant d'environ 30 heures.
-                Un programme annuel de 60 crédits correspond donc en moyenne à un investissement de temps de travail complet de la part de l'étudiant d'environ 1800 heures.""")
+        help="""Le nombre de crédits correspondant à l'activité est également une information préremplie par l'administration, en se  référant au profil d'enseignement du cursus.
+             ECTS signifie European Credits Transfer System, faisant référence au processus de Bologne. Au sens du décret paysage, 1 ECTS correspond à un investissement de temps de travail complet (cours, travaux, stages, travail personnel, évaluation,...) de la part de l'étudiant d'environ 30 heures.
+             Un programme annuel de 60 crédits correspond donc en moyenne à un investissement de temps de travail complet de la part de l'étudiant d'environ 1800 heures.""")
     hours = fields.Integer(related='course_id.hours')
-    weight = fields.Float(related='course_id.weight')
+    weight = fields.Float(related='course_id.weight', 
+        help="""Poids de l'évaluation de l'activité dans l'évaluation totale de l'unité. Cette pondération est définie par le tableau du règlement des études
+            
+            Crédits de l'activité considérée        Coefficient multiplicateur    Cote finale sur
+                    1 à 3                                       1                       20
+                    4 à 6                                       2                       40
+            7 à 10
+            3
+            60
+            11 à 14
+            4
+            80
+            15 à 19
+            5
+            100
+            20 et plus (Domaine de la Musique)
+            6
+            120
+            20 à 23 (DTAP)
+            6
+            120
+            24 à 29 (DTAP)
+            9
+            180
+            30 et plus (DTAP)
+            12
+            240
+            
+            La pondération n'est évidemment pas nécessaire si l'UE ne comprend qu'une AA...
+            Exemple:
+            •	L'AA « banjo » vaut 23 crédits et possède donc une pondération 6 pour une cote finale d'évaluation sur 120 ;
+            •	L'AA « écoute critique de la discographie consacrée au banjo » vaut 1 crédit et possède donc une pondération 1 pour une cote finale d'évaluation sur 20 ;
+            •	L'UE « finalité principale » du «  formation instrumentale / cordes / banjo » vaut au final 24 crédits avec une cote finale sur 140, somme des cotes des 2 AA. Cette cote finale est ensuite ramenée sur 20 pour l'encodage sur « Horizon »
+            
+            Note : Il est conservé la notion de pondération de l'UE au sein du programme du cycle à fin de calcul de la moyenne d'année ou du cycle. Cette moyenne ne conserve qu'un intérêt informatif pour les décisions de réussite de certaines unités d'enseignement par le jury de cycle ou pour l'attribution des mentions en fin de cycle. La pondération n'est pas demandée dans les descriptifs d'activités, elle est prévue par l'article 96 du Règlement des Études.	
+            """)
     
     mandatory = fields.Boolean(string="Mandatory", default=True)
     
