@@ -110,41 +110,40 @@ class CourseDocumentation(models.Model):
     mandatory = fields.Boolean(string="Mandatory", default=True)
     
     schedule = fields.Selection([('Q1','Q1'),('Q2','Q2'),('Q1Q2','Q1 & Q2'),('O','Other')], string="Schedule", required=True, default="Q1")
-    schedule_text = fields.Text(string="Schedule Text",
-            help="""Ce volet comporte une modification importante depuis la mise en application du décret paysage. La notion de «cours» n'apparaît plus en tant que telle dans le décret paysage (ce qui ne signifie cependant pas pour autant qu'elle disparaisse) au profit de la notion plus large d'«activité d'apprentissage»(article 76) :
+    schedule_text = fields.Text(string="Schedule Text",default="""Ce volet comporte une modification importante depuis la mise en application du décret paysage. La notion de «cours» n'apparaît plus en tant que telle dans le décret paysage (ce qui ne signifie cependant pas pour autant qu'elle disparaisse) au profit de la notion plus large d'«activité d'apprentissage»(article 76) :
                 «Les activités d'apprentissage comportent :
                 1° des enseignements organisés par l'établissement, notamment des cours magistraux, exercices dirigés, travaux pratiques, travaux de laboratoire, séminaires, exercices de création et recherche en atelier, excursions, visites et stages;
                 2° des activités individuelles ou en groupe, notamment des préparations, travaux, recherches d'information, travaux de fin d'études, projets et activités d'intégration professionnelle;
                 3° des activités d'étude, d'autoformation et d'enrichissement personnel ;
                 4° des acquisitions de compétences en entreprise dans le cadre de l'enseignement en alternance.
-                <p>
+                &lt;p&gt;
                 Toutes peuvent faire l'objet d'une évaluation et peuvent être exprimées en termes de crédits.»
-                </p>
+                &lt;/p&gt;
                 Il sera donc indiqué dans le volume horaire:
-                <ul>
-                    <li>le nombre d'heures de cours (le minimum est défini par l'arrêté du 17/07/2002 disponible ici:http://www.gallilex.cfwb.be/document/pdf/27034_003.pdf ),</li>
-                    <li>le nombre d'heures de travaux dirigés, répétitions, master-classes, séminaires, visites, ...</li>
-                    <li>le nombre d'heures de stages,</li>
-                    <li>le nombre d'heures d'évaluation.</li>
-                    <li>Le solde par rapport à l'investissement de temps de travail complet de l'étudiant défini par le nombre de crédits associé sera le temps moyen de travail personnel de l'étudiant.</li>
-                </ul>
+                &lt;ul&gt;
+                    &lt;li&gt;le nombre d'heures de cours (le minimum est défini par l'arrêté du 17/07/2002 disponible ici:http://www.gallilex.cfwb.be/document/pdf/27034_003.pdf ),&lt;/li&gt;
+                    &lt;li&gt;le nombre d'heures de travaux dirigés, répétitions, master-classes, séminaires, visites, ...&lt;/li&gt;
+                    &lt;li&gt;le nombre d'heures de stages,&lt;/li&gt;
+                    &lt;li&gt;le nombre d'heures d'évaluation.&lt;/li&gt;
+                    &lt;li&gt;Le solde par rapport à l'investissement de temps de travail complet de l'étudiant défini par le nombre de crédits associé sera le temps moyen de travail personnel de l'étudiant.&lt;/li&gt;
+                &lt;/ul&gt;
                 
-                <h4>Exemples:</h4>
+                &lt;h4&gt;Exemples:&lt;/h4&gt;
                 volume horairede l'AA «banjo»:
-                <ul>
-                    <li>60 heures de cours individuel,</li>
-                    <li>2 heures d'auditions et d'évaluations,</li>
-                    <li>30 heures de travail de groupe,</li>
-                    <li>10 heures de master-classes.</li>
-                </ul>
+                &lt;ul&gt;
+                    &lt;li&gt;60 heures de cours individuel,&lt;/li&gt;
+                    &lt;li&gt;2 heures d'auditions et d'évaluations,&lt;/li&gt;
+                    &lt;li&gt;30 heures de travail de groupe,&lt;/li&gt;
+                    &lt;li&gt;10 heures de master-classes.&lt;/li&gt;
+                &lt;/ul&gt;
                 volume horaire de l'AA d'«écoute critique de la discographie consacrée au banjo» :
-                <ul>
-                    <li>15 heures de cours collectif,</li>
-                    <li>2 heures d'examen.</li>
-                </ul>
-                <p>
+                &lt;ul&gt;
+                    &lt;li&gt;15 heures de cours collectif,&lt;/li&gt;
+                    &lt;li&gt;2 heures d'examen.&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;p&gt;
                 Le volume horaire total doit correspondre à celui indiqué dans le profil d'enseignement correspondant.
-                </p>
+                &lt;/p&gt;
                 Note: certains pédagogues préfèrent fournir une description moins précise ou moins contraignante en terme d'heures destinées à chaque type d'enseignement. A partir du moment ou la description est suffisamment compréhensible pour l'étudiant, cela reste admissible.
                 Exemple: «volume horaire: 100 heures. En moyenne, un cours individuel est dispensé par semaine par le professeur responsable de l'activité; le solde des heures se répartit entre cours collectifs, présence au cours individuel d'autres étudiants, auditions et master-classes».
                 """)
