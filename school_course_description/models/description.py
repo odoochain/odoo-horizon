@@ -116,34 +116,34 @@ class CourseDocumentation(models.Model):
                 2° des activités individuelles ou en groupe, notamment des préparations, travaux, recherches d'information, travaux de fin d'études, projets et activités d'intégration professionnelle;
                 3° des activités d'étude, d'autoformation et d'enrichissement personnel ;
                 4° des acquisitions de compétences en entreprise dans le cadre de l'enseignement en alternance.
-                &lt;p&gt;
+                <p>
                 Toutes peuvent faire l'objet d'une évaluation et peuvent être exprimées en termes de crédits.»
-                &lt;/p&gt;
+                </p>
                 Il sera donc indiqué dans le volume horaire:
-                &lt;ul&gt;
-                    &lt;li&gt;le nombre d'heures de cours (le minimum est défini par l'arrêté du 17/07/2002 disponible ici:http://www.gallilex.cfwb.be/document/pdf/27034_003.pdf ),&lt;/li&gt;
-                    &lt;li&gt;le nombre d'heures de travaux dirigés, répétitions, master-classes, séminaires, visites, ...&lt;/li&gt;
-                    &lt;li&gt;le nombre d'heures de stages,&lt;/li&gt;
-                    &lt;li&gt;le nombre d'heures d'évaluation.&lt;/li&gt;
-                    &lt;li&gt;Le solde par rapport à l'investissement de temps de travail complet de l'étudiant défini par le nombre de crédits associé sera le temps moyen de travail personnel de l'étudiant.&lt;/li&gt;
-                &lt;/ul&gt;
+                <ul>
+                    <li>le nombre d'heures de cours (le minimum est défini par l'arrêté du 17/07/2002 disponible ici:http://www.gallilex.cfwb.be/document/pdf/27034_003.pdf ),</li>
+                    <li>le nombre d'heures de travaux dirigés, répétitions, master-classes, séminaires, visites, ...</li>
+                    <li>le nombre d'heures de stages,</li>
+                    <li>le nombre d'heures d'évaluation.</li>
+                    <li>Le solde par rapport à l'investissement de temps de travail complet de l'étudiant défini par le nombre de crédits associé sera le temps moyen de travail personnel de l'étudiant.</li>
+                </ul>
                 
-                &lt;h4&gt;Exemples:&lt;/h4&gt;
+                <h4>Exemples:</h4>
                 volume horairede l'AA «banjo»:
-                &lt;ul&gt;
-                    &lt;li&gt;60 heures de cours individuel,&lt;/li&gt;
-                    &lt;li&gt;2 heures d'auditions et d'évaluations,&lt;/li&gt;
-                    &lt;li&gt;30 heures de travail de groupe,&lt;/li&gt;
-                    &lt;li&gt;10 heures de master-classes.&lt;/li&gt;
-                &lt;/ul&gt;
+                <ul>
+                    <li>60 heures de cours individuel,</li>
+                    <li>2 heures d'auditions et d'évaluations,</li>
+                    <li>30 heures de travail de groupe,</li>
+                    <li>10 heures de master-classes.</li>
+                </ul>
                 volume horaire de l'AA d'«écoute critique de la discographie consacrée au banjo» :
-                &lt;ul&gt;
-                    &lt;li&gt;15 heures de cours collectif,&lt;/li&gt;
-                    &lt;li&gt;2 heures d'examen.&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;p&gt;
+                <ul>
+                    <li>15 heures de cours collectif,</li>
+                    <li>2 heures d'examen.</li>
+                </ul>
+                <p>
                 Le volume horaire total doit correspondre à celui indiqué dans le profil d'enseignement correspondant.
-                &lt;/p&gt;
+                </p>
                 Note: certains pédagogues préfèrent fournir une description moins précise ou moins contraignante en terme d'heures destinées à chaque type d'enseignement. A partir du moment ou la description est suffisamment compréhensible pour l'étudiant, cela reste admissible.
                 Exemple: «volume horaire: 100 heures. En moyenne, un cours individuel est dispensé par semaine par le professeur responsable de l'activité; le solde des heures se répartit entre cours collectifs, présence au cours individuel d'autres étudiants, auditions et master-classes».
                 """)
