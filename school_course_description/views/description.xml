@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <openerp>
-    <data>
+  <data>
         <!-- Course Documentation List View -->
         <record id="view_course_documentation_list" model="ir.ui.view">
             <field name="name">school.course_documentation.tree</field>
@@ -260,7 +260,7 @@
                               	<li>2/3 de ces points seront attribués par l'enseignement responsable sur base de la qualité de participation au cours de l'étudiant;</li>
                               	<li>le 1/3 restant portera sur l'évaluation d'un rapport écrit, remis par l'étudiant au plus tard le 1er décembre(tout retard non justifié entraînera une note de 2/20) ;</li>
                               	<li>d'un examen écrit valant pour 40 % des points (note: la participation à cet examen fait partie des conditions d'admission aux autres évaluations de l'année académique !)</li>
-                            	<ul>
+                            	</ul>
                               En cas d'échec de l'AA, l'étudiant pourra présenter un nouveau rapport et un nouvel examen lors des sessions de fin de 2ème ou de 3ème quadrimestre(date de remise du rapport: au plus tard le premier jour de la session d'examen) ; la note d'évaluation continue portant sur la qualité de participation au cours ne fera cependant pas l'objet d'une nouvelle possibilité d'évaluation et sera réputée attachée à chacune des sessions de l'année académique.
                               <p>
                               l'AA «banjo» BLOC 2 fera l'objet d'une évaluation artistique devant un jury interne valant pour 50 % des points; cette évaluation se déroulera en deux parties, valant chacune pour moitié des points:
