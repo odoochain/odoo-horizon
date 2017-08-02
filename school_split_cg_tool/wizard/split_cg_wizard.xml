@@ -23,9 +23,9 @@
 <openerp>
     <data>
         <!-- Split Course Group Wizard View -->
-        <record model="ir.ui.view" id="course_group_form">
-          <field name="name">school.split_ue_wizard.view</field>
-          <field name="model">school.split_ue_wizard</field>
+        <record model="ir.ui.view" id="split_cg_wizard_form">
+          <field name="name">school.split_cg_wizard.view</field>
+          <field name="model">school.split_cg_wizard</field>
           <field name="type">form</field>
           <field name="arch" type="xml">
             <form string="Split Course Group Wizard">
@@ -59,5 +59,30 @@
             </form>
           </field>
         </record>
+        
+        <record id="action_split_cg_wizard" model="ir.actions.act_window">
+            <field name="name">Split Course Group Wizard</field>
+            <field name="res_model">school.split_cg_wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="split_cg_wizard_form"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+        
+        <!-- Add evaluation to Individual Course Group form view -->
+        <record id="course_group_eval_form" model="ir.ui.view">
+            <field name="name">school.course_group.eval.view</field>
+            <field name="model">school.course_group</field>
+            <field name="inherit_id" ref="school_management.course_group_form" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='weight']" position="after">
+                    <button name="%(action_split_cg_wizard)d" type="action" string="Split Course Group" icon="fa-scissors"/>
+                </xpath>
+            </field>
+        </record>
+        
     </data>
 </openerp>
