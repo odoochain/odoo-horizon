@@ -47,8 +47,8 @@
                       $(function(){ //wait for document ready
                       
                         setTimeout(function(){
-                          $(".oe_form_required")[0].focus();
-                        }, 100) //execute your function after 2 seconds.
+                          $(".oe_title")[0].focus();
+                        }, 100) //execute your function after 1 second.
                       
                       });
                     </script>
@@ -61,7 +61,7 @@
                     <sheet>
                         <div class="oe_title">
                           <h1>
-                            Course Description - <field name="course_id" class="oe_inline" style="width: 800px !important;"/>
+                            Course Description - <field name="course_id" class="oe_inline" style="width: 800px !important;" domain="[('cycle_id.short_name','!=','MB')]"/>
                           </h1>
                           <h3 class="oe_fade">
                             by <field name="author_id" class="oe_inline" readonly="1"/>
@@ -98,6 +98,16 @@
                           <newline/>
                           <field name="staff_ids" colspan="4" widget="many2many_tags"/>
                         </group>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Remarques</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div>Vous pouvez écrire ici vos remarques et commentaires à propose de cette fiche.
+                            </div>
+                            <field name="remarks" widget="html"/>
+                          </div>
+                        </div>
                         <div class="panel panel-default">
                           <div class="panel-heading">
                             <h3 class="panel-title">Schedule</h3>

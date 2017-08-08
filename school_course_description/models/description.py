@@ -43,6 +43,9 @@ class CourseDocumentation(models.Model):
     
     course_id = fields.Many2one('school.course', string='Course', required=True)
     name = fields.Char(related='course_id.name')
+    
+    remarks = fields.Char(string="Remarks")
+    
     cycle_id = fields.Many2one(related='course_id.cycle_id')
     level = fields.Integer(related='course_id.level')
     course_group_id = fields.Many2one(related='course_id.course_group_id')

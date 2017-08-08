@@ -33,22 +33,90 @@ class SplitUEWizard(models.TransientModel):
     target_first_course_group_id = fields.Many2one('school.course_group', string="Source Course Group")
     target_second_course_group_id = fields.Many2one('school.course_group', string="Source Course Group")
     
-    target_first_course_ids = fields.One2many(related='target_first_course_group_id.course_ids')
-    target_second_course_ids = fields.One2many(related='target_second_course_group_id.course_ids')
+    source_course_group_id_total_hours = fields.Integer(related='source_course_group_id.total_hours')
+    source_course_group_id_total_credits = fields.Integer(related='source_course_group_id.total_credits')
+    
+    target_first_course_group_id_total_hours = fields.Integer(related='target_first_course_group_id.total_hours')
+    target_first_course_group_id_total_credits = fields.Integer(related='target_first_course_group_id.total_credits')
+    
+    target_second_course_group_id_total_hours = fields.Integer(related='target_second_course_group_id.total_hours')
+    target_second_course_group_id_total_credits = fields.Integer(related='target_second_course_group_id.total_credits')
+    
+    total_total_hours = fields.Integer(compute='_compute_totals')
+    total_total_credits = fields.Integer(compute='_compute_totals')
+    
+    @api.depends('target_first_course_group_id','target_second_course_group_id')
+    @api.one
+    def _compute_totals(self):
+        self.total_total_hours = self.target_first_course_group_id.total_hours + self.target_second_course_group_id.total_hours
+        self.total_total_credits = self.target_first_course_group_id.total_credits + self.target_second_course_group_id.total_credits
     
     @api.onchange('source_course_group_id')
     def on_change_source_course_group_id(self):
+        first = self.source_course_group_id.copy()
+        second = self.source_course_group_id.copy()
+        
+        level = (first.level * 2 if first.level > 1 else 1) or 1
+        
+        first.write({
+            'level' : level,
+        })
+        second.write({
+            'level' : level + 1,
+            'sequence' : first.sequence + 1,
+        })
+        
+        for course in first.course_ids:
+            if course.hours >= 30 :
+                course.write({
+                    'hours' : course.hours / 2,
+                    'credits' : course.credits / 2,
+                })
+        
+        for course in second.course_ids:
+            if course.hours >= 30 :
+                course.write({
+                    'hours' : course.hours / 2,
+                    'credits' : course.credits / 2,
+                })
+        
         self.update({
-            'target_first_course_group_id': self.source_course_group_id.copy(),
-            'target_second_course_group_id': self.source_course_group_id.copy(),
+            'target_first_course_group_id': first,
+            'target_second_course_group_id': second,
         })
     
     @api.multi
     def on_confirm(self):
         self.ensure_one()
+        b_count = 0
         for bloc in self.source_course_group_id.bloc_ids:
-            pass
-        return {'type': 'ir.actions.act_window_close'}
+            if bloc.year_id.id == 4:
+                bloc.update({
+                    'course_group_ids' : [
+                        (3, self.source_course_group_id.id, _),
+                        (4, self.target_first_course_group_id.id, _),
+                        (4, self.target_second_course_group_id.id, _)
+                    ]}
+                )
+                b_count += 1
+        c_count = 0
+        for compo in self.source_course_group_id.composite_parent_ids:
+            compo.update({
+                'course_group_ids' : [
+                    (3, self.source_course_group_id.id, _),
+                    (4, self.target_first_course_group_id.id, _),
+                    (4, self.target_second_course_group_id.id, _)
+                ]}
+            )
+            c_count += 1
+        self.source_course_group_id.update({
+            'active' : False,
+        })
+        return {'warning': {
+            'title' : 'Blocs have been updated',
+            'message' : '%d blocs and %d composits have been updated and the original course group has been archived.' % (b_count, c_count),
+            }
+        }
         
     @api.multi
     def on_cancel(self):
@@ -56,3 +124,20 @@ class SplitUEWizard(models.TransientModel):
         self.target_first_course_group_id.unlink()
         self.target_second_course_group_id.unlink()
         return {'type': 'ir.actions.act_window_close'}
+        
+class CourseGroup(models.Model):
+    '''Courses Group'''
+    _inherit = 'school.course_group'
+    
+    @api.multi
+    def on_split(self):
+        value = {
+                'name': _('Split Course Group Wizard'),
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'school.split_cg_wizard',
+                'type': 'ir.actions.act_window',
+                'target': 'new',
+                'context' : {'default_source_course_group_id': self.id},
+        }
+        return value
