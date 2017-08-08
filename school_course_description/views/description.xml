@@ -47,7 +47,7 @@
                       $(function(){ //wait for document ready
                       
                         setTimeout(function(){
-                          $(".oe_title")[0].focus();
+                          $("input.ui-autocomplete-input")[0].focus();
                         }, 100) //execute your function after 1 second.
                       
                       });
@@ -103,7 +103,8 @@
                             <h3 class="panel-title">Remarques</h3>
                           </div>
                           <div class="panel-body">
-                            <div>Vous pouvez écrire ici vos remarques et commentaires à propose de cette fiche.
+                            <div>
+                              <p>Vous pouvez écrire ici vos remarques et commentaires à propose de cette fiche.</p>
                             </div>
                             <field name="remarks" widget="html"/>
                           </div>
