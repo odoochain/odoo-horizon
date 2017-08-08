@@ -306,12 +306,25 @@
             </field>
         </record>
         
+        <record id="view_course_documentation_filter" model="ir.ui.view">
+            <field name="name">course_documentation.select</field>
+            <field name="model">school.course_documentation</field>
+            <field name="arch" type="xml">
+            <search string="Search Groups">
+                <field name="name" string="Nom de l'activité"/>
+                <filter name="my_desc" string="Mes descriptifs" domain="[('author_id','=',uid)]"/>
+            </search>
+            </field>
+        </record>
+        
         <record id="action_course_documentation_list" model="ir.actions.act_window">
             <field name="name">Course Documentation</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">school.course_documentation</field>
+            <field name="search_view_id" ref="view_course_documentation_filter" />
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_my_desc":1}</field>
         </record>
         
         <record id="action_course_documentation_tree_view1" model="ir.actions.act_window.view">
