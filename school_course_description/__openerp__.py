@@ -30,6 +30,7 @@
     'update_xml': [
         #'views/templates.xml',
         'views/description.xml',
+        'report/school_description_report.xml',
     ],
     'demo_xml': [],
     'description': '''
