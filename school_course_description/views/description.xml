@@ -41,7 +41,7 @@
             <field name="model">school.course_documentation</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Course" create="0">
+                <form string="Course">
                     <script>
                       // TODO : Hack as summernote seem to focus at the end
                       $(function(){ //wait for document ready
