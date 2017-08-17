@@ -120,7 +120,7 @@ class CourseDocumentation(models.Model):
     learning_outcomes = fields.Text(string="Learning outcomes")
     references = fields.Text(string="References")
     evaluation_method = fields.Text(string="Evaluation method")
-    skills = fields.Text(string="Skills")
+    #skills = fields.Text(string="Skills")
     pre_co_requiered = fields.Text(string="Pre-Co requiered")
     
     language = fields.Selection([('F','French'),('E','English'),('O','Other')], string="Language", required=True, default="F",

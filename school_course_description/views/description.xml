@@ -211,32 +211,6 @@
                             <h3 class="panel-title">Learning outcomes</h3>
                           </div>
                           <div class="panel-body">
-                            <field name="learning_outcomes" widget="html"/>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">References</h3>
-                          </div>
-                          <div class="panel-body">
-                            <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
-                              Reprendre ici tous les documents (livres, travaux, études, partitions,...) et sources multimedia (disques, videos, sites internets,...) de référence.
-                              <h4>Exemple:</h4>
-                              <ul>
-                                <li>«Le banjopour les nuls» (Johnny Cash, 4ème édition, 1963)</li>
-                                <li>«L'école azerbaïdjanaise du banjo» (Stéphane De May, 2010)</li>
-                                <li>www.banjoforever.com</li>
-                                <li>l'intégrale des disques de Pete Seeger</li>
-                              </ul>
-                            </div>
-                            <field name="references" widget="html"/>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Skills</h3>
-                          </div>
-                          <div class="panel-body">
                             <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
                               <p>En lien avec le référentiel de compétence qui suit (acquis d'apprentissage terminaux du cycle, ou A.A.T.), déterminer les compétences minimales de l'étudiant dont il devra prouver l'acquis lors des évaluations. Il est évident que dans les activités artistiques, certaines notions restent subjectives et ne pourront être évaluées de manière fiable qu'en fin de cycle.</p>
                               
@@ -279,7 +253,25 @@
                                 <li>bases d'interprétation du style bluegrass (A.A.T. 1 et 7)</li>
                               </ul>
                             </div>
-                            <field name="skills" widget="html"/>
+                            <field name="learning_outcomes" widget="html"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">References</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
+                              Reprendre ici tous les documents (livres, travaux, études, partitions,...) et sources multimedia (disques, videos, sites internets,...) de référence.
+                              <h4>Exemple:</h4>
+                              <ul>
+                                <li>«Le banjopour les nuls» (Johnny Cash, 4ème édition, 1963)</li>
+                                <li>«L'école azerbaïdjanaise du banjo» (Stéphane De May, 2010)</li>
+                                <li>www.banjoforever.com</li>
+                                <li>l'intégrale des disques de Pete Seeger</li>
+                              </ul>
+                            </div>
+                            <field name="references" widget="html"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -287,7 +279,9 @@
                             <h3 class="panel-title">Pre-Co Requiered</h3>
                           </div>
                           <div class="panel-body">
-                            <p>Les prérequis et co-requis doivent être défini au niveau des unités d'enseignement. Nous vous invitons néanmoins à les renseigner ici.</p>
+                            <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
+                              <p>Les prérequis et co-requis doivent être défini au niveau des unités d'enseignement. Nous vous invitons néanmoins à les renseigner ici.</p>
+                            </div>
                             <field name="pre_co_requiered" widget="html"/>
                           </div>
                         </div>
