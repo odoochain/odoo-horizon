@@ -234,6 +234,65 @@
                         </div>
                         <div class="panel panel-default">
                           <div class="panel-heading">
+                            <h3 class="panel-title">Skills</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
+                              <p>En lien avec le référentiel de compétence qui suit (acquis d'apprentissage terminaux du cycle, ou A.A.T.), déterminer les compétences minimales de l'étudiant dont il devra prouver l'acquis lors des évaluations. Il est évident que dans les activités artistiques, certaines notions restent subjectives et ne pourront être évaluées de manière fiable qu'en fin de cycle.</p>
+                              
+                              <p>Référentiels de compétence : acquis d'apprentissage terminaux :</p>
+
+                              A la fin du 1er cycle, l’étudiant doit être capable :
+                              <ul>
+                                <li>A.A.T. 1. de produire (instrument, voix et écriture) en faisant la preuve de sa maîtrise technique et musicale, de sa connaissance du répertoire, de créativité et d’autonomie ;</li>
+                                <li>A.A.T. 2. de comprendre et de manipuler les éléments constitutifs des systèmes musicaux qu’il est amené à utiliser : écouter, déchiffrer et retranscrire par un système de notation ;</li>
+                                <li>A.A.T. 3. d’analyser et de mettre en œuvre des outils permettant une analyse au service de l’interprétation des œuvres ;</li>
+                                <li>A.A.T. 4. d’établir des liens pertinents avec le contexte esthétique, historique et sociologique des œuvres et de développer un intérêt pour d’autres champs musicaux ;</li>
+                                <li>A.A.T. 5. de travailler en ensembles et de développer les qualités relationnelles nécessaires aux travaux en groupe ;</li>
+                                <li>A.A.T. 6. de s’orienter dans la littérature et la documentation musicales, d’apprécier les différents supports en mettant en œuvre des démarches analytiques et de faire des choix pertinents ;</li>
+                                <li>A.A.T. 7. d’acquérir une maîtrise suffisante de sa voix et de son corps en tant qu’outil du musicien.</li>
+                              </ul>
+                              
+                              Au domaine de la musique du Conservatoire royal de Liège, le grade de master est décerné aux étudiants qui ont acquis
+                              <ul>
+                                <li>des connaissances et compétences générales qui font suite à celles qui relèvent du niveau de bachelier, rehaussant leurs niveaux d'excellence dans leurs pratiques artistiques (A.A.T. 1),</li>
+                                <li>des connaissances et compétences hautement spécialisées, le cas échéant relatives à un débouché professionnel ciblé par le type de finalité choisi (A.A.T. 2) ;</li>
+                                <li>ces connaissances et ces compétences fournissent une base pour développer ou mettre en œuvre des idées ou des propositions artistiques</li>
+                                <li>de manière originale, le plus souvent dans le cadre d'une recherche artistique ou dans le cadre d'un développement d'une création ou d'une interprétation (A.A.T. 3),</li>
+                                <li>de manière concertée et argumentée, en s'intégrant dans un projet de groupe ou d'ensemble (A.A.T. 4);</li>
+                                <li>sont capables d'appliquer, de mobiliser, d'articuler et de valoriser ces connaissances et ces compétences en vue de s'adapter à des contextes artistiques étendus, pluridisciplinaires, transversaux et novateurs (A.A.T. 5) ;</li>
+                                <li>sont capables de mobiliser ces connaissances et ces compétences, d'en maîtriser la complexité et la richesse ainsi que de formuler des opinions, des jugements critiques ou des propositions artistiques en y intégrant une réflexion sur les responsabilités artistiques, sociétales ou éthiques (A.A.T 6) ;.</li>
+                                <li>sont capables de transmettre, partager, communiquer leur art et les résultats de leur recherche artistique de manière optimale au public, averti ou non, et avec ses pairs, sous toutes leurs formes, passées et actuelles (A.A.T. 7);</li>
+                                <li>ont développé et intégré un fort degré d'autonomie qui leur permet de poursuivre leur formation, d'acquérir de nouveaux savoirs et de développer de nouvelles compétences pour pouvoir évoluer dans de nouveaux contextes artistiques (A.A.T. 8).</li>
+                              </ul>
+                              
+                              <h4>Exemple:</h4>
+                              
+                              En fin d'activité, l'étudiant devra faire preuve de compétences spécifiques suffisantes en :
+                              <ul>
+                                <li>vélocité de la main gauche et qualité de vibrato dans le répertoire dixieland (A.A.T. 1 et 7)</li>
+                                <li>technique du pouce dans le style bluegrass (A.A.T. 1 et 7)</li>
+                                <li>analyse comparative de styles abordés (A.A.T. 2, 3, 4, 5, 6)</li>
+                                <li>connaissance des notations contemporaines du banjo (A.A.T. 2, 6)</li>
+                                <li>lecture du répertoire technique basique (A.A.T. 1)</li>
+                                <li>improvisation de style sur une grille d'accord simple (A.A.T. 1, 4 et 7)</li>
+                                <li>bases d'interprétation du style bluegrass (A.A.T. 1 et 7)</li>
+                              </ul>
+                            </div>
+                            <field name="skills" widget="html"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Pre-Co Requiered</h3>
+                          </div>
+                          <div class="panel-body">
+                            <p>Les prérequis et co-requis doivent être défini au niveau des unités d'enseignement. Nous vous invitons néanmoins à les renseigner ici.</p>
+                            <field name="pre_co_requiered" widget="html"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
                             <h3 class="panel-title">Evaluation method</h3>
                           </div>
                           <div class="panel-body">
