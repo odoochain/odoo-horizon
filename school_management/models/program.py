@@ -254,6 +254,9 @@ class Course(models.Model):
     _inherit = ['mail.thread']
     
     sequence = fields.Integer(string='Sequence')
+    
+    active = fields.Boolean(related="course_group_id.active", store=True, readonly=True)
+    
     title = fields.Char(required=True, string='Title')
     
     description = fields.Text(string='Description')
