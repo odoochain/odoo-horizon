@@ -90,7 +90,7 @@ class SplitUEWizard(models.TransientModel):
         self.ensure_one()
         b_count = 0
         for bloc in self.source_course_group_id.bloc_ids:
-            if bloc.year_id.id == 4:
+            if bloc.year_id.id == 4:  # ie 2017-2018
                 bloc.update({
                     'course_group_ids' : [
                         (3, self.source_course_group_id.id, _),
@@ -109,6 +109,10 @@ class SplitUEWizard(models.TransientModel):
                 ]}
             )
             c_count += 1
+            
+        for course in self.source_course_group_id.course_ids:
+            desc_ids = self.env['ir.module.module'].search([('course_id', '=', course.id)])
+        
         self.source_course_group_id.update({
             'active' : False,
         })

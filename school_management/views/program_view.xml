@@ -171,6 +171,7 @@
       <field name="arch" type="xml">
         <search string="Search Course Group">
           <field name="name" filter_domain="[( 'name', 'ilike', self)]" />
+          <field name="ue_id" filter_domain="[( 'ue_id', 'ilike', self)]"/>
           <group expand="1" string="Group By">
             <filter string="Domain" context="{'group_by':['domain_id']}" />
             <filter string="Speciality" context="{'group_by':['speciality_id']}" />

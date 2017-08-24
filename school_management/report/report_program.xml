@@ -33,6 +33,7 @@
         />
         
     <template id="website_program_details_content" name="Program Details Content">
+        
         <section class="row">
             <div class="col-md-4"><h4>PROFIL D’ENSEIGNEMENT</h4></div>
             <div class="col-md-6"><h4><t t-esc="program.name" /></h4></div>
@@ -161,11 +162,12 @@
         <t t-call="report.html_container">
             <t t-set="data_report_margin_top" t-value="45" />
             <t t-set="data_report_header_spacing" t-value="40" />
-            <t t-set="program" t-value="docs[0]" />
+            <t t-foreach="docs" t-as="program">
             <t t-call="report.external_layout">
                 <div class="page">
                     <t t-call="school_management.website_program_details_content"/>
                 </div>
+            </t>
             </t>
         </t>
     </template>
