@@ -58,7 +58,7 @@ class IndividualBloc(models.Model):
         'account.invoice', 'Invoice',
         copy=False, readonly=True, track_visibility="onchange")
         
-    invoice_count = fields.Integer(compute='_compute_invoice_count',store=True)
+    invoice_count = fields.Integer(compute='_compute_invoice_count')
      
     @api.depends('invoice_id')  
     @api.one
@@ -84,7 +84,7 @@ class IndividualBloc(models.Model):
                     'origin': bloc.name,
                     'type': 'out_invoice',
                     'partner_id': bloc.student_id.id,
-                    'date_invoice': "2016-09-15",
+                    'date_invoice': '%s-09-15' % self.year_id.name[0:4],
                     
                 })
                 bloc.write({'invoice_id': invoice.id})
