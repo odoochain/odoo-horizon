@@ -29,6 +29,7 @@ _logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
     _inherit = 'res.partner'
+    
     out_inv_comm_algorithm = fields.Selection(selection_add=[('student_id', 'Student Id')])
 
 class Invoice(models.Model):
@@ -85,7 +86,6 @@ class IndividualBloc(models.Model):
                     'type': 'out_invoice',
                     'partner_id': bloc.student_id.id,
                     'date_invoice': '%s-09-15' % self.year_id.name[0:4],
-                    'reference_type': 'bba',
                 })
                 bloc.write({'invoice_id': invoice.id})
                 invoice_ids.append(invoice.id)
