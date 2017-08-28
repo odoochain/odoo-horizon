@@ -55,6 +55,7 @@
                                                 <t t-esc="p['body']"/>
                                             </a>
                                             </h2>
+                                            <h3><a href="/school_login_screen/static/pdf/help.pdf">Aide en cas de problème de connection...</a></h3>
                                         </div>
                                         </t>
                                     </div>
