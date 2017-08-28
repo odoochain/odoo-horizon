@@ -41,6 +41,14 @@
                     <script type="text/javascript" src="/school_login_screen/static/lib/mdl/textfields.js"></script>
                     
                     <script type="text/javascript" src="/school_login_screen/static/js/announcements.js"></script>
+                    
+                    <script>
+                      $(document).ready(function(){
+                        $("#toggle_login_form_div").click(function(){
+                            $("#login_form_div").show();
+                        });
+                      });
+                    </script>
                 </t>
                 <div class="mdl-layout mdl-layout--fixed-header mdl-js-layout  mdl-color--white-100">
             		<main class="mdl-layout__content main_content">
@@ -55,12 +63,17 @@
                                                 <t t-esc="p['body']"/>
                                             </a>
                                             </h2>
-                                            <span><a href="/school_login_screen/static/pdf/help.pdf">Aide en cas de problème de connection...</a></span>
+                                            <span><a href="/school_login_screen/static/pdf/help.pdf">Aide en cas de problème de connexion...</a></span>
                                         </div>
                                         </t>
                                     </div>
                     			</div>
                     		    <div class="login-form-div mdl-grid mdl-shadow--2dp">
+                    		        
+                    		        <div class="mdl-cell mdl-cell--12-col login-btn-con">
+                    					<button id="toggle_login_form_div" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary btn">Connexion manuelle</button>
+                    				</div>
+                    		        <div id="login_form_div" style="display:none;">
                     			    <form role="form" t-attf-action="/web/login{{ '?debug' if debug else '' }}" method="post" onsubmit="this.action = this.action + location.hash">
                     				<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                     				<div class="mdl-cell mdl-cell--12-col cell_con">
@@ -93,6 +106,7 @@
                 
                                     <input type="hidden" name="redirect" t-att-value="redirect"/>
                     				</form>
+                    				</div>
                     			</div>
                     		</div>
                     		<div class="announcements-card mdl-cell mdl-cell--6-col">
