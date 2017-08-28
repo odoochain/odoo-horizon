@@ -45,7 +45,7 @@
                     <script>
                       $(document).ready(function(){
                         $("#toggle_login_form_div").click(function(){
-                            $("#login_form_div").show();
+                            $("#login_form_div").toggle();
                         });
                       });
                     </script>
