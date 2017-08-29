@@ -284,7 +284,7 @@ class Course(models.Model):
     
     has_second_session = fields.Boolean(string="Has a second session", default=True)
     
-    @api.depends('title','level','speciality_id.name', 'cycle_id.short_name')
+    @api.depends('title','level','speciality_id.name', 'cycle_id.short_name', 'course_group_id.level')
     @api.multi
     def compute_name(self):
         for course in self:
