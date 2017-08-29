@@ -85,7 +85,7 @@ class IndividualBloc(models.Model):
                     'origin': bloc.name,
                     'type': 'out_invoice',
                     'partner_id': bloc.student_id.id,
-                    'date_invoice': '%s-09-15' % self.year_id.name[0:4],
+                    'date_invoice': '%s-09-15' % bloc.year_id.name[0:4],
                 })
                 bloc.write({'invoice_id': invoice.id})
                 invoice_ids.append(invoice.id)
