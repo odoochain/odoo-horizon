@@ -69,7 +69,7 @@
                     			    <div class="pull-right">
                                         <t t-foreach="providers" t-as="p">
                                         <div>
-                                            <h2><a t-att-href="p['auth_link']" class="btn btn-link">
+                                            <h2><a t-att-href="p['auth_link'].replace('http%3A%2F%2F','https%3A%2F%2F')" class="btn btn-link">
                                                 <i class="fa fa-google-plus-square"></i>
                                                 <t t-esc="p['body']"/>
                                             </a>
