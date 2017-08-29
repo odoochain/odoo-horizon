@@ -57,7 +57,7 @@ class IndividualBloc(models.Model):
 
     invoice_id = fields.Many2one(
         'account.invoice', 'Invoice',
-        copy=False, readonly=True, track_visibility="onchange")
+        copy=False, track_visibility="onchange")
         
     invoice_count = fields.Integer(compute='_compute_invoice_count')
      
