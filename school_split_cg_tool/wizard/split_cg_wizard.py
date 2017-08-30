@@ -110,9 +110,6 @@ class SplitUEWizard(models.TransientModel):
             )
             c_count += 1
             
-        for course in self.source_course_group_id.course_ids:
-            desc_ids = self.env['ir.module.module'].search([('course_id', '=', course.id)])
-        
         self.source_course_group_id.update({
             'active' : False,
         })

@@ -147,7 +147,7 @@ class Course(models.Model):
     documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
     
     all_documentation_ids = fields.One2many('school.course_documentation', 'course_id', string='All Documentations')
-    
+
     all_documentation_count = fields.Integer(string="Documentation Count", compute="_compute_count")
     
     @api.one
