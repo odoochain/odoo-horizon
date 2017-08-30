@@ -148,6 +148,13 @@ class Course(models.Model):
     
     all_documentation_ids = fields.One2many('school.course_documentation', 'course_id', string='All Documentations')
     
+    all_documentation_count = fields.Integer(string="Documentation Count", compute="_compute_count")
+    
+    @api.one
+    @api.depends('all_documentation_ids')
+    def _compute_count(self):
+        self.all_documentation_count = len(self.all_documentation_ids)
+    
     @api.one
     def compute_documentation_id(self):
         doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
