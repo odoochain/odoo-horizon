@@ -146,6 +146,8 @@ class Course(models.Model):
     
     documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
     
+    all_documentation_ids = fields.One2many('school.course_documentation', 'course_id', string='All Documentations')
+    
     @api.one
     def compute_documentation_id(self):
         doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
