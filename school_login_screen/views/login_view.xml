@@ -77,6 +77,11 @@
                                             <span><a href="/school_login_screen/static/pdf/help.pdf">Aide en cas de problème de connexion...</a></span>
                                         </div>
                                         </t>
+                                        <t t-if="request.params.get('oauth_error', '') == '3'">
+                                        <div class="alert alert-danger">
+                                            <strong>Erreur!</strong> Votre compte n'est pas actif, avez vous bien validé via le lien reçu par email. Si vous n'avez plus le mail, contactez le secrétariat.
+                                        </div>
+                                        </t>
                                     </div>
                     			</div>
                     		    <div class="login-form-div mdl-grid mdl-shadow--2dp">
