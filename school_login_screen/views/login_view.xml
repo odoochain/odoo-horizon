@@ -79,7 +79,7 @@
                                         </t>
                                         <t t-if="request.params.get('oauth_error', '') == '3'">
                                         <div class="alert alert-danger">
-                                            <strong>Erreur!</strong> Votre compte n'est pas actif, avez vous bien validé via le lien reçu par email. Si vous n'avez plus le mail, contactez le secrétariat.
+                                            <strong>Erreur!</strong> Votre compte n'est pas actif. Avez vous bien validé celui-ci via le lien reçu par email? Si vous n'avez plus le mail, contactez le secrétariat.
                                         </div>
                                         </t>
                                     </div>
