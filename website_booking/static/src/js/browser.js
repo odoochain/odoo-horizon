@@ -164,15 +164,33 @@ var NewBookingDialog = Widget.extend({
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
             var roomId = parseInt(self.$( "select.select-asset-id" ).val());
             new Model('ir.model.data').call('get_object_reference', ['school_booking', 'school_student_event_type']).then(function(categ) {
-                new Model('calendar.event').call('create', [{
-                    'name' : self.$('#description').val(),
-                    'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
-                    'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
-                    'room_id': roomId,
-                    'categ_ids': [[4, categ[1]]],
-                }]).then(function (id) {
-                    self.trigger_up('newEvent', {'id': id});
-                });
+                if(self.edit_mode) {
+                    new Model('calendar.event').call('write', [[self.event.id], {
+                        'name' : self.$('#description').val(),
+                        'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                        'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                        'room_id': roomId,
+                        'categ_ids': [[4, categ[1]]],
+                    }]).then(function (id) {
+                        self.trigger_up('updateEvent', {'id': id});
+                    });
+                } else {
+                    new Model('calendar.event').call('create', [{
+                        'name' : self.$('#description').val(),
+                        'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                        'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                        'room_id': roomId,
+                        'categ_ids': [[4, categ[1]]],
+                    }]).then(function (id) {
+                        self.trigger_up('newEvent', {'id': id});
+                    });
+                }
+            });
+        },
+        "click .delete-booking" : function (event) {
+            var self = this;
+            new Model('calendar.event').call('unlink', [self.event.id]).done(function () {
+                self.trigger('deleteEvent', self.event.id);
             });
         },
         "change .select-asset-id": function (event) {
@@ -243,9 +261,11 @@ var NewBookingDialog = Widget.extend({
             this.ressources = parent.cal.ressources;
             this.date = options.event.start;
             this.event = options.event;
+            this.edit_mode = true;
         } else {
             this.ressources = parent.cal.ressources;
             this.date = parent.cal.$calendar.fullCalendar( 'getDate' );
+            this.edit_mode = false;
         }
     },
 
@@ -260,7 +280,6 @@ var NewBookingDialog = Widget.extend({
     start: function() {
         this._super.apply(this, arguments);
         var self = this;
-        self.$('select').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
         });
@@ -274,9 +293,8 @@ var NewBookingDialog = Widget.extend({
             'timeFormat': 'H:i',
             'showDuration': true,
         });
-        if(self.event) {
+        if(self.edit_mode) {
             self.$('select.select-asset-id').find('option[value="%s"]' % self.event.resourceId).prop('selected', true);
-            self.$('select.select-asset-id').material_select();
             self.$('#from_hour').val(self.event.start.format('H:mm')).change();
             self.$('#from_hour').addClass('valid');
             self.$('#to_hour').val(self.event.end.format('H:mm')).change();
@@ -286,6 +304,7 @@ var NewBookingDialog = Widget.extend({
         } else {
             self.$('#description').val(session.partner.name);
         }
+        self.$('select.select-asset-id').material_select();
         Materialize.updateTextFields();
     },
 
@@ -646,6 +665,12 @@ var Browser = Widget.extend({
         'switch_ressources' : 'switch_ressources',
         'switch_date' : 'switch_date',
         'newEvent': function(event) {
+            this.cal.refetch_events();
+        },
+        'deleteEvent': function(event) {
+            this.cal.refetch_events();
+        },
+        'updateEvent': function(event) {
             this.cal.refetch_events();
         },
     },
