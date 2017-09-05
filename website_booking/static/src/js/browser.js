@@ -275,10 +275,12 @@ var NewBookingDialog = Widget.extend({
             'showDuration': true,
         });
         if(self.event) {
-            self.$('select').val(self.event.resourceId)
-            self.$('#from_hour').val(self.event.start)
-            self.$('#to_hour').val(self.event.end)
-            self.$('#description').val(self.event.title)
+            self.$('select').val(self.event.resourceId).change();
+            self.$('#from_hour').val(self.event.start.format('H:mm'));
+            self.$('#from_hour').addClass('valid');
+            self.$('#to_hour').val(self.event.end.format('H:mm'));
+            self.$('#to_hour').addClass('valid');
+            self.$('#description').val(self.event.title);
         } else {
             self.$('#description').val(session.partner.name);
         }
