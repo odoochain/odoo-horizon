@@ -337,8 +337,8 @@ var NavigationCard = Widget.extend({
     },
     
     set_active: function() {
-        this.getParent().$el.find('.z-depth-5').removeClass('z-depth-5')
-        this.$el.find('.navbar-card').addClass('z-depth-5');
+        this.getParent().$el.find('.z-depth-5').removeClass('darken-4')
+        this.$el.find('.cat_button').addClass('darken-4');
     },
     
 });
