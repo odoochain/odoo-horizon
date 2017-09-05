@@ -608,7 +608,7 @@ var Toolbar = Widget.extend({
     
     events : {
         "click #login-button" : function (event) {
-            ajax.jsonRpc('/booking/login_providers', 'call', {redirect : '/booking'}).done(function(providers){
+            ajax.jsonRpc('/booking/login_providers', 'call', {redirect : '/booking#category_id=16'}).done(function(providers){
                 if(providers.length > 0) {
                     var provider = providers[0];
                     var link = provider.auth_link
