@@ -280,6 +280,7 @@ var NewBookingDialog = Widget.extend({
     start: function() {
         this._super.apply(this, arguments);
         var self = this;
+        self.$('select.select-asset-id').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
         });
@@ -295,6 +296,7 @@ var NewBookingDialog = Widget.extend({
         });
         if(self.edit_mode) {
             self.$('select.select-asset-id').find('option[value="%s"]' % self.event.resourceId).prop('selected', true);
+            self.$('select.select-asset-id').material_select();
             self.$('#from_hour').val(self.event.start.format('H:mm')).change();
             self.$('#from_hour').addClass('valid');
             self.$('#to_hour').val(self.event.end.format('H:mm')).change();
@@ -304,7 +306,6 @@ var NewBookingDialog = Widget.extend({
         } else {
             self.$('#description').val(session.partner.name);
         }
-        self.$('select.select-asset-id').material_select();
         Materialize.updateTextFields();
     },
 
