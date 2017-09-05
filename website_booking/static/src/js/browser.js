@@ -296,6 +296,7 @@ var NewBookingDialog = Widget.extend({
         });
         if(self.edit_mode) {
             self.$('select.select-asset-id').val(self.event.resourceId).change();
+            self.$('select.select-asset-id').material_select();
             self.$('#from_hour').val(self.event.start.format('H:mm')).change();
             self.$('#from_hour').addClass('valid');
             self.$('#to_hour').val(self.event.end.format('H:mm')).change();
