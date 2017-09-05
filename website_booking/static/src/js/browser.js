@@ -1,7 +1,7 @@
 odoo.define('website_booking.browser', function (require) {
 "use strict";
 
-/* global moment, Materialize, $ */
+/* global moment, Materialize, $, location, odoo */
 
 var core = require('web.core');
 var ajax = require('web.ajax');
@@ -624,6 +624,7 @@ var Toolbar = Widget.extend({
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
             this.rpc("/web/session/destroy", {}).always(function(o) {
                 framework.redirect('/booking#category_id=16');
+                location.reload();
             })
         },
     },
