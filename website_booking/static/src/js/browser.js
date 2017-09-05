@@ -622,7 +622,7 @@ var Toolbar = Widget.extend({
             self.uid = false;
             self.avatar_src = false;
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
-            this.rpc("/web/session/destroy", {}).then(function() {
+            this.rpc("/web/session/destroy", {}).always(function(o) {
                 framework.redirect('/booking#category_id=16');
             })
         },
