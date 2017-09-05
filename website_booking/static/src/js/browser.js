@@ -621,6 +621,7 @@ var Toolbar = Widget.extend({
             self.uid = false;
             self.avatar_src = false;
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
+            return this.rpc("/web/session/destroy", {});
         },
     },
     
