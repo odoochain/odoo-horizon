@@ -190,7 +190,7 @@ var NewBookingDialog = Widget.extend({
         "click .delete-booking" : function (event) {
             var self = this;
             new Model('calendar.event').call('unlink', [self.event.id]).done(function () {
-                self.trigger('deleteEvent', self.event.id);
+                self.trigger_up('deleteEvent', self.event.id);
             });
         },
         "change .select-asset-id": function (event) {
