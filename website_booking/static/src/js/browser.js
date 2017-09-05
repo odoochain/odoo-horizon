@@ -295,8 +295,7 @@ var NewBookingDialog = Widget.extend({
             'showDuration': true,
         });
         if(self.edit_mode) {
-            self.$('select.select-asset-id').find('option[value="%s"]' % self.event.resourceId).prop('selected', true);
-            self.$('select.select-asset-id').material_select();
+            self.$('select.select-asset-id').val(self.event.resourceId).change();
             self.$('#from_hour').val(self.event.start.format('H:mm')).change();
             self.$('#from_hour').addClass('valid');
             self.$('#to_hour').val(self.event.end.format('H:mm')).change();
