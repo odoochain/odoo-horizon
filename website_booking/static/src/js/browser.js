@@ -274,7 +274,14 @@ var NewBookingDialog = Widget.extend({
             'timeFormat': 'H:i',
             'showDuration': true,
         });
-        self.$('#description').val(session.partner.name);
+        if(self.event) {
+            self.$('select').val(self.event.resourceId)
+            self.$('#from_hour').val(self.event.start)
+            self.$('#to_hour').val(self.event.end)
+            self.$('#description').val(self.event.title)
+        } else {
+            self.$('#description').val(session.partner.name);
+        }
         Materialize.updateTextFields();
     },
 
