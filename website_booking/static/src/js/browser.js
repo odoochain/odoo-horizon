@@ -10,6 +10,7 @@ var session = require('web.session');
 var Widget = require('web.Widget');
 var Dialog = require("web.Dialog");
 var time = require('web.time');
+var framework = require('web.framework');
 
 var Model = require("web.Model");
 
@@ -622,7 +623,7 @@ var Toolbar = Widget.extend({
             self.avatar_src = false;
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
             this.rpc("/web/session/destroy", {}).then(function() {
-                this.trigger_up('updateEvent');
+                framework.redirect('/booking#category_id=16');
             })
         },
     },
