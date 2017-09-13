@@ -87,7 +87,7 @@ class IndividualBloc(models.Model):
     student_id = fields.Many2one(related='program_id.student_id', string='Student', domain="[('student', '=', '1')]", readonly=True, store=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
-    source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc")
+    source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc", ondelete="restrict")
     source_bloc_name = fields.Char(related='source_bloc_id.name', string="Source Bloc Name", readonly=True, store=True)
     source_bloc_title = fields.Char(related='source_bloc_id.title', string="Source Bloc Title", readonly=True, store=True)
     source_bloc_level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),],related='source_bloc_id.level', string="Source Bloc Level", readonly=True, store=True)
@@ -207,7 +207,7 @@ class IndividualCourseGroup(models.Model):
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
-    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group")
+    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict")
     
     bloc_id = fields.Many2one('school.individual_bloc', string="Bloc", ondelete='cascade', readonly=True)
 
@@ -297,7 +297,7 @@ class IndividualCourse(models.Model):
     
     dispense = fields.Boolean(string="Dispensed",default=False,track_visibility='onchange')
     
-    source_course_id = fields.Many2one('school.course', string="Source Course", auto_join=True)
+    source_course_id = fields.Many2one('school.course', string="Source Course", auto_join=True, ondelete="restrict")
     
     source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc", related='course_group_id.bloc_id.source_bloc_id', readonly=True, store=True)
     source_bloc_name = fields.Char(related='course_group_id.bloc_id.source_bloc_name', string="Source Course Bloc Name", readonly=True, store=True)
