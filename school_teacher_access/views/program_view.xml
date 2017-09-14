@@ -179,6 +179,7 @@
               <field name="student_id" />
               <field name="name" />
               <field name="dispense" />
+              <field name="is_dispense_approved" />
             </tree>
           </field>
         </record>
