@@ -251,7 +251,7 @@ class CourseGroup(models.Model):
     def onchange_check_programs(self, course_id):
         for bloc_id in self.bloc_ids:
             if bloc_id.program_id.state in ('published','archived'):
-                raise UserError('Cannot change credits or hours of courses used in an active or archived program : %s in %s' % course_id.name, bloc_id.name)
+                raise UserError('Cannot change credits or hours of courses used in an active or archived program : %s in %s' % (course_id.name, bloc_id.name))
     
 class Course(models.Model):
     '''Course'''
