@@ -1,11 +1,11 @@
-:banner: banners/description.jpg
+:banner: banners/descriptif.jpg
 
-========================
-Descriptif des activités
-========================
+=========================
+Descriptifs des activités
+=========================
 
-L’écran « Description des activités » donne accès au descriptifs des activités 
-d’apprentissage. Cet outil vous permet d’encoder les descriptif, de les 
+L’écran « Description des activités » donne accès aux descriptifs des activités 
+d’apprentissage. Cet outil vous permet d’encoder les descriptifs, de les 
 consulter et de les imprimer.
 
 
@@ -27,6 +27,6 @@ Une fois l’activité sélectionnée, les champs prédéfinis sont remplis (ECT
 heures,...) et vous pouvez commencer à compléter les sections relatives à votre 
 activité.
 
-S’il y a une remarque à faire quant à l’activité, un champs remarque est 
-disponible, celui-ci ne sera pas publié et est réservé pour la consultation 
-par le personnel du Conservatoire.
+S’il y a une remarque à faire quant à l’activité ou son organisation, un champs 
+remarque est disponible, celui-ci ne sera pas publié et est réservé pour la 
+consultation par le personnel du Conservatoire.
