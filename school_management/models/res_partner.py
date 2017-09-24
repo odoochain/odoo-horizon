@@ -74,6 +74,7 @@ class Partner(models.Model):
             if bloc.year_id == self.env.user.current_year_id:
                 self.student_current_bloc_id = bloc
                 return
+        self.student_current_bloc_id = False
 
     @api.one
     @api.depends('student_bloc_ids')

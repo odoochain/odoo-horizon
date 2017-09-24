@@ -197,7 +197,7 @@
             <field name="arch" type="xml">
                 <search string="Search Partner">
                     <field name="name" filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]" />
-                    <field name="student_current_program_name" filter_domain="[('student_current_program_name','ilike',self)]" string="Programme"/>
+                    <field name="student_current_bloc_name" filter_domain="[('student_current_bloc_name','ilike',self)]" string="Bloc"/>
                     <separator/>
                     <filter string="Persons" name="type_person" domain="[('is_company','=',0)]" />
                     <filter string="Companies" name="type_company" domain="[('is_company','=',1)]" />
@@ -208,10 +208,12 @@
                     <filter string="Others" name="other" domain="[('employee','=',0),('teacher','=',0),('student','=',0), ('parent_id', '=', False)]" />
                     <filter string="Archived" name="archived" domain="[('active','=',False),('type','=','contact')]" />
                     <separator/>
-                    <filter string="Registered" name="registered" domain="[('student_program_ids.year_sequence','=','current')]" />
-                    <filter string="No Program" name="no_program" domain="[('student_current_program_id','=',False)]" />
+                    <filter string="Registered current" name="registered" domain="[('is_student_registered','=','current')]" />
+                    <filter string="Registered previous" name="registered" domain="[('is_student_registered','=','previous')]" />
+                    <filter string="Registered next" name="registered" domain="[('is_student_registered','=','next')]" />
+                    <filter string="Never registered" name="no_program" domain="[('student_current_bloc_id','=',False)]" />
                     <group expand="0" name="group_by" string="Group By">
-                        <filter string="Program" context="{'group_by': 'student_current_program_name'}" />
+                        <filter string="Bloc" context="{'group_by': 'student_current_bloc_name'}" />
                     </group>
                     <!-- <separator/>
                    <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
