@@ -46,12 +46,10 @@ class Partner(models.Model):
     reg_number = fields.Char('Registration Number')
     mat_number = fields.Char('Matricule Number')
     
-    #minerval_ids = fields.One2many('school.minerval', 'student_id', string='Minerval')
-    #has_paid_current_minerval = fields.Boolean(compute='_has_paid_current_minerval',string="Has paid current minerval", store=True)
-    
-    student_current_program_id = fields.Many2one('school.individual_bloc', compute='_get_student_current_program_id', string='Program', store=True)
-    student_current_program_name = fields.Char(related='student_current_program_id.source_bloc_name', string='Current Program', store=True)
-    student_program_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
+    student_current_bloc_id = fields.Many2one('school.individual_bloc', compute='_get_student_current_bloc_id', string='Bloc', store=True)
+    student_current_bloc_name = fields.Char(related='student_current_bloc_id.source_bloc_name', string='Current Bloc', store=True)
+    student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
+    is_student_registered = fields.Boolean(compute='_is_student_registered', search="_search_student_registered", store=True)
     
     student_current_course_ids = fields.One2many('school.individual_course', compute='_get_student_current_individual_course_ids', string='Courses')
     student_course_ids = fields.One2many('school.individual_course', 'student_id', string='Courses', domain="[('year_id', '=', self.env.user.current_year_id.id)]")
@@ -69,24 +67,32 @@ class Partner(models.Model):
     def _get_student_current_individual_course_ids(self):
         self.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', self.id]])
 
-    #@api.one
-    #@api.depends('minerval_ids')
-    #def _has_paid_current_minerval(self):
-    #    res = self.env['school.minerval'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', self.id]])
-    #    self.has_paid_current_minerval = len(res) > 0
-        
-    #@api.one
-    #@api.depends('has_paid_current_minerval')
-    #def pay_current_minerval(self):
-    #    if not self.has_paid_current_minerval:
-    #        self.env['school.minerval'].create({'student_id': self.id,'year_id': self.env.user.current_year_id.id})
-        
     @api.one
-    @api.depends('student_program_ids')
+    @api.depends('student_bloc_ids')
     def _get_student_current_program_id(self):
-        for program in self.student_program_ids:
-            if program.year_id == self.env.user.current_year_id:
-                self.student_current_program_id = program
+        for bloc in self.student_bloc_ids:
+            if bloc.year_id == self.env.user.current_year_id:
+                self.student_current_bloc_id = bloc
+                return
+
+    @api.one
+    @api.depends('student_program_ids.bloc_ids')
+    def _is_student_registered(self):
+        for bloc in self.student_bloc_ids:
+            if bloc.year_id == self.env.user.current_year_id:
+                self.is_student_registered = True
+                return
+    
+    def _search_student_registered(self, operator, value):
+        current_year_id = self.env.user.current_year_id
+        year_ids = []
+        if 'current' in value:
+            year_ids.append(current_year_id.id)
+        if 'previous' in value:
+            year_ids.append(current_year_id.previous.id)
+        if 'next' in value:
+            year_ids.append(current_year_id.next.id)
+        return [('student_program_ids.year_id','in',year_ids)]
     
     @api.one
     def _get_teacher_current_course_session_ids(self):
@@ -96,7 +102,6 @@ class Partner(models.Model):
     # TODO : This is not working but don't know why
     @api.model
     def _get_default_image(self, is_company, colorize=False):
-        _logger.info("YES WE ARE HERE")
         if getattr(threading.currentThread(), 'testing', False) or self.env.context.get('install_mode'):
             return False
 
@@ -107,11 +112,3 @@ class Partner(models.Model):
             return tools.image_resize_image_big(image.encode('base64'))
         else:
             return super(Partner, self)._get_default_image(is_company, colorize)
-        
-#class Minerval(models.Model):
-#    '''Minerval'''
-#    _name = 'school.minerval'
-#    
-#    year_id = fields.Many2one('school.year', string='Year', readonly=True)
-#    student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", readonly=True)
-#    payment_date = fields.Date(string='Payment Date',default=fields.Date.context_today)
