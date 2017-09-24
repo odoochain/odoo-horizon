@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-md-3">
                             <div name="button_box" class="oe_button_box">
-                                <button name="toggle_active" type="object" groups="base.group_no_one" class="oe_stat_button" icon="fa-archive">
+                                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
                                     <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                                 </button>
                             </div>         
@@ -237,11 +237,11 @@
                 <field name="mobile" position="after">
                     <!--<field name="has_paid_current_minerval" /> -->
                     <field name="student" />
-                    <field name="student_current_program_name" attrs="{'invisible': [('student','=',False)]}" />
+                    <field name="student_current_bloc_name" attrs="{'invisible': [('student','=',False)]}" />
                 </field>
                 <xpath expr="//div[@class='oe_kanban_details']//ul" position="replace">
-                    <li t-if="record.student_current_program_name.value" class="o_text_overflow">
-                        <field name="student_current_program_name" />
+                    <li t-if="record.student_current_bloc_name.value" class="o_text_overflow">
+                        <field name="student_current_bloc_name" />
                     </li>
                 </xpath>
                 <!--<xpath expr="//div[@class='oe_kanban_partner_links']" position="inside">
