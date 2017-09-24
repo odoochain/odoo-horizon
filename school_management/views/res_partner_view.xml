@@ -211,7 +211,7 @@
                     <filter string="Registered current" name="registered" domain="[('year_sequence','=','current')]" />
                     <filter string="Registered previous" name="registered" domain="[('year_sequence','=','previous')]" />
                     <filter string="Registered next" name="registered" domain="[('year_sequence','=','next')]" />
-                    <filter string="Never registered" name="no_program" domain="[('student_current_bloc_id','=',False)]" />
+                    <filter string="Never registered" name="no_program" domain="[('year_sequence','=','never')]" />
                     <group expand="0" name="group_by" string="Group By">
                         <filter string="Bloc" context="{'group_by': 'student_current_bloc_name'}" />
                     </group>
