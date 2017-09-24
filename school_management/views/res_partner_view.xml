@@ -46,7 +46,7 @@
                                     }" on_change="1" modifiers="{'readonly': [['is_company', '=', false]], 'required': [['is_company', '=', true]]}" class="oe_inline"/> <field name='initials' placeholder="Initials" class="oe_inline"/>
                                 </h1>
                                 <h2 attrs="{'invisible': [('student','=',False)]}">
-                                    <field name="student_current_program_name" />
+                                    <field name="student_current_bloc_name" />
                                 </h2>
                                 <h3>
                                     <field name="user_ids" invisible="1"/>
@@ -264,7 +264,7 @@
                 <tree string="Contacts">
                     <field name="display_name" />
                     <field name="function" invisible="1" />
-                    <field name="student_current_program_id" />
+                    <field name="student_current_bloc_id" />
                     <!--<field name="has_paid_current_minerval" />-->
                     <field name="email" />
                     <field name="user_id" invisible="1" />
