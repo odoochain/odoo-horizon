@@ -76,7 +76,7 @@ class Partner(models.Model):
                 return
 
     @api.one
-    @api.depends('student_blco_ids')
+    @api.depends('student_bloc_ids')
     def _is_student_registered(self):
         for bloc in self.student_bloc_ids:
             if bloc.year_id == self.env.user.current_year_id:
@@ -92,7 +92,7 @@ class Partner(models.Model):
             year_ids.append(current_year_id.previous.id)
         if 'next' in value:
             year_ids.append(current_year_id.next.id)
-        return [('student_blco_ids.year_id','in',year_ids)]
+        return [('student_bloc_ids.year_id','in',year_ids)]
     
     @api.one
     def _get_teacher_current_course_session_ids(self):
