@@ -69,7 +69,7 @@ class Partner(models.Model):
 
     @api.one
     @api.depends('student_bloc_ids')
-    def _get_student_current_program_id(self):
+    def _get_student_current_bloc_id(self):
         for bloc in self.student_bloc_ids:
             if bloc.year_id == self.env.user.current_year_id:
                 self.student_current_bloc_id = bloc
