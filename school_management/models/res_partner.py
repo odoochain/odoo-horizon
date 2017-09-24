@@ -54,6 +54,7 @@ class Partner(models.Model):
         ('current','Current'),
         ('previous','Previous'),
         ('next','Next'),
+        ('never','Never'),
         ], string="Year Sequence", compute="_compute_year_sequence", search="_search_year_sequence")
     
     @api.one
@@ -78,10 +79,13 @@ class Partner(models.Model):
             if current_year_id.next.id in year_ids:
                 item.year_sequence = 'next'
                 return
+            item.year_sequence = 'never'
     
     def _search_year_sequence(self, operator, value):
         current_year_id = self.env.user.current_year_id
         year_ids = []
+        if 'never' in value:
+            return [('student_bloc_ids','=',False)]
         if 'current' in value:
             year_ids.append(current_year_id.id)
         if 'previous' in value:
