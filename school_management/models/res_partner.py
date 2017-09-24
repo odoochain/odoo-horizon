@@ -46,11 +46,50 @@ class Partner(models.Model):
     reg_number = fields.Char('Registration Number')
     mat_number = fields.Char('Matricule Number')
     
-    student_current_bloc_id = fields.Many2one('school.individual_bloc', compute='_get_student_current_bloc_id', string='Bloc', store=True)
-    student_current_bloc_name = fields.Char(related='student_current_bloc_id.source_bloc_name', string='Current Bloc', store=True)
+    student_current_bloc_id = fields.Many2one('school.individual_bloc', compute='_get_student_current_bloc_id', string='Bloc')
+    student_current_bloc_name = fields.Char(related='student_current_bloc_id.source_bloc_name', string='Current Bloc')
     student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
-    is_student_registered = fields.Boolean(compute='_is_student_registered', search="_search_student_registered", store=True)
     
+    year_sequence = fields.Selection([
+        ('current','Current'),
+        ('previous','Previous'),
+        ('next','Next'),
+        ], string="Year Sequence", compute="_compute_year_sequence", search="_search_year_sequence")
+    
+    @api.one
+    @api.depends('student_bloc_ids')
+    def _get_student_current_bloc_id(self):
+        for bloc in self.student_bloc_ids:
+            if bloc.year_id == self.env.user.current_year_id:
+                self.student_current_bloc_id = bloc
+                return
+        self.student_current_bloc_id = False
+
+    def _compute_year_sequence(self):
+        for item in self:
+            current_year_id = self.env.user.current_year_id
+            year_ids = item.student_bloc_ids.mapped('year_id.id')
+            if current_year_id.id in year_ids:
+                item.year_sequence = 'current'
+                return
+            if current_year_id.previous.id in year_ids:
+                item.year_sequence = 'previous'
+                return
+            if current_year_id.next.id in year_ids:
+                item.year_sequence = 'next'
+                return
+    
+    def _search_student_registered(self, operator, value):
+        current_year_id = self.env.user.current_year_id
+        year_ids = []
+        if 'current' in value:
+            year_ids.append(current_year_id.id)
+        if 'previous' in value:
+            year_ids.append(current_year_id.previous.id)
+        if 'next' in value:
+            year_ids.append(current_year_id.next.id)
+        return [('student_bloc_ids.year_id','in',year_ids)]
+        
     student_current_course_ids = fields.One2many('school.individual_course', compute='_get_student_current_individual_course_ids', string='Courses')
     student_course_ids = fields.One2many('school.individual_course', 'student_id', string='Courses', domain="[('year_id', '=', self.env.user.current_year_id.id)]")
     
@@ -67,34 +106,6 @@ class Partner(models.Model):
     def _get_student_current_individual_course_ids(self):
         self.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', self.id]])
 
-    @api.one
-    @api.depends('student_bloc_ids')
-    def _get_student_current_bloc_id(self):
-        for bloc in self.student_bloc_ids:
-            if bloc.year_id == self.env.user.current_year_id:
-                self.student_current_bloc_id = bloc
-                return
-        self.student_current_bloc_id = False
-
-    @api.one
-    @api.depends('student_bloc_ids')
-    def _is_student_registered(self):
-        for bloc in self.student_bloc_ids:
-            if bloc.year_id == self.env.user.current_year_id:
-                self.is_student_registered = True
-                return
-    
-    def _search_student_registered(self, operator, value):
-        current_year_id = self.env.user.current_year_id
-        year_ids = []
-        if 'current' in value:
-            year_ids.append(current_year_id.id)
-        if 'previous' in value:
-            year_ids.append(current_year_id.previous.id)
-        if 'next' in value:
-            year_ids.append(current_year_id.next.id)
-        return [('student_bloc_ids.year_id','in',year_ids)]
-    
     @api.one
     def _get_teacher_current_course_session_ids(self):
         res = self.env['school.course_session'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', self.id]])
