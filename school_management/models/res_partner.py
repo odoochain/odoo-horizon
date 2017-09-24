@@ -85,7 +85,7 @@ class Partner(models.Model):
         current_year_id = self.env.user.current_year_id
         year_ids = []
         if 'never' in value:
-            return [('student_bloc_ids','=',[])]
+            return [('student_bloc_ids','=',False)]
         if 'current' in value:
             year_ids.append(current_year_id.id)
         if 'previous' in value:
