@@ -79,7 +79,7 @@ class Partner(models.Model):
                 item.year_sequence = 'next'
                 return
     
-    def _search_student_registered(self, operator, value):
+    def _search_year_sequence(self, operator, value):
         current_year_id = self.env.user.current_year_id
         year_ids = []
         if 'current' in value:
