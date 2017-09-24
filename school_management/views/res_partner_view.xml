@@ -61,8 +61,8 @@
                     					<field name="firstname" attrs="{'required': [('lastname', '=', False),('type','=','contact'),('is_company', '=', False)]}" on_change="1" modifiers="{'required': [['lastname', '=', false], ['type', '=', 'contact'], ['is_company', '=', false]]}"/>
                     				</group>
                     			</div>
-                    			<field name="student_program_ids" attrs="{'invisible': [('student','=',False)]}">
-                                    <tree string="Programs" default_order='year_id desc'>
+                    			<field name="student_bloc_ids" attrs="{'invisible': [('student','=',False)]}">
+                                    <tree string="Blocs" default_order='year_id desc'>
                                         <field name="year_id" />
                                         <field name="source_bloc_name" />
                                         <field name="total_credits" />
