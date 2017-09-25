@@ -206,7 +206,7 @@ class CourseGroup(models.Model):
     
     description = fields.Text(string='Description')
     
-    teacher_id = fields.Many2one('res.partner',string='Teacher',domain="[('teacher', '=', '1')]", copy=False)
+    teacher_id = fields.Many2one('res.partner',string='Teacher',domain="[('teacher', '=', '1')]", copy=True)
     
     course_ids = fields.One2many('school.course', 'course_group_id', domain=['|',('active','=',False),('active','=',True)], string='Courses', copy=True, ondelete="cascade")
 
