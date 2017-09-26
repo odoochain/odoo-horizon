@@ -33,8 +33,26 @@ class PartnerXlsx(ReportXlsx):
         # One sheet by partner
         sheet = workbook.add_worksheet('partners')
         i = 0
+        sheet.write(i, 0, 'name')
+        sheet.write(i, 1, 'firstname')
+        sheet.write(i, 2, 'lastname')
+        sheet.write(i, 3, 'initials')
+        sheet.write(i, 4, 'reg_number')
+        sheet.write(i, 5, 'mat_number')
+        sheet.write(i, 6, 'student_current_bloc_name')
+        sheet.write(i, 7, 'birthplace')
+        sheet.write(i, 8, 'birthdate')
+        i = 1
         for obj in partners:
-            sheet.write(0, i, obj.name)
+            sheet.write(i, 0, obj.name)
+            sheet.write(i, 1, obj.firstname)
+            sheet.write(i, 2, obj.lastname)
+            sheet.write(i, 3, obj.initials)
+            sheet.write(i, 4, obj.reg_number)
+            sheet.write(i, 5, obj.mat_number)
+            sheet.write(i, 6, obj.student_current_bloc_name)
+            sheet.write(i, 7, obj.birthplace)
+            sheet.write(i, 8, obj.birthdate)
             i = i + 1
 
 PartnerXlsx('report.res.partner.xlsx',
