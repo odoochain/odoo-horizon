@@ -46,6 +46,21 @@ class website_portal_school_management(http.Controller):
         }
         return request.render("website_school_management.program", values)
         
+    @http.route(['/program/domain/<domain_id>'], type='http', auth='public')
+    def program_domain(self, domain_id, redirect=None, **post):
+        _, domain_id = unslug(domain_id)
+        programs = request.env['school.program'].sudo().search([('state', '=', 'published'),('domain_id','=',domain_id)],order="domain_id, cycle_id, name ASC")
+        program_list = []
+        for program in programs:
+            program_list.append({
+                'program' : program,
+                'slug_id' : slug(program),
+            })
+        values = {
+            'program_list': program_list,
+        }
+        return request.render("website_school_management.program", values)
+    
     @http.route(['/program/<program_id>'], type='http', auth='public')
     def program_details(self, program_id, redirect=None, **post):
         _, program_id = unslug(program_id)
