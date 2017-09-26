@@ -64,7 +64,7 @@
                     <sheet>
                         <div class="oe_title">
                           <h1>
-                            Course Description - <field name="course_id" class="oe_inline" style="width: 800px !important;" domain="[('cycle_id.short_name','!=','MB')]" options="{'no_create': True}"/>
+                            Course Description - <field name="course_id" class="oe_inline" style="width: 800px !important;" domain="[('cycle_id.short_name','!=','MB')]" options="{'no_create': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </h1>
                           <h3 class="oe_fade">
                             by <field name="author_id" class="oe_inline" readonly="1"/>
@@ -156,7 +156,7 @@
                             Exemple: «volume horaire: 100 heures. En moyenne, un cours individuel est dispensé par semaine par le professeur responsable de l'activité; le solde des heures se répartit entre cours collectifs, présence au cours individuel d'autres étudiants, auditions et master-classes».
                             </div>
                             <group col="4">
-                              <field name="schedule" />
+                              <field name="schedule" attrs="{'readonly':[('state','!=','draft')]}"/>
                             </group>
                             <field name="schedule_text" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
