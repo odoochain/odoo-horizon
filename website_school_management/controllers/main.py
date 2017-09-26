@@ -74,9 +74,9 @@ class website_portal_school_management(http.Controller):
     @http.route(['/course/<course_id>'], type='http', auth='public')
     def course(self, course_id, redirect=None, **post):
         _, course_id = unslug(course_id)
-        course_doc = request.registry['school.course_documentation'].browse(request.cr, request.uid, course_id, context=request.context)
+        course_docs = request.env['school.course_documentation'].sudo().search([('state', '=', 'published'),('course_id','=',course_id)],order="author_id")
         values = {
-            'docs': [course_doc],
+            'docs': course_docs,
         }
         return request.render("school_course_description.report_course_documentation_content", values)
         
