@@ -71,6 +71,15 @@ class website_portal_school_management(http.Controller):
         }
         return request.render("website_school_management.program_details", values)
         
+    @http.route(['/course/<course_id>'], type='http', auth='public')
+    def course(self, course_id, redirect=None, **post):
+        _, course_id = unslug(course_id)
+        course_doc = request.registry['school.course_documentation'].browse(request.cr, request.uid, course_id, context=request.context)
+        values = {
+            'docs': [course_doc],
+        }
+        return request.render("school_course_description.report_course_documentation_content", values)
+        
     @http.route(['/print_program/<model("school.program"):program>'], type='http', auth='public')
     def print_program(self, program, redirect=None, **post):
         
