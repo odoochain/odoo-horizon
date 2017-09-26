@@ -368,6 +368,7 @@
             <field name="arch" type="xml">
             <search string="Search Groups">
                 <field name="name" string="Nom de l'activité"/>
+                <field name="author_id"/>
                 <filter name="my_desc" string="Mes descriptifs" domain="[('author_id','=',uid)]"/>
             </search>
             </field>

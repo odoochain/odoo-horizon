@@ -54,12 +54,12 @@ class CourseDocumentation(models.Model):
     def _needaction_domain_get(self):
         return [('state', '=', 'draft')]
     
-    @api.one
-    @api.constrains('state', 'course_id')
-    def _check_uniqueness(self):
-        num_active = self.env['school.course_documentation'].search_count([['course_id', '=', self.course_id.id],['state','=','published']])
-        if num_active > 1:
-            raise ValidationError("Only on documentation shall be published at a given time")
+    #@api.one
+    #@api.constrains('state', 'course_id')
+    #def _check_uniqueness(self):
+    #    num_active = self.env['school.course_documentation'].search_count([['course_id', '=', self.course_id.id],['state','=','published']])
+    #    if num_active > 1:
+    #        raise ValidationError("Only on documentation shall be published at a given time")
     
     @api.multi
     def unpublish(self):
