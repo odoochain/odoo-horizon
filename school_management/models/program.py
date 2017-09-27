@@ -258,6 +258,7 @@ class Course(models.Model):
     _name = 'school.course'
     _description = 'Course'
     _inherit = ['mail.thread']
+    _order = 'sequence'
     
     sequence = fields.Integer(string='Sequence')
     
@@ -322,6 +323,7 @@ class ReportProgram(models.AbstractModel):
 
 class Competency(models.Model):
     '''Competency'''
+    _order = 'name'
     _name = 'school.competency'
     _order = 'sequence asc'
     sequence = fields.Integer(string='Sequence')
@@ -331,6 +333,7 @@ class Competency(models.Model):
     
 class Domain(models.Model):
     '''Domain'''
+    _order = 'name'
     _name = 'school.domain'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
@@ -338,6 +341,7 @@ class Domain(models.Model):
     
 class Cycle(models.Model):
     '''Cycle'''
+    _order = 'name'
     _name = 'school.cycle'
     
     name = fields.Char(required=True, string='Name', size=60)
@@ -352,12 +356,14 @@ class Cycle(models.Model):
     
 class Section(models.Model):
     '''Section'''
+    _order = 'name'
     _name = 'school.section'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
     
 class Track(models.Model):
     '''Track'''
+    _order = 'name'
     _name = 'school.track'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
@@ -365,6 +371,7 @@ class Track(models.Model):
 class Speciality(models.Model):
     '''Speciality'''
     _name = 'school.speciality'
+    _order = 'name'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
     domain_id = fields.Many2one('school.domain', string='Domain')
@@ -378,6 +385,7 @@ class Speciality(models.Model):
 class Year(models.Model):
     '''Year'''
     _name = 'school.year'
+    _order = 'name'
     name = fields.Char(required=True, string='Name', size=15)
     short_name = fields.Char(required=True, string='Short Name', size=5)
     
