@@ -20,7 +20,7 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models, tools, _
 from openerp.exceptions import UserError
 from openerp.tools.safe_eval import safe_eval
 
@@ -382,6 +382,20 @@ class Speciality(models.Model):
 	        ('uniq_speciality', 'unique(domain_id, name)', 'There shall be only one speciality in a domain'),
     ]
     
+    def init(self, cr):
+        """ School Teacher Report """
+        tools.drop_view_if_exists(cr, 'school_speciality_view')
+        cr.execute(""" 
+            create view school_speciality_view as select 
+                s.id, 
+                s.name as speciality, 
+                d.name as domain, 
+                c.name as section, 
+                t.name as track 
+                from school_speciality s, school_domain d, school_section c, school_track t 
+                where s.domain_id = d.id and s.section_id = c.id and s.track_id = t.id
+        )""")
+    
 class Year(models.Model):
     '''Year'''
     _name = 'school.year'
@@ -408,6 +422,5 @@ class Users(models.Model):
         # duplicate list to avoid modifying the original reference
         self.SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
         self.SELF_READABLE_FIELDS.extend(['current_year_id'])
-        return init_res
     
     current_year_id = fields.Many2one('school.year', string="Current Year", default="1")
