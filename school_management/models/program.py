@@ -383,7 +383,7 @@ class Speciality(models.Model):
     ]
     
     def init(self, cr):
-        """ School Teacher Report """
+        """ School Specialities View """
         tools.drop_view_if_exists(cr, 'school_speciality_view')
         cr.execute(""" 
             create view school_speciality_view as select 
