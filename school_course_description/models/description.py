@@ -162,6 +162,6 @@ class Course(models.Model):
             self.documentation_id = doc_ids[0]
         else:
             pattern = self.title[:3]
-            doc_ids = self.env['school.course_documentation'].search([['course_id.title', 'ilike', pattern],['state','=','published']])
+            doc_ids = self.env['school.course_documentation'].search([['course_id.title', 'ilike', pattern],['state','=','published'],['course_id.level', '=', self.level]])
             if doc_ids :
                 self.documentation_id = doc_ids[0]
