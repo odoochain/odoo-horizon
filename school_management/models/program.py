@@ -382,19 +382,19 @@ class Speciality(models.Model):
 	        ('uniq_speciality', 'unique(domain_id, name)', 'There shall be only one speciality in a domain'),
     ]
     
-    def init(self, cr):
-        """ School Specialities View """
-        tools.drop_view_if_exists(cr, 'school_speciality_view')
-        cr.execute(""" 
-            create view school_speciality_view as select 
-                s.id, 
-                s.name as speciality, 
-                d.name as domain, 
-                c.name as section, 
-                t.name as track 
-                from school_speciality s, school_domain d, school_section c, school_track t 
-                where s.domain_id = d.id and s.section_id = c.id and s.track_id = t.id
-        )""")
+#    def init(self, cr):
+#        """ School Specialities View """
+#        tools.drop_view_if_exists(cr, 'school_speciality_view')
+#        cr.execute(""" 
+#            create view school_speciality_view as select 
+#                s.id, 
+#                s.name as speciality, 
+#                d.name as domain, 
+#                c.name as section, 
+#                t.name as track 
+#                from school_speciality s, school_domain d, school_section c, school_track t 
+#                where s.domain_id = d.id and s.section_id = c.id and s.track_id = t.id
+#        )""")
     
 class Year(models.Model):
     '''Year'''
