@@ -42,6 +42,9 @@ class CourseDocumentation(models.Model):
              " * The 'Archived' status is used when a program is obsolete and not publihed anymore.")
     
     course_id = fields.Many2one('school.course', string='Course', required=True)
+    
+    course_ids = fields.Many2Many('school.course', 'school_doc_course_rel', 'doc_id', 'course_id', string='All Courses')
+    
     name = fields.Char(related='course_id.name')
     
     remarks = fields.Char(string="Remarks")
@@ -146,6 +149,8 @@ class Course(models.Model):
     
     documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
     
+    documentation_ids = fields.Many2Many('school.course_documentation', 'school_doc_course_rel', 'course_id', 'doc_id', string='All Docs')
+    
     all_documentation_ids = fields.One2many('school.course_documentation', 'course_id', string='All Documentations')
 
     all_documentation_count = fields.Integer(string="Documentation Count", compute="_compute_count")
@@ -161,7 +166,13 @@ class Course(models.Model):
         if doc_ids :
             self.documentation_id = doc_ids[0]
         else:
-            pattern = self.title[:3]
-            doc_ids = self.env['school.course_documentation'].search([['course_id.title', 'ilike', pattern],['state','=','published'],['course_id.level', '=', self.level]])
+            pattern = self.title[:-2]
+            doc_ids = self.env['school.course_documentation'].search(
+                    ['|',['course_id.title', '=', pattern],['course_id.title', '=', self.title],
+                    ['course_id.level', '=', self.level],
+                    ['course_id.cycle_id', '=', self.cycle_id.id],
+                    ['course_id.speciality_id', '=', self.speciality_id.id],
+                    ['state','=','published']]
+            )
             if doc_ids :
                 self.documentation_id = doc_ids[0]
