@@ -160,3 +160,8 @@ class Course(models.Model):
         doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
         if doc_ids :
             self.documentation_id = doc_ids[0]
+        else:
+            pattern = self.title[:3]
+            doc_ids = self.env['school.course_documentation'].search([['course_id.title', 'ilike', pattern],['state','=','published']])
+            if doc_ids :
+                self.documentation_id = doc_ids[0]
