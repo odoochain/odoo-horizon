@@ -49,6 +49,8 @@ class IndividualProgram(models.Model):
              " * The 'Abandonned' status is used if a student leave the program.\n"
              ,track_visibility='onchange')
     
+    abandonned_date = fields.Date('Abandonned Date')
+    
     @api.multi
     def set_to_draft(self, context):
         # TODO use a workflow to make sure only valid changes are used.
@@ -78,7 +80,7 @@ class IndividualProgram(models.Model):
     @api.multi
     def set_to_abandonned(self, context):
         # TODO use a workflow to make sure only valid changes are used.
-        return self.write({'state': 'abandonned'})
+        return self.write({'state': 'abandonned','abandonned_date':fields.Date.today()})
     
     historical_bloc_1_eval = fields.Float(string="Hist Bloc 1 Eval",track_visibility='onchange',digits=dp.get_precision('Evaluation'))
     historical_bloc_1_credits = fields.Integer(string="Hist Bloc 1 ECTS",track_visibility='onchange')
