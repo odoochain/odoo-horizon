@@ -162,17 +162,8 @@ class Course(models.Model):
     
     @api.one
     def compute_documentation_id(self):
-        doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
-        if doc_ids :
-            self.documentation_id = doc_ids[0]
+        docs = self.documentation_ids.filtered(lambda r: r.state == 'published')
+        if docs:
+            self.documentation_id = docs[0]
         else:
-            pattern = self.title[:-2]
-            doc_ids = self.env['school.course_documentation'].search(
-                    ['|',['course_id.title', '=', pattern],['course_id.title', '=', self.title],
-                    ['course_id.level', '=', self.level],
-                    ['course_id.cycle_id', '=', self.cycle_id.id],
-                    ['course_id.speciality_id', '=', self.speciality_id.id],
-                    ['state','=','published']]
-            )
-            if doc_ids :
-                self.documentation_id = doc_ids[0]
+            self.documentation_id = False
