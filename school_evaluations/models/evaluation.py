@@ -22,6 +22,8 @@ import logging
 from openerp import api, fields, models, _
 from openerp.exceptions import UserError, ValidationError
 
+from odoo.addons import decimal_precision as dp
+
 _logger = logging.getLogger(__name__)
 
 class CourseGroup(models.Model):
@@ -78,10 +80,10 @@ class IndividualProgram(models.Model):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'abandonned'})
     
-    historical_bloc_1_eval = fields.Float(string="Hist Bloc 1 Eval",track_visibility='onchange')
+    historical_bloc_1_eval = fields.Float(string="Hist Bloc 1 Eval",track_visibility='onchange',digits=dp.get_precision('Evaluation'))
     historical_bloc_1_credits = fields.Integer(string="Hist Bloc 1 ECTS",track_visibility='onchange')
     
-    historical_bloc_2_eval = fields.Float(string="Hist Bloc 2 Eval",track_visibility='onchange')
+    historical_bloc_2_eval = fields.Float(string="Hist Bloc 2 Eval",track_visibility='onchange',digits=dp.get_precision('Evaluation'))
     historical_bloc_2_credits = fields.Integer(string="Hist Bloc 2 ECTS",track_visibility='onchange')
     
     grade = fields.Selection([
@@ -98,7 +100,7 @@ class IndividualProgram(models.Model):
     
     grade_comments = fields.Text(string="Grade Comments",track_visibility='onchange')
     
-    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
+    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
     
     total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',track_visibility='onchange')
     total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True,track_visibility='onchange')
@@ -181,12 +183,12 @@ class IndividualBloc(models.Model):
     total_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Not Dispensed Credits",store=True)
     total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Not Dispensed Hours',store=True)
     
-    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation")
+    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
     decision = fields.Text(string="Decision",track_visibility='onchange')
     exclude_from_deliberation = fields.Boolean(string='Exclude from Deliberation', default=False)
     
-    first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation")
-    second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation")
+    first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
+    second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
     
     @api.multi
     def set_to_draft(self, context):
@@ -334,28 +336,28 @@ class IndividualCourseGroup(models.Model):
     
     ## First Session ##
     
-    first_session_computed_result = fields.Float(compute='compute_average_results', string='First Session Computed Result', store=True, digits=(5, 2))
+    first_session_computed_result = fields.Float(compute='compute_average_results', string='First Session Computed Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='First Session Computed Active', store=True)
     first_session_computed_exclusion_result_bool= fields.Boolean(compute='compute_average_results', string='First Session Exclusion Result', store=True)
     
     first_session_deliberated_result = fields.Char(string='First Session Deliberated Result',track_visibility='onchange')
     first_session_deliberated_result_bool= fields.Boolean(string='First Session Deliberated Active',track_visibility='onchange')
     
-    first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, digits=(5, 2))
+    first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_result_bool= fields.Boolean(compute='compute_first_session_results', string='First Session Active', store=True)
     first_session_acquiered = fields.Selection(([('A', 'Acquired'),('NA', 'Not Acquired')]), compute='compute_first_session_acquiered', string='First Session Acquired Credits',default='NA',store=True,required=True,track_visibility='onchange')
     first_session_note = fields.Text(string='First Session Notes')
     
     ## Second Session ##
     
-    second_session_computed_result = fields.Float(compute='compute_average_results', string='Second Session Computed Result', store=True, digits=(5, 2))
+    second_session_computed_result = fields.Float(compute='compute_average_results', string='Second Session Computed Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='Second Session Computed Active', store=True)
     second_session_computed_exclusion_result_bool= fields.Boolean(compute='compute_average_results', string='Second Session Exclusion Result', store=True)
     
     second_session_deliberated_result = fields.Char(string='Second Session Deliberated Result', digits=(5, 2),track_visibility='onchange')
     second_session_deliberated_result_bool= fields.Boolean(string='Second Session Deliberated Active',track_visibility='onchange')
     
-    second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', store=True, digits=(5, 2))
+    second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_result_bool= fields.Boolean(compute='compute_second_session_results', string='Second Session Active', store=True)
     second_session_acquiered = fields.Selection(([('A', 'Acquired'),('NA', 'Not Acquired')]), compute='compute_second_session_acquiered',string='Second Session Acquired Credits',default='NA',store=True,required=True,track_visibility='onchange')
     second_session_note = fields.Text(string='Second Session Notes')
@@ -364,7 +366,7 @@ class IndividualCourseGroup(models.Model):
     
     dispense =  fields.Boolean(compute='compute_dispense', string='Dispense',default=False,track_visibility='onchange', store=True)
     
-    final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True, digits=(5, 2),track_visibility='onchange')
+    final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True,digits=dp.get_precision('Evaluation'),track_visibility='onchange')
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_results_disp')
     final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active')
     
@@ -575,7 +577,7 @@ class IndividualCourse(models.Model):
     
     ## First Session ##
     
-    first_session_result= fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg')
+    first_session_result= fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
     first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
     
@@ -592,7 +594,7 @@ class IndividualCourse(models.Model):
     
     ## Second Session ##
     
-    second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg')
+    second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
     second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
 
