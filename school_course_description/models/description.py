@@ -43,7 +43,7 @@ class CourseDocumentation(models.Model):
     
     course_id = fields.Many2one('school.course', string='Course', required=True)
     
-    course_ids = fields.Many2many('school.course', 'school_doc_course_rel', 'doc_id', 'course_id', string='All Courses')
+    course_ids = fields.Many2many('school.course', string='All Courses')
     
     name = fields.Char(related='course_id.name')
     
@@ -149,7 +149,7 @@ class Course(models.Model):
     
     documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
     
-    documentation_ids = fields.Many2many('school.course_documentation', 'school_doc_course_rel', 'course_id', 'doc_id', string='All Docs')
+    documentation_ids = fields.Many2many('school.course_documentation', string='All Docs')
     
     all_documentation_ids = fields.One2many('school.course_documentation', 'course_id', string='All Documentations')
 
