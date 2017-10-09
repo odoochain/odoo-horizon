@@ -20,14 +20,14 @@
 #
 ##############################################################################
 -->
-<openerp>
-    <data>
-        <record id="group_evaluations" model="res.groups">
-            <field name="name">Gestion des évaluations</field>
-        </record>
-        <record id="decimal_evaluation" model="decimal.precision">
-            <field name="name">Evaluation</field>
-            <field name="digits">2</field>
-        </record>
-    </data>
-</openerp>
+<odoo>
+    <report
+        id="partner_xlsx"
+        model="res.partner"
+        string="Print to XLSX"
+        report_type="xlsx"
+        name="res.partner.xlsx"
+        file="res.partner.xlsx"
+        attachment_use="False"
+    />
+</odoo>

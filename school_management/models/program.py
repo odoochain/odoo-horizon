@@ -20,7 +20,7 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models, tools, _
 from openerp.exceptions import UserError
 from openerp.tools.safe_eval import safe_eval
 
@@ -258,6 +258,7 @@ class Course(models.Model):
     _name = 'school.course'
     _description = 'Course'
     _inherit = ['mail.thread']
+    _order = 'sequence'
     
     sequence = fields.Integer(string='Sequence')
     
@@ -322,6 +323,7 @@ class ReportProgram(models.AbstractModel):
 
 class Competency(models.Model):
     '''Competency'''
+    _order = 'name'
     _name = 'school.competency'
     _order = 'sequence asc'
     sequence = fields.Integer(string='Sequence')
@@ -331,6 +333,7 @@ class Competency(models.Model):
     
 class Domain(models.Model):
     '''Domain'''
+    _order = 'name'
     _name = 'school.domain'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
@@ -338,6 +341,7 @@ class Domain(models.Model):
     
 class Cycle(models.Model):
     '''Cycle'''
+    _order = 'name'
     _name = 'school.cycle'
     
     name = fields.Char(required=True, string='Name', size=60)
@@ -352,12 +356,14 @@ class Cycle(models.Model):
     
 class Section(models.Model):
     '''Section'''
+    _order = 'name'
     _name = 'school.section'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
     
 class Track(models.Model):
     '''Track'''
+    _order = 'name'
     _name = 'school.track'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
@@ -365,6 +371,7 @@ class Track(models.Model):
 class Speciality(models.Model):
     '''Speciality'''
     _name = 'school.speciality'
+    _order = 'name'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
     domain_id = fields.Many2one('school.domain', string='Domain')
@@ -375,9 +382,24 @@ class Speciality(models.Model):
 	        ('uniq_speciality', 'unique(domain_id, name)', 'There shall be only one speciality in a domain'),
     ]
     
+#    def init(self, cr):
+#        """ School Specialities View """
+#        tools.drop_view_if_exists(cr, 'school_speciality_view')
+#        cr.execute(""" 
+#            create view school_speciality_view as select 
+#                s.id, 
+#                s.name as speciality, 
+#                d.name as domain, 
+#                c.name as section, 
+#                t.name as track 
+#                from school_speciality s, school_domain d, school_section c, school_track t 
+#                where s.domain_id = d.id and s.section_id = c.id and s.track_id = t.id
+#        )""")
+    
 class Year(models.Model):
     '''Year'''
     _name = 'school.year'
+    _order = 'name'
     name = fields.Char(required=True, string='Name', size=15)
     short_name = fields.Char(required=True, string='Short Name', size=5)
     
@@ -400,6 +422,5 @@ class Users(models.Model):
         # duplicate list to avoid modifying the original reference
         self.SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
         self.SELF_READABLE_FIELDS.extend(['current_year_id'])
-        return init_res
     
     current_year_id = fields.Many2one('school.year', string="Current Year", default="1")

@@ -42,6 +42,9 @@ class CourseDocumentation(models.Model):
              " * The 'Archived' status is used when a program is obsolete and not publihed anymore.")
     
     course_id = fields.Many2one('school.course', string='Course', required=True)
+    
+    course_ids = fields.Many2many('school.course', 'school_doc_course_rel', 'doc_id', 'course_id', string='All Courses')
+    
     name = fields.Char(related='course_id.name')
     
     remarks = fields.Char(string="Remarks")
@@ -54,12 +57,12 @@ class CourseDocumentation(models.Model):
     def _needaction_domain_get(self):
         return [('state', '=', 'draft')]
     
-    @api.one
-    @api.constrains('state', 'course_id')
-    def _check_uniqueness(self):
-        num_active = self.env['school.course_documentation'].search_count([['course_id', '=', self.course_id.id],['state','=','published']])
-        if num_active > 1:
-            raise ValidationError("Only on documentation shall be published at a given time")
+    #@api.one
+    #@api.constrains('state', 'course_id')
+    #def _check_uniqueness(self):
+    #    num_active = self.env['school.course_documentation'].search_count([['course_id', '=', self.course_id.id],['state','=','published']])
+    #    if num_active > 1:
+    #        raise ValidationError("Only on documentation shall be published at a given time")
     
     @api.multi
     def unpublish(self):
@@ -146,6 +149,8 @@ class Course(models.Model):
     
     documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
     
+    documentation_ids = fields.Many2many('school.course_documentation', 'school_doc_course_rel', 'course_id', 'doc_id', string='All Docs')
+    
     all_documentation_ids = fields.One2many('school.course_documentation', 'course_id', string='All Documentations')
 
     all_documentation_count = fields.Integer(string="Documentation Count", compute="_compute_count")
@@ -157,6 +162,8 @@ class Course(models.Model):
     
     @api.one
     def compute_documentation_id(self):
-        doc_ids = self.env['school.course_documentation'].search([['course_id', '=', self.id],['state','=','published']])
-        if doc_ids :
-            self.documentation_id = doc_ids[0]
+        docs = self.documentation_ids.filtered(lambda r: r.state == 'published')
+        if docs:
+            self.documentation_id = docs[0]
+        else:
+            self.documentation_id = False

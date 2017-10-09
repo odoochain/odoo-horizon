@@ -64,7 +64,7 @@
                     <sheet>
                         <div class="oe_title">
                           <h1>
-                            Course Description - <field name="course_id" class="oe_inline" style="width: 800px !important;" domain="[('cycle_id.short_name','!=','MB')]" options="{'no_create': True}"/>
+                            Course Description - <field name="course_id" class="oe_inline" style="width: 800px !important;" domain="[('cycle_id.short_name','!=','MB')]" options="{'no_create': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </h1>
                           <h3 class="oe_fade">
                             by <field name="author_id" class="oe_inline" readonly="1"/>
@@ -95,11 +95,11 @@
                           <field name="credits" readonly="1"/>
                           <field name="hours" readonly="1"/>
                           <field name="weight" readonly="1"/>
-                          <field name="mandatory" />
+                          <field name="mandatory" attrs="{'readonly':[('state','!=','draft')]}"/>
                           <newline/>
-                          <field name="language"/>
+                          <field name="language" attrs="{'readonly':[('state','!=','draft')]}"/>
                           <newline/>
-                          <field name="staff_ids" colspan="4" widget="many2many_tags"/>
+                          <field name="staff_ids" colspan="4" widget="many2many_tags" attrs="{'readonly':[('state','!=','draft')]}"/>
                         </group>
                         <div class="panel panel-default">
                           <div class="panel-heading">
@@ -109,7 +109,7 @@
                             <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
                               <p>Vous pouvez écrire ici vos remarques et commentaires à propose de cette fiche.</p>
                             </div>
-                            <field name="remarks" widget="html"/>
+                            <field name="remarks" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -156,9 +156,9 @@
                             Exemple: «volume horaire: 100 heures. En moyenne, un cours individuel est dispensé par semaine par le professeur responsable de l'activité; le solde des heures se répartit entre cours collectifs, présence au cours individuel d'autres étudiants, auditions et master-classes».
                             </div>
                             <group col="4">
-                              <field name="schedule" />
+                              <field name="schedule" attrs="{'readonly':[('state','!=','draft')]}"/>
                             </group>
-                            <field name="schedule_text" widget="html"/>
+                            <field name="schedule_text" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -195,7 +195,7 @@
                               Note: la réduction de crédits dans certaines activités de deuxième cycle (notamment le «cours artistique principal») au profit du TFE, en plus du développement des finalités spécialisées implique dans certains cas une révision des contenus, acquis d'apprentissage et évaluations de manière à être en concordance avec cette nouvelle structure, en terme de temps de travail et d'objectifs
                               </p>
                             </div>
-                            <field name="content" widget="html"/>
+                            <field name="content" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -203,7 +203,7 @@
                             <h3 class="panel-title">Method</h3>
                           </div>
                           <div class="panel-body">
-                            <field name="method" widget="html"/>
+                            <field name="method" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -253,7 +253,7 @@
                                 <li>bases d'interprétation du style bluegrass (A.A.T. 1 et 7)</li>
                               </ul>
                             </div>
-                            <field name="learning_outcomes" widget="html"/>
+                            <field name="learning_outcomes" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -271,7 +271,7 @@
                                 <li>l'intégrale des disques de Pete Seeger</li>
                               </ul>
                             </div>
-                            <field name="references" widget="html"/>
+                            <field name="references" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -282,7 +282,7 @@
                             <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
                               <p>Les prérequis et co-requis doivent être défini au niveau des unités d'enseignement. Nous vous invitons néanmoins à les renseigner ici.</p>
                             </div>
-                            <field name="pre_co_requiered" widget="html"/>
+                            <field name="pre_co_requiered" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
                         </div>
                         <div class="panel panel-default">
@@ -354,7 +354,7 @@
                               Si par exemple un étudiant à une note de 2/20 (note de présence) en «écoute critique de la discographie consacrée au banjo» et une note de 72/120 en «banjo», la note de l'UE devrait être de 74/140, soit 10,6 / 20, entraînant une réussite; la présence de la note d'échec automatique de l'unité d'enseignement fait descendre cette note à 6/20.
                               </p>
                             </div>
-                            <field name="evaluation_method" widget="html"/>
+                            <field name="evaluation_method" widget="html" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </div>
                         </div>
                     </sheet>
@@ -368,6 +368,7 @@
             <field name="arch" type="xml">
             <search string="Search Groups">
                 <field name="name" string="Nom de l'activité"/>
+                <field name="author_id"/>
                 <filter name="my_desc" string="Mes descriptifs" domain="[('author_id','=',uid)]"/>
             </search>
             </field>

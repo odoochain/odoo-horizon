@@ -281,8 +281,8 @@
                     </tr>
                     <tr t-foreach="course_group.course_ids" t-as="course">
                         <td></td>
-                        <td t-if="course.url_ref"><a t-esc="course.title" t-att-href="course.url_ref" target="new" style="cursor: pointer;"/></td>
-                        <td t-if="not course.url_ref"><a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/></td>
+                        <td><a t-esc="course.title" t-att-href="'/course/%s' % course.id" target="new" style="cursor: pointer;"/></td>
+                        <!--<td t-if="not course.url_ref"><a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/></td>-->
                         <td class="text-center"><t t-esc="course.hours"/></td>
                         <td class="text-center"><t t-esc="course.credits"/></td>
                         <td class="text-center"><t t-esc="course.weight"/></td>

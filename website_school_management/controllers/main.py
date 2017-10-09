@@ -46,6 +46,21 @@ class website_portal_school_management(http.Controller):
         }
         return request.render("website_school_management.program", values)
         
+    @http.route(['/program/domain/<domain_id>'], type='http', auth='public')
+    def program_domain(self, domain_id, redirect=None, **post):
+        _, domain_id = unslug(domain_id)
+        programs = request.env['school.program'].sudo().search([('state', '=', 'published'),('domain_id','=',domain_id)],order="domain_id, cycle_id, name ASC")
+        program_list = []
+        for program in programs:
+            program_list.append({
+                'program' : program,
+                'slug_id' : slug(program),
+            })
+        values = {
+            'program_list': program_list,
+        }
+        return request.render("website_school_management.program", values)
+    
     @http.route(['/program/<program_id>'], type='http', auth='public')
     def program_details(self, program_id, redirect=None, **post):
         _, program_id = unslug(program_id)
@@ -55,6 +70,15 @@ class website_portal_school_management(http.Controller):
             'slug_id' : program_id,
         }
         return request.render("website_school_management.program_details", values)
+        
+    @http.route(['/course/<course_id>'], type='http', auth='public')
+    def course(self, course_id, redirect=None, **post):
+        _, course_id = unslug(course_id)
+        course_docs = request.env['school.course_documentation'].sudo().search([('state', '=', 'published'),('course_id','=',course_id)],order="author_id")
+        values = {
+            'docs': course_docs,
+        }
+        return request.render("school_course_description.report_course_documentation_content", values)
         
     @http.route(['/print_program/<model("school.program"):program>'], type='http', auth='public')
     def print_program(self, program, redirect=None, **post):
