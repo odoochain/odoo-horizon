@@ -46,7 +46,7 @@
                                     }" on_change="1" modifiers="{'readonly': [['is_company', '=', false]], 'required': [['is_company', '=', true]]}" class="oe_inline"/> <field name='initials' placeholder="Initials" class="oe_inline"/>
                                 </h1>
                                 <h2 attrs="{'invisible': [('student','=',False)]}">
-                                    <field name="student_current_program_name" />
+                                    <field name="student_current_bloc_name" />
                                 </h2>
                                 <h3>
                                     <field name="user_ids" invisible="1"/>
@@ -61,8 +61,8 @@
                     					<field name="firstname" attrs="{'required': [('lastname', '=', False),('type','=','contact'),('is_company', '=', False)]}" on_change="1" modifiers="{'required': [['lastname', '=', false], ['type', '=', 'contact'], ['is_company', '=', false]]}"/>
                     				</group>
                     			</div>
-                    			<field name="student_program_ids" attrs="{'invisible': [('student','=',False)]}">
-                                    <tree string="Programs" default_order='year_id desc'>
+                    			<field name="student_bloc_ids" attrs="{'invisible': [('student','=',False)]}">
+                                    <tree string="Blocs" default_order='year_id desc'>
                                         <field name="year_id" />
                                         <field name="source_bloc_name" />
                                         <field name="total_credits" />
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-md-3">
                             <div name="button_box" class="oe_button_box">
-                                <button name="toggle_active" type="object" groups="base.group_no_one" class="oe_stat_button" icon="fa-archive">
+                                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
                                     <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                                 </button>
                             </div>         
@@ -197,7 +197,7 @@
             <field name="arch" type="xml">
                 <search string="Search Partner">
                     <field name="name" filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]" />
-                    <field name="student_current_program_name" filter_domain="[('student_current_program_name','ilike',self)]" string="Programme"/>
+                    <field name="student_current_bloc_name" filter_domain="[('student_current_bloc_name','ilike',self)]" string="Bloc"/>
                     <separator/>
                     <filter string="Persons" name="type_person" domain="[('is_company','=',0)]" />
                     <filter string="Companies" name="type_company" domain="[('is_company','=',1)]" />
@@ -208,10 +208,12 @@
                     <filter string="Others" name="other" domain="[('employee','=',0),('teacher','=',0),('student','=',0), ('parent_id', '=', False)]" />
                     <filter string="Archived" name="archived" domain="[('active','=',False),('type','=','contact')]" />
                     <separator/>
-                    <filter string="Registered" name="registered" domain="[('student_program_ids.year_sequence','=','current')]" />
-                    <filter string="No Program" name="no_program" domain="[('student_current_program_id','=',False)]" />
+                    <filter string="Registered current" name="registered_cur" domain="[('year_sequence','=','current')]" />
+                    <filter string="Registered previous" name="registered_prev" domain="[('year_sequence','=','previous')]" />
+                    <filter string="Registered next" name="registered_next" domain="[('year_sequence','=','next')]" />
+                    <filter string="Never registered" name="registered_never" domain="[('year_sequence','=','never')]" />
                     <group expand="0" name="group_by" string="Group By">
-                        <filter string="Program" context="{'group_by': 'student_current_program_name'}" />
+                        <filter string="Bloc" context="{'group_by': 'student_current_bloc_name'}" />
                     </group>
                     <!-- <separator/>
                    <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
@@ -235,11 +237,11 @@
                 <field name="mobile" position="after">
                     <!--<field name="has_paid_current_minerval" /> -->
                     <field name="student" />
-                    <field name="student_current_program_name" attrs="{'invisible': [('student','=',False)]}" />
+                    <field name="student_current_bloc_name" attrs="{'invisible': [('student','=',False)]}" />
                 </field>
                 <xpath expr="//div[@class='oe_kanban_details']//ul" position="replace">
-                    <li t-if="record.student_current_program_name.value" class="o_text_overflow">
-                        <field name="student_current_program_name" />
+                    <li t-if="record.student_current_bloc_name.value" class="o_text_overflow">
+                        <field name="student_current_bloc_name" />
                     </li>
                 </xpath>
                 <!--<xpath expr="//div[@class='oe_kanban_partner_links']" position="inside">
@@ -262,7 +264,7 @@
                 <tree string="Contacts">
                     <field name="display_name" />
                     <field name="function" invisible="1" />
-                    <field name="student_current_program_id" />
+                    <field name="student_current_bloc_id" />
                     <!--<field name="has_paid_current_minerval" />-->
                     <field name="email" />
                     <field name="user_id" invisible="1" />

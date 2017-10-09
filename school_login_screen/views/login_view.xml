@@ -41,6 +41,25 @@
                     <script type="text/javascript" src="/school_login_screen/static/lib/mdl/textfields.js"></script>
                     
                     <script type="text/javascript" src="/school_login_screen/static/js/announcements.js"></script>
+                    
+                    <script>
+                      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+                    
+                      ga('create', 'UA-46482925-6', 'auto');
+                      ga('send', 'pageview');
+                    
+                    </script>
+                    
+                    <script>
+                      $(document).ready(function(){
+                        $("#toggle_login_form_div").click(function(){
+                            $("#login_form_div").toggle();
+                        });
+                      });
+                    </script>
                 </t>
                 <div class="mdl-layout mdl-layout--fixed-header mdl-js-layout  mdl-color--white-100">
             		<main class="mdl-layout__content main_content">
@@ -50,16 +69,27 @@
                     			    <div class="pull-right">
                                         <t t-foreach="providers" t-as="p">
                                         <div>
-                                            <h2><a t-att-href="p['auth_link']" class="btn btn-link">
+                                            <h2><a t-att-href="p['auth_link'].replace('http%3A%2F%2F','https%3A%2F%2F')" class="btn btn-link">
                                                 <i class="fa fa-google-plus-square"></i>
                                                 <t t-esc="p['body']"/>
                                             </a>
                                             </h2>
+                                            <span><a href="/school_login_screen/static/pdf/help.pdf">Aide en cas de problème de connexion...</a></span>
+                                        </div>
+                                        </t>
+                                        <t t-if="request.params.get('oauth_error', '') == '3'">
+                                        <div class="alert alert-danger">
+                                            <strong>Erreur!</strong> Votre compte n'est pas actif. Avez vous bien validé celui-ci via le lien reçu par email? Si vous n'avez plus le mail, contactez le secrétariat.
                                         </div>
                                         </t>
                                     </div>
                     			</div>
                     		    <div class="login-form-div mdl-grid mdl-shadow--2dp">
+                    		        
+                    		        <div class="mdl-cell mdl-cell--12-col login-btn-con">
+                    					<button id="toggle_login_form_div" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary btn">Connexion manuelle</button>
+                    				</div>
+                    		        <div id="login_form_div" style="display:none;">
                     			    <form role="form" t-attf-action="/web/login{{ '?debug' if debug else '' }}" method="post" onsubmit="this.action = this.action + location.hash">
                     				<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                     				<div class="mdl-cell mdl-cell--12-col cell_con">
@@ -80,9 +110,9 @@
                     				<div class="mdl-cell mdl-cell--12-col login-btn-con">
                     					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary btn" type="submit">Login</button>
                     				</div>
-                    				<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet links">
-                                          <a class="mdl-button--primary">Forgot password ?</a>
-                    				</div>	
+                    				<!--<div class="mdl-cell mdl-cell- -6-col mdl-cell- -8-col-tablet links">
+                                          <a class="mdl-button- -primary">Forgot password ?</a>
+                    				</div> -->	
                     				<p class="alert alert-danger" t-if="error">
                                         <t t-esc="error"/>
                                     </p>
@@ -92,6 +122,7 @@
                 
                                     <input type="hidden" name="redirect" t-att-value="redirect"/>
                     				</form>
+                    				</div>
                     			</div>
                     		</div>
                     		<div class="announcements-card mdl-cell mdl-cell--6-col">

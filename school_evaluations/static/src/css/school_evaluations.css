@@ -129,21 +129,24 @@ a.o_school_bloc_item {
     background-color: #00545c !important;
 }
 
-.credits {
+.btn_credits {
   color: #ffffff;
   background-color: #00c853;
   border-color: #00c853;
+  padding: 0;
+  width: 100%;
 }
 
-.openerp .badge {
-  background-color: #337ab7;
-}
-
-.moyenne {
+.btn_moyenne {
   color: #fff;
   background-color: #fbc02d;
   border-color: #fbc02d;
   padding: 0;
+  width: 100%;
+}
+
+.openerp .badge {
+  background-color: #337ab7;
 }
 
 .score_value {

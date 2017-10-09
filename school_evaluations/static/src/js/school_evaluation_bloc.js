@@ -197,12 +197,6 @@ return Widget.extend({
             });
         },
         
-        "click .o_school_eval_details": function (event) {
-            var self = this;
-            event.preventDefault();
-            new DetailEvalDialog(this, {title : _t('Detailed Evaluation'), program : self.program}).open();
-        },
-        
         "click .o_school_edit_icg": function (event) {
             var self = this;
             event.preventDefault();
@@ -360,7 +354,8 @@ return Widget.extend({
             unique: (self.datarecord.__last_update || '').replace(/[^0-9]/g, '')
         });
         
-        return new Model('school.individual_course_group').query(['id','name','title','course_ids','dispense','final_result_bool','acquiered','first_session_computed_result','first_session_deliberated_result_bool','second_session_computed_result','second_session_deliberated_result_bool','second_session_result_bool','final_result','total_credits','total_weight']).filter([['id', 'in', self.bloc.course_group_ids]]).all().then(
+        return new Model('school.individual_course_group').query(['id','name','title','course_ids','dispense','final_result_bool','acquiered','first_session_computed_result','first_session_deliberated_result_bool','second_session_computed_result','second_session_deliberated_result_bool','second_session_result_bool','final_result','total_credits','total_weight'])
+        .filter([['id', 'in', self.bloc.course_group_ids],['is_ghost_cg','=',false]]).all().then(
             function(course_groups) {
                 self.course_groups = course_groups;
                 var all_course_ids = [];
@@ -386,19 +381,19 @@ return Widget.extend({
                         self.program = program[0];
                         switch (self.program.grade) {
                           case "without":
-                            self.program.grade_text = "Sans grade";
+                            self.program.grade_text = "sans grade";
                             break;
                           case "satisfaction":
-                            self.program.grade_text = "Satisfaction";
+                            self.program.grade_text = "avec Satisfaction";
                             break;
                           case "distinction":
-                            self.program.grade_text = "Distinction";
+                            self.program.grade_text = "avec Distinction";
                             break;
                           case "second_class":
-                            self.program.grade_text = "la Grande Distinction";
+                            self.program.grade_text = "avec la Grande Distinction";
                             break;
                           case "first_class":
-                            self.program.grade_text = "la Plus Grande Distinction";
+                            self.program.grade_text = "avec la Plus Grande Distinction";
                             break;
                         };
                         new Model('school.individual_program').call('compute_evaluation_details', [self.program.id]).then(function(results){

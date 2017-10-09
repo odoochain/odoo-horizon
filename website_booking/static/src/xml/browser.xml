@@ -42,6 +42,7 @@
         </div>
         <div class="modal-footer">
             <a href="#!" class="request-booking modal-action modal-close waves-effect waves-green btn-flat">Request Booking</a>
+            <a href="#!" class="delete-booking modal-action modal-close waves-effect waves-green btn-flat" style="display: none">Delete Booking</a>
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
     </t>

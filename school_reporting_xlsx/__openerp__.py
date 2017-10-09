@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!--
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -19,15 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
--->
-<openerp>
-    <data>
-        <record id="group_evaluations" model="res.groups">
-            <field name="name">Gestion des évaluations</field>
-        </record>
-        <record id="decimal_evaluation" model="decimal.precision">
-            <field name="name">Evaluation</field>
-            <field name="digits">2</field>
-        </record>
-    </data>
-</openerp>
+{
+    'name': 'School reporting xlsx',
+    'version': '0.1',
+    'license': 'AGPL-3',
+    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'website': '',
+    'category': 'School Management',
+    'depends': ['school_management','report_xlsx'],
+    'init_xml': [],
+    'update_xml': [
+        'report/school_report_xlsx.xml',
+    ],
+    'demo_xml': [],
+    'description': '''
+        This modules manages registration documents for a school.
+    ''',
+    'active': False,
+    'installable': True,
+    'application': True,
+}

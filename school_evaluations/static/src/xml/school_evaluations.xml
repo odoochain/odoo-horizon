@@ -34,91 +34,6 @@
         </div>
     </t>
 
-    <t t-name="DetailEvalDialog">
-        <div class="container" style="font-size:150%;">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Bac 1</h3>
-                      </div>
-                      <div class="panel-body">
-                        Evaluation : <t t-esc="Math.round(widget.program.evaluation_details.bloc_evaluations[0]*100)/100"/>
-                      </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Bac 2</h3>
-                      </div>
-                      <div class="panel-body">
-                        Evaluation : <t t-esc="Math.round(widget.program.evaluation_details.bloc_evaluations[1]*100)/100"/>
-                      </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Bac 3</h3>
-                      </div>
-                      <div class="panel-body">
-                        Evaluation : <t t-esc="Math.round(widget.program.evaluation_details.bloc_evaluations[2]*100)/100"/>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:10px;">
-                <div class="col-md-3">Grade</div>
-                <div class="col-md-3">
-                    <select id="grade-list">
-                        <t t-if="widget.program.grade == 'without'">
-                            <option value="without" selected="true" >Sans Grade</option>
-                        </t>
-                        <t t-if="widget.program.grade != 'without'">
-                            <option value="without">Sans Grade</option>
-                        </t>
-                        <t t-if="widget.program.grade == 'satisfaction'">
-                            <option value="satisfaction" selected="true" >Satisfaction</option>
-                        </t>
-                        <t t-if="widget.program.grade != 'satisfaction'">
-                            <option value="satisfaction">Satisfaction</option>
-                        </t>
-                        <t t-if="widget.program.grade == 'distinction'">
-                            <option value="distinction" selected="true" >Distinction</option>
-                        </t>
-                        <t t-if="widget.program.grade != 'distinction'">
-                            <option value="distinction">Distinction</option>
-                        </t>
-                        <t t-if="widget.program.grade == 'second_class'">
-                            <option value="second_class" selected="true" >Grande Distinction</option>
-                        </t>
-                        <t t-if="widget.program.grade != 'second_class'">
-                            <option value="second_class">Grande Distinction</option>
-                        </t>
-                        <t t-if="widget.program.grade == 'first_class'">
-                            <option value="first_class" selected="true" >Plus Grande Distinction</option>
-                        </t>
-                        <t t-if="widget.program.grade != 'first_class'">
-                            <option value="first_class">Plus Grande Distinction</option>
-                        </t>
-                    </select>
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:10px;">
-                <div class="col-md-3">Justification</div>
-                <div class="col-md-3">
-                    <select id="grade-comment-list">
-                        <t t-foreach="widget.messages" t-as="message">
-                            <option t-att-value="message_index" ><t t-esc="message"/></option>
-                        </t>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </t>
-        
-
     <t t-name="DetailResultDialog">
         <t t-set="cg" t-value="widget.course_group" />
         <div class="container" style="font-size:150%;">
@@ -308,10 +223,10 @@
                     <li>
                         <div class="text-center eval_top_buttons">
                             <div class="btn-group" data-toggle="buttons">
-                                <label t-att-class="'btn btn-primary center-block o_school_theatre ' + (school_domain == 2 ? 'active' : '')">
+                                <label style="font-size: 12px;" t-att-class="'btn btn-primary center-block o_school_theatre ' + (school_domain == 2 ? 'active' : '')">
                                     <input type="radio">THEATRE</input>
                                 </label>
-                                <label t-att-class="'btn btn-primary center-block o_school_musique ' + (school_domain == 1 ? 'active' : '')">
+                                <label style="font-size: 12px;" t-att-class="'btn btn-primary center-block o_school_musique ' + (school_domain == 1 ? 'active' : '')">
                                     <input type="radio">MUSIQUE</input>
                                 </label>
                             </div>
@@ -407,11 +322,11 @@
                 <div class="container bloc_header">
                     <img border="1" name="image" t-att-src="widget.student_image" class="img" style="width: 180px;height: 180px;position:fixed;top:10px;left:0;z-index: 9999;"/>
                     <div class="row">
-                        <span class="col-md-10">
-                            <h2><t t-esc="widget.bloc.student_name"/></h2>
+                        <span class="col-md-10" style="min-height:66px;">
+                            <h2><t t-esc="widget.bloc.student_name"/> - <t t-esc="widget.bloc.source_bloc_title"/> - <t t-esc="widget.bloc.source_bloc_level"/></h2>
                         </span>
                         <span class="col-md-10">
-                            <h2 style="margin-top: 0;"><t t-esc="widget.bloc.source_bloc_title"/> - <t t-esc="widget.bloc.source_bloc_level"/></h2>
+                            <h2 style="margin-top: 0;"></h2>
                         </span>
                         <span class="refresh_button">
                             <button class="btn btn-default o_reload_bloc" type="button">
@@ -420,8 +335,10 @@
                         </span>
                     </div>
                     <div class="row vertical-align" style="margin-bottom: 10px;">
-                        <div class="col-md-2 text-center credits">
-                            PAE<br/><span class="score_value"><t t-esc="widget.bloc.total_acquiered_credits-widget.bloc.total_dispensed_credits"/>/<t t-esc="widget.bloc.total_credits-widget.bloc.total_dispensed_credits"/></span>
+                        <div class="col-md-2">
+                            <button class="btn btn_credits" type="button">
+                                PAE<br/><span class="score_value"><t t-esc="widget.bloc.total_acquiered_credits-widget.bloc.total_dispensed_credits"/>/<t t-esc="widget.bloc.total_credits-widget.bloc.total_dispensed_credits"/></span>
+                            </button>
                         </div>
                         
                         <t t-if="widget.school_session == 1">
@@ -467,28 +384,47 @@
                     <div class="row vertical-align">
                         <t t-if="widget.bloc.source_bloc_level == 1">
                         <div class="progress" style="width:100%;">
-                            <div class="progress-bar progress-bar-info" t-att-style="'width:'+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/180*100+'%'">
+                            <div class="progress-bar progress-bar-info" t-att-style="'width:'+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='widget.program.total_acquiered_credits+widget.bloc.total_dispensed_credits'/>
                             </div>
-                            <div class="progress-bar progress-bar-success" t-att-style="'width:'+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/180*100+'%'">
+                            <t t-if="(widget.bloc.state != 'awarded_first_session') and (widget.bloc.state != 'awarded_second_session')">
+                            <div class="progress-bar progress-bar-success" t-att-style="'width:'+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='widget.bloc.total_acquiered_credits-widget.bloc.total_dispensed_credits'/>
                             </div>
-                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/180*100+'%'">
+                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc="(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)"/>
                             </div>
+                            </t>
                         </div>
                         </t>
                         <t t-if="widget.bloc.source_bloc_level == 2 or widget.bloc.source_bloc_level == 3">
                         <div class="progress" style="width:100%;">
-                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/180*100+'%'">
+                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
                             </div>
-                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/180*100+'%'">
+                            <t t-if="(widget.bloc.state != 'awarded_first_session') and (widget.bloc.state != 'awarded_second_session')">
+                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
                             </div>
-                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/180*100+'%'">
+                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
                                 <span t-esc="(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)"/>
                             </div>
+                            </t>
+                        </div>
+                        </t>
+                        <t t-if="widget.bloc.source_bloc_level == 4 or widget.bloc.source_bloc_level == 5">
+                        <div class="progress" style="width:100%;">
+                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
+                                <span t-esc='(widget.bloc.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
+                            </div>
+                            <t t-if="(widget.bloc.state != 'awarded_first_session') and (widget.bloc.state != 'awarded_second_session')">
+                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
+                                <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
+                            </div>
+                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
+                                <span t-esc="(widget.bloc.total_credits-widget.bloc.total_acquiered_credits)"/>
+                            </div>
+                            </t>
                         </div>
                         </t>
                     </div>
@@ -562,9 +498,14 @@
                                                 <t t-if="(course.type != 'D')">
                                                     <font color="blue"><t t-esc="Math.round(course.first_session_result*100)/100" /></font>
                                                 </t>
-                                                <t t-if="(course.type == 'D') and course.jun_result">
+                                                <t t-if="(course.type == 'D') and course.first_session_result_bool">
+                                                    <t t-if="course.jun_result">
                                                     <font color="gray"><t t-esc="Math.round(course.first_session_result*100)/100"/></font>
+                                                    </t>
                                                 </t>
+                                                </t>
+                                                <t t-if="(course.type == 'D') and !course.first_session_result_bool">
+                                                    <font color="gray">Val</font>
                                                 </t>
                                             </td>
                                             </t>
@@ -582,8 +523,13 @@
                                                 <t t-if="(course.type != 'D')">
                                                     <font><t t-esc="Math.round(course.first_session_result*100)/100" /></font>
                                                 </t>
-                                                <t t-if="(course.type == 'D') and course.jun_result">
+                                                <t t-if="(course.type == 'D') and course.first_session_result_bool">
+                                                    <t t-if="course.jun_result">
                                                     <font color="gray"><t t-esc="Math.round(course.first_session_result*100)/100"/></font>
+                                                    </t>
+                                                    <t t-if="!course.first_session_result_bool">
+                                                    <font color="gray">Val</font>
+                                                    </t>
                                                 </t>
                                                 </t>
                                             </td>
@@ -597,6 +543,58 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="DetailEvalDialog">
+        <div class="container" style="font-size:150%;">
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-md-3">Grade</div>
+                <div class="col-md-3">
+                    <select id="grade-list">
+                        <t t-if="widget.program.grade == 'without'">
+                            <option value="without" selected="true" >Sans Grade</option>
+                        </t>
+                        <t t-if="widget.program.grade != 'without'">
+                            <option value="without">Sans Grade</option>
+                        </t>
+                        <t t-if="widget.program.grade == 'satisfaction'">
+                            <option value="satisfaction" selected="true" >Satisfaction</option>
+                        </t>
+                        <t t-if="widget.program.grade != 'satisfaction'">
+                            <option value="satisfaction">Satisfaction</option>
+                        </t>
+                        <t t-if="widget.program.grade == 'distinction'">
+                            <option value="distinction" selected="true" >Distinction</option>
+                        </t>
+                        <t t-if="widget.program.grade != 'distinction'">
+                            <option value="distinction">Distinction</option>
+                        </t>
+                        <t t-if="widget.program.grade == 'second_class'">
+                            <option value="second_class" selected="true" >Grande Distinction</option>
+                        </t>
+                        <t t-if="widget.program.grade != 'second_class'">
+                            <option value="second_class">Grande Distinction</option>
+                        </t>
+                        <t t-if="widget.program.grade == 'first_class'">
+                            <option value="first_class" selected="true" >Plus Grande Distinction</option>
+                        </t>
+                        <t t-if="widget.program.grade != 'first_class'">
+                            <option value="first_class">Plus Grande Distinction</option>
+                        </t>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-md-3">Justification</div>
+                <div class="col-md-3">
+                    <select id="grade-comment-list">
+                        <t t-foreach="widget.messages" t-as="message">
+                            <option t-att-value="message_index" ><t t-esc="message"/></option>
+                        </t>
+                    </select>
                 </div>
             </div>
         </div>

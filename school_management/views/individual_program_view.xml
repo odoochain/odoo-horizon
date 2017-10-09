@@ -88,35 +88,20 @@
       <field name="arch" type="xml">
         <search string="Search Blocs">
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
+          <separator/>
+          <filter name="music" string="Musique" domain="[('domain_id', '=', 1)]"/>
+          <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
+          <separator/>
           <group expand="1" string="Group By">
-            <filter string="Domain" context="{'group_by':'domain_id'}" />
-            <filter string="Cycle" context="{'group_by':'cycle_id'}" />
-            <filter string="Section" context="{'group_by':'section_id'}" />
-            <filter string="Track" context="{'group_by':'track_id'}" />
-            <filter string="Speciality" context="{'group_by':'speciality_id'}" />
+            <filter string="Domain" context="{'group_by':'domain_id'}"/>
+            <filter string="Cycle" context="{'group_by':'cycle_id'}"/>
+            <filter string="Section" context="{'group_by':'section_id'}"/>
+            <filter string="Track" context="{'group_by':'track_id'}"/>
+            <filter string="Speciality" context="{'group_by':'speciality_id'}"/>
           </group>
         </search>
       </field>
     </record>
-    
-    
-    <record id="view_individual_program_filter" model="ir.ui.view">
-      <field name="name">program.select</field>
-      <field name="model">school.individual_program</field>
-      <field name="arch" type="xml">
-        <search string="Search Blocs">
-          <field name="student_id" domain="[('type', '=', 'contact')]"/>
-          <group expand="1" string="Group By">
-            <filter string="Domain" context="{'group_by':'domain_id'}" />
-            <filter string="Cycle" context="{'group_by':'cycle_id'}" />
-            <filter string="Section" context="{'group_by':'section_id'}" />
-            <filter string="Track" context="{'group_by':'track_id'}" />
-            <filter string="Speciality" context="{'group_by':'speciality_id'}" />
-          </group>
-        </search>
-      </field>
-    </record>
-    
     
     <record id="action_individual_program_form" model="ir.actions.act_window">
       <field name="name">Individual Programs</field>
@@ -232,6 +217,7 @@
             </group>
             <field name="course_group_ids">
               <tree string="Course Groups" context="{'default_bloc_id':active_id}">
+                <field name="ue_id"/>
                 <field name="name" />
                 <field name="total_hours" string="Hrs"/>
                 <field name="total_credits" />
@@ -260,6 +246,9 @@
           <filter name="bloc_3" string="Bac 3" domain="[('source_bloc_level', '=', 3)]"/>
           <filter name="bloc_4" string="Master 1" domain="[('source_bloc_level', '=', 4)]"/>
           <filter name="bloc_5" string="Master 2" domain="[('source_bloc_level', '=', 5)]"/>
+          <separator/>
+          <filter name="music" string="Musique" domain="[('source_bloc_domain_id', '=', 1)]"/>
+          <filter name="theatre" string="Théatre" domain="[('source_bloc_domain_id', '=', 2)]"/>
           <separator/>
           <filter string="Current Year" name="current" domain="[('year_sequence','=','current')]" />
           <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
@@ -319,6 +308,7 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Individual Course" editable="top" create="0">
+          <field name="ue_id"/>
           <field name="year_id"/>
           <field name="student_id" />
           <field name="name" />
@@ -345,7 +335,7 @@
                <field name="name"/>
               </h1>
               <h3 class="oe_fade">
-               <field name="bloc_id" options='{"no_open":True}'/>
+               <field name="ue_id"/> - <field name="bloc_id" options='{"no_open":True}'/>
               </h3>
             </div>
             <group col="2" colspan="2">
@@ -382,6 +372,7 @@
       <field name="model">school.individual_course_group</field>
       <field name="arch" type="xml">
         <search string="Search Courses">
+          <field name="ue_id" string="UE Id"/>
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
           <field name="source_course_group_id" string="Activité"/>
           <filter name="bloc_1" string="Bloc 1" domain="[('source_bloc_level', '=', 1)]"/>
@@ -490,7 +481,7 @@
             <group col="4">
               <field name="source_course_id" colspan="4"/>
               <field name="teacher_id"/>
-              <field name="teacher_choice_id"/>
+              <field name="teacher_choice_id" /> <!--TODO set a domain like "[('id','in','source_course_id.teacher_ids')]" -->
               <field name="hours"/>
               <field name="credits"/>
               <field name="weight"/>

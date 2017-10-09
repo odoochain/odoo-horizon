@@ -69,33 +69,21 @@
             </field>
         </record>
 
-        <!-- Add evaluation to Individual Course tree view -->
-        <record id="individual_bloc_eval_tree" model="ir.ui.view">
-            <field name="name">school.individual_bloc.eval.tree</field>
-            <field name="model">school.individual_bloc</field>
-            <field name="inherit_id" ref="school_management.view_individual_bloc_tree" />
-            <field eval="25" name="priority" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='total_credits']" position="after">
-                    <field name="total_dispensed_credits" />
-                    <field name="total_acquiered_credits" />
-                    <field name="total_not_acquiered_credits" />
-                    <field name="state"/>
-                </xpath>
-            </field>
-        </record>
-    
-        <!-- Add evaluation to Individual Course tree view -->
-        <record id="individual_program_eval_tree" model="ir.ui.view">
-            <field name="name">school.individual_program.eval.tree</field>
+        <record id="view_individual_program_eval_filter" model="ir.ui.view">
+            <field name="name">school.individual_program.eval.filter</field>
             <field name="model">school.individual_program</field>
-            <field name="inherit_id" ref="school_management.view_individual_program_tree" />
+            <field name="inherit_id" ref="school_management.view_individual_program_filter" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='required_credits']" position="after">
-                    <field name="total_acquiered_credits" />
-                    <field name="evaluation"/>
-                    <field name="state"/>
+                <xpath expr="//field[@name='student_id']" position="after">
+                    <separator/>
+                    <field name="grade_year_id"/>
+                    <filter name="program_completed" string="Completed" domain="[('program_completed', '=', True)]"/>
+                    <separator/>
+                    <filter name="draft" string="Draft" domain="[('state', 'in', ['draft'])]" />
+                    <filter name="progress" string="Progress" domain="[('state', 'in', ['progress'])]" />
+                    <filter name="awarded" string="Awarded" domain="[('state', 'in', ['awarded'])]" />
+                    <filter name="abandonned" string="Abandonned" domain="[('state', 'in', ['abandonned'])]" />
                 </xpath>
             </field>
         </record>
@@ -111,9 +99,9 @@
                     <header>
                         <button name="set_to_progress" type="object" states="draft" string="Progress" class="oe_highlight" />
                         <button name="set_to_awarded" type="object" states="progress" string="Awarded" class="oe_highlight" />
-                        <button name="set_to_abandoned" type="object" states="progress" string="Abandoned" class="oe_highlight" />
-                        <button name="set_to_draft" type="object" states="progress,awarded,abandoned" string="Reset to Draft" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,awarded,abandoned" />
+                        <button name="set_to_abandonned" type="object" states="progress" string="Abandoned" class="oe_highlight" />
+                        <button name="set_to_draft" type="object" states="progress,awarded,abandonned" string="Reset to Draft" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,awarded,abandonned" />
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='required_credits']" position="after">         
@@ -121,15 +109,34 @@
                     <field name="historical_bloc_1_eval"/>
                     <field name="historical_bloc_2_credits"/>
                     <field name="historical_bloc_2_eval"/>
+                    <field name="total_registered_credits" />
                     <field name="total_acquiered_credits" />
                     <field name="evaluation" />
                     <field name="grade" />
                     <field name="grade_year_id" />
+                    <newline/>
                     <field name="grade_comments" colspan="4"/>
                 </xpath>
                 <xpath expr="//field[@name='source_bloc_name']" position="after">
                     <field name="total_acquiered_credits" />
                     <field name="evaluation"/>
+                    <field name="state"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Add evaluation to Individual Course tree view -->
+        <record id="individual_program_eval_tree" model="ir.ui.view">
+            <field name="name">school.individual_program.eval.tree</field>
+            <field name="model">school.individual_program</field>
+            <field name="inherit_id" ref="school_management.view_individual_program_tree" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='required_credits']" position="after">
+                    <field name="total_registered_credits" />
+                    <field name="total_acquiered_credits" />
+                    <field name="grade"/>
+                    <field name="grade_year_id"/>
                     <field name="state"/>
                 </xpath>
             </field>
@@ -190,6 +197,50 @@
             </field>
         </record>
 
+        <!-- Add evaluation to Individual Course tree view -->
+        <record id="individual_bloc_eval_tree" model="ir.ui.view">
+            <field name="name">school.individual_bloc.eval.tree</field>
+            <field name="model">school.individual_bloc</field>
+            <field name="inherit_id" ref="school_management.view_individual_bloc_tree" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='total_credits']" position="after">
+                    <field name="total_dispensed_credits" />
+                    <field name="total_acquiered_credits" />
+                    <field name="total_not_acquiered_credits" />
+                    <field name="state"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add evaluation to Individual Course Group form view -->
+        <record id="course_group_eval_form" model="ir.ui.view">
+            <field name="name">school.course_group.eval.view</field>
+            <field name="model">school.course_group</field>
+            <field name="inherit_id" ref="school_management.course_group_form" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='weight']" position="after">
+                    <field name="enable_exclusion_bool"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add evaluation to Individual Course form view -->
+        <record id="individual_course_group_eval_tree" model="ir.ui.view">
+            <field name="name">school.individual_course_group.eval.tree</field>
+            <field name="model">school.individual_course_group</field>
+            <field name="inherit_id" ref="school_management.view_individual_course_group_tree" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="dispense" string="Dis" readonly="1" />
+                    <field name="final_result" string="Res"/>
+                    <field name="acquiered" string="Acq" readonly="1" />
+                </xpath>
+            </field>
+        </record>
+
         <!-- Add evaluation to Individual Course Group form view -->
         <record id="individual_course_group_eval_form" model="ir.ui.view">
             <field name="name">school.individual_course_group.eval.view</field>
@@ -245,6 +296,7 @@
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='url_ref']" position="after">
+                    <newline/>
                     <label for="type" string="Type of results" />
                     <field name="type" widget="radio" colspan="3" nolabel="1" options="{'horizontal': true}" />
                 </xpath>
