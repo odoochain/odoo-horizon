@@ -218,6 +218,7 @@ var NewBookingDialog = Widget.extend({
                     break;
                 } 
             }
+            self.updateRoomList();
             self.updateSendButton();
             // TODO : DOES NOT WORK ? FIlTER RECURRING BASED ON TIME ??
             /*var start = moment(self.date).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
@@ -256,6 +257,7 @@ var NewBookingDialog = Widget.extend({
                 self.$('#to_hour').removeClass('valid');
                 self.$('#to_hour').addClass('invalid');
             }
+            self.updateRoomList();
             self.updateSendButton();
         },
     },

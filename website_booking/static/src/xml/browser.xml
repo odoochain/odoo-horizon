@@ -21,7 +21,7 @@
                               </div>
                             </div>
                             <div class="input-field col s12">
-                                <select class="select-asset-id">
+                                <select class="select-asset-id" disabled="">
                                     <option value="" disabled="" selected="">Choose your room</option>
                                     <t t-foreach="widget.ressources" t-as="ressource">
                                     <option t-att-value="ressource.id"><span t-esc="ressource.title"/></option>
