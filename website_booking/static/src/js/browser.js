@@ -236,6 +236,7 @@ var NewBookingDialog = Widget.extend({
         },
         "change #to_hour": function (event) {
             var self = this;
+            var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
             var toTime = self.$('#to_hour').timepicker('getTime', this.date.toDate());
             var events = this.schedule.events;
             self.$('#to_hour').removeClass('invalid');
@@ -246,6 +247,10 @@ var NewBookingDialog = Widget.extend({
                     self.$('#to_hour').addClass('invalid');
                     break;
                 } 
+            }
+            if(fromTime > toTime - 1) {
+                self.$('#to_hour').removeClass('valid');
+                self.$('#to_hour').addClass('invalid');
             }
             self.updateSendButton();
         },

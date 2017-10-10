@@ -51,7 +51,7 @@
         <record id="action_website_booking" model="ir.actions.act_url">
             <field name="name">Online Booking</field>
             <field name="type">ir.actions.act_url</field>
-            <field name="url">/booking#category_id=11</field>
+            <field name="url">/booking#category_id=16</field>
             <field name="target">new</field>
         </record>
 
