@@ -41,6 +41,21 @@ class BookingController(http.Controller):
     def booking_browser(self, debug=False, **k):
         return request.render('website_booking.index')
 
+    @http.route('/booking/rooms', type='json', auth='public', website=True)
+    def booking_rooms(self, start, end):
+        # TODO : ugply transform
+        start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        fields = ['name']
+        domain = [
+            ('start', '<=', end),    
+            ('stop', '>=', start)
+        ]
+        all_rooms = request.env['calendar.event'].sudo().search_read([],fields)
+        busy_rooms = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
+        return all_rooms - busy_rooms
+        
+        
     @http.route('/booking/category', type='json', auth='public', website=True)
     def booking_category(self, id=False, debug=False, **k):
         return request.env['school.asset.category'].sudo().search_read([('id', '=', id)],['name','display_name','sequence','parent_id','is_leaf'])
@@ -80,7 +95,6 @@ class BookingController(http.Controller):
         
     @http.route('/booking/events', type='json', auth='public', website=True)
     def booking_events(self, start, end, timezone=False, category_id=False, asset_id=False):
-        _logger.info([start, end, timezone, category_id, asset_id])
         # TODO : ugply transform
         start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
@@ -99,8 +113,6 @@ class BookingController(http.Controller):
                 '|',('asset_ids', '=', asset_id),('room_id', '=', asset_id),
             ]
             ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
-        _logger.info(domain)
-        _logger.info(ret)
         return ret
         
     @http.route('/booking/editor', type='http', auth='user', website=True)
