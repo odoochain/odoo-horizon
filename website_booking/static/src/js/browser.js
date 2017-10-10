@@ -248,7 +248,7 @@ var NewBookingDialog = Widget.extend({
                     break;
                 } 
             }
-            if(fromTime.getHour() > toTime.getHour() - 1) {
+            if((fromTime.getHours() + fromTime.getMinutes()/60) > (toTime.getHours() + toTime.getMinutes()/60 - 1)) {
                 self.$('#to_hour').removeClass('valid');
                 self.$('#to_hour').addClass('invalid');
             }
