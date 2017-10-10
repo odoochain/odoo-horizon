@@ -196,14 +196,6 @@ var NewBookingDialog = Widget.extend({
         },
         "change .select-asset-id": function (event) {
             this.schedule.set_asset_id(parseInt(this.$( "select.select-asset-id" ).val()));
-            this.$('#from_hour').val('');
-            this.$('#to_hour').val('');
-            this.$('#from_hour').removeClass('valid');
-            this.$('#to_hour').removeClass('valid');
-            this.$('#from_hour').addClass('invalid');
-            this.$('#to_hour').addClass('invalid');
-            this.updateSendButton();
-            Materialize.updateTextFields();
         },
         "change #from_hour": function (event) {
             var self = this;
@@ -350,6 +342,7 @@ var NewBookingDialog = Widget.extend({
             roomSelect.removeAttr( "disabled" )
     	    roomSelect.material_select();
     	    Materialize.updateTextFields();
+    	    self.updateSendButton();
     	});
     },
     
