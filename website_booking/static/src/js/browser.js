@@ -293,7 +293,7 @@ var NewBookingDialog = Widget.extend({
         self.$('#from_hour').on('change', function() {
             var newTime = self.$('#from_hour').timepicker('getTime');
             if (newTime) { // Not null
-                newTime.setHour(newTime.getHour() + 1);
+                newTime.setHours(newTime.getHours() + 1);
                 self.$('#to_hour').timepicker('option', 'minTime', newTime);
             }
         });
