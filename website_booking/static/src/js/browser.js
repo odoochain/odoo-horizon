@@ -220,20 +220,6 @@ var NewBookingDialog = Widget.extend({
             }
             self.updateRoomList();
             self.updateSendButton();
-            // TODO : DOES NOT WORK ? FIlTER RECURRING BASED ON TIME ??
-            /*var start = moment(self.date).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
-            var roomId = parseInt(self.$( "select.select-asset-id" ).val());
-            var context = new data.CompoundContext();
-            var domain = new data.CompoundDomain([["start", "<=", start],["stop", ">=", start],['room_id','=',roomId]]);
-            new Model('calendar.event').call("search_count", [domain, context]).then(function(data) {
-                if(data > 0) {
-                    self.$('#from_hour').removeClass('valid');
-                    self.$('#from_hour').addClass('invalid');
-                } else {
-                    self.$('#from_hour').removeClass('invalid');
-                    self.$('#from_hour').addClass('valid');
-                }
-            });*/
         },
         "change #to_hour": function (event) {
             var self = this;
@@ -269,7 +255,6 @@ var NewBookingDialog = Widget.extend({
     init: function(parent, options) {
         this._super.apply(this, arguments);
         if(options && options.event){
-            console.log(options.event);
             this.ressources = parent.cal.ressources;
             this.date = options.event.start;
             this.event = options.event;
@@ -341,6 +326,30 @@ var NewBookingDialog = Widget.extend({
         this.$('#to_hour').addClass('valid');
         this.updateSendButton();
         Materialize.updateTextFields();
+    },
+    
+    updateRoomList: function() {
+        var self = this;
+        var fromTime = self.$('#from_hour').timepicker('getTime');
+        var toTime = self.$('#to_hour').timepicker('getTime');
+        var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
+        var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+        ajax.jsonRpc('/booking/rooms', 'call', {
+    				'start' : time.moment_to_str(start),
+    				'end' : time.moment_to_str(stop),
+	    	}).done(function(rooms){
+            var roomSelect = self.$('select.select-asset-id').empty().html(' ');
+            for(var room in rooms) {
+                // add new value
+                roomSelect.append(
+                  $("<option></option>")
+                    .attr("value",room.id)
+                    .text(room.name)
+                );
+            }
+    	    roomSelect.material_select();
+    	    Materialize.updateTextFields();
+    	});
     },
     
     updateSendButton: function() {
