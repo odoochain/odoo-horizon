@@ -48,6 +48,8 @@ class BookingController(http.Controller):
         end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         fields = ['name','room_id']
         domain = [
+            ('start', '<=', end),    
+            ('stop', '>=', start),
             ('start_datetime', '<=', end),    
             ('stop_datetime', '>=', start),
             ('room_id', '<>', False)
