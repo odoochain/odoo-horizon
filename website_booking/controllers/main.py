@@ -46,14 +46,14 @@ class BookingController(http.Controller):
         # TODO : ugply transform
         start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
-        fields = ['name']
+        fields = ['name','room_id']
         domain = [
             ('start', '<=', end),    
             ('stop', '>=', start)
         ]
-        all_rooms = request.env['calendar.event'].sudo().search([],fields)
-        busy_rooms = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,fields)
-        return all_rooms - busy_rooms
+        all_rooms_ids = request.env['school.asset'].sudo().search([],['name'])
+        busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,fields).mapped('room_id')
+        return all_rooms_ids - busy_rooms_ids
         
         
     @http.route('/booking/category', type='json', auth='public', website=True)
