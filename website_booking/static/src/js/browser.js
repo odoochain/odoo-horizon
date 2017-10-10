@@ -338,7 +338,8 @@ var NewBookingDialog = Widget.extend({
     				'end' : time.moment_to_str(stop),
 	    	}).done(function(rooms){
             var roomSelect = self.$('select.select-asset-id').empty().html(' ');
-            for(var room in rooms) {
+            for(var room_idx in rooms) {
+                var room = rooms[room_idx];
                 // add new value
                 roomSelect.append(
                   $("<option></option>")
