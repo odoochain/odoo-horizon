@@ -324,8 +324,7 @@ var NewBookingDialog = Widget.extend({
         this.$('#to_hour').removeClass('invalid');
         this.$('#from_hour').addClass('valid');
         this.$('#to_hour').addClass('valid');
-        this.updateSendButton();
-        Materialize.updateTextFields();
+        this.updateRoomList();
     },
     
     updateRoomList: function() {
