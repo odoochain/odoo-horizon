@@ -51,7 +51,7 @@ class BookingController(http.Controller):
             ('start', '<=', end),    
             ('stop', '>=', start)
         ]
-        all_rooms_ids = request.env['school.asset'].sudo().search(['active','=',True])
+        all_rooms_ids = request.env['school.asset'].sudo().search([['active','=',True]])
         busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,fields).mapped('room_id')
         return all_rooms_ids - busy_rooms_ids
         
