@@ -346,6 +346,7 @@ var NewBookingDialog = Widget.extend({
                     .text(room.name)
                 );
             }
+            roomSelect.removeAttr( "disabled" )
     	    roomSelect.material_select();
     	    Materialize.updateTextFields();
     	});
