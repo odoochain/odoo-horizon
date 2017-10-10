@@ -252,6 +252,10 @@ var NewBookingDialog = Widget.extend({
                 self.$('#to_hour').removeClass('valid');
                 self.$('#to_hour').addClass('invalid');
             }
+            if((fromTime.getHours() + fromTime.getMinutes()/60) < (toTime.getHours() + toTime.getMinutes()/60 + 2)) {
+                self.$('#to_hour').removeClass('valid');
+                self.$('#to_hour').addClass('invalid');
+            }
             self.updateSendButton();
         },
     },
