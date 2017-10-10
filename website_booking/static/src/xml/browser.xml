@@ -7,15 +7,6 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="col s6">
-                            <div class="input-field col s12">
-                                <select class="select-asset-id">
-                                    <option value="" disabled="" selected="">Choose your room</option>
-                                    <t t-foreach="widget.ressources" t-as="ressource">
-                                    <option t-att-value="ressource.id"><span t-esc="ressource.title"/></option>
-                                    </t>
-                                </select>
-                                <label>Room</label>
-                            </div>
                             <div class='schedule'/>
                         </div>
                         <div class="col s6">
@@ -28,6 +19,15 @@
                                 <input id="to_hour" type="text" data-length="10" class="invalid"/>
                                 <label for="input_text">To Hour</label>
                               </div>
+                            </div>
+                            <div class="input-field col s12">
+                                <select class="select-asset-id">
+                                    <option value="" disabled="" selected="">Choose your room</option>
+                                    <t t-foreach="widget.ressources" t-as="ressource">
+                                    <option t-att-value="ressource.id"><span t-esc="ressource.title"/></option>
+                                    </t>
+                                </select>
+                                <label>Room</label>
                             </div>
                             <div class="row">
                               <div class="input-field col s12">
