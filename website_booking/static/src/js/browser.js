@@ -196,8 +196,6 @@ var NewBookingDialog = Widget.extend({
         },
         "change .select-asset-id": function (event) {
             this.schedule.set_asset_id(parseInt(this.$( "select.select-asset-id" ).val()));
-            this.$('select.select-asset-id').removeClass('invalid');
-            this.$('select.select-asset-id').addClass('valid');
             this.updateSendButton();
         },
         "change #from_hour": function (event) {

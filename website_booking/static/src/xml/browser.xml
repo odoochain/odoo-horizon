@@ -21,7 +21,7 @@
                               </div>
                             </div>
                             <div class="input-field col s12">
-                                <select class="select-asset-id invalid" disabled="">
+                                <select class="select-asset-id" disabled="">
                                     <option value="" disabled="" selected="">Choose your room</option>
                                 </select>
                                 <label>Room</label>
