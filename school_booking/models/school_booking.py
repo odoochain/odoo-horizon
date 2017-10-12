@@ -80,6 +80,6 @@ class Event(models.Model):
         total = 0
         _logger.info(duration_list)
         for item in duration_list:
-            total = total + item.duration
+            total = total + item['duration']
         if total > 2:
             raise ValidationError(_("You cannot book more than two hours in advance."))
