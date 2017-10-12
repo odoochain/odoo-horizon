@@ -41,13 +41,14 @@
         <t t-call="report.html_container">
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
-            <t t-foreach="docs" t-as="o">
-                <div class="page">
-                    <div class="container">
-                      
-                    </div>
+            <div class="page">
+                <div class="container">
+                  <div class="jumbotron">
+                    <h1>No description found</h1>      
+                    <p>Please contact the secretary or your teacher for more information about this activity.</p>
+                  </div>          
                 </div>
-            </t>
+            </div>
         </t>
     </template>
     
