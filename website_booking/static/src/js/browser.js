@@ -187,8 +187,10 @@ var NewBookingDialog = Widget.extend({
                         'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
                         'room_id': roomId,
                         'categ_ids': [[4, categ[1]]],
-                    }]).fail(function(err) {
-                        console.log(err);
+                    }]).fail(function(error) {
+                        if(error.data.exception_type == "validation_error"){
+                            Dialog.alert(null, _t(error.data.message));
+                        }
                     }).then(function (id) {
                         self.trigger_up('newEvent', {'id': id});
                     });
