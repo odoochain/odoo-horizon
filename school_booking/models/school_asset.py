@@ -31,7 +31,27 @@ class Asset(models.Model):
     _inherit = ['mail.thread']
     _order = 'sequence'
     
+    booking_policy = fields.Selection([
+            ('available','Available'),
+            ('preserved','Preserved'),
+            ('out', 'Out'),
+        ], string='Booking policy', index=True, default='available',copy=False,
+        help=" * The 'Available' available to all users.\n"
+             " * The 'Preserved' only employee can book.\n"
+             " * The 'Out' no one can book.\n"
+             ,track_visibility='onchange')
     
+    abandonned_date = fields.Date('Abandonned Date')
+    
+    @api.multi
+    def set_to_draft(self, context):
+        # TODO use a workflow to make sure only valid changes are used.
+        return self.write({'state': 'draft'})
+    
+    @api.multi
+    def set_to_progress(self, context):
+        # TODO use a workflow to make sure only valid changes are used.
+        return self.write({'state': 'progress'})
     
     sequence = fields.Integer(string='Sequence')
     name = fields.Char(required=True, translate=True)

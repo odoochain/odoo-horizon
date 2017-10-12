@@ -168,6 +168,7 @@
             <group col="2">
               <field name="asset_type_id"/>
               <field name="is_room" invisible="1"/>
+              <field name="booking_policy"/>
               <field name="building_id" attrs="{'invisible': [('is_room','=',False)]}"/>
               <field name="category_id" />
               <field name="tag_ids" widget="many2many_tags"/>
