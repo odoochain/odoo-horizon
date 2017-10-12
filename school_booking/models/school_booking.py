@@ -83,14 +83,14 @@ class Event(models.Model):
         if total > 2:
             raise ValidationError(_("You cannot book more than two hours in advance."))
             
-    @api.one
-    @api.constrains('start','stop','room_id')
-    def _check_room_availability(self):
-        domain = [
-            ('start', '<=', self.stop),    
-            ('stop', '>=', self.start),
-            ('room_id', '=', self.room_id)
-        ]
-        match_count = self.env['calendar.event'].search_count(domain)
-        if match_count > 0 :
-            raise ValidationError(_("Conflict detected on the room %s." % self.room_id.name)) 
+    #@api.one
+    #@api.constrains('start','stop','room_id')
+    #def _check_room_availability(self):
+    #    domain = [
+    #        ('start', '<=', self.stop),    
+    #        ('stop', '>=', self.start),
+    #       ('room_id', '=', self.room_id)
+    #    ]
+    #    match_count = self.env['calendar.event'].search_count(domain)
+    #    if match_count > 0 :
+    #        raise ValidationError(_("Conflict detected on the room %s." % self.room_id.name)) 
