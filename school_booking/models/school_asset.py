@@ -31,6 +31,8 @@ class Asset(models.Model):
     _inherit = ['mail.thread']
     _order = 'sequence'
     
+    
+    
     sequence = fields.Integer(string='Sequence')
     name = fields.Char(required=True, translate=True)
     active = fields.Boolean(name="Active", default=True)
