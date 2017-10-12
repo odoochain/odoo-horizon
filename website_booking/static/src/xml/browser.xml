@@ -100,7 +100,7 @@
                 </li>
             </ul>
         </main>
-        <div id="#main-modal" class="modal">
+        <div id="main-modal" class="modal">
             <div class="modal-content"/>
             <div class="modal-footer"/>
         </div>
