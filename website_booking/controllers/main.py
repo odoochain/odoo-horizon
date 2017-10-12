@@ -114,7 +114,7 @@ class BookingController(http.Controller):
             ('start', '<=', end),    
             ('stop', '>=', start),
             ('room_id', '<>', False),
-            ('booking_policy','=','available')
+            ('room_id.booking_policy','=','available')
         ]
         all_rooms_ids = request.env['school.asset'].search([['asset_type_id.is_room','=',True]])
         busy_rooms_ids = request.env['calendar.event'].with_context({'virtual_id': True}).search(domain,fields)
