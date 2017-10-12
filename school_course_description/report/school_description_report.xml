@@ -60,7 +60,7 @@
                 <div class="page">
                     <div class="container">
                       <section>
-                        <div class="row" style="margin-bottom:30px;">
+                        <div class="row mt64 mb64">
                             <h1>
                                 <t t-if="o.state == 'draft'">Draft </t>Course Description
                             </h1>
