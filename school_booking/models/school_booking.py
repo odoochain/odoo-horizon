@@ -76,7 +76,7 @@ class Event(models.Model):
             return
         duration_list = self.env['calendar.event'].search_read([
                 ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
-            ],'duration')
+            ],['duration'])
         total = 0
         _logger.info(duration_list)
         for item in duration_list:
