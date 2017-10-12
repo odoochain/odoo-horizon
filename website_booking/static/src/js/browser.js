@@ -43,6 +43,11 @@ var CalendarWidget = Widget.extend({
     		navLinks: true, // can click day/week names to navigate views
     		eventLimit: true, // allow "more" link when too many events
     		refetchResourcesOnNavigate : false,
+    		resourceRender: function(resourceObj, labelTds, bodyTds) {
+    		    if(resourceObj.booking_policy in ['preserved','out']) {
+    		        labelTds.css('background', 'grey');    
+    		    }
+            },
         }
     },
     
@@ -615,10 +620,6 @@ var Calendar = CalendarWidget.extend({
         this.category_id = resource.id;
         this.$calendar.fullCalendar( 'refetchResources' );
         this.$calendar.fullCalendar( 'refetchEvents' );
-    },
-    
-    resourceRender: function(resourceObj, labelTds, bodyTds) {
-        labelTds.css('background', 'blue');
     },
     
 });

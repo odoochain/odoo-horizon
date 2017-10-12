@@ -91,7 +91,7 @@ class BookingController(http.Controller):
     @http.route('/booking/assets', type='json', auth='public', website=True)
     def booking_assets(self, category_id=False, debug=False, **k):
         if category_id:
-            return request.env['school.asset'].sudo().search_read([('category_id', '=', category_id)],['name'])
+            return request.env['school.asset'].sudo().search_read([('category_id', '=', category_id)],['name','booking_policy'])
         else:
             return [];
         
