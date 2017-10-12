@@ -81,7 +81,7 @@ class website_portal_school_management(http.Controller):
             }
             return request.render("school_course_description.report_course_documentation_content", values)
         else:
-            return request.render("school_course_description.no_description", [])
+            return request.render("school_course_description.report_course_documentation_no_content", [])
         
     @http.route(['/print_program/<model("school.program"):program>'], type='http', auth='public')
     def print_program(self, program, redirect=None, **post):
