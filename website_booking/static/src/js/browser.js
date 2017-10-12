@@ -726,7 +726,7 @@ var Browser = Widget.extend({
         this._super.apply(this, arguments);
         var self = this;
         /* TODO : why this.$('#main-modal') does not work ? */
-        self.main_modal = this.$('#main-modal').modal();
+        self.main_modal = this.$('#main-modal-content').parent().modal();
         this.$('.collapsible').collapsible();
     },
     
