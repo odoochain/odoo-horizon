@@ -464,9 +464,6 @@ var Navigation = Widget.extend({
     
     renderCategories: function() {
         var self = this;
-        console.log(this.selected_category);
-        console.log(this.display_category);
-        console.log(this.parent_category);
         if(this.display_category) {
             if(this.display_category.isRoot) {
                 ajax.jsonRpc('/booking/categories', 'call', {'root' : 1}).done(function(categories){
