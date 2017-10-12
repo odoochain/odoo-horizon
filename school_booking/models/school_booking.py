@@ -72,7 +72,7 @@ class Event(models.Model):
     @api.one
     @api.constrains('room_id')
     def _check_room_quota(self):
-        if self.user_id.partner_id.teacher or self.user_id.partner_id.emplpoyee :
+        if self.user_id.partner_id.teacher or self.user_id.partner_id.emplpoye :
             return
         duration_list = self.env['calendar.event'].search_read([
                 ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
