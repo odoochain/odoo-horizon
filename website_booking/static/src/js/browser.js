@@ -617,6 +617,10 @@ var Calendar = CalendarWidget.extend({
         this.$calendar.fullCalendar( 'refetchEvents' );
     },
     
+    resourceRender: function(resourceObj, labelTds, bodyTds) {
+        labelTds.css('background', 'blue');
+    },
+    
 });
 
 var Toolbar = Widget.extend({
