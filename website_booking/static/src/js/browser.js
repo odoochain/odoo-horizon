@@ -189,7 +189,7 @@ var NewBookingDialog = Widget.extend({
                         'categ_ids': [[4, categ[1]]],
                     }]).fail(function(error) {
                         if(error.data.exception_type == "validation_error"){
-                            Materialize.toast(_t(error.data.arguments[0]), 3000, 'rounded')
+                            Materialize.toast(_t(error.data.arguments[0]), 4000)
                         }
                     }).then(function (id) {
                         self.trigger_up('newEvent', {'id': id});
