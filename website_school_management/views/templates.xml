@@ -74,7 +74,7 @@
                 </script>
             </head>
             <body>
-                <div class="container mt64 mb64">
+                <div class="container">
                     <t t-call="website_school_management.program_content"/>
                 </div>
             </body>
@@ -84,7 +84,7 @@
     <template id="program_content" name="Program Content">
         <t t-set="title">Programmes</t>
         <div class="oe_structure">
-            <div class="container">
+            <div class="container mt64 mb64">
                 <div class="row text-center">
                     <h2>Programmes</h2>
                 </div>
