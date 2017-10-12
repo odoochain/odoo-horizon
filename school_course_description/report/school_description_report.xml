@@ -43,7 +43,7 @@
             <t t-set="data_report_header_spacing" t-value="25"/>
             <div class="page">
                 <div class="container">
-                  <div class="jumbotron">
+                  <div class="jumbotron mt64">
                     <h1>No description found</h1>      
                     <p>Please contact the secretary or your teacher for more information about this activity.</p>
                   </div>          
