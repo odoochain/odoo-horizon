@@ -283,8 +283,6 @@ var NewBookingDialog = Widget.extend({
             'showDuration': true,
         });
         if(self.edit_mode) {
-            self.$('select.select-asset-id').val(self.event.resourceId).change();
-            self.$('select.select-asset-id').material_select();
             self.$('#from_hour').val(self.event.start.format('H:mm'));
             self.$('#from_hour').removeClass('invalid');
             self.$('#from_hour').addClass('valid');
@@ -292,6 +290,9 @@ var NewBookingDialog = Widget.extend({
             self.$('#to_hour').removeClass('invalid');
             self.$('#to_hour').addClass('valid');
             self.$('#description').val(self.event.title);
+            self.updateRoomList();
+            self.$('select.select-asset-id').val(self.event.resourceId).change();
+            self.$('select.select-asset-id').material_select();
             self.$('.delete-booking').show();
         } else {
             self.$('#description').val(session.partner.name);
