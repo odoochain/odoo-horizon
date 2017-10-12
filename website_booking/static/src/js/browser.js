@@ -569,6 +569,7 @@ var Calendar = CalendarWidget.extend({
                     self.ressources.push({
                         'id' : asset.id,
                         'title' : asset.name,
+                        'booking_policy' : asset.booking_policy,
                     });
                 });
                 callback(self.ressources);
