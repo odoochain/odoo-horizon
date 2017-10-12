@@ -101,7 +101,11 @@
             </ul>
         </main>
         <div id="main-modal" class="modal">
-            <div class="modal-content"/>
+            <div id="main-modal-content" class="modal-content"/>
+            <div class="modal-footer"/>
+        </div>
+        <div id="error-modal" class="modal">
+            <div id="error-modal-content" class="modal-content"/>
             <div class="modal-footer"/>
         </div>
     </t>
