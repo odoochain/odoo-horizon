@@ -68,3 +68,17 @@ class Event(models.Model):
     def _get_main_categ_id(self):
         if self.categ_ids:
             self.main_categ_id = self.categ_ids[0]
+            
+    @api.one
+    @api.constrains('room_id')
+    def _check_room_quota(self):
+        if self.user_id.partner_id.teacher or self.user_id.partner_id.emplpoyee :
+            return
+        duration_list = self.env['calendar.event'].search_read([
+                ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
+            ],'duration')
+        total = 0
+        for item in duration_list:
+            total = total + item.duration
+        if total > 2:
+            raise ValidationError('You cannot book more than two hours in advance.')
