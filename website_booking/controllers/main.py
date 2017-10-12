@@ -105,7 +105,7 @@ class BookingController(http.Controller):
         return request.render('website_booking.editor')
         
     @http.route('/booking/rooms', type='json', auth='user', website=True)
-    def booking_rooms(self, start, end):
+    def booking_rooms(self, start, end, debug=False, **k):
         # TODO : ugply transform
         start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
@@ -114,7 +114,7 @@ class BookingController(http.Controller):
             ('start', '<=', end),    
             ('stop', '>=', start),
             ('room_id', '<>', False),
-            ('')
+            ('booking_policy','=','available')
         ]
         all_rooms_ids = request.env['school.asset'].search([['asset_type_id.is_room','=',True]])
         busy_rooms_ids = request.env['calendar.event'].with_context({'virtual_id': True}).search(domain,fields)
