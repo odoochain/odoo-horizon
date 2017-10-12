@@ -140,6 +140,7 @@
           <field name="category_id"/>
           <field name="building_id"/>
           <field name="asset_type_id"/>
+          <field name="booking_policy"/>
           <field name="responsible_id"/>
           <field name="room_id"/>
         </tree>
