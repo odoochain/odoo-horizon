@@ -44,7 +44,7 @@ var CalendarWidget = Widget.extend({
     		eventLimit: true, // allow "more" link when too many events
     		refetchResourcesOnNavigate : false,
     		resourceRender: function(resourceObj, labelTds, bodyTds) {
-    		    if(resourceObj.booking_policy in ['preserved','out']) {
+    		    if(resourceObj.booking_policy === 'preserved' || resourceObj.booking_policy === 'out') {
     		        labelTds.css('background', 'grey');    
     		    }
             },
