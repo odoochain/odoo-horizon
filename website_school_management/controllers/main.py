@@ -75,10 +75,13 @@ class website_portal_school_management(http.Controller):
     def course(self, course_id, redirect=None, **post):
         _, course_id = unslug(course_id)
         course_docs = request.env['school.course_documentation'].sudo().search([('state', '=', 'published'),('course_ids','=',course_id)],order="author_id")
-        values = {
-            'docs': course_docs[0],
-        }
-        return request.render("school_course_description.report_course_documentation_content", values)
+        if course_docs:
+            values = {
+                'docs': course_docs[0],
+            }
+            return request.render("school_course_description.report_course_documentation_content", values)
+        else:
+            return request.render("school_course_description.no_description", [])
         
     @http.route(['/print_program/<model("school.program"):program>'], type='http', auth='public')
     def print_program(self, program, redirect=None, **post):
