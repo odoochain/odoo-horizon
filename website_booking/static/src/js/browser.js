@@ -45,7 +45,7 @@ var CalendarWidget = Widget.extend({
     		refetchResourcesOnNavigate : false,
     		resourceRender: function(resourceObj, labelTds, bodyTds) {
     		    if(resourceObj.booking_policy === 'preserved' || resourceObj.booking_policy === 'out') {
-    		        labelTds.css('background', '#ccccc');    
+    		        labelTds.css('background', '#cccccc');    
     		    }
             },
         }
