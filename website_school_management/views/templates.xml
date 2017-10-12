@@ -153,7 +153,7 @@
                 </script>
             </head>
             <body>
-                <div class="container">
+                <div class="container mt64 mb64">
                     <t t-call="website_school_management.program_details_content_global"/>
                 </div>
             </body>
