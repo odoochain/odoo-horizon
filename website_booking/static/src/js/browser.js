@@ -24,11 +24,12 @@ var CalendarWidget = Widget.extend({
     
     get_fc_init_options: function() {
         return {
-            header: {
-    			left: 'prev,next today',
-    			center: 'title',
-    			right:'',
-    		},
+            header : {
+                 left:   'prev',
+                 center: 'title,today',
+                 right:  'next'
+             },
+            themeSystem : 'bootstrap3',
     		allDaySlot : false,
     		locale: moment.locale,
     		timezone: "local",
