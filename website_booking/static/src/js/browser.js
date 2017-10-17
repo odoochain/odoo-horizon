@@ -551,6 +551,11 @@ var Calendar = CalendarWidget.extend({
                 dialog.appendTo(self.getParent().main_modal.empty());
                 self.getParent().main_modal.modal('open');
             },
+            header : {
+                left:   'prev',
+                center: 'title,today',
+                right:  'next'
+            }
         });
     },
     
