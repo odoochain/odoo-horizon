@@ -279,8 +279,8 @@ class IndividualBloc(models.Model):
         self.total_acquiered_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
         self.total_not_acquiered_credits = self.total_credits - self.total_acquiered_credits
         self.total_not_acquiered_hours = self.total_hours - self.total_acquiered_hours
-        self.total_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
-        self.total_dispensed_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
+        self.total_dispensed_credits = sum([icg.total_dispensed_credits for icg in self.course_group_ids])
+        self.total_dispensed_hours = sum([icg.total_dispensed_hours for icg in self.course_group_ids])
         self.total_not_dispensed_credits = self.total_credits - self.total_dispensed_credits
         self.total_not_dispensed_hours = self.total_hours - self.total_dispensed_hours
         
@@ -310,6 +310,21 @@ class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _inherit = 'school.individual_course_group'
     
+    ## Compute dispensed hours and ECTS
+    
+    total_dispensed_credits = fields.Integer(compute="compute_credits",string="Dispensed Credits",store=True)
+    total_dispensed_hours = fields.Integer(compute="compute_credits",string="Dispensed Hours",store=True)
+    total_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Not Dispensed Credits",store=True)
+    total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Not Dispensed Hours',store=True)
+    
+    @api.depends('course_ids.dispense')
+    @api.one
+    def compute_credits(self):
+        self.total_dispensed_credits = sum([ic.credits for ic in self.course_ids if ic.dispense])
+        self.total_dispensed_hours = sum([ic.hours for ic in self.course_ids if ic.dispense])
+        self.total_not_dispensed_credits = self.total_credits - self.total_dispensed_credits
+        self.total_not_dispensed_hours = self.total_hours - self.total_dispensed_hours
+        
     # Actions
     @api.one
     def set_deliberated_to_ten(self, session = 1, message=''):
