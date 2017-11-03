@@ -124,7 +124,7 @@
                 </group>
                 <notebook>
                   <page string="Participants" attrs="{'invisible':[('type','=','O')]}">
-                    <field name="individual_course_ids" options="{'no_create': True, 'no_open': True}">
+                    <field name="individual_course_ids" options="{'no_create': True, 'no_open': True}" widget="many2many">
                       <tree string="Participants" default_order="student_id,name">
                         <field name="student_id" />
                         <field name="source_bloc_name" string="Bloc" />
@@ -140,21 +140,21 @@
                     </field>
                   </page>
                   <page string="Participants" attrs="{'invisible':[('type','!=','O')]}">
-                    <field name="picked_participant_ids" options="{'no_create': True, 'no_open': True}">
+                    <field name="picked_participant_ids" options="{'no_create': True, 'no_open': True}" widget="many2many">
                       <tree string="Participants">
                         <field name="name" />
                       </tree>
                     </field>
                   </page>
                   <page string="Courses" attrs="{'invisible':[('type','in',['O', 'P'])]}">
-                    <field name="course_ids" options="{'no_create': True, 'no_open': True}">
+                    <field name="course_ids" options="{'no_create': True, 'no_open': True}" widget="many2many">
                       <tree string="Courses">
                         <field name="name" />
                       </tree>
                     </field>
                   </page>
                   <page string="Staff">
-                    <field name="staff_ids" options="{'no_create': True, 'no_open': True}">
+                    <field name="staff_ids" options="{'no_create': True, 'no_open': True}" widget="many2many">
                       <tree string="Staff">
                         <field name="name" />
                       </tree>
