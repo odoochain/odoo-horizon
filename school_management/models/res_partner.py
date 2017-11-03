@@ -52,7 +52,7 @@ class Partner(models.Model):
     student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
     student_current_bloc_ids = fields.One2many('school.individual_bloc', compute='_get_student_current_bloc_ids', string='Current Blocs')
     
-    speciality_ids = fields.One2many('school.speciality', compute='_get_speciality_ids')
+    #speciality_ids = fields.One2many('school.speciality', compute='_get_speciality_ids')
     
     year_sequence = fields.Selection([
         ('current','Current'),
