@@ -138,7 +138,8 @@ class SaturnXlsx(ReportXlsx):
             sheet.write(i, 17, bloc_id.field_b6.name)
             sheet.write(i, 18, bloc_id.field_b7)
             sheet.write(i, 19, bloc_id.field_b8.name)
-            sheet.write_datetime(i, 20, fields.Date.from_string(bloc_id.field_b9), date_format)
+            if bloc_id.field_b9:
+                sheet.write_datetime(i, 20, fields.Date.from_string(bloc_id.field_b9), date_format)
             sheet.write(i, 21, bloc_id.field_b10)
             sheet.write(i, 22, bloc_id.field_b11)
             sheet.write(i, 23, bloc_id.field_b12)
@@ -197,8 +198,8 @@ class SaturnXlsx(ReportXlsx):
             sheet.write(i, 76, bloc_id.field_h1)
             sheet.write(i, 77, bloc_id.field_h2)
             sheet.write(i, 78, bloc_id.field_h3)
-            _logger.info(bloc_id.field_h4)
-            sheet.write_datetime(i, 79, fields.Date.from_string(bloc_id.field_h4), date_format)
+            if bloc_id.field_h4:
+                sheet.write_datetime(i, 79, fields.Date.from_string(bloc_id.field_h4), date_format)
             i = i + 1
 
 SaturnXlsx('report.school.saturn.xlsx','school.saturn')
