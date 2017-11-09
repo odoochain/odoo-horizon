@@ -18,28 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School Statistics Fields',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['school_invoice','school_evaluations','report_xlsx'],
-    'init_xml': [],
-    'data': [
-        'data/school.stat_etablissement.csv',
-        'data/school.stat_domain.csv',
-    ],
-    'update_xml': [
-        'views/saturn_view.xml',
-        'report/statistics_report.xml',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules add saturn statistic support.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+import statistics_report

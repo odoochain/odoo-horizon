@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -18,28 +19,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School Statistics Fields',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['school_invoice','school_evaluations','report_xlsx'],
-    'init_xml': [],
-    'data': [
-        'data/school.stat_etablissement.csv',
-        'data/school.stat_domain.csv',
-    ],
-    'update_xml': [
-        'views/saturn_view.xml',
-        'report/statistics_report.xml',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules add saturn statistic support.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+-->
+<odoo>
+    <report
+        id="saturn_xlsx"
+        model="school.saturn"
+        string="Export Saturn to XLSX"
+        report_type="xlsx"
+        name="school.saturn.xlsx"
+        file="school.saturn.xlsx"
+        attachment_use="False"
+    />
+</odoo>
