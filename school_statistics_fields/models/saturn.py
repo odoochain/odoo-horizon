@@ -475,7 +475,6 @@ class IndividualBloc(models.Model):
         year_minus_4 = year_minus_3.previous if year_minus_3 else False
         year_minus_5 = year_minus_4.previous if year_minus_4 else False
         if year_minus_1:
-            _logger.info('Look for year %s' % year_minus_1.name)
             history = self.env['school.student_history_entry'].search([('student_id','=',self.student_id.id),('year_id','=',year_minus_1.id)])
             if history:
                 _logger.info('Found année n-1')

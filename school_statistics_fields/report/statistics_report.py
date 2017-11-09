@@ -193,7 +193,7 @@ class SaturnXlsx(ReportXlsx):
             sheet.write(i, 72, bloc_id.field_g24.code)
             sheet.write(i, 73, bloc_id.field_g25)
             sheet.write(i, 74, bloc_id.field_g26)
-            sheet.write(i, 75, bloc_id.field_g27)
+            sheet.write(i, 75, bloc_id.field_g27.name)
             sheet.write(i, 76, bloc_id.field_h1)
             sheet.write(i, 77, bloc_id.field_h2)
             sheet.write(i, 78, bloc_id.field_h3)
