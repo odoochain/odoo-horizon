@@ -477,17 +477,14 @@ class IndividualBloc(models.Model):
         if year_minus_1:
             history = self.env['school.student_history_entry'].search([('student_id','=',self.student_id.id),('year_id','=',year_minus_1.id)])
             if history:
-                _logger.info('Found année n-1')
                 self.field_g2 = history.activite
                 self.field_g3 = history.etablissement_id
                 self.field_g4 = history.domain_id
                 self.field_g5 = history.annee
                 self.field_g6 = history.resultat
         if year_minus_2:
-            _logger.info('Look for year %s' % year_minus_2)
             history = self.env['school.student_history_entry'].search([('student_id','=',self.student_id.id),('year_id','=',year_minus_2.id)])
             if history:
-                _logger.info('Found année n-2')
                 self.field_g7 = history.activite
                 self.field_g8= history.etablissement_id
                 self.field_g9= history.domain_id
