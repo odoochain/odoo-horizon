@@ -215,7 +215,7 @@ class IndividualBloc(models.Model):
     field_c19 = fields.Selection([('AC','Mobilité académique'),('ST','Mobilité de stage'),('NA','Non applicable')],description='Fields C19',string='Type de mobilité', related='student_id.mob_type')
     
     field_d1 = fields.Selection([('1','Etudiant non finançable'),('2','Partiellement finançable'),('3','Étudiant finançable')],description='Fields D1',string='Nationalité de l''étudiant au regard du financement', default='3')
-    #field_d2 = fields.Char(description='Fields D2',string='Modalité de l''inscription au regard du financement')
+    field_d2 = fields.Char(description='Fields D2',string='Modalité de l''inscription au regard du financement')
     field_d3 = fields.Selection([('B','Boursier'),('X','Non boursier'),('A','Bourse en attente'),('N','Bourse refusée')],description='Fields D3',string='Etudiant boursier')
     field_d4 = fields.Monetary(currency_field='company_currency_id', description='Fields D4',string='Minerval', related='invoice_id.amount_total',readonly='1')
     field_d5 = fields.Date(description='Fields D5',string='Date de réception du paiement du minerval', related='invoice_id.final_payment_date',readonly='1')
