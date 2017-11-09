@@ -115,7 +115,7 @@ class SaturnXlsx(ReportXlsx):
         sheet.write(i, 76, u'Résultats de la 1re session (juillet 2013)')
         sheet.write(i, 77, u'Résultats de la 2e session (septembre 2013)')
         sheet.write(i, 78, u'Résultats de session prolongée')
-        sheet.write(i, 79, u'Date du diplôme')
+        sheet.write(i, 79, u'Date du diplôme') 
         i = 1
         for bloc_id in saturn.bloc_ids:
             sheet.write(i, 0, bloc_id.field_a1)
