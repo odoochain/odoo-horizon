@@ -100,6 +100,7 @@ class StudentHistoryEntry(models.Model):
     year_id = fields.Many2one('school.year', string="Year", required=True)
     student_id = fields.Many2one('res.partner', string="Student", required=True)
     activite = fields.Selection([
+        ('0','Enseignement supérieur de la fédération Wallonie Bruxelle'),
         ('1','Enseignement secondaire non obligatoire (année préparatoire à l’enseignement supérieur, 4e cycle du secondaire, ...)'),
         ('2','Haute École de la Fédération Wallonie‐Bruxelles ou germanophone'),
         ('3','Université de la Fédération Wallonie‐Bruxelles'),
