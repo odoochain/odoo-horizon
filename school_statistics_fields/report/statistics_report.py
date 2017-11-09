@@ -197,6 +197,7 @@ class SaturnXlsx(ReportXlsx):
             sheet.write(i, 76, bloc_id.field_h1)
             sheet.write(i, 77, bloc_id.field_h2)
             sheet.write(i, 78, bloc_id.field_h3)
+            _logger.info(bloc_id.field_h4)
             sheet.write_datetime(i, 79, fields.Date.from_string(bloc_id.field_h4), date_format)
             i = i + 1
 
