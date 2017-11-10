@@ -180,7 +180,12 @@ class IndividualBloc(models.Model):
     
     student_historic_entry_ids = fields.One2many('school.student_history_entry', related='student_id.student_historic_entry_ids')
     
-    field_a1 = fields.Char(description='Fields A1',string='Code Fase de l''Ecole supérieure des Arts', compute=lambda self: self.env.user.company_id.code_fase,readonly='1')
+    field_a1 = fields.Char(description='Fields A1',string='Code Fase de l''Ecole supérieure des Arts', compute='_compute_fase_code',readonly='1')
+    
+    @api.multi
+    def _compute_fase_code(self):
+        self.field_a1 = self.env.user.company_id.code_fase
+    
     field_a2 = fields.Many2one('school.year',description='Fields A2',string='Année académique en cours (= année N)',related='year_id',readonly='1')
     field_a3 = fields.Selection([('long','Long'),('short', 'Short')],description='Fields A3',string='Type d''études', related='program_id.cycle_id.type',readonly='1')
     field_a4 = fields.Many2one('school.domain',description='Fields A4',string='Domaine d''études',related='program_id.speciality_id.domain_id',readonly='1')
