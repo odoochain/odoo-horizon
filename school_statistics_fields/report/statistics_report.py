@@ -120,7 +120,7 @@ class SaturnXlsx(ReportXlsx):
         for bloc_id in saturn.bloc_ids:
             sheet.write(i, 0, bloc_id.field_a1 or '')
             sheet.write(i, 1, bloc_id.field_a2.name or '')
-            sheet.write(i, 2, bloc_id.field_a3 or '')
+            sheet.write(i, 2, bloc_id.field_a3[0].upper() or '')
             sheet.write(i, 3, bloc_id.field_a4.saturn_code or '')
             sheet.write(i, 4, bloc_id.field_a5.saturn_code or '')
             sheet.write(i, 5, bloc_id.field_a6.saturn_code or '')
