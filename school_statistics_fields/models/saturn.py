@@ -182,7 +182,7 @@ class IndividualBloc(models.Model):
     
     field_a1 = fields.Char(description='Fields A1',string='Code Fase de l''Ecole supérieure des Arts', compute='_compute_fase_code',readonly='1')
     
-    @api.multi
+    @api.one
     def _compute_fase_code(self):
         self.field_a1 = self.env.user.company_id.code_fase
     
