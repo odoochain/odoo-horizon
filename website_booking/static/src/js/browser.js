@@ -105,7 +105,7 @@ var Schedule =  CalendarWidget.extend({
     			right:'',
     		},
             defaultDate: this.date,
-            height: 500,
+            height: 350,
             events: self.fetch_events.bind(this),
             allDaySlot: false,
             dayClick: self.day_click.bind(this),

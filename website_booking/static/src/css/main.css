@@ -83,6 +83,10 @@ nav .nav-title {
 }
 
 .fc button:focus {
-    outline: none;
-    background-color: transparent;
+  outline: none;
+  background-color: transparent;
 }
+
+label:after {
+  font-size: xx-small;
+}  
