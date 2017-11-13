@@ -30,4 +30,15 @@
         file="school.saturn.xlsx"
         attachment_use="False"
     />
+    
+    <report
+        id="annexe5_xlsx"
+        model="school.saturn"
+        string="Export Annexe 5 to XLSX"
+        report_type="xlsx"
+        name="school.annexe5.xlsx"
+        file="school.annexe5.xlsx"
+        attachment_use="False"
+    />
+    
 </odoo>

@@ -7,9 +7,6 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="col s6">
-                            <div class='schedule'/>
-                        </div>
-                        <div class="col s6">
                             <div class="row">
                               <div class="input-field col s6">
                                 <input id="from_hour" type="text" data-length="10" class="invalid"/>
@@ -32,6 +29,9 @@
                                 <label for="description">Event description</label>
                               </div>
                             </div>
+                        </div>
+                        <div class="col s6">
+                            <div class='schedule'/>
                         </div>
                     </div>
                 </form>

@@ -36,7 +36,7 @@ class SchoolSaturnStatistics(models.Model):
     @api.one
     @api.depends('year_id')
     def _compute_name(self):
-        self.name = "Collecte Saturn %s" % self.year_id.name
+        self.name = "Collecte Statistique %s" % self.year_id.name
 
     state = fields.Selection([
             ('draft','Draft'),

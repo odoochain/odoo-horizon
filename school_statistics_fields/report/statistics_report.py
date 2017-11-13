@@ -205,3 +205,16 @@ class SaturnXlsx(ReportXlsx):
             i = i + 1
 
 SaturnXlsx('report.school.saturn.xlsx','school.saturn')
+
+class Annexe5Xlsx(ReportXlsx):
+
+    def generate_xlsx_report(self, workbook, data, saturn):
+        saturn.ensure_one()
+        sheet = workbook.add_worksheet('main')
+        
+        date_format = workbook.add_format({'num_format': 'dd/mm/yyyy'})
+        
+        i = 0
+            
+        
+Annexe5Xlsx('report.school.annexe5.xlsx','school.saturn')
