@@ -302,7 +302,7 @@
                                 <field name="annee" />
                                 <field name="resultat" />
                             </tree>
-                        </fields>
+                        </field>
                         <separator string="Annexe 5 Lines"/>
                         <field name="student_historic_entry_ids">
                             <tree string="Annexe 5 Lines" context="{'default_student_id' : active_id}" editable="bottom">
