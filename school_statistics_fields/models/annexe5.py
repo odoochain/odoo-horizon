@@ -57,6 +57,6 @@ class StudentAnnexe5Entry(models.Model):
     
     resultat = fields.Selection([('R','Réussi'),('E','Echec')], string='Résultat', requiered=False)
     
-    pae_num = fields.integer(string='PAE Num', requiered=False)
+    pae_num = fields.Integer(string='PAE Num', requiered=False)
     
-    pae_den = fields.integer(string='PAE Den', requiered=False)
+    pae_den = fields.Integer(string='PAE Den', requiered=False)
