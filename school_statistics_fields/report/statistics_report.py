@@ -372,5 +372,6 @@ class Annexe5Xlsx(ReportXlsx):
             sheet.write(i, 80, u'PAE 16-17')
             #sheet.write(i, 81, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 82, u'A ENCODER SUR FICHIER SEPARE')
+            i = i + 1
 
 Annexe5Xlsx('report.school.annexe5.xlsx','school.saturn')
