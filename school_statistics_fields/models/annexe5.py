@@ -30,7 +30,6 @@ class IndividualBloc(models.Model):
     _inherit = 'school.individual_bloc'
     
     is_annexe5_validated = fields.Boolean(string="Validated for Saturn")
-    
 
 class Partner(models.Model):
     '''Partner'''
