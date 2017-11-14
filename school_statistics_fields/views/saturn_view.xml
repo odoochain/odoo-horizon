@@ -291,9 +291,9 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="historylines" string="Student Statistics Details" attrs="{'invisible': [('student','=',False)]}">
+                        <separator string="Saturn History Lines"/>
                         <field name="student_historic_entry_ids">
                             <field name="condition"/>
-                            <separator string="History Lines"/>
                             <tree string="History Lines" context="{'default_student_id' : active_id}" editable="bottom">
                                 <field name="year_id"/>
                                 <field name="activite"/>
