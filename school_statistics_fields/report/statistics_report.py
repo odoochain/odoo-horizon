@@ -306,7 +306,7 @@ class Annexe5Xlsx(ReportXlsx):
         for bloc_id in saturn.bloc_ids:
             sheet.write(i, 0, u'ESA')
             sheet.write(i, 1, bloc_id.field_a5.short_name or '')
-            sheet.write(i, 2, u'OPTION/FINALITE/ORIENTATION')
+            sheet.write(i, 2, bloc_id.section.name + '/' + bloc_id.track.name + '/' + bloc_id.speciality.name)
             sheet.write(i, 3, bloc_id.field_a4.name or '')
             sheet.write(i, 4, u'INSCRIPTION 16-17')
             sheet.write(i, 5, u'TYPE')
