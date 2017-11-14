@@ -307,7 +307,8 @@ class Annexe5Xlsx(ReportXlsx):
             sheet.write(i, 0, u'ESA')
             sheet.write(i, 1, bloc_id.field_a5.short_name or '')
             _logger.info(bloc_id.name)
-            sheet.write(i, 2, bloc_id.source_bloc_section_id.name or '' + '/' + bloc_id.source_bloc_track_id.name or '' + '/' + bloc_id.source_bloc_speciality_id.name or '')
+            if bloc_id.source_bloc_section_id and bloc_id.source_bloc_track_id and bloc_id.source_bloc_speciality_id :
+                sheet.write(i, 2, bloc_id.source_bloc_section_id.name or '' + '/' + bloc_id.source_bloc_track_id.name or '' + '/' + bloc_id.source_bloc_speciality_id.name or '')
             sheet.write(i, 3, bloc_id.field_a4.name or '')
             sheet.write(i, 4, u'INSCRIPTION 16-17')
             sheet.write(i, 5, u'TYPE')
