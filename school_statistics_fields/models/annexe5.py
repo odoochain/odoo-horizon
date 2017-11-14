@@ -31,3 +31,32 @@ class IndividualBloc(models.Model):
     
     is_annexe5_validated = fields.Boolean(string="Validated for Saturn")
     
+
+class Partner(models.Model):
+    '''Partner'''
+    _inherit = 'res.partner'
+
+    student_annexe5_entry_ids = fields.One2many('school.student_annexe5_entry', 'student_id', string="Student Annexe 5", track_visibility='onchange')
+    
+class StudentAnnexe5Entry(models.Model):
+    '''Student Annexe 5 Entry'''
+    _name = 'school.student_annexe5_entry'
+    
+    year_id = fields.Many2one('school.year', string="Year", required=True)
+    
+    student_id = fields.Many2one('res.partner', string="Student", required=True)
+    
+    activite = fields.Selection([('ETU','Etudes'),('TRAV','Travail'),('CHOM','Chômage'),('ETR','Etranger'),('AUT','Autre')]
+                                , string="Activité", required=True)
+    
+    code_saturn = fields.Many2one('school.speciality', string="Code Saturn", required=False)
+    
+    type = fields.Selection([('U','U'),('HE','HE'),('ESA','ESA'),('PSU','PSU'),('HE','HE'),('ESA','ESA'),('PS','PS')], string="Type", requiered=False)
+    
+    inscription = fields.Selection([('B1','B1'), ('B2','B2'), ('B3','B3'), ('M1','M1'), ('M2','M2'), ('SP','SP'), ('1A1C','1A1C')], string="Inscription", requiered=False)
+    
+    resultat = fields.Selection([('R','Réussi'),('E','Echec')], string='Résultat', requiered=False)
+    
+    pae_num = fields.integer(string='PAE Num', requiered=False)
+    
+    pae_den = fields.integer(string='PAE Den', requiered=False)
