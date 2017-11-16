@@ -45,14 +45,13 @@ class StudentAnnexe5Entry(models.Model):
     
     student_id = fields.Many2one('res.partner', string="Student", required=True)
     
-    activite = fields.Selection([('ETU','Etudes'),('TRAV','Travail'),('CHOM','Chômage'),('ETR','Etranger'),('AUT','Autre')]
-                                , string="Activité", required=True)
+    activite = fields.Char(string="Activité", required=True, help="ETU, TRAV, CHOM, ETR, ou autre à spécifier")
     
     code_saturn = fields.Many2one('school.speciality', string="Code Saturn", required=False)
     
     type = fields.Selection([('U','U'),('HE','HE'),('ESA','ESA'),('PSU','PSU'),('HE','HE'),('ESA','ESA'),('PS','PS')], string="Type", requiered=False)
     
-    inscription = fields.Selection([('B1','B1'), ('B2','B2'), ('B3','B3'), ('M1','M1'), ('M2','M2'), ('SP','SP'), ('1A1C','1A1C')], string="Inscription", requiered=False)
+    inscription = fields.Selection([('B1','B1'), ('B2','B2'), ('B3','B3'), ('M1','M1'), ('M2','M2'), ('SP','SP'), ('1A1C','1A1C'), ('>45','>45')], string="Inscription", requiered=False)
     
     resultat = fields.Selection([('R','Réussi'),('E','Echec')], string='Résultat', requiered=False)
     
