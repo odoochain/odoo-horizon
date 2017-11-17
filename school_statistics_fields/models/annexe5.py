@@ -61,7 +61,7 @@ class StudentAnnexe5Entry(models.Model):
     
     type = fields.Selection([('U','U'),('HE','HE'),('ESA','ESA'),('PSU','PSU'),('HE','HE'),('ESA','ESA'),('PS','PS')], string="Type", requiered=False)
     
-    inscription = fields.Selection([('B1','B1'), ('B2','B2'), ('B3','B3'), ('M1','M1'), ('M2','M2'), ('SP','SP'), ('1A1C','1A1C'), ('>45','>45')], string="Inscription", requiered=False)
+    inscription = fields.Selection([('B1','B1'), ('B2','B2'), ('B3','B3'), ('M1','M1'), ('M2','M2'), ('M','M'), ('SP','SP'), ('1A1C','1A1C'), ('>45','>45')], string="Inscription", requiered=False)
     
     resultat = fields.Selection([('R','Réussi'),('E','Echec')], string='Résultat', requiered=False)
     
