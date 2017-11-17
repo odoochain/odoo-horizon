@@ -377,9 +377,9 @@ class Annexe5Xlsx(ReportXlsx):
             #sheet.write(i, 80, u'PAE 16-17')
             #sheet.write(i, 81, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 82, u'A ENCODER SUR FICHIER SEPARE')
-            sheet.write(i, 87, self.get_xml_id().get(self.id))
-            sheet.write(i, 88, self.student_id.get_xml_id().get(self.student_id.id))
-            sheet.write(i, 89, self.program_id.get_xml_id().get(self.program_id.id))
+            sheet.write(i, 87, bloc_id.get_xml_id().get(bloc_id.id))
+            sheet.write(i, 88, bloc_id.student_id.get_xml_id().get(bloc_id.student_id.id))
+            sheet.write(i, 89, bloc_id.program_id.get_xml_id().get(bloc_id.program_id.id))
             i = i + 1
 
 Annexe5Xlsx('report.school.annexe5.xlsx','school.saturn')
