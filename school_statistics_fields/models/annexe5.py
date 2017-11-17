@@ -47,7 +47,17 @@ class StudentAnnexe5Entry(models.Model):
     
     activite = fields.Char(string="Activité", required=True, help="ETU, TRAV, CHOM, ETR, ou autre à spécifier")
     
-    code_saturn = fields.Many2one('school.speciality', string="Code Saturn", required=False)
+    code_saturn = fields.Selection([
+        ('P129','P129'),
+        ('P130','P130'),
+        ('P131','P131'),
+        ('P132','P132'),
+        ('P17','P17'),
+        ('P56','P56'),
+        ('S13','S13'),
+        ('UNIVERSITE','UNIVERSITE'),
+        ('X001','X001')], 
+    string="Code Saturn", requiered=False) # TODO : Insert all Saturn Codes
     
     type = fields.Selection([('U','U'),('HE','HE'),('ESA','ESA'),('PSU','PSU'),('HE','HE'),('ESA','ESA'),('PS','PS')], string="Type", requiered=False)
     
