@@ -75,7 +75,7 @@
                     <col style="width:60px"/>
                     <col style="width:60px"/>
                     <col style="width:60px"/>
-                    <col style="width:100px"/>
+                    <!--<col style="width:100px"/>-->
                     <col style="width:100px"/>
                     <col style="width:100px"/>
                 </colgroup>
@@ -86,7 +86,7 @@
                         <th class="text-center">Heures</th> 
                         <th class="text-center">ECTS</th>
                         <th class="text-center">Pond</th>
-                        <th>Pré/Co-requis</th>
+                        <!--<th>Pré/Co-requis</th>-->
                         <th>Quadrimestre</th>
                         <th>Référentiel</th>
                     </tr> 
@@ -99,7 +99,7 @@
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
                         <td></td>
-                        <td class="text-center">Aucun</td>
+                        <!--<td class="text-center">Aucun</td>-->
                         <td></td>
                         <td></td>
                     </tr>
@@ -110,7 +110,7 @@
                         <td class="text-center"><t t-esc="course.hours"/></td>
                         <td class="text-center"><t t-esc="course.credits"/></td>
                         <td class="text-center"><t t-esc="course.weight"/></td>
-                        <td></td>
+                        <!--<td></td>-->
                         <td></td>
                         <td></td>
                     </tr>
@@ -121,7 +121,7 @@
                         <td class="text-center"><t t-esc="bloc.total_hours"/></td>
                         <td class="text-center"><t t-esc="bloc.total_credits"/></td>
                         <td></td>
-                        <td></td>
+                        <!--<td></td>-->
                         <td></td>
                         <td></td>
                     </tr>
