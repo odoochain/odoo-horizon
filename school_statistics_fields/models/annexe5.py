@@ -63,7 +63,7 @@ class StudentAnnexe5Entry(models.Model):
     
     inscription = fields.Selection([('B1','B1'), ('B2','B2'), ('B3','B3'), ('M1','M1'), ('M2','M2'), ('M','M'), ('SP','SP'), ('1A1C','1A1C'), ('>45','>45')], string="Inscription", requiered=False)
     
-    resultat = fields.Selection([('R','Réussi'),('E','Echec')], string='Résultat', requiered=False)
+    resultat = fields.Selection([('R','Réussi'),('E','Echec'),('ETAL','Etalement')], string='Résultat', requiered=False)
     
     pae_num = fields.Integer(string='PAE Num', requiered=False)
     
