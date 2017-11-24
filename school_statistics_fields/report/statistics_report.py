@@ -306,6 +306,14 @@ class Annexe5Xlsx(ReportXlsx):
         sheet.write(i, 88, u'Student id')
         sheet.write(i, 89, u'Cycle id')
         i = 1
+        
+        # years for history
+        year_minus_1 = self.year_id.previous if self.year_id else False
+        year_minus_2 = year_minus_1.previous if year_minus_1 else False
+        year_minus_3 = year_minus_2.previous if year_minus_2 else False
+        year_minus_4 = year_minus_3.previous if year_minus_3 else False
+        year_minus_5 = year_minus_4.previous if year_minus_4 else False
+        
         for bloc_id in saturn.bloc_ids:
             sheet.write(i, 0, u'ESA')
             sheet.write(i, 1, bloc_id.field_a5.short_name or '')
@@ -334,41 +342,26 @@ class Annexe5Xlsx(ReportXlsx):
             #sheet.write(i, 32, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 33, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 34, u'A ENCODER SUR FICHIER SEPARE')
-            #sheet.write(i, 35, u'Activité')
-            #sheet.write(i, 36, u'Inscr.')
-            #sheet.write(i, 37, u'Code saturn')
-            #sheet.write(i, 38, u'U/HE/ESA/PS')
-            #sheet.write(i, 39, u'Résultat')
-            #sheet.write(i, 40, u'PAE_num')
-            #sheet.write(i, 41, u'PAE_dén.')
-            #sheet.write(i, 42, u'Activité')
-            #sheet.write(i, 43, u'Inscr.')
-            #sheet.write(i, 44, u'Code saturn')
-            #sheet.write(i, 45, u'U/HE/ESA/PS')
-            #sheet.write(i, 46, u'Résultat')
-            #sheet.write(i, 47, u'PAE_num')
-            #sheet.write(i, 48, u'PAE_dén.')
-            #sheet.write(i, 49, u'Activité')
-            #sheet.write(i, 50, u'Inscr.')
-            #sheet.write(i, 51, u'Code saturn')
-            #sheet.write(i, 52, u'U/HE/ESA/PS')
-            #sheet.write(i, 53, u'Résultat')
-            #sheet.write(i, 54, u'PAE_num')
-            #sheet.write(i, 55, u'PAE_dén.')
-            #sheet.write(i, 56, u'Activité')
-            #sheet.write(i, 57, u'Inscr.')
-            #sheet.write(i, 58, u'Code saturn')
-            #sheet.write(i, 59, u'U/HE/ESA/PS')
-            ##sheet.write(i, 60, u'Résultat')
-            #sheet.write(i, 61, u'PAE_num')
-            #sheet.write(i, 62, u'PAE_dén.')
-            #sheet.write(i, 63, u'Activité')
-            #sheet.write(i, 64, u'Inscr.')
-            #sheet.write(i, 65, u'Code saturn')
-            #sheet.write(i, 66, u'U/HE/ESA/PS')
-            #sheet.write(i, 67, u'Résultat')
-            #sheet.write(i, 68, u'PAE_num')
-            #sheet.write(i, 69, u'PAE_dén.')
+            year_id = year_minus_5
+            hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
+            if hist_id:
+                sheet.write(i, 35, hist_id.activite)
+                sheet.write(i, 36, hist_id.inscription)
+                sheet.write(i, 37, hist_id.code_saturn)
+                sheet.write(i, 38, hist_id.type)
+                sheet.write(i, 39, hist_id.resultat)
+                sheet.write(i, 40, hist_id.pae_num)
+                sheet.write(i, 41, hist_id.pae_den)
+            year_id = year_minus_4
+            hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
+            if hist_id:
+                sheet.write(i, 42, hist_id.activite)
+                sheet.write(i, 43, hist_id.inscription)
+                sheet.write(i, 44, hist_id.code_saturn)
+                sheet.write(i, 45, hist_id.type)
+                sheet.write(i, 46, hist_id.resultat)
+                sheet.write(i, 47, hist_id.pae_num)
+                sheet.write(i, 48, hist_id.pae_den)
             #sheet.write(i, 70, u'date inscription')
             #sheet.write(i, 76, u'REGULIER')
             #sheet.write(i, 77, u'IRREGULIER')
