@@ -308,7 +308,7 @@ class Annexe5Xlsx(ReportXlsx):
         i = 1
         
         # years for history
-        year_minus_1 = self.year_id.previous if self.year_id else False
+        year_minus_1 = saturn.year_id.previous if saturn.year_id else False
         year_minus_2 = year_minus_1.previous if year_minus_1 else False
         year_minus_3 = year_minus_2.previous if year_minus_2 else False
         year_minus_4 = year_minus_3.previous if year_minus_3 else False
