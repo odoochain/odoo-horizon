@@ -435,7 +435,7 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 64, '1A1C')
                 else:
                     sheet.write(i, 64, 'M')
-                sheet.write(i, 65, program_id.speciality_id.code_saturn)
+                sheet.write(i, 65, program_id.speciality_id.saturn_code)
                 sheet.write(i, 66, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
                     sheet.write(i, 67, 'R')
