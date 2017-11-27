@@ -351,14 +351,18 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 36, 'B1')
                 elif hist_bloc_id.source_bloc_level in (2,3) :
                     sheet.write(i, 36, '>45')
+                elif hist_bloc_id.source_bloc_level == 6 :
+                    sheet.write(i, 36, '1A1C')
                 else:
                     sheet.write(i, 36, 'M')
-                
-                sheet.write(i, 37, hist_id.code_saturn or '')
-                sheet.write(i, 38, hist_id.type or '')
-                sheet.write(i, 39, hist_id.resultat or '')
-                sheet.write(i, 40, hist_id.pae_num or '')
-                sheet.write(i, 41, hist_id.pae_den or '')
+                sheet.write(i, 37, program_id.speciality_id.code_saturn)
+                sheet.write(i, 38, 'ESA')
+                if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
+                    sheet.write(i, 39, 'R')
+                else :
+                    sheet.write(i, 39, 'E')
+                sheet.write(i, 40, hist_bloc_id.total_acquiered_credits)
+                sheet.write(i, 41, hist_bloc_id.total_credits)
             else :    
                 hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
                 if hist_id:
@@ -370,15 +374,35 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 40, hist_id.pae_num or '')
                     sheet.write(i, 41, hist_id.pae_den or '')
             year_id = year_minus_4
-            hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
-            if hist_id:
-                sheet.write(i, 42, hist_id.activite or '')
-                sheet.write(i, 43, hist_id.inscription or '')
-                sheet.write(i, 44, hist_id.code_saturn or '')
-                sheet.write(i, 45, hist_id.type or '')
-                sheet.write(i, 46, hist_id.resultat or '')
-                sheet.write(i, 47, hist_id.pae_num or '')
-                sheet.write(i, 48, hist_id.pae_den or '')
+            hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if hist_bloc_id :
+                sheet.write(i, 42, 'ETU')
+                if hist_bloc_id.source_bloc_level == 1 :
+                    sheet.write(i, 43, 'B1')
+                elif hist_bloc_id.source_bloc_level in (2,3) :
+                    sheet.write(i, 43, '>45')
+                elif hist_bloc_id.source_bloc_level == 6 :
+                    sheet.write(i, 43, '1A1C')
+                else:
+                    sheet.write(i, 43, 'M')
+                sheet.write(i, 44, program_id.speciality_id.code_saturn)
+                sheet.write(i, 45, 'ESA')
+                if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
+                    sheet.write(i, 46, 'R')
+                else :
+                    sheet.write(i, 46, 'E')
+                sheet.write(i, 47, hist_bloc_id.total_acquiered_credits)
+                sheet.write(i, 48, hist_bloc_id.total_credits)
+            else :    
+                hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
+                if hist_id:
+                    sheet.write(i, 42, hist_id.activite or '')
+                    sheet.write(i, 43, hist_id.inscription or '')
+                    sheet.write(i, 44, hist_id.code_saturn or '')
+                    sheet.write(i, 45, hist_id.type or '')
+                    sheet.write(i, 46, hist_id.resultat or '')
+                    sheet.write(i, 47, hist_id.pae_num or '')
+                    sheet.write(i, 48, hist_id.pae_den or '')
             year_id = year_minus_3
             hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
             if hist_id:
@@ -400,15 +424,35 @@ class Annexe5Xlsx(ReportXlsx):
                 sheet.write(i, 61, hist_id.pae_num or '')
                 sheet.write(i, 62, hist_id.pae_den or '')
             year_id = year_minus_1
-            hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
-            if hist_id:
-                sheet.write(i, 63, hist_id.activite or '')
-                sheet.write(i, 64, hist_id.inscription or '')
-                sheet.write(i, 65, hist_id.code_saturn or '')
-                sheet.write(i, 66, hist_id.type or '')
-                sheet.write(i, 67, hist_id.resultat or '')
-                sheet.write(i, 68, hist_id.pae_num or '')
-                sheet.write(i, 69, hist_id.pae_den or '')
+            hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if hist_bloc_id :
+                sheet.write(i, 63, 'ETU')
+                if hist_bloc_id.source_bloc_level == 1 :
+                    sheet.write(i, 64, 'B1')
+                elif hist_bloc_id.source_bloc_level in (2,3) :
+                    sheet.write(i, 64, '>45')
+                elif hist_bloc_id.source_bloc_level == 6 :
+                    sheet.write(i, 64, '1A1C')
+                else:
+                    sheet.write(i, 64, 'M')
+                sheet.write(i, 65, program_id.speciality_id.code_saturn)
+                sheet.write(i, 66, 'ESA')
+                if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
+                    sheet.write(i, 67, 'R')
+                else :
+                    sheet.write(i, 67, 'E')
+                sheet.write(i, 68, hist_bloc_id.total_acquiered_credits)
+                sheet.write(i, 69, hist_bloc_id.total_credits)
+            else :    
+                hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
+                if hist_id:
+                    sheet.write(i, 63, hist_id.activite or '')
+                    sheet.write(i, 64, hist_id.inscription or '')
+                    sheet.write(i, 65, hist_id.code_saturn or '')
+                    sheet.write(i, 66, hist_id.type or '')
+                    sheet.write(i, 67, hist_id.resultat or '')
+                    sheet.write(i, 68, hist_id.pae_num or '')
+                    sheet.write(i, 69, hist_id.pae_den or '')
             #sheet.write(i, 70, u'date inscription')
             #sheet.write(i, 76, u'REGULIER')
             #sheet.write(i, 77, u'IRREGULIER')
