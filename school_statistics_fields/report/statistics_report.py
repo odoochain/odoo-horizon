@@ -346,6 +346,7 @@ class Annexe5Xlsx(ReportXlsx):
             program_id = bloc_id.program_id
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
             if hist_bloc_id :
+                hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 35, 'ETU')
                 if hist_bloc_id.source_bloc_level == 1 :
                     sheet.write(i, 36, 'B1')
@@ -376,6 +377,7 @@ class Annexe5Xlsx(ReportXlsx):
             year_id = year_minus_4
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
             if hist_bloc_id :
+                hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 42, 'ETU')
                 if hist_bloc_id.source_bloc_level == 1 :
                     sheet.write(i, 43, 'B1')
@@ -426,6 +428,7 @@ class Annexe5Xlsx(ReportXlsx):
             year_id = year_minus_1
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
             if hist_bloc_id :
+                hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 63, 'ETU')
                 if hist_bloc_id.source_bloc_level == 1 :
                     sheet.write(i, 64, 'B1')
