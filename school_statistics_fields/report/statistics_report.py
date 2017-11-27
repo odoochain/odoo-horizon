@@ -356,7 +356,7 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 36, '1A1C')
                 else:
                     sheet.write(i, 36, 'M')
-                sheet.write(i, 37, program_id.track_id.code_saturn)
+                sheet.write(i, 37, program_id.track_id.saturn_code)
                 sheet.write(i, 38, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
                     sheet.write(i, 39, 'R')
@@ -387,7 +387,7 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 43, '1A1C')
                 else:
                     sheet.write(i, 43, 'M')
-                sheet.write(i, 44, program_id.track_id.code_saturn)
+                sheet.write(i, 44, program_id.track_id.saturn_code)
                 sheet.write(i, 45, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
                     sheet.write(i, 46, 'R')
@@ -418,7 +418,7 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 50, '1A1C')
                 else:
                     sheet.write(i, 50, 'M')
-                sheet.write(i, 51, program_id.track_id.code_saturn)
+                sheet.write(i, 51, program_id.track_id.saturn_code)
                 sheet.write(i, 52, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
                     sheet.write(i, 53, 'R')
@@ -449,7 +449,7 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 57, '1A1C')
                 else:
                     sheet.write(i, 57, 'M')
-                sheet.write(i, 58, program_id.track_id.code_saturn)
+                sheet.write(i, 58, program_id.track_id.saturn_code)
                 sheet.write(i, 59, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
                     sheet.write(i, 60, 'R')
