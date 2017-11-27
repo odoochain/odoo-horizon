@@ -351,14 +351,14 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 35, 'ETU')
-                if hist_bloc_id.source_bloc_level == '1' :
-                    sheet.write(i, 36, 'B1')
+                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                    sheet.write(i, 36, 'DCC')
+                elif hist_bloc_id.source_bloc_level == '1' :
+                    sheet.write(i, 36, '1A1C')
                 elif hist_bloc_id.source_bloc_level in ('2','3') :
                     sheet.write(i, 36, '>45')
-                elif hist_bloc_id.source_bloc_level == '6' :
-                    sheet.write(i, 36, '1A1C')
                 else:
-                    sheet.write(i, 36, 'M')
+                    sheet.write(i, 36, '1A2C')
                 sheet.write(i, 37, program_id.track_id.saturn_code)
                 sheet.write(i, 38, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
@@ -385,14 +385,14 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 42, 'ETU')
-                if hist_bloc_id.source_bloc_level == '1' :
-                    sheet.write(i, 43, 'B1')
+                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                    sheet.write(i, 43, 'DCC')
+                elif hist_bloc_id.source_bloc_level == '1' :
+                    sheet.write(i, 43, '1A1C')
                 elif hist_bloc_id.source_bloc_level in ('2','3') :
                     sheet.write(i, 43, '>45')
-                elif hist_bloc_id.source_bloc_level == '6' :
-                    sheet.write(i, 43, '1A1C')
                 else:
-                    sheet.write(i, 43, 'M')
+                    sheet.write(i, 43, '1A2C')
                 sheet.write(i, 44, program_id.track_id.saturn_code)
                 sheet.write(i, 45, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
@@ -419,14 +419,14 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 49, 'ETU')
-                if hist_bloc_id.source_bloc_level == '1' :
-                    sheet.write(i, 50, 'B1')
+                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                    sheet.write(i, 50, 'DCC')
+                elif hist_bloc_id.source_bloc_level == '1' :
+                    sheet.write(i, 50, '1A1C')
                 elif hist_bloc_id.source_bloc_level in ('2','3') :
                     sheet.write(i, 50, '>45')
-                elif hist_bloc_id.source_bloc_level == '6' :
-                    sheet.write(i, 50, '1A1C')
                 else:
-                    sheet.write(i, 50, 'M')
+                    sheet.write(i, 50, '1A2C')
                 sheet.write(i, 51, program_id.track_id.saturn_code)
                 sheet.write(i, 52, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
@@ -453,14 +453,14 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 56, 'ETU')
-                if hist_bloc_id.source_bloc_level == '1' :
-                    sheet.write(i, 57, 'B1')
+                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                    sheet.write(i, 57, 'DCC')
+                elif hist_bloc_id.source_bloc_level == '1' :
+                    sheet.write(i, 57, '1A1C')
                 elif hist_bloc_id.source_bloc_level in ('2','3') :
                     sheet.write(i, 57, '>45')
-                elif hist_bloc_id.source_bloc_level == '6' :
-                    sheet.write(i, 57, '1A1C')
                 else:
-                    sheet.write(i, 57, 'M')
+                    sheet.write(i, 57, '1A2C')
                 sheet.write(i, 58, program_id.track_id.saturn_code)
                 sheet.write(i, 59, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
@@ -487,14 +487,14 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 63, 'ETU')
-                if hist_bloc_id.source_bloc_level == '1' :
-                    sheet.write(i, 64, 'B1')
+                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                    sheet.write(i, 64, 'DCC')
+                elif hist_bloc_id.source_bloc_level == '1' :
+                    sheet.write(i, 64, '1A1C')
                 elif hist_bloc_id.source_bloc_level in ('2','3') :
                     sheet.write(i, 64, '>45')
-                elif hist_bloc_id.source_bloc_level == '6' :
-                    sheet.write(i, 64, '1A1C')
                 else:
-                    sheet.write(i, 64, 'M')
+                    sheet.write(i, 64, '1A2C')
                 sheet.write(i, 65, program_id.track_id.saturn_code)
                 sheet.write(i, 66, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
