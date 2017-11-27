@@ -430,11 +430,11 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 63, 'ETU')
-                if hist_bloc_id.source_bloc_level == 1 :
+                if hist_bloc_id.source_bloc_level == '1' :
                     sheet.write(i, 64, 'B1')
-                elif hist_bloc_id.source_bloc_level in (2,3) :
+                elif hist_bloc_id.source_bloc_level in ('2','3') :
                     sheet.write(i, 64, '>45')
-                elif hist_bloc_id.source_bloc_level == 6 :
+                elif hist_bloc_id.source_bloc_level == '6' :
                     sheet.write(i, 64, '1A1C')
                 else:
                     sheet.write(i, 64, 'M')
