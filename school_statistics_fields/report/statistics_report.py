@@ -209,7 +209,7 @@ SaturnXlsx('report.school.saturn.xlsx','school.saturn')
 class Annexe5Xlsx(ReportXlsx):
 
     def _is_dcc_bloc(self, bloc_id):
-        older_bloc_credits = sum(bloc_id.program_id.bloc_ids.filtered(lambda b : b.year_id.name <= bloc_id.year_id.name).mapped('total_acquiered_credits'))
+        older_bloc_credits = bloc_id.program_id.historical_bloc_1_credits + bloc_id.program_id.historical_bloc_2_credits + sum(bloc_id.program_id.bloc_ids.filtered(lambda b : b.year_id.name <= bloc_id.year_id.name).mapped('total_acquiered_credits'))
         return older_bloc_credits >= bloc_id.program_id.required_credits
 
     def generate_xlsx_report(self, workbook, data, saturn):
