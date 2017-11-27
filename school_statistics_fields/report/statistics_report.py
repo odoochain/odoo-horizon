@@ -343,15 +343,32 @@ class Annexe5Xlsx(ReportXlsx):
             #sheet.write(i, 33, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 34, u'A ENCODER SUR FICHIER SEPARE')
             year_id = year_minus_5
-            hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
-            if hist_id:
-                sheet.write(i, 35, hist_id.activite or '')
-                sheet.write(i, 36, hist_id.inscription or '')
+            program_id = bloc_id.program_id
+            hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if hist_bloc_id :
+                sheet.write(i, 35, 'ETU')
+                if hist_bloc_id.source_bloc_level == 1 :
+                    sheet.write(i, 36, 'B1')
+                elif hist_bloc_id.source_bloc_level in (2,3) :
+                    sheet.write(i, 36, '>45')
+                else:
+                    sheet.write(i, 36, 'M')
+                
                 sheet.write(i, 37, hist_id.code_saturn or '')
                 sheet.write(i, 38, hist_id.type or '')
                 sheet.write(i, 39, hist_id.resultat or '')
                 sheet.write(i, 40, hist_id.pae_num or '')
                 sheet.write(i, 41, hist_id.pae_den or '')
+            else :    
+                hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
+                if hist_id:
+                    sheet.write(i, 35, hist_id.activite or '')
+                    sheet.write(i, 36, hist_id.inscription or '')
+                    sheet.write(i, 37, hist_id.code_saturn or '')
+                    sheet.write(i, 38, hist_id.type or '')
+                    sheet.write(i, 39, hist_id.resultat or '')
+                    sheet.write(i, 40, hist_id.pae_num or '')
+                    sheet.write(i, 41, hist_id.pae_den or '')
             year_id = year_minus_4
             hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
             if hist_id:

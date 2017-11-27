@@ -153,7 +153,7 @@ class Bloc(models.Model):
     
     cycle_id = fields.Many2one(related='program_id.cycle_id', string='Cycle',store=True)
     
-    level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),],string='Level')
+    level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),('6','Agregation'),],string='Level')
     
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
     domain_id = fields.Many2one(related='program_id.domain_id', string='Domain',store=True)
