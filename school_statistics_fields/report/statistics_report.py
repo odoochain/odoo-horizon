@@ -208,6 +208,10 @@ SaturnXlsx('report.school.saturn.xlsx','school.saturn')
 
 class Annexe5Xlsx(ReportXlsx):
 
+    def _is_dcc_bloc(self, bloc_id):
+        older_bloc_credits = sum(bloc_id.program_id.bloc_ids.filtered(lambda b : b.year_id.name <= bloc_id.year_id.name).mapped('total_acquiered_credits'))
+        return older_bloc_credits >= bloc_id.program_id.required_credits
+
     def generate_xlsx_report(self, workbook, data, saturn):
         saturn.ensure_one()
         sheet = workbook.add_worksheet('main')
@@ -351,7 +355,7 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 35, 'ETU')
-                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                if self._is_dcc_bloc(hist_bloc_id) :
                     sheet.write(i, 36, 'DCC')
                 elif hist_bloc_id.source_bloc_level == '1' :
                     sheet.write(i, 36, '1A1C')
@@ -385,7 +389,7 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 42, 'ETU')
-                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                if self._is_dcc_bloc(hist_bloc_id) :
                     sheet.write(i, 43, 'DCC')
                 elif hist_bloc_id.source_bloc_level == '1' :
                     sheet.write(i, 43, '1A1C')
@@ -419,7 +423,7 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 49, 'ETU')
-                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                if self._is_dcc_bloc(hist_bloc_id) :
                     sheet.write(i, 50, 'DCC')
                 elif hist_bloc_id.source_bloc_level == '1' :
                     sheet.write(i, 50, '1A1C')
@@ -453,7 +457,7 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 56, 'ETU')
-                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                if self._is_dcc_bloc(hist_bloc_id) :
                     sheet.write(i, 57, 'DCC')
                 elif hist_bloc_id.source_bloc_level == '1' :
                     sheet.write(i, 57, '1A1C')
@@ -487,7 +491,7 @@ class Annexe5Xlsx(ReportXlsx):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 63, 'ETU')
-                if hist_bloc_id.total_credits + hist_bloc_id.program_id.total_acquiered_credits >= hist_bloc_id.program_id.required_credits :
+                if self._is_dcc_bloc(hist_bloc_id) :
                     sheet.write(i, 64, 'DCC')
                 elif hist_bloc_id.source_bloc_level == '1' :
                     sheet.write(i, 64, '1A1C')
