@@ -345,6 +345,9 @@ class Annexe5Xlsx(ReportXlsx):
             year_id = year_minus_5
             program_id = bloc_id.program_id
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if not hist_bloc_id:
+                # Try to find a bloc in another cycle for the given year
+                hist_bloc_id = self.env['school.individual_bloc'].search([('student_id','=',bloc_id.student_id.id),('year_id','=',year_id.id)])
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 35, 'ETU')
@@ -376,6 +379,9 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 41, hist_id.pae_den or '')
             year_id = year_minus_4
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if not hist_bloc_id:
+                # Try to find a bloc in another cycle for the given year
+                hist_bloc_id = self.env['school.individual_bloc'].search([('student_id','=',bloc_id.student_id.id),('year_id','=',year_id.id)])
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 42, 'ETU')
@@ -407,6 +413,9 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 48, hist_id.pae_den or '')
             year_id = year_minus_3
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if not hist_bloc_id:
+                # Try to find a bloc in another cycle for the given year
+                hist_bloc_id = self.env['school.individual_bloc'].search([('student_id','=',bloc_id.student_id.id),('year_id','=',year_id.id)])
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 49, 'ETU')
@@ -438,6 +447,9 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 55, hist_id.pae_den or '')
             year_id = year_minus_2
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if not hist_bloc_id:
+                # Try to find a bloc in another cycle for the given year
+                hist_bloc_id = self.env['school.individual_bloc'].search([('student_id','=',bloc_id.student_id.id),('year_id','=',year_id.id)])
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 56, 'ETU')
@@ -469,6 +481,9 @@ class Annexe5Xlsx(ReportXlsx):
                     sheet.write(i, 62, hist_id.pae_den or '')
             year_id = year_minus_1
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if not hist_bloc_id:
+                # Try to find a bloc in another cycle for the given year
+                hist_bloc_id = self.env['school.individual_bloc'].search([('student_id','=',bloc_id.student_id.id),('year_id','=',year_id.id)])
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 sheet.write(i, 63, 'ETU')
