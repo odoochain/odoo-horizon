@@ -477,9 +477,9 @@ class Annexe5Xlsx(ReportXlsx):
                 sheet.write(i, 57, program_id.track_id.saturn_code)
                 sheet.write(i, 58, 'ESA')
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
-                    sheet.write(i, 69, 'R')
+                    sheet.write(i, 59, 'R')
                 else :
-                    sheet.write(i, 69, 'E')
+                    sheet.write(i, 59, 'E')
                 sheet.write(i, 60, hist_bloc_id.total_acquiered_credits)
                 sheet.write(i, 61, hist_bloc_id.total_credits)
             else :
