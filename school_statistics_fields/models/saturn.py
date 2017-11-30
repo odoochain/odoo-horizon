@@ -66,6 +66,17 @@ class SchoolSaturnStatistics(models.Model):
     def _compute_count(self):
         self.bloc_count = len(self.bloc_ids)
         self.student_count = len(set(self.bloc_ids.mapped('student_id')))
+    
+    @api.multi
+    def action_student_list(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Participants',
+            'res_model': 'res.partner',
+            'domain': [('id', 'in', set(self.bloc_ids.mapped('student_id.id')))],
+            'view_mode': 'tree',
+        }
         
 class Etablissement(models.Model):
     '''Etablissement'''
