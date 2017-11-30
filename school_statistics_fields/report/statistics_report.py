@@ -321,10 +321,7 @@ class Annexe5Xlsx(ReportXlsx):
         for bloc_id in saturn.bloc_ids:
             sheet.write(i, 0, u'ESA')
             sheet.write(i, 1, bloc_id.field_a5.short_name or '')
-            _logger.info(bloc_id.name)
-            
-            
-            sheet.write(i, 2, bloc_id.field_a7.name or '' + '/' + bloc_id.field_a12.name or '' + '/' + bloc_id.field_a6.name or '')
+            sheet.write(i, 2, (bloc_id.field_a7.name or '') + '/' + (bloc_id.field_a12.name or '') + '/' + (bloc_id.field_a6.name or ''))
             sheet.write(i, 3, bloc_id.field_a4.name or '')
             #sheet.write(i, 4, u'INSCRIPTION 16-17')
             if self._is_dcc_bloc(bloc_id) :
