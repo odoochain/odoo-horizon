@@ -4479,11 +4479,6 @@ msgid "record:"
 msgstr ""
 
 #. module: school_management
-#: model:ir.model,name:school_management.model_school_assignment
-msgid "school.assignment"
-msgstr ""
-
-#. module: school_management
 #: model:ir.model,name:school_management.model_school_competency
 msgid "school.competency"
 msgstr ""
