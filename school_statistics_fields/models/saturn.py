@@ -72,9 +72,20 @@ class SchoolSaturnStatistics(models.Model):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Participants',
+            'name': 'Students',
             'res_model': 'res.partner',
             'domain': [('id', 'in', self.bloc_ids.mapped('student_id.id'))],
+            'view_mode': 'tree',
+        }
+        
+    @api.multi
+    def action_program_list(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Blocs',
+            'res_model': 'school.individual_bloc',
+            'domain': [('id', 'in', self.bloc_ids.ids)],
             'view_mode': 'tree',
         }
         
