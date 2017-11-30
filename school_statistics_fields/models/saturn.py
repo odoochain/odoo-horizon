@@ -74,7 +74,7 @@ class SchoolSaturnStatistics(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Participants',
             'res_model': 'res.partner',
-            'domain': [('id', 'in', set(self.bloc_ids.mapped('student_id.id')))],
+            'domain': [('id', 'in', self.bloc_ids.mapped('student_id.id'))],
             'view_mode': 'tree',
         }
         
