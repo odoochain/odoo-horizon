@@ -355,6 +355,21 @@ class Annexe5Xlsx(ReportXlsx):
             if bloc_id.invoice_id :
                 base_line = bloc_id.invoice_id.invoice_line_ids.filtered(lambda l: l.product_id.categ_id.id == 5)
                 sheet.write(i, 15, sum(base_line.mapped('price_subtotal')))
+                dis_line = bloc_id.invoice_id.invoice_line_ids.filtered(lambda l: l.product_id.categ_id.id == 6)
+                sheet.write(i, 20, sum(dis_line.mapped('price_subtotal')))
+            if bloc_id.student_id.financial_cond == 'B':
+                sheet.write(i, 17, 1)
+                sheet.write(i, 18, 0)
+                sheet.write(i, 19, 0)
+            if bloc_id.student_id.financial_cond == 'CM':
+                sheet.write(i, 17, 0)
+                sheet.write(i, 18, 1)
+                sheet.write(i, 19, 0)
+            else :
+                sheet.write(i, 17, 0)
+                sheet.write(i, 18, 0)
+                sheet.write(i, 19, 1)
+                
             #sheet.write(i, 15, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 27, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 28, u'A ENCODER SUR FICHIER SEPARE')
