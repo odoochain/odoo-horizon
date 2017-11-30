@@ -326,7 +326,16 @@ class Annexe5Xlsx(ReportXlsx):
                 sheet.write(i, 2, bloc_id.source_bloc_section_id.name or '' + '/' + bloc_id.source_bloc_track_id.name or '' + '/' + bloc_id.source_bloc_speciality_id.name or '')
             sheet.write(i, 3, bloc_id.field_a4.name or '')
             #sheet.write(i, 4, u'INSCRIPTION 16-17')
-            #sheet.write(i, 5, u'TYPE')
+            if self._is_dcc_bloc(bloc_id) :
+                sheet.write(i, 4, 'DCC')
+            elif bloc_id.source_bloc_level == '1' :
+                sheet.write(i, 4, '1A1C')
+            elif bloc_id.source_bloc_level in ('2','3') :
+                sheet.write(i, 4, '>45')
+            else:
+                sheet.write(i, 4, '1A2C')
+            if bloc_id.field_a3:
+                sheet.write(i, 5, "T" + bloc_id.field_a3[0].upper())
             sheet.write(i, 6, bloc_id.field_b1)
             sheet.write(i, 7, bloc_id.field_b2)
             if bloc_id.field_b5:
