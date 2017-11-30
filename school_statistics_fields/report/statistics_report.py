@@ -23,6 +23,12 @@ import logging
 from openerp import api, fields, models, tools, _
 from openerp.exceptions import MissingError
 
+import unicodedata
+
+def _unaccent(in_string):
+    return unicodedata.normalize('NFD', in_string).encode('ascii', 'ignore')
+
+
 _logger = logging.getLogger(__name__)
 
 from openerp.addons.report_xlsx.report.report_xlsx import ReportXlsx
@@ -334,8 +340,8 @@ class Annexe5Xlsx(ReportXlsx):
                 sheet.write(i, 4, '1A2C')
             if bloc_id.field_a3:
                 sheet.write(i, 5, "T" + bloc_id.field_a3[0].upper())
-            sheet.write(i, 6, bloc_id.field_b1)
-            sheet.write(i, 7, bloc_id.field_b2)
+            sheet.write(i, 6, _unaccent(bloc_id.field_b1))
+            sheet.write(i, 7, _unaccent(bloc_id.field_b2))
             if bloc_id.field_b5:
                 sheet.write(i, 8, bloc_id.field_b5[0].upper())
             sheet.write(i, 9, bloc_id.field_b7 or '')
