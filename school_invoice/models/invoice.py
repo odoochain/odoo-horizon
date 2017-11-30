@@ -31,6 +31,8 @@ class Partner(models.Model):
     _inherit = 'res.partner'
     
     out_inv_comm_algorithm = fields.Selection(selection_add=[('student_id', 'Student Id')])
+    
+    financial_cond = fields.Selection([('Boursier','B'),('Condition Modeste','CM'),('Non Boursier','NB')])
 
 class Invoice(models.Model):
     _inherit = 'account.invoice'
