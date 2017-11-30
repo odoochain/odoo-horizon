@@ -332,12 +332,14 @@ class Annexe5Xlsx(ReportXlsx):
             if bloc_id.field_b5:
                 sheet.write(i, 8, bloc_id.field_b5[0].upper())
             sheet.write(i, 9, bloc_id.field_b7 or '')
-            #sheet.write(i, 10, u'jour naiss')
-            #sheet.write(i, 11, u'mois naiss')
-            #sheet.write(i, 12, u'annee naiss')
+            date_naiss = fields.Date.from_string(bloc_id.field_b9)
+            if date_naiss:
+                sheet.write(i, 10, date_naiss.day)
+                sheet.write(i, 11, date_naiss.month)
+                sheet.write(i, 12, date_naiss.year)
             sheet.write(i, 13, bloc_id.field_b6.name or '')
             sheet.write(i, 14, bloc_id.field_b12 or '')
-            sheet.write(i, 15, u'minerval')
+            #sheet.write(i, 15, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 27, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 28, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 29, u'A ENCODER SUR FICHIER SEPARE')
