@@ -357,6 +357,10 @@ class Annexe5Xlsx(ReportXlsx):
                 sheet.write(i, 15, sum(base_line.mapped('price_subtotal')))
                 dis_line = bloc_id.invoice_id.invoice_line_ids.filtered(lambda l: l.product_id.categ_id.id == 6)
                 sheet.write(i, 20, sum(dis_line.mapped('price_subtotal')))
+                sheet.write(i, 22, min(bloc_id.invoice_id.payment_move_line_ids.mapped('date')))
+                if bloc_id.invoice_id.residual == 0:
+                    sheet.write(i, 23, max(bloc_id.invoice_id.payment_move_line_ids.mapped('date')))
+                sheet.write(i, 24, bloc_id.invoice_id.residual)
             if bloc_id.student_id.financial_cond == 'B':
                 sheet.write(i, 17, 1)
                 sheet.write(i, 18, 0)
