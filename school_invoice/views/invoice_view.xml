@@ -22,6 +22,19 @@
 -->
 <openerp>
     <data>
+        <!-- Partner -->
+        <record id="view_partners_form_school_fin_fields" model="ir.ui.view">
+            <field name="name">view.res.partner.form.school.fin_fields</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="school_management.view_partners_form_school" />
+            <field eval="18" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='personal_information_group']" position="inside">
+                    <field name="financial_cond"/>
+                </xpath>
+            </field>
+        </record>
+
 
         <!-- Add invoice to Individual Program form view -->
         <record id="individual_bloc_invoice_form" model="ir.ui.view">

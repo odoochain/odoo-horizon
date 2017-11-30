@@ -354,6 +354,7 @@ class Annexe5Xlsx(ReportXlsx):
             sheet.write(i, 14, bloc_id.field_b12 or '')
             if bloc_id.invoice_id :
                 base_line = bloc_id.invoice_id.filtered(lambda l: l.product_id.categ_id.id == 5)
+                
             
             #sheet.write(i, 15, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 27, u'A ENCODER SUR FICHIER SEPARE')
