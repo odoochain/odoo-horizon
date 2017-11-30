@@ -412,6 +412,7 @@ class Annexe5Xlsx(ReportXlsx):
             else :    
                 hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
                 if hist_id:
+                    hist_id = hist_id[0]
                     sheet.write(i, 34, hist_id.activite or '')
                     sheet.write(i, 35, hist_id.inscription or '')
                     sheet.write(i, 36, hist_id.code_saturn or '')
@@ -446,6 +447,7 @@ class Annexe5Xlsx(ReportXlsx):
             else :    
                 hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
                 if hist_id:
+                    hist_id = hist_id[0]
                     sheet.write(i, 41, hist_id.activite or '')
                     sheet.write(i, 42, hist_id.inscription or '')
                     sheet.write(i, 43, hist_id.code_saturn or '')
@@ -480,6 +482,7 @@ class Annexe5Xlsx(ReportXlsx):
             else :
                 hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
                 if hist_id:
+                    hist_id = hist_id[0]
                     sheet.write(i, 48, hist_id.activite or '')
                     sheet.write(i, 49, hist_id.inscription or '')
                     sheet.write(i, 50, hist_id.code_saturn or '')
@@ -514,6 +517,7 @@ class Annexe5Xlsx(ReportXlsx):
             else :
                 hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
                 if hist_id:
+                    hist_id = hist_id[0]
                     sheet.write(i, 55, hist_id.activite or '')
                     sheet.write(i, 56, hist_id.inscription or '')
                     sheet.write(i, 57, hist_id.code_saturn or '')
@@ -548,6 +552,7 @@ class Annexe5Xlsx(ReportXlsx):
             else :    
                 hist_id = self.env['school.student_annexe5_entry'].search([('year_id','=',year_id.id),('student_id','=',bloc_id.student_id.id)])
                 if hist_id:
+                    hist_id = hist_id[0]
                     sheet.write(i, 62, hist_id.activite or '')
                     sheet.write(i, 63, hist_id.inscription or '')
                     sheet.write(i, 64, hist_id.code_saturn or '')
