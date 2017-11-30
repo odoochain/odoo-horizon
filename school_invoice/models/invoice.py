@@ -32,7 +32,7 @@ class Partner(models.Model):
     
     out_inv_comm_algorithm = fields.Selection(selection_add=[('student_id', 'Student Id')])
     
-    financial_cond = fields.Selection([('Boursier','B'),('Condition Modeste','CM'),('Non Boursier','NB')])
+    financial_cond = fields.Selection([('B','Boursier'),('CM','Condition Modeste'),('NB','Non Boursier')])
 
 class Invoice(models.Model):
     _inherit = 'account.invoice'
