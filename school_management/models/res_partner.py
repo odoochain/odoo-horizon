@@ -69,11 +69,12 @@ class Partner(models.Model):
     @api.one
     @api.depends('student_bloc_ids')
     def _get_student_current_bloc_id(self):
+        res = False
         for bloc in self.student_bloc_ids:
             if bloc.year_id == self.env.user.current_year_id:
-                self.student_current_bloc_id = bloc
-                return
-        self.student_current_bloc_id = False
+                if not res or bloc.source_bloc_level > res.source_bloc_level
+                    res = bloc
+        self.student_current_bloc_id = res
 
     def _compute_year_sequence(self):
         for item in self:
