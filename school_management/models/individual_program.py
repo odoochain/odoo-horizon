@@ -74,7 +74,7 @@ class IndividualBloc(models.Model):
     _description='Individual Bloc'
     _inherit = ['mail.thread','school.year_sequence.mixin']
     
-    _order = 'name'
+    _order = 'source_bloc_level, source_bloc_name'
     
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
