@@ -72,7 +72,7 @@ class Partner(models.Model):
         res = False
         for bloc in self.student_bloc_ids:
             if bloc.year_id == self.env.user.current_year_id:
-                if not res or bloc.source_bloc_level > res.source_bloc_level
+                if not res or bloc.source_bloc_level > res.source_bloc_level:
                     res = bloc
         self.student_current_bloc_id = res
 
