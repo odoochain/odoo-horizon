@@ -565,7 +565,7 @@ class Annexe5Xlsx(ReportXlsx):
             #sheet.write(i, 77, u'IRREGULIER')
             #sheet.write(i, 78, u'FINANCABLE')
             #sheet.write(i, 79, u'NON FINANCABLE')
-            #sheet.write(i, 80, u'PAE 16-17')
+            sheet.write(i, 80, bloc_id.total_credits)
             #sheet.write(i, 81, u'A ENCODER SUR FICHIER SEPARE')
             #sheet.write(i, 82, u'A ENCODER SUR FICHIER SEPARE')
             sheet.write(i, 87, bloc_id.get_xml_id().get(bloc_id.id))
