@@ -510,7 +510,8 @@
           <filter name="bloc_2" string="Bloc 2" domain="[('source_bloc_level', '=', 2)]"/>
           <filter name="bloc_3" string="Bloc 3" domain="[('source_bloc_level', '=', 3)]"/>
           <filter name="master_1" string="Master 1" domain="[('source_bloc_level', '=', 4)]"/>
-          <filter name="master_1" string="Master 2" domain="[('source_bloc_level', '=', 5)]"/>
+          <filter name="master_2" string="Master 2" domain="[('source_bloc_level', '=', 5)]"/>
+          <filter name="agg" string="Agregation" domain="[('source_bloc_level', '=', 6)]"/>
           <separator/>
           <filter string="No teacher" name="no_teacher" domain="[('teacher_id','=', False)]"/>
           <separator/>
