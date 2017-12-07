@@ -54,6 +54,7 @@
           <filter name="bloc_3" string="Bac 3" domain="[('source_bloc_level', '=', 3)]"/>
           <filter name="bloc_4" string="Master 1" domain="[('source_bloc_level', '=', 4)]"/>
           <filter name="bloc_5" string="Master 2" domain="[('source_bloc_level', '=', 5)]"/>
+          <filter name="agg" string="Agregation" domain="[('source_bloc_level', '=', 6)]"/>
            <separator/>
           <filter name="my_courses" string="My Courses" domain="[('teacher_id.user_ids','=',uid)]" />
           <separator/>
