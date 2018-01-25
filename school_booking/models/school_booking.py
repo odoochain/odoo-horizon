@@ -76,7 +76,7 @@ class Event(models.Model):
             return
         student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_teacher_event_type')
         
-        if self.event_type_id == student_event:
+        if student_event in self.categ_ids:
             duration_list = self.env['calendar.event'].search_read([
                     ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
                 ],['duration'])
