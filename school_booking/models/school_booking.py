@@ -74,14 +74,17 @@ class Event(models.Model):
     def _check_room_quota(self):
         if self.user_id.partner_id.teacher or self.user_id.partner_id.employee :
             return
-        duration_list = self.env['calendar.event'].search_read([
-                ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
-            ],['duration'])
-        total = 0
-        for item in duration_list:
-            total = total + item['duration']
-        if total > 2:
-            raise ValidationError(_("You cannot book more than two hours in advance."))
+        student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_teacher_event_type')
+        
+        if self.event_type_id == student_event:
+            duration_list = self.env['calendar.event'].search_read([
+                    ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
+                ],['duration'])
+            total = 0
+            for item in duration_list:
+                total = total + item['duration']
+            if total > 2:
+                raise ValidationError(_("You cannot book more than two hours in advance."))
             
     #@api.one
     #@api.constrains('start','stop','room_id')
