@@ -256,6 +256,11 @@ class IndividualBloc(models.Model):
     field_b10 = fields.Char(description='Fields B10',string='Domicile légal en Belgique', compute='_compute_zip_country')
     field_b11 = fields.Char(description='Fields B11',string='Domicile légal à l''étranger', compute='_compute_zip_country')
     
+    @api.one
+    def _compute_reg_number(self):
+        if self.student_id.nationality_id.code == 'BE':
+            self.field_b12 = self.student_id.reg_number
+            
     field_b12 = fields.Char(description='Fields B12',string='Numéro de Registre national', related='student_id.reg_number')
     
     field_c1 = fields.Selection([('r','Régulier'),('i','Irrégulier'),('l','Libre')], description='Fields C1',string='Régulier / Libre', default='r', required=True)
