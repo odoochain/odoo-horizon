@@ -79,7 +79,7 @@ class Event(models.Model):
         if student_event in self.categ_ids:
             duration_list = self.env['calendar.event'].read_group([
                     ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id)
-                ],['start_date','duration'],['start_date'])
+                ],['start_datetime','duration'],['start_date_time:day'])
             _logger.info(duration_list)
             for duration in duration_list:
                 if duration['duration'] and duration['duration'] > 6:
