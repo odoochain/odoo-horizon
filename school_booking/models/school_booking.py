@@ -87,7 +87,7 @@ class Event(models.Model):
             
             duration_list = self.env['calendar.event'].read_group([
                     ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now()), ('categ_ids','in',student_event.id)
-                ],['start_date','duration'],['start_date'])
+                ],['start_datetime','duration'],['start_datetime:day'])
             for duration in duration_list:
                 if duration['duration'] > 4:
                     raise ValidationError(_("You cannot book more than four hours in advance per day - %s") % duration['start_date'])
