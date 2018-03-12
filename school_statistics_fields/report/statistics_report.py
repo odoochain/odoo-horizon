@@ -143,7 +143,7 @@ class SaturnXlsx(ReportXlsx):
             sheet.write(i, 15, bloc_id.field_b4 or '')
             if bloc_id.field_b5:
                 sheet.write(i, 16, bloc_id.field_b5[0].upper())
-            sheet.write(i, 17, bloc_id.field_b6.name or '')
+            sheet.write(i, 17, bloc_id.field_b6.code or '')
             sheet.write(i, 18, bloc_id.field_b7 or '')
             sheet.write(i, 19, bloc_id.field_b8.code or '')
             if bloc_id.field_b9:
