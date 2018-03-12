@@ -145,7 +145,7 @@ class SaturnXlsx(ReportXlsx):
                 sheet.write(i, 16, bloc_id.field_b5[0].upper())
             sheet.write(i, 17, bloc_id.field_b6.name or '')
             sheet.write(i, 18, bloc_id.field_b7 or '')
-            sheet.write(i, 19, bloc_id.field_b8.name or '')
+            sheet.write(i, 19, bloc_id.field_b8.code or '')
             if bloc_id.field_b9:
                 sheet.write_datetime(i, 20, fields.Date.from_string(bloc_id.field_b9), date_format)
             sheet.write(i, 21, bloc_id.field_b10 or '')
