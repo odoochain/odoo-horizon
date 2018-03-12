@@ -207,14 +207,27 @@ class IndividualBloc(models.Model):
     @api.one
     def _compute_fase_code(self):
         self.field_a1 = self.env.user.company_id.code_fase
-    
+        
+    @api.one
+    def _compute_field_a8(self):
+        mapping = {
+            '0' : 1,
+            '1' : 1,
+            '2' : 2,
+            '3' : 3,
+            '4' : 1,
+            '5' : 2,
+            '6' : 1,
+        }
+        self.field_a8 = mapping.get(self.source_bloc_id.level,1)
+        
     field_a2 = fields.Many2one('school.year',description='Fields A2',string='Année académique en cours (= année N)',related='year_id',readonly='1')
     field_a3 = fields.Selection([('long','Long'),('short', 'Short')],description='Fields A3',string='Type d''études', related='program_id.cycle_id.type',readonly='1')
     field_a4 = fields.Many2one('school.domain',description='Fields A4',string='Domaine d''études',related='program_id.speciality_id.domain_id',readonly='1')
     field_a5 = fields.Many2one('school.cycle',description='Fields A5',string='Cycle d''études et durée du cycle',related='program_id.cycle_id',readonly='1')
     field_a6 = fields.Many2one('school.section',description='Fields A6',string='Section d''études (Musique) ou AESS (tous les domaines)',related='program_id.speciality_id.section_id',readonly='1')
     field_a7 = fields.Many2one('school.track',description='Fields A7',string='Option',related='program_id.speciality_id.track_id',readonly='1')
-    field_a8 = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),],description='Fields A8',string='Année d''études dans le cycle',related='source_bloc_id.level',readonly='1')
+    field_a8 = fields.Integer(description='Fields A8',string='Année d''études dans le cycle',compute='_compute_field_a8',readonly='1')
     field_a9 = fields.Selection([('1','Principale'),('2','Secondaire'),('3','Ternaire')], description='Fields A9',string='Inscriptions multiples', default='1')
     field_a10 = fields.Boolean(description='Fields A10',string='Jeunes Talents (Musique)', related='program_id.cycle_id.is_jeune_talent',readonly='1')
     field_a11 = fields.Selection([('A','Approfondie'),('D','Didactique'),('S','Specialisée')],description='Fields A11',string='Finalité du 2e cycle', related='program_id.cycle_id.type_second_cycle',readonly='1')
