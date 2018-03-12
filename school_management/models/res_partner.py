@@ -20,6 +20,7 @@
 ##############################################################################
 import logging
 import threading
+import re
 
 import openerp
 from openerp import tools, api, fields, models, _
@@ -37,6 +38,13 @@ class Partner(models.Model):
     employee = fields.Boolean("Employee",default=False)
     
     initials = fields.Char('Initials')
+    
+    @api.one
+    @api.constrains('initials')
+    def _check_initials(self):
+        if not re.match('([A-Z]\.,)*([A-Z]\.)?',self.initials):
+            raise UserError(_("Please encode initials as eg X.,V.,T."))
+    
     birthplace = fields.Char('Birthplace')
     phone2 = fields.Char('Phone2')
     title = fields.Selection([('Mr', 'Monsieur'),('Mme', 'Madame'),('Mlle', 'Mademoiselle')])
