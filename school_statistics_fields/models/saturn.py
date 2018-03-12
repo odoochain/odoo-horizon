@@ -251,7 +251,7 @@ class IndividualBloc(models.Model):
             else :
                 self.field_b10 = self.student_id.zip
         else :
-            self.field_b11 = self.student_ud.nationality_id.code
+            self.field_b11 = self.student_id.nationality_id.code
     
     field_b10 = fields.Char(description='Fields B10',string='Domicile légal en Belgique', compute='_compute_zip_country')
     field_b11 = fields.Char(description='Fields B11',string='Domicile légal à l''étranger', compute='_compute_zip_country')
