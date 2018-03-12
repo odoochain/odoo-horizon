@@ -501,14 +501,31 @@ class IndividualBloc(models.Model):
         year_minus_3 = year_minus_2.previous if year_minus_2 else False
         year_minus_4 = year_minus_3.previous if year_minus_3 else False
         year_minus_5 = year_minus_4.previous if year_minus_4 else False
+        program_id = self.program_id
         if year_minus_1:
-            history = self.env['school.student_history_entry'].search([('student_id','=',self.student_id.id),('year_id','=',year_minus_1.id)])
-            if history:
-                self.field_g2 = history.activite
-                self.field_g3 = history.etablissement_id
-                self.field_g4 = history.domain_id
-                self.field_g5 = history.annee
-                self.field_g6 = history.resultat
+            year_id = year_minus_1
+            hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
+            if not hist_bloc_id:
+                # Try to find a bloc in another cycle for the given year
+                hist_bloc_id = self.env['school.individual_bloc'].search([('student_id','=',self.student_id.id),('year_id','=',year_id.id)])
+            if hist_bloc_id :
+                hist_bloc_id = hist_bloc_id[0]
+                self.field_g2 = 2
+                self.field_g3 = self.field_a1
+                self.field_g4 = self.domain_id
+                self.field_g5 = year_id
+                if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
+                    self.field_g6 = 1
+                else :
+                    self.field_g6 = 2
+            else :
+                history = self.env['school.student_history_entry'].search([('student_id','=',self.student_id.id),('year_id','=',year_id.id)])
+                if history:
+                    self.field_g2 = history.activite
+                    self.field_g3 = history.etablissement_id
+                    self.field_g4 = history.domain_id
+                    self.field_g5 = history.annee
+                    self.field_g6 = history.resultat
         if year_minus_2:
             history = self.env['school.student_history_entry'].search([('student_id','=',self.student_id.id),('year_id','=',year_minus_2.id)])
             if history:
