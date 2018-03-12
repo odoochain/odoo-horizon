@@ -510,14 +510,14 @@ class IndividualBloc(models.Model):
                 hist_bloc_id = self.env['school.individual_bloc'].search([('student_id','=',self.student_id.id),('year_id','=',year_id.id)])
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
-                self.field_g2 = 2
+                self.field_g2 = '2'
                 self.field_g3 = self.field_a1
                 self.field_g4 = self.domain_id
                 self.field_g5 = year_id
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
-                    self.field_g6 = 1
+                    self.field_g6 = '1'
                 else :
-                    self.field_g6 = 2
+                    self.field_g6 = '2'
             else :
                 history = self.env['school.student_history_entry'].search([('student_id','=',self.student_id.id),('year_id','=',year_id.id)])
                 if history:
