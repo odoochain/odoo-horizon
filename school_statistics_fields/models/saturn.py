@@ -512,9 +512,9 @@ class IndividualBloc(models.Model):
             if hist_bloc_id :
                 hist_bloc_id = hist_bloc_id[0]
                 self.field_g2 = '2'
-                self.field_g3 = self.field_a1
-                self.field_g4 = self.source_bloc_domain_id.saturn_code
-                self.field_g5 = year_mapping.get(self.source_bloc_level,None)
+                self.field_g3 = hist_bloc_id.field_a1
+                self.field_g4 = hist_bloc_id.source_bloc_domain_id.saturn_code
+                self.field_g5 = year_mapping.get(hist_bloc_id.source_bloc_level,None)
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
                     self.field_g6 = '1'
                 else :
