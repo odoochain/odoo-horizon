@@ -236,7 +236,7 @@ class IndividualBloc(models.Model):
     field_b1 = fields.Char(description='Fields B1',string='Nom de l''étudiant', related='student_id.lastname')
     field_b2 = fields.Char(description='Fields B2',string='Premier prénom de l''étudiant', related='student_id.firstname')
     field_b3 = fields.Char(description='Fields B3',string='Initiales des autres prénoms', related='student_id.initials')
-    field_b4 = fields.Char(description='Fields B4',string='Numéro matricule', related='student_id.id')
+    field_b4 = fields.Integer(description='Fields B4',string='Numéro matricule', related='student_id.id')
     field_b5 = fields.Selection([('male', 'Male'),('female', 'Female')],description='Fields B5',string='Sexe', related='student_id.gender')
     field_b6 = fields.Many2one('res.country',description='Fields B6',string='Nationalité', related='student_id.nationality_id')
     field_b7 = fields.Char(description='Fields B7',string='Lieu de naissance', related='student_id.birthplace')
