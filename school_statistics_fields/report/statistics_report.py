@@ -137,7 +137,7 @@ class SaturnXlsx(ReportXlsx):
             sheet.write(i, 9, bloc_id.field_a10)
             sheet.write(i, 10, bloc_id.field_a11 or '')
             sheet.write(i, 11, bloc_id.field_a12.saturn_code or '')
-            sheet.write(i, 12, bloc_id.field_b1 or '')
+            sheet.write(i, 12, _unaccent(bloc_id.field_b1) or '')
             sheet.write(i, 13, bloc_id.field_b2 or '')
             sheet.write(i, 14, bloc_id.field_b3 or '')
             sheet.write(i, 15, bloc_id.field_b4 or '')
