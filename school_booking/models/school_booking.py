@@ -81,10 +81,10 @@ class Event(models.Model):
         if student_event in self.categ_ids:
             now = datetime.datetime.now()
             _logger.info(now)
-            if now.hour + now.minute / 60 <= 12.5 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
+            if now.hour + now.minute / 60 <= 11.5 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
                 raise ValidationError(_("You cannot book for the next day before 12h30."))
             
-            if now.hour + now.minute / 60 >= 12.5 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != now.timedelta(days=1).date() :
+            if now.hour + now.minute / 60 >= 11.5 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != now.timedelta(days=1).date() :
                 raise ValidationError(_("You can book only the next day (after 12h30)."))
             
             duration_list = self.env['calendar.event'].read_group([
