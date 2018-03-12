@@ -74,17 +74,31 @@ class Event(models.Model):
     def _check_room_quota(self):
         if self.user_id.partner_id.teacher or self.user_id.partner_id.employee :
             return
-        student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_teacher_event_type')
+        student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_student_event_type')
         
         if student_event in self.categ_ids:
-            duration_list = self.env['calendar.event'].search_read([
+            duration_list = self.env['calendar.event'].read_group([
+                    ('user_id', '=', self.user_id.id)
+                ],['start_date','duration'],['start_date'])
+            for duration in duration_list:
+                if duration['duration'] > 6:
+                    raise ValidationError(_("You cannot book more than six hours per day - %s") % duration['start_date'])
+            
+            duration_list = self.env['calendar.event'].read_group([
                     ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
-                ],['duration'])
-            total = 0
-            for item in duration_list:
-                total = total + item['duration']
-            if total > 2:
-                raise ValidationError(_("You cannot book more than two hours in advance."))
+                ],['start_date','duration'],['start_date'])
+            for duration in duration_list:
+                if duration['duration'] > 4:
+                    raise ValidationError(_("You cannot book more than four hours in advance per day - %s") % duration['start_date'])
+
+            # duration_list = self.env['calendar.event'].search_read([
+            #         ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
+            #     ],['duration'])
+            # total = 0
+            # for item in duration_list:
+            #     total = total + item['duration']
+            # if total > 2:
+            #     raise ValidationError(_("You cannot book more than two hours in advance."))
             
     #@api.one
     #@api.constrains('start','stop','room_id')
