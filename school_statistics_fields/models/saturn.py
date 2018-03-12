@@ -502,6 +502,7 @@ class IndividualBloc(models.Model):
         year_minus_4 = year_minus_3.previous if year_minus_3 else False
         year_minus_5 = year_minus_4.previous if year_minus_4 else False
         program_id = self.program_id
+        year_mapping = {1 : '11', 2 : '12', 3 : '13', 4 : '21', 5 : '22'}
         if year_minus_1:
             year_id = year_minus_1
             hist_bloc_id = program_id.bloc_ids.filtered(lambda b: b.year_id == year_id)
@@ -513,7 +514,7 @@ class IndividualBloc(models.Model):
                 self.field_g2 = '2'
                 self.field_g3 = self.field_a1
                 self.field_g4 = self.source_bloc_domain_id.saturn_code
-                self.field_g5 = year_id
+                self.field_g5 = year_mapping.get(self.source_bloc_level,None)
                 if hist_bloc_id.state in ('awarded_first_session','awarded_second_session'):
                     self.field_g6 = '1'
                 else :
