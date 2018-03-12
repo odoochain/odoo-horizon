@@ -245,11 +245,11 @@ class IndividualBloc(models.Model):
     
     @api.one
     def _compute_zip_country(self):
-        if self.student_ud.nationality_id.code == 'BE':
-            if len(self.student_ud.child_ids) > 0 :
-                self.field_b10 = self.student_ud.child_ids[0].zip
+        if self.student_id.nationality_id.code == 'BE':
+            if len(self.student_id.child_ids) > 0 :
+                self.field_b10 = self.student_id.child_ids[0].zip
             else :
-                self.field_b10 = self.student_ud.zip
+                self.field_b10 = self.student_id.zip
         else :
             self.field_b11 = self.student_ud.nationality_id.code
     
