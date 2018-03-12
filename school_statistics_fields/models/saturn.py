@@ -265,7 +265,25 @@ class IndividualBloc(models.Model):
     
     field_c1 = fields.Selection([('R','Régulier'),('I','Irrégulier'),('L','Libre')], description='Fields C1',string='Régulier / Libre', default='r', required=True)
     field_c2 = fields.Date(description='Fields C2',string='Date d''abandon')
-    field_c3 = fields.Selection([('A','Ancien'),('N','Nouveau')],description='Fields C3',string='Ancien/Nouveau', default='A', required=True)
+    
+    @api.one
+    def _default_field_c3(self):
+        years = self.env['school.individual_bloc'].search([('student_id','=',self.student_id.id)]).mapped('year_id')
+        if len(years) > 1 :
+            return 'A'
+        else :
+            return 'N'
+            
+    @api.one
+    def _recompute_field_c3(self):
+        years = self.env['school.individual_bloc'].search([('student_id','=',self.student_id.id)]).mapped('year_id')
+        if len(years) > 1 :
+            self.field_c3 = 'A'
+        else :
+            self.field_c3 = 'N'
+    
+    field_c3 = fields.Selection([('A','Ancien'),('N','Nouveau')],description='Fields C3',string='Ancien/Nouveau', default=lambda self: self._default_field_c3(), required=True)
+    
     field_c4 = fields.Boolean(description='Fields C4',string='Etalement')
     field_c5 = fields.Selection([('0','Non'),('1','Mobilité européenne'),('2','Mobilité non-européenne')], description='Fields C5',string='Mobilité', related='student_id.mobility')
     field_c14 = fields.Selection([('1','Non'),('2','Oui, en FWB ou en Communauté germanophone'),('3','Oui, en Communauté flamande'),('4','Oui, à l’étranger')],description='Fields C14',string='Première génération', related='student_id.generation')
