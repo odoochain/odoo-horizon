@@ -80,7 +80,7 @@ class Event(models.Model):
             duration_list = self.env['calendar.event'].read_group([
                     ('user_id', '=', self.user_id.id)
                 ],['start_date','duration'],['start_date'])
-             _logger.info(duration_list)
+            _logger.info(duration_list)
             for duration in duration_list:
                 if duration['duration'] and duration['duration'] > 6:
                     raise ValidationError(_("You cannot book more than six hours per day - %s") % duration['start_date'])
