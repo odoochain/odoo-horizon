@@ -78,7 +78,7 @@ class Event(models.Model):
         
         if student_event in self.categ_ids:
             duration_list = self.env['calendar.event'].read_group([
-                    ('user_id', '=', self.user_id.id)
+                    ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id)
                 ],['start_date','duration'],['start_date'])
             _logger.info(duration_list)
             for duration in duration_list:
@@ -86,7 +86,7 @@ class Event(models.Model):
                     raise ValidationError(_("You cannot book more than six hours per day - %s") % duration['start_date'])
             
             duration_list = self.env['calendar.event'].read_group([
-                    ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
+                    ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now()), ('categ_ids','in',student_event.id)
                 ],['start_date','duration'],['start_date'])
             for duration in duration_list:
                 if duration['duration'] > 4:
