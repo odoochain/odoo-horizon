@@ -242,8 +242,17 @@ class IndividualBloc(models.Model):
     field_b7 = fields.Char(description='Fields B7',string='Lieu de naissance', related='student_id.birthplace')
     field_b8 = fields.Many2one('res.country',description='Fields B8',string='Pays du lieu de naissance', related='student_id.birthcountry')
     field_b9 = fields.Date(description='Fields B9',string='Date de naissance de l''étudiant', related='student_id.birthdate_date')
-    field_b10 = fields.Char(description='Fields B10',string='Domicile légal en Belgique')
-    field_b11 = fields.Char(description='Fields B11',string='Domicile légal à l''étranger')
+    
+    @api.one
+    def _compute_zip_country(self):
+        if self.student_ud.nationality_id.code == 'BE':
+            self.field_b10 = self.student_ud.zip
+        else :
+            self.field_b11 = self.student_ud.nationality_id.code
+    
+    field_b10 = fields.Char(description='Fields B10',string='Domicile légal en Belgique', compute='_compute_zip_country')
+    field_b11 = fields.Char(description='Fields B11',string='Domicile légal à l''étranger', compute='_compute_zip_country')
+    
     field_b12 = fields.Char(description='Fields B12',string='Numéro de Registre national', related='student_id.reg_number')
     
     field_c1 = fields.Selection([('r','Régulier'),('i','Irrégulier'),('l','Libre')], description='Fields C1',string='Régulier / Libre', default='r', required=True)
