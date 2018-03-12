@@ -81,6 +81,7 @@ class Event(models.Model):
         if student_event in self.categ_ids:
             now = datetime.datetime.now()
             _logger.info(now)
+            _logger.info(now.hour + now.minute / 60)
             if now.hour + now.minute / 60 <= 11.5 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
                 raise ValidationError(_("You cannot book for the next day before 12h30."))
             
