@@ -19,7 +19,7 @@
 ##############################################################################
 import logging
 
-import datetime
+from datetime import datetime, date, time, timedelta
 
 from openerp import api, fields, models, _, tools
 from openerp.exceptions import UserError, ValidationError
@@ -79,11 +79,11 @@ class Event(models.Model):
         student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_student_event_type')
         
         if student_event in self.categ_ids:
-            now = datetime.datetime.now()
-            if now.hour + now.minute / 60 < 11 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
+            now = datetime.now()
+            if now.hour < 11 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
                 raise ValidationError(_("You cannot book for the next day before 12h00."))
             
-            if now.hour + now.minute / 60 >= 11 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != now.timedelta(days=1).date() :
+            if now.hour >= 11 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != (now + timedelta(days=1)).date() :
                 raise ValidationError(_("You can book only the next day (after 12h00)."))
             
             duration_list = self.env['calendar.event'].read_group([
