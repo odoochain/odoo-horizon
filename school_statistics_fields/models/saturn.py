@@ -261,7 +261,7 @@ class IndividualBloc(models.Model):
         if self.student_id.nationality_id.code == 'BE':
             self.field_b12 = self.student_id.reg_number
             
-    field_b12 = fields.Char(description='Fields B12',string='Numéro de Registre national', related='student_id.reg_number')
+    field_b12 = fields.Char(description='Fields B12',string='Numéro de Registre national', compute='_compute_reg_number')
     
     field_c1 = fields.Selection([('r','Régulier'),('i','Irrégulier'),('l','Libre')], description='Fields C1',string='Régulier / Libre', default='r', required=True)
     field_c2 = fields.Date(description='Fields C2',string='Date d''abandon')
