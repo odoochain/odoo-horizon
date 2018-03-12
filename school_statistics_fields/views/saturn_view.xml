@@ -95,7 +95,7 @@
                             <field name='field_d8' attrs="{'readonly': [('is_saturn_validated', '=', True)]}"/>
                         </group>
                     </page>
-                    <page string="Section E" attrs="{'invisible': ['|','|',('field_a5','not in',('1B','1C')),('field_a8','!=','1'),('field_c3','!=','N')]}">
+                    <page string="Section E">  <!-- attrs="{'invisible': ['|','|',('field_a5','not in',('1B','1C')),('field_a8','!=','1'),('field_c3','!=','N')]}"> -->
                         <group>
                             <field name='field_e1' attrs="{'readonly': [('is_saturn_validated', '=', True)]}"/>
                             <field name='field_e2' attrs="{'readonly': [('is_saturn_validated', '=', True)]}"/>
@@ -104,7 +104,7 @@
                             <field name='field_e5' attrs="{'readonly': [('is_saturn_validated', '=', True)], 'invisible': [('field_e1','!=','5')]}"/>
                         </group>
                     </page>
-                    <page string="Section F" attrs="{'invisible': ['|','|',('field_c3','!=','N'),('field_c14','!=','2'),('field_a8','not in',('2','3','4','5'))]}">
+                    <page string="Section F"> <!-- attrs="{'invisible': ['|','|',('field_c3','!=','N'),('field_c14','!=','2'),('field_a8','not in',('2','3','4','5'))]}"> -->
                         <group>
                             <field name='field_f1' attrs="{'readonly': [('is_saturn_validated', '=', True)]}"/>
                             <field name='field_f2' attrs="{'readonly': [('is_saturn_validated', '=', True)]}"/>
