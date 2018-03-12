@@ -42,6 +42,7 @@ class Partner(models.Model):
     @api.one
     @api.constrains('initials')
     def _check_initials(self):
+        _logger.info('Chech here !!')
         if self.initials and not re.match('([A-Z]\.,)*([A-Z]\.)?',self.initials):
             raise UserError(_("Please encode initials as eg X.,V.,T."))
     

@@ -43,7 +43,7 @@
                                     <field name="name" default_focus="1" placeholder="Nom" attrs="{
                                         'readonly': [('is_company', '=', False)],
                                         'required': [('is_company', '=', True)]
-                                    }" on_change="1" modifiers="{'readonly': [['is_company', '=', false]], 'required': [['is_company', '=', true]]}" class="oe_inline"/> <field name='initials' placeholder="Initials" class="oe_inline"/>
+                                    }" on_change="1" modifiers="{'readonly': [['is_company', '=', false]], 'required': [['is_company', '=', true]]}" class="oe_inline"/> <field name='initials' placeholder="I.,J.,F." class="oe_inline"/>
                                 </h1>
                                 <span class="oe_fade">
                                       Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
