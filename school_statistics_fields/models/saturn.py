@@ -321,6 +321,7 @@ class IndividualBloc(models.Model):
     field_f10 = fields.Many2one('res.country', description='Fields F10',string='Pays dans lequel le diplôme indiqué à la variable F2 a été obtenu')
     
     field_g2 = fields.Selection([
+        ('0','Enseignement supérieur de la fédération Wallonie Bruxelle'),
         ('1','Enseignement secondaire non obligatoire (année préparatoire à l’enseignement supérieur, 4e cycle du secondaire, ...)'),
         ('2','Haute École de la Fédération Wallonie‐Bruxelles ou germanophone'),
         ('3','Université de la Fédération Wallonie‐Bruxelles'),
@@ -354,6 +355,7 @@ class IndividualBloc(models.Model):
             ('2','Refusé'),
         ], description='Fields G6',string='Résultats se rapportant à G2',compute='_compute_g_fields')
     field_g7 = fields.Selection([
+        ('0','Enseignement supérieur de la fédération Wallonie Bruxelle'),
         ('1','Enseignement secondaire non obligatoire (année préparatoire à l’enseignement supérieur, 4e cycle du secondaire, ...)'),
         ('2','Haute École de la Fédération Wallonie‐Bruxelles ou germanophone'),
         ('3','Université de la Fédération Wallonie‐Bruxelles'),
@@ -387,6 +389,7 @@ class IndividualBloc(models.Model):
             ('2','Refusé'),
         ], description='Fields G11',string='Résultats se rapportant à G7',compute='_compute_g_fields')
     field_g12 = fields.Selection([
+        ('0','Enseignement supérieur de la fédération Wallonie Bruxelle'),
         ('1','Enseignement secondaire non obligatoire (année préparatoire à l’enseignement supérieur, 4e cycle du secondaire, ...)'),
         ('2','Haute École de la Fédération Wallonie‐Bruxelles ou germanophone'),
         ('3','Université de la Fédération Wallonie‐Bruxelles'),
@@ -420,6 +423,7 @@ class IndividualBloc(models.Model):
             ('2','Refusé'),
         ], description='Fields G16',string='Résultats se rapportant à G12',compute='_compute_g_fields')
     field_g17 = fields.Selection([
+        ('0','Enseignement supérieur de la fédération Wallonie Bruxelle'),
         ('1','Enseignement secondaire non obligatoire (année préparatoire à l’enseignement supérieur, 4e cycle du secondaire, ...)'),
         ('2','Haute École de la Fédération Wallonie‐Bruxelles ou germanophone'),
         ('3','Université de la Fédération Wallonie‐Bruxelles'),
@@ -453,6 +457,7 @@ class IndividualBloc(models.Model):
             ('2','Refusé'),
         ], description='Fields G21',string='Résultats se rapportant à G17',compute='_compute_g_fields')
     field_g22 = fields.Selection([
+        ('0','Enseignement supérieur de la fédération Wallonie Bruxelle'),
         ('1','Enseignement secondaire non obligatoire (année préparatoire à l’enseignement supérieur, 4e cycle du secondaire, ...)'),
         ('2','Haute École de la Fédération Wallonie‐Bruxelles ou germanophone'),
         ('3','Université de la Fédération Wallonie‐Bruxelles'),
