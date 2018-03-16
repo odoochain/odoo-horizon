@@ -79,7 +79,7 @@ class Event(models.Model):
         
         # Prevent concurrent bookings
         
-        _logger.info([('room_id','=',self.room_id.id), ('start_datetime', '<=', self.stop_datetime), ('stop_datetime', '>=', self.start_datetime)])
+        _logger.info(self.env['calendar.event'].search([],[('room_id','=',self.room_id.id), ('start_datetime', '<=', self.stop_datetime), ('stop_datetime', '>=', self.start_datetime)]))
         
         conflicts_count = self.env['calendar.event'].search_count([('room_id','=',self.room_id.id), ('start_datetime', '<=', self.stop_datetime), ('stop_datetime', '>=', self.start_datetime)])
         
