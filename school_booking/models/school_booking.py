@@ -87,7 +87,7 @@ class Event(models.Model):
         
         _logger.info(conflicts_count)
         
-        if conflicts_count > 0:
+        if conflicts_count > 1:
             raise ValidationError(_("Concurrent event detected - %s in %s") % (self.start_datetime, self.room_id.name))
         
         # Constraint on student events
