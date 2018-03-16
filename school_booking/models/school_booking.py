@@ -79,7 +79,11 @@ class Event(models.Model):
         
         # Prevent concurrent bookings
         
+        _logger.info([('room_id','=',self.room_id.id), ('start_datetime', '<=', self.stop_datetime), ('stop_datetime', '>=', self.start_datetime)])
+        
         conflicts_count = self.env['calendar.event'].search_count([('room_id','=',self.room_id.id), ('start_datetime', '<=', self.stop_datetime), ('stop_datetime', '>=', self.start_datetime)])
+        
+        _logger.info(conflicts_count)
         
         if conflicts_count > 0:
             raise ValidationError(_("Concurrent event detected - %s in %s") % (self.start_datetime, self.room_id.name))
@@ -101,7 +105,6 @@ class Event(models.Model):
             duration_list = self.env['calendar.event'].read_group([
                     ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('start', '>', fields.Datetime.to_string(event_day)), ('start', '<', fields.Datetime.to_string(event_day + timedelta(days=1)))
                 ],['room_id','duration'],['room_id'])
-            _logger.info(duration_list)
             for duration in duration_list:
                 if duration['duration'] and duration['duration'] > 2:
                     raise ValidationError(_("You cannot book the room %s more than two hours per day") % (duration.get('room_id','')[1]))
@@ -109,7 +112,6 @@ class Event(models.Model):
             duration_list = self.env['calendar.event'].read_group([
                     ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('start', '>', fields.Datetime.to_string(event_day)), ('start', '<', fields.Datetime.to_string(event_day + timedelta(days=1)))
                 ],['start_datetime','duration'],['start_datetime:day'])
-            _logger.info(duration_list)
             for duration in duration_list:
                 if duration['duration'] and duration['duration'] > 6:
                     raise ValidationError(_("You cannot book more than six hours per day - %s") % duration['start_datetime:day'])
