@@ -82,7 +82,7 @@ class Event(models.Model):
         conflicts_count = self.env['calendar.event'].search_count([('room_id','=',self.room_id.id), ('start', '<=', fields.Datetime.to_string(self.end)), ('stop', '>=', fields.Datetime.to_string(self.stop))])
         
         if conflicts_count > 0:
-            raise ValidationError(_("Concurrent event detected"))
+            raise ValidationError(_("Concurrent event detected - %s in %s") % (self.start_datetime, self.room_id.name))
         
         # Constraint on student events
         
