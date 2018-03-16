@@ -89,7 +89,7 @@ class Event(models.Model):
             event_day = fields.Datetime.from_string(self.start_datetime).date()
             
             duration_list = self.env['calendar.event'].read_group([
-                    ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('start', '>', event_day), ('start', '<', event_day + timedelta(days=1))
+                    ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('start', '>', fields.Datetime.to_string(event_day)), ('start', '<', fields.Datetime.to_string(event_day + timedelta(days=1)))
                 ],['start_datetime','room_id','duration'],['start_datetime:day','room_id'])
             _logger.info(duration_list)
             for duration in duration_list:
