@@ -337,27 +337,29 @@ var NewBookingDialog = Widget.extend({
         var self = this;
         var fromTime = self.$('#from_hour').timepicker('getTime');
         var toTime = self.$('#to_hour').timepicker('getTime');
-        var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
-        var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
-        ajax.jsonRpc('/booking/rooms', 'call', {
-    				'start' : time.moment_to_str(start),
-    				'end' : time.moment_to_str(stop),
-	    	}).done(function(rooms){
-            var roomSelect = self.$('select.select-asset-id').empty().html(' ');
-            for(var room_idx in rooms) {
-                var room = rooms[room_idx];
-                // add new value
-                roomSelect.append(
-                  $("<option></option>")
-                    .attr("value",room.id)
-                    .text(room.name)
-                );
-            }
-            roomSelect.removeAttr( "disabled" )
-    	    roomSelect.material_select();
-    	    Materialize.updateTextFields();
-    	    self.updateSendButton();
-    	});
+        if (fromTime && toTime) {
+            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
+            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+            ajax.jsonRpc('/booking/rooms', 'call', {
+        				'start' : time.moment_to_str(start),
+        				'end' : time.moment_to_str(stop),
+    	    	}).done(function(rooms){
+                var roomSelect = self.$('select.select-asset-id').empty().html(' ');
+                for(var room_idx in rooms) {
+                    var room = rooms[room_idx];
+                    // add new value
+                    roomSelect.append(
+                      $("<option></option>")
+                        .attr("value",room.id)
+                        .text(room.name)
+                    );
+                }
+                roomSelect.removeAttr( "disabled" )
+        	    roomSelect.material_select();
+        	    Materialize.updateTextFields();
+        	    self.updateSendButton();
+        	});
+        }
     },
     
     updateSendButton: function() {
