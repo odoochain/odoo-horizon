@@ -616,6 +616,7 @@ var Calendar = CalendarWidget.extend({
                         'id': evt.id,
                         'resourceId':evt.room_id[0],
                         'color': evt.recurrency ? '#00bcd4' : session.uid == evt.user_id[0] ? '#ffc107' : '#ff4355',
+                        'user_id' : evt.user_id[0],
                     });
                 });
                 //console.log([start, end, events])
