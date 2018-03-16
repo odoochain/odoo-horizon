@@ -86,8 +86,10 @@ class Event(models.Model):
             if now.hour >= 11 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != (now + timedelta(days=1)).date() :
                 raise ValidationError(_("You can book only the next day (after 12h00)."))
             
+            event_day = fields.Datetime.from_string(self.start_datetime).date()
+            
             duration_list = self.env['calendar.event'].read_group([
-                    ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id)
+                    ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('start_datetime', '>', event_day), ('start_datetime', '<', event_day + timedelta(days=1))
                 ],['start_datetime','room_id','duration'],['start_datetime:day','room_id'])
             _logger.info(duration_list)
             for duration in duration_list:
