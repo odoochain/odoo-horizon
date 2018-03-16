@@ -90,11 +90,11 @@ class Event(models.Model):
             
             duration_list = self.env['calendar.event'].read_group([
                     ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('start', '>', fields.Datetime.to_string(event_day)), ('start', '<', fields.Datetime.to_string(event_day + timedelta(days=1)))
-                ],['start_datetime','room_id','duration'],['start_datetime:day','room_id'])
+                ],['room_id','duration'],['room_id'])
             _logger.info(duration_list)
             for duration in duration_list:
                 if duration['duration'] and duration['duration'] > 2:
-                    raise ValidationError(_("You cannot book the same room more than two hours per day - %s on %s") % (duration.get('room_id',''),duration.get('start_datetime:day','')))
+                    raise ValidationError(_("You cannot book the same room %s more than two hours per day") % (duration.get('room_id','')))
             
             duration_list = self.env['calendar.event'].read_group([
                     ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id)
