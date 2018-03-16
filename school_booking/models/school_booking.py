@@ -76,6 +76,16 @@ class Event(models.Model):
     def _check_room_quota(self):
         if self.user_id.partner_id.teacher or self.user_id.partner_id.employee :
             return
+        
+        # Prevent concurrent bookings
+        
+        conflicts_count = self.env['calendar.event'].search_count([('room_id','=',self.room_id.id), ('start', '<=', fields.Datetime.to_string(self.end)), ('stop', '>=', fields.Datetime.to_string(self.stop))])
+        
+        if conflicts_count > 0:
+            raise ValidationError(_("Concurrent event detected"))
+        
+        # Constraint on student events
+        
         student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_student_event_type')
         
         if student_event in self.categ_ids:
@@ -110,24 +120,5 @@ class Event(models.Model):
             for duration in duration_list:
                 if duration['duration'] > 4:
                     raise ValidationError(_("You cannot book more than four hours in advance per day - %s") % duration['start_datetime:day'])
-
-            # duration_list = self.env['calendar.event'].search_read([
-            #         ('user_id', '=', self.user_id.id), ('start', '>', fields.Datetime.now())
-            #     ],['duration'])
-            # total = 0
-            # for item in duration_list:
-            #     total = total + item['duration']
-            # if total > 2:
-            #     raise ValidationError(_("You cannot book more than two hours in advance."))
+                    
             
-    #@api.one
-    #@api.constrains('start','stop','room_id')
-    #def _check_room_availability(self):
-    #    domain = [
-    #        ('start', '<=', self.stop),    
-    #        ('stop', '>=', self.start),
-    #       ('room_id', '=', self.room_id)
-    #    ]
-    #    match_count = self.env['calendar.event'].search_count(domain)
-    #    if match_count > 0 :
-    #        raise ValidationError(_("Conflict detected on the room %s." % self.room_id.name)) 
