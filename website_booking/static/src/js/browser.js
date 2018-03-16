@@ -143,6 +143,7 @@ var Schedule =  CalendarWidget.extend({
                             'id': evt.id,
                             'resourceId':evt.room_id[0],
                             'color': '#FA8FB1',
+                            'user_id' : evt.user_id[0],
                         });
                     });
                     //console.log([start, end, events])
