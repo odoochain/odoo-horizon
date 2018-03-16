@@ -79,7 +79,7 @@ class Event(models.Model):
         
         # Prevent concurrent bookings
         
-        conflicts_count = self.env['calendar.event'].search_count([('room_id','=',self.room_id.id), ('start_datetime', '<=', fields.Datetime.to_string(self.stop_datetime)), ('stop_datetime', '>=', fields.Datetime.to_string(self.start_datetime))])
+        conflicts_count = self.env['calendar.event'].search_count([('room_id','=',self.room_id.id), ('start_datetime', '<=', self.stop_datetime), ('stop_datetime', '>=', self.start_datetime)])
         
         if conflicts_count > 0:
             raise ValidationError(_("Concurrent event detected - %s in %s") % (self.start_datetime, self.room_id.name))
