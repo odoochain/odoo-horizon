@@ -83,7 +83,7 @@ class BookingController(http.Controller):
         # TODO : ugply transform
         start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
-        fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency']
+        fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','tags']
         if(category_id):
             domain = [
                 ('start', '<=', end),    
