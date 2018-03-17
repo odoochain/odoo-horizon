@@ -284,6 +284,8 @@ var NewBookingDialog = Widget.extend({
         self.$('select.select-asset-id').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
+            'minTime': '8:00',
+            'maxTime': '19:30',
         });
         self.$('#from_hour').on('change', function() {
             var newTime = self.$('#from_hour').timepicker('getTime');
@@ -291,6 +293,8 @@ var NewBookingDialog = Widget.extend({
         });
         self.$('#to_hour').timepicker({
             'timeFormat': 'H:i',
+            'minTime': '8:30',
+            'maxTime': '20:00',
             'showDuration': true,
         });
         if(self.edit_mode) {
