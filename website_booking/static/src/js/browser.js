@@ -556,10 +556,14 @@ var Calendar = CalendarWidget.extend({
     		},
     		eventClick: function(calEvent, jsEvent, view) {
     		    var now = moment();
-    		    if(session.uid == calEvent.user_id && moment(calEvent.start) > now) {
-        		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
-                    dialog.appendTo(self.getParent().main_modal.empty());
-                    self.getParent().main_modal.modal('open');
+    		    if(session.uid == calEvent.user_id) {
+    		        if (moment(calEvent.start) > now) {
+            		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
+                        dialog.appendTo(self.getParent().main_modal.empty());
+                        self.getParent().main_modal.modal('open');
+    		        } else {
+    		            Materialize.toast('You cannot edit booking in the past', 2000);
+    		        }
     		    }
             },
             header : {
