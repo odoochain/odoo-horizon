@@ -74,21 +74,23 @@ class Event(models.Model):
     @api.one
     @api.constrains('room_id')
     def _check_room_quota(self):
-        if self.user_id.partner_id.teacher or self.user_id.partner_id.employee :
+        
+        if self.user_id == 1 :
             return
-        
+
         # Prevent concurrent bookings
-        
+            
         domain = [('room_id','=',self.room_id.id), ('start', '<=', self.stop_datetime), ('stop', '>=', self.start_datetime)]
         conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
         if conflicts_count > 1:
             raise ValidationError(_("Concurrent event detected - %s in %s") % (self.start_datetime, self.room_id.name))
-        
+
         # Constraint on student events
         
         student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_student_event_type')
         
         if student_event in self.categ_ids:
+            
             now = datetime.now()
             if now.hour < 11 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
                 raise ValidationError(_("You cannot book for the next day before 12h00."))
