@@ -21,7 +21,6 @@
                                 <select class="select-asset-id browser-default" disabled="">
                                     <option value="" disabled="" selected="">Choose your room</option>
                                 </select>
-                                <label>Room</label>
                             </div>
                             <div class="row">
                               <div class="input-field col s12">
