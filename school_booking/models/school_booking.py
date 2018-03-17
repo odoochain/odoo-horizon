@@ -75,7 +75,9 @@ class Event(models.Model):
     @api.constrains('room_id')
     def _check_room_quota(self):
         
-        if self.user_id == 1 :
+        # Admin is king
+        
+        if self.env.uid == 1 :
             return
 
         # Prevent concurrent bookings
