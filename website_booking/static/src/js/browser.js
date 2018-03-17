@@ -555,7 +555,8 @@ var Calendar = CalendarWidget.extend({
     		     self.trigger_up('switch_date', {'date' : self.$calendar.fullCalendar( 'getDate' )});
     		},
     		eventClick: function(calEvent, jsEvent, view) {
-    		    if(session.uid == calEvent.user_id) {
+    		    var now = moment();
+    		    if(session.uid == calEvent.user_id && moment(calEvent.start) > now) {
         		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
                     dialog.appendTo(self.getParent().main_modal.empty());
                     self.getParent().main_modal.modal('open');
