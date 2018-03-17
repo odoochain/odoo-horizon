@@ -551,9 +551,11 @@ var Calendar = CalendarWidget.extend({
     		     self.trigger_up('switch_date', {'date' : self.$calendar.fullCalendar( 'getDate' )});
     		},
     		eventClick: function(calEvent, jsEvent, view) {
-    		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
-                dialog.appendTo(self.getParent().main_modal.empty());
-                self.getParent().main_modal.modal('open');
+    		    if(session.uid == calEvent.user_id) {
+        		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
+                    dialog.appendTo(self.getParent().main_modal.empty());
+                    self.getParent().main_modal.modal('open');
+    		    }
             },
             header : {
                 left:   'prev',
@@ -673,6 +675,7 @@ var Toolbar = Widget.extend({
                     [[["id", "=", session.partner_id]], ["id","name"]],
                     {context: session.context}).then(function (partner_ids) {
                         session.partner = partner_ids[0];
+                        self.partner = session.partner;
                 });
                 self.avatar_src = session.url('/web/image', {model:'res.users', field: 'image_small', id: session.uid});
                 self.$el.html(qweb.render('website_booking.toolbar_log', {widget : self}));
@@ -718,15 +721,16 @@ var Browser = Widget.extend({
         this._super.apply(this, arguments);
         this._current_state = $.deparam(window.location.hash.substring(1));
         var self = this;
-        // Fill calendar panel
-        self.cal = new Calendar(this);
-        self.cal.appendTo(this.$(".calendar"));
         // Fill toolbar
-        self.nav = new Toolbar(this);
-        self.nav.appendTo(this.$(".booking_toolbar"));
+        self.tb = new Toolbar(this);
+        self.tb.appendTo(this.$(".booking_toolbar"));
         // Fill navigation panel
         self.nav = new Navigation(this);
         self.nav.appendTo(this.$(".navbar"));
+        // Fill calendar panel
+        self.cal = new Calendar(this);
+        self.cal.appendTo(this.$(".calendar"));
+        self.cal.tb = self.tb;
     },
     
     start: function() {
