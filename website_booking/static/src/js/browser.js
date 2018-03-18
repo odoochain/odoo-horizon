@@ -34,7 +34,7 @@ var CalendarWidget = Widget.extend({
     		locale: moment.locale,
     		timezone: "local",
     		editable: false,
-    		height: 750,
+    		height: 760,
     		locale: 'fr',
     		titleFormat: 'dddd D MMMM YYYY',
     		defaultDate: moment(),
