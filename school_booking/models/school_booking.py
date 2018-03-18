@@ -93,7 +93,7 @@ class Event(models.Model):
         
         if student_event in self.categ_ids:
             
-            if fields.Datetime.from_string(self.start_datetime).minute <> 0 and fields.Datetime.from_string(self.start_datetime).minute <> 30 :
+            if fields.Datetime.from_string(self.start_datetime).minute != 0 and fields.Datetime.from_string(self.start_datetime).minute != 30 :
                 raise ValidationError(_("Invalid booking, please use standard booking."))
             
             now = datetime.now()
