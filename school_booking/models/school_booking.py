@@ -93,6 +93,9 @@ class Event(models.Model):
         
         if student_event in self.categ_ids:
             
+            if fields.Datetime.from_string(self.start_datetime).minute <> 0 and fields.Datetime.from_string(self.start_datetime).minute <> 30 :
+                raise ValidationError(_("Invalid booking, trying to get around the limitations is not allowed, your activity is logged."))
+            
             now = datetime.now()
             if now.hour < 11 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
                 raise ValidationError(_("You cannot book for the next day before 12h00."))
