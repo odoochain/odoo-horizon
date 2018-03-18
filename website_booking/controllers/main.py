@@ -111,8 +111,8 @@ class BookingController(http.Controller):
         end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         fields = ['name','room_id']
         domain = [
-            ('start', '<=', end),    
-            ('stop', '>=', start),
+            ('start', '<', end),    
+            ('stop', '>', start),
             ('room_id', '<>', False)
         ]
         all_rooms_ids = request.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
