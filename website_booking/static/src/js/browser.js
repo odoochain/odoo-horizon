@@ -700,6 +700,12 @@ var Toolbar = Widget.extend({
             if (session.uid) {
                 self.is_logged = true;
                 self.uid = session.uid;
+                new Model('res.user').call("search_read", 
+                    [[["id", "=", session.uid]], ["id","name","in_group_14","in_group_15","in_group_16",]],
+                    {context: session.context}).then(function (user_ids) {
+                        session.user = user_ids[0];
+                        self.user = session.partner;
+                });
                 new Model('res.partner').call("search_read", 
                     [[["id", "=", session.partner_id]], ["id","name"]],
                     {context: session.context}).then(function (partner_ids) {
