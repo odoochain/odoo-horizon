@@ -26,10 +26,10 @@
                               <div class="input-field col s12">
                                   <t t-if='!(widget.user.in_group_15 or widget.user.in_group_15)'>
                                   <textarea id="description" class="materialize-textarea valid" data-length="360" disabled=""></textarea>
-                                  </t-if>
+                                  </t>
                                   <t t-if='(widget.user.in_group_15 or widget.user.in_group_15)'>
                                   <textarea id="description" class="materialize-textarea valid" data-length="360"></textarea>
-                                  </t-if>
+                                  </t>
                                   <label for="description">Event description</label>
                               </div>
                             </div>
