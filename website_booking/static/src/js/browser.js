@@ -624,7 +624,7 @@ var Calendar = CalendarWidget.extend({
                         'allDay': evt.allday,
                         'id': evt.id,
                         'resourceId':evt.room_id[0],
-                        'color': evt.categ_ids.includes(9) ? '#00bcd4' : session.uid == evt.user_id[0] ? '#ffc107' : '#ff4355',
+                        'color': evt.categ_ids.includes(9) ? '#00bcd4' : evt.categ_ids.includes(7) ? : '#2962ff' : session.uid == evt.user_id[0] ? '#ffc107' : '#ff4355',
                         'user_id' : evt.user_id[0],
                     });
                 });
