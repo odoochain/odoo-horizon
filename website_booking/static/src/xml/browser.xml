@@ -24,7 +24,7 @@
                             </div>
                             <div class="row">
                               <div class="input-field col s12">
-                                <textarea id="description" class="materialize-textarea valid" data-length="360" disabled=""></textarea>
+                                <textarea id="description" class="materialize-textarea valid" data-length="360" t-att-disabled="!(widget.user.in_group_15 or widget.user.in_group_15)"></textarea>
                                 <label for="description">Event description</label>
                               </div>
                             </div>
