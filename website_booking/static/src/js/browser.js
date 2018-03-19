@@ -701,9 +701,10 @@ var Toolbar = Widget.extend({
             self.avatar_src = false;
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
             this.rpc("/web/session/destroy", {}).always(function(o) {
-                gapi.auth.signOut();
-                framework.redirect('/booking#category_id=16');
-                location.reload();
+                this.rpc("https://accounts.google.com/logout", {}).always(function(o) {
+                    framework.redirect('/booking#category_id=16');
+                    location.reload();
+                })
             })
         },
     },
