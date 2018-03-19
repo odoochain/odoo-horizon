@@ -78,6 +78,7 @@ class Event(models.Model):
         default.update({
             'start_datetime': fields.Datetime.now(),
             'stop_datetime': fields.Datetime.now(),
+            'room_id' : False,
         })
         _logger.info('Copy on %s with default %s' % (self.id, str(default)))
         return super(Event, self).copy(default)
