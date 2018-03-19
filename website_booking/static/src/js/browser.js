@@ -616,20 +616,20 @@ var Calendar = CalendarWidget.extend({
     				'start' : time.moment_to_str(start),
     				'end' : time.moment_to_str(end),
 	    	}).done(function(events){
-	    	    var color = '#ff4355';
-	    	    if (evt.categ_ids.includes(9)) {
-	    	        color = '#00bcd4';
-	    	    } else {
-	    	        if(evt.categ_ids.includes(7)) {
-	    	            color = '#2962ff';
-	    	        } else {
-	    	            if (session.uid == evt.user_id[0]) {
-	    	                color = '#ffc107';
-	    	            }
-	    	        }
-	    	    } 
 	    	    
-                events.forEach(function(evt) {
+	    	    events.forEach(function(evt) {
+                    var color = '#ff4355';
+    	    	    if (evt.categ_ids.includes(9)) {
+    	    	        color = '#00bcd4';
+    	    	    } else {
+    	    	        if(evt.categ_ids.includes(7)) {
+    	    	            color = '#2962ff';
+    	    	        } else {
+    	    	            if (session.uid == evt.user_id[0]) {
+    	    	                color = '#ffc107';
+    	    	            }
+    	    	        }
+    	    	    } 
                     self.events.push({
                         'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
                         'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
