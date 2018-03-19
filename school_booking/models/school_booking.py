@@ -76,8 +76,8 @@ class Event(models.Model):
         
         default = dict(default or {})
         default.update({
-            '[start_datetime]': False,
-            '[stop_datetime]': False,
+            'start_datetime': False,
+            'stop_datetime': False,
         })
         _logger.info('Copy on %s with default %s' % (self.id, str(default)))
         return super(Event, self).copy(default)
