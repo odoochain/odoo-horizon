@@ -111,7 +111,7 @@
                             <field name='field_f3' attrs="{'readonly': [('is_saturn_validated', '=', True)], 'invisible': [('field_f2','==', False)]}"/>
                             <field name='field_f4' attrs="{'readonly': [('is_saturn_validated', '=', True)]}"/>
                             <field name='field_f5' attrs="{'readonly': [('is_saturn_validated', '=', True)], 'invisible': [('field_f4','==', False)]}"/>
-                            <field name='field_f10' attrs="{'readonly': [('is_saturn_validated', '=', True)], 'invisible': [('field_f2','!=','50')]}"/>
+                            <field name='field_f10' attrs="{'readonly': [('is_saturn_validated', '=', True)], 'invisible': [('field_f2','<>','50')]}"/>
                         </group>
                     </page>
                     <page string="Section G">
