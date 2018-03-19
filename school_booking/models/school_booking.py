@@ -79,7 +79,7 @@ class Event(models.Model):
             '[start_datetime]': False,
             '[stop_datetime]': False,
         })
-        _logger.info('Copy on %s with default ' % (self.id, str(default)))
+        _logger.info('Copy on %s with default %s' % (self.id, str(default)))
         return super(Event, self).copy(default)
         
     @api.one
