@@ -701,7 +701,8 @@ var Toolbar = Widget.extend({
             self.avatar_src = false;
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
             self.rpc("/web/session/destroy", {}).always(function(o) {
-                    framework.redirect('https://accounts.google.com/logout');
+                    win = window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
+                    setTimeout("win.close();", 400);
                     location.reload();
             })
         },
