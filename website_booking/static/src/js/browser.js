@@ -677,6 +677,9 @@ var Toolbar = Widget.extend({
                 }
             });    
         },
+        "click #help-booking-button": function (event) {
+            window.open('http://www.crlg.be/2018/03/15/musique-horizon-booking', '_blank', '');    
+        },
         "click #logout-booking-button": function (event) {
             var self = this;
             self.is_logged = false;
