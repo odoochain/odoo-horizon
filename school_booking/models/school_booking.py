@@ -73,11 +73,13 @@ class Event(models.Model):
             
     @api.one
     def copy(self, default=None):
+        
         default = dict(default or {})
         default.update({
             '[start_datetime]': False,
             '[stop_datetime]': False,
         })
+        _logger.info('Copy on %s with default ' % (self.id, default))
         return super(Event, self).copy(default)
         
     @api.one
