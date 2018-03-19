@@ -616,6 +616,19 @@ var Calendar = CalendarWidget.extend({
     				'start' : time.moment_to_str(start),
     				'end' : time.moment_to_str(end),
 	    	}).done(function(events){
+	    	    var color = '#ff4355';
+	    	    if (evt.categ_ids.includes(9)) {
+	    	        color = '#00bcd4';
+	    	    } else {
+	    	        if(evt.categ_ids.includes(7)) {
+	    	            color = '#2962ff';
+	    	        } else {
+	    	            if (session.uid == evt.user_id[0]) {
+	    	                color = '#ffc107';
+	    	            }
+	    	        }
+	    	    } 
+	    	    
                 events.forEach(function(evt) {
                     self.events.push({
                         'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
@@ -624,7 +637,7 @@ var Calendar = CalendarWidget.extend({
                         'allDay': evt.allday,
                         'id': evt.id,
                         'resourceId':evt.room_id[0],
-                        'color': evt.categ_ids.includes(9) ? '#00bcd4' : evt.categ_ids.includes(7) ? : '#2962ff' : session.uid == evt.user_id[0] ? '#ffc107' : '#ff4355',
+                        'color': color,
                         'user_id' : evt.user_id[0],
                     });
                 });
