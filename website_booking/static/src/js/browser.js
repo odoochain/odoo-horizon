@@ -353,9 +353,6 @@ var NewBookingDialog = Widget.extend({
     
     updateRoomList: function() {
         var self = this;
-        if(self.edit_mode && !self.hasChanged) {
-            return;
-        }
         var fromTime = self.$('#from_hour').timepicker('getTime');
         var toTime = self.$('#to_hour').timepicker('getTime');
         if (fromTime && toTime) {

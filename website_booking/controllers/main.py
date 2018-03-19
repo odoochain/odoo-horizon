@@ -105,7 +105,7 @@ class BookingController(http.Controller):
         return request.render('website_booking.editor')
         
     @http.route('/booking/rooms', type='json', auth='user', website=True)
-    def booking_rooms(self, start, end, debug=False, **k):
+    def booking_rooms(self, start, end, self_id, debug=False, **k):
         # TODO : ugply transform
         start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
         end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
