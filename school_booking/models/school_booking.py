@@ -84,7 +84,7 @@ class Event(models.Model):
         _logger.info('_check_room_quota on %s' % self.id)
         
         if self.exists() :
-            _logger.info('Check constraints on record %s' % self.id)
+            _logger.info('Check constraints _check_room_quota on record %s' % self.id)
             domain = [('room_id','=',self.room_id.id), ('start', '<', self.stop_datetime), ('stop', '>', self.start_datetime)]
             conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
             if conflicts_count > 1:
