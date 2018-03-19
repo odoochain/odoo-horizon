@@ -229,6 +229,7 @@ var NewBookingDialog = Widget.extend({
                     break;
                 } 
             }
+            self.hasChanged = true;
             self.updateRoomList();
             self.updateSendButton();
         },
@@ -254,6 +255,7 @@ var NewBookingDialog = Widget.extend({
                 self.$('#to_hour').removeClass('valid');
                 self.$('#to_hour').addClass('invalid');
             }
+            self.hasChanged = true;
             self.updateRoomList();
             self.updateSendButton();
         },
@@ -318,10 +320,12 @@ var NewBookingDialog = Widget.extend({
             self.$('select.select-asset-id').val(self.event.resourceId).change();
             self.$('select.select-asset-id').material_select();
             self.$('.delete-booking').show();
+            self.hasChanged = false;
         } else {
             self.$('#description').val(session.partner.name);
         }
         Materialize.updateTextFields();
+        self.hasChanged = false;
     },
 
     click_scheduler: function(event) {
@@ -349,6 +353,9 @@ var NewBookingDialog = Widget.extend({
     
     updateRoomList: function() {
         var self = this;
+        if(self.edit_mode && !self.hasChanged) {
+            return;
+        }
         var fromTime = self.$('#from_hour').timepicker('getTime');
         var toTime = self.$('#to_hour').timepicker('getTime');
         if (fromTime && toTime) {
