@@ -701,10 +701,8 @@ var Toolbar = Widget.extend({
             self.avatar_src = false;
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
             self.rpc("/web/session/destroy", {}).always(function(o) {
-                self.rpc("https://accounts.google.com/logout", {}).always(function(o) {
-                    framework.redirect('/booking#category_id=16');
+                    framework.redirect('https://accounts.google.com/logout');
                     location.reload();
-                })
             })
         },
     },
