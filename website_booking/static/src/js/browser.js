@@ -171,7 +171,14 @@ var NewBookingDialog = Widget.extend({
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
             var roomId = parseInt(self.$( "select.select-asset-id" ).val());
-            new Model('ir.model.data').call('get_object_reference', ['school_booking', 'school_student_event_type']).then(function(categ) {
+            var event_type = 'school_student_event_type';
+            if(self.user.in_group_15) {
+                event_type = 'school_teacher_event_type';
+            }
+            if(self.user.in_group_14) {
+                event_type = 'school_management_event_type';
+            }
+            new Model('ir.model.data').call('get_object_reference', ['school_booking', event_type]).then(function(categ) {
                 if(self.edit_mode) {
                     new Model('calendar.event').call('write', [[self.event.id], {
                         'name' : self.$('#description').val(),
@@ -258,6 +265,8 @@ var NewBookingDialog = Widget.extend({
     
     init: function(parent, options) {
         this._super.apply(this, arguments);
+        this.parent = parent;
+        this.user = parent.session.user;
         if(options && options.event){
             this.ressources = parent.cal.ressources;
             this.date = options.event.start;
