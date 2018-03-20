@@ -72,12 +72,6 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
                     viewRender: function(view) {
                         var mode;
                         switch(view.name) {
-                            case "month":
-                                mode = "month";
-                                break;
-                            case "agendaWeek":
-                                mode = "week" ;
-                                break;
                             case "timelineDay":
                                 mode = "timeline" ;
                                 break;
