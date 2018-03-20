@@ -151,9 +151,9 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
          */
         get_event_data: function(event) {
             var self = this;
-            data = self._super(event);
+            var data = self._super(event);
             // fetch the ressource if available
-            console.log(event);
+            data.resource = event.get('resource',false);
             return data;
         },
         
