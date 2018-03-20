@@ -123,7 +123,7 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
                     timelineDay: { // name of view
                         titleFormat: 'DD/MM/YYYY',
                         minTime: {hours : 7},
-                        maxTime: {hours : 21},
+                        maxTime: {hours : 22},
                         slotDuration: {hours : 1},
                     },    
                 });
@@ -141,6 +141,15 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
             } else {
                 return self._super(evt);
             }
+        },
+        
+        get_color: function(key) {
+            if (this.color_map[key]) {
+                return this.color_map[key];
+            }
+            var index = (((_.keys(this.color_map).length + 1) * 5) % 24) + 1;
+            this.color_map[key] = index;
+            return index;
         },
         
     });
