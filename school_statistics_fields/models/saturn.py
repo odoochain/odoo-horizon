@@ -301,8 +301,9 @@ class IndividualBloc(models.Model):
                 self.field_d4 = sum(base_line.mapped('price_subtotal'))
                 dis_line = self.invoice_id.invoice_line_ids.filtered(lambda l: l.product_id.categ_id.id == 6)
                 self.field_d6 = sum(dis_line.mapped('price_subtotal'))
-                if self.invoice_id.residual == 0 and self.invoice_id.payment_move_line_ids :
+                if self.invoice_id.payment_move_line_ids :
                     self.field_d5 = max(self.invoice_id.payment_move_line_ids.mapped('date'))
+                if self.field_d6 > 0 and self.invoice_id.payment_move_line_ids :
                     self.field_d7 = max(self.invoice_id.payment_move_line_ids.mapped('date'))
     
     field_d4 = fields.Monetary(currency_field='company_currency_id', description='Fields D4',string='Minerval', compute='_compute_invoice_info',readonly='1')
