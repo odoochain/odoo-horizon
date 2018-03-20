@@ -123,7 +123,7 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
                     timelineDay: { // name of view
                         titleFormat: 'DD/MM/YYYY',
                         minTime: {hours : 7},
-                        maxTime: {hours : 22},
+                        maxTime: {hours : 23},
                         slotDuration: {hours : 1},
                     },    
                 });
