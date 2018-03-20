@@ -298,12 +298,12 @@ class IndividualBloc(models.Model):
     def _compute_invoice_info(self):
         if self.invoice_id :
                 base_line = self.invoice_id.invoice_line_ids.filtered(lambda l: l.product_id.categ_id.id == 5)
-                field_d4 = sum(base_line.mapped('price_subtotal'))
+                self.field_d4 = sum(base_line.mapped('price_subtotal'))
                 dis_line = self.invoice_id.invoice_line_ids.filtered(lambda l: l.product_id.categ_id.id == 6)
-                field_d6 = sum(dis_line.mapped('price_subtotal'))
+                self.field_d6 = sum(dis_line.mapped('price_subtotal'))
                 if self.invoice_id.residual == 0 and self.invoice_id.payment_move_line_ids :
-                    field_d5 = max(self.invoice_id.payment_move_line_ids.mapped('date'))
-                    field_d7 = max(self.invoice_id.payment_move_line_ids.mapped('date'))
+                    self.field_d5 = max(self.invoice_id.payment_move_line_ids.mapped('date'))
+                    self.field_d7 = max(self.invoice_id.payment_move_line_ids.mapped('date'))
     
     field_d4 = fields.Monetary(currency_field='company_currency_id', description='Fields D4',string='Minerval', compute='_compute_invoice_info',readonly='1')
     field_d5 = fields.Date(description='Fields D5',string='Date de réception du paiement du minerval', compute='_compute_invoice_info',readonly='1')
