@@ -292,10 +292,24 @@ class IndividualBloc(models.Model):
     field_d1 = fields.Selection([('1','Etudiant non finançable'),('2','Partiellement finançable'),('3','Étudiant finançable')],description='Fields D1',string='Nationalité de l''étudiant au regard du financement', default='3')
     field_d2 = fields.Char(description='Fields D2',string='Modalité de l''inscription au regard du financement')
     field_d3 = fields.Selection([('B','Boursier'),('X','Non boursier'),('A','Bourse en attente'),('N','Bourse refusée')],description='Fields D3',string='Etudiant boursier')
-    field_d4 = fields.Monetary(currency_field='company_currency_id', description='Fields D4',string='Minerval', related='invoice_id.amount_total',readonly='1')
-    field_d5 = fields.Date(description='Fields D5',string='Date de réception du paiement du minerval', related='invoice_id.final_payment_date',readonly='1')
-    field_d6 = fields.Monetary(currency_field='company_currency_id', description='Fields D6',string='Droit d''inscription spécifique (DIS)')
-    field_d7 = fields.Date(description='Fields D7',string='Date de réception du paiement du droit d''inscription spécifique')
+    
+    @api.onchange('invoice_id')
+    @api.one
+    def _compute_invoice_info(self):
+        if self.invoice_id :
+                base_line = self.invoice_id.invoice_line_ids.filtered(lambda l: l.product_id.categ_id.id == 5)
+                field_d4 = sum(base_line.mapped('price_subtotal'))
+                dis_line = self.invoice_id.invoice_line_ids.filtered(lambda l: l.product_id.categ_id.id == 6)
+                field_d6 = sum(dis_line.mapped('price_subtotal'))
+                if self.invoice_id.residual == 0 and self.invoice_id.payment_move_line_ids :
+                    field_d5 = max(self.invoice_id.payment_move_line_ids.mapped('date'))
+                    field_d7 = max(self.invoice_id.payment_move_line_ids.mapped('date'))
+    
+    field_d4 = fields.Monetary(currency_field='company_currency_id', description='Fields D4',string='Minerval', compute='_compute_invoice_info',readonly='1')
+    field_d5 = fields.Date(description='Fields D5',string='Date de réception du paiement du minerval', compute='_compute_invoice_info',readonly='1')
+    field_d6 = fields.Monetary(currency_field='company_currency_id', description='Fields D6',string='Droit d''inscription spécifique (DIS)', compute='_compute_invoice_info',readonly='1')
+    field_d7 = fields.Date(description='Fields D7',string='Date de réception du paiement du droit d''inscription spécifique', compute='_compute_invoice_info',readonly='1')
+    
     field_d8 = fields.Selection([('0','Conditions normales'),('1','Conditions modestes')],description='Fields D8',string='Etudiant de condition modeste', related='student_id.modeste')
     
     field_e1 = fields.Selection([
