@@ -293,7 +293,6 @@ class IndividualBloc(models.Model):
     field_d2 = fields.Char(description='Fields D2',string='Modalité de l''inscription au regard du financement')
     field_d3 = fields.Selection([('B','Boursier'),('X','Non boursier'),('A','Bourse en attente'),('N','Bourse refusée')],description='Fields D3',string='Etudiant boursier')
     
-    @api.onchange('invoice_id')
     @api.one
     def _compute_invoice_info(self):
         if self.invoice_id :
