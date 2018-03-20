@@ -117,7 +117,9 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
                             callback(self.resourceObjects);
                         });
                     },
+                    
                     refetchResourcesOnNavigate : false,
+                    
                 });
                 ret.views = $.extend(ret.views, {
                     timelineDay: { // name of view
@@ -143,13 +145,16 @@ odoo.define('web_scheduler.SchedulerView', function (require) {
             }
         },
         
-        get_color: function(key) {
-            if (this.color_map[key]) {
-                return this.color_map[key];
-            }
-            var index = (((_.keys(this.color_map).length + 1) * 5) % 24) + 1;
-            this.color_map[key] = index;
-            return index;
+        
+        /**
+         * Transform fullcalendar event object to OpenERP Data object
+         */
+        get_event_data: function(event) {
+            var self = this;
+            data = self._super(event);
+            // fetch the ressource if available
+            console.log(event);
+            return data;
         },
         
     });
