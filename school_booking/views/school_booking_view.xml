@@ -159,7 +159,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
-      <field name="context" eval="{'search_default_student':1, 'search_default_today':1, 'default_categ_ids':ref('school_booking.school_student_event_type')}" />
+      <field name="context" eval="{'search_default_student':1, 'search_default_today':1, 'default_categ_ids':[ref('school_booking.school_student_event_type')]}" />
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a recurring booking.
@@ -177,7 +177,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
-      <field name="context" eval="{'search_default_teacher':1, 'search_default_today':1, 'default_categ_ids':ref('school_booking.school_teacher_event_type')}" />
+      <field name="context" eval="{'search_default_teacher':1, 'search_default_today':1, 'default_categ_ids':[ref('school_booking.school_teacher_event_type')]}" />
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a recurring booking.
@@ -195,7 +195,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
-      <field name="context" eval="{'search_default_management':1, 'search_default_today':1, 'default_categ_ids':ref('school_booking.school_management_event_type')}" />
+      <field name="context" eval="{'search_default_management':1, 'search_default_today':1, 'default_categ_ids':[ref('school_booking.school_management_event_type')]}" />
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a recurring booking.
