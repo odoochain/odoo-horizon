@@ -124,9 +124,9 @@
         <search string="Search Booking">
           <field name="name" filter_domain="[('name','ilike',self)]" />
           <filter string="Recurring" name="recurring" domain="[('recurrency','=',True)]" />
-          <filter string="Student Booking" name="student" domain="[('categ_ids','=',6)]" />
-          <filter string="Teacher Booking" name="teacher" domain="[('categ_ids','=',7)]" />
-          <filter string="Management Booking" name="management" domain="[('categ_ids','=',8)]" />
+          <filter string="Student Booking" name="student" domain="[('categ_ids','=',%(school_booking.school_student_event_type)d)]" />
+          <filter string="Teacher Booking" name="teacher" domain="[('categ_ids','=',%(school_booking.school_teacher_event_type)d)]" />
+          <filter string="Management Booking" name="management" domain="[('categ_ids','=',%(school_booking.school_management_event_type)d)]" />
         </search>
       </field>
     </record>
