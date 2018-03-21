@@ -129,6 +129,7 @@
           <filter string="Management Booking" name="management" domain="[('categ_ids','=',%(school_booking.school_management_event_type)d)]" />
           <separator/>
           <filter string="Today" name="today" domain="[('start_datetime','&gt;', context_today().strftime('%%Y-%%m-%%d 00:00:00') ),('start_datetime','&lt;', (context_today() + datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d 00:00:00') )]" />
+          <filter string="Tomorrow" name="tomorrow" domain="[('start_datetime','&gt;', (context_today() + datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d 00:00:00') ),('start_datetime','&lt;', (context_today() + datetime.timedelta(days=2)).strftime('%%Y-%%m-%%d 00:00:00') )]" />
         </search>
       </field>
     </record>
@@ -140,6 +141,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
+      <field name="context">{"search_default_today":1}</field>
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a booking.
@@ -157,7 +159,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
-      <field name="context">{"search_default_student":1}</field>
+      <field name="context">{"search_default_student":1, "search_default_today":1}</field>
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a recurring booking.
@@ -175,7 +177,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
-      <field name="context">{"search_default_teacher":1}</field>
+      <field name="context">{"search_default_teacher":1, "search_default_today":1}</field>
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a recurring booking.
@@ -193,7 +195,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
-      <field name="context">{"search_default_management":1}</field>
+      <field name="context">{"search_default_management":1, "search_default_today":1}</field>
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
           Click to add a recurring booking.
