@@ -52,8 +52,8 @@
     </record>
 
     <menuitem id="menu_school_booking_wizard"
-        name="Find a toom"
+        name="Find a room"
         action="action_school_booking_wizard_view"
-        parent="menu_main_booking" sequence="5" groups="school_management.group_employee"/>
+        parent="menu_main_booking" sequence="1000" groups="school_management.group_employee"/>
     
 </odoo>
