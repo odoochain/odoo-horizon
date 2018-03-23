@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+##############################################################################
+#
+#    Copyright (c) 2015 be-cloud.be
+#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<odoo>v
+    <record id="school_booking_wizard_view" model="ir.ui.view">
+        <field name="name">Find a room</field>
+        <field name="model">school.school_booking_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Find a room">
+                <group col="4">
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="room_ids" widget="many2many_checkboxes"/>
+                </group>
+                <footer>
+                    <button name="create_booking" string="Validate" type="object" default_focus="1" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_school_booking_wizard_view" model="ir.actions.act_window">
+        <field name="name">Find a room</field>
+        <field name="res_model">school.school_booking_wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="school_booking_wizard_view"/>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_school_booking_wizard"
+        name="Find a toom"
+        action="action_school_booking_wizard_view"
+        parent="menu_main_booking" sequence="5" groups="group_employee"/>
+    
+</odoo>
