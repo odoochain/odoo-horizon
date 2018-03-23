@@ -37,16 +37,17 @@ class BookingWizard(models.TransientModel):
     @api.one
     @api.depends('from_date', 'to_date')
     def find_rooms(self):
-        the_fields = ['name','room_id']
-        domain = [
-            ('start', '<', self.to_date),    
-            ('stop', '>', self.from_date),
-            ('room_id', '<>', False),
-        ]
-        all_rooms_ids = self.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
-        busy_rooms_ids = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,the_fields)
-        busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start_datetime < self.to_date).filtered(lambda r : r.stop_datetime > self.from_date).mapped('room_id')
-        return (all_rooms_ids - busy_rooms_ids).read(['name'])
+        if self.from_date and self.to_date :
+            the_fields = ['name','room_id']
+            domain = [
+                ('start', '<', self.to_date),    
+                ('stop', '>', self.from_date),
+                ('room_id', '<>', False),
+            ]
+            all_rooms_ids = self.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
+            busy_rooms_ids = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,the_fields)
+            busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start_datetime < self.to_date).filtered(lambda r : r.stop_datetime > self.from_date).mapped('room_id')
+            self.room_ids = all_rooms_ids - busy_rooms_ids
         
     @api.one
     @api.depends('from_date', 'to_date')
