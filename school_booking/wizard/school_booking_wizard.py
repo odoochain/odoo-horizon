@@ -29,7 +29,7 @@ class BookingWizard(models.TransientModel):
     _name = "school.school_booking_wizard"
     _description = "School Booking Wizard"
     
-    room_ids = fields.Many2many('school.asset', 'booking_wizard_room_ref','wizard_id','room_id', string='Rooms', domain="[('is_room,'=',true)]")
+    room_ids = fields.Many2many('school.asset', 'booking_wizard_room_ref', 'wizard_id', 'room_id', string='Rooms', domain="[('is_room','=',true)]")
     
     from_date = fields.Datetime('From Date')
     to_date = fields.Datetime('From Date')
