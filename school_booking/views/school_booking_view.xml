@@ -282,13 +282,15 @@
       <field name="act_window_id" ref="action_booking_teach_tree" />
     </record>
 
-    <menuitem id="menu_booking_rec_tree" parent="menu_main_booking" action="action_booking_stud_tree" sequence="10" />
+    <menuitem id="menu_booking_rec_tree" parent="menu_booking_booking_tree" action="action_booking_stud_tree" sequence="10" />
 
-    <menuitem id="menu_booking_teach_tree" parent="menu_main_booking" action="action_booking_teach_tree" sequence="20" />
+    <menuitem id="menu_booking_teach_tree" parent="menu_booking_booking_tree" action="action_booking_teach_tree" sequence="20" />
 
-    <menuitem id="menu_booking_man_tree" parent="menu_main_booking" action="action_booking_man_tree" sequence="30" />
+    <menuitem id="menu_booking_man_tree" parent="menu_booking_booking_tree" action="action_booking_man_tree" sequence="30" />
 
-    <menuitem id="menu_booking_tree" parent="menu_main_booking" action="action_booking_tree" sequence="50" />
+    <menuitem id="menu_booking_booking_tree" parent="menu_booking_tree" action="action_booking_tree" sequence="50" />
+
+    <menuitem id="menu_booking_tree" parent="menu_main_booking" sequence="10" />
     
   </data>
 </openerp>
