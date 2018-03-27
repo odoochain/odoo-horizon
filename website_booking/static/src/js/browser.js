@@ -257,6 +257,9 @@ var NewBookingDialog = Widget.extend({
                     self.$('#to_hour').removeClass('valid');
                     self.$('#to_hour').addClass('invalid');
                 }
+            } else {
+                self.$('#to_hour').removeClass('invalid');
+                self.$('#to_hour').addClass('valid');
             }
             self.hasChanged = true;
             self.updateRoomList();
