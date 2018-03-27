@@ -93,6 +93,7 @@ var Schedule =  CalendarWidget.extend({
     init: function(parent, options) {
         this._super.apply(this, arguments);
         this.date = parent.date;
+        this.user = parent.user;
         this.asset_id = false;
     },
 
@@ -247,13 +248,15 @@ var NewBookingDialog = Widget.extend({
                     break;
                 } 
             }
-            if((fromTime.getHours() + fromTime.getMinutes()/60) > (toTime.getHours() + toTime.getMinutes()/60 - 0.5)) {
-                self.$('#to_hour').removeClass('valid');
-                self.$('#to_hour').addClass('invalid');
-            }
-            if((fromTime.getHours() + fromTime.getMinutes()/60) < (toTime.getHours() + toTime.getMinutes()/60 - 2)) {
-                self.$('#to_hour').removeClass('valid');
-                self.$('#to_hour').addClass('invalid');
+            if(!self.user.in_group_14 && !self.user.in_group_15) {
+                if((fromTime.getHours() + fromTime.getMinutes()/60) > (toTime.getHours() + toTime.getMinutes()/60 - 0.5)) {
+                    self.$('#to_hour').removeClass('valid');
+                    self.$('#to_hour').addClass('invalid');
+                }
+                if((fromTime.getHours() + fromTime.getMinutes()/60) < (toTime.getHours() + toTime.getMinutes()/60 - 2)) {
+                    self.$('#to_hour').removeClass('valid');
+                    self.$('#to_hour').addClass('invalid');
+                }
             }
             self.hasChanged = true;
             self.updateRoomList();
