@@ -90,6 +90,14 @@ class Event(models.Model):
             if conflicts_count > 1:
                 raise ValidationError(_("Concurrent event detected - %s in %s") % (self.start_datetime, self.room_id.name))
     
+            # Constraint not for employees and teatchers
+    
+            if self.env.user.has_group('school_management.group_employee'):
+                return
+    
+            if self.env.user.has_group('school_management.group_teacher'):
+                return
+    
             # Constraint on student events
             
             student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_student_event_type')
