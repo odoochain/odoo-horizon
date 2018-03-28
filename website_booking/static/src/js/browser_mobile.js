@@ -25,27 +25,19 @@ var BrowserMobile = Widget.extend({
     events: {
         "click #today" : function (event) {
             this.date = this.today;
-            this.$('#tomorrow').removeClass('red');
-            this.$('#today').addClass('red');
+            this.$('#tomorrow').removeClass('blue');
+            this.$('#today').addClass('blue');
         },
         "click #tomorrow" : function (event) {
             this.date = this.tomorrow;
-            this.$('#today').removeClass('red');
-            this.$('#tomorrow').addClass('red');
+            this.$('#today').removeClass('blue');
+            this.$('#tomorrow').addClass('blue');
         },
         "change #from_hour": function (event) {
             var self = this;
             var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
-            var events = this.schedule.events;
             self.$('#from_hour').removeClass('invalid');
             self.$('#from_hour').addClass('valid');
-            for (event in events) {
-                if (moment(events[event].start).isBefore(fromTime) && moment(events[event].end).isAfter(fromTime)){
-                    self.$('#from_hour').removeClass('valid');
-                    self.$('#from_hour').addClass('invalid');
-                    break;
-                } 
-            }
             self.updateRoomList();
             self.updateSendButton();
         },
@@ -53,16 +45,8 @@ var BrowserMobile = Widget.extend({
             var self = this;
             var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
             var toTime = self.$('#to_hour').timepicker('getTime', this.date.toDate());
-            var events = this.schedule.events;
             self.$('#to_hour').removeClass('invalid');
             self.$('#to_hour').addClass('valid');
-            for (event in events) {
-                if (moment(events[event].start).isBefore(toTime) && moment(events[event].end).isAfter(toTime)){
-                    self.$('#to_hour').removeClass('valid');
-                    self.$('#to_hour').addClass('invalid');
-                    break;
-                } 
-            }
             if(!self.user.in_group_14 && !self.user.in_group_15) {
                 if((fromTime.getHours() + fromTime.getMinutes()/60) > (toTime.getHours() + toTime.getMinutes()/60 - 0.5)) {
                     self.$('#to_hour').removeClass('valid');
@@ -90,6 +74,7 @@ var BrowserMobile = Widget.extend({
     start: function() {
         this._super.apply(this, arguments);
         var self = this;
+        self.$('#today').addClass('blue');
         self.$('select.select-asset-id').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
