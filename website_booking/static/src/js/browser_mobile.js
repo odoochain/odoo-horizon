@@ -23,6 +23,16 @@ var BrowserMobile = Widget.extend({
     template: 'website_booking.browser_mobile',
     
     events: {
+        "click #today" : function (event) {
+            this.date = this.today;
+            this.$('#tomorrow').removeClass('red');
+            this.$('#today').addClass('red');
+        },
+        "click #tomorrow" : function (event) {
+            this.date = this.tomorrow;
+            this.$('#today').removeClass('red');
+            this.$('#tomorrow').addClass('red');
+        },
         "change #from_hour": function (event) {
             var self = this;
             var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
@@ -73,7 +83,7 @@ var BrowserMobile = Widget.extend({
     
     init: function(parent) {
         this._super(parent);
-        this.today = moment(new Date());
+        this.date = this.today = moment(new Date());
         this.tomorrow = moment(new Date()).add(1,'days');
     },
     
