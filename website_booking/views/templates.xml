@@ -42,11 +42,36 @@
                                 var core = require('web.core');
                                 var ajax = require('web.ajax');
                                 var qweb = core.qweb;
-                                ajax.loadXML('/website_booking/static/src/xml/browser.xml', qweb).then(function(){
-                                    var Browser = require('website_booking.browser');
-                                    var b = new Browser();
-                                    b.appendTo($(document.body));
-                                });
+                                
+                                // detect mobiles
+                                
+                                var deviceAgent = navigator.userAgent.toLowerCase();
+
+                                var isTouchDevice = ('ontouchstart' in document.documentElement) || 
+                                (deviceAgent.match(/(iphone|ipod|ipad)/) ||
+                                deviceAgent.match(/(android)/)  || 
+                                deviceAgent.match(/(iemobile)/) || 
+                                deviceAgent.match(/iphone/i) || 
+                                deviceAgent.match(/ipad/i) || 
+                                deviceAgent.match(/ipod/i) || 
+                                deviceAgent.match(/blackberry/i) || 
+                                deviceAgent.match(/bada/i));
+                                
+                                if (isTouchDevice) {
+                                    ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb).then(function(){
+                                        var BrowserMobile = require('website_booking.browser_mobile');
+                                        var b = new BrowserMobile();
+                                        b.appendTo($(document.body));
+                                    });
+                                } else {
+                                    ajax.loadXML('/website_booking/static/src/xml/browser.xml', qweb).then(function(){
+                                        var Browser = require('website_booking.browser');
+                                        var b = new Browser();
+                                        b.appendTo($(document.body));
+                                    });
+                                }
+                                
+                                
                             });
                         });
                     </script>

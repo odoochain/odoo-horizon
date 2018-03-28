@@ -46,6 +46,7 @@
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser.js"></script>
+            <script type="text/javascript" src="/website_booking/static/src/js/browser_mobile.js"></script>
         </template>
         
         <record id="action_website_booking" model="ir.actions.act_url">
