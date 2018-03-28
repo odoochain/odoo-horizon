@@ -57,15 +57,11 @@
                                 deviceAgent.match(/blackberry/i) || 
                                 deviceAgent.match(/bada/i));
                                 
-                                if (isTouchDevice) {
-                                    /*ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb).then(function(){
+                                //if (isTouchDevice) {
+                                if(window.location.href.includes("debug)) {
+                                    ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb).then(function(){
                                         var BrowserMobile = require('website_booking.browser_mobile');
                                         var b = new BrowserMobile();
-                                        b.appendTo($(document.body));
-                                    });*/
-                                    ajax.loadXML('/website_booking/static/src/xml/browser.xml', qweb).then(function(){
-                                        var Browser = require('website_booking.browser');
-                                        var b = new Browser();
                                         b.appendTo($(document.body));
                                     });
                                 } else {
