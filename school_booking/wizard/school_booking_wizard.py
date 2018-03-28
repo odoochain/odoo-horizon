@@ -39,7 +39,6 @@ class BookingWizard(models.TransientModel):
     def find_rooms(self):
         self.ensure_one()
         if self.from_date and self.to_date :
-            _logger.info('Search rooms')
             the_fields = ['name','room_id']
             domain = [
                 ('start', '<', self.to_date),    
