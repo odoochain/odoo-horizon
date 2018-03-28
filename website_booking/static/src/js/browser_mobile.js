@@ -22,6 +22,8 @@ ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb);
 var BrowserMobile = Widget.extend({
     template: 'website_booking.browser_mobile',
     
+    
+    
 });
 
 core.action_registry.add('website_booking.browser_mobile', BrowserMobile);
