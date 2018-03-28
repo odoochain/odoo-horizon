@@ -38,6 +38,7 @@ class BookingWizard(models.TransientModel):
     @api.depends('from_date', 'to_date')
     def find_rooms(self):
         if self.from_date and self.to_date :
+            _logger.info('Search rooms')
             the_fields = ['name','room_id']
             domain = [
                 ('start', '<', self.to_date),    
