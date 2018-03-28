@@ -29,7 +29,7 @@ class BookingWizard(models.TransientModel):
     _name = "school.school_booking_wizard"
     _description = "School Booking Wizard"
     
-    room_ids = fields.Many2many('school.asset', 'booking_wizard_room_ref', 'wizard_id', 'room_id', string='Rooms', domain="[('is_room','=',True)]")
+    room_id = fields.Many2one('school.asset', string='Selected Room', domain="[('is_room','=',True)]")
     
     from_date = fields.Datetime('From Date')
     to_date = fields.Datetime('From Date')
@@ -48,7 +48,10 @@ class BookingWizard(models.TransientModel):
             all_rooms_ids = self.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
             busy_rooms_ids = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,the_fields)
             busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start_datetime < self.to_date).filtered(lambda r : r.stop_datetime > self.from_date).mapped('room_id')
-            self.room_ids = all_rooms_ids - busy_rooms_ids
+            available_rooms_ids = all_rooms_ids - busy_rooms_ids
+            return {'domain': {'room_id': {('is_room','=',True),('id','in',available_rooms_ids.ids)}}}
+        else:
+            return {'domain': {'room_id': {('is_room','=',True)}}}
         
     @api.one
     @api.depends('from_date', 'to_date')
