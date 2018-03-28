@@ -35,7 +35,7 @@ class BookingWizard(models.TransientModel):
     to_date = fields.Datetime('From Date')
     
     @api.one
-    @api.depends('from_date', 'to_date')
+    @api.onchange('from_date', 'to_date')
     def find_rooms(self):
         if self.from_date and self.to_date :
             _logger.info('Search rooms')
