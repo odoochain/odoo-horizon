@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     <t t-name="website_booking.browser_mobile">
-        <div class="row">
-            <a class="waves-effect waves-light btn">Aujourd'hui</a>
-            <a class="waves-effect waves-light btn">Demain</a>
+        <div class="row mt16 mb16">
+            <div class="col">
+                <a class="waves-effect waves-light btn">Aujourd'hui</a>
+            </div>
+            <div class="col">
+                <a class="waves-effect waves-light btn">Demain</a>
+            </div>
         </div>
     </t>
 </templates>
