@@ -49,9 +49,9 @@ class BookingWizard(models.TransientModel):
             busy_rooms_ids = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,the_fields)
             busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start_datetime < self.to_date).filtered(lambda r : r.stop_datetime > self.from_date).mapped('room_id')
             available_rooms_ids = all_rooms_ids - busy_rooms_ids
-            return {'domain': {'room_id': {('is_room','=',True),('id','in',available_rooms_ids.ids)}}}
+            return {'domain': {'room_id': [('is_room','=',True),('id','in',available_rooms_ids.ids)]}}
         else:
-            return {'domain': {'room_id': {('is_room','=',True)}}}
+            return {'domain': {'room_id': [('is_room','=',True)]}}
         
     @api.one
     @api.depends('from_date', 'to_date')
