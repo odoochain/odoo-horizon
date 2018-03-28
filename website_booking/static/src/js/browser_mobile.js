@@ -22,6 +22,55 @@ ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb);
 var BrowserMobile = Widget.extend({
     template: 'website_booking.browser_mobile',
     
+    events: {
+        "change #from_hour": function (event) {
+            var self = this;
+            var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
+            var events = this.schedule.events;
+            self.$('#from_hour').removeClass('invalid');
+            self.$('#from_hour').addClass('valid');
+            for (event in events) {
+                if (moment(events[event].start).isBefore(fromTime) && moment(events[event].end).isAfter(fromTime)){
+                    self.$('#from_hour').removeClass('valid');
+                    self.$('#from_hour').addClass('invalid');
+                    break;
+                } 
+            }
+            self.updateRoomList();
+            self.updateSendButton();
+        },
+        "change #to_hour": function (event) {
+            var self = this;
+            var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
+            var toTime = self.$('#to_hour').timepicker('getTime', this.date.toDate());
+            var events = this.schedule.events;
+            self.$('#to_hour').removeClass('invalid');
+            self.$('#to_hour').addClass('valid');
+            for (event in events) {
+                if (moment(events[event].start).isBefore(toTime) && moment(events[event].end).isAfter(toTime)){
+                    self.$('#to_hour').removeClass('valid');
+                    self.$('#to_hour').addClass('invalid');
+                    break;
+                } 
+            }
+            if(!self.user.in_group_14 && !self.user.in_group_15) {
+                if((fromTime.getHours() + fromTime.getMinutes()/60) > (toTime.getHours() + toTime.getMinutes()/60 - 0.5)) {
+                    self.$('#to_hour').removeClass('valid');
+                    self.$('#to_hour').addClass('invalid');
+                }
+                if((fromTime.getHours() + fromTime.getMinutes()/60) < (toTime.getHours() + toTime.getMinutes()/60 - 2)) {
+                    self.$('#to_hour').removeClass('valid');
+                    self.$('#to_hour').addClass('invalid');
+                }
+            } else {
+                self.$('#to_hour').removeClass('invalid');
+                self.$('#to_hour').addClass('valid');
+            }
+            self.updateRoomList();
+            self.updateSendButton();
+        },     
+    },
+    
     init: function(parent) {
         this._super(parent);
         this.today = moment(new Date());
@@ -47,6 +96,46 @@ var BrowserMobile = Widget.extend({
             'maxTime': '22:00',
             'showDuration': true,
         });
+        
+        Materialize.updateTextFields();
+    },
+    
+    updateRoomList: function() {
+        var self = this;
+        var fromTime = self.$('#from_hour').timepicker('getTime');
+        var toTime = self.$('#to_hour').timepicker('getTime');
+        if (fromTime && toTime) {
+            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
+            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+            ajax.jsonRpc('/booking/rooms', 'call', {
+        				'start' : time.moment_to_str(start),
+        				'end' : time.moment_to_str(stop),
+        				'self_id' : self.event ? self.event.id : '',
+    	    	}).done(function(rooms){
+                var roomSelect = self.$('select.select-asset-id').empty().html(' ');
+                for(var room_idx in rooms) {
+                    var room = rooms[room_idx];
+                    // add new value
+                    roomSelect.append(
+                      $("<option></option>")
+                        .attr("value",room.id)
+                        .text(room.name)
+                    );
+                }
+                roomSelect.removeAttr( "disabled" )
+        	    roomSelect.material_select();
+        	    Materialize.updateTextFields();
+        	    self.updateSendButton();
+        	});
+        }
+    },
+    
+    updateSendButton: function() {
+        if(this.$('.invalid').length > 0) {
+            this.$('.request-booking').attr( 'disabled', '' );
+        } else {
+            this.$('.request-booking').removeAttr( 'disabled' );
+        }
     },
     
 });
