@@ -2,11 +2,11 @@
 <templates id="template" xml:space="preserve">
     <t t-name="website_booking.browser_mobile">
         <div class="row mt16 mb16">
-            <div class="col justify-content-center">
-                <a class="waves-effect waves-light btn">Aujourd'hui</a>
+            <div class="col s6" align="center">
+                <a id="todat" class="waves-effect waves-light btn">Aujourd'hui</a>
             </div>
-            <div class="col justify-content-center">
-                <a class="waves-effect waves-light btn">Demain</a>
+            <div class="col s6" align="center">
+                <a id="tomorrow" class="waves-effect waves-light btn">Demain</a>
             </div>
         </div>
     </t>
