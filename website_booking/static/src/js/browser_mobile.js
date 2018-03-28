@@ -22,7 +22,11 @@ ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb);
 var BrowserMobile = Widget.extend({
     template: 'website_booking.browser_mobile',
     
-    
+    init: function(parent) {
+        this._super(parent);
+        this.today = moment(new Date());
+        this.tomorrow = moment(new Date()).add(1,'days');
+    },
     
 });
 
