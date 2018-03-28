@@ -11,5 +11,22 @@
                 Demain
             </div>
         </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="from_hour" type="text" data-length="10" class="invalid"/>
+            <label for="input_text">From Hour</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="to_hour" type="text" data-length="10" class="invalid" />
+            <label for="input_text" data-error="Minimum 30min et maximum 2h">To Hour</label>
+          </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12" style="margin-top:40px;">
+                <select class="select-asset-id browser-default" disabled="">
+                    <option value="" disabled="" selected="">Choose your room</option>
+                </select>
+            </div>
+        </div>
     </t>
 </templates>
