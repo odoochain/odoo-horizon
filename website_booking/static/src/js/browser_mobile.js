@@ -1,4 +1,4 @@
-odoo.define('website_booking.browser', function (require) {
+odoo.define('website_booking.browser_mobile', function (require) {
 "use strict";
 
 /* global moment, Materialize, $, location, odoo, gapi */
