@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     <t t-name="website_booking.browser_mobile">
-        <div class="row mt16 mb16">
+        <div class="row">
             <div class="col s6" align="center">
-                <a id="todat" class="waves-effect waves-light btn-large"><t t-esc="widget.today.format('DD/MM')"/></a>
+                <a id="todat" class="waves-effect waves-light btn-large"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
                 Auhourd'hui
             </div>
             <div class="col s6" align="center">
-                <a id="tomorrow" class="waves-effect waves-light btn-large"><t t-esc="widget.tomorrow.format('DD/MM')"/></a>
+                <a id="tomorrow" class="waves-effect waves-light btn-large"><t t-esc="widget.tomorrow.format('DD/MM')"/></a><br/>
                 Demain
             </div>
         </div>
