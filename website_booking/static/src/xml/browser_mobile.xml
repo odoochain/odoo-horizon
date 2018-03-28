@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="row">
-            <div class="input-field col s12" style="margin-top:40px;">
+            <div class="input-field col s12">
                 <select class="select-asset-id browser-default" disabled="">
                     <option value="" disabled="" selected="">Choose your room</option>
                 </select>

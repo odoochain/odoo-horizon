@@ -28,6 +28,27 @@ var BrowserMobile = Widget.extend({
         this.tomorrow = moment(new Date()).add(1,'days');
     },
     
+    start: function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        self.$('select.select-asset-id').material_select();
+        self.$('#from_hour').timepicker({
+            'timeFormat': 'H:i',
+            'minTime': '8:00',
+            'maxTime': '21:30',
+        });
+        self.$('#from_hour').on('change', function() {
+            var newTime = self.$('#from_hour').timepicker('getTime');
+            self.$('#to_hour').timepicker('option', 'minTime', newTime);
+        });
+        self.$('#to_hour').timepicker({
+            'timeFormat': 'H:i',
+            'minTime': '8:30',
+            'maxTime': '22:00',
+            'showDuration': true,
+        });
+    },
+    
 });
 
 core.action_registry.add('website_booking.browser_mobile', BrowserMobile);
