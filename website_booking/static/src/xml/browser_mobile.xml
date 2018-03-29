@@ -51,43 +51,48 @@
             <div class="row">
                 <div class="col s12">
                     <div class="card horizontal">
-                      <div class="card-image">
-                        <span>12:00-14:00</span>
-                      </div>
-                      <div class="card-stacked">
+                        <div class="card-image">
+                            <span>12:00</span><span>
+                            <span>14:00</span>
+                        </div>
                         <div class="card-content">
-                          <b>C32</b>
+                            <b>D12</b>
+                            <p style="color:grey">
+                              Concert de musique
+                            </p>
                         </div>
                         <div class="card-action">
-                          <a href="#">EDITER</a><a href="#">SUPPRIMER</a>
+                            <a href="#"><i class="material-icons small">create</i></a><a href="#"><i class="material-icons small">delete</i></a>
                         </div>
-                      </div>
-                    </div>
-                    <div class="card horizontal">
-                      <div class="card-image">
-                        <span>16:00-17:00</span>
-                      </div>
-                      <div class="card-stacked">
-                        <div class="card-content">
-                          <b>A12</b>
-                        </div>
-                        <div class="card-action">
-                          <a href="#">EDITER</a><a href="#">SUPPRIMER</a>
-                        </div>
-                      </div>
                     </div>
                     <div class="card horizontal">
                         <div class="card-image">
-                            <span>19:00-20:00</span>
+                            <span>19:00</span><span>
+                            <span>20:00</span>
                         </div>
                         <div class="card-content">
                             <b>B12</b>
-                            <blockquote>
+                            <p style="color:grey">
                               Concert de musique
-                            </blockquote>
+                            </p>
                         </div>
                         <div class="card-action">
-                            <a href="#"><i class="material-icons">create</i></a><a href="#"><i class="material-icons">delete</i></a>
+                            <a href="#"><i class="material-icons small">create</i></a><a href="#"><i class="material-icons small">delete</i></a>
+                        </div>
+                    </div>
+                    <div class="card horizontal">
+                        <div class="card-image">
+                            <span>19:00</span><span>
+                            <span>20:00</span>
+                        </div>
+                        <div class="card-content">
+                            <b>B12</b>
+                            <p style="color:grey">
+                              Concert de musique
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#"><i class="material-icons small">create</i></a><a href="#"><i class="material-icons small">delete</i></a>
                         </div>
                     </div>
                 </div>
