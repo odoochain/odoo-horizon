@@ -50,19 +50,45 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                  <div class="card-panel">
-                    <b >C32</b> - 12:00-14:00
-                  </div>
-                </div>
-                <div class="col s12">
-                  <div class="card-panel">
-                    <b>A06</b> - 16:00-17:00
-                  </div>
-                </div>
-                <div class="col s12">
-                  <div class="card-panel">
-                    <b>D12</b> - 19:00-20:00
-                  </div>
+                    <div class="card horizontal">
+                      <div class="card-image">
+                        <span>12:00-14:00</span>
+                      </div>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <b>C32</b>
+                        </div>
+                        <div class="card-action">
+                          <a href="#">EDITER</a><a href="#">SUPPRIMER</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card horizontal">
+                      <div class="card-image">
+                        <span>16:00-17:00</span>
+                      </div>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <b>A06</b>
+                        </div>
+                        <div class="card-action">
+                          <a href="#">EDITER</a><a href="#">SUPPRIMER</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card horizontal">
+                      <div class="card-image">
+                        <span>19:00-20:00</span>
+                      </div>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <b>B12</b>
+                        </div>
+                        <div class="card-action">
+                          <a href="#">EDITER</a><a href="#">SUPPRIMER</a>
+                        </div>
+                      </div>
+                    </div>
                 </div>
             </div>
         </main>
