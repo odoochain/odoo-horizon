@@ -69,6 +69,33 @@ var BrowserMobile = Widget.extend({
         this._super(parent);
         this.date = this.today = moment(new Date());
         this.tomorrow = moment(new Date()).add(1,'days');
+        var self = this;
+        session.session_bind().then(function(){
+            if (session.uid) {
+                self.is_logged = true;
+                self.uid = session.uid;
+                new Model('res.users').call("search_read", 
+                    [[["id", "=", session.uid]], ["id","name","in_group_14","in_group_15","in_group_16",]],
+                    {context: session.context}).then(function (user_ids) {
+                        session.user = user_ids[0];
+                        self.user = session.partner;
+                });
+                new Model('res.partner').call("search_read", 
+                    [[["id", "=", session.partner_id]], ["id","name"]],
+                    {context: session.context}).then(function (partner_ids) {
+                        session.partner = partner_ids[0];
+                        self.partner = session.partner;
+                });
+            } else {
+                ajax.jsonRpc('/booking/login_providers', 'call', {redirect : '/booking#debug'}).done(function(providers){
+                    if(providers.length > 0) {
+                        var provider = providers[0];
+                        var link = provider.auth_link
+                        window.location.replace(provider.auth_link);
+                    }
+                });
+            }
+        });
     },
     
     start: function() {
