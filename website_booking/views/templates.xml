@@ -25,9 +25,9 @@
         <template id="index" name="Booking Index" page="True">
             <t t-call="web.layout">
                 <t t-set="head">
-                    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-                    <meta name="format-detection" content="telephone=no">
-                    <meta name="msapplication-tap-highlight" content="no">
+                    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+                    <meta name="format-detection" content="telephone=no"/>
+                    <meta name="msapplication-tap-highlight" content="no"/>
 
                     <t t-call-assets="web.assets_common" t-css="false"/>
                     <script type="text/javascript">
