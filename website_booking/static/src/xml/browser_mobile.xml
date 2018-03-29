@@ -66,7 +66,7 @@
                 </div>
             </div>
         </main>
-        <footer class="page-footer cyan darken-2">
+        <footer class="page-footer cyan darken-2" style="position: fixed;bottom: 0;width: 100%;">
             <div class="container">
                 <div class="row">
                     <div class="col s4" align="center">
