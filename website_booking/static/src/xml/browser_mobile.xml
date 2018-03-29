@@ -39,5 +39,12 @@
                 </select>
             </div>
         </div>
-    </t>
+        <div class="row">
+            <div class="input-field col s12">
+                <a href="#!" class="request-booking modal-action modal-close waves-effect waves-green btn-flat">Request Booking</a>
+                <a href="#!" class="delete-booking modal-action modal-close waves-effect waves-green btn-flat" style="display: none">Delete Booking</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        </t>
 </templates>
