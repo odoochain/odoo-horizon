@@ -70,13 +70,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col s4" align="center">
-                        <a id="add_event"><i class="material-icons">add_alarm</i></a>
+                        <a id="add_event" style="color:white;"><i class="material-icons">add_alarm</i></a>
                     </div>
                     <div class="col s4" align="center">
-                        <a id="search"><i class="material-icons">search</i></a>
+                        <a id="search" style="color:white;"><i class="material-icons">search</i></a>
                     </div>
                     <div class="col s4" align="center">
-                        <a id="logout"><i class="material-icons">lock_outline</i></a>
+                        <a id="logout" style="color:white;"><i class="material-icons">lock_outline</i></a>
                     </div>
                 </div>
             </div>
