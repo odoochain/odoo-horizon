@@ -23,6 +23,16 @@ var BrowserMobile = Widget.extend({
     template: 'website_booking.browser_mobile',
     
     events: {
+        "click #logout" : function (event) {
+            var self = this;
+            self.is_logged = false;
+            self.uid = false;
+            self.avatar_src = false;
+            self.rpc("/web/session/destroy", {}).always(function(o) {
+                    window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
+                    location.reload();
+            });
+        },
         "click #today" : function (event) {
             this.date = this.today;
             this.$('#tomorrow').removeClass('blue');
