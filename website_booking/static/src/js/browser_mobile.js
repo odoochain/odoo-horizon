@@ -47,7 +47,7 @@ var BrowserMobile = Widget.extend({
             var toTime = self.$('#to_hour').timepicker('getTime', this.date.toDate());
             self.$('#to_hour').removeClass('invalid');
             self.$('#to_hour').addClass('valid');
-            if(!self.user.in_group_14 && !self.user.in_group_15) {
+            /*if(!self.user.in_group_14 && !self.user.in_group_15) {
                 if((fromTime.getHours() + fromTime.getMinutes()/60) > (toTime.getHours() + toTime.getMinutes()/60 - 0.5)) {
                     self.$('#to_hour').removeClass('valid');
                     self.$('#to_hour').addClass('invalid');
@@ -59,7 +59,7 @@ var BrowserMobile = Widget.extend({
             } else {
                 self.$('#to_hour').removeClass('invalid');
                 self.$('#to_hour').addClass('valid');
-            }
+            }*/
             self.updateRoomList();
             self.updateSendButton();
         },     
