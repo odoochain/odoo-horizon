@@ -14,11 +14,11 @@
         </nav>
         <div class="row">
             <div class="col s6" align="center">
-                <a id="today" class="waves-effect waves-light btn-large"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
+                <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
                 Auhourd'hui
             </div>
             <div class="col s6" align="center">
-                <a id="tomorrow" class="waves-effect waves-light btn-large"><t t-esc="widget.tomorrow.format('DD/MM')"/></a><br/>
+                <a id="tomorrow" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.tomorrow.format('DD/MM')"/></a><br/>
                 Demain
             </div>
         </div>
@@ -43,6 +43,23 @@
             <div class="input-field col s12" align="center">
                 <a href="#!" class="request-booking waves-effect waves-green btn-large">Request Booking</a>
                 <a href="#!" class="delete-booking waves-effect waves-green btn-large" style="display: none">Delete Booking</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+              <div class="card-panel">
+                <b >C32</b> - 12:00-14:00
+              </div>
+            </div>
+            <div class="col s12">
+              <div class="card-panel">
+                <b>A06</b> - 16:00-17:00
+              </div>
+            </div>
+            <div class="col s12">
+              <div class="card-panel">
+                <b>D12</b> - 19:00-20:00
+              </div>
             </div>
         </div>
         </t>
