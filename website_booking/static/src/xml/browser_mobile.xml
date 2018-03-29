@@ -66,16 +66,16 @@
                 </div>
             </div>
         </main>
-        <footer class="page-footer">
+        <footer class="page-footer cyan darken-2">
             <div class="container">
-                <div class="row cyan darken-2">
-                    <div class="col s4">
+                <div class="row">
+                    <div class="col s4" align="center">
                         <i class="material-icons">add_alarm</i>
                     </div>
-                    <div class="col s4">
+                    <div class="col s4" align="center">
                         <i class="material-icons">search</i>
                     </div>
-                    <div class="col s4">
+                    <div class="col s4" align="center">
                         <i class="material-icons">lock_outline</i>
                     </div>
                 </div>
