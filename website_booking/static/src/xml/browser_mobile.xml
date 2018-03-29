@@ -41,9 +41,9 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <a href="#!" class="request-booking modal-action modal-close waves-effect waves-green btn-flat">Request Booking</a>
-                <a href="#!" class="delete-booking modal-action modal-close waves-effect waves-green btn-flat" style="display: none">Delete Booking</a>
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                <a href="#!" class="request-booking waves-effect waves-green btn-large">Request Booking</a>
+                <a href="#!" class="delete-booking waves-effect waves-green btn-large" style="display: none">Delete Booking</a>
+                <a href="#!" class="modal-action waves-effect waves-green btn-large grey">Cancel</a>
             </div>
         </div>
         </t>
