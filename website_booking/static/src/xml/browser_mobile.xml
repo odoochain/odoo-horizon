@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     <t t-name="website_booking.browser_mobile">
-        <nav class="row">
+        <nav class="row cyan darken-2">
             <div class="nav-wrapper">
                 <img style="margin: 0 10px 0 10px; vertical-align:middle;" src="/website_booking/static/src/img/logo.png"/>
                 <a href="#" class="brand-logo">Booking Mobile</a>
