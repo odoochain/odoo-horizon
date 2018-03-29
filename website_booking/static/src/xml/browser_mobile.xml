@@ -51,9 +51,9 @@
             <div class="row">
                 <div class="col s12">
                     <div class="card horizontal">
-                        <div class="card-image cyan darken-2" align="center" style="display:flex;align-items:center;">
-                            <span>12:00</span>
-                            <span>14:00</span>
+                        <div class="card-image cyan darken-2" align="center" style="color:white;">
+                            <div class="row"><div class="col">12:00</div></div>
+                            <div class="row"><div class="col">14:00</div></div>
                         </div>
                         <div class="card-content">
                             <b>D12</b>
@@ -66,9 +66,9 @@
                         </div>
                     </div>
                     <div class="card horizontal">
-                        <div class="card-image cyan darken-2" align="center" style="display:flex;align-items:center;">
-                            <span>19:00</span>
-                            <span>20:00</span>
+                        <div class="card-image cyan darken-2" align="center" style="color:white;">
+                            <div class="row"><div class="col">12:00</div></div>
+                            <div class="row"><div class="col">14:00</div></div>
                         </div>
                         <div class="card-content">
                             <b>B12</b>
@@ -81,9 +81,9 @@
                         </div>
                     </div>
                     <div class="card horizontal">
-                        <div class="card-image cyan darken-2" align="center" style="display:flex;align-items:center;">
-                            <span>19:00</span>
-                            <span>20:00</span>
+                        <div class="card-image cyan darken-2" align="center" style="color:white;">
+                            <div class="row"><div class="col">12:00</div></div>
+                            <div class="row"><div class="col">14:00</div></div>
                         </div>
                         <div class="card-content">
                             <b>B12</b>
