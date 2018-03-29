@@ -51,8 +51,8 @@
             <div class="row">
                 <div class="col s12">
                     <div class="card horizontal">
-                        <div class="card-image">
-                            <span>12:00</span><span>
+                        <div class="card-image cyan darken-2" align="center" style="display:flex;align-items:center;">
+                            <span>12:00</span>
                             <span>14:00</span>
                         </div>
                         <div class="card-content">
@@ -66,8 +66,8 @@
                         </div>
                     </div>
                     <div class="card horizontal">
-                        <div class="card-image">
-                            <span>19:00</span><span>
+                        <div class="card-image cyan darken-2" align="center" style="display:flex;align-items:center;">
+                            <span>19:00</span>
                             <span>20:00</span>
                         </div>
                         <div class="card-content">
@@ -81,8 +81,8 @@
                         </div>
                     </div>
                     <div class="card horizontal">
-                        <div class="card-image">
-                            <span>19:00</span><span>
+                        <div class="card-image cyan darken-2" align="center" style="display:flex;align-items:center;">
+                            <span>19:00</span>
                             <span>20:00</span>
                         </div>
                         <div class="card-content">
