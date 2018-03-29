@@ -77,17 +77,18 @@
                       </div>
                     </div>
                     <div class="card horizontal">
-                      <div class="card-image">
-                        <span>19:00-20:00</span>
-                      </div>
-                      <div class="card-stacked">
+                        <div class="card-image">
+                            <span>19:00-20:00</span>
+                        </div>
                         <div class="card-content">
-                          <b>B12</b>
+                            <b>B12</b>
+                            <blockquote>
+                              Concert de musique
+                            </blockquote>
                         </div>
                         <div class="card-action">
-                          <a href="#">EDITER</a><a href="#">SUPPRIMER</a>
+                            <a href="#">EDITER</a><a href="#">SUPPRIMER</a>
                         </div>
-                      </div>
                     </div>
                 </div>
             </div>
