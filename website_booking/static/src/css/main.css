@@ -96,3 +96,14 @@ label:after {
   margin-top: 10px;
   border-bottom: 1px solid #eaeaea;
 }
+
+footer {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height:50px;
+}
+
+section {
+  margin-bottom:50px;
+}
