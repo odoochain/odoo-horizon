@@ -36,10 +36,13 @@
                       </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s12">
+                        <div class="input-field col s8">
                             <select class="select-asset-id browser-default" disabled="">
                                 <option value="" disabled="" selected="">Choose your room</option>
                             </select>
+                        </div>
+                        <div class="input-field col s4">
+                            <a id="confirm" class="waves-effect waves-light btn-large" style="font-size:150%">Confirme</a><br/>
                         </div>
                     </div>
                 </div>
