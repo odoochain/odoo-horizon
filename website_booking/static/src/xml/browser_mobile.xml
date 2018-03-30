@@ -14,7 +14,7 @@
                 </div>
             </nav>
         </header>
-        <main>
+        <section>
             <div class="row">
                 <div class="col s6" align="center">
                     <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
         <footer class="page-footer">
           <div class="container">
             <div class="row">
