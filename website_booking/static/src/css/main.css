@@ -98,9 +98,16 @@ label:after {
 }
 
 .mobile_footer {
-  height: 50px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+  height:70px;
 }
 
 .mobile_section {
-  min-height: calc(100vh - 70px);
+  margin-bottom: 70px;
 }
