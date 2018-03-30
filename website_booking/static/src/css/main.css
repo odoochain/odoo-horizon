@@ -108,4 +108,6 @@ label:after {
 
 .mobile_section {
   padding-bottom:60px;
+  height: 100%;
+  overflow-y: scroll;
 }

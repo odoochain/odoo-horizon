@@ -13,137 +13,137 @@
                     </ul>-->
                 </div>
             </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col s6" align="center">
+                        <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
+                        Auhourd'hui
+                    </div>
+                    <div class="col s6" align="center">
+                        <a id="tomorrow" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.tomorrow.format('DD/MM')"/></a><br/>
+                        Demain
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input id="from_hour" type="text" data-length="10" class="invalid"/>
+                    <label for="input_text">From Hour</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input id="to_hour" type="text" data-length="10" class="invalid" />
+                    <label for="input_text">To Hour</label>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select class="select-asset-id browser-default" disabled="">
+                            <option value="" disabled="" selected="">Choose your room</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </header>
         <section class="mobile_section">
-            <div class="row">
-                <div class="col s6" align="center">
-                    <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
-                    Auhourd'hui
-                </div>
-                <div class="col s6" align="center">
-                    <a id="tomorrow" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.tomorrow.format('DD/MM')"/></a><br/>
-                    Demain
-                </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s6">
-                <input id="from_hour" type="text" data-length="10" class="invalid"/>
-                <label for="input_text">From Hour</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="to_hour" type="text" data-length="10" class="invalid" />
-                <label for="input_text">To Hour</label>
-              </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <select class="select-asset-id browser-default" disabled="">
-                        <option value="" disabled="" selected="">Choose your room</option>
-                    </select>
-                </div>
-            </div>
             <div class="mobile_list">
-                <div class="container">
-                    <div class="row mobile_event">
-                        <div class="col s8">
-                            <span style="font-size:150%;font-weight:800;">12:00</span>
-                            <span style="font-size:150%;font-weight:800;"> &gt; </span>
-                            <span style="font-size:150%;font-weight:800;">14:00</span>
-                            <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
-                            <br/>
-                            <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
-                        </div>
-                        <div class="col s4">
-                            <div class="row">
-                                <i class="material-icons small">create</i>
-                                <span style="magin-left:20px;"/>
-                                <i class="material-icons small">delete</i>
-                            </div>
+                <div class="row mobile_event">
+                    <div class="col s8">
+                        <span style="font-size:150%;font-weight:800;">12:00</span>
+                        <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                        <span style="font-size:150%;font-weight:800;">14:00</span>
+                        <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
+                        <br/>
+                        <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="row">
+                            <i class="material-icons small">create</i>
+                            <span style="magin-left:20px;"/>
+                            <i class="material-icons small">delete</i>
                         </div>
                     </div>
-                    <div class="row mobile_event">
-                        <div class="col s8">
-                            <span style="font-size:150%;font-weight:800;">12:00</span>
-                            <span style="font-size:150%;font-weight:800;"> &gt; </span>
-                            <span style="font-size:150%;font-weight:800;">14:00</span>
-                            <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
-                            <br/>
-                            <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
-                        </div>
-                        <div class="col s4">
-                            <div class="row">
-                                <i class="material-icons small">create</i>
-                                <span style="magin-left:20px;"/>
-                                <i class="material-icons small">delete</i>
-                            </div>
+                </div>
+                <div class="row mobile_event">
+                    <div class="col s8">
+                        <span style="font-size:150%;font-weight:800;">12:00</span>
+                        <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                        <span style="font-size:150%;font-weight:800;">14:00</span>
+                        <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
+                        <br/>
+                        <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="row">
+                            <i class="material-icons small">create</i>
+                            <span style="magin-left:20px;"/>
+                            <i class="material-icons small">delete</i>
                         </div>
                     </div>
-                    <div class="row mobile_event">
-                        <div class="col s8">
-                            <span style="font-size:150%;font-weight:800;">12:00</span>
-                            <span style="font-size:150%;font-weight:800;"> &gt; </span>
-                            <span style="font-size:150%;font-weight:800;">14:00</span>
-                            <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
-                            <br/>
-                            <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
-                        </div>
-                        <div class="col s4">
-                            <div class="row">
-                                <i class="material-icons small">create</i>
-                                <span style="magin-left:20px;"/>
-                                <i class="material-icons small">delete</i>
-                            </div>
+                </div>
+                <div class="row mobile_event">
+                    <div class="col s8">
+                        <span style="font-size:150%;font-weight:800;">12:00</span>
+                        <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                        <span style="font-size:150%;font-weight:800;">14:00</span>
+                        <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
+                        <br/>
+                        <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="row">
+                            <i class="material-icons small">create</i>
+                            <span style="magin-left:20px;"/>
+                            <i class="material-icons small">delete</i>
                         </div>
                     </div>
-                    <div class="row mobile_event">
-                        <div class="col s8">
-                            <span style="font-size:150%;font-weight:800;">12:00</span>
-                            <span style="font-size:150%;font-weight:800;"> &gt; </span>
-                            <span style="font-size:150%;font-weight:800;">14:00</span>
-                            <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
-                            <br/>
-                            <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
-                        </div>
-                        <div class="col s4">
-                            <div class="row">
-                                <i class="material-icons small">create</i>
-                                <span style="magin-left:20px;"/>
-                                <i class="material-icons small">delete</i>
-                            </div>
+                </div>
+                <div class="row mobile_event">
+                    <div class="col s8">
+                        <span style="font-size:150%;font-weight:800;">12:00</span>
+                        <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                        <span style="font-size:150%;font-weight:800;">14:00</span>
+                        <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
+                        <br/>
+                        <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="row">
+                            <i class="material-icons small">create</i>
+                            <span style="magin-left:20px;"/>
+                            <i class="material-icons small">delete</i>
                         </div>
                     </div>
-                    <div class="row mobile_event">
-                        <div class="col s8">
-                            <span style="font-size:150%;font-weight:800;">12:00</span>
-                            <span style="font-size:150%;font-weight:800;"> &gt; </span>
-                            <span style="font-size:150%;font-weight:800;">14:00</span>
-                            <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
-                            <br/>
-                            <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
-                        </div>
-                        <div class="col s4">
-                            <div class="row">
-                                <i class="material-icons small">create</i>
-                                <span style="magin-left:20px;"/>
-                                <i class="material-icons small">delete</i>
-                            </div>
+                </div>
+                <div class="row mobile_event">
+                    <div class="col s8">
+                        <span style="font-size:150%;font-weight:800;">12:00</span>
+                        <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                        <span style="font-size:150%;font-weight:800;">14:00</span>
+                        <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
+                        <br/>
+                        <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="row">
+                            <i class="material-icons small">create</i>
+                            <span style="magin-left:20px;"/>
+                            <i class="material-icons small">delete</i>
                         </div>
                     </div>
-                    <div class="row mobile_event">
-                        <div class="col s8">
-                            <span style="font-size:150%;font-weight:800;">12:00</span>
-                            <span style="font-size:150%;font-weight:800;"> &gt; </span>
-                            <span style="font-size:150%;font-weight:800;">14:00</span>
-                            <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
-                            <br/>
-                            <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
-                        </div>
-                        <div class="col s4">
-                            <div class="row">
-                                <i class="material-icons small">create</i>
-                                <span style="magin-left:20px;"/>
-                                <i class="material-icons small">delete</i>
-                            </div>
+                </div>
+                <div class="row mobile_event">
+                    <div class="col s8">
+                        <span style="font-size:150%;font-weight:800;">12:00</span>
+                        <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                        <span style="font-size:150%;font-weight:800;">14:00</span>
+                        <span style="margin-left:40px;font-size:150%;font-weight:800;">C32</span>
+                        <br/>
+                        <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="row">
+                            <i class="material-icons small">create</i>
+                            <span style="magin-left:20px;"/>
+                            <i class="material-icons small">delete</i>
                         </div>
                     </div>
                 </div>
