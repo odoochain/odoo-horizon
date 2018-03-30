@@ -1,7 +1,7 @@
 odoo.define('website_booking.browser_mobile', function (require) {
 "use strict";
 
-/* global moment, M, $, location, odoo, gapi */
+/* global moment, Materialize, $, location, odoo, gapi */
 
 var core = require('web.core');
 var ajax = require('web.ajax');
@@ -112,7 +112,7 @@ var BrowserMobile = Widget.extend({
         this._super.apply(this, arguments);
         var self = this;
         self.$('#today').addClass('blue');
-        self.$('select.select-asset-id').formSelect();;
+        self.$('select.select-asset-id').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:00',
@@ -129,7 +129,7 @@ var BrowserMobile = Widget.extend({
             'showDuration': true,
         });
         
-        M.updateTextFields();;
+        Materialize.updateTextFields();
     },
     
     updateRoomList: function() {
@@ -155,8 +155,8 @@ var BrowserMobile = Widget.extend({
                     );
                 }
                 roomSelect.removeAttr( "disabled" )
-        	    roomSelect.formSelect();;
-        	    M.updateTextFields();
+        	    roomSelect.material_select();
+        	    Materialize.updateTextFields();
         	    self.updateSendButton();
         	});
         }
