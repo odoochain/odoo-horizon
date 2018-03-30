@@ -42,61 +42,45 @@
                     </select>
                 </div>
             </div>
+            <div style="margin-bottom: 10px;
+                        margin-top: 10px;
+                        border-bottom: 1px solid #eaeaea;"/>
             <div class="row">
                 <div class="input-field col s12" align="center">
                     <a href="#!" class="request-booking waves-effect waves-green btn-large">Request Booking</a>
                     <a href="#!" class="delete-booking waves-effect waves-green btn-large" style="display: none">Delete Booking</a>
                 </div>
             </div>
+            <div style="margin-bottom: 10px;
+                        margin-top: 10px;
+                        border-bottom: 1px solid #eaeaea;"/>
             <div class="row">
                 <div class="col s12">
-                    <div class="card horizontal">
-                        <div class="card-image cyan darken-2" align="center" style="color:white;">
-                            <div class="row"><div class="col">12:00</div></div>
-                            <div class="row"><div class="col">14:00</div></div>
-                        </div>
-                        <div class="card-content">
-                            <b>D12</b>
-                            <p style="color:grey">
-                              Concert de musique
-                            </p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#"><i class="material-icons small">create</i></a><a href="#"><i class="material-icons small">delete</i></a>
-                        </div>
-                    </div>
-                    <div class="card horizontal">
-                        <div class="card-image cyan darken-2" align="center" style="color:white;">
-                            <div class="row"><div class="col">12:00</div></div>
-                            <div class="row"><div class="col">14:00</div></div>
-                        </div>
-                        <div class="card-content">
-                            <b>B12</b>
-                            <p style="color:grey">
-                              Concert de musique
-                            </p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#"><i class="material-icons small">create</i></a><a href="#"><i class="material-icons small">delete</i></a>
-                        </div>
-                    </div>
-                    <div class="card horizontal">
-                        <div class="card-image cyan darken-2" align="center" style="color:white;">
-                            <div class="row"><div class="col">12:00</div></div>
-                            <div class="row"><div class="col">14:00</div></div>
-                        </div>
-                        <div class="card-content">
-                            <b>B12</b>
-                            <p style="color:grey">
-                              Concert de musique
-                            </p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#"><i class="material-icons small">create</i></a><a href="#"><i class="material-icons small">delete</i></a>
-                        </div>
-                    </div>
+                    <span>12:00</span><i class="material-icons">navigate_next</i><span>14:00</span><span>C32</span>
+                    <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
                 </div>
             </div>
+            <div style="margin-bottom: 10px;
+                        margin-top: 10px;
+                        border-bottom: 1px solid #eaeaea;"/>
+            <div class="row">
+                <div class="col s12">
+                    <span>12:00</span><i class="material-icons">navigate_next</i><span>14:00</span><span>C32</span>
+                    <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                </div>
+            </div>
+            <div style="margin-bottom: 10px;
+                        margin-top: 10px;
+                        border-bottom: 1px solid #eaeaea;"/>
+            <div class="row">
+                <div class="col s12">
+                    <span>12:00</span><i class="material-icons">navigate_next</i><span>14:00</span><span>C32</span>
+                    <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                </div>
+            </div>
+            <div style="margin-bottom: 10px;
+                        margin-top: 10px;
+                        border-bottom: 1px solid #eaeaea;"/>
         </main>
         <footer class="page-footer cyan darken-2" style="position: fixed;bottom: 0;width: 100%;">
             <div class="container">
