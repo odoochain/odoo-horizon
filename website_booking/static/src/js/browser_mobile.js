@@ -1,7 +1,7 @@
 odoo.define('website_booking.browser_mobile', function (require) {
 "use strict";
 
-/* global moment, Materialize, $, location, odoo, gapi */
+/* global moment, M, $, location, odoo, gapi */
 
 var core = require('web.core');
 var ajax = require('web.ajax');
@@ -129,7 +129,7 @@ var BrowserMobile = Widget.extend({
             'showDuration': true,
         });
         
-        Materialize.updateTextFields();
+        M.updateTextFields();;
     },
     
     updateRoomList: function() {
@@ -156,7 +156,7 @@ var BrowserMobile = Widget.extend({
                 }
                 roomSelect.removeAttr( "disabled" )
         	    roomSelect.formSelect();;
-        	    Materialize.updateTextFields();
+        	    M.updateTextFields();
         	    self.updateSendButton();
         	});
         }
