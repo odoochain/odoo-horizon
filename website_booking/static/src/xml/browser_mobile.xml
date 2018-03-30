@@ -42,7 +42,7 @@
                     </select>
                 </div>
             </div>
-            <div style="mobile_event"/>
+            <div class="mobile_event"/>
             <div class="row mobile_event">
                 <div class="col s8">
                     <span style="font-size:150%;font-weight:800;">12:00</span>
