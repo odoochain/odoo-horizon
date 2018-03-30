@@ -112,7 +112,7 @@ var BrowserMobile = Widget.extend({
         this._super.apply(this, arguments);
         var self = this;
         self.$('#today').addClass('blue');
-        self.$('select.select-asset-id').material_select();
+        self.$('select.select-asset-id').formSelect();;
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:00',
@@ -155,7 +155,7 @@ var BrowserMobile = Widget.extend({
                     );
                 }
                 roomSelect.removeAttr( "disabled" )
-        	    roomSelect.material_select();
+        	    roomSelect.formSelect();;
         	    Materialize.updateTextFields();
         	    self.updateSendButton();
         	});
