@@ -42,7 +42,7 @@
                             </select>
                         </div>
                         <div class="input-field col s4">
-                            <a id="confirm" class="waves-effect waves-light" style="font-size:150%">OK</a><br/>
+                            <a id="confirm" class="waves-effect waves-light btn" style="font-size:150%">OK</a><br/>
                         </div>
                     </div>
                 </div>
