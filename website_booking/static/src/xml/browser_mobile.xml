@@ -42,45 +42,49 @@
                     </select>
                 </div>
             </div>
-            <div style="margin-bottom: 10px;
-                        margin-top: 10px;
-                        border-bottom: 1px solid #eaeaea;"/>
-            <div class="row">
-                <div class="input-field col s12" align="center">
-                    <a href="#!" class="request-booking waves-effect waves-green btn-large">Request Booking</a>
-                    <a href="#!" class="delete-booking waves-effect waves-green btn-large" style="display: none">Delete Booking</a>
-                </div>
-            </div>
-            <div style="margin-bottom: 10px;
-                        margin-top: 10px;
-                        border-bottom: 1px solid #eaeaea;"/>
-            <div class="row">
-                <div class="col s12">
-                    <span>12:00</span><i class="material-icons">navigate_next</i><span>14:00</span><span>C32</span>
+            <div style="border-bottom: 1px solid #eaeaea;"/>
+            <div class="row mobile_event">
+                <div class="col s8">
+                    <span style="font-size:150%;font-weight:800;">12:00</span>
+                    <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                    <span style="font-size:150%;font-weight:800;">14:00</span>
+                    <span style="margin-left:20px;font-size:150%;font-weight:800;">C32</span>
+                    <br/>
                     <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
                 </div>
-            </div>
-            <div style="margin-bottom: 10px;
-                        margin-top: 10px;
-                        border-bottom: 1px solid #eaeaea;"/>
-            <div class="row">
-                <div class="col s12">
-                    <span>12:00</span><i class="material-icons">navigate_next</i><span>14:00</span><span>C32</span>
-                    <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                <div class="col s8">
+                    <div class="row'><i class="material-icons">create</i></div>
+                    <div class="row'><i class="material-icons">delete</i></div>
                 </div>
             </div>
-            <div style="margin-bottom: 10px;
-                        margin-top: 10px;
-                        border-bottom: 1px solid #eaeaea;"/>
-            <div class="row">
-                <div class="col s12">
-                    <span>12:00</span><i class="material-icons">navigate_next</i><span>14:00</span><span>C32</span>
+            <div class="row mobile_event">
+                <div class="col s8">
+                    <span style="font-size:150%;font-weight:800;">12:00</span>
+                    <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                    <span style="font-size:150%;font-weight:800;">14:00</span>
+                    <span style="margin-left:20px;font-size:150%;font-weight:800;">C32</span>
+                    <br/>
                     <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
                 </div>
+                <div class="col s8">
+                    <div class="row'><i class="material-icons">create</i></div>
+                    <div class="row'><i class="material-icons">delete</i></div>
+                </div>
             </div>
-            <div style="margin-bottom: 10px;
-                        margin-top: 10px;
-                        border-bottom: 1px solid #eaeaea;"/>
+            <div class="row mobile_event">
+                <div class="col s8">
+                    <span style="font-size:150%;font-weight:800;">12:00</span>
+                    <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                    <span style="font-size:150%;font-weight:800;">14:00</span>
+                    <span style="margin-left:20px;font-size:150%;font-weight:800;">C32</span>
+                    <br/>
+                    <span style="font-size: 13px;font-weight: 300;">Ceci est la description de l'activité</span>
+                </div>
+                <div class="col s8">
+                    <div class="row'><i class="material-icons">create</i></div>
+                    <div class="row'><i class="material-icons">delete</i></div>
+                </div>
+            </div>
         </main>
         <footer class="page-footer cyan darken-2" style="position: fixed;bottom: 0;width: 100%;">
             <div class="container">
