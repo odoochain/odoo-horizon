@@ -91,6 +91,8 @@ label:after {
   font-size: xx-small;
 }
 
-mobile_event {
-  
+.mobile_event {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-bottom: 1px solid #eaeaea;
 }
