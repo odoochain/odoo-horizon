@@ -14,7 +14,7 @@
                 </div>
             </nav>
         </header>
-        <main>
+        <section class="mobile_section">
             <div class="row">
                 <div class="col s6" align="center">
                     <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
@@ -145,8 +145,8 @@
                     </div>
                 </div>
             </div>
-        </main>
-        <footer class="page-footer cyan darken-2" style="height: 50px;margin-top: -50px;">
+        </section>
+        <footer class="page-footer mobile_footer cyan darken-2">
             <div class="container">
                 <div class="row">
                     <div class="col s4" align="center">
