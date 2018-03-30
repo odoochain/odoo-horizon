@@ -86,6 +86,11 @@ label:after {
   font-size: xx-small;
 }
 
+.mobile_list {
+  border-top: 1px solid #eaeaea;
+  padding-top:10px;
+}
+
 .mobile_event {
   margin-bottom: 10px;
   margin-top: 10px;
