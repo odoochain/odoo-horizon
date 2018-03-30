@@ -42,8 +42,6 @@
                     </select>
                 </div>
             </div>
-        </section>
-        <section style="overflow-y:scroll;">
             <div class="mobile_list">
                 <div class="container">
                     <div class="row mobile_event">
