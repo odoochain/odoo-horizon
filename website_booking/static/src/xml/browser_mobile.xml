@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
     <t t-name="website_booking.browser_mobile">
         <div class="mobile_container">
-            <div class="container mobile_content"/>
+            <div class="mobile_content"/>
             <footer class="page-footer mobile_footer cyan darken-2">
                 <div class="container">
                     <div class="row">
@@ -28,7 +28,7 @@
                     <img style="margin: 0 10px 0 10px; vertical-align:middle;" src="/website_booking/static/src/img/logo.png"/>
                     <a href="#" class="brand-logo">Booking Mobile</a>
                 </div>
-                <div class="row">
+                <div class="row" style="margin-top:20px;">
                     <div class="col s6" align="center">
                         <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
                         Auhourd'hui
