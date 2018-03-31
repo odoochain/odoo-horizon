@@ -115,7 +115,7 @@ label:after {
   border-bottom: 1px solid #eaeaea;
 }
 
-.mobile_footer {
+footer.mobile_footer {
   flex-shrink: 0;
   position: fixed;
   left: 0;
@@ -124,5 +124,4 @@ label:after {
   color: white;
   text-align: center;
   height:60px;
-  padding-top: 10px;
 }
