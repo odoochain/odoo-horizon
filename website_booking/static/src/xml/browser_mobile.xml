@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
     <t t-name="website_booking.browser_mobile">
         <div class="mobile_container">
-            <div class="mobile_content"/>
+            <div class="container mobile_content"/>
             <footer class="page-footer mobile_footer cyan darken-2">
                 <div class="container">
                     <div class="row">
