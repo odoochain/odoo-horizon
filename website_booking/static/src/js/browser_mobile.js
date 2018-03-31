@@ -19,20 +19,10 @@ var qweb = core.qweb;
 
 ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb);
 
-var BrowserMobile = Widget.extend({
-    template: 'website_booking.browser_mobile',
+var BrowserEditor = Widget.extend({
+    template: 'website_booking.browser_mobile_editor',
     
     events: {
-        "click #logout" : function (event) {
-            var self = this;
-            self.is_logged = false;
-            self.uid = false;
-            self.avatar_src = false;
-            self.rpc("/web/session/destroy", {}).always(function(o) {
-                    window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
-                    location.reload();
-            });
-        },
         "click #today" : function (event) {
             this.date = this.today;
             this.$('#tomorrow').removeClass('blue');
@@ -170,6 +160,32 @@ var BrowserMobile = Widget.extend({
         }
     },
     
+});
+
+var BrowserMobile = Widget.extend({
+    template: 'website_booking.browser_mobile',
+    
+    events: {
+        "click #logout" : function (event) {
+            var self = this;
+            self.is_logged = false;
+            self.uid = false;
+            self.avatar_src = false;
+            self.rpc("/web/session/destroy", {}).always(function(o) {
+                    window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
+                    location.reload();
+            });
+        },
+    },
+    
+    renderElement: function() {
+        this._super.apply(this, arguments);
+        this._current_state = $.deparam(window.location.hash.substring(1));
+        var self = this;
+        // Editor
+        self.editor = new BrowserEditor(this);
+        self.editor.appendTo(this.$(".mobile_content"));
+    },
 });
 
 core.action_registry.add('website_booking.browser_mobile', BrowserMobile);
