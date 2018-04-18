@@ -63,26 +63,27 @@
             </div>
         </header>
         <section class="mobile_section">
-            <div class="mobile_list">
-                <t t-debug="pdb"/>
-                <div class="row mobile_event" t-foreach="widget.events" t-as="event">
-                    <div class="col s8">
-                        <span style="font-size:150%;font-weight:800;"><t t-esc="event.start.format('HH:mm')"/></span>
-                        <span style="font-size:150%;font-weight:800;"> &gt; </span>
-                        <span style="font-size:150%;font-weight:800;"><t t-esc="widget.event.end.format('HH:mm')"/></span>
-                        <span style="margin-left:40px;font-size:150%;font-weight:800;"><t t-esc="event.resourceName"/></span>
-                        <br/>
-                        <span style="font-size: 13px;font-weight: 300;"><t t-esc="event.title"/></span>
-                    </div>
-                    <div class="col s4">
-                        <div class="row">
-                            <i class="material-icons small">create</i>
-                            <span style="padding-left:10px;"></span>
-                            <i class="material-icons small">delete</i>
-                        </div>
-                    </div>
+            <div class="mobile_list"/>
+        </section>
+    </t>
+    
+    <t t-name="website_booking.browser_mobile_editor">
+        <div class="row mobile_event" t-foreach="widget.events" t-as="event">
+            <div class="col s8">
+                <span style="font-size:150%;font-weight:800;"><t t-esc="event.start.format('HH:mm')"/></span>
+                <span style="font-size:150%;font-weight:800;"> &gt; </span>
+                <span style="font-size:150%;font-weight:800;"><t t-esc="widget.event.end.format('HH:mm')"/></span>
+                <span style="margin-left:40px;font-size:150%;font-weight:800;"><t t-esc="event.resourceName"/></span>
+                <br/>
+                <span style="font-size: 13px;font-weight: 300;"><t t-esc="event.title"/></span>
+            </div>
+            <div class="col s4">
+                <div class="row">
+                    <i class="material-icons small">create</i>
+                    <span style="padding-left:10px;"></span>
+                    <i class="material-icons small">delete</i>
                 </div>
             </div>
-        </section>
+        </div>
     </t>
 </templates>

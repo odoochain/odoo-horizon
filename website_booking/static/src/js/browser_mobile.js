@@ -19,6 +19,15 @@ var qweb = core.qweb;
 
 ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb);
 
+var EventList = Widget.extend({
+    template: 'website_booking.browser_mobile_event_list',
+    
+    init: function(parent, options) {
+        this.events = options.events;
+    },
+    
+});
+
 var BrowserEditor = Widget.extend({
     template: 'website_booking.browser_mobile_editor',
     
@@ -121,7 +130,8 @@ var BrowserEditor = Widget.extend({
                                 'user_id' : evt.user_id[0],
                             });
                         });
-                        console.log([self.today, self.tomorrow, events])
+                        console.log([self.today, self.tomorrow, self.events])
+                        self.updateEventList();
                     }
                 );
             } else {
@@ -198,6 +208,10 @@ var BrowserEditor = Widget.extend({
         }
     },
     
+    updateEventList: function() {
+        var event_list = new EventList(this, {'events' : this.events});
+        event_list.appendTo(this.$('.mobile_list').empty());
+    },
 });
 
 var BrowserMobile = Widget.extend({
