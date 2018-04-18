@@ -3,7 +3,7 @@
     
     <t t-name="website_booking.details_dialog">
         <div class="modal-content">
-            <h4><t t-esc="windget.event.from_hour"/> - <t t-esc="windget.event.to_hour"/> - A26</h4>
+            <h4><t t-esc="widget.event.from_hour"/> - <t t-esc="widget.event.to_hour"/> - A26</h4>
             <p>Jérôme Sonnet</p>
         </div>
         <div class="modal-footer">
