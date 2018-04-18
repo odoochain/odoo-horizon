@@ -79,9 +79,9 @@
             </div>
             <div class="col s4">
                 <div class="row">
-                    <i class="material-icons small">create</i>
+                    <i class="material-icons small" t-att-data-event-id="event.id">create</i>
                     <span style="padding-left:10px;"></span>
-                    <i class="material-icons small">delete</i>
+                    <i class="material-icons small" t-att-data-event-id="event.id">delete</i>
                 </div>
             </div>
         </div>
