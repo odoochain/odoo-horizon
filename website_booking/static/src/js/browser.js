@@ -585,7 +585,8 @@ var Calendar = CalendarWidget.extend({
     		            Materialize.toast('You cannot edit booking in the past', 2000);
     		        }
     		    } else {
-    		        $('#modal_details').modal('open');
+    		        self.event = calEvent;
+    		        self.getParent().details_modal.modal('open');
     		    }
             },
             header : {
@@ -795,6 +796,7 @@ var Browser = Widget.extend({
         var self = this;
         /* TODO : why this.$('#main-modal') does not work ? */
         self.main_modal = this.$('#main-modal-content').parent().modal();
+        self.details_modal = this.$('#modal-details-content').parent().modal();
         this.$('.collapsible').collapsible();
     },
     

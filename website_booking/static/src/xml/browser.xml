@@ -109,8 +109,8 @@
             <div class="modal-footer"/>
         </div>
         <!-- Modal Structure -->
-        <div id="modal_details" class="modal">
-            <div class="modal-content">
+        <div id="modal-details" class="modal">
+            <div id="modal-details-content" class="modal-content">
                 <h3>12:00 - 14:00 - A26</h3>
                 <p>Jérôme Sonnet</p>
             </div>
