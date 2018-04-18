@@ -229,9 +229,9 @@ var BrowserEditor = Widget.extend({
         self.$('select.select-asset-id').val('');
         self.$('select.select-asset-id').removeClass('valid');
         self.$('select.select-asset-id').removeClass('invalid');
+        self.$('select.select-asset-id').empty().html(' ');
+        self.$('.confirm').attr( 'disabled', '' );
         self.updateEventList();
-        self.updateRoomList();
-        self.updateSendButton();
     },
 });
 
