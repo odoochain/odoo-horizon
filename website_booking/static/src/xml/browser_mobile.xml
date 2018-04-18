@@ -98,6 +98,16 @@
                     <img style="margin: 0 10px 0 10px; vertical-align:middle;" src="/website_booking/static/src/img/logo.png"/>
                     <a href="#" class="brand-logo">Booking Mobile</a>
                 </div>
+                <div class="row" style="margin-top:20px;">
+                    <div class="col s6" align="center">
+                        <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
+                        Auhourd'hui
+                    </div>
+                    <div class="col s6" align="center">
+                        <a id="tomorrow" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.tomorrow.format('DD/MM')"/></a><br/>
+                        Demain
+                    </div>
+                </div>
             </nav>
             <div class="container mobile_form">
                 <div class="row">

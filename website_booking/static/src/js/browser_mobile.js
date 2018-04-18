@@ -242,7 +242,15 @@ var BrowserSearch = Widget.extend({
         "change #search" : function (event) {
             console.log('Search ' +  this.$('#search').val());
         },
-    }
+    },
+    
+    init: function(parent) {
+        this._super(parent);
+        this.date = this.today = moment(new Date());
+        this.tomorrow = moment(new Date()).add(1,'days');
+        var self = this;
+          
+    },
 });
 
 var BrowserMobile = Widget.extend({
