@@ -53,6 +53,7 @@ var BrowserWidget = Widget.extend({
         this._super(parent);
         this.date = this.today = moment(new Date());
         this.tomorrow = moment(new Date()).add(1,'days');
+        this.edit_mode = false;
     },
     
     start: function() {
@@ -102,6 +103,7 @@ var BrowserEditor = BrowserWidget.extend({
     init: function(parent) {
         this._super(parent);
         var self = this;
+        this.edit_mode = true;
         self.calEvents = [];
         session.session_bind().then(function(){
             if (session.uid) {
