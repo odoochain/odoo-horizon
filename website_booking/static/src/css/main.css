@@ -123,11 +123,11 @@ label:after {
 .mobile_items {
   display: flex;
 	flex-direction: row;
-	z-index: 0;
 }
 
 .mobile_item {
   flex: auto;
+  z-index: 0;
 }
 
 footer.mobile_footer {
