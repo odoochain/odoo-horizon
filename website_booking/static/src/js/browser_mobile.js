@@ -70,6 +70,7 @@ var BrowserEditor = Widget.extend({
         this.date = this.today = moment(new Date());
         this.tomorrow = moment(new Date()).add(1,'days');
         var self = this;
+        self.events = [];
         session.session_bind().then(function(){
             if (session.uid) {
                 self.is_logged = true;
