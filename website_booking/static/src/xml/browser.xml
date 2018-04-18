@@ -108,6 +108,16 @@
             <div id="main-modal-content" class="modal-content"/>
             <div class="modal-footer"/>
         </div>
+        <!-- Modal Structure -->
+        <div id="modal_details" class="modal">
+            <div class="modal-content">
+                <h3>12:00 - 14:00 - A26</h3>
+                <p>Jérôme Sonnet</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
+            </div>
+        </div>
     </t>
     
     <t t-name="website_booking.browser_calendar">

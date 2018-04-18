@@ -584,6 +584,8 @@ var Calendar = CalendarWidget.extend({
     		        } else {
     		            Materialize.toast('You cannot edit booking in the past', 2000);
     		        }
+    		    } else {
+    		        $('#modal_details').modal('open');
     		    }
             },
             header : {
