@@ -72,7 +72,7 @@
             <div class="col s8">
                 <span style="font-size:150%;font-weight:800;"><t t-esc="event.start.format('HH:mm')"/></span>
                 <span style="font-size:150%;font-weight:800;"> &gt; </span>
-                <span style="font-size:150%;font-weight:800;"><t t-esc="widget.event.end.format('HH:mm')"/></span>
+                <span style="font-size:150%;font-weight:800;"><t t-esc="event.end.format('HH:mm')"/></span>
                 <span style="margin-left:40px;font-size:150%;font-weight:800;"><t t-esc="event.resourceName"/></span>
                 <br/>
                 <span style="font-size: 13px;font-weight: 300;"><t t-esc="event.title"/></span>
