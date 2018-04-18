@@ -590,7 +590,7 @@ var Calendar = CalendarWidget.extend({
     		        }
     		    } else {
     		        var details_dialog = new DetailsDialog(self.getParent(), {'event' : calEvent});
-    		        dialog.appendTo(self.getParent().details_modal.empty());
+    		        details_dialog.appendTo(self.getParent().details_modal.empty());
     		        self.getParent().details_modal.modal('open');
     		    }
             },
