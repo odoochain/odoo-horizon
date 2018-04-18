@@ -235,10 +235,24 @@ var BrowserEditor = Widget.extend({
     },
 });
 
+var BrowserSearch = Widget.extend({
+    template: 'website_booking.browser_mobile_search',
+
+    
+});
+
 var BrowserMobile = Widget.extend({
     template: 'website_booking.browser_mobile',
     
     events: {
+        "click #editor" : function (event) {
+            this.switchToEditor();
+        },
+        
+        "click #search" : function (event) {
+            this.switchToSearch();
+        },
+        
         "click #logout" : function (event) {
             var self = this;
             self.is_logged = false;
@@ -254,10 +268,26 @@ var BrowserMobile = Widget.extend({
     renderElement: function() {
         this._super.apply(this, arguments);
         this._current_state = $.deparam(window.location.hash.substring(1));
+        this.mode = '';
+        this.editor = new BrowserEditor(this);
+        this.search = new BrowserSearch(this);
+        this.switchToEditor();
+    },
+    
+    switchToEditor: function() {
         var self = this;
-        // Editor
-        self.editor = new BrowserEditor(this);
-        self.editor.appendTo(this.$(".mobile_content"));
+        if(this.mode != 'editor') {
+            this.mode = 'editor';
+            self.editor.appendTo(this.$(".mobile_content").empty());    
+        }
+    },
+    
+    switchToSearch: function() {
+        var self = this;
+        if(this.mode != 'search') {
+            this.mode = 'search';
+            self.search.appendTo(this.$(".mobile_content").empty());
+        }
     },
 });
 
