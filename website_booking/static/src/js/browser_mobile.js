@@ -1,7 +1,7 @@
 odoo.define('website_booking.browser_mobile', function (require) {
 "use strict";
 
-/* global moment, Materialize, $, location, odoo, gapi */
+/* global moment, Materialize, $, location, odoo, gapi, _*/
 
 var core = require('web.core');
 var ajax = require('web.ajax');
@@ -30,7 +30,7 @@ var EventList = Widget.extend({
 
 var BrowserWidget = Widget.extend({
     
-    events: {
+    events: _.extend({}, Widget.prototype.events || {}, {
         "click #today" : function (event) {
             if(this.date != this.today) {
                 this.date = this.today;
@@ -47,7 +47,7 @@ var BrowserWidget = Widget.extend({
                 this.clearAll();
             }
         },
-    },
+    }),
     
     init: function(parent) {
         this._super(parent);
@@ -66,7 +66,7 @@ var BrowserWidget = Widget.extend({
 var BrowserEditor = BrowserWidget.extend({
     template: 'website_booking.browser_mobile_editor',
     
-    events: {
+    events: _.extend({}, BrowserWidget.prototype.events || {}, {
         "change #from_hour": function (event) {
             var self = this;
             var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
@@ -97,7 +97,7 @@ var BrowserEditor = BrowserWidget.extend({
             self.updateRoomList();
             self.updateSendButton();
         },     
-    },
+    }),
     
     init: function(parent) {
         this._super(parent);
@@ -254,11 +254,11 @@ var BrowserEditor = BrowserWidget.extend({
 var BrowserSearch = BrowserWidget.extend({
     template: 'website_booking.browser_mobile_search',
 
-    events: {
+    events: _.extend({}, BrowserWidget.prototype.events || {}, {
         "change #search" : function (event) {
             console.log('Search ' +  this.$('#search').val());
         },
-    },
+    }),
     
 });
 
