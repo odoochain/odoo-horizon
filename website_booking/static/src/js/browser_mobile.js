@@ -238,7 +238,11 @@ var BrowserEditor = Widget.extend({
 var BrowserSearch = Widget.extend({
     template: 'website_booking.browser_mobile_search',
 
-    
+    events: {
+        "change #search" : function (event) {
+            console.log('Search ' +  this.$('#search').val());
+        },
+    }
 });
 
 var BrowserMobile = Widget.extend({
