@@ -257,12 +257,63 @@ var BrowserSearch = BrowserWidget.extend({
     events: _.extend({}, BrowserWidget.prototype.events || {}, {
         "change #search" : function (event) {
             console.log('Search ' +  this.$('#search').val());
+            this.searchEvents();
         },
     }),
     
     clearAll: function() {
         var self = this;
         self.$('#search').val('');
+    },
+    
+    searchEvents: function() {
+        var self = this;
+        self.calEvents = [];
+        var fromTime = self.$('#from_hour').timepicker('getTime');
+        var toTime = self.$('#to_hour').timepicker('getTime');
+        var query = this.$('#search').val();
+        if (fromTime && toTime && query != '') {
+            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
+            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+            ajax.jsonRpc('/booking/search', 'call', {
+        				'start' : time.moment_to_str(start),
+        				'end' : time.moment_to_str(stop),
+        				'query' : query,
+    	    	}).done(function(calEvents){
+        	    	    
+        	    	    calEvents.forEach(function(evt) {
+                            var color = '#ff4355';
+            	    	    if (evt.categ_ids.includes(9)) {
+            	    	        color = '#00bcd4';
+            	    	    } else {
+            	    	        if(evt.categ_ids.includes(7)) {
+            	    	            color = '#2962ff';
+            	    	        } else {
+            	    	            if(evt.categ_ids.includes(8)) {
+                	    	            color = '#e65100';
+                	    	        } else {
+                	    	            if (session.uid == evt.user_id[0]) {
+                	    	                color = '#ffc107';
+                	    	            }
+                	    	        }
+            	    	        }
+            	    	    } 
+                            self.calEvents.push({
+                                'start': moment.utc(evt.start).local(),
+                                'end': moment.utc(evt.stop).local(),
+                                'title': /*evt.partner_id[1] + " - " +*/ evt.name,
+                                'allDay': evt.allday,
+                                'id': evt.id,
+                                'resourceId':evt.room_id[0],
+                                'resourceName':evt.room_id[1],
+                                'color': color,
+                                'user_id' : evt.user_id[0],
+                            });
+                        });
+                        self.updateEventList();
+                    }
+            );
+        }
     },
 });
 
