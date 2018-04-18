@@ -3,8 +3,8 @@
     
     <t t-name="website_booking.details_dialog">
         <div class="modal-content">
-            <h4><t t-esc="widget.event.from_hour"/> - <t t-esc="widget.event.to_hour"/> - A26</h4>
-            <p>Jérôme Sonnet</p>
+            <h4><t t-esc="widget.event.start.hour"/>:<t t-esc="widget.event.start.minute"/> - <t t-esc="widget.event.stop.hour"/>:<t t-esc="widget.event.stop.minute"/> - <t t-esc="widget.event.resourceName"/></h4>
+            <p><t t-esc="widget.event.title"/></p>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>

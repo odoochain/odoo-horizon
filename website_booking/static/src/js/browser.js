@@ -143,6 +143,7 @@ var Schedule =  CalendarWidget.extend({
                             'allDay': evt.allday,
                             'id': evt.id,
                             'resourceId':evt.room_id[0],
+                            'resourceName':evt.room_id[1],
                             'color': '#FA8FB1',
                             'user_id' : evt.user_id[0],
                         });
@@ -675,6 +676,7 @@ var Calendar = CalendarWidget.extend({
                         'allDay': evt.allday,
                         'id': evt.id,
                         'resourceId':evt.room_id[0],
+                        'resourceName':evt.room_id[1],
                         'color': color,
                         'user_id' : evt.user_id[0],
                     });
