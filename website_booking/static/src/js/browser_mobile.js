@@ -202,9 +202,9 @@ var BrowserEditor = Widget.extend({
     
     updateSendButton: function() {
         if(this.$('.invalid').length > 0) {
-            this.$('.request-booking').attr( 'disabled', '' );
+            this.$('.confirm').attr( 'disabled', '' );
         } else {
-            this.$('.request-booking').removeAttr( 'disabled' );
+            this.$('.confirm').removeAttr( 'disabled' );
         }
     },
     
