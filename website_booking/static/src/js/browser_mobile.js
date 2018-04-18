@@ -33,14 +33,20 @@ var BrowserEditor = Widget.extend({
     
     events: {
         "click #today" : function (event) {
-            this.date = this.today;
-            this.$('#tomorrow').removeClass('blue');
-            this.$('#today').addClass('blue');
+            if(this.date != this.today) {
+                this.date = this.today;
+                this.$('#tomorrow').removeClass('blue');
+                this.$('#today').addClass('blue');
+                this.clearAll();
+            }
         },
         "click #tomorrow" : function (event) {
-            this.date = this.tomorrow;
-            this.$('#today').removeClass('blue');
-            this.$('#tomorrow').addClass('blue');
+            if(this.date != this.tomorrow) {
+                this.date = this.tomorrow;
+                this.$('#today').removeClass('blue');
+                this.$('#tomorrow').addClass('blue');
+                this.clearAll();
+            }
         },
         "change #from_hour": function (event) {
             var self = this;
@@ -210,6 +216,16 @@ var BrowserEditor = Widget.extend({
     updateEventList: function() {
         var event_list = new EventList(this, {'calEvents' : this.calEvents});
         event_list.appendTo(this.$('.mobile_list').empty());
+    },
+    
+    clearAll: function() {
+        var self = this;
+        self.$('#to_hour').val('');
+        self.$('#from_hour').val('');
+        self.$('select.select-asset-id').val('');
+        self.updateEventList();
+        self.updateRoomList();
+        self.updateSendButton();
     },
 });
 
