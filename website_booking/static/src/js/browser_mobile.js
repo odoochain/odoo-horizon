@@ -120,8 +120,7 @@ var BrowserEditor = Widget.extend({
                                 'user_id' : evt.user_id[0],
                             });
                         });
-                        //console.log([start, end, events])
-                        callback(self.events);
+                        console.log([self.today, self.tomorrow, events])
                     }
                 );
             } else {
