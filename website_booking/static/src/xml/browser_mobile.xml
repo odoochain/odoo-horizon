@@ -67,7 +67,7 @@
         </section>
     </t>
     
-    <t t-name="website_booking.browser_mobile_editor">
+    <t t-name="website_booking.browser_mobile_event_list">
         <div class="row mobile_event" t-foreach="widget.events" t-as="event">
             <div class="col s8">
                 <span style="font-size:150%;font-weight:800;"><t t-esc="event.start.format('HH:mm')"/></span>
