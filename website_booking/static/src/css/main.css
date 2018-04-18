@@ -89,18 +89,25 @@ label:after {
 .mobile_container {
   width: 100%;
   height: 100%;
+}
+
+.mobile_content {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  padding-bottom: 50px;
 }
 
 .mobile_header {
+  flex-shrink: 1;
 }
 
 .mobile_section {
+  flex-grow: 1;
   overflow: auto;
   min-height: 2em;
-  padding-bottom: 50px;
 }
 
 .mobile_list {
