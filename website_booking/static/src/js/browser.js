@@ -163,6 +163,11 @@ var Schedule =  CalendarWidget.extend({
 
 var DetailsDialog = Widget.extend({
     template: 'website_booking.details_dialog',
+    
+    init: function(parent, options) {
+        this.event = options.event;
+    },
+    
 });
 
 var NewBookingDialog = Widget.extend({
