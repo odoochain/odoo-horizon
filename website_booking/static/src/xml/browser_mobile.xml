@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col s4" align="center">
-                            <a id="add_event" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">add_alarm</i></a>
+                            <a id="editor" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">add_alarm</i></a>
                         </div>
                         <div class="col s4" align="center">
                             <a id="search" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">search</i></a>
@@ -89,4 +89,25 @@
             </div>
         </div>
     </t>
+    
+    
+    <t t-name="website_booking.browser_mobile_search">
+        <header class="mobile_header">
+            <nav class="row cyan darken-2">
+                <div class="nav-wrapper">
+                  <form>
+                    <div class="input-field">
+                      <input id="search" type="search" required>
+                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+                </div>
+            </nav>
+        </header>
+        <section class="mobile_section">
+            <div class="mobile_list"/>
+        </section>
+    </t>
+    
 </templates>
