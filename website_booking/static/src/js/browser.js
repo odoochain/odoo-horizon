@@ -166,7 +166,7 @@ var DetailsDialog = Widget.extend({
     
     init: function(parent, options) {
         this.event = options.event;
-        console.log(event);
+        console.log(this.event);
     },
     
 });
