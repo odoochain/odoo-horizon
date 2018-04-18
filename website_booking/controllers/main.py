@@ -123,7 +123,7 @@ class BookingController(http.Controller):
         domain = [
             ('start', '<=', end),    
             ('stop', '>=', start),
-            '|',('title', 'ilike', "%s%s%s" % ("%", query, "%")),('room_id.name', 'ilike', "%s%s%s" % ("%", query, "%")),
+            '|',('name', 'ilike', "%s%s%s" % ("%", query, "%")),('room_id.name', 'ilike', "%s%s%s" % ("%", query, "%")),
         ]
         ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
         return ret
