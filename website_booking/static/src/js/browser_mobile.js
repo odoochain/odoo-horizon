@@ -315,6 +315,11 @@ var BrowserSearch = BrowserWidget.extend({
             );
         }
     },
+    
+    updateEventList: function() {
+        var event_list = new EventList(this, {'calEvents' : this.calEvents});
+        event_list.appendTo(this.$('.mobile_list').empty());
+    },
 });
 
 var BrowserMobile = Widget.extend({
