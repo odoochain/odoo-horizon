@@ -24,6 +24,7 @@ var EventList = Widget.extend({
     
     init: function(parent, options) {
         this.calEvents = options.calEvents;
+        this.edit_mode = options.edit_mode;
     },
     
 });
@@ -53,7 +54,6 @@ var BrowserWidget = Widget.extend({
         this._super(parent);
         this.date = this.today = moment(new Date());
         this.tomorrow = moment(new Date()).add(1,'days');
-        this.edit_mode = false;
     },
     
     start: function() {
@@ -103,7 +103,6 @@ var BrowserEditor = BrowserWidget.extend({
     init: function(parent) {
         this._super(parent);
         var self = this;
-        this.edit_mode = true;
         self.calEvents = [];
         session.session_bind().then(function(){
             if (session.uid) {
@@ -232,7 +231,7 @@ var BrowserEditor = BrowserWidget.extend({
     },
     
     updateEventList: function() {
-        var event_list = new EventList(this, {'calEvents' : this.calEvents});
+        var event_list = new EventList(this, {'calEvents' : this.calEvents, 'edit_mode' : true});
         event_list.appendTo(this.$('.mobile_list').empty());
     },
     
@@ -316,7 +315,7 @@ var BrowserSearch = BrowserWidget.extend({
     },
     
     updateEventList: function() {
-        var event_list = new EventList(this, {'calEvents' : this.calEvents});
+        var event_list = new EventList(this, {'calEvents' : this.calEvents, 'edit_mode' : false});
         event_list.appendTo(this.$('.mobile_list').empty());
     },
 });
