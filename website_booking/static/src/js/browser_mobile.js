@@ -299,7 +299,8 @@ var BrowserMobile = Widget.extend({
         var self = this;
         if(this.mode != 'editor') {
             this.mode = 'editor';
-            self.editor.appendTo(this.$(".mobile_content").empty());    
+            self.editor.appendTo(this.$(".mobile_content").empty());
+            self.editor.updateEventList();
         }
     },
     
