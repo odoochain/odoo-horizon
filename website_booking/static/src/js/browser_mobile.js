@@ -119,8 +119,8 @@ var BrowserEditor = Widget.extend({
             	    	        }
             	    	    } 
                             self.events.push({
-                                'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
-                                'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
+                                'start': moment.utc(evt.start).local(),
+                                'end': moment.utc(evt.stop).local(),
                                 'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                                 'allDay': evt.allday,
                                 'id': evt.id,
