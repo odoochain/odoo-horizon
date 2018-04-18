@@ -264,6 +264,7 @@ var BrowserSearch = BrowserWidget.extend({
     clearAll: function() {
         var self = this;
         self.$('#search').val('');
+        self.updateEventList();
     },
     
     searchEvents: function() {
