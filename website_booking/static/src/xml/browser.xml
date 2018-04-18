@@ -3,7 +3,7 @@
     
     <t t-name="website_booking.details_dialog">
         <div class="modal-content">
-            <h4><t t-esc="widget.event.start.hour"/>:<t t-esc="widget.event.start.minute"/> - <t t-esc="widget.event.end.hour"/>:<t t-esc="widget.event.end.minute"/> - <t t-esc="widget.event.resourceName"/></h4>
+            <h4><t t-esc="widget.event.start.hour()"/>:<t t-esc="widget.event.start.minute()"/> - <t t-esc="widget.event.end.hour()"/>:<t t-esc="widget.event.end.minute()"/> - <t t-esc="widget.event.resourceName"/></h4>
             <p><t t-esc="widget.event.title"/></p>
         </div>
         <div class="modal-footer">
