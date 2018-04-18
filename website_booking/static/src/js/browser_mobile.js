@@ -221,8 +221,14 @@ var BrowserEditor = Widget.extend({
     clearAll: function() {
         var self = this;
         self.$('#to_hour').val('');
+        self.$('#to_hour').removeClass('valid');
+        self.$('#to_hour').addClass('invalid');
         self.$('#from_hour').val('');
+        self.$('#from_hour').removeClass('valid');
+        self.$('#from_hour').addClass('invalid');
         self.$('select.select-asset-id').val('');
+        self.$('select.select-asset-id').removeClass('valid');
+        self.$('select.select-asset-id').removeClass('invalid');
         self.updateEventList();
         self.updateRoomList();
         self.updateSendButton();
