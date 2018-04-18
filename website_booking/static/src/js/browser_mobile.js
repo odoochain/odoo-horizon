@@ -269,15 +269,11 @@ var BrowserSearch = BrowserWidget.extend({
     searchEvents: function() {
         var self = this;
         self.calEvents = [];
-        var fromTime = self.$('#from_hour').timepicker('getTime');
-        var toTime = self.$('#to_hour').timepicker('getTime');
         var query = this.$('#search').val();
-        if (fromTime && toTime && query != '') {
-            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
-            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+        if (query != '') {
             ajax.jsonRpc('/booking/search', 'call', {
-        				'start' : time.moment_to_str(start),
-        				'end' : time.moment_to_str(stop),
+        				'start' : time.moment_to_str(self.today),
+            			'end' : time.moment_to_str(self.tomorrow),
         				'query' : query,
     	    	}).done(function(calEvents){
         	    	    
