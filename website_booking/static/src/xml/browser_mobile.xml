@@ -95,15 +95,19 @@
         <header class="mobile_header">
             <nav class="row cyan darken-2">
                 <div class="nav-wrapper">
-                  <form>
+                    <img style="margin: 0 10px 0 10px; vertical-align:middle;" src="/website_booking/static/src/img/logo.png"/>
+                    <a href="#" class="brand-logo">Booking Mobile</a>
+                </div>
+            </nav>
+            <div class="container mobile_form">
+                <div class="row">
                     <div class="input-field">
                       <input id="search" type="search" required=""/>
                       <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                       <i class="material-icons">close</i>
                     </div>
-                  </form>
                 </div>
-            </nav>
+            </div>
         </header>
         <section class="mobile_section">
             <div class="mobile_list"/>
