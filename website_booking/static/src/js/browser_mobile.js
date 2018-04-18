@@ -23,7 +23,7 @@ var EventList = Widget.extend({
     template: 'website_booking.browser_mobile_event_list',
     
     init: function(parent, options) {
-        this.events = options.events;
+        this.calEvents = options.calEvents;
     },
     
 });
@@ -79,7 +79,7 @@ var BrowserEditor = Widget.extend({
         this.date = this.today = moment(new Date());
         this.tomorrow = moment(new Date()).add(1,'days');
         var self = this;
-        self.events = [];
+        self.calEvents = [];
         session.session_bind().then(function(){
             if (session.uid) {
                 self.is_logged = true;
@@ -99,9 +99,9 @@ var BrowserEditor = Widget.extend({
                 ajax.jsonRpc('/booking/my_events', 'call', {
             				'start' : time.moment_to_str(self.today),
             				'end' : time.moment_to_str(self.tomorrow),
-        	    	}).done(function(events){
+        	    	}).done(function(calEvents){
         	    	    
-        	    	    events.forEach(function(evt) {
+        	    	    calEvents.forEach(function(evt) {
                             var color = '#ff4355';
             	    	    if (evt.categ_ids.includes(9)) {
             	    	        color = '#00bcd4';
@@ -118,7 +118,7 @@ var BrowserEditor = Widget.extend({
                 	    	        }
             	    	        }
             	    	    } 
-                            self.events.push({
+                            self.calEvents.push({
                                 'start': moment.utc(evt.start).local(),
                                 'end': moment.utc(evt.stop).local(),
                                 'title': /*evt.partner_id[1] + " - " +*/ evt.name,
@@ -130,7 +130,6 @@ var BrowserEditor = Widget.extend({
                                 'user_id' : evt.user_id[0],
                             });
                         });
-                        console.log([self.today, self.tomorrow, self.events])
                         self.updateEventList();
                     }
                 );
@@ -209,7 +208,7 @@ var BrowserEditor = Widget.extend({
     },
     
     updateEventList: function() {
-        var event_list = new EventList(this, {'events' : this.events});
+        var event_list = new EventList(this, {'calEvents' : this.calEvents});
         event_list.appendTo(this.$('.mobile_list').empty());
     },
 });
