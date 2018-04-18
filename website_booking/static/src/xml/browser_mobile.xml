@@ -78,10 +78,13 @@
                 <span style="font-size: 13px;font-weight: 300;"><t t-esc="event.title"/></span>
             </div>
             <div class="col s4">
-                <div class="row">
-                    <i class="material-icons small" t-att-data-event-id="event.id">create</i>
-                    <span style="padding-left:10px;"></span>
-                    <i class="material-icons small" t-att-data-event-id="event.id">delete</i>
+                <div class="row mobile_items">
+                    <div class="mobile_item">
+                        <i class="material-icons small" t-att-data-event-id="event.id">create</i>
+                    </div>
+                    <div class="mobile_item">
+                        <i class="material-icons small" t-att-data-event-id="event.id">delete</i>
+                    </div>
                 </div>
             </div>
         </div>

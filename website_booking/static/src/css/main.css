@@ -120,6 +120,15 @@ label:after {
   border-bottom: 1px solid #eaeaea;
 }
 
+.mobile_items {
+  display: flex;
+	flex-direction: row;
+}
+
+.mobile_item {
+  flex: auto;
+}
+
 footer.mobile_footer {
   position: fixed;
   left: 0;
