@@ -111,7 +111,7 @@
         <!-- Modal Structure -->
         <div id="modal-details" class="modal">
             <div id="modal-details-content" class="modal-content">
-                <h3>12:00 - 14:00 - A26</h3>
+                <h4><t t-esc="windget.event.from_hour"/> - <t t-esc="windget.event.to_hour"/> - A26</h4>
                 <p>Jérôme Sonnet</p>
             </div>
             <div class="modal-footer">
