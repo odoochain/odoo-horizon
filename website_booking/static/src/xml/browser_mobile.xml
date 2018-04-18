@@ -31,11 +31,9 @@
                 <div class="row" style="margin-top:20px;">
                     <div class="col s6" align="center">
                         <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
-                        Auhourd'hui
                     </div>
                     <div class="col s6" align="center">
                         <a id="tomorrow" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.tomorrow.format('DD/MM')"/></a><br/>
-                        Demain
                     </div>
                 </div>
             </nav>
@@ -102,11 +100,9 @@
             <div class="row" style="margin-top:20px;">
                 <div class="col s6" align="center">
                     <a id="today" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.today.format('DD/MM')"/></a><br/>
-                    Auhourd'hui
                 </div>
                 <div class="col s6" align="center">
                     <a id="tomorrow" class="waves-effect waves-light btn-large" style="font-size:150%"><t t-esc="widget.tomorrow.format('DD/MM')"/></a><br/>
-                    Demain
                 </div>
             </div>
             <div class="container mobile_form">

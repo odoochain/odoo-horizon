@@ -28,8 +28,7 @@ var EventList = Widget.extend({
     
 });
 
-var BrowserEditor = Widget.extend({
-    template: 'website_booking.browser_mobile_editor',
+var BrowserWidget = Widget.extend({
     
     events: {
         "click #today" : function (event) {
@@ -48,6 +47,26 @@ var BrowserEditor = Widget.extend({
                 this.clearAll();
             }
         },
+    },
+    
+    init: function(parent) {
+        this._super(parent);
+        this.date = this.today = moment(new Date());
+        this.tomorrow = moment(new Date()).add(1,'days');
+    },
+    
+    start: function() {
+        this._super.apply(this, arguments);
+        var self = this;
+        self.$('#today').addClass('blue');
+    },
+    
+});
+
+var BrowserEditor = BrowserWidget.extend({
+    template: 'website_booking.browser_mobile_editor',
+    
+    events: {
         "change #from_hour": function (event) {
             var self = this;
             var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
@@ -82,8 +101,6 @@ var BrowserEditor = Widget.extend({
     
     init: function(parent) {
         this._super(parent);
-        this.date = this.today = moment(new Date());
-        this.tomorrow = moment(new Date()).add(1,'days');
         var self = this;
         self.calEvents = [];
         session.session_bind().then(function(){
@@ -154,7 +171,6 @@ var BrowserEditor = Widget.extend({
     start: function() {
         this._super.apply(this, arguments);
         var self = this;
-        self.$('#today').addClass('blue');
         self.$('select.select-asset-id').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
@@ -235,7 +251,7 @@ var BrowserEditor = Widget.extend({
     },
 });
 
-var BrowserSearch = Widget.extend({
+var BrowserSearch = BrowserWidget.extend({
     template: 'website_booking.browser_mobile_search',
 
     events: {
@@ -244,13 +260,6 @@ var BrowserSearch = Widget.extend({
         },
     },
     
-    init: function(parent) {
-        this._super(parent);
-        this.date = this.today = moment(new Date());
-        this.tomorrow = moment(new Date()).add(1,'days');
-        var self = this;
-          
-    },
 });
 
 var BrowserMobile = Widget.extend({
