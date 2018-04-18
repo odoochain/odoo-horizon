@@ -125,8 +125,8 @@ class BookingController(http.Controller):
             ('stop', '>=', start),
             '|',('name', 'ilike', "%s%s%s" % ("%", query, "%")),('room_id.name', 'ilike', "%s%s%s" % ("%", query, "%")),
         ]
-        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
-        return ret.sorted(key=lambda r: r.start)
+        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields,order='start ASC')
+        return ret
         
     @http.route('/booking/editor', type='http', auth='user', website=True)
     def booking_editor(self, debug=False, **k):
