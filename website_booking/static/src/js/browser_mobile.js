@@ -86,6 +86,44 @@ var BrowserEditor = Widget.extend({
                         session.partner = partner_ids[0];
                         self.partner = session.partner;
                 });
+                ajax.jsonRpc('/booking/my_events', 'call', {
+            				'start' : time.moment_to_str(self.today),
+            				'end' : time.moment_to_str(self.tomorrow),
+        	    	}).done(function(events){
+        	    	    
+        	    	    events.forEach(function(evt) {
+                            var color = '#ff4355';
+            	    	    if (evt.categ_ids.includes(9)) {
+            	    	        color = '#00bcd4';
+            	    	    } else {
+            	    	        if(evt.categ_ids.includes(7)) {
+            	    	            color = '#2962ff';
+            	    	        } else {
+            	    	            if(evt.categ_ids.includes(8)) {
+                	    	            color = '#e65100';
+                	    	        } else {
+                	    	            if (session.uid == evt.user_id[0]) {
+                	    	                color = '#ffc107';
+                	    	            }
+                	    	        }
+            	    	        }
+            	    	    } 
+                            self.events.push({
+                                'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
+                                'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
+                                'title': /*evt.partner_id[1] + " - " +*/ evt.name,
+                                'allDay': evt.allday,
+                                'id': evt.id,
+                                'resourceId':evt.room_id[0],
+                                'resourceName':evt.room_id[1],
+                                'color': color,
+                                'user_id' : evt.user_id[0],
+                            });
+                        });
+                        //console.log([start, end, events])
+                        callback(self.events);
+                    }
+                );
             } else {
                 ajax.jsonRpc('/booking/login_providers', 'call', {redirect : '/booking#debug'}).done(function(providers){
                     if(providers.length > 0) {
