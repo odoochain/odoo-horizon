@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     
+    <t t-name="website_booking.details_dialog">
+        <div class="modal-content">
+            <h4><t t-esc="windget.event.from_hour"/> - <t t-esc="windget.event.to_hour"/> - A26</h4>
+            <p>Jérôme Sonnet</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
+        </div>
+    </t>
+    
     <t t-name="website_booking.new_booking_dialog">
         <div class="modal-content">
             <div class="row">
@@ -108,15 +118,9 @@
             <div id="main-modal-content" class="modal-content"/>
             <div class="modal-footer"/>
         </div>
-        <!-- Modal Structure -->
         <div id="modal-details" class="modal">
-            <div id="modal-details-content" class="modal-content">
-                <h4><t t-esc="windget.event.from_hour"/> - <t t-esc="windget.event.to_hour"/> - A26</h4>
-                <p>Jérôme Sonnet</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
-            </div>
+            <div id="modal-details-content" class="modal-content"/>
+            <div class="modal-footer"/>
         </div>
     </t>
     

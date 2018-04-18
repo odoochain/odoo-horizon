@@ -161,6 +161,10 @@ var Schedule =  CalendarWidget.extend({
     
 });
 
+var DetailsDialog = Widget.extend({
+    template: 'website_booking.details_dialog',
+});
+
 var NewBookingDialog = Widget.extend({
     template: 'website_booking.new_booking_dialog',
     
@@ -585,7 +589,8 @@ var Calendar = CalendarWidget.extend({
     		            Materialize.toast('You cannot edit booking in the past', 2000);
     		        }
     		    } else {
-    		        self.event = calEvent;
+    		        var details_dialog = new DetailsDialog(self.getParent(), {'event' : calEvent});
+    		        dialog.appendTo(self.getParent().details_modal.empty());
     		        self.getParent().details_modal.modal('open');
     		    }
             },
