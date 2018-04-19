@@ -291,7 +291,7 @@ var BrowserEditor = BrowserWidget.extend({
                             });
                         });
                         var event_list = new EventList(this, {'calEvents' : self.calEvents, 'edit_mode' : true});
-                        event_list.appendTo(this.$('.mobile_list').empty());
+                        event_list.appendTo(self.$('.mobile_list').empty());
                     }
                 );
         
