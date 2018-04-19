@@ -98,6 +98,49 @@ var BrowserEditor = BrowserWidget.extend({
             self.updateRoomList();
             self.updateSendButton();
         },     
+         "click .confirm": function (event) {
+            var self = this;
+            var fromTime = self.$('#from_hour').timepicker('getTime');
+            var toTime = self.$('#to_hour').timepicker('getTime');
+            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
+            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+            var roomId = parseInt(self.$( "select.select-asset-id" ).val());
+            var event_type = 'school_student_event_type';
+            if(self.user.in_group_15) {
+                event_type = 'school_teacher_event_type';
+            }
+            if(self.user.in_group_14) {
+                event_type = 'school_management_event_type';
+            }
+            new Model('ir.model.data').call('get_object_reference', ['school_booking', event_type]).then(function(categ) {
+                if(self.edit_mode) {
+                    new Model('calendar.event').call('write', [[self.event.id], {
+                        'name' : self.$('#description').val(),
+                        'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                        'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                        'room_id': roomId,
+                        'categ_ids': [[4, categ[1]]],
+                    }]).then(function (id) {
+                        self.trigger_up('updateEvent', {'id': id});
+                    });
+                } else {
+                    new Model('calendar.event').call('create', [{
+                        'name' : self.$('#description').val(),
+                        'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                        'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                        'room_id': roomId,
+                        'categ_ids': [[4, categ[1]]],
+                    }]).fail(function(error) {
+                        if(error.data.exception_type == "validation_error"){
+                            Materialize.toast(error.data.arguments[0], 4000)
+                        }
+                    }).then(function (id) {
+                        self.trigger_up('newEvent', {'id': id});
+                        self.clearAll();
+                    });
+                }
+            });
+        },
     }),
     
     init: function(parent) {
