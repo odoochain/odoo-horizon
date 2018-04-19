@@ -256,12 +256,11 @@ var BrowserEditor = BrowserWidget.extend({
     
     updateEventList: function() {
         var self = this;
-        self.calEvents = [];
         ajax.jsonRpc('/booking/my_events', 'call', {
             				'start' : time.moment_to_str(self.date.startOf('day')),
             				'end' : time.moment_to_str(self.date.endOf('day')),
         	    	}).done(function(calEvents){
-        	    	    
+                        self.calEvents = [];
         	    	    calEvents.forEach(function(evt) {
                             var color = '#ff4355';
             	    	    if (evt.categ_ids.includes(9)) {
