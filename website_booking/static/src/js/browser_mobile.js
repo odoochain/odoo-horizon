@@ -25,6 +25,7 @@ var EventList = Widget.extend({
     events: _.extend({}, Widget.prototype.events || {}, {
         "click .delete-event" : function (event) {
             console.log(event);
+            console.log(event.getPareent().getAttribute("data-event-id"));
         },
     }),
         
