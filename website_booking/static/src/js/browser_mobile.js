@@ -292,7 +292,7 @@ var BrowserEditor = BrowserWidget.extend({
                                 'user_id' : evt.user_id[0],
                             });
                         });
-                        var event_list = new EventList(this, {'calEvents' : self.calEvents, 'edit_mode' : true});
+                        var event_list = new EventList(self, {'calEvents' : self.calEvents, 'edit_mode' : true});
                         event_list.appendTo(self.$('.mobile_list').empty());
                     }
                 );
