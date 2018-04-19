@@ -772,21 +772,6 @@ var Browser = Widget.extend({
         },
     },
     
-    custom_events: {
-        'switch_resource' : 'switch_resource',
-        'switch_category' : 'switch_category',
-        'switch_ressources' : 'switch_ressources',
-        'switch_date' : 'switch_date',
-        'newEvent': function(event) {
-            this.cal.refetch_events();
-        },
-        'deleteEvent': function(event) {
-            this.cal.refetch_events();
-        },
-        'updateEvent': function(event) {
-            this.cal.refetch_events();
-        },
-    },
     
     renderElement: function() {
         this._super.apply(this, arguments);
