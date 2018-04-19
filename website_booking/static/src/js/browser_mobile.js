@@ -319,7 +319,6 @@ var BrowserSearch = BrowserWidget.extend({
 
     events: _.extend({}, BrowserWidget.prototype.events || {}, {
         "change #search" : function (event) {
-            console.log('Search ' +  this.$('#search').val());
             this.searchEvents();
         },
     }),
@@ -373,6 +372,8 @@ var BrowserSearch = BrowserWidget.extend({
                         self.updateEventList();
                     }
             );
+        } else {
+            self.clearAll();
         }
     },
     
