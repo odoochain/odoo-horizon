@@ -55,6 +55,7 @@ class Asset(models.Model):
     
     sequence = fields.Integer(string='Sequence')
     name = fields.Char(required=True, translate=True)
+    fullName = fields.Char(required=True, translate=True)
     active = fields.Boolean(name="Active", default=True)
     asset_type_id = fields.Many2one('school.asset_type', string='Asset Type')
     building_id = fields.Many2one('school.building', string='Building')
