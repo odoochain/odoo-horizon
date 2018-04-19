@@ -387,7 +387,7 @@ var NewBookingDialog = Widget.extend({
                     roomSelect.append(
                       $("<option></option>")
                         .attr("value",room.id)
-                        .text(room.fullName)
+                        .text(room.name)
                     );
                 }
                 roomSelect.removeAttr( "disabled" )
