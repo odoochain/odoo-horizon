@@ -181,6 +181,8 @@
               <field name="linked_to_room"/>
               <field name="room_id" attrs="{'invisible': [('linked_to_room','=',False)]}"/>
             </group>
+            <h4>Description</h4>
+            <field name="description" widget="html"/>
           </sheet>
           <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers" />

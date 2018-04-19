@@ -60,7 +60,6 @@
                   <field name="partner_id" />
                   <field name="asset_id" />
                   <field name="category_id" />
-                  <field name="description" widget="html"/>
                 </tree>
               </field>
             </group>
