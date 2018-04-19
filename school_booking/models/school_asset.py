@@ -152,6 +152,8 @@ class AssetType(models.Model):
     name = fields.Char('Name', required=True, translate=True)
     require_validation = fields.Boolean(string="Require validation")
     
+    description = fields.Html('Description')
+    
     has_responsible = fields.Boolean(string="Has a responsible")
     is_room = fields.Boolean(string="Is a room")
     linked_to_room = fields.Boolean(string="Is linked to a room")
