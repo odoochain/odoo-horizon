@@ -327,7 +327,7 @@ var BrowserSearch = BrowserWidget.extend({
     clearAll: function() {
         var self = this;
         self.$('#search').val('');
-        self.updateEventList();
+        self.$('.mobile_list').empty();
     },
     
     searchEvents: function() {
@@ -336,8 +336,8 @@ var BrowserSearch = BrowserWidget.extend({
         var query = this.$('#search').val();
         if (query != '') {
             ajax.jsonRpc('/booking/search', 'call', {
-        				'start' : time.moment_to_str(self.today.startOf('day')),
-            			'end' : time.moment_to_str(self.today.endOf('day')),
+        				'start' : time.moment_to_str(self.date.startOf('day')),
+            			'end' : time.moment_to_str(self.date.endOf('day')),
         				'query' : query,
     	    	}).done(function(calEvents){
         	    	    
