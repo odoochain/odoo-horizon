@@ -34,7 +34,6 @@ var EventList = Widget.extend({
         
     init: function(parent, options) {
         this._super(parent);
-        this.parent = parent;
         this.calEvents = options.calEvents;
         this.edit_mode = options.edit_mode;
     },
