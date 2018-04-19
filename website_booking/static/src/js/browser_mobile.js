@@ -22,6 +22,12 @@ ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb);
 var EventList = Widget.extend({
     template: 'website_booking.browser_mobile_event_list',
     
+    events: _.extend({}, Widget.prototype.events || {}, {
+        "click .delete-event" : function (event) {
+            console.log(event);
+        },
+    }),
+        
     init: function(parent, options) {
         this.calEvents = options.calEvents;
         this.edit_mode = options.edit_mode;
