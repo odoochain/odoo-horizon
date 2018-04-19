@@ -24,8 +24,10 @@ var EventList = Widget.extend({
     
     events: _.extend({}, Widget.prototype.events || {}, {
         "click .delete-event" : function (event) {
-            console.log(event);
-            console.log($(event.target).parent().attr("data-event-id"));
+            var self = this;
+            new Model('calendar.event').call('unlink', [$(event.target).parent().attr("data-event-id")]).done(function () {
+                self.trigger_up('deleteEvent', $(event.target).parent().attr("data-event-id"));
+            });
         },
     }),
         
