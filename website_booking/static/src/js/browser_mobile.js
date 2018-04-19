@@ -226,8 +226,8 @@ var BrowserEditor = BrowserWidget.extend({
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
             ajax.jsonRpc('/booking/rooms', 'call', {
-        				'start' : time.moment_to_str(self.today.startOf('day')),
-            			'end' : time.moment_to_str(self.today.endOf('day')),
+        				'start' : time.moment_to_str(self.date.startOf('day')),
+            			'end' : time.moment_to_str(self.date.endOf('day')),
         				'self_id' : self.event ? self.event.id : '',
     	    	}).done(function(rooms){
                 var roomSelect = self.$('select.select-asset-id').empty().html(' ');
@@ -260,8 +260,8 @@ var BrowserEditor = BrowserWidget.extend({
         var self = this;
         self.calEvents = [];
         ajax.jsonRpc('/booking/my_events', 'call', {
-            				'start' : time.moment_to_str(self.today),
-            				'end' : time.moment_to_str(self.tomorrow),
+            				'start' : time.moment_to_str(self.date.startOf('day')),
+            				'end' : time.moment_to_str(self.date.endOf('day')),
         	    	}).done(function(calEvents){
         	    	    
         	    	    calEvents.forEach(function(evt) {
