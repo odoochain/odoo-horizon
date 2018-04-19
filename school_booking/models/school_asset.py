@@ -61,6 +61,8 @@ class Asset(models.Model):
     tag_ids = fields.Many2many('school.asset.tag', 'school_asset_tag_rel', 'asset_id', 'tag_id', string='Tags', copy=True)
     category_id = fields.Many2one('school.asset.category', string='Category')
     
+    
+    
     require_validation = fields.Boolean(related='asset_type_id.require_validation')
     has_responsible = fields.Boolean(related='asset_type_id.has_responsible')
     responsible_id = fields.Many2one('res.partner', string='Responsible', domain="[('type','=','contact')]", required=True, default=lambda self: self.env.user.partner_id)
@@ -151,8 +153,6 @@ class AssetType(models.Model):
 
     name = fields.Char('Name', required=True, translate=True)
     require_validation = fields.Boolean(string="Require validation")
-    
-    description = fields.Html('Description')
     
     has_responsible = fields.Boolean(string="Has a responsible")
     is_room = fields.Boolean(string="Is a room")
