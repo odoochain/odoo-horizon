@@ -148,7 +148,6 @@ var BrowserEditor = BrowserWidget.extend({
                     }).then(function (id) {
                         self.trigger_up('newEvent', {'id': id});
                         self.clearAll();
-                        self.updateEventList();
                     });
                 }
             });
