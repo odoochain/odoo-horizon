@@ -1,5 +1,6 @@
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
+  overflow: auto;
 }
 
 nav {
