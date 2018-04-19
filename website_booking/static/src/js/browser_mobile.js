@@ -256,6 +256,7 @@ var BrowserEditor = BrowserWidget.extend({
     
     updateEventList: function() {
         var self = this;
+        self.calEvents = [];
         ajax.jsonRpc('/booking/my_events', 'call', {
             				'start' : time.moment_to_str(self.today),
             				'end' : time.moment_to_str(self.tomorrow),
