@@ -115,7 +115,7 @@ var BrowserEditor = BrowserWidget.extend({
             new Model('ir.model.data').call('get_object_reference', ['school_booking', event_type]).then(function(categ) {
                 if(self.edit_mode) {
                     new Model('calendar.event').call('write', [[self.event.id], {
-                        'name' : self.$('#description').val(),
+                        'name' : session.partner.name,
                         'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
                         'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
                         'room_id': roomId,
@@ -125,7 +125,7 @@ var BrowserEditor = BrowserWidget.extend({
                     });
                 } else {
                     new Model('calendar.event').call('create', [{
-                        'name' : self.$('#description').val(),
+                        'name' : session.partner.name,
                         'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
                         'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
                         'room_id': roomId,
