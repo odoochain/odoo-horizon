@@ -32,6 +32,7 @@ var EventList = Widget.extend({
     }),
         
     init: function(parent, options) {
+        this.parent = parent;
         this.calEvents = options.calEvents;
         this.edit_mode = options.edit_mode;
     },
@@ -150,6 +151,12 @@ var BrowserEditor = BrowserWidget.extend({
                     });
                 }
             });
+        },
+    }),
+    
+    custom_events: _.extend({}, BrowserWidget.prototype.custom_events || {}, {
+        'deleteEvent': function(event) {
+            this.updateEventList();
         },
     }),
     
