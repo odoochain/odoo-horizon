@@ -198,7 +198,7 @@ var BrowserEditor = BrowserWidget.extend({
         var self = this;
         self.$('select.select-asset-id').material_select();
         self.$('#from_hour').mdtimepicker({
-    		timeFormat: 'HH:mm:ss',	// format of the time value (data-time attribute)
+    		timeFormat: 'H:mm:ss',	// format of the time value (data-time attribute)
     		format: 'H:mm tt',			// format of the input value
     		theme: 'blue',				// theme of the timepicker
     		readOnly: true,				// determines if input is readonly
