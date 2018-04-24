@@ -197,7 +197,9 @@ var BrowserEditor = BrowserWidget.extend({
         this._super.apply(this, arguments);
         var self = this;
         self.$('select.select-asset-id').material_select();
-        self.$('#from_hour').timepicker({
+        self.$('#from_hour').bootstrapMaterialDatePicker({ date: false });
+        self.$('#to_hour').bootstrapMaterialDatePicker({ date: false });
+        /*self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:00',
             'maxTime': '21:30',
@@ -211,7 +213,7 @@ var BrowserEditor = BrowserWidget.extend({
             'minTime': '8:30',
             'maxTime': '22:00',
             'showDuration': true,
-        });
+        });*/
         
         Materialize.updateTextFields();
     },
