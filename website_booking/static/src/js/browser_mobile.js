@@ -197,7 +197,13 @@ var BrowserEditor = BrowserWidget.extend({
         this._super.apply(this, arguments);
         var self = this;
         self.$('select.select-asset-id').material_select();
-        self.$('#from_hour').mdtimepicker();
+        self.$('#from_hour').mdtimepicker({
+    		timeFormat: 'HH:mm:ss',	// format of the time value (data-time attribute)
+    		format: 'H:mm tt',			// format of the input value
+    		theme: 'blue',				// theme of the timepicker
+    		readOnly: true,				// determines if input is readonly
+    		hourPadding: false			// determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
+	    });
         self.$('#to_hour').mdtimepicker();
         /*self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
