@@ -37,7 +37,7 @@
             
             <link rel="stylesheet" href="/website_booking/static/src/css/main.css"/>
             <link rel="stylesheet" href="/website_booking/static/src/css/fc-material.css"/>
-            <link rel="stylesheet" href="/website_booking/static/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" />
+            <link rel="stylesheet" href="/website_booking/static/lib/mdtimepicker/mdtimepicker.css" />
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"/>
             
             <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
@@ -46,7 +46,7 @@
             <script type="text/javascript" src="/web_scheduler/static/lib/fullcalendar/scheduler.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
-            <script type="text/javascript" src="/website_booking/static/lib/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+            <script type="text/javascript" src="/website_booking/static/lib/mdtimepicker/mdtimepicker.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser_mobile.js"></script>
         </template>
