@@ -197,8 +197,8 @@ var BrowserEditor = BrowserWidget.extend({
         this._super.apply(this, arguments);
         var self = this;
         self.$('select.select-asset-id').material_select();
-        self.$('#from_hour').bootstrapMaterialDatePicker({ date: false });
-        self.$('#to_hour').bootstrapMaterialDatePicker({ date: false });
+        self.$('#from_hour').bootstrapMaterialDatePicker({ date: false, format: 'HH:mm' });
+        self.$('#to_hour').bootstrapMaterialDatePicker({ date: false, format: 'HH:mm' });
         /*self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:00',
