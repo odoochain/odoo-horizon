@@ -207,7 +207,7 @@
     <template id="school_bloc" name="Bloc">
         <div class="col-md-12">
             <table class="table table-condensed oe_school_program_table">
-                <caption style="font-size: 100%;">Grille du bloc - <t t-esc="bloc.name"/></caption>
+                <caption style="font-size: 200%;">Programme annuel de l'étudiant</caption>
                 <colgroup>
                     <col style="width:75px"/>
                     <col style="width:100%"/>
@@ -237,7 +237,7 @@
                         <td></td>
                         <!--<td class="text-center">Aucun</td>-->
                         <td>
-                            <t t-if="course_group.dispense">Disp.</t>
+                            <t t-if="course_group.acquiered == 'A'">Valid.</t>
                             <t t-if="course_group.group_registration_type == 'rework'">Rés</t>
                             <t t-if="course_group.group_registration_type == 'anticipated'">Ant</t>
                         </td>
@@ -247,7 +247,7 @@
                         <td t-if="course.url_ref"><a t-esc="course.title" t-att-href="course.url_ref" target="new"/></td>
                         <td t-if="not course.url_ref"><t t-esc="course.title"/></td>
                         <td class="text-center"><t t-esc="course.hours"/></td>
-                        <td class="text-center"><t t-esc="course.credits"/></td>
+                        <td class="text-center"><!--<t t-esc="course.credits"/>--></td>
                         <td class="text-center"><t t-esc="course.weight"/></td>
                         <!--<td></td>-->
                         <td><t t-if="course.dispense">Disp.</t></td>
@@ -289,17 +289,21 @@
                     <t t-call="school_management.school_bloc"/>
                     
                     <div class="container">
-                        <div class="row" style="margin-top:10px;">
-                            <div class="col-xs-10 col-xs-offset-1">
-                                Signature de l'étudiant
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:70px;">
-                            <div class="col-xs-4 col-xs-offset-1">
-                                Avis de la commission des études
-                            </div>
-                            <div class="col-xs-7">
-                                <textarea name="input-avis" style="width:350px;height:100px;"></textarea>
+                        <table border="1" style="width:100%;">
+                          <tr>
+                            <td colspan="2" style="padding: 10px 10px 80px 10px;">Date et signature de l'étudiant</td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" style="padding: 10px 10px 80px 10px;">Avis de la commission des études</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 10px 10px 80px 10px;">Signature du président de la commission des études</td>
+                            <td style="padding: 10px 10px 80px 10px;">Signature du secrétaire de la commission des études</td>
+                          </tr>
+                        </table>
+                        <div class="row" style="margin-top:20px;margin-bottom:120px;">
+                            <div class="col-xs-9 col-xs-offset-1">
+                                Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
                             </div>
                         </div>
                     </div>
