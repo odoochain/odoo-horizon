@@ -206,8 +206,8 @@
 
     <template id="school_bloc" name="Bloc">
         <div class="col-md-12">
+            <h2>Unités ayant fait l'objet d'une valorisation</h2>
             <table class="table table-condensed oe_school_program_table">
-                <caption style="font-size: 200%;">Programme annuel de l'étudiant</caption>
                 <colgroup>
                     <col style="width:75px"/>
                     <col style="width:100%"/>
@@ -229,6 +229,7 @@
                 </thead>
                 <tbody>
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
+                    <t t-if="course_group.dispense">
                     <tr class="oe_school_course_group">
                         <td><t t-esc="course_group.ue_id"/></td>
                         <td><t t-esc="course_group.name"/></td>
@@ -253,21 +254,72 @@
                         <td><t t-if="course.dispense">Disp.</t></td>
                     </tr>
                     </t>
+                    </t>
+                    <tr>
+                        <td></td>
+                        <td class="text-right">Total :</td>
+                        <td class="text-center"><t t-esc="bloc.total_acquiered_hours"/></td>
+                        <td class="text-center"><t t-esc="bloc.total_acquiered_credits"/></td>
+                        <td></td>
+                        <!--<td></td>-->
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Programme annuel de l'étudiant</h2>
+            <table class="table table-condensed oe_school_program_table">
+                <colgroup>
+                    <col style="width:75px"/>
+                    <col style="width:100%"/>
+                    <col style="width:60px"/>
+                    <col style="width:60px"/>
+                    <col style="width:60px"/>
+                    <col style="width:100px"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Code UE</th> 
+                        <th>Unités d’enseignement</th> 
+                        <th class="text-center">Heures</th> 
+                        <th class="text-center">ECTS</th>
+                        <th class="text-center">Pond</th>
+                        <!--<th>Pré/Co-requis</th>-->
+                        <th>Statut</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <t t-foreach="bloc.course_group_ids" t-as="course_group">
+                    <t t-if="course_group.dispense == False">
+                    <tr class="oe_school_course_group">
+                        <td><t t-esc="course_group.ue_id"/></td>
+                        <td><t t-esc="course_group.name"/></td>
+                        <td class="text-center"><t t-esc="course_group.total_hours"/></td>
+                        <td class="text-center"><t t-esc="course_group.total_credits"/></td>
+                        <td></td>
+                        <!--<td class="text-center">Aucun</td>-->
+                        <td>
+                            <t t-if="course_group.acquiered == 'A'">Valid.</t>
+                            <t t-if="course_group.group_registration_type == 'rework'">Rés</t>
+                            <t t-if="course_group.group_registration_type == 'anticipated'">Ant</t>
+                        </td>
+                    </tr>
+                    <tr t-foreach="course_group.course_ids" t-as="course">
+                        <td></td>
+                        <td t-if="course.url_ref"><a t-esc="course.title" t-att-href="course.url_ref" target="new"/></td>
+                        <td t-if="not course.url_ref"><t t-esc="course.title"/></td>
+                        <td class="text-center"><t t-esc="course.hours"/></td>
+                        <td class="text-center"><!--<t t-esc="course.credits"/>--></td>
+                        <td class="text-center"><t t-esc="course.weight"/></td>
+                        <!--<td></td>-->
+                        <td><t t-if="course.dispense">Disp.</t></td>
+                    </tr>
+                    </t>
+                    </t>
                     <tr>
                         <td></td>
                         <td class="text-right">Total :</td>
                         <td class="text-center"><t t-esc="bloc.total_not_dispensed_hours"/></td>
                         <td class="text-center"><t t-esc="bloc.total_not_dispensed_credits"/></td>
-                        <td></td>
-                        <!--<td></td>-->
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class="text-right">Whose already acquiered :</td>
-                        <td class="text-center"></td>
-                        <td class="text-center"><t t-esc="bloc.total_acquiered_credits"/></td>
-                        <td></td>
                         <td></td>
                         <!--<td></td>-->
                         <td></td>
