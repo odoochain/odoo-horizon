@@ -166,8 +166,8 @@ var BrowserEditor = BrowserWidget.extend({
         },
         'editEvent': function(event) {
             console.log(event);
-            this.$('#from_hour').val(event.data.start.format('HH:mm'));
-            this.$('#to_hour').val(event.data.end.format('HH:mm'));
+            this.$('#from_hour').mdtimepicker().setValue(event.data.start);
+            this.$('#to_hour').mdtimepicker().setValue(event.data.end);
             this.updateRoomList();
             this.$( "select.select-asset-id" ).val(event.data.resourceId);
             Materialize.updateTextFields();
@@ -247,8 +247,8 @@ var BrowserEditor = BrowserWidget.extend({
     
     updateRoomList: function() {
         var self = this;
-        var fromTime = self.$('#from_hour').timepicker('getTime');
-        var toTime = self.$('#to_hour').timepicker('getTime');
+        var fromTime = self.$('#from_hour').mdtimepicker('getTime');
+        var toTime = self.$('#to_hour').mdtimepicker('getTime');
         if (fromTime && toTime) {
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
