@@ -166,6 +166,9 @@ var BrowserEditor = BrowserWidget.extend({
         },
         'editEvent': function(event) {
             console.log(event);
+            this.$('#from_hour').timepicker('setTime', event.data.start);
+            this.$('#to_hour').timepicker('setTime', event.data.end);
+            this.$( "select.select-asset-id" ).val(event.data.resourceId);
         },
     }),
     
@@ -205,6 +208,7 @@ var BrowserEditor = BrowserWidget.extend({
     start: function() {
         this._super.apply(this, arguments);
         var self = this;
+        this.edit_mode = false;
         self.$('select.select-asset-id').material_select();
         self.$('#from_hour').mdtimepicker({
     		timeFormat: 'hh:mm:ss',	// format of the time value (data-time attribute)
