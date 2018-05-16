@@ -166,8 +166,9 @@ var BrowserEditor = BrowserWidget.extend({
         },
         'editEvent': function(event) {
             console.log(event);
-            this.$('#from_hour').val(event.data.start.format('HH:MM'));
-            this.$('#to_hour').val(event.data.end.format('HH:MM'));
+            this.$('#from_hour').val(event.data.start.format('HH:mm'));
+            this.$('#to_hour').val(event.data.end.format('HH:mm'));
+            this.updateRoomList();
             this.$( "select.select-asset-id" ).val(event.data.resourceId);
             Materialize.updateTextFields();
         },
