@@ -32,7 +32,9 @@ var EventList = Widget.extend({
         },
         "click .edit-event" : function (event) {
             var self = this;
-            self.trigger_up('editEvent', this.calEvents);
+            var id_to_edit = $(event.target).parent().attr("data-event-id");
+            var event_to_edit = this.calEvents.filter(event => event.id == id_to_edit);
+            self.trigger_up('editEvent', event_to_edit[0]);
         },
     }),
         
