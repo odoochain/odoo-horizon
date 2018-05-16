@@ -166,9 +166,10 @@ var BrowserEditor = BrowserWidget.extend({
         },
         'editEvent': function(event) {
             console.log(event);
-            this.$('#from_hour').timepicker('setTime', event.data.start);
-            this.$('#to_hour').timepicker('setTime', event.data.end);
+            this.$('#from_hour').val(event.data.start.format('HH:MM'));
+            this.$('#to_hour').val(event.data.stop.format('HH:MM'));
             this.$( "select.select-asset-id" ).val(event.data.resourceId);
+            Materialize.updateTextFields();
         },
     }),
     
