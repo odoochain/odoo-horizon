@@ -30,6 +30,10 @@ var EventList = Widget.extend({
                 self.trigger_up('deleteEvent', id_to_delete);
             });
         },
+        "click .edit-event" : function (event) {
+            var self = this;
+            self.trigger_up('editEvent', this.calEvents);
+        },
     }),
         
     init: function(parent, options) {
@@ -157,6 +161,9 @@ var BrowserEditor = BrowserWidget.extend({
     custom_events: _.extend({}, BrowserWidget.prototype.custom_events || {}, {
         'deleteEvent': function(event) {
             this.updateEventList();
+        },
+        'editEvent': function(event) {
+            console.log(event);
         },
     }),
     
