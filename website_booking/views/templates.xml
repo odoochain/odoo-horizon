@@ -61,8 +61,8 @@
                                 deviceAgent.match(/blackberry/i) || 
                                 deviceAgent.match(/bada/i));
                                 
-                                //if (isTouchDevice) {
-                                if(window.location.href.includes("debug=mobile")) {
+                                if (isTouchDevice) {
+                                //if(window.location.href.includes("debug=mobile")) {
                                     ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb).then(function(){
                                         var BrowserMobile = require('website_booking.browser_mobile');
                                         var b = new BrowserMobile();
