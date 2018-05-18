@@ -141,11 +141,3 @@ footer.mobile_footer {
   height:60px;
   padding-top: 10px;
 }
-
-input#from_hour.big_mobile {
-  font-size: xx-large;
-}
-
-input#to_hour.big_mobile {
-  font-size: xx-large;
-}
