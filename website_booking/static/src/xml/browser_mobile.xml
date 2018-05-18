@@ -39,20 +39,18 @@
             </nav>
             <div class="container mobile_form">
                 <div class="row">
-                  <div class="input-field col s12" style="font-size:xx-large;">
+                  <div class="input-field col s6" style="font-size:x-large;">
                     <input id="from_hour" type="text" data-length="10" class="invalid browser-default" style="font-size:xx-large;"/>
                     <!--<label for="input_text">From Hour</label>-->
                   </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12" style="font-size:xx-large;">
+                  <div class="input-field col s6" style="font-size:x-large;">
                     <input id="to_hour" type="text" data-length="10" class="invalid browser-default" style="font-size:xx-large;" />
                     <!--<label for="input_text">To Hour</label>-->
                   </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s8">
-                        <select class="select-asset-id browser-default" disabled="">
+                        <select class="select-asset-id browser-default" disabled="" style="font-size:x-large;">
                             <option value="" disabled="" selected="">Choose your room</option>
                         </select>
                     </div>
