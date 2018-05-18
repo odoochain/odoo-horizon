@@ -586,7 +586,7 @@ class Course(models.Model):
     '''Course'''
     _inherit = 'school.course'
     
-    type = fields.Selection(([('S', 'Simple'),('T', 'Triple'),('C', 'Complex')]), string='Type', default="S")
+    type = fields.Selection(([('S', 'Simple'),('C', 'Complex')]), string='Type', default="S")
 
 class IndividualCourse(models.Model):
     '''Individual Course'''
@@ -594,7 +594,7 @@ class IndividualCourse(models.Model):
     
     ## Type and weight for average computation (ie 0 for dispenses) ##
     
-    type = fields.Selection(([('S', 'Simple'),('T', 'Triple'),('C', 'Complex'),('D','Deferred')]),compute='compute_type', string='Type', store=True, default="S")
+    type = fields.Selection(([('S', 'Simple'),('C', 'Complex'),('D','Deferred')]),compute='compute_type', string='Type', store=True, default="S")
     c_weight =  fields.Float(compute='compute_weight', readonly=True, store=True)
 
     ## Evaluation ##
@@ -686,7 +686,7 @@ class IndividualCourse(models.Model):
                     self.first_session_result_bool = False
                     raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00".' % self.jun_result))
                     
-        if self.type in ['S','D','T']:
+        if self.type in ['S','D']:
             f = -1
             if self.jan_result :
                 try:

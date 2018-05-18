@@ -212,7 +212,7 @@ var BrowserEditor = BrowserWidget.extend({
         var self = this;
         this.edit_mode = false;
         self.$('select.select-asset-id').material_select();
-        self.$('#from_hour').mdtimepicker({
+        /*self.$('#from_hour').mdtimepicker({
     		timeFormat: 'hh:mm:ss',	// format of the time value (data-time attribute)
     		format: 'hh:mm tt',			// format of the input value
     		theme: 'teal',				// theme of the timepicker
@@ -225,8 +225,8 @@ var BrowserEditor = BrowserWidget.extend({
     		theme: 'teal',				// theme of the timepicker
     		readOnly: true,				// determines if input is readonly
     		hourPadding: false			// determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
-	    });
-        /*self.$('#from_hour').timepicker({
+	    });*/
+        self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:00',
             'maxTime': '21:30',
@@ -240,15 +240,15 @@ var BrowserEditor = BrowserWidget.extend({
             'minTime': '8:30',
             'maxTime': '22:00',
             'showDuration': true,
-        });*/
+        });
         
         Materialize.updateTextFields();
     },
     
     updateRoomList: function() {
         var self = this;
-        var fromTime = self.$('#from_hour').mdtimepicker('getTime');
-        var toTime = self.$('#to_hour').mdtimepicker('getTime');
+        var fromTime = self.$('#from_hour').timepicker('getTime');
+        var toTime = self.$('#to_hour').timepicker('getTime');
         if (fromTime && toTime) {
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
