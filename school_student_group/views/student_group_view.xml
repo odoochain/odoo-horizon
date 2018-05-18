@@ -26,6 +26,8 @@
       <!-- Top menu item -->
       <menuitem name="Groups" id="menu_groups_program" icon="fa-book" web_icon="school_student_group,static/description/icon.png" sequence="50" />
       
+      <menuitem id="menu_evaluation_report_by_teacher" name="Evaluation by Teacher" action="action_evaluation_report_by_teacher" parent="menu_groups_program" sequence="900" />
+      
       <!-- <menuitem name="Student Groups" parent="menu_groups_program" id="menu_student_groups" sequence="10" /> -->
       
       <!--
