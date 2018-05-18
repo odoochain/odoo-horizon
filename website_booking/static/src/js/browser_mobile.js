@@ -196,7 +196,7 @@ var BrowserEditor = BrowserWidget.extend({
                 });
                 self.updateEventList();
             } else {
-                ajax.jsonRpc('/booking/login_providers', 'call', {redirect : '/booking#debug'}).done(function(providers){
+                ajax.jsonRpc('/booking/login_providers', 'call', {redirect : '/booking#debug=mobile'}).done(function(providers){
                     if(providers.length > 0) {
                         var provider = providers[0];
                         var link = provider.auth_link
