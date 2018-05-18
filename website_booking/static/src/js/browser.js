@@ -143,6 +143,7 @@ var Schedule =  CalendarWidget.extend({
                             'allDay': evt.allday,
                             'id': evt.id,
                             'resourceId':evt.room_id[0],
+                            'resourceName':evt.room_id[1],
                             'color': '#FA8FB1',
                             'user_id' : evt.user_id[0],
                         });
@@ -157,6 +158,16 @@ var Schedule =  CalendarWidget.extend({
     set_asset_id: function(asset_id) {
         this.asset_id = asset_id;
         this.refetch_events();
+    },
+    
+});
+
+var DetailsDialog = Widget.extend({
+    template: 'website_booking.details_dialog',
+    
+    init: function(parent, options) {
+        this.event = options.event;
+        console.log(this.event);
     },
     
 });
@@ -584,6 +595,10 @@ var Calendar = CalendarWidget.extend({
     		        } else {
     		            Materialize.toast('You cannot edit booking in the past', 2000);
     		        }
+    		    } else {
+    		        var details_dialog = new DetailsDialog(self.getParent(), {'event' : calEvent});
+    		        details_dialog.appendTo(self.getParent().details_modal.empty());
+    		        self.getParent().details_modal.modal('open');
     		    }
             },
             header : {
@@ -632,7 +647,7 @@ var Calendar = CalendarWidget.extend({
             }
         } catch(e) {}
 	    ajax.jsonRpc('/booking/events', 'call', {
-	    		'category_id':self.category_id,
+	    		    'category_id':self.category_id,
     				'start' : time.moment_to_str(start),
     				'end' : time.moment_to_str(end),
 	    	}).done(function(events){
@@ -661,6 +676,7 @@ var Calendar = CalendarWidget.extend({
                         'allDay': evt.allday,
                         'id': evt.id,
                         'resourceId':evt.room_id[0],
+                        'resourceName':evt.room_id[1],
                         'color': color,
                         'user_id' : evt.user_id[0],
                     });
@@ -793,6 +809,7 @@ var Browser = Widget.extend({
         var self = this;
         /* TODO : why this.$('#main-modal') does not work ? */
         self.main_modal = this.$('#main-modal-content').parent().modal();
+        self.details_modal = this.$('#modal-details-content').parent().modal();
         this.$('.collapsible').collapsible();
     },
     

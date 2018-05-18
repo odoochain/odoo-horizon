@@ -55,11 +55,14 @@ class Asset(models.Model):
     
     sequence = fields.Integer(string='Sequence')
     name = fields.Char(required=True, translate=True)
+    short_name = fields.Char(required=True, translate=True)
     active = fields.Boolean(name="Active", default=True)
     asset_type_id = fields.Many2one('school.asset_type', string='Asset Type')
     building_id = fields.Many2one('school.building', string='Building')
     tag_ids = fields.Many2many('school.asset.tag', 'school_asset_tag_rel', 'asset_id', 'tag_id', string='Tags', copy=True)
     category_id = fields.Many2one('school.asset.category', string='Category')
+
+    description = fields.Html('Description')
     
     require_validation = fields.Boolean(related='asset_type_id.require_validation')
     has_responsible = fields.Boolean(related='asset_type_id.has_responsible')

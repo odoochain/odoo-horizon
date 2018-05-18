@@ -118,6 +118,8 @@ class IndividualProgram(models.Model):
         self.total_acquiered_credits = total + self.historical_bloc_1_credits + self.historical_bloc_2_credits
         self.program_completed = self.total_acquiered_credits >= self.required_credits
     
+    
+    # TODO : Fix this it does not seem right
     @api.depends('grade')
     def _onchange_grade(self):
         if self.grade:
@@ -279,8 +281,13 @@ class IndividualBloc(models.Model):
         self.total_acquiered_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
         self.total_not_acquiered_credits = self.total_credits - self.total_acquiered_credits
         self.total_not_acquiered_hours = self.total_hours - self.total_acquiered_hours
-        self.total_dispensed_credits = sum([icg.total_dispensed_credits for icg in self.course_group_ids])
-        self.total_dispensed_hours = sum([icg.total_dispensed_hours for icg in self.course_group_ids])
+        
+        # WAS BEFORE May 2018
+        #self.total_dispensed_credits = sum([icg.total_dispensed_credits for icg in self.course_group_ids])
+        #self.total_dispensed_hours = sum([icg.total_dispensed_hours for icg in self.course_group_ids])
+        
+        self.total_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
+        self.total_dispensed_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
         self.total_not_dispensed_credits = self.total_credits - self.total_dispensed_credits
         self.total_not_dispensed_hours = self.total_hours - self.total_dispensed_hours
         
@@ -557,7 +564,6 @@ class IndividualCourseGroup(models.Model):
     @api.depends('course_ids.dispense')
     @api.one
     def compute_dispense(self):
-        _logger.debug('Trigger "compute_dispense" on Course Group %s' % self.name)
         # Check if Course Group is dispensed
         all_dispensed = True
         for ic in self.course_ids:

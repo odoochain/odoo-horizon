@@ -100,6 +100,34 @@ class BookingController(http.Controller):
             ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
         return ret
         
+    @http.route('/booking/my_events', type='json', auth='public', website=True)
+    def booking_my_events(self, start, end, timezone=False):
+        # TODO : ugply transform
+        start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        domain = [
+            ('start', '<=', end),    
+            ('stop', '>=', start),
+            ('user_id','=',request.uid),
+        ]
+        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
+        return ret
+        
+    @http.route('/booking/search', type='json', auth='public', website=True)
+    def booking_search(self, start, end, query, timezone=False):
+        # TODO : ugply transform
+        start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        domain = [
+            ('start', '<=', end),    
+            ('stop', '>=', start),
+            '|',('name', 'ilike', "%s%s%s" % ("%", query, "%")),('room_id.name', 'ilike', "%s%s%s" % ("%", query, "%")),
+        ]
+        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields,order='start ASC')
+        return ret
+        
     @http.route('/booking/editor', type='http', auth='user', website=True)
     def booking_editor(self, debug=False, **k):
         return request.render('website_booking.editor')

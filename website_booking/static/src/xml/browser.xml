@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     
+    <t t-name="website_booking.details_dialog">
+        <div class="modal-content">
+            <h4><t t-esc="widget.event.start.format('HH:mm')"/> - <t t-esc="widget.event.end.format('HH:mm')"/> - <t t-esc="widget.event.resourceName"/></h4>
+            <p><t t-esc="widget.event.title"/></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
+        </div>
+    </t>
+    
     <t t-name="website_booking.new_booking_dialog">
         <div class="modal-content">
             <div class="row">
@@ -106,6 +116,10 @@
         </main>
         <div id="main-modal" class="modal">
             <div id="main-modal-content" class="modal-content"/>
+            <div class="modal-footer"/>
+        </div>
+        <div id="modal-details" class="modal">
+            <div id="modal-details-content" class="modal-content"/>
             <div class="modal-footer"/>
         </div>
     </t>

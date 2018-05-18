@@ -50,6 +50,7 @@ class YearOpening(models.TransientModel):
     def open_year(self):
         ids = []
         for program in self.program_to_duplicate_ids:
+            _logger.info("Duplicate %s" % program.name)
             new_program = program.copy(default={
                 'year_id':self.year_id.id
             })
