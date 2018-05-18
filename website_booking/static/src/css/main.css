@@ -141,3 +141,7 @@ footer.mobile_footer {
   height:60px;
   padding-top: 10px;
 }
+
+.big-mobile {
+  font-size: xx-large;
+}

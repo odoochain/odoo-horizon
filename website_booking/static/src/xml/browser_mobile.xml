@@ -40,13 +40,13 @@
             <div class="container mobile_form">
                 <div class="row">
                   <div class="input-field col s12" style="font-size:xx-large;">
-                    <input id="from_hour" type="text" data-length="10" class="invalid browser-default"/>
+                    <input id="from_hour" type="text" data-length="10" class="invalid browser-default big-mobile"/>
                     <!--<label for="input_text">From Hour</label>-->
                   </div>
                 </div>
                 <div class="row">
                   <div class="input-field col s12" style="font-size:xx-large;">
-                    <input id="to_hour" type="text" data-length="10" class="invalid browser-default" />
+                    <input id="to_hour" type="text" data-length="10" class="invalid browser-default big-mobile" />
                     <!--<label for="input_text">To Hour</label>-->
                   </div>
                 </div>
