@@ -166,11 +166,16 @@ var BrowserEditor = BrowserWidget.extend({
         },
         'editEvent': function(event) {
             console.log(event);
-            this.$('#from_hour').mdtimepicker().setValue(event.data.start);
-            this.$('#to_hour').mdtimepicker().setValue(event.data.end);
+            this.$('#from_hour').val(event.data.start.format('H:mm'));
+            this.$('#from_hour').removeClass('invalid');
+            this.$('#from_hour').addClass('valid');
+            this.$('#from_hour').val(event.data.end.format('H:mm'));
+            this.$('#to_hour').removeClass('invalid');
+            this.$('#to_hour').addClass('valid');
             this.updateRoomList();
-            this.$( "select.select-asset-id" ).val(event.data.resourceId);
-            Materialize.updateTextFields();
+            this.$('select.select-asset-id').val(event.resourceId).change();
+            this.$('select.select-asset-id').material_select();
+            this.hasChanged = false;
         },
     }),
     
