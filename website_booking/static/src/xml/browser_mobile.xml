@@ -39,13 +39,15 @@
             </nav>
             <div class="container mobile_form">
                 <div class="row">
-                  <div class="input-field col s6">
+                  <div class="input-field col s12">
                     <input id="from_hour" type="text" data-length="10" class="invalid"/>
-                    <label for="input_text">From Hour</label>
+                    <!--<label for="input_text">From Hour</label>-->
                   </div>
-                  <div class="input-field col s6">
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
                     <input id="to_hour" type="text" data-length="10" class="invalid" />
-                    <label for="input_text">To Hour</label>
+                    <!--<label for="input_text">To Hour</label>-->
                   </div>
                 </div>
                 <div class="row">
