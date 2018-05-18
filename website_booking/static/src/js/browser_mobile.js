@@ -169,7 +169,7 @@ var BrowserEditor = BrowserWidget.extend({
             this.$('#from_hour').val(event.data.start.format('H:mm'));
             this.$('#from_hour').removeClass('invalid');
             this.$('#from_hour').addClass('valid');
-            this.$('#from_hour').val(event.data.end.format('H:mm'));
+            this.$('#to_hour').val(event.data.end.format('H:mm'));
             this.$('#to_hour').removeClass('invalid');
             this.$('#to_hour').addClass('valid');
             this.updateRoomList();
