@@ -231,6 +231,7 @@ var BrowserEditor = BrowserWidget.extend({
             'minTime': '8:00',
             'maxTime': '21:30',
             disableTextInput: true,
+            disableTouchKeyboard: true,
         });
         self.$('#from_hour').on('change', function() {
             var newTime = self.$('#from_hour').timepicker('getTime');
@@ -242,6 +243,7 @@ var BrowserEditor = BrowserWidget.extend({
             'maxTime': '22:00',
             'showDuration': true,
             disableTextInput: true,
+            disableTouchKeyboard: true,
         });
         
         Materialize.updateTextFields();
