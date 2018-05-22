@@ -40,6 +40,10 @@ class BookingController(http.Controller):
     @http.route('/booking', type='http', auth='public', website=True)
     def booking_browser(self, debug=False, **k):
         return request.render('website_booking.index')
+    
+    @http.route('/booking_mobile', type='http', auth='public', website=True)
+    def booking_mobile_browser(self, debug=False, **k):
+        return request.render('website_booking.index_mobile')
         
     @http.route('/booking/category', type='json', auth='public', website=True)
     def booking_category(self, id=False, debug=False, **k):
