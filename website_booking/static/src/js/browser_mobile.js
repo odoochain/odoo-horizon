@@ -186,7 +186,7 @@ var BrowserEditor = BrowserWidget.extend({
         var self = this;
         self.calEvents = [];
         session.session_bind().then(function(){
-            if (session.uid) {
+            if (session.uid > 0) {
                 self.is_logged = true;
                 self.uid = session.uid;
                 new Model('res.users').call("search_read", 
