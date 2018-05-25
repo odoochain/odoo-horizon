@@ -281,7 +281,7 @@ class IndividualCourse(models.Model):
             ret = [course.teacher_id.id]
             for group_id in course.group_ids:
                 ret.append(group_id.responsible_id.id)
-            ret.append(course.source_course_id.course_group_id.teacher_id)
+            ret.append(course.source_course_id.course_group_id.teacher_id.id)
             course.responsible_ids = set(ret)
     
     responsible_ids = fields.Many2many('res.partner', 'group_partner_rel', 'individual_course_id', 'partner_id', string='Responsibles', domain="[('type','=','contact')]",compute='_compute_responsible_ids', store=True)
