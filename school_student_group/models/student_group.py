@@ -286,6 +286,6 @@ class IndividualCourse(models.Model):
                     ret.append(group_id.responsible_id.id)
             if course.source_course_id.course_group_id.teacher_id :
                 ret.append(course.source_course_id.course_group_id.teacher_id.id)
-            course.responsible_ids = set(ret)
+            course.responsible_ids = list(set(ret))
     
     responsible_ids = fields.Many2many('res.partner', 'group_partner_rel', 'individual_course_id', 'partner_id', string='Responsibles', domain="[('type','=','contact')]",compute='_compute_responsible_ids', store=True)
