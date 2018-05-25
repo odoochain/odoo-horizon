@@ -278,10 +278,14 @@ class IndividualCourse(models.Model):
     @api.one
     def _compute_responsible_ids(self):
         for course in self:
-            ret = [course.teacher_id.id]
-            for group_id in course.group_ids:
-                ret.append(group_id.responsible_id.id)
-            ret.append(course.source_course_id.course_group_id.teacher_id.id)
+            ret = []
+            if course.teacher_id :
+                ret.append(course.teacher_id.id)
+            for group_id in course.group_ids :
+                if group_id.responsible_id :
+                    ret.append(group_id.responsible_id.id)
+            if course.source_course_id.course_group_id.teacher_id :
+                ret.append(course.source_course_id.course_group_id.teacher_id.id)
             course.responsible_ids = set(ret)
     
     responsible_ids = fields.Many2many('res.partner', 'group_partner_rel', 'individual_course_id', 'partner_id', string='Responsibles', domain="[('type','=','contact')]",compute='_compute_responsible_ids', store=True)
