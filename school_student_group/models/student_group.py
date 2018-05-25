@@ -273,3 +273,15 @@ class IndividualCourse(models.Model):
         return res
 
     group_ids = fields.Many2many('school.student_group', 'group_individual_course_rel', 'individual_course_id', 'group_id', string='Groups')
+
+    @api.depends('group_ids','group_ids.responsible_id','source_course_id.course_group_id.teacher_id')
+    @api.one
+    def _compute_responsible_ids(self):
+        for course in self:
+            ret = [course.teacher_id.id]
+            for group_id in course.group_ids:
+                ret.append(group_id.responsible_id.id)
+            ret.append(source_course_id.course_group_id.teacher_id)
+            course.responsible_ids = set(ret)
+    
+    responsible_ids = fields.Many2many('res.partner', 'group_partner_rel', 'individual_course_id', 'partner_id', string='Responsibles', domain="[('type','=','contact')]",compute='_compute_responsible_ids')
