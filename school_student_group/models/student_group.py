@@ -272,7 +272,7 @@ class IndividualCourse(models.Model):
             
         return res
 
-    group_ids = fields.Many2many('school.student_group', 'group_individual_course_rel', 'individual_course_id', 'group_id', string='Groups')
+    group_ids = fields.Many2many('school.student_group', 'school_group_individual_course_rel', 'individual_course_id', 'group_id', string='Groups')
 
     @api.depends('group_ids','group_ids.responsible_id','source_course_id.course_group_id.teacher_id')
     @api.one
