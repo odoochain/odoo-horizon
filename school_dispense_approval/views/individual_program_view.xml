@@ -50,7 +50,7 @@
         </record>
         
         <!-- Individual Course Tree View -->
-        <record id="view_individual_course_dispense_approuval_tree" model="ir.ui.view">
+        <record id="view_individual_course_dispense_approuval_tree_security" model="ir.ui.view">
           <field name="name">school.individual_course.dispense_approuval.tree</field>
           <field name="model">school.individual_course</field>
           <field name="inherit_id" ref="view_individual_course_dispense_approuval_tree" />
