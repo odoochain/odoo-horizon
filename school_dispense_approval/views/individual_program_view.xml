@@ -53,9 +53,9 @@
         <record id="view_individual_course_dispense_approuval_tree" model="ir.ui.view">
           <field name="name">school.individual_course.dispense_approuval.tree</field>
           <field name="model">school.individual_course</field>
-          <field name="inherit_id" ref="school_management.view_individual_course_tree" />
+          <field name="inherit_id" ref="view_individual_course_dispense_approuval_tree" />
           <field name="groups_id" eval="[(6, 0, [ref('school_evaluations.group_evaluations') ])]" />
-          <field eval="35" name="priority" />
+          <field eval="25" name="priority" />
           <field name="arch" type="xml">
             <xpath expr="//field[@name='is_dispense_approved']" position="replace">
               <field name="is_dispense_approved" />
