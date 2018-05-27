@@ -29,9 +29,30 @@
             <field name="inherit_id" ref="school_evaluations.individual_course_eval_form" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//group/field[@name='dispense']" position="after">
-                    <field name="is_dispense_approved" attrs="{'invisible': [('dispense','=',False)]}"/>
-                    <field name="dispense_approval_comment" attrs="{'invisible': [('dispense','=',False)]}"/>
+                <xpath expr="//group/field[@name='dispense']" position="replace">
+                    <field name="dispense" readonly="1"/>
+                    <field name="is_dispense_approved" attrs="{'invisible': [('dispense','=',False)]}" readonly="1"/>
+                    <field name="dispense_approval_comment" attrs="{'invisible': [('dispense','=',False)]}" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+      
+        <!-- Add choice to Individual Course Group form view -->
+        <record id="course_dispense_approuval_form_security" model="ir.ui.view">
+            <field name="name">school.course.dispense_approuval.view</field>
+            <field name="model">school.individual_course</field>
+            <field name="inherit_id" ref="course_dispense_approuval_form" />
+            <field name="groups_id" eval="[(6, 0, [ref('school_evaluations.group_evaluations') ])]" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='dispense']" position="replace">
+                  <field name="is_dispense_approved" />
+                </xpath>>
+                <xpath expr="//field[@name='is_dispense_approved']" position="replace">
+                  <field name="is_dispense_approved" attrs="{'invisible': [('dispense','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='dispense_approval_comment']" position="replace">
+                  <field name="dispense_approval_comment" attrs="{'invisible': [('dispense','=',False)]}"/>
                 </xpath>
             </field>
         </record>
@@ -43,7 +64,8 @@
           <field name="inherit_id" ref="school_management.view_individual_course_tree" />
           <field eval="25" name="priority" />
           <field name="arch" type="xml">
-            <xpath expr="//field[@name='dispense']" position="after">
+            <xpath expr="//field[@name='dispense']" position="replace">
+              <field name="dispense" readonly="1"/>
               <field name="is_dispense_approved" readonly="1"/>
             </xpath>
           </field>
