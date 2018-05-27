@@ -37,7 +37,7 @@
             </field>
         </record>
       
-        <!-- Add choice to Individual Course Group form view -->
+        <!-- Add choice to Individual Course Group form view 
         <record id="course_dispense_approuval_form_security" model="ir.ui.view">
             <field name="name">school.course.dispense_approuval.view.security</field>
             <field name="model">school.individual_course</field>
@@ -55,7 +55,7 @@
                   <field name="dispense_approval_comment" attrs="{'invisible': [('dispense','=',False)]}"/>
                 </xpath>
             </field>
-        </record>
+        </record>-->
         
         <!-- Individual Course Tree View -->
         <record id="view_individual_course_dispense_approuval_tree" model="ir.ui.view">
