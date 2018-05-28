@@ -93,6 +93,8 @@ class Event(models.Model):
             utc_tz = pytz.utc
             user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
     
+            _logger.info('Timezone in place')
+    
             # Prevent concurrent bookings
 
             domain = [('room_id','=',self.room_id.id), ('start', '<', self.stop_datetime), ('stop', '>', self.start_datetime)]
@@ -114,10 +116,14 @@ class Event(models.Model):
             
             if student_event in self.categ_ids:
                 
+                _logger.info('Get start time')
+                
                 dt = to_tz(fields.Datetime.from_string(self.start_datetime),utc_tz)
                 
                 if dt.minute != 0 and dt.minute != 30 :
                     raise ValidationError(_("Invalid booking, please use standard booking."))
+                
+                _logger.info('Get now')
                 
                 now = to_tz(datetime.now(),user_tz)
                 
@@ -131,6 +137,8 @@ class Event(models.Model):
                 
                 if dt < (now + timedelta(minutes=-30)):
                     raise ValidationError(_("You cannot book in the past."))
+                
+                _logger.info('Other checks')
                 
                 event_day = fields.Datetime.from_string(self.start_datetime).date()
                 
@@ -154,5 +162,7 @@ class Event(models.Model):
                 for duration in duration_list:
                     if duration['duration'] > 4:
                         raise ValidationError(_("You cannot book more than four hours in advance per day - %s") % duration['start_datetime:day'])
+                        
+                _logger.info('Check done')
                     
             
