@@ -19,6 +19,7 @@
 ##############################################################################
 import logging
 
+import pytz
 from datetime import datetime, date, time, timedelta
 
 from openerp import api, fields, models, _, tools
@@ -83,6 +84,10 @@ class Event(models.Model):
             if self.env.uid == 1 :
                 return
     
+            # Get user timezone
+            
+            user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
+    
             # Prevent concurrent bookings
 
             domain = [('room_id','=',self.room_id.id), ('start', '<', self.stop_datetime), ('stop', '>', self.start_datetime)]
@@ -109,12 +114,18 @@ class Event(models.Model):
                 if dt.minute != 0 and dt.minute != 30 :
                     raise ValidationError(_("Invalid booking, please use standard booking."))
                 
-                now = datetime.now()
-                if now.hour < 10 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
+                now = user_tz.localize(datetime.now())
+                
+                _logger.info('Check against now as : %s' % now)
+                
+                if now.hour < 19 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
                     raise ValidationError(_("You cannot book for the next day before 12h00."))
                 
-                if now.hour >= 10 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != (now + timedelta(days=1)).date() :
+                if now.hour >= 19 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != (now + timedelta(days=1)).date() :
                     raise ValidationError(_("You can book only the next day (after 12h00)."))
+                
+                if dt < (now + timedelta(minutes=-30)):
+                    raise ValidationError(_("You cannot book in the past."))
                 
                 event_day = fields.Datetime.from_string(self.start_datetime).date()
                 
