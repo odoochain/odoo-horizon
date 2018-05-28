@@ -113,14 +113,10 @@ class Event(models.Model):
             
             if student_event in self.categ_ids:
                 
-                _logger.info('Get start time')
-                
                 dt = to_tz(fields.Datetime.from_string(self.start_datetime),utc_tz)
                 
                 if dt.minute != 0 and dt.minute != 30 :
                     raise ValidationError(_("Invalid booking, please use standard booking."))
-                
-                _logger.info('Get now')
                 
                 now = to_tz(datetime.now(),user_tz)
                 
@@ -134,8 +130,6 @@ class Event(models.Model):
                 
                 if dt < (now + timedelta(minutes=-30)):
                     raise ValidationError(_("You cannot book in the past."))
-                
-                _logger.info('Other checks')
                 
                 event_day = fields.Datetime.from_string(self.start_datetime).date()
                 
