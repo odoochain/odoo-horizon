@@ -27,6 +27,10 @@ from openerp.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
+def to_tz(datetime, tz_name):
+    tz = pytz.timezone(tz_name) if tz_name else pytz.UTC
+    return pytz.UTC.localize(datetime.replace(tzinfo=None), is_dst=False).astimezone(tz).replace(tzinfo=None)
+
 class Year(models.Model):
     _inherit = 'school.year'
     
@@ -86,6 +90,7 @@ class Event(models.Model):
     
             # Get user timezone
             
+            utc_tz = pytz.utc
             user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
     
             # Prevent concurrent bookings
@@ -109,12 +114,12 @@ class Event(models.Model):
             
             if student_event in self.categ_ids:
                 
-                dt = fields.Datetime.from_string(self.start_datetime)
+                dt = to_tz(fields.Datetime.from_string(self.start_datetime),utc_tz)
                 
                 if dt.minute != 0 and dt.minute != 30 :
                     raise ValidationError(_("Invalid booking, please use standard booking."))
                 
-                now = user_tz.localize(datetime.now())
+                now = to_tz(datetime.now(),user_tz)
                 
                 _logger.info('Check against now as : %s' % now)
                 
