@@ -121,7 +121,7 @@ class Event(models.Model):
                 
                 now = to_tz(datetime.now(),user_tz)
                 
-                _logger.info('Check against now as : %s' % now)
+                _logger.info('Check %s against now as : %s' % (dt,now))
                 
                 if now.hour < 19 and fields.Datetime.from_string(self.start_datetime).date() != now.date() :
                     raise ValidationError(_("You cannot book for the next day before 12h00."))
