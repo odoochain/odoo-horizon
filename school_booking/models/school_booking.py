@@ -90,7 +90,8 @@ class Event(models.Model):
             # Get user timezone
             
             utc_tz = pytz.UTC
-            user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
+            #user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
+            user_tz = pytz.timezone('Europe/Brussels')
     
             # Prevent concurrent bookings
 
