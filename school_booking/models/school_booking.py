@@ -129,7 +129,7 @@ class Event(models.Model):
                 if now.hour >= 19 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != (now + timedelta(days=1)).date() :
                     raise ValidationError(_("You can book only the next day (after 12h00)."))
                 
-                if dt < (now + timedelta(minutes=-30)):
+                if dt < (datetime.now() + timedelta(minutes=-30)):
                     raise ValidationError(_("You cannot book in the past."))
                 
                 event_day = fields.Datetime.from_string(self.start_datetime).date()
