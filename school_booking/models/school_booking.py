@@ -27,8 +27,7 @@ from openerp.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
-def to_tz(datetime, tz_name):
-    tz = pytz.timezone(tz_name) if tz_name else pytz.UTC
+def to_tz(datetime, tz):
     return pytz.UTC.localize(datetime.replace(tzinfo=None), is_dst=False).astimezone(tz).replace(tzinfo=None)
 
 class Year(models.Model):
@@ -92,8 +91,6 @@ class Event(models.Model):
             
             utc_tz = pytz.UTC
             user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
-    
-            _logger.info('Timezone in place')
     
             # Prevent concurrent bookings
 
