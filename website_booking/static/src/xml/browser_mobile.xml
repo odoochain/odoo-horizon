@@ -75,7 +75,7 @@
                 <br/>
                 <span style="font-size: 13px;font-weight: 300;"><t t-esc="event.title"/></span>
             </div>
-            <t t-if="widget.edit_mode">
+            <t t-if="widget.edit_mode and event.can_edit">
             <div class="col s4">
                 <div class="row mobile_items">
                     <div class="mobile_item">

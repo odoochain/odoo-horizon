@@ -41,6 +41,10 @@ var EventList = Widget.extend({
     init: function(parent, options) {
         this._super(parent);
         this.calEvents = options.calEvents;
+        var now = moment();
+        this.calEvents.map(function (ev) {
+            ev.can_edit = moment(ev.start) > now;
+        });
         this.edit_mode = options.edit_mode;
     },
     
