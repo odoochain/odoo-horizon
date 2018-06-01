@@ -47,7 +47,11 @@ class Bloc(models.Model):
         new_bloc = super(Bloc, self).copy(default=default)
         new_childs = []
         for child in self.child_bloc_ids:
-            new_childs |= child.copy(default=default)
+            new_child = self.env['school.composite_bloc'].search([('year_id','=',default.get('year_id') or self.year_id),('name','=',self.name)])
+            if new_child :
+                new_childs |= new_child
+            else :
+                new_childs |= child.copy(default=default)
         new_bloc.child_course_group_ids = new_childs
         return new_bloc
         
@@ -112,7 +116,11 @@ class CompositeBloc(models.Model):
         new_bloc = super(CompositeBloc, self).copy(default=default)
         new_childs = []
         for child in self.child_bloc_ids:
-            new_childs |= child.copy(default=default)
+            new_child = self.env['school.composite_bloc'].search([('year_id','=',default.get('year_id') or self.year_id),('name','=',self.name)])
+            if new_child :
+                new_childs |= new_child
+            else :
+                new_childs |= child.copy(default=default)
         new_bloc.child_course_group_ids = new_childs
         return new_bloc
 
