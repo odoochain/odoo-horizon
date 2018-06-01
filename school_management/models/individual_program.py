@@ -63,9 +63,12 @@ class IndividualProgram(models.Model):
     
     @api.one
     def _compute_course_group_ids(self):
-        ret = []
+        ret = False
         for bloc in self.bloc_ids:
-            ret |= bloc.course_group_ids
+            if ret:
+                ret |= bloc.course_group_ids
+            else:
+                ret = bloc.course_group_ids
         self.course_group_ids = ret
 
     @api.one
