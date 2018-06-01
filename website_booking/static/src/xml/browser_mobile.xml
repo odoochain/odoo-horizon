@@ -13,6 +13,9 @@
                             <a id="search" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">search</i></a>
                         </div>
                         <div class="col s4" align="center">
+                            <a id="desktop" class="btn-floating btn waves-effect waves-light cyan darken-1" href="/booking?#category_id=16"><i class="material-icons">desktop_windows</i></a>
+                        </div>
+                        <div class="col s4" align="center">
                             <a id="logout" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">lock_outline</i></a>
                         </div>
                     </div>
