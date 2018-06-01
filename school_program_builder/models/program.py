@@ -41,6 +41,15 @@ class Bloc(models.Model):
                 child.populate_course_group_ids()
                 ret |= child.course_group_ids
             self.course_group_ids = ret
+            
+    @api.one
+    def copy(self, default=None):
+        new_bloc = super(Bloc, self).copy(default=default)
+        new_childs = []
+        for child in self.child_bloc_ids:
+            new_childs |= child.copy(default=default)
+        new_bloc.child_course_group_ids = new_childs
+        return new_bloc
         
 class CompositeBloc(models.Model):
     '''Composite Bloc'''
@@ -97,6 +106,15 @@ class CompositeBloc(models.Model):
             child.populate_course_group_ids()
             ret |= child.course_group_ids
         self.course_group_ids = ret
+    
+    @api.one
+    def copy(self, default=None):
+        new_bloc = super(CompositeBloc, self).copy(default=default)
+        new_childs = []
+        for child in self.child_bloc_ids:
+            new_childs |= child.copy(default=default)
+        new_bloc.child_course_group_ids = new_childs
+        return new_bloc
 
 class CourseGroup(models.Model):
     '''Course Group'''
