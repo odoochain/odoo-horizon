@@ -98,7 +98,7 @@
             <table class="table table-condensed oe_school_program_table">
                 <caption style="font-size: 100%;">Grille du bloc - <t t-esc="bloc.name"/></caption>
                 <colgroup>
-                    <col style="width:75px"/>
+                    <col style="width:100px"/>
                     <col style="width:100%"/>
                     <col style="width:60px"/>
                     <col style="width:60px"/>
@@ -209,7 +209,7 @@
             <h2>Unités ayant fait l'objet d'une valorisation</h2>
             <table class="table table-condensed oe_school_program_table">
                 <colgroup>
-                    <col style="width:75px"/>
+                    <col style="width:100px"/>
                     <col style="width:100%"/>
                     <col style="width:60px"/>
                     <col style="width:60px"/>
@@ -269,7 +269,7 @@
             <h2>Programme annuel de l'étudiant</h2>
             <table class="table table-condensed oe_school_program_table">
                 <colgroup>
-                    <col style="width:75px"/>
+                    <col style="width:100px"/>
                     <col style="width:100%"/>
                     <col style="width:60px"/>
                     <col style="width:60px"/>
@@ -336,7 +336,7 @@
             <t t-foreach="docs" t-as="bloc">
             <t t-call="report.external_layout">
                 <div class="page">
-                    <i>PAE-<t t-esc="id"/></i>
+                    <i>PAE-<t t-esc="bloc.id"/></i>
                     
                     <h3><t t-esc="bloc.name"/></h3>
                     <h4>Basé sur <t t-esc="bloc.source_bloc_id.name"/></h4>
