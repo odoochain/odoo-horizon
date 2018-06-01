@@ -207,6 +207,7 @@
               <h3 class="oe_fade">
                Based on <field name="source_bloc_id" options='{"no_open":True}' class="oe_inline"/>
               </h3>
+              <h3>PAE-<field name="id' options='{"no_open":True}' class="oe_inline"/></h3>
             </div>
             <group col="4">
               <field name="program_id" colspan="4"/>
