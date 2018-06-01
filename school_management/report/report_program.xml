@@ -231,7 +231,7 @@
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
                     <t t-if="course_group.dispense">
                     <tr class="oe_school_course_group">
-                        <td><t t-esc="course_group.ue_id"/></td>
+                        <td><t t-esc="course_group.ue_id"/></td> 
                         <td><t t-esc="course_group.name"/></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
@@ -337,6 +337,7 @@
             <t t-call="report.external_layout">
                 <div class="page">
                     <h1><t t-esc="bloc.name"/></h1>
+                    <h2>Basé sur <t t-esc="bloc.source_bloc_id.name"/></h2>
                     
                     <t t-call="school_management.school_bloc"/>
                     
