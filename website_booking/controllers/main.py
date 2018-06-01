@@ -115,7 +115,7 @@ class BookingController(http.Controller):
             ('stop', '>=', start),
             ('user_id','=',request.uid),
         ]
-        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields).sorted(key=lambda e: e.start)
+        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields,order='start asc')
         return ret
         
     @http.route('/booking/search', type='json', auth='public', website=True)
