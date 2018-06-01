@@ -336,7 +336,7 @@
             <t t-foreach="docs" t-as="bloc">
             <t t-call="report.external_layout">
                 <div class="page">
-                    <i>PAE-<t t-esc="bloc.id"/></i>
+                    <i style="color:blue;">PAE-<t t-esc="bloc.id"/></i>
                     
                     <h3><t t-esc="bloc.name"/></h3>
                     <h4>Basé sur <t t-esc="bloc.source_bloc_id.name"/></h4>
