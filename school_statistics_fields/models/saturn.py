@@ -270,9 +270,9 @@ class IndividualBloc(models.Model):
     def _default_field_c3(self):
         years = self.env['school.individual_bloc'].search([('student_id','=',self.student_id.id)]).mapped('year_id')
         if len(years) > 1 :
-            return 'A'
+            self.field_c3 = 'A'
         else :
-            return 'N'
+            self.field_c3 = 'N'
             
     @api.one
     def _recompute_field_c3(self):
