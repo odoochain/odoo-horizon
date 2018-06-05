@@ -266,7 +266,7 @@ class IndividualBloc(models.Model):
     field_c1 = fields.Selection([('R','Régulier'),('I','Irrégulier'),('L','Libre')], description='Fields C1',string='Régulier / Libre', default='R', required=True)
     field_c2 = fields.Date(description='Fields C2',string='Date d''abandon')
     
-    @api.one
+    @api.model
     def _default_field_c3(self):
         years = self.env['school.individual_bloc'].search([('student_id','=',self.student_id.id)]).mapped('year_id')
         if len(years) > 1 :
