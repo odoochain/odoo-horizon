@@ -263,7 +263,7 @@ class IndividualBloc(models.Model):
             
     field_b12 = fields.Char(description='Fields B12',string='Numéro de Registre national', compute='_compute_reg_number')
     
-    field_c1 = fields.Selection([('R','Régulier'),('I','Irrégulier'),('L','Libre')], description='Fields C1',string='Régulier / Libre', default='r', required=True)
+    field_c1 = fields.Selection([('R','Régulier'),('I','Irrégulier'),('L','Libre')], description='Fields C1',string='Régulier / Libre', default='R', required=True)
     field_c2 = fields.Date(description='Fields C2',string='Date d''abandon')
     
     @api.one
