@@ -64,7 +64,7 @@ class website_portal_school_management(http.Controller):
     @http.route(['/program/<program_id>'], type='http', auth='public')
     def program_details(self, program_id, redirect=None, **post):
         _, program_id = unslug(program_id)
-        program = request.registry['school.program'].browse(request.cr, request.uid, program_id, context=request.context)
+        program = request.env['school.program'].browse(program_id)
         if program :
             values = {
                 'program': program,
