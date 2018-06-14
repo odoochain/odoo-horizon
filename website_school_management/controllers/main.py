@@ -65,11 +65,14 @@ class website_portal_school_management(http.Controller):
     def program_details(self, program_id, redirect=None, **post):
         _, program_id = unslug(program_id)
         program = request.registry['school.program'].browse(request.cr, request.uid, program_id, context=request.context)
-        values = {
-            'program': program,
-            'slug_id' : program_id,
-        }
-        return request.render("website_school_management.program_details", values)
+        if program :
+            values = {
+                'program': program,
+                'slug_id' : program_id,
+            }
+            return request.render("website_school_management.program_details", values)
+        else :
+            return request.render('website.404')
         
     @http.route(['/course/<course_id>'], type='http', auth='public')
     def course(self, course_id, redirect=None, **post):
