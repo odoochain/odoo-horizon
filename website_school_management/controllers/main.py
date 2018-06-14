@@ -21,6 +21,8 @@
 
 import logging
 
+import werkzeug
+
 from openerp.addons.website.models.website import slug, unslug
 
 from openerp import http
@@ -72,7 +74,7 @@ class website_portal_school_management(http.Controller):
             }
             return request.render("website_school_management.program_details", values)
         else :
-            return request.render('website.404')
+            raise werkzeug.exceptions.HTTPException(description='Unkown program.')
         
     @http.route(['/course/<course_id>'], type='http', auth='public')
     def course(self, course_id, redirect=None, **post):
