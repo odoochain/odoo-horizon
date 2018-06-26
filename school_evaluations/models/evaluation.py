@@ -429,7 +429,7 @@ class IndividualCourseGroup(models.Model):
         self.total_credits = sum(course.credits for course in self.course_ids)
         self.total_weight = sum(course.c_weight for course in self.course_ids)
 
-    @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.second_session_result_bool','course_ids.second_session_result','course_ids.c_weight')
+    @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.second_session_result_bool','course_ids.second_session_result','course_ids.c_weight','course_ids.weight')
     @api.one
     def compute_average_results(self):
         _logger.debug('Trigger "compute_average_results" on Course Group %s' % self.name)

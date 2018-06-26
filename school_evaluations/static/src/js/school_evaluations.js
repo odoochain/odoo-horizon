@@ -216,7 +216,13 @@ var EvaluationsAction = Widget.extend({
                 'school_session' : this.school_session,
                 'is_program' : true,
             },
-            
+            { 
+                'id' : 5, 
+                'title' : "Agrégation",
+                'blocs' : [],
+                'school_session' : this.school_session,
+                'is_program' : false,
+            },
         ];
         var defs = [];
         
@@ -276,6 +282,18 @@ var EvaluationsAction = Widget.extend({
             function(data){
                 if(data.length > 0){
                     self.groups[4].blocs = data;
+                }
+            }
+        ));
+        defs.push(this.model.query(['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'])
+                            .context(this.context)
+                            .order_by('student_name')
+                            .filter(self.build_domain())
+                            .filter([['source_bloc_level', '=', 6]])
+                            .all().then(
+            function(data){
+                if(data.length > 0){
+                    self.groups[5].blocs = data;
                 }
             }
         ));
