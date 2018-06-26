@@ -150,7 +150,7 @@ class IndividualProgram(models.Model):
     @api.multi
     def compute_evaluation_details(self):
         self.ensure_one();
-        ret = [0,0,0,0,0]
+        ret = [0,0,0,0,0,0]
         if self.historical_bloc_1_eval > 0:
             ret[0] = self.historical_bloc_1_eval
         if self.historical_bloc_2_eval > 0:
