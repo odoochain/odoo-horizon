@@ -60,8 +60,8 @@
             <field eval="8" name="priority" />
             <field name="arch" type="xml">
                 <tree string="Corequisits" editable="bottom">
-                    <field name="course1_id" />
-                    <field name="course2_id" />
+                    <field name="course_id" string="Course Group"/>
+                    <field name="coriquisit_id" />
                 </tree>
             </field>
         </record>
