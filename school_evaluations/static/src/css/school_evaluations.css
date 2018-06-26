@@ -21,7 +21,7 @@
 */
 .sub_navbar {
   position: absolute;
-  top: 460px;
+  top: 490px;
   bottom: 57px;
   left: 0;
   right: 0;
@@ -51,7 +51,7 @@ a.o_school_bloc_item {
 
 .bloc_details {
   position: absolute;
-  top: 285px;
+  top: 265px;
   bottom: 0;
   left: 180px;
   right: 0;
