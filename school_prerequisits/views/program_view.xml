@@ -98,10 +98,10 @@
                             </tree>
                         </field>
                     </page>
-                    <page name="prerequisit_list" string="Corequisits">
-                        <field name="co_requisit_course_ids">
+                    <page name="corequisit_list" string="Corequisits">
+                        <field name="co_requisit_ids">
                             <tree string="Corequisits">
-                                <field name="name" />
+                                <field name="coriquisit_id" string="Name"/>
                             </tree>
                         </field>
                     </page>

@@ -31,7 +31,7 @@ class CourseGroup(models.Model):
     pre_requisit_ids = fields.One2many('school.prerequisit', 'course_id', 'Prerequisits')
     pre_requisit_course_ids = fields.One2many('school.course_group', string='Prerequisits', compute='_compute_pre_requisit_ids')
 
-    co_requisit_ids = fields.One2many('school.corequisit', string='Corequisits', compute='_compute_co_requisit_ids')
+    co_requisit_ids = fields.One2many('school.corequisit', 'course_id', string='Corequisits')
     co_requisit_course_ids = fields.One2many('school.course_group', string='Corequisits', compute='_compute_co_requisit_ids')
 
     @api.one
@@ -43,14 +43,10 @@ class CourseGroup(models.Model):
 
     @api.one
     def _compute_co_requisit_ids(self):
-        self.co_requisit_ids = self.env['school.corequisit'].search(['|',('course1_id','=',self.id),('course2_id','=',self.id)])
         ret_ids = []
         for co_requisit in self.co_requisit_ids:
-            if co_requisit.course1_id == self:
-                ret_ids.append(co_requisit.course2_id.id)
-            else:
-                ret_ids.append(co_requisit.course1_id.id)
-        self.co_requisit_course_ids = ret_ids
+            ret_ids.append(co_requisit.course_id.id)
+        self.co_requisit_ids = ret_ids
         
 class PreRequisit(models.Model):
     '''PreRequisit'''
@@ -63,5 +59,5 @@ class CoRequisit(models.Model):
     '''CoRequisit'''
     _name = 'school.corequisit'
     
-    course1_id = fields.Many2one('school.course_group', 'Course Group 1')
-    course2_id = fields.Many2one('school.course_group', 'Course Group 2')
+    course_id = fields.Many2one('school.course_group', 'Course Group')
+    coriquisit_id = fields.Many2one('school.course_group', 'Corequisit')

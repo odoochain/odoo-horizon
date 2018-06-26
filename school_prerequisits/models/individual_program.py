@@ -46,7 +46,8 @@ class IndividualBloc(models.Model):
                     }}
             # Check co-requisits
             for coreq in scg.co_requisit_course_ids:
-                if not coreq.id in current_scg_ids.ids :
+                icg_acq = self.env['school.individual_course_group'].search([('student_id','=',self.student_id.id),('source_course_group_id','=',coreq.id)])
+                if len(icg_acq) == 0 :
                     res = {'warning': {
                         'title': _('Warning'),
                         'message': _("CoRequisit for course group %s is not matched" % coreq.name)
