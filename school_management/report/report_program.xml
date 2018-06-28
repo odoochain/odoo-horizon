@@ -123,7 +123,7 @@
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
                     <tr class="oe_school_course_group">
                         <td><t t-esc="course_group.ue_id"/></td>
-                        <td><t t-esc="course_group.title"/></td>
+                        <td><t t-esc="course_group.title"/><br/><t t-esc="course_group.teacher_id.name"/></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
                         <td></td>
@@ -133,8 +133,8 @@
                     </tr>
                     <tr t-foreach="course_group.course_ids" t-as="course">
                         <td></td>
-                        <td t-if="course.url_ref"><a t-esc="course.title" t-att-href="course.url_ref" target="new" style="cursor: pointer;"/></td>
-                        <td t-if="not course.url_ref"><a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/></td>
+                        <td t-if="course.url_ref"><a t-esc="course.title" t-att-href="course.url_ref" target="new" style="cursor: pointer;"/><br/><t t-esc="course.teacher_id.name"/></td>
+                        <td t-if="not course.url_ref"><a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/><br/><t t-esc="course.teacher_id.name"/></td>
                         <td class="text-center"><t t-esc="course.hours"/></td>
                         <td class="text-center"><t t-esc="course.credits"/></td>
                         <td class="text-center"><t t-esc="course.weight"/></td>
