@@ -245,7 +245,7 @@ return Widget.extend({
         } else {
             self.record_idx = idx;
             self.datarecord = self.records[self.record_idx];
-            return new Promise();
+            return new Deferred();
         }
     },
     
