@@ -478,12 +478,12 @@ class IndividualCourseGroup(models.Model):
             except ValueError:
                 self.write('first_session_deliberated_result', None)
                 raise UserError(_('Cannot decode %s, please encode a Float eg "12.00".' % self.first_session_deliberated_result))
-            if (f < self.first_session_computed_result):
-                # TODO : take care of this - removed due to Cours artistiques B - Art dramatique - 2 - 2015-2016 - VALERIO Maddy 
-                # raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s." % (self.first_session_deliberated_result, self.first_session_computed_result))
-                self.first_session_result = f
-            else:
-                self.first_session_result = f
+            #if (f < self.first_session_computed_result):
+            #    # TODO : take care of this - removed due to Cours artistiques B - Art dramatique - 2 - 2015-2016 - VALERIO Maddy 
+            #    # raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s." % (self.first_session_deliberated_result, self.first_session_computed_result))
+            self.first_session_result = f
+            #else:
+            #    self.first_session_result = f
             self.first_session_result_bool = True
         elif self.first_session_computed_result_bool :
             self.first_session_result = self.first_session_computed_result
@@ -497,9 +497,10 @@ class IndividualCourseGroup(models.Model):
     def compute_first_session_acquiered(self):
         _logger.debug('Trigger "compute_first_session_acquiered" on Course Group %s' % self.name)
         self.first_session_acquiered = 'NA'
-        if self.first_session_deliberated_result_bool:
-            self.first_session_acquiered = 'A'
-        elif self.enable_exclusion_bool :
+        #if self.first_session_deliberated_result_bool:
+        #    self.first_session_acquiered = 'A'
+        #el
+        if self.enable_exclusion_bool :
             if self.first_session_result >= 10 and (not self.first_session_computed_exclusion_result_bool or self.first_session_deliberated_result_bool):
                 self.first_session_acquiered = 'A'
         else:
