@@ -245,8 +245,8 @@ return Widget.extend({
         } else {
             self.record_idx = idx;
             self.datarecord = self.records[self.record_idx];
+            return new Promise();
         }
-        
     },
     
     set_bloc_id: function(bloc_id) {
