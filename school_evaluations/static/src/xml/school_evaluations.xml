@@ -637,7 +637,7 @@
                             </button>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-lg btn-success">Réussite</button>
+                            <button type="button" class="btn btn-lg btn-award">Réussite</button>
                         </div>    
                     </div>
                 </div>
