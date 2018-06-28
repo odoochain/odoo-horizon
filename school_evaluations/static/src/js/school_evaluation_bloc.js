@@ -245,6 +245,9 @@ return Widget.extend({
         } else {
             self.record_idx = idx;
             self.datarecord = self.records[self.record_idx];
+            self.bloc = self.datarecord;
+            self.parent.hide_startup();
+            self.renderElement();
             return $.Deferred();
         }
     },
