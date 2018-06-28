@@ -63,6 +63,7 @@ class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
 
+    # TODO : RE IMPLEMENT THIS CHECK
     #@api.multi
     #def set_to_progress(self, context):
     #    for bloc in self:
