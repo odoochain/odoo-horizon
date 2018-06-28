@@ -208,7 +208,7 @@ return Widget.extend({
         "click .o_reload_bloc": function (event) {
             var self = this;
             event.preventDefault();
-            self.update();
+            self.refresh();
         },
         
         "click .o_set_delib": function (event) {
@@ -264,6 +264,18 @@ return Widget.extend({
             return self.update();
         }
         
+    },
+    
+    refresh: function() {
+        var self = this;
+        return self.read_ids(self.ids,self.record_idx).then(function(){
+            self.bloc = self.datarecord = self.records[self.record_idx];
+            self._read_bloc_data().done(
+                function(){
+                    self.parent.hide_startup();
+                    self.renderElement();
+                });
+        });
     },
     
     update: function() {
