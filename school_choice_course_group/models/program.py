@@ -63,13 +63,13 @@ class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
 
-    @api.multi
-    def set_to_progress(self, context):
-        for bloc in self:
-            for icg in bloc.course_group_ids:
-                if icg.source_course_group_id.is_choice_course_group:
-                    if icg.source_course_group_id.total_credits_to_select != icg.total_credits:    
-                        raise UserError(_('Cannot set program on progress, choice for %s are not set in %s.' % (icg.name, bloc.name)))
-                    if icg.source_course_group_id.total_hours_to_select != icg.total_hours:    
-                        raise UserError(_('Cannot set program on progress, choice for %s are not set in %s.' % (icg.name, bloc.name)))
-        return super(IndividualBloc, self).set_to_progress(context)
+    #@api.multi
+    #def set_to_progress(self, context):
+    #    for bloc in self:
+    #        for icg in bloc.course_group_ids:
+    #            if icg.source_course_group_id.is_choice_course_group:
+    #                if icg.source_course_group_id.total_credits_to_select != icg.total_credits:    
+    #                    raise UserError(_('Cannot set program on progress, choice for %s are not set in %s.' % (icg.name, bloc.name)))
+    #                if icg.source_course_group_id.total_hours_to_select != icg.total_hours:    
+    #                    raise UserError(_('Cannot set program on progress, choice for %s are not set in %s.' % (icg.name, bloc.name)))
+    #    return super(IndividualBloc, self).set_to_progress(context)
