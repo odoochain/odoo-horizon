@@ -29,6 +29,7 @@
     'init_xml': [],
     'update_xml': [
         'views/program_view.xml',
+        'report/report_program.xml',
         'security/ir.model.access.csv',
     ],
     'demo_xml': [],

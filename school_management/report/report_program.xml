@@ -127,7 +127,7 @@
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
                         <td></td>
-                        <td class="text-center">Aucun</td>
+                        <td class="text-center prereq">Aucun</td>
                         <td></td>
                         <td></td>
                     </tr>
