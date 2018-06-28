@@ -629,7 +629,7 @@
                             moyenne du cycle<br/><span class="score_value"><t t-esc="Math.round(widget.program.evaluation*10)/10"/></span>
                         </div>  
                         <div class="col-md-6">
-                            <div class="alert alert-success" role="alert">A obtenu 180 crédits ECTS - Sanctionné avec <t t-esc="widget.program.grade_text"/> <br/> <span t-if="widget.program.grade_comments"></span></span><t t-esc="widget.program.grade_comments"/></div>
+                            <div class="alert alert-success" role="alert">A obtenu 180 crédits ECTS - Sanctionné avec <t t-esc="widget.program.grade_text"/> <br/> <t t-esc="widget.program.grade_comments"/></div>
                         </div>  
                         <div class="col-md-1">
                             <button class="btn btn-default btn_moyenne" type="button">
