@@ -238,8 +238,6 @@ return Widget.extend({
         return this.dataset.read_ids(ids,[]).then(function (results) {
             self.ids = ids;
             self.records = results;
-            self.record_idx = idx;
-            self.datarecord = self.records[self.record_idx];
         });
             
     },
@@ -270,14 +268,23 @@ return Widget.extend({
     
     update: function() {
         var self = this;
-        return self.read_ids(self.ids,self.record_idx).then(function(){
-            self.bloc = self.datarecord;
-            self._read_bloc_data().done(
+        if(!this.records) {
+            return self.read_ids(self.ids,self.record_idx).then(function(){
+                self.bloc = self.datarecord = self.records[self.record_idx];
+                self._read_bloc_data().done(
+                    function(){
+                        self.parent.hide_startup();
+                        self.renderElement();
+                    });
+            });
+        } else {
+            self.bloc = self.datarecord = self.records[self.record_idx];
+            return self._read_bloc_data().done(
                 function(){
                     self.parent.hide_startup();
                     self.renderElement();
                 });
-        });
+        }
     },
     
     _update_evaluation_messages: function() {
