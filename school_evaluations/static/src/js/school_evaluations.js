@@ -230,7 +230,7 @@ var EvaluationsAction = Widget.extend({
                             .context(this.context)
                             .order_by('student_name')
                             .filter(self.build_domain())
-                            .filter([['source_bloc_level', '=', 1],['exclude_from_deliberation', '=', false]])
+                            .filter([['source_bloc_level', '=', 1]])
                             .all().then(
             function(data){
                 if(data.length > 0){
@@ -242,7 +242,7 @@ var EvaluationsAction = Widget.extend({
                             .context(this.context)
                             .order_by('student_name')
                             .filter(self.build_domain())
-                            .filter(['|',['source_bloc_level', '=', 2],['source_bloc_level', '=', 3],['exclude_from_deliberation', '=', false]])
+                            .filter(['|',['source_bloc_level', '=', 2],['source_bloc_level', '=', 3]])
                             .all().then(
             function(data){
                 if(data.length > 0){
@@ -253,7 +253,7 @@ var EvaluationsAction = Widget.extend({
         defs.push(this.program_model.query()
                             .context(this.context)
                             .order_by('student_name')
-                            .filter([['state','in',['progress']],['cycle_id.short_name', '=', 'B'],['program_completed', '=', true],['domain_id','=',this.school_domain],['exclude_from_deliberation', '=', false]])
+                            .filter([['state','in',['progress']],['cycle_id.short_name', '=', 'B'],['program_completed', '=', true],['domain_id','=',this.school_domain]])
                             .all().then(
             function(data){
                 if(data.length > 0){
@@ -265,7 +265,7 @@ var EvaluationsAction = Widget.extend({
                             .context(this.context)
                             .order_by('student_name')
                             .filter(self.build_domain())
-                            .filter(['|',['source_bloc_level', '=', 4],['source_bloc_level', '=', 5],['exclude_from_deliberation', '=', false]])
+                            .filter(['|',['source_bloc_level', '=', 4],['source_bloc_level', '=', 5]])
                             .all().then(
             function(data){
                 if(data.length > 0){
@@ -276,7 +276,7 @@ var EvaluationsAction = Widget.extend({
         defs.push(this.program_model.query()
                             .context(this.context)
                             .order_by('student_name')
-                            .filter([['state','in',['progress']],['cycle_id.short_name', '=', 'M'],['program_completed', '=', true],['domain_id','=',this.school_domain],['exclude_from_deliberation', '=', false]])
+                            .filter([['state','in',['progress']],['cycle_id.short_name', '=', 'M'],['program_completed', '=', true],['domain_id','=',this.school_domain]])
                             .all().then(
             function(data){
                 if(data.length > 0){
@@ -288,7 +288,7 @@ var EvaluationsAction = Widget.extend({
                             .context(this.context)
                             .order_by('student_name')
                             .filter(self.build_domain())
-                            .filter([['source_bloc_level', '=', 6],['exclude_from_deliberation', '=', false]])
+                            .filter([['source_bloc_level', '=', 6]])
                             .all().then(
             function(data){
                 if(data.length > 0){
