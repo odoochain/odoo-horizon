@@ -23,12 +23,12 @@
 <odoo>
 
     <template id="website_school_bloc_prereq" inherit_id="school_management.website_school_bloc">
-        <!--<xpath expr="//td[@class='prereq']" position="replace">
+        <xpath expr="//td[@class='prereq']" position="replace">
             <td class="text-center prereq">
                 <t t-foreach="course_group.pre_requisit_course_ids" t-as="pre_cg">
                     pre_cg.ue_id
                 </t>
             </td>
-        </xpath>-->
+        </xpath>
     </template>
 </odoo>
