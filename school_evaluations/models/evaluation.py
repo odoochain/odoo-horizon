@@ -337,14 +337,14 @@ class IndividualCourseGroup(models.Model):
     def set_deliberated_to_ten(self, session = 1, message=''):
         if session == 1:
             self.write({
-                #'first_session_deliberated_result' : max(self.first_session_computed_result, 10),
+                'first_session_deliberated_result' : max(self.first_session_computed_result, 10),
                 'first_session_deliberated_result' : self.first_session_computed_result,
                 'first_session_deliberated_result_bool' : True,
                 'first_session_note': message,
             })
         else:
             self.write({
-                #'second_session_deliberated_result' : max(self.second_session_computed_result, 10) if self.second_session_computed_result_bool else max(self.first_session_computed_result, 10),
+                'second_session_deliberated_result' : max(self.second_session_computed_result, 10) if self.second_session_computed_result_bool else max(self.first_session_computed_result, 10),
                 'second_session_deliberated_result' : self.second_session_computed_result if self.second_session_computed_result_bool else self.first_session_computed_result,
                 'second_session_deliberated_result_bool' : True,
                 'second_session_note': message,

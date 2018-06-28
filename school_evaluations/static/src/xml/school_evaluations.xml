@@ -684,7 +684,7 @@
                                                 E
                                             </t>
                                             <t t-if="course_group.final_result_bool and !((course_group.first_session_deliberated_result_bool or course_group.second_session_deliberated_result_bool) and course_group.final_result == 10)">
-                                                    <t t-esc="(Math.round(course_group.final_result*100)/100).toFixed(2)" />
+                                                <t t-esc="(Math.round(course_group.final_result*100)/100).toFixed(2)" />
                                             </t>
                                         </td>
                                         <td style=" text-align: right;">
