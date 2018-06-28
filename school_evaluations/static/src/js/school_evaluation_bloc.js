@@ -235,21 +235,13 @@ return Widget.extend({
         var self = this;
         this.school_session = this.parent.school_session;
         idx = idx || 0;
-        if(!this.records) {
-            return this.dataset.read_ids(ids,[]).then(function (results) {
-                self.ids = ids;
-                self.records = results;
-                self.record_idx = idx;
-                self.datarecord = self.records[self.record_idx];
-            });
-        } else {
+        return this.dataset.read_ids(ids,[]).then(function (results) {
+            self.ids = ids;
+            self.records = results;
             self.record_idx = idx;
             self.datarecord = self.records[self.record_idx];
-            self.bloc = self.datarecord;
-            self.parent.hide_startup();
-            self.renderElement();
-            return $.Deferred();
-        }
+        });
+            
     },
     
     set_bloc_id: function(bloc_id) {
