@@ -105,7 +105,6 @@
                     <col style="width:60px"/>
                     <col style="width:100px"/>
                     <col style="width:100px"/>
-                    <col style="width:100px"/>
                 </colgroup>
                 <thead>
                     <tr>
@@ -116,29 +115,32 @@
                         <th class="text-center">Pond</th>
                         <th>Pré/Co-requis</th>
                         <th>Quadrimestre</th>
-                        <th>Référentiel</th>
                     </tr> 
                 </thead>
                 <tbody>
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
                     <tr class="oe_school_course_group">
                         <td><t t-esc="course_group.ue_id"/></td>
-                        <td><t t-esc="course_group.title"/><br/><t t-esc="course_group.teacher_id.name"/></td>
+                        <td><t t-esc="course_group.title"/><br/><i style="color:grey;"><t t-esc="course_group.teacher_id.name"/></i></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
                         <td></td>
                         <td class="text-center prereq">Aucun</td>
                         <td></td>
-                        <td></td>
                     </tr>
                     <tr t-foreach="course_group.course_ids" t-as="course">
                         <td></td>
-                        <td t-if="course.url_ref"><a t-esc="course.title" t-att-href="course.url_ref" target="new" style="cursor: pointer;"/><br/><t t-esc="course.teacher_id.name"/></td>
-                        <td t-if="not course.url_ref"><a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/><br/><t t-esc="course.teacher_id.name"/></td>
+                        <td t-if="course.url_ref">
+                            <a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/>
+                            <br/><t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name"/><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t>
+                        </td>
+                        <td t-if="not course.url_ref">
+                            <a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/>
+                            <br/><t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;"  t-esc="teacher.name"/><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t>
+                        </td>
                         <td class="text-center"><t t-esc="course.hours"/></td>
                         <td class="text-center"><t t-esc="course.credits"/></td>
                         <td class="text-center"><t t-esc="course.weight"/></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -148,7 +150,6 @@
                         <td class="text-right">Total :</td>
                         <td class="text-center"><t t-esc="bloc.total_hours"/></td>
                         <td class="text-center"><t t-esc="bloc.total_credits"/></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
