@@ -25,8 +25,8 @@
     <template id="website_school_bloc_prereq" inherit_id="school_management.website_school_bloc">
         <xpath expr="//td[@class='text-center  prereq']" position="replace">
             <td class="text-center prereq">
-                <t t-foreach="course_group.pre_requisit_course_ids" t-as="pre_cg">
-                    <t t-esc="pre_cg.ue_id"/>,
+                <t t-foreach="course_group.pre_requisit_ids" t-as="pre_cg">
+                    <t t-esc="pre_cg.preriquisit_id.ue_id"/>,
                 </t>
             </td>
         </xpath>
