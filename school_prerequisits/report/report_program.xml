@@ -26,7 +26,7 @@
         <xpath expr="//td[@class='text-center  prereq']" position="replace">
             <td class="text-center prereq">
                 <t t-foreach="course_group.pre_requisit_ids" t-as="pre_cg">
-                    <t t-esc="pre_cg.preriquisit_id.ue_id"/><t t-esc="pre_cg_index"/>
+                    <t t-esc="pre_cg.preriquisit_id.ue_id"/><t t-if="pre_cg_index < pre_cg_size - 1">,</t>
                 </t>
             </td>
         </xpath>
