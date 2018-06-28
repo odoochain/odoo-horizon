@@ -630,6 +630,9 @@
                         </div>  
                         <div class="col-md-7">
                             <div class="alert alert-success" role="alert">A obtenu 180 crédits ECTS - Sanctionné <t t-esc="widget.program.grade_text"/></div>
+                            <button class="btn btn-default btn_moyenne" type="button">
+                                <i class="fa fa-edit fa-fw"></i>
+                            </button>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-lg btn-success">Réussite</button>
