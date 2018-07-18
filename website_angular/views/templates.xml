@@ -25,14 +25,18 @@
         <template id="app" name="Horizon Angular" page="True">
             <t t-call="web.layout">
                 <t t-set="head">
-                    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-                    <meta name="format-detection" content="telephone=no"/>
-                    <meta name="msapplication-tap-highlight" content="no"/>
-
-                    <html>
-                        <body>
-                            <h1>This is my angular application</h1>
-                        </body>
+                    <html lang="en">
+                    <head>
+                      <meta charset="utf-8">
+                      <title>HorizonAngular</title>
+                      <base href="/angular/static">
+                    
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <link rel="icon" type="image/x-icon" href="favicon.ico">
+                    </head>
+                    <body>
+                        <app-root></app-root>
+                        <script type="text/javascript" src="static/dist/runtime.js"></script><script type="text/javascript" src="static/dist/polyfills.js"></script><script type="text/javascript" src="static/dist/styles.js"></script><script type="text/javascript" src="static/dist/vendor.js"></script><script type="text/javascript" src="static/dist/main.js"></script></body>
                     </html>
                 </t>
             </t>
