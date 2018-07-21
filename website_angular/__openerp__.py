@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {
-    'name': 'Website Booking Interface',
+    'name': 'Horizon Angular Interface',
     'version': '0.1',
     'license': 'AGPL-3',
     'author': 'be-Cloud.be (Jerome Sonnet)',
