@@ -34,9 +34,9 @@
                       <link rel="icon" type="image/x-icon" href="favicon.ico"/>
                     </head>
                     <body>
-                        <script>
+                        <script type="text/javascript">
                             horizon = {
-                                csrf_token = '<t t-esc='request.csrf_token()'/>',
+                                'csrf_token' : '<t t-esc='request.csrf_token()'/>',
                             };
                         </script>
                         <app-root></app-root>
