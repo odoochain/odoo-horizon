@@ -34,7 +34,9 @@
                       <link rel="icon" type="image/x-icon" href="favicon.ico"/>
                     </head>
                     <body>
-                        <input id="csrf_token" type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <script>
+                            horizon.csrf_token = <t t-esc='request.csrf_token()'/>
+                        </script>
                         <app-root></app-root>
                         <script type="text/javascript" src="/website_angular/static/dist/runtime.js"></script><script type="text/javascript" src="/website_angular/static/dist/polyfills.js"></script><script type="text/javascript" src="static/dist/styles.js"></script><script type="text/javascript" src="/website_angular/static/dist/vendor.js"></script><script type="text/javascript" src="/website_angular/static/dist/main.js"></script></body>
                     </html>
