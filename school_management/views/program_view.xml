@@ -126,6 +126,8 @@
               <field name="teacher_id" colspan="4"/>
               <field name="sequence" />
               <field name="level" />
+              <field name="period" />
+              <field name="mandatory" />
               <field name="total_hours" />
               <field name="total_credits" />
               <field name="total_weight" />
