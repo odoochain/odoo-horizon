@@ -48,7 +48,7 @@ class IndividualProgram(models.Model):
         cg_ids = []
         for group in new_pae.source_bloc_id.course_group_ids:
             # Check if cg already acquiered
-            count = self.env['school.individual_course_group'].search_count([('student_id','=',self.student_id.id),('acquiered','=',true)])
+            count = self.env['school.individual_course_group'].search_count([('student_id','=',self.student_id.id),('acquiered','=',True)])
             if count == 0 :
                 _logger.info('assign course groups : ' + group.name)
                 cg = self.course_group_ids.create({'bloc_id': new_pae.id,'source_course_group_id': group.id, 'acquiered' : 'NA'})
