@@ -37,12 +37,12 @@ class IndividualProgram(models.Model):
         
         #if self.total_acquiered_credits < 45 :
         # Register all UE from bloc 1 that are not yet acquiered
-        new_pae = self.env['school.individual_bloc'].create({
-            'student_id' : context.get('default_student_id'),
-            'program_id' : context.get('default_program_id'),
-            'year_id' :  self.env.user.current_year_id.id,
-            'source_bloc_id' : self.source_program_id.bloc_ids[0]
-        })
+        # new_pae = self.env['school.individual_bloc'].create({
+        #     'student_id' : context.get('default_student_id'),
+        #     'program_id' : context.get('default_program_id'),
+        #     'year_id' :  self.env.user.current_year_id.id,
+        #     'source_bloc_id' : self.source_program_id.bloc_ids[0]
+        # })
             
         
         value = {
@@ -50,7 +50,7 @@ class IndividualProgram(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'school.individual_bloc',
-            'res_id' : new_pae.id,
+            #'res_id' : new_pae.id,
             'view_id': False,
             'context': context,
             'type': 'ir.actions.act_window',
