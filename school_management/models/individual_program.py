@@ -62,7 +62,7 @@ class IndividualProgram(models.Model):
     highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
 
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups',compute='_compute_course_group_ids')
-    remaining_course_group_ids  = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups',compute='_compute_course_group_ids')
+    remaining_course_group_ids  = fields.One2many('school.course_group', 'bloc_id', string='Courses Groups',compute='_compute_course_group_ids')
     
     @api.one
     def _compute_course_group_ids(self):
