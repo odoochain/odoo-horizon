@@ -74,7 +74,7 @@ class IndividualProgram(models.Model):
                 ret = bloc.course_group_ids
         self.course_group_ids = ret
         
-        cg_acq_ids = ret.filtered(('acquiered','=','A')).mapped('source_course_group_id')
+        cg_acq_ids = ret.filtered([('acquiered','=','A')]).mapped('source_course_group_id')
         
         cg_ids = []
         for bloc in self.source_program_id.bloc_ids :
