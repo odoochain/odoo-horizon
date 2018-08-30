@@ -81,7 +81,7 @@ class IndividualProgram(models.Model):
         for bloc in self.source_program_id.bloc_ids :
             cg_ids |= bloc.course_group_ids
             
-        self.remaining_course_group_ids = cg_ids - cg_acq_ids
+        self.remaining_course_group_ids = self.env['school.course_group'].browse(cg_ids) - cg_acq_ids
             
 
 
