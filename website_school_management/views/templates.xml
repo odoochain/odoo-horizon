@@ -271,7 +271,7 @@
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
                     <tr class="oe_school_course_group" style="font-weight: 600;">
                         <td style="font-size: x-small;"><t t-esc="course_group.ue_id"/></td>
-                        <td><t t-esc="course_group.title"/></td>
+                        <td><a t-esc="course_group.title" t-att-href="'/course_group/%s' % course_group.id" target="new" style="cursor: pointer;"/></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
                         <td></td>
