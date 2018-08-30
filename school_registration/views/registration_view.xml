@@ -29,7 +29,7 @@
             <field name="inherit_id" ref="school_management.individual_program_form" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//sheet" position="inside">
+                <xpath expr="//field[@name='image']" position="before">
                     <div class="oe_button_box" name="button_box">
                         <button string="Register PAE" type="object" name="register_pae" class="oe_highlight" context="{'default_program_id': active_id}" 
                                     groups="school_management.group_employee"/>
