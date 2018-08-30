@@ -33,12 +33,17 @@ class IndividualProgram(models.Model):
     def register_pae(self):
         self.ensure_one()
         context = dict(self._context or {})
-        _logger.info(context)
-        new_pae = self.env['school.individual_bloc'].create({
-            'student_id' : context.get('default_student_id'),
-            'program_id' : context.get('default_program_id'),
-            'year_id' :  self.env.user.current_year_id.id,
-        })
+        _logger.info(context
+        
+        #if self.total_acquiered_credits < 45 :
+            # Register all UE from bloc 1 that are not yet acquiered
+            new_pae = self.env['school.individual_bloc'].create({
+                'student_id' : context.get('default_student_id'),
+                'program_id' : context.get('default_program_id'),
+                'year_id' :  self.env.user.current_year_id.id,
+                'source_bloc_id' : self.source_program_id.bloc_ids[0],
+            })
+            
         
         value = {
             'domain': "[]",
