@@ -227,7 +227,7 @@
                       <section>
                         <div class="row mt64 mb64">
                             <h1>
-                                <t t-if="o.state == 'draft'">Draft </t>Course Group Description
+                                Course Group Description
                             </h1>
                             <h1>
                                 <span t-field="o.title"/>
