@@ -204,6 +204,10 @@ class CourseGroup(models.Model):
     
     level = fields.Integer(string='Level')
     
+    period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period')
+    
+    mandatory = fields.Boolean(string='Mandatory', default=True)
+    
     description = fields.Text(string='Description')
     
     teacher_id = fields.Many2one('res.partner',string='Teacher',domain="[('teacher', '=', '1')]", copy=True)

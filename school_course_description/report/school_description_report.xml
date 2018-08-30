@@ -23,7 +23,7 @@
 <odoo>
     <!--
     
-    Description
+    Description Course
     
     -->
 
@@ -185,4 +185,159 @@
             </t>
         </t>
     </template>
+    
+    <!--
+    
+    Description Coure Group
+    
+    -->
+
+    <report id="report_course_group_description" 
+            model="school.course_documentation" 
+            string="Course Group Documentation" 
+            report_type="qweb-pdf" 
+            name="school_course_description.report_course_group_documentation_content" 
+            file="school_course_description.report_course_group_documentation_content"
+            attachment_use="True"
+            attachment="object.name+'-DESC-'+time.strftime('%d-%m-%Y')+'.pdf'"
+    />
+    
+    <template id="report_course_group_documentation_no_content">
+        <t t-call="report.html_container">
+            <t t-set="data_report_margin_top" t-value="30"/>
+            <t t-set="data_report_header_spacing" t-value="25"/>
+            <div class="page">
+                <div class="container">
+                  <div class="jumbotron mt64">
+                    <h1>No description found</h1>      
+                    <p>Please contact the secretary or your teacher for more information about this activity.</p>
+                  </div>          
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <template id="report_course_documentation_content">
+        <t t-call="report.html_container">
+            <t t-set="data_report_margin_top" t-value="30"/>
+            <t t-set="data_report_header_spacing" t-value="25"/>
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="container">
+                      <section>
+                        <div class="row mt64 mb64">
+                            <h1>
+                                <t t-if="o.state == 'draft'">Draft </t>Course Group Description
+                            </h1>
+                            <h1>
+                                <span t-field="o.title"/>
+                            </h1>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Course Group Informations</div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <colgroup>
+                                        <col style="width:250px"/>
+                                        <col style="width:100%"/>
+                                    </colgroup>
+                                    <tbody>
+                                      <tr>
+                                        <td>Code</td>
+                                        <td><span t-field="o.ue_id"/></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Cycle</td>
+                                        <td><span t-field="o.cycle_id"/></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Teacher</td>
+                                        <td><span t-field="o.teacher_id"/></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Period</td>
+                                        <td><span t-field="o.perdiod"/></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Credits</td>
+                                        <td><span t-field="o.total_credits"/></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Hours</td>
+                                        <td><span t-field="o.total_hours"/></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Mandatory</td>
+                                        <td><t t-if="o.mandatory"><input type="checkbox" value="" checked=""/></t><t t-if="not(o.mandatory)"><input type="checkbox" value=""/></t></td>
+                                      </tr>
+                                    </tbody>
+                                 </table>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Schedule - <span t-field="o.schedule"/></h3>
+                          </div>
+                          <div class="panel-body">
+                            <span style="padding:5px;" t-raw="o.schedule_text"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Content</h3>
+                          </div>
+                          <div class="panel-body">
+                            <span style="padding:5px;" t-raw="o.content"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Method</h3>
+                          </div>
+                          <div class="panel-body">
+                            <span style="padding:5px;" t-raw="o.method"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Learning outcomes</h3>
+                          </div>
+                          <div class="panel-body">
+                            <span style="padding:5px;" t-raw="o.learning_outcomes"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">References</h3>
+                          </div>
+                          <div class="panel-body">
+                            <span style="padding:5px;" t-raw="o.references"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Pre-Co requiered</h3>
+                          </div>
+                          <div class="panel-body">
+                            <span style="padding:5px;" t-raw="o.pre_co_requiered"/>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Evaluation method</h3>
+                          </div>
+                          <div class="panel-body">
+                            <span style="padding:5px;" t-raw="o.evaluation_method"/>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top:40px;margin-bottom:40px;">
+                            Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
+                        </div>
+                      </section>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+    
 </odoo>
