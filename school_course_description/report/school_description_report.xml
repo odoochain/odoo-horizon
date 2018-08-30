@@ -256,7 +256,7 @@
                                       </tr>
                                       <tr>
                                         <td>Period</td>
-                                        <td><span t-field="o.perdiod"/></td>
+                                        <td><span t-field="o.period"/></td>
                                       </tr>
                                       <tr>
                                         <td>Credits</td>
