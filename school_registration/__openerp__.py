@@ -28,9 +28,9 @@
     'depends': ['school_dispense_approval'],
     'init_xml': [],
     'update_xml': [
+        'views/configuration_view.xml',
         'wizard/year_opening.xml',
         'views/registration_view.xml',
-        'views/configuration_view.xml',
         #'security/ir.model.access.csv',
     ],
     'demo_xml': [],
