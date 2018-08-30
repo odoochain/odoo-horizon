@@ -279,11 +279,17 @@
                             <div class="panel-body">
                                 <table class="table table-striped">
                                     <colgroup>
-                                        <col style="width:100%"/>
+                                        <col style="width:400px"/>
                                         <col style="width:150px"/>
                                         <col style="width:150px"/>
                                         <col style="width:150px"/>
                                     </colgroup>
+                                    <tr>
+                                      <td>Title</td>
+                                      <td>Hours</td>
+                                      <td>Credits</td>
+                                      <td>Weight</td>
+                                    </tr>
                                     <tr t-foreach="o.course_ids" t-as="course">
                                       <td t-if="course.url_ref">
                                           <a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/>
