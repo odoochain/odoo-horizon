@@ -90,7 +90,7 @@ class website_portal_school_management(http.Controller):
             
             
     @http.route(['/course_group/<course_group_id>'], type='http', auth='public')
-    def course(self, course_group_id, redirect=None, **post):
+    def course_group(self, course_group_id, redirect=None, **post):
         _, course_group_id = unslug(course_group_id)
         course_group_id = request.env['school.course_group'].sudo().browse([course_group_id])
         if course_group_id:
