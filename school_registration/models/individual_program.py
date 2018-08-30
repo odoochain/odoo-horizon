@@ -29,7 +29,7 @@ class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit='school.individual_program'
     
-     @api.multi
+    @api.multi
     def register_pae(self):
         self.ensure_one()
         value = {
