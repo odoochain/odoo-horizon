@@ -279,10 +279,10 @@
                             <div class="panel-body">
                                 <table class="table table-striped">
                                     <colgroup>
-                                        <col style="width:400px"/>
-                                        <col style="width:150px"/>
-                                        <col style="width:150px"/>
-                                        <col style="width:150px"/>
+                                        <col style="width:600px"/>
+                                        <col style="width:100px"/>
+                                        <col style="width:100px"/>
+                                        <col style="width:100px"/>
                                     </colgroup>
                                     <tr>
                                       <td>Title</td>
