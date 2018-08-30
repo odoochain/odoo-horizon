@@ -48,9 +48,9 @@ class IndividualProgram(models.Model):
         cg_ids = []
         for group in new_pae.source_bloc_id.course_group_ids:
             # Check if cg already acquiered
-            count = self.env['school.individual_course_group'].search_count([('student_id','=',self.student_id.id),('acquiered','=',True)])
+            count = self.env['school.individual_course_group'].search_count([('student_id','=',self.student_id.id),('acquiered','=','A'),('source_course_group_id','=',group.id)])
             if count == 0 :
-                _logger.info('assign course groups : ' + group.name)
+                _logger.info('Assign course groups : ' + group.ue_id + ' - ' +group.name)
                 cg = self.course_group_ids.create({'bloc_id': new_pae.id,'source_course_group_id': group.id, 'acquiered' : 'NA'})
                 courses = []
                 for course in group.course_ids:
@@ -59,7 +59,7 @@ class IndividualProgram(models.Model):
                 _logger.info(courses)
                 cg.write({'course_ids': courses})
             else :
-                 _logger.info('skip course groups : ' + group.name)
+                 _logger.info('Skip course groups : ' + group.ue_id + ' - ' +group.name)
 
         
         value = {
