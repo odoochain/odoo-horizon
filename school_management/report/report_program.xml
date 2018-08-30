@@ -240,8 +240,6 @@
                         <!--<td class="text-center">Aucun</td>-->
                         <td>
                             <t t-if="course_group.acquiered == 'A'">Valid.</t>
-                            <t t-if="course_group.group_registration_type == 'rework'">Rés</t>
-                            <t t-if="course_group.group_registration_type == 'anticipated'">Ant</t>
                         </td>
                     </tr>
                     <tr t-foreach="course_group.course_ids" t-as="course">
@@ -300,8 +298,6 @@
                         <!--<td class="text-center">Aucun</td>-->
                         <td>
                             <t t-if="course_group.acquiered == 'A'">Valid.</t>
-                            <t t-if="course_group.group_registration_type == 'rework'">Rés</t>
-                            <t t-if="course_group.group_registration_type == 'anticipated'">Ant</t>
                         </td>
                     </tr>
                     <tr t-foreach="course_group.course_ids" t-as="course">
