@@ -274,6 +274,33 @@
                                  </table>
                             </div>
                         </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Course Informations</div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <colgroup>
+                                        <col style="width:100%"/>
+                                        <col style="width:150px"/>
+                                        <col style="width:150px"/>
+                                        <col style="width:150px"/>
+                                    </colgroup>
+                                    <tr t-foreach="course_group.course_ids" t-as="course">
+                                      <td t-if="course.url_ref">
+                                          <a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/>
+                                          <br/><t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name"/><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t>
+                                      </td>
+                                      <td t-if="not course.url_ref">
+                                          <a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/>
+                                          <br/><t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;"  t-esc="teacher.name"/><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t>
+                                      </td>
+                                      <td class="text-center"><t t-esc="course.hours"/></td>
+                                      <td class="text-center"><t t-esc="course.credits"/></td>
+                                      <td class="text-center"><t t-esc="course.weight"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
                         <div class="row" style="margin-top:40px;margin-bottom:40px;">
                             Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
                         </div>
