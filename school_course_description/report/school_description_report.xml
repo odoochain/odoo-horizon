@@ -248,7 +248,7 @@
                                       </tr>
                                       <tr>
                                         <td>Cycle</td>
-                                        <td><span t-field="o.cycle_id"/></td>
+                                        <td><span t-field="o.cycle_id.grade"/></td>
                                       </tr>
                                       <tr>
                                         <td>Teacher</td>
