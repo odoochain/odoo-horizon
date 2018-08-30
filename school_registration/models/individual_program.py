@@ -29,22 +29,7 @@ class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit='school.individual_program'
     
-    @api.multi
-    def register_pae(self):
-        self.ensure_one()
-        context = dict(self._context or {})
-        _logger.info(context)
-        
-        #if self.total_acquiered_credits < 45 :
-        # Register all UE from bloc 1 that are not yet acquiered
-        new_pae = self.env['school.individual_bloc'].create({
-            'student_id' : context.get('default_student_id'),
-            'program_id' : context.get('default_program_id'),
-            'year_id' :  self.env.user.current_year_id.id,
-            'source_bloc_id' : self.source_program_id.bloc_ids[0].id,
-            'state' : 'draft',
-        })
-            
+    def _assign_cg(self, new_pae):
         cg_ids = []
         for group in new_pae.source_bloc_id.course_group_ids:
             # Check if cg already acquiered
@@ -60,7 +45,45 @@ class IndividualProgram(models.Model):
                 cg.write({'course_ids': courses})
             else :
                  _logger.info('Skip course groups : ' + group.ue_id + ' - ' +group.name)
+    
+    @api.multi
+    def register_pae(self):
+        self.ensure_one()
+        context = dict(self._context or {})
+        _logger.info(context)
+        
+        if self.total_acquiered_credits < 45 :
+            # Register all UE from bloc 1 that are not yet acquiered
+            new_pae = self.env['school.individual_bloc'].create({
+                'student_id' : context.get('default_student_id'),
+                'program_id' : context.get('default_program_id'),
+                'year_id' :  self.env.user.current_year_id.id,
+                'source_bloc_id' : self.source_program_id.bloc_ids[0].id,
+            })
+                
+            self._assign_cg(new_pae)
 
+        elif  self.total_acquiered_credits < 120 :
+            # Register all UE that are not yet acquiered
+            new_pae = self.env['school.individual_bloc'].create({
+                'student_id' : context.get('default_student_id'),
+                'program_id' : context.get('default_program_id'),
+                'year_id' :  self.env.user.current_year_id.id,
+                'source_bloc_id' : self.source_program_id.bloc_ids[1].id,
+            })
+                
+            self._assign_cg(new_pae)
+            
+        else :
+            # Register all UE that are not yet acquiered
+            new_pae = self.env['school.individual_bloc'].create({
+                'student_id' : context.get('default_student_id'),
+                'program_id' : context.get('default_program_id'),
+                'year_id' :  self.env.user.current_year_id.id,
+                'source_bloc_id' : self.source_program_id.bloc_ids[2].id,
+            })
+                
+            self._assign_cg(new_pae)
         
         value = {
             'domain': "[]",
