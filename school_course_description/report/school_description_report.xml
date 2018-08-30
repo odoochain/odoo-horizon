@@ -217,7 +217,7 @@
         </t>
     </template>
     
-    <template id="report_course_documentation_content">
+    <template id="report_course_group_documentation_content">
         <t t-call="report.html_container">
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
