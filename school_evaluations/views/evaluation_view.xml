@@ -122,6 +122,11 @@
                     <field name="evaluation"/>
                     <field name="state"/>
                 </xpath>
+                <xpath expr="//field[@name='total_credits']" position="after">
+                    <field name="dispense" />
+                    <field name="final_result"/>
+                    <field name="acquiered"/>
+                </xpath>
             </field>
         </record>
         
