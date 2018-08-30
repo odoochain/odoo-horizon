@@ -291,7 +291,7 @@
                                       <td>Weight</td>
                                     </tr>
                                     <tr t-foreach="o.course_ids" t-as="course">
-                                      <td></td>
+                                      <td>
                                         <a t-esc="course.title" t-att-href="'/course/%s' % course.id" target="new" style="cursor: pointer;"/>
                                         <br/><t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name"/><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t>
                                       </td>
