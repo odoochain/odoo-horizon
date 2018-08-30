@@ -31,7 +31,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="before">
                     <header>
-                        <button string="Register PAE" type="action" name="%(action_assign_program_view)d" class="oe_highlight" context="{'default_student_id': active_id}" attrs="{'invisible': [('student','=',False)]}" 
+                        <button string="Register PAE" type="object" name="register_pae" class="oe_highlight" context="{'default_program_id': active_id}" 
                                     groups="school_management.group_employee"/>
                     </header>
                 </xpath>
