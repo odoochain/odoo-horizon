@@ -83,7 +83,6 @@
                 <field name="total_credits"/>
                 <field name="dispense"/>
                 <field name="acquiered"/>
-                <field name="state"/>
                </tree>
             </field>
           </sheet>
