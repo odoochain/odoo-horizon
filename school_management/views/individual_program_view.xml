@@ -81,7 +81,6 @@
                 <field name="name"/>
                 <field name="total_hours"/>
                 <field name="total_credits"/>
-                <field name="dispense"/>
                 <field name="acquiered"/>
                </tree>
             </field>
