@@ -37,7 +37,7 @@ class IndividualProgram(models.Model):
         new_pae = self.env['school.individual_bloc'].create({
             'student_id' : context.get('default_student_id'),
             'program_id' : context.get('default_program_id'),
-            'year_id' :  self.env.user.current_year_id,
+            'year_id' :  self.env.user.current_year_id.id,
         })
         
         value = {
