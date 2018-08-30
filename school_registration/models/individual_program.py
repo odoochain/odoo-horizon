@@ -32,13 +32,22 @@ class IndividualProgram(models.Model):
     @api.multi
     def register_pae(self):
         self.ensure_one()
+        context = dict(self._context or {})
+        _logger.info(context)
+        new_pae = self.env['school.individual_bloc'].create({
+            'student_id' : context.get('default_student_id'),
+            'program_id' : context.get('default_program_id'),
+            'year_id' :  self.env.user.current_year_id,
+        })
+        
         value = {
             'domain': "[]",
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'school.individual_bloc',
+            'res_id' : new_pae.id,
             'view_id': False,
-            'context': dict(self._context or {}),
+            'context': context,
             'type': 'ir.actions.act_window',
             'search_view_id': False
         }
