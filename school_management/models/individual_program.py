@@ -46,7 +46,7 @@ class IndividualProgram(models.Model):
     
     source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict", required=True)
     
-    speciality_id = fields.Many2one('school.speciality', string='Speciality', required=True)
+    speciality_id = fields.Many2one('school.speciality', related='source_program_id.speciality_id', string='Speciality', required=True, store=True)
     domain_id = fields.Many2one(related='speciality_id.domain_id', string='Domain',store=True)
     section_id = fields.Many2one(related='speciality_id.section_id', string='Section',store=True)
     track_id = fields.Many2one(related='speciality_id.track_id', string='Track',store=True)
