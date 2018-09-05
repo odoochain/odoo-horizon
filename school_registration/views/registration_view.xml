@@ -50,5 +50,11 @@
             </field>
         </record>
         
+        <record id="school_action_program_new" model="ir.actions.act_window">
+            <field name="name">Program</field>
+            <field name="res_model">school.individual_program</field>
+            <field name="view_mode">form</field>
+        </record>
+        
     </data>
 </openerp>
