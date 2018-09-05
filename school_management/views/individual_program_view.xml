@@ -59,9 +59,10 @@
             <div class="oe_title" style="padding-left: 260px;">
               <h1>
                 <field name="student_id"/>
+                <field name="year_id"/>
+                <field name="source_program_id"/>
                 <field name="cycle_id"/>
                 <field name="speciality_id"/>
-                <field name="source_program_id"/>
               </h1>
             </div>
             <group col="4">
