@@ -44,7 +44,7 @@ class IndividualProgram(models.Model):
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
-    source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict", required=True, domain="[('year_id','=',self.year_id.id)]")
+    source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict", required=True, domain="[('year_id','=',year_id)]")
     
     cycle_id = fields.Many2one('school.cycle', related='source_program_id.cycle_id', string='Cycle', required=True, store=True, readonly=True)
     
