@@ -36,6 +36,12 @@
             </field>
         </record>
         
+        <record id="school_action_program_new" model="ir.actions.act_window">
+            <field name="name">Program</field>
+            <field name="res_model">school.individual_program</field>
+            <field name="view_mode">form</field>
+        </record>
+        
         <!-- Add program for student form view -->
         <record id="view_student_form_school_docs" model="ir.ui.view">
             <field name="name">view.res.partner.form.school.docs</field>
@@ -48,12 +54,6 @@
                         context="{'default_student_id': active_id}" groups="school_management.group_employee"/>
                 </xpath>
             </field>
-        </record>
-        
-        <record id="school_action_program_new" model="ir.actions.act_window">
-            <field name="name">Program</field>
-            <field name="res_model">school.individual_program</field>
-            <field name="view_mode">form</field>
         </record>
         
     </data>
