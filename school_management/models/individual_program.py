@@ -35,6 +35,8 @@ class IndividualProgram(models.Model):
 
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
+    year_id = fields.Many2one('school.year', string='Year')
+    
     student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", required=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
@@ -42,7 +44,7 @@ class IndividualProgram(models.Model):
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
-    source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict", required=True)
+        source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict", required=True, domain="[('year_id','=',self.year_id.id)]")
     
     cycle_id = fields.Many2one('school.cycle', related='source_program_id.cycle_id', string='Cycle', required=True, store=True, readonly=True)
     
