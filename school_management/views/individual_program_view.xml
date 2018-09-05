@@ -38,7 +38,7 @@
       <field name="model">school.individual_program</field>
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
-        <tree string="Individual Program" create="false">
+        <tree string="Individual Program">
           <field name="student_id" />
           <field name="cycle_id" />
           <field name="speciality_id" />
