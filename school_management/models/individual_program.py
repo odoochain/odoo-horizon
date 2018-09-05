@@ -66,22 +66,23 @@ class IndividualProgram(models.Model):
     
     @api.one
     def _compute_course_group_ids(self):
-        ret = []
-        for bloc in self.bloc_ids:
-            if ret:
-                ret |= bloc.course_group_ids
-            else:
-                ret = bloc.course_group_ids
+        pass
+        # ret = []
+        # for bloc in self.bloc_ids:
+        #     if ret:
+        #         ret |= bloc.course_group_ids
+        #     else:
+        #         ret = bloc.course_group_ids
                 
-        self.course_group_ids = ret
+        # self.course_group_ids = ret
         
-        cg_acq_ids = ret.filtered(lambda r: r.acquiered == 'A').mapped('source_course_group_id')
+        # cg_acq_ids = ret.filtered(lambda r: r.acquiered == 'A').mapped('source_course_group_id')
         
-        cg_ids = []
-        for bloc in self.source_program_id.bloc_ids :
-            cg_ids |= bloc.course_group_ids
+        # cg_ids = []
+        # for bloc in self.source_program_id.bloc_ids :
+        #     cg_ids |= bloc.course_group_ids
             
-        self.remaining_course_group_ids = self.env['school.course_group'].browse(cg_ids) - cg_acq_ids
+        # self.remaining_course_group_ids = self.env['school.course_group'].browse(cg_ids) - cg_acq_ids
             
 
 
