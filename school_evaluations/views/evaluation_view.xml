@@ -133,7 +133,7 @@
                       <tree string="Course Group" create="0" delete="0">
                         <field name="ue_id"/>-->
                         <field name="name"/>
-                        <!--<field name="total_hours"/>
+                        <field name="total_hours"/>
                         <field name="total_credits"/>
                        </tree>
                     </field>
