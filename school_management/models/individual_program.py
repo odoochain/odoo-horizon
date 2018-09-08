@@ -61,8 +61,12 @@ class IndividualProgram(models.Model):
     
     @api.one
     def _compute_course_group_ids(self):
+        _logger.info('HERHERHEHREHRHEHERH')
         course_group_ids = False
         for bloc in self.source_program_id.bloc_ids:
+            _logger.info(bloc)
+            _logger.info(bloc.course_group_ids)
+            _logger.info(course_group_ids)
             if course_group_ids :
                 course_group_ids |= bloc.course_group_ids
             else :
