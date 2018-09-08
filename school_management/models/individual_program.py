@@ -59,7 +59,7 @@ class IndividualProgram(models.Model):
     
     @api.one
     def _compute_ind_course_group_ids(self):
-        self.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids.ids)])
+        self.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids.ids)]).sorted(key=lambda ic: (ic.year_id, ic.sequence))
     
     @api.one
     @api.depends('cycle_id.name','speciality_id.name','student_id.name')
