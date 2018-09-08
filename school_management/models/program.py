@@ -113,6 +113,12 @@ class Program(models.Model):
     
     bloc_ids = fields.One2many('school.bloc', 'program_id', string='Blocs', copy=True)
     
+    course_group_ids = fields.One2many('school.course_group', string='Courses Groups',compute='_compute_course_group_ids')
+    
+    @api.one
+    def _compute_course_group_ids(self):
+        self.all_course_group_ids = self.env['school.course_group'].search([('bloc_id','in',self.bloc_ids)])
+    
     @api.multi
     def unpublish(self):
         return self.write({'state': 'draft'})

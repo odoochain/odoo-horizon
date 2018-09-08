@@ -29,6 +29,22 @@ class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit='school.individual_program'
     
+    ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids')
+    
+    not_acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids')
+    acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids')
+    
+    remaining_course_group_ids  = fields.One2many('school.course_group', string='Courses Groups',compute='_compute_ind_course_group_ids')
+    
+    @api.one
+    def _compute_ind_course_group_ids(self):
+        self.all_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids)])
+        self.not_acquired_ind_course_group_ids = self.all_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
+        self.acquired_ind_course_group_ids = self.all_course_group_ids.filtered(lambda ic: ic.acquiered == 'A')
+        
+        #acquired_course_group_ids = self.acquired_ind_course_group_ids.mapped('source_course_id')
+        #self.remaining_course_group_ids = self.source_program_id.course_group_ids.ids - acquired_course_group_ids
+    
     def _assign_cg(self, new_pae):
         cg_ids = []
         for group in new_pae.source_bloc_id.course_group_ids:

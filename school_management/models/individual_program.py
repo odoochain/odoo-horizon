@@ -63,31 +63,6 @@ class IndividualProgram(models.Model):
     bloc_ids = fields.One2many('school.individual_bloc', 'program_id', string='Individual Blocs')
     highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
 
-    course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups',compute='_compute_course_group_ids')
-    remaining_course_group_ids  = fields.One2many('school.course_group', string='Courses Groups',compute='_compute_course_group_ids')
-    
-    @api.one
-    def _compute_course_group_ids(self):
-        pass
-        # ret = []
-        # for bloc in self.bloc_ids:
-        #     if ret:
-        #         ret |= bloc.course_group_ids
-        #     else:
-        #         ret = bloc.course_group_ids
-                
-        # self.course_group_ids = ret
-        
-        # cg_acq_ids = ret.filtered(lambda r: r.acquiered == 'A').mapped('source_course_group_id')
-        
-        # cg_ids = []
-        # for bloc in self.source_program_id.bloc_ids :
-        #     cg_ids |= bloc.course_group_ids
-            
-        # self.remaining_course_group_ids = self.env['school.course_group'].browse(cg_ids) - cg_acq_ids
-            
-
-
     @api.one
     @api.depends('bloc_ids.source_bloc_level')
     def _compute_highest_level(self):
