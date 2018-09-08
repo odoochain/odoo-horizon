@@ -22,7 +22,7 @@
 -->
 <openerp>
     <data>
-        <!-- Add program for student form view 
+        <!-- Add program for student form view -->
         <record id="view_program_form_school" model="ir.ui.view">
             <field name="name">view.program.form.school.reg</field>
             <field name="model">school.individual_program</field>
@@ -42,7 +42,7 @@
             <field name="view_mode">form</field>
         </record>
         
-        <!- - Add program for student form view - ->
+        <!-- Add program for student form view -->
         <record id="view_student_form_school_docs" model="ir.ui.view">
             <field name="name">view.res.partner.form.school.docs</field>
             <field name="model">res.partner</field>
@@ -56,7 +56,7 @@
                     </header>
                 </xpath>
             </field>
-        </record>-->
+        </record>
         
     </data>
 </openerp>
