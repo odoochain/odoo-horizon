@@ -88,7 +88,7 @@
             </field>
         </record>
     
-        <!-- Add evaluation to Individual Program form view -->
+        <!-- Add evaluation to Individual Program form view - ->
         <record id="individual_program_eval_form" model="ir.ui.view">
             <field name="name">school.individual_program.eval.view</field>
             <field name="model">school.individual_program</field>
@@ -127,7 +127,7 @@
                     <field name="final_result"/>
                     <field name="acquiered"/>
                 </xpath>
-                <!--<xpath expr="//field[@name='ind_course_group_ids']" position="after">
+                <! --<xpath expr="//field[@name='ind_course_group_ids']" position="after">
                     <h2>Unités d'enseignement restant à acquérir</h2>
                     <field name="remaining_course_group_ids">
                       <tree string="Course Group" create="0" delete="0">
@@ -137,9 +137,9 @@
                         <field name="total_credits"/>
                        </tree>
                     </field>
-                </xpath>-->
+                </xpath>-- >
             </field>
-        </record>
+        </record>-->
         
         <!-- Add evaluation to Individual Course tree view -->
         <record id="individual_program_eval_tree" model="ir.ui.view">
