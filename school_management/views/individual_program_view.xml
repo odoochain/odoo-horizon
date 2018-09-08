@@ -76,16 +76,6 @@
               </tree>
             </field>
             <br/>
-            <h2>Unités d'enseignement du cycle</h2>
-            <field name="course_group_ids">
-              <tree string="Course Group" create="0" delete="0">
-                <field name="ue_id"/>
-                <field name="name"/>
-                <field name="total_hours"/>
-                <field name="total_credits"/>
-               </tree>
-            </field>
-            <br/>
             <h2>Unités d'enseignement reprise dans les PAE</h2>
             <field name="ind_course_group_ids">
               <tree string="Course Group" create="0" delete="0">
@@ -96,6 +86,17 @@
                 <field name="total_credits"/>
                </tree>
             </field>
+            <br/>
+            <h2>Unités d'enseignement du cycle</h2>
+            <field name="course_group_ids">
+              <tree string="Course Group" create="0" delete="0">
+                <field name="ue_id"/>
+                <field name="name"/>
+                <field name="total_hours"/>
+                <field name="total_credits"/>
+               </tree>
+            </field>
+            <br/>
           </sheet>
           <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers" />
