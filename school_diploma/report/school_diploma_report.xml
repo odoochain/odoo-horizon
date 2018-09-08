@@ -22,7 +22,7 @@
 -->
 <odoo>
     
-    <!-- Add evaluation to Individual Program form view -->
+    <!-- Add evaluation to Individual Program form view - ->
     <record id="individual_program_diplom_form" model="ir.ui.view">
         <field name="name">school.individual_program.diplom.view</field>
         <field name="model">school.individual_program</field>
@@ -33,7 +33,7 @@
                 <field name="access_requirements" colspan="4"/>
             </xpath>
         </field>
-    </record>
+    </record> -->
 
     <!--
     
