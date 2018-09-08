@@ -122,12 +122,12 @@
                     <field name="evaluation"/>
                     <field name="state"/>
                 </xpath>
-                <xpath expr="//field[@name='total_credits']" position="after">
+                 <!--<xpath expr="//field[@name='total_credits']" position="after">
                     <field name="dispense" />
                     <field name="final_result"/>
                     <field name="acquiered"/>
                 </xpath>
-                <!--<xpath expr="//field[@name='ind_course_group_ids']" position="after">
+               <xpath expr="//field[@name='ind_course_group_ids']" position="after">
                     <h2>Unités d'enseignement restant à acquérir</h2>
                     <field name="remaining_course_group_ids">
                       <tree string="Course Group" create="0" delete="0">
