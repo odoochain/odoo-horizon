@@ -126,7 +126,7 @@
                     <field name="dispense" />
                     <field name="final_result"/>
                     <field name="acquiered"/>
-                </xpath>-->
+                </xpath>
                 <xpath expr="//field[@name='ind_course_group_ids']" position="after">
                     <h2>Unités d'enseignement restant à acquérir</h2>
                     <field name="remaining_course_group_ids">
@@ -137,7 +137,7 @@
                         <field name="total_credits"/>
                        </tree>
                     </field>
-                </xpath>
+                </xpath>-->
             </field>
         </record>
         
