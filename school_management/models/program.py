@@ -121,7 +121,7 @@ class Program(models.Model):
         for bloc in self.bloc_ids:
             if course_group_ids :
                 course_group_ids |= bloc.course_group_ids
-            else 
+            else :
                 course_group_ids = bloc.course_group_ids
         self.course_group_ids = course_group_ids
     
