@@ -83,7 +83,7 @@
                 <!--<field name="ue_id"/>-->
                 <field name="name"/>
                 <field name="total_hours"/>
-                <field name="total_credits"/>
+                <!--<field name="total_credits"/>-->
                </tree>
             </field>
             <h2>Unités d'enseignement restant à acquérir</h2>
@@ -92,7 +92,7 @@
                 <!--<field name="ue_id"/>-->
                 <field name="name"/>
                 <field name="total_hours"/>
-                <field name="total_credits"/>
+                <!--<field name="total_credits"/>-->
                </tree>
             </field>
           </sheet>
