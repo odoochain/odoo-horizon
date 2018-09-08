@@ -119,6 +119,9 @@ class Program(models.Model):
     def _compute_course_group_ids(self):
         course_group_ids = False
         for bloc in self.bloc_ids:
+            _logger.info(bloc)
+            _logger.info(bloc.course_group_ids)
+            _logger.info(course_group_ids)
             if course_group_ids :
                 course_group_ids |= bloc.course_group_ids
             else :
