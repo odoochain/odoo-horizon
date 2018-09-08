@@ -162,6 +162,19 @@ class IndividualProgram(models.Model):
         }
         # TODO : Implement computation based on UE as per the decret
     
+    not_acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids')
+    acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids')
+    
+    remaining_course_group_ids  = fields.One2many('school.course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
+    
+    @api.one
+    def _compute_ind_course_group_ids_eval(self):
+        self.not_acquired_ind_course_group_ids = self.all_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
+        self.acquired_ind_course_group_ids = self.all_course_group_ids.filtered(lambda ic: ic.acquiered == 'A')
+        
+        #acquired_course_group_ids = self.acquired_ind_course_group_ids.mapped('source_course_id')
+        #self.remaining_course_group_ids = self.source_program_id.course_group_ids.ids - acquired_course_group_ids
+    
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'

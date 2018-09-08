@@ -55,6 +55,12 @@ class IndividualProgram(models.Model):
     
     required_credits = fields.Integer(related='cycle_id.required_credits',string='Requiered Credits')
     
+    ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids')
+    
+    @api.one
+    def _compute_ind_course_group_ids(self):
+        self.all_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids)])
+    
     @api.one
     @api.depends('cycle_id.name','speciality_id.name','student_id.name')
     def _compute_name(self):
