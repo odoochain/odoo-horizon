@@ -61,7 +61,7 @@ class IndividualProgram(models.Model):
     
     @api.one
     def _compute_course_group_ids(self):
-        self.course_group_ids = self.env['school.course_group'].search([('bloc_id','in',self.source_program_id.bloc_ids.ids)])
+        self.course_group_ids = self.env['school.course_group'].search([('bloc_ids','in',self.source_program_id.bloc_ids.ids)])
     
     @api.one
     def _compute_ind_course_group_ids(self):
