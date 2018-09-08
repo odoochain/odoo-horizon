@@ -99,7 +99,7 @@ class Program(models.Model):
         
     competency_ids = fields.Many2many('school.competency','school_competency_program_rel', id1='program_id', id2='competency_id', string='Competencies', ondelete='set null')
     
-    cycle_id = fields.Many2one('school.cycle', string='Cycle')
+    cycle_id = fields.Many2one('school.cycle', string='Cycle', required=True)
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
     domain_id = fields.Many2one(related='speciality_id.domain_id', string='Domain',store=True)
