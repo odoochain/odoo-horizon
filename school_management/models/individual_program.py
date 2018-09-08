@@ -59,7 +59,7 @@ class IndividualProgram(models.Model):
     
     @api.one
     def _compute_ind_course_group_ids(self):
-        self.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids.ids)]).sorted(key=lambda ic: (ic.year_id, ic.sequence))
+        self.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids.ids)])
     
     @api.one
     @api.depends('cycle_id.name','speciality_id.name','student_id.name')
@@ -201,7 +201,7 @@ class IndividualCourseGroup(models.Model):
     _description='Individual Course Group'
     _inherit = ['mail.thread','school.year_sequence.mixin']
     
-    _order = 'sequence'
+    _order = 'year_id, sequence'
     
     name = fields.Char(related="source_course_group_id.name", readonly=True)
     ue_id = fields.Char(related="source_course_group_id.ue_id", readonly=True)
