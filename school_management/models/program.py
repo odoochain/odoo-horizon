@@ -117,7 +117,7 @@ class Program(models.Model):
     
     @api.one
     def _compute_course_group_ids(self):
-        self.all_course_group_ids = self.env['school.course_group'].search([('bloc_id','in',self.bloc_ids)])
+        self.course_group_ids = self.env['school.course_group'].search([('bloc_id','in',self.bloc_ids)])
     
     @api.multi
     def unpublish(self):
