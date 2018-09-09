@@ -136,13 +136,13 @@ class Program(models.Model):
     @api.one
     def _compute_bloc_course_group_ids(self):
         if len(self.bloc_ids) > 0 :
-            self.bloc1_title = self.bloc_ids[0].title
+            self.bloc1_title = self.bloc_ids[0].name
             self.bloc1_course_group_ids = self.bloc_ids[0].course_group_ids
         if len(self.bloc_ids) > 1 :
-            self.bloc2_title = self.bloc_ids[1].title
+            self.bloc2_title = self.bloc_ids[1].name
             self.bloc2_course_group_ids = self.bloc_ids[1].course_group_ids
         if len(self.bloc_ids) > 2 :
-            self.bloc3_title = self.bloc_ids[2].title
+            self.bloc3_title = self.bloc_ids[2].name
             self.bloc3_course_group_ids = self.bloc_ids[2].course_group_ids
         
     @api.multi
