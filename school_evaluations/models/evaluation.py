@@ -171,7 +171,7 @@ class IndividualProgram(models.Model):
         self.not_acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
         self.acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A')
         acquired_source_course_group_ids = self.acquired_ind_course_group_ids.mapped('source_course_group_id')
-        self.remaining_course_group_ids = self.source_program_id.course_group_ids.filtered(lambda cg: cg.id not in acquired_source_course_group_ids.ids)
+        self.remaining_course_group_ids = self.source_program_id.course_group_ids - acquired_source_course_group_ids
     
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
