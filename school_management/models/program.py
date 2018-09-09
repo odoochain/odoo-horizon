@@ -124,7 +124,20 @@ class Program(models.Model):
             else :
                 course_group_ids = bloc.course_group_ids
         self.course_group_ids = course_group_ids
+        
+    bloc1_course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_bloc_course_group_ids')
+    bloc2_course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_bloc_course_group_ids')
+    bloc3_course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_bloc_course_group_ids')
     
+    @api.one
+    def _compute_bloc_course_group_ids(self):
+        if self.bloc_ids[0] :
+            self.bloc1_course_group_ids = self.bloc_ids[0].course_group_ids
+        if self.bloc_ids[1] :
+            self.bloc2_course_group_ids = self.bloc_ids[1].course_group_ids
+        if self.bloc_ids[2] :
+            self.bloc3_course_group_ids = self.bloc_ids[2].course_group_ids
+        
     @api.multi
     def unpublish(self):
         return self.write({'state': 'draft'})

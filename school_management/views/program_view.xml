@@ -133,7 +133,6 @@
               <field name="total_weight" />
               <field name="weight" />
             </group>
-
             <field name="course_ids" context="{'default_course_group_id':active_id}">
               <tree string="Courses">
                 <field name="name" />
@@ -677,6 +676,7 @@
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
+            <h2>Blocs</h2>
             <field name="bloc_ids" context="{'default_program_id':active_id}">
               <tree string="Blocs">
                 <field name="id" string="Id"/>
@@ -684,6 +684,15 @@
                 <field name="total_hours" />
                 <field name="total_credits" />
               </tree>
+            </field>
+            <h2>Course Groups</h2>
+            <field name="course_group_ids">
+              <tree string="Course Group" create="0" delete="0">
+                <field name="ue_id"/>
+                <field name="name"/>
+                <field name="total_hours"/>
+                <field name="total_credits"/>
+               </tree>
             </field>
             <notebook>
               <page string="Description">
