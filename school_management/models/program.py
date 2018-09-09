@@ -125,9 +125,9 @@ class Program(models.Model):
                 course_group_ids = bloc.course_group_ids
         self.course_group_ids = course_group_ids
         
-    bloc1_title = fields.String(compute='_compute_bloc_course_group_ids')
-    bloc2_title = fields.String(compute='_compute_bloc_course_group_ids')
-    bloc3_title = fields.String(compute='_compute_bloc_course_group_ids')
+    bloc1_title = fields.Text(compute='_compute_bloc_course_group_ids')
+    bloc2_title = fields.Text(compute='_compute_bloc_course_group_ids')
+    bloc3_title = fields.Text(compute='_compute_bloc_course_group_ids')
         
     bloc1_course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_bloc_course_group_ids')
     bloc2_course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_bloc_course_group_ids')
