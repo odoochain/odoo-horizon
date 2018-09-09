@@ -685,8 +685,7 @@
                 <field name="total_credits" />
               </tree>
             </field>
-            <h2>Course Groups</h2>
-            <field name="course_group_ids">
+            <field name="bloc1_course_group_ids" attrs="{'invisible':[('bloc1_course_group_ids','=',False)]}">
               <tree string="Course Group" create="0" delete="0">
                 <field name="ue_id"/>
                 <field name="name"/>
@@ -694,7 +693,23 @@
                 <field name="total_credits"/>
                </tree>
             </field>
-            <notebook>
+            <field name="bloc2_course_group_ids" attrs="{'invisible':[('bloc2_course_group_ids','=',False)]}">
+              <tree string="Course Group" create="0" delete="0">
+                <field name="ue_id"/>
+                <field name="name"/>
+                <field name="total_hours"/>
+                <field name="total_credits"/>
+               </tree>
+            </field>
+            <field name="bloc3_course_group_ids" attrs="{'invisible':[('bloc3_course_group_ids','=',False)]}">
+              <tree string="Course Group" create="0" delete="0">
+                <field name="ue_id"/>
+                <field name="name"/>
+                <field name="total_hours"/>
+                <field name="total_credits"/>
+               </tree>
+            </field>
+          <notebook>
               <page string="Description">
                 <field name="description" placeholder="Vade mecum..." colspan="4" />
               </page>
