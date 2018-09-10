@@ -676,7 +676,6 @@
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
-            <h2>Blocs</h2>
             <field name="bloc_ids" context="{'default_program_id':active_id}">
               <tree string="Blocs">
                 <field name="id" string="Id"/>
@@ -685,34 +684,36 @@
                 <field name="total_credits" />
               </tree>
             </field>
-            <h2><field name="bloc1_title" attrs="{'invisible':[('bloc1_course_group_ids','=',[])]}"/></h2>
-            <field name="bloc1_course_group_ids" attrs="{'invisible':[('bloc1_course_group_ids','=',[])]}">
-              <tree string="Course Group" create="0" delete="0">
-                <field name="ue_id"/>
-                <field name="name"/>
-                <field name="total_hours"/>
-                <field name="total_credits"/>
-               </tree>
-            </field>
-            <h2><field name="bloc1_title" attrs="{'invisible':[('bloc2_course_group_ids','=',[])]}"/></h2>
-            <field name="bloc2_course_group_ids" attrs="{'invisible':[('bloc2_course_group_ids','=',[])]}">
-              <tree string="Course Group" create="0" delete="0">
-                <field name="ue_id"/>
-                <field name="name"/>
-                <field name="total_hours"/>
-                <field name="total_credits"/>
-               </tree>
-            </field>
-            <h2><field name="bloc1_title" attrs="{'invisible':[('bloc3_course_group_ids','=',[])]}"/></h2>
-            <field name="bloc3_course_group_ids" attrs="{'invisible':[('bloc3_course_group_ids','=',[])]}">
-              <tree string="Course Group" create="0" delete="0">
-                <field name="ue_id"/>
-                <field name="name"/>
-                <field name="total_hours"/>
-                <field name="total_credits"/>
-               </tree>
-            </field>
-          <notebook>
+            <notebook>
+              <page string="Détails des blocs">
+                <h2><field name="bloc1_title" attrs="{'invisible':[('bloc1_course_group_ids','=',[])]}"/></h2>
+                <field name="bloc1_course_group_ids" attrs="{'invisible':[('bloc1_course_group_ids','=',[])]}">
+                  <tree string="Course Group" create="0" delete="0">
+                    <field name="ue_id"/>
+                    <field name="name"/>
+                    <field name="total_hours"/>
+                    <field name="total_credits"/>
+                   </tree>
+                </field>
+                <h2><field name="bloc2_title" attrs="{'invisible':[('bloc2_course_group_ids','=',[])]}"/></h2>
+                <field name="bloc2_course_group_ids" attrs="{'invisible':[('bloc2_course_group_ids','=',[])]}">
+                  <tree string="Course Group" create="0" delete="0">
+                    <field name="ue_id"/>
+                    <field name="name"/>
+                    <field name="total_hours"/>
+                    <field name="total_credits"/>
+                   </tree>
+                </field>
+                <h2><field name="bloc3_title" attrs="{'invisible':[('bloc3_course_group_ids','=',[])]}"/></h2>
+                <field name="bloc3_course_group_ids" attrs="{'invisible':[('bloc3_course_group_ids','=',[])]}">
+                  <tree string="Course Group" create="0" delete="0">
+                    <field name="ue_id"/>
+                    <field name="name"/>
+                    <field name="total_hours"/>
+                    <field name="total_credits"/>
+                   </tree>
+                </field>
+              </page>
               <page string="Description">
                 <field name="description" placeholder="Vade mecum..." colspan="4" />
               </page>
