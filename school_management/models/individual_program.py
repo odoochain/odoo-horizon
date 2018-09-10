@@ -55,12 +55,19 @@ class IndividualProgram(models.Model):
     
     required_credits = fields.Integer(related='cycle_id.required_credits',string='Requiered Credits')
     
-    course_group_ids = fields.One2many('school.course_group', related="source_program_id.course_group_ids")
+    course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_ind_course_group_ids')
     
-    ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids')
+    ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
     @api.one
     def _compute_ind_course_group_ids(self):
+        course_group_ids = False
+        for bloc in self.source_program_id.bloc_ids:
+            if course_group_ids :
+                course_group_ids |= bloc.course_group_ids
+            else :
+                course_group_ids = bloc.course_group_ids
+        self.course_group_ids = course_group_ids
         self.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids.ids)])
     
     @api.one
