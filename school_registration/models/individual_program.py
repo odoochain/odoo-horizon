@@ -36,7 +36,7 @@ class IndividualProgram(models.Model):
             count = self.env['school.individual_course_group'].search_count([('student_id','=',self.student_id.id),('acquiered','=','A'),('source_course_group_id','=',group.id)])
             if count == 0 :
                 _logger.info('Assign course groups : ' + group.ue_id + ' - ' +group.name)
-                cg = self.course_group_ids.create({'bloc_id': new_pae.id,'source_course_group_id': group.id, 'acquiered' : 'NA'})
+                cg = new_pae.course_group_ids.create({'bloc_id': new_pae.id,'source_course_group_id': group.id, 'acquiered' : 'NA'})
                 courses = []
                 for course in group.course_ids:
                     _logger.info('assign course : ' + course.name)

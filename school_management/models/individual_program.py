@@ -136,7 +136,7 @@ class IndividualBloc(models.Model):
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
-    course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups',track_visibility='onchange')
+    course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', track_visibility='onchange')
     
     total_credits = fields.Integer(compute='_get_courses_total', string='Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours')
