@@ -64,7 +64,7 @@
                 </xpath>
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="official_document_list" string="Official Documents" attrs="{'invisible': [('student','=',False)]}" >
-                        <field name="google_drive_folder" widget="url">
+                        <field name="google_drive_folder" widget="url"/>
                         <field name="official_document_ids">
                             <tree string="Programs">
                                 <field name="name" />
