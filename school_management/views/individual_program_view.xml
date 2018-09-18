@@ -55,7 +55,7 @@
         <form string="Individual Program">
           <sheet>
             <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
-            <div class="oe_title" style="padding-left: 260px;">
+            <div class="oe_title" style="padding-left: 260px;width: 100%;">
               <h1>
                 <field name="student_id"/>
                 <field name="year_id"/>

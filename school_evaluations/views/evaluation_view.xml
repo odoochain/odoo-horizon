@@ -104,7 +104,7 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,progress,awarded,abandonned" />
                     </header>
                 </xpath>
-                <xpath expr="//sheet" position="inside">
+                <xpath expr="//field[@name='image']" position="before">
                     <div class="oe_button_box" name="button_box">
                             <button name="toggle_active" type="object"
                                     class="oe_stat_button" icon="fa-archive">
