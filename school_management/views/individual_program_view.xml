@@ -109,8 +109,9 @@
       <field name="name">program.select</field>
       <field name="model">school.individual_program</field>
       <field name="arch" type="xml">
-        <search string="Search Blocs">
+        <search string="Search Programs">
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
+          <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
           <separator/>
           <filter name="music" string="Musique" domain="[('domain_id', '=', 1)]"/>
           <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
@@ -263,6 +264,7 @@
       <field name="arch" type="xml">
         <search string="Search Blocs">
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
+          <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
           <field name="source_bloc_id" string="Programme"/>
           <field name="source_bloc_domain_id"/>
           <filter name="bloc_1" string="Bac 1" domain="[('source_bloc_level', '=', 1)]"/>
