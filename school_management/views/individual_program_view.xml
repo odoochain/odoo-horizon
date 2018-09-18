@@ -156,7 +156,7 @@
       <field name="act_window_id" ref="action_individual_program_form" />
     </record>
     
-    <menuitem id="menu_individual_program_form" parent="menu_individual_bloc" action="action_individual_program_form" sequence="50" />
+    <menuitem id="menu_individual_program_form" parent="menu_individual_bloc" action="action_individual_program_form" sequence="10" />
 
     <!--
     
@@ -319,7 +319,7 @@
       <field name="act_window_id" ref="action_individual_bloc_form" />
     </record>
     
-    <menuitem id="menu_individual_bloc_form" parent="menu_individual_bloc" action="action_individual_bloc_form" sequence="10" />
+    <menuitem id="menu_individual_bloc_form" parent="menu_individual_bloc" action="action_individual_bloc_form" sequence="30" />
 
     <!--
     
