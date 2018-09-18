@@ -219,9 +219,9 @@
                     <group expand="0" name="group_by" string="Group By">
                         <filter string="Bloc" context="{'group_by': 'student_current_bloc_name'}" />
                     </group>
-                    <!-- <separator/>
+                    <separator/>
                    <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
-                   <field name="user_id"/>
+                   <!--<field name="user_id"/>
                    <field name="parent_id" domain="[('is_company','=',1)]" operator="child_of"/>
                    <group expand="0" name="group_by" string="Group By">
                        <filter string="Company" context="{'group_by': 'parent_id'}"/>
@@ -271,6 +271,7 @@
                     <field name="student_current_bloc_id" />
                     <!--<field name="has_paid_current_minerval" />-->
                     <field name="email" />
+                    <field name="category_id" />
                     <field name="user_id" invisible="1" />
                     <field name="is_company" invisible="1" />
                     <field name="country_id" invisible="1" />
