@@ -33,6 +33,8 @@ class IndividualProgram(models.Model):
     
     _order = 'name'
 
+    active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
+
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
     year_id = fields.Many2one('school.year', string='Registration Year', default=lambda self: self.env.user.current_year_id)
@@ -94,6 +96,8 @@ class IndividualBloc(models.Model):
     _inherit = ['mail.thread','school.year_sequence.mixin']
     
     _order = 'year_id, source_bloc_level desc, source_bloc_name'
+    
+    active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
     
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
