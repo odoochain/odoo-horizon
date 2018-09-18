@@ -51,10 +51,11 @@
                                 <h2 attrs="{'invisible': [('student','=',False)]}">
                                     <field name="student_current_bloc_name" />
                                 </h2>
-                                <h3>
+                                <group>
+                                    <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
                                     <field name="user_ids" invisible="1"/>
                                     <field name="email" widget="email" attrs="{'required': [('user_ids','!=', [])]}" placeholder="Email"/>
-                                </h3>
+                                </group>
                                 <div class="oe_edit_only">
                     		        <group attrs="{'invisible': [('is_company', '=', True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
                     				    <field name='student' />
@@ -71,7 +72,6 @@
                                         <field name="total_credits" />
                                     </tree>
                                 </field>
-                    			<field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
                     			<field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': ['|',('is_company','=', True),('student','=',True)]}"/>
                             </div>
                         </div>
