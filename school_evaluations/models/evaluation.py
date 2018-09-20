@@ -109,7 +109,7 @@ class IndividualProgram(models.Model):
 
     program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True,track_visibility='onchange')
 
-    course_group_ids = fields.One2many('school.individual_course_group', 'cycle_id', string='Valuated Courses Groups', track_visibility='onchange')
+    valuated_course_group_ids = fields.One2many('school.individual_course_group', 'cycle_id', string='Valuated Courses Groups', track_visibility='onchange')
 
     @api.depends('required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     @api.one
