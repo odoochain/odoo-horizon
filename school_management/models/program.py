@@ -292,7 +292,8 @@ class CourseGroup(models.Model):
     
     @api.model
     def name_search(self, name='', args=None, operator='ilike', limit=100):
-        args = (args or []) + [('ue_id', 'ilike', name)]
+        if name :
+                args = ['|'] + (args or []) + [('ue_id', 'ilike', name)]
         return super(CourseGroup, self).name_search(name=name, args=args, operator=operator, limit=limit)
     
 class Course(models.Model):
