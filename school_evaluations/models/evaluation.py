@@ -617,9 +617,9 @@ class CourseGroup(models.Model):
         program_id = self.env.context.get('program_id')
         _logger.info('Add cg %s to %s' % (self.id, program_id))
         if program_id :
-            self.env['school.individual_course_group'].create({'valuated_program_id' : program_id, 'source_course_group_id': self.id, 'acquiered' : 'A'})
+            cg = self.env['school.individual_course_group'].create({'valuated_program_id' : program_id, 'source_course_group_id': self.id, 'acquiered' : 'A'})
             courses = []
-            for course in group.course_ids:
+            for course in selfs.course_ids:
                 courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
             cg.write({'course_ids': courses})
     
