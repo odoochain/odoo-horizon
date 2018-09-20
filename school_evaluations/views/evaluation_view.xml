@@ -136,7 +136,7 @@
                     <field name="final_result"/>
                     <field name="acquiered"/>
                 </xpath>
-                <xpath expr="//field[@name='ind_course_group_ids']" position="before">
+                <xpath expr="//field[@name='bloc_ids']" position="before">
                     <h2>Unités d'enseignement valorisées</h2>
                     <field name="valuated_course_group_ids">
                       <tree string="Course Group" create="0">
@@ -155,6 +155,7 @@
                         <field name="name"/>
                         <field name="total_hours" sum="total_hours_rem"/>
                         <field name="total_credits" sum="total_credits_rem"/>
+                        <button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group"/>
                        </tree>
                     </field>
                 </xpath>
