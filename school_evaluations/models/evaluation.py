@@ -109,27 +109,33 @@ class IndividualProgram(models.Model):
 
     program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True,track_visibility='onchange')
 
-    valuated_course_group_ids = fields.One2many('school.individual_course_group', 'cycle_id', string='Valuated Courses Groups', track_visibility='onchange')
+    valuated_course_group_ids = fields.One2many('school.individual_course_group', 'valuated_program_id', string='Valuated Courses Groups', track_visibility='onchange')
 
-    @api.depends('required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
+    @api.depends('valuated_course_group_ids', 'required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     @api.one
     def _get_total_acquiered_credits(self):
         _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % self.name)
-        total = sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in self.bloc_ids) or 0
+        total = sum(cg.total_credits for cg in self.valuated_course_group_ids)
+        total += sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in self.bloc_ids) or 0
         total_current = sum(bloc_id.total_credits if bloc_id.state in ['progress','postponed'] else 0 for bloc_id in self.bloc_ids)
         self.total_acquiered_credits = total + self.historical_bloc_1_credits + self.historical_bloc_2_credits
         self.program_completed = self.required_credits > 0 and self.total_acquiered_credits >= self.required_credits
+        self.total_registered_credits = self.total_acquiered_credits + total_current
+        self.program_completed = self.required_credits > 0 and self.total_acquiered_credits >= self.required_credits
     
-    
-    # TODO : Fix this it does not seem right
+    @api.depends('valuated_course_group_ids')
+    def _onchange_valuated_course_group_ids(self):
+        for cg in self.valuated_course_group_ids :
+            cg.course_ids.write({
+                'dispense' : True
+            })
+            
     @api.depends('grade')
     def _onchange_grade(self):
         if self.grade:
             graduation_date = fields.Date.today()
-        self.total_registered_credits = self.total_acquiered_credits + total_current
-        self.program_completed = self.required_credits > 0 and self.total_acquiered_credits >= self.required_credits
 
-    @api.depends('bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
+    @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     @api.one
     def compute_evaluation(self):
         total = 0
@@ -148,7 +154,7 @@ class IndividualProgram(models.Model):
             self.evaluation = total/count
         # TODO : Implement computation based on UE as per the decret
         
-    @api.depends('bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
+    @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     @api.multi
     def compute_evaluation_details(self):
         self.ensure_one();
@@ -171,10 +177,8 @@ class IndividualProgram(models.Model):
     @api.one
     def _compute_ind_course_group_ids_eval(self):
         self.not_acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
-        self.acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A')
+        self.acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A') + self.valuated_course_group_ids
         acquired_source_course_group_ids = self.acquired_ind_course_group_ids.mapped('source_course_group_id')
-        _logger.info(acquired_source_course_group_ids)
-        _logger.info(self.source_program_id.course_group_ids)
         self.remaining_course_group_ids = self.source_program_id.course_group_ids - acquired_source_course_group_ids
     
 class IndividualBloc(models.Model):
@@ -332,7 +336,7 @@ class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _inherit = 'school.individual_course_group'
     
-    cycle_id = fields.Many2one('school.individual_program', string="Program", ondelete='cascade', readonly=True)
+    valuated_program_id = fields.Many2one('school.individual_program', string="Program", ondelete='cascade', readonly=True)
     
     ## Compute dispensed hours and ECTS
     
