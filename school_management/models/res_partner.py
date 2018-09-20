@@ -55,11 +55,13 @@ class Partner(models.Model):
     reg_number = fields.Char('Registration Number')
     mat_number = fields.Char('Matricule Number')
     
-    student_current_bloc_id = fields.Many2one('school.individual_bloc', compute='_get_student_current_bloc_id', string='Bloc')
-    student_current_bloc_name = fields.Char(related='student_current_bloc_id.source_bloc_name', string='Current Bloc')
+    #student_program_ids = fields.One2many('school.individual_program', 'student_id', string='Programs')
+    
+    #student_current_bloc_id = fields.Many2one('school.individual_bloc', compute='_get_student_current_bloc_id', string='Bloc')
+    #student_current_bloc_name = fields.Char(related='student_current_bloc_id.source_bloc_name', string='Current Bloc')
     
     student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
-    student_current_bloc_ids = fields.One2many('school.individual_bloc', compute='_get_student_current_bloc_ids', string='Current Blocs')
+    #student_current_bloc_ids = fields.One2many('school.individual_bloc', compute='_get_student_current_bloc_ids', string='Current Blocs')
     
     #speciality_ids = fields.One2many('school.speciality', compute='_get_speciality_ids')
     
@@ -70,20 +72,20 @@ class Partner(models.Model):
         ('never','Never'),
         ], string="Year Sequence", compute="_compute_year_sequence", search="_search_year_sequence")
     
-    @api.one
-    @api.depends('student_bloc_ids')
-    def _get_student_current_bloc_ids(self):
-        self.student_current_bloc_ids = self.student_bloc_ids.filtered(lambda bloc: bloc.year_id == self.env.user.current_year_id)
+    # @api.one
+    # @api.depends('student_bloc_ids')
+    # def _get_student_current_bloc_ids(self):
+    #     self.student_current_bloc_ids = self.student_bloc_ids.filtered(lambda bloc: bloc.year_id == self.env.user.current_year_id)
         
-    @api.one
-    @api.depends('student_bloc_ids')
-    def _get_student_current_bloc_id(self):
-        res = False
-        for bloc in self.student_bloc_ids:
-            if bloc.year_id == self.env.user.current_year_id:
-                if not res or bloc.source_bloc_level > res.source_bloc_level:
-                    res = bloc
-        self.student_current_bloc_id = res
+    # @api.one
+    # @api.depends('student_bloc_ids')
+    # def _get_student_current_bloc_id(self):
+    #     res = False
+    #     for bloc in self.student_bloc_ids:
+    #         if bloc.year_id == self.env.user.current_year_id:
+    #             if not res or bloc.source_bloc_level > res.source_bloc_level:
+    #                 res = bloc
+    #     self.student_current_bloc_id = res
 
     def _compute_year_sequence(self):
         for item in self:

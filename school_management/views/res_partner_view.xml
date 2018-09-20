@@ -48,9 +48,6 @@
                                 <span class="oe_fade">
                                       Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
                                 </span>
-                                <h2 attrs="{'invisible': [('student','=',False)]}">
-                                    <field name="student_current_bloc_name" />
-                                </h2>
                                 <group>
                                     <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
                                     <field name="user_ids" invisible="1"/>
@@ -65,13 +62,6 @@
                     					<field name="firstname" attrs="{'required': [('lastname', '=', False),('type','=','contact'),('is_company', '=', False)]}" on_change="1" modifiers="{'required': [['lastname', '=', false], ['type', '=', 'contact'], ['is_company', '=', false]]}"/>
                     				</group>
                     			</div>
-                    			<field name="student_bloc_ids" attrs="{'invisible': [('student','=',False)]}">
-                                    <tree string="Blocs" default_order='year_id desc'>
-                                        <field name="year_id" />
-                                        <field name="source_bloc_name" />
-                                        <field name="total_credits" />
-                                    </tree>
-                                </field>
                     			<field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': ['|',('is_company','=', True),('student','=',True)]}"/>
                             </div>
                         </div>
@@ -88,9 +78,23 @@
                             <field name="is_company" invisible="1"/>
                             <field name="parent_id" invisible="1"/>
                             <field name="type" attrs="{'invisible': [('parent_id','=', False)]}" groups="base.group_no_one"/>
-                            <label for="street" string="Main Address"/>
                             <div class="row">
-                                <div class="col-md-6 mb16">
+                                <div class="col-md-3 mb16">
+                                    <label for="street" string="Main Address"/>
+                                    <div class="o_address_format">
+                                        <div class="oe_edit_only">
+                                            <button name="open_parent" type="object" string="(edit)" class="oe_link" attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}"/>
+                                        </div>
+                                        <field name="street" placeholder="Street..." class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                        <field name="street2" placeholder="Street 2..." class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                        <field name="city" placeholder="City" class="o_address_city" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}" on_change="onchange_state(state_id)" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" context="{'country_id': country_id, 'zip': zip}"/>
+                                        <field name="zip" placeholder="ZIP" class="o_address_zip" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                        <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb16 ">
+                                    <label for="street" string="Alternative Address"/>
                                     <div class="o_address_format">
                                         <div class="oe_edit_only">
                                             <button name="open_parent" type="object" string="(edit)" class="oe_link" attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}"/>
@@ -112,7 +116,7 @@
                                     </group>
                                 </div>
                             </div>
-                            <label for="child_ids" string="Alternative Addresses"/>
+                            <!--<label for="child_ids" string="Alternative Addresses"/>
                             <field name="child_ids" context="{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_supplier': supplier, 'default_customer': customer, 'default_lang': lang,'default_name':name,'default_type':'invoice'}">
                                 <tree>
                                     <field name="street"/>
@@ -152,7 +156,7 @@
                                         <field name="lang" invisible="True"/>
                                     </sheet>
                                 </form>
-                            </field>
+                            </field>-->
                         </page>
                         <page name="personal_information_page" string="Informations personnelles" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
             				<group name="personal_information_group">
