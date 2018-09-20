@@ -138,8 +138,8 @@ class IndividualProgram(models.Model):
     @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     @api.one
     def compute_evaluation(self):
-        total = 0
-        count = 0
+        total = sum(cg.total_credits for cg in self.valuated_course_group_ids)
+        count = len(elf.valuated_course_group_ids)
         for bloc in self.bloc_ids:
             if bloc.evaluation > 0 : # if all is granted do not count
                 total += bloc.evaluation
@@ -622,6 +622,12 @@ class CourseGroup(models.Model):
             for course in self.course_ids:
                 courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
             cg.write({'course_ids': courses})
+            return {'type': 'ir.actions.act_window',
+                'res_model': 'school.individual_program',
+                'view_mode': 'form',
+                'res_id': program_id,
+                'target': 'current',
+                'flags': {'form': {'action_buttons': True}}}
     
 class Course(models.Model):
     '''Course'''
