@@ -470,13 +470,13 @@
       <field name="model">school.individual_course</field>
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
-        <tree string="Individual Course" editable="top" create="0">
+        <tree string="Individual Course" editable="top" create="0" context="{'program_id': parent.id}">
           <field name="year_id" readonly="1"/>
           <field name="student_id" />
           <field name="name" />
           <field name="teacher_id" />
           <field name="dispense" />
-          <button type="object" icon="fa-book" name="open_program" string="Program" context="{'program_id': parent.id}"/>
+          <button type="object" icon="fa-book" name="open_program" string="Program" />
         </tree>
       </field>
     </record>
