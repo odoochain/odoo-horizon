@@ -105,7 +105,7 @@ class IndividualProgram(models.Model):
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
     
     total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',track_visibility='onchange')
-    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True,track_visibility='onchange')
+    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True, track_visibility='onchange')
 
     program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True,track_visibility='onchange')
 
@@ -137,8 +137,8 @@ class IndividualProgram(models.Model):
     @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     @api.one
     def compute_evaluation(self):
-        total = sum(cg.total_credits for cg in self.valuated_course_group_ids)
-        count = len(elf.valuated_course_group_ids)
+        total = 0
+        count = 0
         for bloc in self.bloc_ids:
             if bloc.evaluation > 0 : # if all is granted do not count
                 total += bloc.evaluation
