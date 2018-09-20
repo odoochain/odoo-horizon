@@ -622,9 +622,11 @@ class CourseGroup(models.Model):
             for course in self.course_ids:
                 courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
             cg = program_id.valuated_course_group_ids.create({
+                'valuated_program_id' : program_id.id,
                 'source_course_group_id': self.id, 
                 'acquiered' : 'A',
                 'course_ids': courses})
+            program_id._get_total_acquiered_credits()
             return {
                 'type': 'ir.actions.client',
                 'tag': 'reload',
