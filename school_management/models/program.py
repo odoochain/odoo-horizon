@@ -289,6 +289,12 @@ class CourseGroup(models.Model):
             if bloc_id.program_id.state in ('published','archived') and not self.env.user._is_admin() :
                 raise UserError('Cannot change credits or hours of courses used in an active or archived program : %s in %s' % (course_id.name, bloc_id.name))
     
+    
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        args = (args or []) + [('ue_id', 'ilike', name)]
+        return super(CourseGroup, self).name_search(name=name, args=args, operator=operator, limit=limit)
+    
 class Course(models.Model):
     '''Course'''
     _name = 'school.course'
