@@ -476,7 +476,7 @@
           <field name="name" />
           <field name="teacher_id" />
           <field name="dispense" />
-          <button type="object" icon="fa-book" name="open_program" string="Porgram"/>
+          <button type="object" icon="fa-book" name="open_program" string="Program" context="{'program_id': parent.id}"/>
         </tree>
       </field>
     </record>

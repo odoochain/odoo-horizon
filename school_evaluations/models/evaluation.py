@@ -607,6 +607,21 @@ class IndividualCourseGroup(models.Model):
             self.acquiered = self.second_session_acquiered
     
     
+class CourseGroup(models.Model):
+    '''Course Group'''
+    _inherit = 'school.course_group'
+    
+    @api.multi
+    def valuate_course_group(self):
+        self.ensure_one()
+        active_id = self.env.context.get('program_id')
+        if active_id :
+            self.env['school.individual_course_group'].create({'valuated_program_id' : active_id, 'source_course_group_id': self.id, 'acquiered' : 'A'})
+                courses = []
+                for course in group.course_ids:
+                    courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
+                cg.write({'course_ids': courses})
+    
 class Course(models.Model):
     '''Course'''
     _inherit = 'school.course'
