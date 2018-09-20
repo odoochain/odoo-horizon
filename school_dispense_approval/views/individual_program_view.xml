@@ -41,7 +41,7 @@
         <record id="course_dispense_approuval_form_sec" model="ir.ui.view">
             <field name="name">school.course.dispense_approuval.view.sec</field>
             <field name="model">school.individual_course</field>
-            <field name="inherit_id" ref="school_evaluations.individual_course_eval_form" />
+            <field name="inherit_id" ref="school_dispense_approval.course_dispense_approuval_form" />
             <field eval="25" name="priority" />
             <field name="groups_id" eval="[(6, 0, [ref('school_evaluations.group_evaluations') ])]" />
             <field name="arch" type="xml">
