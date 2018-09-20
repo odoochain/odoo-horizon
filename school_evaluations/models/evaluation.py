@@ -622,12 +622,10 @@ class CourseGroup(models.Model):
             for course in self.course_ids:
                 courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
             cg.write({'course_ids': courses})
-            return {'type': 'ir.actions.act_window',
-                'res_model': 'school.individual_program',
-                'view_mode': 'form',
-                'res_id': program_id,
-                'target': 'current',
-                'flags': {'form': {'action_buttons': True}}}
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'reload',
+            }
     
 class Course(models.Model):
     '''Course'''
