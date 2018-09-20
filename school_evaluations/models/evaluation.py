@@ -616,7 +616,7 @@ class CourseGroup(models.Model):
         self.ensure_one()
         program_id = self.env.context.get('program_id')
         _logger.info('Add cg %s to %s' % (self.id, program_id))
-        if active_id :
+        if program_id :
             self.env['school.individual_course_group'].create({'valuated_program_id' : program_id, 'source_course_group_id': self.id, 'acquiered' : 'A'})
             courses = []
             for course in group.course_ids:
