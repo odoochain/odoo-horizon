@@ -158,6 +158,16 @@
                                 </form>
                             </field>-->
                         </page>
+                        <page name="program_page" string="Etudes" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
+            				<field name="student_bloc_ids" attrs="{'invisible': [('student','=',False)]}">
+                                <tree string="Blocs" default_order='year_id desc'>
+                                    <field name="year_id" />
+                                    <field name="program_id" />
+                                    <field name="source_bloc_name" />
+                                    <field name="total_credits" />
+                                </tree>
+                            </field>
+            			</page>
                         <page name="personal_information_page" string="Informations personnelles" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
             				<group name="personal_information_group">
             				    <field name="title" options="{&quot;no_open&quot;: True}" attrs="{'invisible': [('is_company', '=', True)]}"/>
