@@ -338,6 +338,11 @@ class IndividualCourseGroup(models.Model):
     
     valuated_program_id = fields.Many2one('school.individual_program', string="Program", ondelete='cascade', readonly=True)
     
+    @api.constrains('bloc_id','valuated_program_id')
+    def _check_bloc_id_constrains(self):
+        if self.bloc_id and self.valuated_program_id :
+            raise UserError('A Course Group cannot be valuated in a program and in a bloc at the same time.')
+            
     ## Compute dispensed hours and ECTS
     
     total_dispensed_credits = fields.Integer(compute="compute_credits",string="Dispensed Credits",store=True)
