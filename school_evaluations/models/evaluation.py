@@ -142,14 +142,14 @@ class IndividualProgram(models.Model):
         credit_count = 0
         for bloc in self.bloc_ids:
             if bloc.evaluation > 0 : # if all is granted do not count
-                total += bloc.evaluation
+                total += bloc.evaluation * bloc.total_credits
                 credit_count += bloc.total_credits
         if self.historical_bloc_1_eval > 0:
-            total += self.historical_bloc_1_eval
-            credit_count += bloc.total_credits
+            total += self.historical_bloc_1_eval * self.historical_bloc_1_credits
+            credit_count += self.historical_bloc_1_credits
         if self.historical_bloc_2_eval > 0:
-            total += self.historical_bloc_2_eval
-            credit_count += bloc.total_credits
+            total += self.historical_bloc_2_eval * self.historical_bloc_2_credits
+            credit_count += self.historical_bloc_2_credits
         if credit_count > 0:
             self.evaluation = total/credit_count
         
