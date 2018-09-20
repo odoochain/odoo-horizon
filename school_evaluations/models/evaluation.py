@@ -128,6 +128,7 @@ class IndividualProgram(models.Model):
             cg.course_ids.write({
                 'dispense' : True
             })
+            self._get_total_acquiered_credits()
             
     @api.depends('grade')
     def _onchange_grade(self):
