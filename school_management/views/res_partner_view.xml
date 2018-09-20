@@ -272,7 +272,6 @@
                 <tree string="Contacts">
                     <field name="display_name" />
                     <field name="function" invisible="1" />
-                    <field name="student_current_bloc_id" />
                     <!--<field name="has_paid_current_minerval" />-->
                     <field name="email" />
                     <field name="category_id" />
