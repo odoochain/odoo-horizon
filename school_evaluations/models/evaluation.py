@@ -152,7 +152,6 @@ class IndividualProgram(models.Model):
             count += bloc.total_credits
         if count > 0:
             self.evaluation = total/count
-        # TODO : Implement computation based on UE as per the decret
         
     @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     @api.multi
@@ -168,7 +167,6 @@ class IndividualProgram(models.Model):
         return {
             'bloc_evaluations' : ret
         }
-        # TODO : Implement computation based on UE as per the decret
     
     not_acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
     acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
