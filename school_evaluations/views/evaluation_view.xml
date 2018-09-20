@@ -251,7 +251,7 @@
             </field>
         </record>
 
-        <!-- Add evaluation to Individual Course form view -->
+        <!-- Add evaluation to Individual Course tree view -->
         <record id="individual_course_group_eval_tree" model="ir.ui.view">
             <field name="name">school.individual_course_group.eval.tree</field>
             <field name="model">school.individual_course_group</field>
@@ -395,7 +395,7 @@
             </field>
         </record>
 
-        <!-- Add evaluation to Individual Course form view -->
+        <!-- Add evaluation to Individual Course tree view -->
         <record id="individual_course_eval_tree_security" model="ir.ui.view">
             <field name="name">school.individual_course.eval.tree.sec</field>
             <field name="model">school.individual_course</field>
