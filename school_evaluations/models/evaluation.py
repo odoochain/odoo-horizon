@@ -139,17 +139,17 @@ class IndividualProgram(models.Model):
     @api.one
     def compute_evaluation(self):
         total = 0
-        count = 0
+        credit_count = 0
         for bloc in self.bloc_ids:
             if bloc.evaluation > 0 : # if all is granted do not count
                 total += bloc.evaluation
-                count += 1
+                count += bloc.total_credits
         if self.historical_bloc_1_eval > 0:
             total += self.historical_bloc_1_eval
-            count += 1
+            count += bloc.total_credits
         if self.historical_bloc_2_eval > 0:
             total += self.historical_bloc_2_eval
-            count += 1
+            count += bloc.total_credits
         if count > 0:
             self.evaluation = total/count
         # TODO : Implement computation based on UE as per the decret
