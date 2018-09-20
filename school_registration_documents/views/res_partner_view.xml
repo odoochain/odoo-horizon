@@ -46,7 +46,6 @@
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='button_box']" position="inside">
-                    <button string="Add documents" type="action" name="%(action_document_add_wizard)d" class="oe_highlight" context="{'default_student_id': active_id}" groups="school_management.group_employee"/>
                     <button name="action_view_documents"
                         type="object"
                         class="oe_stat_button"
@@ -64,6 +63,7 @@
                 </xpath>
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="official_document_list" string="Official Documents" attrs="{'invisible': [('student','=',False)]}" >
+                        <button string="Add documents" type="action" name="%(action_document_add_wizard)d" class="oe_highlight" context="{'default_student_id': active_id}" groups="school_management.group_employee"/>
                         <field name="google_drive_folder" widget="url"/>
                         <field name="official_document_ids">
                             <tree string="Programs">
