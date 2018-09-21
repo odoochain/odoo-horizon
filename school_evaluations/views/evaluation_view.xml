@@ -127,12 +127,12 @@
                     <field name="grade_comments" colspan="4"/>
                 </xpath>
                 <xpath expr="//field[@name='source_bloc_name']" position="after">
-                    <field name="total_acquiered_credits" />
+                    <field name="total_acquiered_credits"/>
                     <field name="evaluation"/>
                     <field name="state"/>
                 </xpath>
-                 <xpath expr="//field[@sum='credits_pae']" position="after">
-                    <field name="dispense" />
+                 <xpath expr="//field[@name='ind_course_group_ids']/tree/field[@name='total_credits']" position="after">
+                    <field name="dispense"/>
                     <field name="final_result"/>
                     <field name="acquiered"/>
                 </xpath>
@@ -155,7 +155,7 @@
                         <field name="name"/>
                         <field name="total_hours" sum="total_hours_rem"/>
                         <field name="total_credits" sum="total_credits_rem"/>
-                        <button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group" />
+                        <button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group"/>
                        </tree>
                     </field>
                 </xpath>
