@@ -131,7 +131,7 @@
                     <field name="evaluation"/>
                     <field name="state"/>
                 </xpath>
-                 <xpath expr="//field[@name='total_credits']" position="after">
+                 <xpath expr="//field[@sum='credits_pae']" position="after">
                     <field name="dispense" />
                     <field name="final_result"/>
                     <field name="acquiered"/>
