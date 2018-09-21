@@ -136,7 +136,7 @@
                     <field name="final_result"/>
                     <field name="acquiered"/>
                 </xpath>
-                <xpath expr="//field[@name='bloc_ids']" position="before">
+                <xpath expr="//field[@name='bloc_ids']" position="after">
                     <h2>Unités d'enseignement valorisées</h2>
                     <field name="valuated_course_group_ids">
                       <tree string="Course Group" create="0">
