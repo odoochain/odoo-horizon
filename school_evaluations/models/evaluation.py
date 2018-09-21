@@ -626,8 +626,9 @@ class CourseGroup(models.Model):
                 'course_ids': courses})
             program_id._get_total_acquiered_credits()
             return {
-                'type': 'ir.actions.client',
-                'tag': 'reload',
+                'value' : {
+                    'valuated_course_group_ids' : program_id.valuated_course_group_ids.ids,
+                },
             }
     
 class Course(models.Model):
