@@ -33,6 +33,30 @@ class CourseGroup(models.Model):
     ## If set a course with an evaluation < 10 will make this course group not acquiered.
     enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=False)
     
+    @api.multi
+    def valuate_course_group(self):
+        self.ensure_one()
+        program_id = self.env.context.get('program_id')
+        _logger.info('Add cg %s to %s' % (self.id, program_id))
+        if program_id :
+            program_id = self.env['school.individual_program'].browse(program_id)[0]
+            courses = []
+            for course in self.course_ids:
+                courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
+            cg = program_id.valuated_course_group_ids.create({
+                'valuated_program_id' : program_id.id,
+                'source_course_group_id': self.id, 
+                'acquiered' : 'A',
+                'course_ids': courses})
+            program_id._get_total_acquiered_credits()
+            return {
+                'value' : {
+                    'total_acquiered_credits' : program_id.total_acquiered_credits,
+                    'total_registered_credits' : program_id.total_registered_credits,
+                    'valuated_course_group_ids' : (6, 0, program_id.valuated_course_group_ids.ids),
+                },
+            }
+    
 class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit='school.individual_program'
@@ -209,6 +233,7 @@ class IndividualBloc(models.Model):
     total_dispensed_hours = fields.Integer(compute="compute_credits",string="Dispensed Hours",store=True)
     total_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Not Dispensed Credits",store=True)
     total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Not Dispensed Hours',store=True)
+    total_acquiered_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Acquiered Credits",store=True)
     
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
     decision = fields.Text(string="Decision",track_visibility='onchange')
@@ -307,6 +332,7 @@ class IndividualBloc(models.Model):
         self.total_dispensed_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
         self.total_not_dispensed_credits = self.total_credits - self.total_dispensed_credits
         self.total_not_dispensed_hours = self.total_hours - self.total_dispensed_hours
+        self.total_acquiered_not_dispensed_credits = self.total_acquiered_credits - self.total_dispensed_credits
         
     @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered', 'course_group_ids.is_ghost_cg')
     @api.one
@@ -603,35 +629,6 @@ class IndividualCourseGroup(models.Model):
             self.acquiered  = 'A'
         else :
             self.acquiered = self.second_session_acquiered
-    
-    
-class CourseGroup(models.Model):
-    '''Course Group'''
-    _inherit = 'school.course_group'
-    
-    @api.multi
-    def valuate_course_group(self):
-        self.ensure_one()
-        program_id = self.env.context.get('program_id')
-        _logger.info('Add cg %s to %s' % (self.id, program_id))
-        if program_id :
-            program_id = self.env['school.individual_program'].browse(program_id)[0]
-            courses = []
-            for course in self.course_ids:
-                courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
-            cg = program_id.valuated_course_group_ids.create({
-                'valuated_program_id' : program_id.id,
-                'source_course_group_id': self.id, 
-                'acquiered' : 'A',
-                'course_ids': courses})
-            program_id._get_total_acquiered_credits()
-            return {
-                'value' : {
-                    'total_acquiered_credits' : program_id.total_acquiered_credits,
-                    'total_registered_credits' : program_id.total_registered_credits,
-                    'valuated_course_group_ids' : (6, 0, program_id.valuated_course_group_ids.ids),
-                },
-            }
     
 class Course(models.Model):
     '''Course'''
