@@ -217,11 +217,11 @@
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='total_credits']" position="after">
-                    <field name="total_dispensed_credits" />
-                    <field name="total_acquiered_credits" />
-                    <field name="total_not_acquiered_credits" />
+                    <field name="total_dispensed_credits"/>
                     <newline/>
-                    <field name="evaluation" />
+                    <field name="total_acquiered_not_dispensed_credits"/>
+                    <field name="total_not_dispensed_credits"/>
+                    <field name="evaluation"/>
                     <field name="exclude_from_deliberation" string="Exc Delib"/>
                     <field name="decision" colspan="4"/>
                 </xpath>
