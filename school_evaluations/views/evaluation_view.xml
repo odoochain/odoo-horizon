@@ -49,9 +49,8 @@
             <field eval="18" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='total_credits']" position="after">
-                    <field name="total_dispensed_credits" />
-                    <field name="total_acquiered_credits" />
-                    <field name="total_not_acquiered_credits" />
+                    <field name="total_not_dispensed_credits" />
+                    <field name="total_acquiered_not_dispensed_credits" />
                     <field name="state"/>
                 </xpath>
                 <!--<xpath expr="//notebook[last()]" position="inside">
