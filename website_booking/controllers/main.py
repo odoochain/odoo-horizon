@@ -144,14 +144,14 @@ class BookingController(http.Controller):
         fields = ['name','room_id']
         if self_id == '' :
             domain = [
-                ('start', '<', end),    
-                ('stop', '>', start),
+                ('start', '<=', end),    
+                ('stop', '>=', start),
                 ('room_id', '<>', False),
             ]
         else :
             domain = [
-                ('start', '<', end),    
-                ('stop', '>', start),
+                ('start', '<=', end),    
+                ('stop', '>=', start),
                 ('room_id', '<>', False),
                 ('id', '!=', self_id),
             ]
