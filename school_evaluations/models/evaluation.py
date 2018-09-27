@@ -204,7 +204,7 @@ class IndividualProgram(models.Model):
         self.acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A') + self.valuated_course_group_ids
         acquired_source_course_group_ids = self.acquired_ind_course_group_ids.mapped('source_course_group_id')
         self.remaining_course_group_ids = self.source_program_id.course_group_ids - acquired_source_course_group_ids
-        self.all_valuated_course_group_ids = self.acquired_ind_course_group_ids + valuated_course_group_ids
+        self.all_valuated_course_group_ids = self.acquired_ind_course_group_ids + self.valuated_course_group_ids
     
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
