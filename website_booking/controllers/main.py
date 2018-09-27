@@ -89,9 +89,8 @@ class BookingController(http.Controller):
         
     @http.route('/booking/events', type='json', auth='public', website=True)
     def booking_events(self, start, end, timezone=False, category_id=False, asset_id=False):
-        # TODO : ugply transform
-        start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
-        end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
+        end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
         fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
         if(category_id):
             domain = [
@@ -111,9 +110,8 @@ class BookingController(http.Controller):
         
     @http.route('/booking/my_events', type='json', auth='public', website=True)
     def booking_my_events(self, start, end, timezone=False):
-        # TODO : ugply transform
-        start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
-        end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
+        end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
         fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
         domain = [
             ('start', '<=', end),    
@@ -125,9 +123,8 @@ class BookingController(http.Controller):
         
     @http.route('/booking/search', type='json', auth='public', website=True)
     def booking_search(self, start, end, query, timezone=False):
-        # TODO : ugply transform
-        start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
-        end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
+        end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
         fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
         domain = [
             ('start', '<=', end),    
