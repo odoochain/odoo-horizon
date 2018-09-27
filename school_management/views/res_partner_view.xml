@@ -116,7 +116,7 @@
                         </page>
                         <page name="program_page" string="Etudes" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
             				<field name="student_bloc_ids" attrs="{'invisible': [('student','=',False)]}">
-                                <tree string="Blocs" default_order='year_id desc'>
+                                <tree string="Blocs" default_order='year_id desc' create="false" edit="false" delete="false">
                                     <field name="year_id" />
                                     <field name="program_id" />
                                     <field name="source_bloc_name" />
@@ -150,9 +150,6 @@
                                     <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                                 </group>
                             </group>
-                        </page>
-                        <page name="internal_notes" string="Internal Notes">
-                            <field name="comment" placeholder="Internal note..."/>
                         </page>
                     </notebook>
                 </sheet>
