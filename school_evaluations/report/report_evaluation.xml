@@ -628,12 +628,12 @@
                           <div class="col-xs-12">
                              <table class="table table-condensed table-bordered result_table">
                                     <colgroup>
-                                        <col style="width:70px"/>
+                                        <col style="width:120px"/>
                                         <col style="width:500px"/>
-                                        <col style="width:150px"/>
-                                        <col style="width:150px"/>
-                                        <col style="width:150px"/>
-                                        <col style="width:150px"/>
+                                        <col style="width:100px"/>
+                                        <col style="width:100px"/>
+                                        <col style="width:100px"/>
+                                        <col style="width:100px"/>
                                         <col style="width:250px"/>
                                         <col style="width:350px"/>
                                         <col style="width:350px"/>
@@ -652,7 +652,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <t t-foreach="o.valuated_course_group_ids" t-as="course_group">
+                                        <t t-foreach="o.all_valuated_course_group_ids" t-as="course_group">
                                             <tr class="course_group">
                                                 <td>
                                                     <t t-esc="course_group.ue_id"/>
@@ -673,7 +673,12 @@
                                                     <t t-esc="course_group.total_credits"/>
                                                 </td>
                                                 <td>
-                                                    PAE <t t-esc="course_group.program_id.year_id.name"/>
+                                                    <t t-if="course_group.bloc_id.year_id">
+                                                    PAE <t t-esc="course_group.bloc_id.year_id.name"/>
+                                                    </t>
+                                                    <t t-if="not course_group.bloc_id.year_id">
+                                                    Valorisation
+                                                    </t>
                                                 </td>
                                                 <td>
                                                     <span />
