@@ -23,6 +23,11 @@ import time
 import werkzeug.utils
 import json
 
+import dateutil
+import dateutil.parser
+import dateutil.relativedelta
+
+from openerp import api, fields
 from openerp import http
 from openerp.http import request
 from openerp.addons.auth_oauth.controllers.main import OAuthLogin as Home
@@ -138,9 +143,8 @@ class BookingController(http.Controller):
         
     @http.route('/booking/rooms', type='json', auth='user', website=True)
     def booking_rooms(self, start, end, self_id, debug=False, **k):
-        # TODO : ugply transform
-        start = start.replace('T',' ').replace('Z',' ').replace('.000','').strip()
-        end = end.replace('T',' ').replace('Z',' ').replace('.000','').strip()
+        start = fields.Datetime.to_string(dateutil.parser.parse(start)-dateutil.relativedelta.relativedelta(seconds=+1))
+        end = fields.Datetime.to_string(dateutil.parser.parse(end)+dateutil.relativedelta.relativedelta(seconds=+1))
         fields = ['name','room_id']
         if self_id == '' :
             domain = [
