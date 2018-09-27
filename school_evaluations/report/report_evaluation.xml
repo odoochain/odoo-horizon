@@ -591,6 +591,160 @@
         </t>
     </template>
 
+
+    <!-- Individual Bloc Definition Report -->
+    
+    <report id="report_individual_bloc_definition" 
+            model="school.individual_program" 
+            string="Individual Bloc Definition Report"
+            report_type="qweb-pdf" 
+            name="school_evaluations.report_individual_bloc_definition_content" 
+            file="school_evaluations.report_individual_bloc_definition_content"
+    />
+
+    <template id="report_individual_bloc_definition_content">
+        <t t-call="report.html_container">
+            <t t-set="data_report_margin_top" t-value="40"/>
+            <t t-set="data_report_header_spacing" t-value="35"/>
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="container" style="margin-left:60px;margin-right:60px;">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <h3>PROCÈS VERBAL DE DÉLIBÉRATION</h3>
+                                <h3>Conservatoire royal de Liège<br/>Boulevard Piercot, 29, 4000 LIÈGE</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <t t-foreach="docs" t-as="o">
+                    <div class="container" style="page-break-before:always;">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-1">
+                                <h4>Fiche de résultats - <t t-esc="o.name"/></h4>    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-1">
+                                <h4><t t-esc="o.source_bloc_name"/></h4>    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1">
+                                <!-- Table -->
+                                <table class="table table-condensed table-bordered result_table">
+                                    <colgroup>
+                                        <col style="width:300px"/>
+                                        <col style="width:75px"/>
+                                        <col style="width:60px"/>
+                                        <col style="width:90px"/>
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>Intitulé du cours</th>
+                                            <th>Résultats</th>
+                                            <th>ECTS</th>
+                                            <th>Acquis</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.course_group_ids" t-as="course_group">
+                                            <tr class="course_group">
+                                                <td>
+                                                    <t t-esc="course_group.title"/>
+                                                </td>
+                                                <td style=" text-align: right;">
+                                                    <t t-if="course_group.first_session_deliberated_result_bool or course_group.second_session_deliberated_result_bool">
+                                                        E
+                                                    </t>
+                                                    <t t-if="course_group.final_result_bool and not(course_group.first_session_deliberated_result_bool) and not(course_group.second_session_deliberated_result_bool)">
+                                                        <t t-esc="course_group.final_result_disp"/>
+                                                    </t>
+                                                </td>
+                                                <td style=" text-align: right;">
+                                                    <t t-esc="course_group.total_credits"/>
+                                                </td>
+                                                <td>
+                                                    <t t-if="course_group.dispense">
+                                                        <span class="label label-info btn" t-att-data-course-group-id="course_group.id">Val</span>
+                                                    </t>
+                                                    <t t-if="not(course_group.dispense)">
+                                                        <span class="label label-success" t-if="course_group.acquiered == 'A'">Acq</span>
+                                                        <span class="label label-warning btn o_set_delib" t-if="course_group.acquiered == 'NA'" t-att-data-course-group-id="course_group.id">NoAcq</span>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <t t-foreach="course_group.course_ids" t-as="course">
+                                                <tr style="font-style: italic;font-size:80%;">
+                                                    <td>
+                                                        <t t-esc="course.title"/> - <t t-esc="course.level"/> <i t-if="course.teacher_id" class="oe_fade"> - <t t-esc="course.teacher_id.name"/></i></td>
+                                                    <td style=" text-align: right;">
+                                                        <t t-if="course_group.final_result_bool and not(course_group.first_session_deliberated_result_bool) and not(course_group.second_session_deliberated_result_bool)">
+                                                        <t t-if="course.second_session_result_bool">
+                                                            <t t-esc="course.second_session_result_disp"/>
+                                                        </t>
+                                                        <t t-if="course.second_session_result_bool == False">
+                                                            <t t-esc="course.first_session_result_disp"/>
+                                                        </t>
+                                                        </t>
+                                                    </td>
+                                                    <td/>
+                                                    <td/>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1">
+                                <h4>A acquis ou valorisé <t t-esc="o.total_acquiered_credits"/> crédits ECTS. <t t-if="o.total_credits == o.total_acquiered_credits">A réussi l'ensemble de son PAE.</t></h4>
+                            </div>
+                        </div>
+                        <!--<div class="row">
+                            <div class="col-xs-10 col-xs-offset-1">
+                                <h4><t t-esc="o.decision"/>
+                                <t t-if="o.program_id.grade">
+                                    <span t-field="o.program_id.grade"/>
+                                </t>
+                                <t t-if="o.program_id.grade_comments">
+                                    au motif <span t-field="o.program_id.grade_comments"/>
+                                </t></h4>
+                            </div>
+                        </div>-->
+                    </div>
+                    </t>
+                    <div class="container" style="margin-left:60px;margin-right:60px;page-break-before:always;">
+                        <div class="row" style="margin-top:60px;">
+                            <div class="col-xs-10">
+                                Remarques : 
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:150px;">
+                            <div class="col-xs-6">
+                                Le/La Président-e du jury
+                            </div>
+                            <div class="col-xs-6">
+                                Le/La Secrétaire du jury
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:120px;">
+                            <div class="col-xs-6">
+                                Les Membres du jury
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:200px;">
+                            <div class="col-xs-9">
+                                Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
     <!--
     
     Evaluations by Teacher
@@ -640,6 +794,7 @@
     <menuitem id="menu_evaluation_report_by_teacher" name="Evaluation by Teacher" action="action_evaluation_report_by_teacher" parent="menu_main_evaluation" sequence="900" />
 
     <!--  Add wizard -->
+    
     <act_window name="Evaluation by Teacher"
                 res_model="school_evaluations.report_evaluation_by_teacher"
                 src_model="res.partner"

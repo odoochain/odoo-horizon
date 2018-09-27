@@ -405,8 +405,9 @@ class IndividualCourseGroup(models.Model):
         ], string='Status', index=True, readonly=True, default='draft',
         #track_visibility='onchange', TODO : is this useful for this case ?
         copy=False,
-        help=" * The 'Draft' status is used when results are not confirmed yet.\n"
-             " * The 'Confirmed' status is when restults are confirmed.")
+        help=" * The 'Draft' status is used when course group is only plan.\n"
+             " * The 'In Progress' status is used when results are not confirmed yet.\n"
+             " * The 'Awarded' status is when restults are confirmed.")
     
     ## If set a course with an evaluation < 10 will make this course group not acquiered.
     
