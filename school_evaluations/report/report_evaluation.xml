@@ -667,10 +667,10 @@
                                                     <t t-esc="course_group.total_credits"/>
                                                 </td>
                                                 <td>
-                                                    <t t-esc="course_group.total_credits"/>
+                                                    <span />
                                                 </td>
                                                 <td>
-                                                    <t t-esc="course_group.total_credits"/>
+                                                    <span />
                                                 </td>
                                                 <td>
                                                     <t t-if="course_group.bloc_id.year_id">
