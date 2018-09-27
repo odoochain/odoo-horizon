@@ -63,8 +63,8 @@ class Partner(models.Model):
     secondary_street2 = fields.Char('Street2')
     secondary_zip = fields.Char('Zip', size=24, change_default=True)
     secondary_city = fields.Char('City')
-    secondary_state_id = fields.many2one("res.country.state", 'State', ondelete='restrict')
-    secondary_country_id = fields.many2one('res.country', 'Country', ondelete='restrict')
+    secondary_state_id = fields.Many2one("res.country.state", 'State', ondelete='restrict')
+    secondary_country_id = fields.Many2one('res.country', 'Country', ondelete='restrict')
 
     year_sequence = fields.Selection([
         ('current','Current'),
