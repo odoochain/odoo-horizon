@@ -143,8 +143,8 @@ class BookingController(http.Controller):
         
     @http.route('/booking/rooms', type='json', auth='user', website=True)
     def booking_rooms(self, start, end, self_id, debug=False, **k):
-        start = fields.Datetime.to_string(dateutil.parser.parse(start)-dateutil.relativedelta.relativedelta(seconds=+1))
-        end = fields.Datetime.to_string(dateutil.parser.parse(end)+dateutil.relativedelta.relativedelta(seconds=+1))
+        start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
+        end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
         room_fields = ['name','room_id']
         if self_id == '' :
             domain = [
