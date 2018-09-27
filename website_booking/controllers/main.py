@@ -145,7 +145,7 @@ class BookingController(http.Controller):
     def booking_rooms(self, start, end, self_id, debug=False, **k):
         start = fields.Datetime.to_string(dateutil.parser.parse(start)-dateutil.relativedelta.relativedelta(seconds=+1))
         end = fields.Datetime.to_string(dateutil.parser.parse(end)+dateutil.relativedelta.relativedelta(seconds=+1))
-        fields = ['name','room_id']
+        room_fields = ['name','room_id']
         if self_id == '' :
             domain = [
                 ('start', '<=', end),    
@@ -160,7 +160,7 @@ class BookingController(http.Controller):
                 ('id', '!=', self_id),
             ]
         all_rooms_ids = request.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
-        busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,fields)
+        busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,room_fields)
         busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start_datetime <= end).filtered(lambda r : r.stop_datetime >= start).mapped('room_id')
         return (all_rooms_ids - busy_rooms_ids).read(['name'])
         
