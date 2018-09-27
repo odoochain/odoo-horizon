@@ -91,47 +91,47 @@ class BookingController(http.Controller):
     def booking_events(self, start, end, timezone=False, category_id=False, asset_id=False):
         start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
         end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
-        fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
         if(category_id):
             domain = [
                 ('start', '<=', end),    
                 ('stop', '>=', start),
                 '|',('asset_ids.category_id', '=', category_id),('room_id.category_id', '=', category_id),
             ]
-            ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
+            ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,event_fields)
         else:
             domain = [
                 ('start', '<=', end),    
                 ('stop', '>=', start),
                 '|',('asset_ids', '=', asset_id),('room_id', '=', asset_id),
             ]
-            ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields)
+            ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,event_fields)
         return ret
         
     @http.route('/booking/my_events', type='json', auth='public', website=True)
     def booking_my_events(self, start, end, timezone=False):
         start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
         end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
-        fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
         domain = [
             ('start', '<=', end),    
             ('stop', '>=', start),
             ('user_id','=',request.uid),
         ]
-        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields,order='start asc')
+        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,event_fields,order='start asc')
         return ret
         
     @http.route('/booking/search', type='json', auth='public', website=True)
     def booking_search(self, start, end, query, timezone=False):
         start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
         end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
-        fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
         domain = [
             ('start', '<=', end),    
             ('stop', '>=', start),
             '|',('name', 'ilike', "%s%s%s" % ("%", query, "%")),('room_id.name', 'ilike', "%s%s%s" % ("%", query, "%")),
         ]
-        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,fields,order='start ASC')
+        ret = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,event_fields,order='start ASC')
         return ret
         
     @http.route('/booking/editor', type='http', auth='user', website=True)
