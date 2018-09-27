@@ -644,11 +644,11 @@
                                             <th>Nom</th>
                                             <th>Heures</th>
                                             <th>ECTS</th>
-                                            <!--<th>Résultat final</th>
+                                            <th>Résultat final</th>
                                             <th>ECTS acquis</th>
                                             <th>Origine</th>
                                             <th>Avis pédagogique</th>
-                                            <th>Décision jury</th>-->
+                                            <th>Décision jury</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -666,7 +666,22 @@
                                                 <td>
                                                     <t t-esc="course_group.total_credits"/>
                                                 </td>
-                                              </tr>
+                                                <td>
+                                                    <t t-esc="course_group.total_credits"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="course_group.total_credits"/>
+                                                </td>
+                                                <td>
+                                                    PAE <t t-esc="course_group.program_id.year_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <span />
+                                                </td>
+                                                <td>
+                                                    <span />
+                                                </td>
+                                            </tr>
                                       </t>
                                     </tbody>
                                 </table>
