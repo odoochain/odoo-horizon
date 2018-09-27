@@ -148,7 +148,7 @@
                 </xpath>
                 <xpath expr="//field[@name='ind_course_group_ids']" position="after">
                     <h2>Unités d'enseignement restant à acquérir</h2>
-                    <field name="remaining_course_group_ids" context="{'program_id': active_id}">
+                    <field name="remaining_course_group_ids" context="{'program_id': active_id}" options="{'not_delete': True, 'reload_on_button': True, 'no_create': True}">
                       <tree string="Course Group" create="0" delete="0">
                         <field name="ue_id"/>
                         <field name="name"/>
