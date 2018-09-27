@@ -608,16 +608,14 @@
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-call="report.external_layout">
                 <div class="page">
-                    <!--<div class="container" style="margin-left:60px;margin-right:60px;">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <h3>PROCÈS VERBAL DE DÉLIBÉRATION</h3>
-                                <h3>Conservatoire royal de Liège<br/>Boulevard Piercot, 29, 4000 LIÈGE</h3>
-                            </div>
-                        </div>
-                    </div>
                     <t t-foreach="docs" t-as="o">
                     <div class="container" style="page-break-before:always;">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                CYCLE-<field name="id"/>
+                            </div>
+                        </div>
+                        <!--
                         <div class="row">
                             <div class="col-xs-8 col-xs-offset-1">
                                 <h4>Fiche de résultats - <t t-esc="o.name"/></h4>    
@@ -699,7 +697,7 @@
                             <div class="col-xs-10 col-xs-offset-1">
                                 <h4>A acquis ou valorisé <t t-esc="o.total_acquiered_credits"/> crédits ECTS. <t t-if="o.total_credits == o.total_acquiered_credits">A réussi l'ensemble de son PAE.</t></h4>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     </t>
                     <div class="container" style="margin-left:60px;margin-right:60px;page-break-before:always;">
