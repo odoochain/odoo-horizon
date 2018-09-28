@@ -143,6 +143,7 @@
                         <field name="name"/>
                         <field name="total_hours" sum="total_hours_valo"/>
                         <field name="total_credits" sum="total_credits_valo"/>
+                        <field name="state"/>
                        </tree>
                     </field>
                 </xpath>
