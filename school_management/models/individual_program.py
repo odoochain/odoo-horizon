@@ -78,6 +78,7 @@ class IndividualProgram(models.Model):
         self.name = "%s - %s - %s" % (self.student_id.name,self.cycle_id.name,self.speciality_id.name)
         
     bloc_ids = fields.One2many('school.individual_bloc', 'program_id', string='Individual Blocs')
+    
     highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
 
     @api.one
