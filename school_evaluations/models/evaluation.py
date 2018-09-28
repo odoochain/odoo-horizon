@@ -54,6 +54,7 @@ class CourseGroup(models.Model):
                     'total_acquiered_credits' : program_id.total_acquiered_credits,
                     'total_registered_credits' : program_id.total_registered_credits,
                     'valuated_course_group_ids' : (6, 0, program_id.valuated_course_group_ids.ids),
+                    'state' : 'candidate',
                 },
             }
     
@@ -242,6 +243,15 @@ class IndividualBloc(models.Model):
     first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
     second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
     
+    @api.onchange('state')
+    def _onchange_state(self):
+        if self.state == 'draft' :
+            self.course_group_ids.write({'state': 'draft'})
+        elif self.state == 'progress' :
+            self.course_group_ids.write({'state': 'progress'})
+        else :
+            self.course_group_ids.write({'state': 'confirmed'})
+    
     @api.multi
     def set_to_draft(self, context):
         # TODO use a workflow to make sure only valid changes are used.
@@ -390,24 +400,28 @@ class IndividualCourseGroup(models.Model):
                 'first_session_deliberated_result' : max(self.first_session_computed_result, 10),
                 'first_session_deliberated_result_bool' : True,
                 'first_session_note': message,
+                'state' : 'finish',
             })
         else:
             self.write({
                 'second_session_deliberated_result' : max(self.second_session_computed_result, 10) if self.second_session_computed_result_bool else max(self.first_session_computed_result, 10),
                 'second_session_deliberated_result_bool' : True,
                 'second_session_note': message,
+                'state' : 'finish',
             })
     
     state = fields.Selection([
             ('draft','Draft'),
             ('progress','In Progress'),
-            ('finish', 'Awarded'),
+            ('candidate','Candidate'),
+            ('confirmed', 'Confirmed'),
         ], string='Status', index=True, readonly=True, default='draft',
-        #track_visibility='onchange', TODO : is this useful for this case ?
+        track_visibility='onchange',
         copy=False,
         help=" * The 'Draft' status is used when course group is only plan.\n"
              " * The 'In Progress' status is used when results are not confirmed yet.\n"
-             " * The 'Awarded' status is when restults are confirmed.")
+             " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
+             " * The 'Confirmed' status is when restults are confirmed.")
     
     ## If set a course with an evaluation < 10 will make this course group not acquiered.
     

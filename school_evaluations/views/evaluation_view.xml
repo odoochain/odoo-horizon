@@ -284,6 +284,11 @@
             <field name="inherit_id" ref="school_management.individual_course_group_form" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed" />
+                    </header>
+                </xpath>
                 <xpath expr="//field[@name='source_course_id']" position="before">
                     <field name="first_session_result" string="S1" />
                     <field name="second_session_result" string="S2" />
