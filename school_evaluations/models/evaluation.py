@@ -47,14 +47,14 @@ class CourseGroup(models.Model):
                 'valuated_program_id' : program_id.id,
                 'source_course_group_id': self.id, 
                 'acquiered' : 'A',
-                'course_ids': courses})
+                'course_ids': courses,
+                'state' : 'candidate',})
             program_id._get_total_acquiered_credits()
             return {
                 'value' : {
                     'total_acquiered_credits' : program_id.total_acquiered_credits,
                     'total_registered_credits' : program_id.total_registered_credits,
-                    'valuated_course_group_ids' : (6, 0, program_id.valuated_course_group_ids.ids),
-                    'state' : 'candidate',
+                    'valuated_course_group_ids' : (6, 0, program_id.valuated_course_group_ids.ids)
                 },
             }
     
