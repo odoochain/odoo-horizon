@@ -709,7 +709,12 @@
                                                         </t>
                                                     </td>
                                                     <td>
-                                                        <t t-esc="course_group.total_not_dispensed_credits"/>
+                                                        <t t-if="course_group.acquiered">
+                                                            Acquis
+                                                        </t>
+                                                        <t t-if="not course_group.acquiered">
+                                                            Non-Acquis
+                                                        </t>
                                                     </td>
                                                     <td>
                                                         <span />
