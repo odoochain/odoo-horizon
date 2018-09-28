@@ -196,7 +196,7 @@ class IndividualProgram(models.Model):
     not_acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
     acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
     remaining_course_group_ids  = fields.One2many('school.course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
-    last_bloc_course_group_ids  = fields.One2many('school.course_group', string='Last Bloc Courses Groups',compute='_compute_ind_course_group_ids_eval')
+    last_bloc_course_group_ids  = fields.One2many('school.individual_course_group', string='Last Bloc Courses Groups',compute='_compute_ind_course_group_ids_eval')
     
     
     @api.one
