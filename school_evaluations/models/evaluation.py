@@ -196,8 +196,6 @@ class IndividualProgram(models.Model):
     not_acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
     acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
     remaining_course_group_ids  = fields.One2many('school.course_group', string='Courses Groups',compute='_compute_ind_course_group_ids_eval')
-    last_bloc_course_group_ids  = fields.One2many('school.individual_course_group', string='Last Bloc Courses Groups',compute='_compute_ind_course_group_ids_eval')
-    
     
     @api.one
     def _compute_ind_course_group_ids_eval(self):
@@ -205,8 +203,6 @@ class IndividualProgram(models.Model):
         self.acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A') + self.valuated_course_group_ids
         acquired_source_course_group_ids = self.acquired_ind_course_group_ids.mapped('source_course_group_id')
         self.remaining_course_group_ids = self.source_program_id.course_group_ids - acquired_source_course_group_ids
-        if len(self.bloc_ids) > 0 :
-            self.last_bloc_course_group_ids = self.bloc_ids[-1].course_group_ids
     
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
