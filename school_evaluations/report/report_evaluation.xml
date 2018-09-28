@@ -724,50 +724,50 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                            <div class="col-xs-12" style="font-size:160%;font-weight:800;">
-                                Crédits du cycle à obtenir
-                            </div>
-                            <div class="col-xs-12">
-                                <table class="table table-condensed table-bordered result_table">
-                                    <colgroup>
-                                        <col style="width:120px"/>
-                                        <col style="width:500px"/>
-                                        <col style="width:100px"/>
-                                        <col style="width:100px"/>
-                                        <col style="width:650px"/>
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>UE Id</th>
-                                            <th>Nom</th>
-                                            <th>Heures</th>
-                                            <th>ECTS</th>
-                                            <th>Commentaire</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <t t-foreach="o.remaining_course_group_ids" t-as="course_group">
-                                            <tr class="course_group">
-                                                <td>
-                                                    <t t-esc="course_group.ue_id"/>
-                                                </td>
-                                                <td>
-                                                    <t t-esc="course_group.title"/>
-                                                </td>
-                                                <td>
-                                                    <t t-esc="course_group.total_hours"/>
-                                                </td>
-                                                <td>
-                                                    <t t-esc="course_group.total_credits"/>
-                                                </td>
-                                                <td>
-                                                    <span />
-                                                </td>
+                                <div class="col-xs-12" style="font-size:160%;font-weight:800;">
+                                    Crédits du cycle à obtenir
+                                </div>
+                                <div class="col-xs-12">
+                                    <table class="table table-condensed table-bordered result_table">
+                                        <colgroup>
+                                            <col style="width:120px"/>
+                                            <col style="width:500px"/>
+                                            <col style="width:100px"/>
+                                            <col style="width:100px"/>
+                                            <col style="width:650px"/>
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>UE Id</th>
+                                                <th>Nom</th>
+                                                <th>Heures</th>
+                                                <th>ECTS</th>
+                                                <th>Commentaire</th>
                                             </tr>
-                                      </t>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.remaining_course_group_ids" t-as="course_group">
+                                                <tr class="course_group">
+                                                    <td>
+                                                        <t t-esc="course_group.ue_id"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="course_group.title"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="course_group.total_hours"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="course_group.total_credits"/>
+                                                    </td>
+                                                    <td>
+                                                        <span />
+                                                    </td>
+                                                </tr>
+                                          </t>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </t>
