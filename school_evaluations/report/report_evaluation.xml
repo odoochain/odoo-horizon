@@ -709,10 +709,10 @@
                                                         </t>
                                                     </td>
                                                     <td>
-                                                        <t t-if="course_group.acquiered">
+                                                        <t t-if="course_group.acquiered == 'A'">
                                                             Acquis
                                                         </t>
-                                                        <t t-if="not course_group.acquiered">
+                                                        <t t-if="not course_group.acquiered  == 'NA'">
                                                             Non-Acquis
                                                         </t>
                                                     </td>
