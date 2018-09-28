@@ -704,7 +704,9 @@
                                                         <t t-esc="course_group.total_credits"/>
                                                     </td>
                                                     <td>
-                                                        <t t-esc="course_group.final_result_disp"/>
+                                                        <t t-if="course_group.final_result_bool">
+                                                            <t t-esc="course_group.final_result_disp"/>
+                                                        </t>
                                                     </td>
                                                     <td>
                                                         <t t-esc="course_group.total_not_dispensed_credits"/>
