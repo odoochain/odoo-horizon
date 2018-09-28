@@ -673,10 +673,13 @@
                                                     <t t-esc="course_group.total_not_dispensed_credits"/>
                                                 </td>
                                                 <td>
-                                                    <t t-if="course_group.bloc_id.year_id">
+                                                    <t t-if="course_group.bloc_id">
                                                     PAE <t t-esc="course_group.bloc_id.year_id.name"/>
                                                     </t>
-                                                    <t t-if="not course_group.bloc_id.year_id">
+                                                    <t t-if="not course_group.bloc_id and course_group.state='candidate'">
+                                                    Attente
+                                                    </t>
+                                                    <t t-if="not course_group.bloc_id and course_group.state='confirmed'">
                                                     Valorisation
                                                     </t>
                                                 </td>
