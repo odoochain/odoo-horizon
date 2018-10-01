@@ -377,6 +377,7 @@ class IndividualCourseGroup(models.Model):
         if self.bloc_id and self.valuated_program_id :
             raise UserError('A Course Group cannot be valuated in a program and in a bloc at the same time.')
     
+    @api.multi
     def valuate_course_group(self):
         self.ensure_one()
         program_id = self.bloc_id.program_id
