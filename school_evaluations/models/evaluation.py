@@ -255,10 +255,12 @@ class IndividualBloc(models.Model):
     @api.multi
     def set_to_draft(self, context):
         # TODO use a workflow to make sure only valid changes are used.
+        self.course_group_ids.write({'state': 'draft'})
         return self.write({'state': 'draft'})
     
     @api.multi
     def set_to_progress(self, context):
+        self.course_group_ids.write({'state': 'progress'})
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'progress'})
     
@@ -276,6 +278,7 @@ class IndividualBloc(models.Model):
         if isinstance(decision, dict):
             context = decision
             decision = None
+        self.course_group_ids.write({'state': 'confirmed'})
         return self.write({'state': 'awarded_first_session','decision' : decision})
         
     @api.multi
@@ -284,6 +287,7 @@ class IndividualBloc(models.Model):
         if isinstance(decision, dict):
             context = decision
             decision = None
+        self.course_group_ids.write({'state': 'confirmed'})
         return self.write({'state': 'awarded_second_session','decision' : decision})
     
     @api.multi
@@ -292,6 +296,7 @@ class IndividualBloc(models.Model):
         if isinstance(decision, dict):
             context = decision
             decision = None
+        self.course_group_ids.write({'state': 'confirmed'})
         return self.write({'state': 'failed','decision' : decision})
     
     @api.multi
