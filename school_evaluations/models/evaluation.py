@@ -202,12 +202,11 @@ class IndividualProgram(models.Model):
     def _compute_ind_course_group_ids_eval(self):
         self.not_acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
         self.acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A') + self.valuated_course_group_ids
-        acquired_source_course_group_ids = self.acquired_ind_course_group_ids.mapped('source_course_group_id')
-        self.remaining_course_group_ids = self.source_program_id.course_group_ids - acquired_source_course_group_ids
+        self.remaining_course_group_ids = self.source_program_id.course_group_ids - self.acquired_ind_course_group_ids.mapped('source_course_group_id')
         if len(self.bloc_ids) > 0 :
             self.remaining_not_planned_course_group_ids = self.remaining_course_group_ids - self.bloc_ids[-1].course_group_ids
         else :
-            self.remaining_not_planned_course_group_ids = self.remaining_course_group_ids
+            self.remaining_not_planned_course_group_ids = self.remaining_course_group_ids.mapped('source_course_group_id')
     
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
