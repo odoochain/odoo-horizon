@@ -376,6 +376,27 @@ class IndividualCourseGroup(models.Model):
     def _check_bloc_id_constrains(self):
         if self.bloc_id and self.valuated_program_id :
             raise UserError('A Course Group cannot be valuated in a program and in a bloc at the same time.')
+    
+    def valuate_course_group(self):
+        self.ensure_one()
+        program_id = self.bloc_id.program_id
+        _logger.info('Add cg %s to %s' % (self.id, program_id))
+        if program_id :
+            self.course_ids.write({'dispense' : True})
+            self.write({
+                'bloc_id' : False,
+                'valuated_program_id' : program_id.id,
+                'source_course_group_id': self.id, 
+                'acquiered' : 'A',
+                'state' : 'candidate',})
+            program_id._get_total_acquiered_credits()
+            return {
+                'value' : {
+                    'total_acquiered_credits' : program_id.total_acquiered_credits,
+                    'total_registered_credits' : program_id.total_registered_credits,
+                    'valuated_course_group_ids' : (6, 0, program_id.valuated_course_group_ids.ids)
+                },
+            }
             
     ## Compute dispensed hours and ECTS
     

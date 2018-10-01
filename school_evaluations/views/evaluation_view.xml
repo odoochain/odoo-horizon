@@ -134,6 +134,7 @@
                     <field name="dispense"/>
                     <field name="final_result"/>
                     <field name="acquiered"/>
+                    <button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group"/>
                 </xpath>
                 <xpath expr="//field[@name='bloc_ids']" position="after">
                     <h2>Unités d'enseignement valorisées</h2>
