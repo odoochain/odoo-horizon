@@ -746,7 +746,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <t t-foreach="o.remaining_course_group_ids" t-as="course_group">
+                                            <t t-foreach="o.remaining_not_planned_course_group_ids" t-as="course_group">
                                                 <tr class="course_group">
                                                     <td>
                                                         <t t-esc="course_group.ue_id"/>
