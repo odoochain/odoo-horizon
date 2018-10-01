@@ -206,7 +206,7 @@ class IndividualProgram(models.Model):
         self.remaining_course_group_ids = self.source_program_id.course_group_ids - acquired_source_course_group_ids
         if len(self.bloc_ids > 0) :
             self.remaining_not_planned_course_group_ids = self.remaining_course_group_ids - self.bloc_ids[-1].course_group_ids
-        else
+        else :
             self.remaining_not_planned_course_group_ids = self.remaining_course_group_ids
     
 class IndividualBloc(models.Model):
