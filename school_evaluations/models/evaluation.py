@@ -387,7 +387,6 @@ class IndividualCourseGroup(models.Model):
             self.write({
                 'bloc_id' : False,
                 'valuated_program_id' : program_id.id,
-                'source_course_group_id': self.id, 
                 'acquiered' : 'A',
                 'state' : 'candidate',})
             program_id._get_total_acquiered_credits()
