@@ -592,7 +592,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 mb16" style="font-size:160%;font-weight:800;">
-                                 Crédits du cycle obtenus
+                                 Crédits du cycle obtenus (<t t-esc="o.total_acquiered_credits"/> / <t t-esc="o.source_program_id.total_credits"/>)
                             </div>
                             <div class="col-xs-12">
                                 <table class="table table-condensed table-bordered result_table">
@@ -663,8 +663,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-xs-12 mb16" style="font-size:160%;font-weight:800;">
-                                Programme annuel de l'étudiant
+                            <div t-if="len(o.bloc_ids) > 0" class="col-xs-12 mb16" style="font-size:160%;font-weight:800;">
+                                Programme annuel de l'étudiant (<t t-esc="o.bloc_ids[-1].total_not_dispensed_credits"/>)
                             </div>
                             <div class="col-xs-12">
                                     <table class="table table-condensed table-bordered result_table">
