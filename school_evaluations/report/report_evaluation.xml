@@ -664,7 +664,7 @@
                                 </table>
                             </div>
                             <div t-if="len(o.bloc_ids) > 0" class="col-xs-12 mb16" style="font-size:160%;font-weight:800;">
-                                Programme annuel de l'étudiant (<t t-esc="o.bloc_ids[-1].total_not_dispensed_credits"/>)
+                                Programme annuel de l'étudiant - PAE-<t t-esc="o.bloc_ids[-1].id"/> (<t t-esc="o.bloc_ids[-1].total_not_dispensed_credits"/>)
                             </div>
                             <div class="col-xs-12">
                                     <table class="table table-condensed table-bordered result_table">
@@ -725,7 +725,7 @@
                                     </table>
                                 </div>
                                 <div class="col-xs-12 mb16" style="font-size:160%;font-weight:800;">
-                                    Crédits du cycle à obtenir
+                                    Crédits du cycle à obtenir (<t t-esc="sum(o.remaining_not_planned_course_group_ids.mapped('total_credits'))"/>)
                                 </div>
                                 <div class="col-xs-12">
                                     <table class="table table-condensed table-bordered result_table">

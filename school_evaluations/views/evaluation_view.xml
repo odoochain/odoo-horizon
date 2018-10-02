@@ -113,10 +113,10 @@
                     </div>
                 </xpath>
                 <xpath expr="//field[@name='required_credits']" position="after">         
-                    <field name="historical_bloc_1_credits"/>
+                    <!--<field name="historical_bloc_1_credits"/>
                     <field name="historical_bloc_1_eval"/>
                     <field name="historical_bloc_2_credits"/>
-                    <field name="historical_bloc_2_eval"/>
+                    <field name="historical_bloc_2_eval"/>-->
                     <field name="total_registered_credits" />
                     <field name="total_acquiered_credits" />
                     <field name="evaluation" />
