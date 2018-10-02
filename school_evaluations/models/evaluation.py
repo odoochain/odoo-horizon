@@ -491,7 +491,7 @@ class IndividualCourseGroup(models.Model):
     
     ## Final ##
     
-    dispense =  fields.Boolean(compute='compute_dispense', string='Dispense',default=False,track_visibility='onchange', store=True)
+    dispense =  fields.Boolean(compute='compute_dispense', string='Valuation',default=False,track_visibility='onchange', store=True)
     
     final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True,digits=dp.get_precision('Evaluation'),track_visibility='onchange')
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_results_disp')
