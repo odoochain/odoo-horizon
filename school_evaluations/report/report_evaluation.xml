@@ -659,24 +659,26 @@
                                                     <span />
                                                 </td>
                                             </tr>
-                                            <t t-if="not course_group.bloc_id and course_group.state == 'candidate'" t-foreach="course_group.course_ids" t-as="course">
+                                            <t t-if="course_group.state == 'candidate'">
+                                            <t t-foreach="course_group.course_ids" t-as="course">
                                             <tr class="course_group">
                                                 <td>
                                                     <span />
                                                 </td>
                                                 <td>
-                                                    <t t-esc="course.title"/>
+                                                    <i><t t-esc="course.title"/></i>
                                                 </td>
                                                 <td>
-                                                    <t t-esc="course.hours"/>
+                                                    <i><t t-esc="course.hours"/></i>
                                                 </td>
                                                 <td>
-                                                    <t t-esc="course.credits"/>
+                                                    <i><t t-esc="course.credits"/></i>
                                                 </td>
                                                 <td colspan="5">
-                                                    <t t-esc="course.dispense_approval_comment"/>
+                                                    <i><t t-esc="course.dispense_approval_comment"/></i>
                                                 </td>
                                             </tr>
+                                            </t>
                                             </t>
                                         </t>
                                     </tbody>
@@ -739,6 +741,41 @@
                                                         <span />
                                                     </td>
                                                 </tr>
+                                                <t t-foreach="course_group.course_ids" t-as="course">
+                                                <tr class="course_group">
+                                                    <td>
+                                                        <span />
+                                                    </td>
+                                                    <td>
+                                                        <i><t t-esc="course.title"/></i>
+                                                    </td>
+                                                    <td>
+                                                        <i><t t-esc="course.hours"/></i>
+                                                    </td>
+                                                    <td>
+                                                        <i><t t-esc="course.credits"/></i>
+                                                    </td>
+                                                    <td>
+                                                        <i><t t-if="course.second_session_result_bool">
+                                                            <t t-esc="course.second_session_result_disp"/>
+                                                        </t>
+                                                        <t t-if="not course.second_session_result_bool">
+                                                            <t t-esc="course.first_session_result_disp"/>
+                                                        </t></i>
+                                                    </td>
+                                                    <td>
+                                                        <i><t t-if="course.acquiered == 'A'">
+                                                            Acquis
+                                                        </t>
+                                                        <t t-if="course.acquiered  == 'NA'">
+                                                            Non-Acquis
+                                                        </t></i>
+                                                    </td>
+                                                    <td>
+                                                        <span />
+                                                    </td>
+                                                </tr>
+                                                </t>
                                           </t>
                                         </tbody>
                                     </table>
