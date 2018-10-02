@@ -767,6 +767,8 @@ class IndividualCourse(models.Model):
     @api.one
     def compute_results(self):
         _logger.debug('Trigger "compute_results" on Course %s' % self.name)
+        self.first_session_result_bool = False
+        self.second_session_result_bool = False
         if self.type == 'D' :
             if self.jun_result :
                 try:
