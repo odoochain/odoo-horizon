@@ -659,7 +659,7 @@
                                                     <span />
                                                 </td>
                                             </tr>
-                                            <t t-if="not course_group.bloc_id and course_group.state == 'candidate'" t-foreach="course_group.course_ids" t-as="course_group">
+                                            <t t-if="not course_group.bloc_id and course_group.state == 'candidate'" t-foreach="course_group.course_ids" t-as="course">
                                             <tr class="course_group">
                                                 <td>
                                                     <span />
