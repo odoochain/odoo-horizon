@@ -622,7 +622,7 @@
                                     </thead>
                                     <tbody>
                                         <t t-foreach="o.acquired_ind_course_group_ids" t-as="course_group">
-                                            <tr class="course_group">
+                                            <tr class="course_group" style="background-color: #f1f1f1;">
                                                 <td>
                                                     <t t-esc="course_group.ue_id"/>
                                                 </td>
@@ -711,7 +711,7 @@
                                         </thead>
                                         <tbody>
                                             <t t-if="len(o.bloc_ids) > 0" t-foreach="o.bloc_ids[-1].course_group_ids" t-as="course_group">
-                                                <tr class="course_group">
+                                                <tr class="course_group" style="background-color: #f1f1f1;">
                                                     <td>
                                                         <t t-esc="course_group.ue_id"/>
                                                     </td>
