@@ -452,6 +452,10 @@ class IndividualCourseGroup(models.Model):
              " * The 'In Progress' status is used when results are not confirmed yet.\n"
              " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
              " * The 'Confirmed' status is when restults are confirmed.")
+        
+    @api.multi
+    def set_to_confirmed(self, context):
+        return self.write({'state': 'confirmed'})
     
     ## If set a course with an evaluation < 10 will make this course group not acquiered.
     
