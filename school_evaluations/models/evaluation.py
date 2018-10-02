@@ -369,7 +369,7 @@ class IndividualBloc(models.Model):
         if total_weight > 0 :
             self.evaluation = total / total_weight
             self.first_session_result = total_first / total_weight
-            self.total_second = total_first / total_weight
+            self.second_session_result = total_second / total_weight
         else:
             _logger.debug('total_weight is 0 on Bloc %s' % self.name)
             self.evaluation = None
