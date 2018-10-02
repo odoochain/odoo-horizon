@@ -764,12 +764,7 @@
                                                         </t></i>
                                                     </td>
                                                     <td>
-                                                        <i><t t-if="course.acquiered == 'A'">
-                                                            Acquis
-                                                        </t>
-                                                        <t t-if="course.acquiered  == 'NA'">
-                                                            Non-Acquis
-                                                        </t></i>
+                                                        <span />
                                                     </td>
                                                     <td>
                                                         <span />
