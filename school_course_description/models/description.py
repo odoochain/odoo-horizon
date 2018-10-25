@@ -164,7 +164,7 @@ class Course(models.Model):
     @api.one
     @api.depends('all_documentation_ids')
     def _compute_count(self):
-        self.all_documentation_count = len(self.all_documentation_ids)
+        self.all_documentation_count = len(self.documentation_ids)
     
     @api.one
     def compute_documentation_id(self):

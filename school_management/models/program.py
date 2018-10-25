@@ -129,9 +129,9 @@ class Program(models.Model):
     bloc2_title = fields.Text(compute='_compute_bloc_course_group_ids')
     bloc3_title = fields.Text(compute='_compute_bloc_course_group_ids')
         
-    bloc1_course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_bloc_course_group_ids')
-    bloc2_course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_bloc_course_group_ids')
-    bloc3_course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_bloc_course_group_ids')
+    bloc1_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 1', compute='_compute_bloc_course_group_ids')
+    bloc2_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 2', compute='_compute_bloc_course_group_ids')
+    bloc3_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 3', compute='_compute_bloc_course_group_ids')
     
     @api.one
     def _compute_bloc_course_group_ids(self):
