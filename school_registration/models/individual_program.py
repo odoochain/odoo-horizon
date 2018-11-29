@@ -63,7 +63,7 @@ class IndividualProgram(models.Model):
                 
             self._assign_cg(new_pae)
 
-        elif  self.total_acquiered_credits < 110 :
+        elif  self.total_acquiered_credits < 110 or len(self.source_program_id.bloc_ids) < 3 :
             # Register all UE that are not yet acquiered
             new_pae = self.env['school.individual_bloc'].create({
                 'student_id' : context.get('default_student_id'),
