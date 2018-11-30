@@ -282,7 +282,8 @@
                         <th class="text-center">Heures</th> 
                         <th class="text-center">ECTS</th>
                         <th class="text-center">Pond</th>
-                        <!--<th>Pré/Co-requis</th>-->
+                        <!--
+                        <th>Pré/Co-requis</th>-->
                         <th>Statut</th>
                     </tr> 
                 </thead>
