@@ -247,7 +247,7 @@
                 <caption style="font-size: 100%;">Grille du bloc - <t t-esc="bloc.name"/></caption>
                 <colgroup>
                     <col style="width:75px"/>
-                    <col style="width:100%"/>
+                    <col style="width:400px"/>
                     <col style="width:60px"/>
                     <col style="width:60px"/>
                     <col style="width:60px"/>
