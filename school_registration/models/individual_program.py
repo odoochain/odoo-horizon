@@ -51,6 +51,8 @@ class IndividualProgram(models.Model):
         self.ensure_one()
         context = dict(self._context or {})
         _logger.info(context)
+        if not self.source_program_id:
+            raise UserError(_("Pas de cycle théorique défini, impossible de proposer un PAE."))
         
         if self.total_acquiered_credits < 45 :
             # Register all UE from bloc 1 that are not yet acquiered
