@@ -78,7 +78,7 @@
                             <field name="is_company" invisible="1"/>
                             <field name="parent_id" invisible="1"/>
                             <field name="type" attrs="{'invisible': [('parent_id','=', False)]}" groups="base.group_no_one"/>
-                            <div class="row">
+                            <div class="row" groups="school_management.group_employee">
                                 <div class="col-md-3 mb16">
                                     <label for="street" string="Main Address"/>
                                     <div class="o_address_format">
