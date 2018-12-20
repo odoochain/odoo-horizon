@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <notebook colspan="4">
-                        <page string="Contacts &amp; Addresses" autofocus="autofocus">
+                        <page string="Contacts &amp; Addresses" autofocus="autofocus" groups="school_management.group_employee">
                             <field name="is_company" invisible="1"/>
                             <field name="parent_id" invisible="1"/>
                             <field name="type" attrs="{'invisible': [('parent_id','=', False)]}" groups="base.group_no_one"/>
