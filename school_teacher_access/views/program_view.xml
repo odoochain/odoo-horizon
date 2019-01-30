@@ -30,7 +30,7 @@
 
         <!-- Teacher dashboard view -->
         
-        <!-- add css / js
+        <!-- add css / js -->
         <template id="assets_backend" name="school_teacher_dashboard assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
                 <link rel="stylesheet" href="/school_teacher_access/static/src/css/teacher_dashboard.less"/>
@@ -78,7 +78,7 @@
                     It seems you have no course set yet, please contact the administration.
                 </p>
             </field>
-        </record> -->
+        </record>
 
         <!-- <menuitem name="My Information" parent="menu_information" id="menu_details" action="school_teacher_act" sequence="10" />
 
