@@ -383,7 +383,7 @@ class IndividualCourseProxy(models.Model):
                 school_individual_course.teacher_id IS NOT NULL
             GROUP BY CAST(CAST(school_individual_course.year_id AS text)||
                 CAST(school_individual_course.teacher_id AS text)||
-                CAST(school_individual_course.source_course_id AS text) AS BIGINT),
+                CAST(school_individual_course.source_course_id AS text) AS INTEGER),
                 school_individual_course.name,
                 school_individual_course.title,
                 school_individual_course.year_id,
