@@ -87,7 +87,7 @@
         </record>
     
         <!-- Student Project Form View -->
-        <record model="ir.ui.view" id="student_group_form">
+        <record model="ir.ui.view" id="projects_form">
           <field name="name">school.project.view</field>
           <field name="model">school.project</field>
           <field name="type">form</field>
