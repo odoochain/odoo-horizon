@@ -104,3 +104,11 @@ class SchoolProject(models.Model):
             'domain': [('id', 'in', self.participant_ids.ids)],
             'view_mode': 'tree',
         }
+        
+    attachment_ids = fields.Many2many('ir.attachment','project_ir_attachment_rel', 'project_id','ir_attachment_id', 'Attachments')
+    attachment_count = fields.Integer(compute='_compute_attachment_count', string='# Attachments')
+
+    @api.one
+    @api.depends('attachment_ids')
+    def _compute_attachment_count(self):
+        self.attachment_count = len(self.attachment_ids)
