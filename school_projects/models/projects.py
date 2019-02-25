@@ -72,8 +72,7 @@ class SchoolProject(models.Model):
         self.short_name = self.title
 
     participant_ids = fields.Many2many('res.partner', 'school_group_participants_rel', 'group_id', 'res_partner_id', string='Participipants', domain="[('type', '=', 'contact')]")
-    participant_count = fields.Integer(string="Participant Count", compute="_compute_count")
-    
+    participant_count = fields.Integer(string="Participant Count")
         
     @api.onchange('course_ids')
     def onchange_course_ids(self):
