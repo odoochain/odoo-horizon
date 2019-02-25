@@ -35,7 +35,7 @@
         <!-- Student Group Kanban View -->
         <record model="ir.ui.view" id="projects_kanban_view">
           <field name="name">shcool.projects.kanban</field>
-          <field name="model">school.projects</field>
+          <field name="model">school.project</field>
           <field name="arch" type="xml">
             <kanban class="o_student_group_kanban">
               <field name="name" />
@@ -74,8 +74,8 @@
     
         <!-- Student Project Tree View -->
         <record id="view_projects_tree" model="ir.ui.view">
-          <field name="name">school.projects.tree</field>
-          <field name="model">school.projects</field>
+          <field name="name">school.project.tree</field>
+          <field name="model">school.project</field>
           <field eval="8" name="priority" />
           <field name="arch" type="xml">
             <tree string="Student Projects">
@@ -88,8 +88,8 @@
     
         <!-- Student Project Form View -->
         <record model="ir.ui.view" id="student_group_form">
-          <field name="name">school.projects.view</field>
-          <field name="model">school.projects</field>
+          <field name="name">school.project.view</field>
+          <field name="model">school.project</field>
           <field name="type">form</field>
           <field name="arch" type="xml">
             <form string="Student Project">
@@ -143,7 +143,7 @@
     
         <record id="view_projects_filter" model="ir.ui.view">
           <field name="name">projects.select</field>
-          <field name="model">school.projects</field>
+          <field name="model">school.project</field>
           <field name="arch" type="xml">
             <search string="Search Student Projects">
               <field name="name" filter_domain="[( 'name', 'ilike', self)]" />
@@ -160,7 +160,7 @@
       <record id="action_projects_form" model="ir.actions.act_window">
         <field name="name">Student Projects</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">school.projects</field>
+        <field name="res_model">school.project</field>
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
         <!--<field name="context">{"search_default_my_projects":1}</field>-->
