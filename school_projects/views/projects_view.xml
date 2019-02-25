@@ -118,7 +118,7 @@
                 </group>
                 <notebook>
                   <page string="Participants">
-                    <field name="individual_course_ids" options="{'no_create': True, 'no_open': True}" widget="many2many">
+                    <field name="participant_ids" options="{'no_create': True, 'no_open': True}" widget="many2many">
                       <tree string="Participants">
                         <field name="name" />
                       </tree>
