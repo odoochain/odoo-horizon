@@ -131,9 +131,9 @@
                       </tree>
                     </field>
                   </page>
-                  <page string="Attachments">
+                  <!--<page string="Attachments">
                     <field name="attachment_ids" widget="many2many_binary" />
-                  </page>
+                  </page>-->
                 </notebook>
               </sheet>
               <div class="oe_chatter">

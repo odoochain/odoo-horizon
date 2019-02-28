@@ -25,11 +25,11 @@ import json
 
 from openerp import http
 from openerp.http import request
-from openerp.addons.auth_oauth.controllers.main import OAuthLogin as Home
+from openerp.addons.auth_oauth.controllers.main import OAuthLogin
 
 _logger = logging.getLogger(__name__)
 
-class BookingLoginController(Home):
+class BookingLoginController(OAuthLogin):
     
     @http.route('/angular/login_providers', type='json', auth="none")
     def booking_login(self, redirect=None, *args, **kw):
