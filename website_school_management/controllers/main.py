@@ -115,7 +115,7 @@ class csv_school_management(CSVExport):
           },
           "import_compat": true
         }"""
-        return self.base(data, '1551704801155')
+      return self.base(data, '1551704801155')
   
     @http.route('/web/export/course_group', type='http', auth="user")
     #@serialize_exception
