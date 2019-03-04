@@ -38,7 +38,7 @@ class csv_school_management(CSVExport):
 
     @http.route('/web/export/blocs', type='http', auth="user")
     #@serialize_exception
-    def index(self):
+    def export_blocs(self):
         data = """{
                   "model": "school.bloc",
                   "fields": [
@@ -111,6 +111,113 @@ class csv_school_management(CSVExport):
                   "import_compat": true
                 }"""
         return self.base(data, '1551704801155')
+        
+        
+        
+    @http.route('/web/export/programs', type='http', auth="user")
+    #@serialize_exception
+    def export_programs(self):
+        data = """{
+            "model": "school.program",
+            "fields": [
+              {
+                "name": "id",
+                "label": "External ID"
+              },
+              {
+                "name": "year_id/id",
+                "label": "Année scolaire/Identifiant"
+              },
+              {
+                "name": "year_id/name",
+                "label": "Année scolaire/Nom"
+              },
+              {
+                "name": "create_date",
+                "label": "Créé le"
+              },
+              {
+                "name": "create_uid/id",
+                "label": "Créé par/Identifiant"
+              },
+              {
+                "name": "write_uid/id",
+                "label": "Dernière mise à jour par/Identifiant"
+              },
+              {
+                "name": "__last_update",
+                "label": "Dernière modification le"
+              },
+              {
+                "name": "domain_id/name",
+                "label": "Domaine/Nom"
+              },
+              {
+                "name": "domain_id/long_name",
+                "label": "Domaine/Nom Long"
+              },
+              {
+                "name": "name",
+                "label": "Nom"
+              },
+              {
+                "name": "track_id/id",
+                "label": "Option/Identifiant"
+              },
+              {
+                "name": "track_id/name",
+                "label": "Option/Nom"
+              },
+              {
+                "name": "section_id/id",
+                "label": "Section/Identifiant"
+              },
+              {
+                "name": "section_id/name",
+                "label": "Section/Nom"
+              },
+              {
+                "name": "speciality_id/id",
+                "label": "Spécialité/Identifiant"
+              },
+              {
+                "name": "speciality_id/name",
+                "label": "Spécialité/Nom"
+              },
+              {
+                "name": "state",
+                "label": "État"
+              },
+              {
+                "name": "total_credits",
+                "label": "Total des ECTS"
+              },
+              {
+                "name": "total_hours",
+                "label": "Total des Heures"
+              }
+            ],
+            "ids": false,
+            "domain": [
+              [
+                "year_sequence",
+                "=",
+                "current"
+              ]
+            ],
+            "context": {
+              "lang": "fr_BE",
+              "tz": "Europe/Brussels",
+              "uid": 1,
+              "search_default_current": 1,
+              "params": {
+                "action": 110
+              }
+            },
+            "import_compat": true
+          }"""
+        return self.base(data, '1551704801155')
+          
 
 class website_portal_school_management(http.Controller):
 
