@@ -37,7 +37,7 @@ _logger = logging.getLogger(__name__)
 class csv_school_management(CSVExport):
 
     @http.route('/web/export/blocs', type='http', auth="public")
-    @serialize_exception
+    #@serialize_exception
     def index(self, data, token):
         data = """{
                   "model": "school.bloc",
