@@ -110,7 +110,7 @@ class csv_school_management(CSVExport):
                   },
                   "import_compat": true
                 }"""
-        return self.base(data, None)
+        return self.base(data, [])
 
 class website_portal_school_management(http.Controller):
 
