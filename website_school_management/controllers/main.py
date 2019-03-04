@@ -215,7 +215,7 @@ class csv_school_management(CSVExport):
       return self.base(data, '1551704801155')
 
 
-    @http.route('/web/export/blocs', type='http', auth="user")
+    @http.route('/web/export/bloc', type='http', auth="user")
     #@serialize_exception
     def export_blocs(self):
         data = """{
@@ -293,7 +293,7 @@ class csv_school_management(CSVExport):
         
         
         
-    @http.route('/web/export/programs', type='http', auth="user")
+    @http.route('/web/export/program', type='http', auth="user")
     #@serialize_exception
     def export_programs(self):
         data = """{
