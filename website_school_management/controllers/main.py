@@ -26,6 +26,8 @@ import werkzeug
 from openerp.addons.website.models.website import slug, unslug
 
 from openerp import http
+from openerp.addons.web.controllers.main import CSVExport
+
 from openerp.http import request, serialize_exception
 from openerp import tools
 from openerp.tools.translate import _
