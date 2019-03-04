@@ -26,11 +26,89 @@ import werkzeug
 from openerp.addons.website.models.website import slug, unslug
 
 from openerp import http
-from openerp.http import request
+from openerp.http import request, serialize_exception
 from openerp import tools
 from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
+
+class csv_school_management(CSVExport):
+
+    @http.route('/web/export/blocs', type='http', auth="user")
+    @serialize_exception
+    def index(self, token):
+        data = """{
+                  "model": "school.bloc",
+                  "fields": [
+                    {
+                      "name": "id",
+                      "label": "External ID"
+                    },
+                    {
+                      "name": "year_id/name",
+                      "label": "Année scolaire/Nom"
+                    },
+                    {
+                      "name": "domain_id/name",
+                      "label": "Domaine/Nom"
+                    },
+                    {
+                      "name": "name",
+                      "label": "Nom"
+                    },
+                    {
+                      "name": "level",
+                      "label": "Niveau"
+                    },
+                    {
+                      "name": "track_id/name",
+                      "label": "Option/Nom"
+                    },
+                    {
+                      "name": "track_id/saturn_code",
+                      "label": "Option/Saturn Code"
+                    },
+                    {
+                      "name": "total_credits",
+                      "label": "Total des ECTS"
+                    },
+                    {
+                      "name": "total_weight",
+                      "label": "Total de la pondération"
+                    },
+                    {
+                      "name": "total_hours",
+                      "label": "Total des Heures"
+                    },
+                    {
+                      "name": "program_id/id",
+                      "label": "Programme/Identifiant"
+                    }
+                  ],
+                  "ids": false,
+                  "domain": [
+                    [
+                      "year_sequence",
+                      "=",
+                      "current"
+                    ],
+                    [
+                      "title",
+                      "ilike",
+                      "master"
+                    ]
+                  ],
+                  "context": {
+                    "lang": "fr_BE",
+                    "tz": "Europe/Brussels",
+                    "uid": 1,
+                    "params": {
+                      "action": 109
+                    }
+                  },
+                  "import_compat": true
+                }"""
+        return self.base(data, token)
 
 class website_portal_school_management(http.Controller):
 
