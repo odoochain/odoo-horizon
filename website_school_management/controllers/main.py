@@ -38,7 +38,7 @@ class csv_school_management(CSVExport):
 
     @http.route('/web/export/blocs', type='http', auth="user")
     @serialize_exception
-    def index(self, data, token):
+    def index(self):
         data = """{
                   "model": "school.bloc",
                   "fields": [
@@ -110,7 +110,7 @@ class csv_school_management(CSVExport):
                   },
                   "import_compat": true
                 }"""
-        return self.base(data, token)
+        return self.base(data, None)
 
 class website_portal_school_management(http.Controller):
 
