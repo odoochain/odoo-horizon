@@ -35,6 +35,185 @@ from openerp.tools.translate import _
 _logger = logging.getLogger(__name__)
 
 class csv_school_management(CSVExport):
+  
+    @http.route('/web/export/course', type='http', auth="user")
+    #@serialize_exception
+    def export_course(self):
+      data =  """{
+          "model": "school.course",
+          "fields": [
+            {
+              "name": "id",
+              "label": "External ID"
+            },
+            {
+              "name": "domain_id/id",
+              "label": "Domaine/Identifiant"
+            },
+            {
+              "name": "teacher_ids/id",
+              "label": "Enseignants/Identifiant"
+            },
+            {
+              "name": "credits",
+              "label": "ECTS"
+            },
+            {
+              "name": ".id",
+              "label": "Identifiant"
+            },
+            {
+              "name": "level",
+              "label": "Niveau"
+            },
+            {
+              "name": "name",
+              "label": "Nom"
+            },
+            {
+              "name": "weight",
+              "label": "Poids"
+            },
+            {
+              "name": "has_second_session",
+              "label": "Seconde session possible"
+            },
+            {
+              "name": "section_id/id",
+              "label": "Section/Identifiant"
+            },
+            {
+              "name": "speciality_id/id",
+              "label": "Spécialité/Identifiant"
+            },
+            {
+              "name": "type",
+              "label": "Type"
+            },
+            {
+              "name": "url_ref",
+              "label": "Url Reference"
+            },
+            {
+              "name": "course_group_id/id",
+              "label": "Unité d'enseignement/Identifiant"
+            },
+            {
+              "name": "hours",
+              "label": "Heures"
+            }
+          ],
+          "ids": false,
+          "domain": [],
+          "context": {
+            "lang": "fr_BE",
+            "tz": "Europe/Brussels",
+            "uid": 1,
+            "params": {
+              "action": 126
+            }
+          },
+          "import_compat": true
+        }"""
+        return self.base(data, '1551704801155')
+  
+    @http.route('/web/export/course_group', type='http', auth="user")
+    #@serialize_exception
+    def export_course_group(self):
+      data =  """{
+            "model": "school.course_group",
+            "fields": [
+              {
+                "name": "id",
+                "label": "External ID"
+              },
+              {
+                "name": "bloc_ids/id",
+                "label": "Blocs annuels/Identifiant"
+              },
+              {
+                "name": "co_requisit_ids/.id",
+                "label": "Corequis/Identifiant"
+              },
+              {
+                "name": "create_date",
+                "label": "Créé le"
+              },
+              {
+                "name": "domain_id/name",
+                "label": "Domaine/Nom"
+              },
+              {
+                "name": ".id",
+                "label": "Identifiant"
+              },
+              {
+                "name": "teacher_id/teacher",
+                "label": "Enseignant/Enseignant"
+              },
+              {
+                "name": "teacher_id/display_name",
+                "label": "Enseignant/Nom"
+              },
+              {
+                "name": "teacher_id/name",
+                "label": "Enseignant/Nom"
+              },
+              {
+                "name": "name",
+                "label": "Nom"
+              },
+              {
+                "name": "weight",
+                "label": "Poids"
+              },
+              {
+                "name": "pre_requisit_course_ids/id",
+                "label": "Prérequis/Identifiant"
+              },
+              {
+                "name": "pre_requisit_ids/id",
+                "label": "Prérequis/Identifiant"
+              },
+              {
+                "name": "title",
+                "label": "Titre"
+              },
+              {
+                "name": "enable_exclusion_bool",
+                "label": "Tient compte des côtes d'exclusion"
+              },
+              {
+                "name": "total_weight",
+                "label": "Total de la pondération"
+              },
+              {
+                "name": "total_credits",
+                "label": "Total des ECTS"
+              },
+              {
+                "name": "total_hours",
+                "label": "Total des Heures"
+              },
+              {
+                "name": "period",
+                "label": "Période"
+              }
+            ],
+            "ids": false,
+            "domain": [],
+            "context": {
+              "lang": "fr_BE",
+              "tz": "Europe/Brussels",
+              "uid": 1,
+              "params": {
+                "action": 108
+              }
+            },
+            "import_compat": true
+          }"""
+        return self.base(data, '1551704801155')
+
 
     @http.route('/web/export/blocs', type='http', auth="user")
     #@serialize_exception
