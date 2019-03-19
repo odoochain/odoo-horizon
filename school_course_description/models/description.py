@@ -181,7 +181,7 @@ class Course(models.Model):
             current_program_ids = self.env['school.program'].search([['year_id', '=', current_year_id.id]])
             current_bloc_ids = current_program_ids.mapped('bloc_ids')
             current_ue_ids = current_bloc_ids.mapped('course_group_ids')
-            current_course_ids = current_program_ids.mapped('course_ids')
+            current_course_ids = current_ue_ids.mapped('course_ids')
             recs = self.env['school.course_documentation'].search([('state', '=', 'published')]).mapped('course_ids')
             recs = current_course_ids - recs
             return [('id', 'in', [x.id for x in recs])]
