@@ -178,5 +178,8 @@ class Course(models.Model):
     def _search_documentation_id(self, operator, value):
         recs = self.env['school.course_documentation'].search([('state', '=', 'published')]).mapped('course_ids')
         if recs:
-            return [('id', 'in', [x.id for x in recs])]
+            if value :
+                return [('id', 'in', [x.id for x in recs])]
+            else :
+                return [('id', 'not in', [x.id for x in recs])]
     
