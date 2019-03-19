@@ -176,10 +176,20 @@ class Course(models.Model):
             
     @api.multi
     def _search_documentation_id(self, operator, value):
-        recs = self.env['school.course_documentation'].search([('state', '=', 'published')]).mapped('course_ids')
-        if recs:
-            if operator == '!=' :
-                return [('id', 'in', [x.id for x in recs])]
-            else :
-                return [('id', 'not in', [x.id for x in recs])]
+        if value == 'missing' :
+            current_year_id = self.env.user.current_year_id
+            current_program_ids = self.env['school.program'].search([['year_id', '=', current_year_id.id]])
+            current_bloc_ids = current_program_ids.mapped('bloc_ids')
+            current_ue_ids = current_bloc_ids.mapped('course_group_ids')
+            current_course_ids = current_program_ids.mapped('course_ids')
+            recs = self.env['school.course_documentation'].search([('state', '=', 'published')]).mapped('course_ids')
+            recs = current_course_ids - recs
+            return [('id', 'in', [x.id for x in recs])]
+        else :
+            recs = self.env['school.course_documentation'].search([('state', '=', 'published')]).mapped('course_ids')
+            if recs:
+                if operator == '!=' :
+                    return [('id', 'in', [x.id for x in recs])]
+                else :
+                    return [('id', 'not in', [x.id for x in recs])]
     
