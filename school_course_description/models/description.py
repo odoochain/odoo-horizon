@@ -153,7 +153,7 @@ class Course(models.Model):
     '''Course'''
     _inherit = 'school.course'
     
-    documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id')
+    documentation_id = fields.Many2one('school.course_documentation', string='Documentation', compute='compute_documentation_id', search='_search_documentation_id')
     
     documentation_ids = fields.Many2many('school.course_documentation', 'school_doc_course_rel', 'course_id', 'doc_id', string='All Docs')
     
@@ -173,3 +173,10 @@ class Course(models.Model):
             self.documentation_id = docs[0]
         else:
             self.documentation_id = False
+            
+    @api.multi
+    def _search_documentation_id(self, operator, value):
+        recs = self.search([]).filtered(lambda x : x.documentation_id is True )
+        if recs:
+            return [('id', 'in', [x.id for x in recs])]
+    
