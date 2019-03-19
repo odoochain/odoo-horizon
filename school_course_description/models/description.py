@@ -176,5 +176,7 @@ class Course(models.Model):
             
     @api.multi
     def _search_documentation_id(self, operator, value):
-        return self.env['school.course_documentation'].search([('state', '=', 'published')]).mapped('course_ids')
+        recs = self.env['school.course_documentation'].search([('state', '=', 'published')]).mapped('course_ids')
+        if recs:
+            return [('id', 'in', [x.id for x in recs])]
     
