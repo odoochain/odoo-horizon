@@ -56,7 +56,7 @@
                       });
                     </script>
                     <header groups="school_management.group_employee">
-        	            <button name="publish" type="object" states="draft" string="Publish" class="oe_highlight" /> <!-- email Ingisi mars 2019 groups="school_management.group_employee" -->
+        	              <button name="publish" type="object" states="draft" string="Publish" class="oe_highlight" /> <!-- email Ingisi mars 2019 cd groups="school_management.group_employee" -->
                         <button name="unpublish" type="object" states="published,archived" string="Reset to Draft" /> <!-- groups="school_management.group_employee" -->
                         <button name="archive" type="object" states="published" string="Archive" /> <!-- groups="school_management.group_employee" -->
         	            <field name="state" widget="statusbar" statusbar_visible="draft,published,archived"/>
