@@ -59,12 +59,12 @@
               <h1>
                 <field name="student_id"/>
               </h1>
-              <h2>
-                Année de début de cycle : <field name="year_id"/>
-              </h2>
-              <h2>
-                Cycle basé sur le profil d'enseignement : <field name="source_program_id"/>
-              </h2>
+              <h4>
+                Année de début de cycle : <field name="year_id" class="oe_inline" />
+              </h4>
+              <h4>
+                Cycle basé sur le profil d'enseignement : <field name="source_program_id" class="oe_inline" />
+              </h4>
                 <field name="cycle_id" invisible="1"/>
                 <field name="speciality_id" invisible="1"/>
             </div>
