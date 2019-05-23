@@ -58,11 +58,15 @@
             <div class="oe_title" style="padding-left: 260px;width: 100%;">
               <h1>
                 <field name="student_id"/>
-                <field name="year_id"/>
-                <field name="source_program_id"/>
-                <field name="cycle_id"/>
-                <field name="speciality_id"/>
               </h1>
+              <h2>
+                Année de début de cycle : <field name="year_id"/>
+              </h2>
+              <h2>
+                Cycle basé sur le profil d'enseignement : <field name="source_program_id"/>
+              </h2>
+                <field name="cycle_id" invisible="1"/>
+                <field name="speciality_id" invisible="1"/>
             </div>
             <group col="4">
               <field name="required_credits" colspan="4" readonly="1"/>
