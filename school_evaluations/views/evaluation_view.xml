@@ -100,7 +100,7 @@
                         <button name="set_to_awarded" type="object" states="progress" string="Awarded" class="oe_highlight" />
                         <button name="set_to_abandonned" type="object" states="progress" string="Abandoned" class="oe_highlight" />
                         <button name="set_to_draft" type="object" states="progress,awarded,abandonned" string="Reset to Draft" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,awarded,abandonned" />
+                        <field name="state" widget="statusbar" statusbar_visible=" " />
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='image']" position="before">
