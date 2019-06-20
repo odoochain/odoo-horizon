@@ -826,22 +826,15 @@ class IndividualCourse(models.Model):
                     jun = self._parse_result(self.jun_result)
                     if self.ann_result and self.jan_result :
                         # ABSORBING RESULTS MAIL INGISI 06-2019
-                        if ann < 3 :
-                            self.first_session_result = ann
-                        elif jan < 3 :
-                            self.first_session_result = jan
+                        if jan < 3 :
+                            self.first_session_result = ann * 0.5 + jan * 0.5
                         elif jun < 3 :
-                            self.first_session_result = jun
+                            self.first_session_result = ann * 0.5 + jun * 0.5
                         else :
                             self.first_session_result = ann * 0.5 + (jan * 0.5 + jun * 0.5) * 0.5
                         self.first_session_result_bool = True
                     elif self.ann_result :
-                        if ann < 3 :
-                            self.first_session_result = ann
-                        elif jun < 3 :
-                            self.first_session_result = jun
-                        else :
-                            self.first_session_result = ann * 0.5 + jun * 0.5
+                        self.first_session_result = ann * 0.5 + jun * 0.5
                         self.first_session_result_bool = True
                     else:
                         self.first_session_result = 0
@@ -854,12 +847,7 @@ class IndividualCourse(models.Model):
                 try:
                     sept = self._parse_result(self.sept_result)
                     if self.ann_result :
-                        if ann < 3 :
-                            self.second_session_result = ann
-                        elif sept < 3 :
-                            self.second_session_result = sept
-                        else :
-                            self.second_session_result = ann * 0.5 + sept * 0.5
+                        self.second_session_result = ann * 0.5 + sept * 0.5
                         self.second_session_result_bool = True 
                     else:
                         self.first_session_result = 0
