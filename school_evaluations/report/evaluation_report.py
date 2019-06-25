@@ -97,9 +97,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 
                 filename = "evaluations.pdf"
                 
-                report_id = env['ir.actions.report'].search([('report_name', '=', report_evaluation_by_teacher)], limit=1)
-                
-                pdf_bin, _ = report_id.render(teacher_id.id, data=data)
+                pdf_bin, _ = self.env.ref('school_evaluations.report_evaluation_by_teacher').render_report(teacher_id.id, data=data)
                 
                 attachment = self.env['ir.attachment'].create({
                     'name': filename,
