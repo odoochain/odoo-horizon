@@ -99,7 +99,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 
                 report = self.env.ref('school_evaluations.report_evaluation_by_teacher')
                 
-                pdf_bin, _ = report.render_qweb_pdf(self.res_id)
+                pdf_bin, _ = report.get_pdf(self.res_id, data=data)
                 attachment = self.env['ir.attachment'].create({
                     'name': filename,
                     'datas': base64.b64encode(pdf_bin),
