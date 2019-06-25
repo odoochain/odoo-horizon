@@ -50,7 +50,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
         if self.send_as_email :
             for teacher_id in self.teacher_ids:
                 data['teacher_ids'] = [teacher_id.id]
-                this.send_mail(teacher_id.id, data)
+                self.send_mail(teacher_id.id, data)
         else :
             if self.teacher_id:
                 data['teacher_ids'] = [self.teacher_id.id] 
