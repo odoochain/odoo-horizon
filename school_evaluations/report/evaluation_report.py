@@ -50,7 +50,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
         if self.send_as_email :
             for teacher_id in self.teacher_ids:
                 data['teacher_ids'] = [teacher_id.id]
-                self.send_mail(teacher_id.id, data)
+                self.send_mail(teacher_id, data)
         else :
             if self.teacher_id:
                 data['teacher_ids'] = [self.teacher_id.id] 
@@ -82,7 +82,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 
                 # create a mail_mail based on values, without attachments
                 values = template.generate_email(teacher_id)
-                values['recipient_ids'] = [(4, pid) for pid in values.get('teacher_ids', list())]
+                values['recipient_ids'] = [teacher_id]
                 attachment_ids = values.pop('attachment_ids', [])
                 attachments = values.pop('attachments', [])
                 
@@ -106,6 +106,8 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 # if attachment_ids:
                 #     values['attachment_ids'] = [(6, 0, attachment_ids)]
                 #     mail.write({'attachment_ids': [(6, 0, attachment_ids)]})
+        
+                # mail.send()
         
                 return mail.id  # TDE CLEANME: return mail + api.returns ?
 
