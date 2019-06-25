@@ -125,7 +125,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 
                 mail.write({'attachment_ids': [(6, 0, [attachment.id])]})
         
-                # mail.send()
+                mail.send()
         
                 return mail.id  # TDE CLEANME: return mail + api.returns ?
 
