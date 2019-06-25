@@ -82,7 +82,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 
                 # create a mail_mail based on values, without attachments
                 values = template.generate_email(teacher_id.id)
-                values['recipient_ids'] = [teacher_id]
+                values['recipient_ids'] = teacher_id
                 attachment_ids = values.pop('attachment_ids', [])
                 attachments = values.pop('attachments', [])
                 
