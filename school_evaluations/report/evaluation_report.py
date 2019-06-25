@@ -109,8 +109,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                     'res_id': teacher_id.id,
                     'type': 'binary',  # override default_type from context, possibly meant for another model!
                 })
-                values['attachment_id'] = attachment.id
-        
+                
                 # for attachment in attachments:
                 #     attachment_data = {
                 #         'name': attachment[0],
@@ -123,7 +122,8 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 #     attachment_ids.append(Attachment.create(attachment_data).id)
                 # if attachment_ids:
                 #     values['attachment_ids'] = [(6, 0, attachment_ids)]
-                #     mail.write({'attachment_ids': [(6, 0, attachment_ids)]})
+                
+                mail.write({'attachment_ids': [(6, 0, attachment.id)]})
         
                 # mail.send()
         
