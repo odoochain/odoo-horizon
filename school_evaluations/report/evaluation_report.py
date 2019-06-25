@@ -20,6 +20,7 @@
 ##############################################################################
 import logging
 import time
+import base64
 
 from openerp import api, fields, models, tools, _
 from openerp.exceptions import MissingError
@@ -93,6 +94,22 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 mail = Mail.create(values)
         
                 # manage attachments
+                
+                filename = "evaluations.pdf"
+                
+                report = self.env.ref('school_evaluations.report_evaluation_by_teacher')
+                
+                pdf_bin, _ = report.render_qweb_pdf(self.res_id)
+                attachment = self.env['ir.attachment'].create({
+                    'name': filename,
+                    'datas': base64.b64encode(pdf_bin),
+                    'datas_fname': filename,
+                    'res_model': 'res.partner',
+                    'res_id': teacher_id.id,
+                    'type': 'binary',  # override default_type from context, possibly meant for another model!
+                })
+                values['attachment_id'] = attachment.id
+        
                 # for attachment in attachments:
                 #     attachment_data = {
                 #         'name': attachment[0],
