@@ -38,6 +38,8 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
     freeze_first_session = fields.Boolean(string='Freeze First Session')
     message = fields.Text(string="Message")
     
+    send_as_email = fields.Boolean(string="Send as email")
+    
     @api.multi
     def print_report(self, data):
         self.ensure_one()
@@ -45,14 +47,28 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
         data['message'] = self.message
         data['display_results'] = self.display_results
         data['freeze_first_session'] = self.freeze_first_session
-        if self.teacher_id:
-            data['teacher_ids'] = [self.teacher_id.id] 
-        elif self.teacher_ids:
-            data['teacher_ids'] = self.teacher_ids.ids
-        else:
-            context = dict(self._context or {})
-            data['teacher_ids'] = data.get('active_ids')
-        return self.env['report'].get_action(self, 'school_evaluations.report_evaluation_by_teacher_content', data=data)
+        if self.send_as_email :
+            for teacher_id in self.teacher_ids:
+                context = dict(self._context or {})
+                data['teacher_ids'] = [teacher_id.id]
+                message = self.env['mail.message'].create({
+                    'subject': "Compte rendu de l'encodage de résultat",
+                    'body': "Bonjour,<br/> nous vous prions de trouver ci-joint le rapport d'encodage de vos résultats.",
+                    'record_name': "teacher_id.name",
+                    'email_from': "info@crlg.be",
+                    'reply_to': "info@crlg.be",
+                    'model': "res.partner",
+                    'res_id': teacher_id.id,
+                })
+        else :
+            if self.teacher_id:
+                data['teacher_ids'] = [self.teacher_id.id] 
+            elif self.teacher_ids:
+                data['teacher_ids'] = self.teacher_ids.ids
+            else:
+                context = dict(self._context or {})
+                data['teacher_ids'] = data.get('active_ids')
+            return self.env['report'].get_action(self, 'school_evaluations.report_evaluation_by_teacher_content', data=data)
     
 
 class ReportEvaluationByTeacher(models.AbstractModel):
