@@ -49,17 +49,8 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
         data['freeze_first_session'] = self.freeze_first_session
         if self.send_as_email :
             for teacher_id in self.teacher_ids:
-                context = dict(self._context or {})
                 data['teacher_ids'] = [teacher_id.id]
-                message = self.env['mail.message'].create({
-                    'subject': "Compte rendu de l'encodage de résultat",
-                    'body': "Bonjour,<br/> nous vous prions de trouver ci-joint le rapport d'encodage de vos résultats.",
-                    'record_name': "teacher_id.name",
-                    'email_from': "info@crlg.be",
-                    'reply_to': "info@crlg.be",
-                    'model': "res.partner",
-                    'res_id': teacher_id.id,
-                })
+                this.send_mail(teacher_id.id, data)
         else :
             if self.teacher_id:
                 data['teacher_ids'] = [self.teacher_id.id] 
@@ -70,6 +61,53 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 data['teacher_ids'] = data.get('active_ids')
             return self.env['report'].get_action(self, 'school_evaluations.report_evaluation_by_teacher_content', data=data)
     
+    
+    def send_mail(self, teacher_id, data):
+        """Generates a new mail message for the given template and record,
+           and schedules it for delivery through the ``mail`` module's scheduler.
+           :param int res_id: id of the record to render the template with
+                              (model is taken from the template)
+           :param bool force_send: if True, the generated mail.message is
+                immediately sent after being created, as if the scheduler
+                was executed for this message only.
+           :returns: id of the mail.message that was created
+        """
+        self.ensure_one()
+        Mail = self.env['mail.mail']
+        Attachment = self.env['ir.attachment']  # TDE FIXME: should remove dfeault_type from context
+        
+        template = self.env.ref('school_evaluations.mail_template_evaluation_email')
+        for wizard_line in self:
+            if template:
+                
+                # create a mail_mail based on values, without attachments
+                values = template.generate_email(teacher_id)
+                values['recipient_ids'] = [(4, pid) for pid in values.get('teacher_ids', list())]
+                attachment_ids = values.pop('attachment_ids', [])
+                attachments = values.pop('attachments', [])
+                
+                # add a protection against void email_from
+                if 'email_from' in values and not values.get('email_from'):
+                    values.pop('email_from')
+                    
+                mail = Mail.create(values)
+        
+                # manage attachments
+                # for attachment in attachments:
+                #     attachment_data = {
+                #         'name': attachment[0],
+                #         'datas_fname': attachment[0],
+                #         'datas': attachment[1],
+                #         'type': 'binary',
+                #         'res_model': 'mail.message',
+                #         'res_id': mail.mail_message_id.id,
+                #     }
+                #     attachment_ids.append(Attachment.create(attachment_data).id)
+                # if attachment_ids:
+                #     values['attachment_ids'] = [(6, 0, attachment_ids)]
+                #     mail.write({'attachment_ids': [(6, 0, attachment_ids)]})
+        
+                return mail.id  # TDE CLEANME: return mail + api.returns ?
 
 class ReportEvaluationByTeacher(models.AbstractModel):
     _name = 'report.school_evaluations.report_evaluation_by_teacher_content'
