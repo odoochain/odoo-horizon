@@ -123,7 +123,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
                 # if attachment_ids:
                 #     values['attachment_ids'] = [(6, 0, attachment_ids)]
                 
-                mail.write({'attachment_ids': [(6, 0, attachment.id)]})
+                mail.write({'attachment_ids': [(6, 0, [attachment.id])]})
         
                 # mail.send()
         
