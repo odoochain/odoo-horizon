@@ -870,6 +870,7 @@
                     <field name="teacher_ids" colspan="4" widget="many2many_tags" />
                     <field name="display_results" />
                     <field name="freeze_first_session" />
+                    <field name="send_as_email" />
                     <h3>Message</h3>
                     <field name="message" colspan="4" nolabel="1" default="Merci de ramener le document au secrétariat." />
                 </group>
