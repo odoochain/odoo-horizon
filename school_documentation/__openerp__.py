@@ -36,6 +36,6 @@
     ''',
     'qweb': [],
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

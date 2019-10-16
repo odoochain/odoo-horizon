@@ -38,6 +38,6 @@
         This modules add registration tools for a school.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

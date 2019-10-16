@@ -45,6 +45,6 @@
         This modules add management tools for a school.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

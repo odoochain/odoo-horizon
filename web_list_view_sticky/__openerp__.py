@@ -16,7 +16,7 @@ Web List View Fixed Table Header
         'views/web_list_view_sticky.xml',
     ],
     'qweb': ['static/src/xml/*.xml'],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

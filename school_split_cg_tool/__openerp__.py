@@ -35,6 +35,6 @@
         This module allows to split a course group, for example to organize them in quadrimesters.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': False,
 }

@@ -36,6 +36,6 @@
         This modules adds an approuval step to dispenses.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

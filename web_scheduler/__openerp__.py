@@ -37,7 +37,7 @@ Extend calendar view to support scheduler.
         'views/web_scheduler.xml',
     ],
     'qweb': ['static/src/xml/*.xml'],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

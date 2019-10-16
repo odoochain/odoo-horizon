@@ -37,6 +37,6 @@
         This modules manages the course documentation for a school.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

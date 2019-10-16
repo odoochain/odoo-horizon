@@ -40,6 +40,6 @@
     ''',
     'qweb': ['static/src/xml/*.xml'],
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

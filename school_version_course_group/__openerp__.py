@@ -35,6 +35,6 @@
         This modules add version (ie year_id) to course groups.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

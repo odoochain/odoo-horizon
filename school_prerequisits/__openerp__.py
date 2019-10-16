@@ -37,6 +37,6 @@
         This modules manage pre and co requisits for courses a school.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

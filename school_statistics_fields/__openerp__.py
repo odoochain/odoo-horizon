@@ -40,6 +40,6 @@
         This modules add saturn statistic support.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

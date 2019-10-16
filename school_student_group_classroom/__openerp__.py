@@ -39,6 +39,6 @@
         This modules adds support for Google Classroom to student groups.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

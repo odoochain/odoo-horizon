@@ -35,6 +35,6 @@
         This modules add choice course group for a school.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

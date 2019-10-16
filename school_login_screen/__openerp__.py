@@ -36,6 +36,6 @@
         This modules improve the login view for Horizon.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

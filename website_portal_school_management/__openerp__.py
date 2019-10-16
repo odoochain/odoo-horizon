@@ -37,6 +37,6 @@
         This module adds web portal access for a school.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

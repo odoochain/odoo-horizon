@@ -16,6 +16,6 @@ Collects web application usage with Google Analytics.
     'data': [
         'views/web_analytics.xml',
     ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

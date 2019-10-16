@@ -38,6 +38,6 @@
         This modules add specific access for teacher with dedicated menu.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

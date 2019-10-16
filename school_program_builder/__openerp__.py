@@ -35,6 +35,6 @@
         This modules helps creating complex programs.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

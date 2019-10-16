@@ -35,6 +35,6 @@
         This modules add invoice management for a school.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }

@@ -37,6 +37,6 @@
         This modules add booking to group student.
     ''',
     'active': False,
-    'installable': True,
+    'installable': False,
     'application': True,
 }
