@@ -25,7 +25,7 @@
     'author': 'be-Cloud.be (Jerome Sonnet)',
     'website': '',
     'category': 'School Contacts',
-    'depends': ['mail','partner_contact_gender','partner_contact_birthdate','partner_contact_birthplace'],
+    'depends': ['mail','partner_contact_gender','partner_contact_birthdate','partner_contact_birthplace','partner_firstname'],
     'init_xml': [],
     'update_xml': [
         'school_data.xml',
