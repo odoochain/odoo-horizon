@@ -30,7 +30,6 @@
     'update_xml': [
         'school_data.xml',
         'views/res_partner_view.xml',
-        'security/ir.model.access.csv',
     ],
     'demo_xml': [],
     'description': '''
