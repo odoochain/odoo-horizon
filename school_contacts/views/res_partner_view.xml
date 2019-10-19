@@ -109,7 +109,6 @@
                                         <field name='email_personnel' />
                                         <field name="phone" widget="phone"/>
                                         <field name="mobile" widget="phone"/>
-                                        <field name="fax" widget="phone"/>
                                     </group>
                                 </div>
                             </div>
