@@ -145,11 +145,11 @@
                 </xpath>
             </field>
         </record>
-
-        <!-- Top menu item -->
+        
+        <!-- Top menu item - ->
         <menuitem name="Contacts" id="menu_contacts" icon="fa-user" web_icon="school_management,static/description/icon_contact.png" sequence="40" />
 
-        <!-- <menuitem name="Contacts" parent="menu_main_contacts" id="menu_contacts" sequence="1" /> -->
+        <!-- <menuitem name="Contacts" parent="menu_main_contacts" id="menu_contacts" sequence="1" /> - ->
 
         <record id="view_res_partner_filter" model="ir.ui.view">
             <field name="name">res.partner.select</field>
@@ -178,7 +178,7 @@
             </field>
         </record>
 
-        <!-- Add program for student form view -->
+        <!-- Add program for student form view - ->
         <record id="view_student_kanban_school" model="ir.ui.view">
             <field name="name">view.res.partner.kanban.school</field>
             <field name="model">res.partner</field>
@@ -196,11 +196,11 @@
                     <t t-if="record.has_paid_current_minerval.raw_value == false">
                         <span class="badge" attrs="{'invisible': [('student','=',False)]}"><i class="fa fa-square" aria-hidden="true"></i></span>
                     </t>
-                </xpath>-->
+                </xpath>- ->
             </field>
         </record>
 
-        <!-- Speciality List View -->
+        <!-- Speciality List View - ->
         <record id="view_student_tree_school" model="ir.ui.view">
             <field name="name">school.res.partner.tree</field>
             <field name="model">res.partner</field>
@@ -209,7 +209,7 @@
                 <tree string="Contacts">
                     <field name="display_name" />
                     <field name="function" invisible="1" />
-                    <!--<field name="has_paid_current_minerval" />-->
+                    <!--<field name="has_paid_current_minerval" />- ->
                     <field name="email" />
                     <field name="category_id" />
                     <field name="user_id" invisible="1" />
@@ -276,7 +276,7 @@
             </field>
         </record>
 
-        <!-- Add courses list for teacher form view -->
+        Add courses list for teacher form view 
         <record id="view_teacher_form_school" model="ir.ui.view">
             <field name="name">view.res.partner.form.school</field>
             <field name="model">res.partner</field>
@@ -301,7 +301,7 @@
                     </page>
                 </xpath>
             </field>
-        </record>
+        </record> 
 
         <record id="action_teacher_form_view1" model="ir.actions.act_window.view">
             <field name="sequence" eval="0" />
@@ -439,7 +439,7 @@
             <field name="act_window_id" ref="action_archived_form" />
         </record>
         
-        <menuitem id="menu_archived_form" parent="menu_contacts" action="action_archived_form" sequence="99" />
+        <menuitem id="menu_archived_form" parent="menu_contacts" action="action_archived_form" sequence="99" /> -->
 
     </data>
 </openerp>
