@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import res_partner
-import program
-import individual_program
-import course_session
+import . res_partner
+import . program
+import . individual_program
+import . course_session
