@@ -39,6 +39,8 @@ class Partner(models.Model):
     
     initials = fields.Char('Initials')
     
+    nationality_id = fields.Many2one("res.country", "Nationality")
+    
     @api.one
     @api.constrains('initials')
     def _check_initials(self):
