@@ -147,19 +147,19 @@ class IndividualBloc(models.Model):
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours')
     total_weight = fields.Float(compute='_get_courses_total', string='Weight')
 
-    @api.onchange('source_bloc_id')
-    @api.depends('course_group_ids')
-    def assign_source_bloc(self):
-        cg_ids = []
-        for group in self.source_bloc_id.course_group_ids:
-            _logger.info('assign course groups : ' + group.name)
-            cg = self.course_group_ids.create({'bloc_id': self.id,'source_course_group_id': group.id, 'acquiered' : 'NA'}) # TODO FIX DEPENDENCIE TO EVALUATION
-            courses = []
-            for course in group.course_ids:
-                _logger.info('assign course : ' + course.name)
-                courses.append((0,0,{'source_course_id': course.id}))
-            _logger.info(courses)
-            cg.write({'course_ids': courses})
+    # @api.onchange('source_bloc_id')
+    # @api.depends('course_group_ids')
+    # def assign_source_bloc(self):
+    #     cg_ids = []
+    #     for group in self.source_bloc_id.course_group_ids:
+    #         _logger.info('assign course groups : ' + group.name)
+    #         cg = self.course_group_ids.create({'bloc_id': self.id,'source_course_group_id': group.id, 'acquiered' : 'NA'}) # TODO FIX DEPENDENCIE TO EVALUATION
+    #         courses = []
+    #         for course in group.course_ids:
+    #             _logger.info('assign course : ' + course.name)
+    #             courses.append((0,0,{'source_course_id': course.id}))
+    #         _logger.info(courses)
+    #         cg.write({'course_ids': courses})
 
     @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight','course_group_ids.is_ghost_cg')
     @api.one
