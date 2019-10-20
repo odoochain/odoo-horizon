@@ -20,6 +20,11 @@ $o-brand-primary: $o-community-color;
     }
 }
 
+// Forms
+.o_form_view .oe_button_box .oe_stat_button .o_button_icon {
+  color: $o-community-color;
+}
+
 // $o-brand-secondary: #f0eeee;
 // $o-brand-lightsecondary: #e2e2e0;
 // $o-gray-100: #f8f9fa; // This is BS default
