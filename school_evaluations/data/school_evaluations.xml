@@ -20,14 +20,12 @@
 #
 ##############################################################################
 -->
-<openerp>
-    <data>
-        <record id="group_evaluations" model="res.groups">
-            <field name="name">Gestion des évaluations</field>
-        </record>
-        <record id="decimal_evaluation" model="decimal.precision">
-            <field name="name">Evaluation</field>
-            <field name="digits">2</field>
-        </record>
-    </data>
-</openerp>
+<odoo>
+    <record id="group_evaluations" model="res.groups">
+        <field name="name">Gestion des évaluations</field>
+    </record>
+    <record id="decimal_evaluation" model="decimal.precision">
+        <field name="name">Evaluation</field>
+        <field name="digits">2</field>
+    </record>
+</odoo>
