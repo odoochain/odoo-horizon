@@ -6,7 +6,19 @@ $o-enterprise-primary-color: #101527;
 $o-brand-odoo: $o-community-color;
 $o-brand-primary: $o-community-color;
 
-.hello_world{ color: $o-brand-odoo }
+// Extra Fields
+.o_required_modifier {
+    &.o_input, .o_input {
+        background-color: #DDDDDD!important;
+    }
+}
+
+.o_field_widget {
+    // Many2one
+    &.o_field_many2one .o_external_button {
+        color: #DDDDDD;
+    }
+}
 
 // $o-brand-secondary: #f0eeee;
 // $o-brand-lightsecondary: #e2e2e0;
