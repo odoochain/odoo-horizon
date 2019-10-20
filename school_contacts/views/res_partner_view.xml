@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <group>
                                             <field name="id"/>
                                             <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
@@ -75,7 +75,7 @@
                             				</group>
                             			</div>
                             		</div>
-                            		<div class="col-md-6">
+                            		<div class="col-md-9">
                             		    <notebook colspan="2">
                                             <page string="Contacts &amp; Addresses" autofocus="autofocus">
                                                 <field name="is_company" invisible="1"/>
@@ -117,7 +117,7 @@
                                                 </div>
                                             </page>
                                             <page name="personal_information_page" string="Informations personnelles">
-                                				<group name="personal_information_group">
+                                				<group name="personal_information_group" col="4">
                                 				    <field name="title" options="{&quot;no_open&quot;: True}" attrs="{'invisible': [('is_company', '=', True)]}"/>
                                 				    <field name="lang"/>
                                 				    <field name='gender' />
