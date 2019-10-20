@@ -3,10 +3,10 @@ $o-community-color: #101527;
 $o-enterprise-color: #101527;
 $o-enterprise-primary-color: #101527;
 
-$o-test-color: #101527;
+$o-brand-odoo: $o-community-color;
+$o-brand-primary: $o-community-color;
 
-// $o-brand-odoo: $o-community-color;
-// $o-brand-primary: $o-community-color;
+.hello_world{ color: $o-brand-odoo }
 
 // $o-brand-secondary: #f0eeee;
 // $o-brand-lightsecondary: #e2e2e0;
