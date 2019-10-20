@@ -19,21 +19,20 @@
 #
 ##############################################################################
 {
-    'name': 'School Contacts',
+    'name': 'School Theme',
     'version': '0.1',
     'license': 'AGPL-3',
     'author': 'be-Cloud.be (Jerome Sonnet)',
     'website': '',
-    'category': 'School Contacts',
-    'depends': ['contacts','partner_contact_gender','partner_contact_birthdate','partner_contact_birthplace','partner_firstname'],
+    'category': 'school',
+    'depends': ['web_responsive'],
     'init_xml': [],
-    'update_xml': [
-        'school_data.xml',
-        'views/res_partner_view.xml',
+    'data': [
+        'views/assets.xml',
     ],
     'demo_xml': [],
     'description': '''
-        This modules add fields to partners for a school.
+        This modules setup the theme.
     ''',
     'active': False,
     'installable': True,
