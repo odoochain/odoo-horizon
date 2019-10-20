@@ -145,6 +145,24 @@
                 </xpath>
             </field>
         </record>
+        
+        <record id="view_res_partner_filter" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Partner">
+                    <field name="name" filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]" />
+                    <separator/>
+                    <filter string="Employees" name="employee" domain="[('employee','=',1), ('parent_id', '=', False)]" />
+                    <filter string="Teachers" name="teacher" domain="[('teacher','=',1), ('parent_id', '=', False)]" />
+                    <filter string="Students" name="student" domain="[('student','=',1), ('parent_id', '=', False)]" />
+                    <filter string="Others" name="other" domain="[('employee','=',0),('teacher','=',0),('student','=',0), ('parent_id', '=', False)]" />
+                    <filter string="Archived" name="archived" domain="[('active','=',False),('type','=','contact')]" />
+                    <separator/>
+                    <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
+                </search>
+            </field>
+        </record>
 
     </data>
 </openerp>
