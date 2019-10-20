@@ -26,10 +26,10 @@
     
     Success Certificate
     
-   
+    -->
 
     <report id="report_success_certificate" model="school.individual_bloc" string="Success Certificate" report_type="qweb-pdf" name="school_evaluations.report_success_certificate_content" file="school_evaluations.report_success_certificate_content" attachment_use="True"
-        attachment="object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'" /> -->
+        attachment="object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'" />
 
     <!--Email template -->
     <record id="email_template_success_certificate" model="mail.template">
@@ -118,10 +118,10 @@
     
     Success Certificate on programs
     
-    
+    -->
 
     <report id="report_success_certificate_prog" model="school.individual_program" string="Success Certificate" report_type="qweb-pdf" name="school_evaluations.report_success_certificate_prog_content" file="school_evaluations.report_success_certificate_prog_content"
-        attachment_use="True" attachment="object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'" />-->
+        attachment_use="True" attachment="object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'" />
 
     <!--Email template -->
     <record id="email_template_success_certificate_prog" model="mail.template">
@@ -206,10 +206,10 @@
     
     Evaluations report for students
     
-    
+    -->
 
     <report id="report_evaluation_for_student" model="school.individual_bloc" string="Evaluations for student" report_type="qweb-pdf" name="school_evaluations.report_evaluation_for_student_content" file="school_evaluations.report_evaluation_for_student_content"
-        attachment_use="True" attachment="object.name+'-RES-'+time.strftime('%d-%m-%Y')+'.pdf'" />-->
+        attachment_use="True" attachment="object.name+'-RES-'+time.strftime('%d-%m-%Y')+'.pdf'" />
 
     <!--Email template -->
     <record id="email_template_evaluation_for_student" model="mail.template">
@@ -359,10 +359,10 @@
     
     Evaluations report for deliberation annexe
     
-    
+    -->
 
     <report id="report_deliberation_program_annexe" model="school.individual_program" string="Deliberation Report Program" report_type="qweb-pdf" name="school_evaluations.report_deliberation_annexe_program" file="school_evaluations.report_deliberation_annexe_program"
-    />-->
+    />
 
 
     <template id="report_deliberation_annexe_program">
@@ -419,9 +419,9 @@
         </t>
     </template>
 
-    <!--
+
     <report id="report_deliberation_annexe" model="school.individual_bloc" string="Deliberation Report" report_type="qweb-pdf" name="school_evaluations.report_deliberation_annexe_content" file="school_evaluations.report_deliberation_annexe_content" />
-    -->
+
 
     <template id="report_deliberation_annexe_content">
         <t t-call="report.html_container">
@@ -566,12 +566,11 @@
     </template>
 
 
-    <!-- Individual Bloc Definition Report 
+    <!-- Individual Bloc Definition Report -->
 
     <report id="report_individual_bloc_definition" model="school.individual_program" string="Individual Bloc Definition Report" report_type="qweb-pdf" name="school_evaluations.report_individual_bloc_definition_content" file="school_evaluations.report_individual_bloc_definition_content"
     />
-    -->
-    
+
     <template id="report_individual_bloc_definition_content">
         <t t-call="report.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
@@ -886,7 +885,7 @@
         </field>
     </record>
     
-    <!-- email template -->
+    <!-- email template 
     
     <record id="mail_template_evaluation_email" model="mail.template">
         <field name="name">Evaluation report</field>
@@ -904,7 +903,7 @@
         <field name="lang">${object.lang}</field>
         <field name="auto_delete" eval="True"/>
         <field name="user_signature" eval="False"/>
-    </record>
+    </record> -->
 
     <report id="report_evaluation_by_teacher" model="school.individual_course" string="Evaluation by Teacher" report_type="qweb-pdf" name="school_evaluations.report_evaluation_by_teacher_content" file="school_evaluations.report_evaluation_by_teacher_content"
     />
@@ -919,7 +918,7 @@
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_evaluation_report_by_teacher" name="Evaluation by Teacher" action="action_evaluation_report_by_teacher" parent="menu_main_evaluation" sequence="900" />
+    <menuitem id="menu_evaluation_report_by_teacher" name="Evaluation by Teacher" action="action_evaluation_report_by_teacher" parent="menu_main_evaluation" sequence="900" /> 
 
     <!--  Add wizard -->
 
