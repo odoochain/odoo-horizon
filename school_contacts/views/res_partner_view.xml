@@ -40,10 +40,9 @@
                         <div class="col-md-7">
                             <div class="oe_title">
                                 <h1>
-                                    <field name="name" default_focus="1" placeholder="Nom" attrs="{
-                                        'readonly': [('is_company', '=', False)],
-                                        'required': [('is_company', '=', True)]
-                                    }" on_change="1" modifiers="{'readonly': [['is_company', '=', false]], 'required': [['is_company', '=', true]]}" class="oe_inline"/> <field name='initials' placeholder="I.,J.,F." class="oe_inline"/>
+                                    <field name="name" default_focus="1" placeholder="Nom" class="oe_inline"/> 
+                                    <span class="o_field_widget"> - </span> 
+                                    <field name='initials' placeholder="I.,J.,F." class="oe_inline"/>
                                 </h1>
                                 <span class="oe_fade">
                                       Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
