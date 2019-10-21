@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+##############################################################################
+#
+#    Copyright (c) 2015 be-cloud.be
+#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<openerp>
+    <data>
+        <menuitem name="Administration" id="menu_school_admin" icon="fa-book" web_icon="stock,static/description/icon.png" sequence="250" />
+        
+        <menuitem name="Programs" parent="menu_school_admin" id="menu_admin_program" sequence="20" />
+        
+        <!-- Cycle List View -->
+        <record id="view_cycle_list" model="ir.ui.view">
+            <field name="name">school.cycle.tree</field>
+            <field name="model">school.cycle</field>
+            <field eval="8" name="priority" />
+            <field name="arch" type="xml">
+                <tree string="Cycles">
+                    <field name="name" />
+                    <field name="short_name" />
+                    <field name="required_credits"/>
+                    <field name="type"/>
+                    <field name="grade"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_cycle_list" model="ir.actions.act_window">
+            <field name="name">Cycles</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.cycle</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_cycle_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_cycle_list" />
+            <field name="act_window_id" ref="action_cycle_list" />
+        </record>
+        
+        <record id="action_cycle_form_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5" />
+            <field name="view_mode">form</field>
+            <field name="act_window_id" ref="action_cycle_list" />
+        </record>
+        
+        <menuitem id="menu_cycle_list" parent="menu_admin_program" action="action_cycle_list" sequence="15" />
+        
+        <!-- Speciality List View -->
+        <record id="view_speciality_list" model="ir.ui.view">
+            <field name="name">school.speciality.tree</field>
+            <field name="model">school.speciality</field>
+            <field eval="8" name="priority" />
+            <field name="arch" type="xml">
+                <tree string="Specialities">
+                    <field name="name" />
+                    <field name="domain_id" />
+                    <field name="section_id" />
+                    <field name="track_id" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_speciality_list" model="ir.actions.act_window">
+            <field name="name">Specialities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.speciality</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_speciality_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_speciality_list" />
+            <field name="act_window_id" ref="action_speciality_list" />
+        </record>
+        
+        <record id="action_speciality_form_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5" />
+            <field name="view_mode">form</field>
+            <field name="act_window_id" ref="action_speciality_list" />
+        </record>
+        
+        <menuitem id="menu_speciality_list" parent="menu_admin_program" action="action_speciality_list" sequence="20" />
+        
+        <!-- Section List View -->
+        <record id="view_section_list" model="ir.ui.view">
+            <field name="name">school.section.tree</field>
+            <field name="model">school.section</field>
+            <field eval="8" name="priority" />
+            <field name="arch" type="xml">
+                <tree string="Sections">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_section_list" model="ir.actions.act_window">
+            <field name="name">Sections</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.section</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_section_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_section_list" />
+            <field name="act_window_id" ref="action_section_list" />
+        </record>
+        
+        <record id="action_section_form_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5" />
+            <field name="view_mode">form</field>
+            <field name="act_window_id" ref="action_section_list" />
+        </record>
+        
+        <menuitem id="menu_section_list" parent="menu_admin_program" action="action_section_list" sequence="30" />
+        
+        <!-- Track List View -->
+        <record id="view_track_list" model="ir.ui.view">
+            <field name="name">school.track.tree</field>
+            <field name="model">school.track</field>
+            <field eval="8" name="priority" />
+            <field name="arch" type="xml">
+                <tree string="Tracks">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_track_list" model="ir.actions.act_window">
+            <field name="name">Tracks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.track</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_track_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_track_list" />
+            <field name="act_window_id" ref="action_track_list" />
+        </record>
+        
+        <record id="action_track_form_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5" />
+            <field name="view_mode">form</field>
+            <field name="act_window_id" ref="action_track_list" />
+        </record>
+        
+        <menuitem id="menu_track_list" parent="menu_admin_program" action="action_track_list" sequence="40" />
+        
+        <!-- Domain List View -->
+        <record id="view_domain_list" model="ir.ui.view">
+            <field name="name">school.domain.tree</field>
+            <field name="model">school.domain</field>
+            <field eval="8" name="priority" />
+            <field name="arch" type="xml">
+                <tree string="Domains">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_domain_list" model="ir.actions.act_window">
+            <field name="name">Domains</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.domain</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_domain_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_domain_list" />
+            <field name="act_window_id" ref="action_domain_list" />
+        </record>
+        
+        <record id="action_domain_form_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5" />
+            <field name="view_mode">form</field>
+            <field name="act_window_id" ref="action_domain_list" />
+        </record>
+        
+        <menuitem id="menu_domain_list" parent="menu_admin_program" action="action_domain_list" sequence="50" />
+        
+    </data>
+</openerp>
