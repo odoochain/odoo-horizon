@@ -346,7 +346,10 @@ class Cycle(models.Model):
     
     name = fields.Char(required=True, string='Name', size=60)
     
-    
+    domain = fields.Selection([
+            ('musique','Musique'),
+            ('theatre', 'Théatre'),
+        ], string='Domaine'))
     
     short_name = fields.Char(string='Short Name', size=2)
     description = fields.Text(string='Description')
