@@ -364,14 +364,14 @@ class Speciality(models.Model):
     domain = fields.Selection([
             ('musique','Musique'),
             ('theatre', 'Théatre')
-        ], string='Domaine'))
+        ], string='Domaine')
              
     section = fields.Selection([
             ('artdram','Art dramatique'),
             ('ecriture','Écritures et théorie musicale'),
             ('instrument','Formation instrumentale'),
             ('vocale','Formation vocale')
-        ], string='Section'))
+        ], string='Section')
         
     track = fields.Selection([
             ('artdram','Art Dramatique'),
@@ -383,7 +383,7 @@ class Speciality(models.Model):
             ('formation','Formation musicale'),
             ('percussion','Percussions'),
             ('vents','Vents')
-        ], string='Option'))
+        ], string='Option')
     
     _sql_constraints = [
 	        ('uniq_speciality', 'unique(domain, name)', 'There shall be only one speciality in a domain'),
