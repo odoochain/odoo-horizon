@@ -93,6 +93,11 @@ class Program(models.Model):
         for course_g in self:
             course_g.name = "%s - %s" % (course_g.year_id.short_name, course_g.title)
     
+    domain = fields.Selection([
+            ('musique','Musique'),
+            ('theatre', 'Théatre')
+        ], string='Domaine')
+    
     year_id = fields.Many2one('school.year', required=True, string="Year")
     
     description = fields.Text(string='Description')
