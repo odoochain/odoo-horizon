@@ -768,33 +768,19 @@
     </record>
     <menuitem id="menu_program_form" parent="menu_program" action="action_program_form" sequence="1" />
 
-    <!-- Competencies Tree View -->
-    <record id="view_competencies_tree" model="ir.ui.view">
-      <field name="name">school.competency.tree</field>
-      <field name="model">school.competency</field>
-      <field eval="8" name="priority" />
+    <!-- User current year setting -->
+    <record id="view_users_form_simple_modif_school" model="ir.ui.view">
+      <field name="name">res.users.preferences.form</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+      <field eval="18" name="priority"/>
       <field name="arch" type="xml">
-        <tree string="Competences">
-          <field name="sequence" />
-          <field name="description" />
-        </tree>
+          <xpath expr="//field[@name='tz_offset']" position="after">
+              <field name="current_year_id" placeholder="Current Year" readonly="0"/>
+          </xpath>
       </field>
     </record>
 
-    <!-- User current year setting -->
-    <record id="view_users_form_simple_modif_school" model="ir.ui.view">
-            <field name="name">res.users.preferences.form</field>
-            <field name="model">res.users</field>
-            <field name="inherit_id" ref="base.view_users_form_simple_modif" />
-            <field eval="18" name="priority"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='tz_offset']" position="after">
-                    <field name="current_year_id" placeholder="Current Year" readonly="0"/>
-                </xpath>
-            </field>
-        </record>
-  
-  
   <!-- User current year setting -->
     <record id="view_users_form_school" model="ir.ui.view">
             <field name="name">res.users.preferences.form</field>
