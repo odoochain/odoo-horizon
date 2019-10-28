@@ -175,12 +175,10 @@ class Bloc(models.Model):
     cycle_id = fields.Many2one(related='program_id.cycle_id', string='Cycle',store=True)
     
     level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),('6','Agregation'),],string='Level')
-    
+ 
+    domain = fields.Many2one(related='program_id.domain', string='Domain',store=True)   
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
-    domain_id = fields.Many2one(related='program_id.domain_id', string='Domain',store=True)
-    section_id = fields.Many2one(related='program_id.section_id', string='Section',store=True)
-    track_id = fields.Many2one(related='program_id.track_id', string='Track',store=True)
-    
+ 
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight')
