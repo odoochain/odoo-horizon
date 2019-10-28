@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -18,27 +19,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School Programs',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
-    'website': '',
-    'category': 'School',
-    'depends': [],
-    'init_xml': [],
-    'update_xml': [
-        'school_data.xml',
-        'views/program_view.xml',
-        'views/configuration_view.xml',
-        'report/report_program.xml',
-        'security/ir.model.access.csv',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules add management tools for a school programs.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': False,
-}
+-->
+<openerp>
+    <data noupdate="1">
+
+        <record id="group_program_management" model="res.groups">
+            <field name="name">Gestion des programmes</field>
+        </record>
+
+    </data>
+</openerp>
