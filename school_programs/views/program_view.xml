@@ -127,7 +127,6 @@
               <field name="total_hours" />
               <field name="total_credits" />
               <field name="total_weight" />
-              <field name="weight" />
             </group>
             <field name="course_ids" context="{'default_course_group_id':active_id}">
               <tree string="Courses">
