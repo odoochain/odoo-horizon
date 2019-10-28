@@ -722,10 +722,10 @@
           <filter string="Draft" name="draft" domain="[('state','=','draft')]" />
           <filter string="Published" name="draft" domain="[('state','=','published')]" />
           <filter string="Archived" name="archived" domain="[('state','=','archived')]" />
-          <group expand="1" string="Group By">
+          <!--<group expand="1" string="Group By">
             <filter string="Cycle" context="{'group_by':'cycle_id'}" />
             <filter string="Speciality" context="{'group_by':'speciality_id'}" />
-          </group>
+          </group>-->
         </search>
       </field>
     </record>
