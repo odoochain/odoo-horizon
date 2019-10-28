@@ -303,14 +303,14 @@ class Course(models.Model):
     
     has_second_session = fields.Boolean(string="Has a second session", default=True)
     
-    @api.depends('title','level','speciality_id.name', 'cycle_id.short_name', 'course_group_id.level')
+    @api.depends('title','level','cycle_id.short_name', 'course_group_id.level')
     @api.multi
     def compute_name(self):
         for course in self:
             if course.level:
-                course.name = "%s - %s - %s%s" % (course.title, course.speciality_id.name, course.cycle_id.short_name, course.level)
+                course.name = "%s - %s - %s%s" % (course.title, course.cycle_id.short_name, course.level)
             else:
-                course.name = "%s - %s - %s" % (course.title, course.speciality_id.name, course.cycle_id.short_name)
+                course.name = "%s - %s - %s" % (course.title, course.cycle_id.short_name)
     
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]")
     
