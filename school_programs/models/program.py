@@ -176,7 +176,7 @@ class Bloc(models.Model):
     
     level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),('6','Agregation'),],string='Level')
  
-    domain = fields.Many2one(related='program_id.domain', string='Domain',store=True)   
+    domain = fields.Selection(related='program_id.domain', string='Domain',store=True)   
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
  
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
