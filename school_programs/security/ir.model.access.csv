@@ -9,7 +9,6 @@ school_year_employee,model_school_year_base.group_employee,model_school_year,sch
 school_program_teacher,school_program_teacher,model_school_program,school_contacts.group_teacher,1,0,0,0
 school_course_group_teacher,school_course_group_teacher,model_school_course_group,school_contacts.group_teacher,1,0,0,0
 school_course_teacher,school_course_teacher,model_school_course,school_contacts.group_teacher,1,0,0,0
-school_domain_teacher,school_domain_teacher,model_school_domain,school_contacts.group_teacher,1,0,0,0
 school_cycle_teacher,school_cycle_teacher,model_school_cycle,school_contacts.group_teacher,1,0,0,0
 school_year_teacher,model_school_year_base.group_teacher,model_school_year,school_contacts.group_teacher,1,0,0,0
 model_school_program_base.group_public,model_school_program_base.group_public,model_school_program,base.group_public,1,0,0,0
