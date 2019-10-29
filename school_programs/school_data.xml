@@ -26,6 +26,41 @@
         <record id="group_program_management" model="res.groups">
             <field name="name">Gestion des programmes</field>
         </record>
+        
+        <record id="2015_2016" model="school.year">
+            <field name="name">2015-2016</field>
+            <field name="short_name">15-16</field>
+        </record>
+        
+        <record id="2016_2017" model="school.year">
+            <field name="name">2016-2017</field>
+            <field name="short_name">16-17</field>
+        </record>
+        
+        <record id="2017_2018" model="school.year">
+            <field name="name">2017-2018</field>
+            <field name="short_name">17-18</field>
+        </record>
+        
+        <record id="2018_2019" model="school.year">
+            <field name="name">2018-2019</field>
+            <field name="short_name">18-19</field>
+        </record>
+        
+        <record id="2019_2020" model="school.year">
+            <field name="name">2019-2020</field>
+            <field name="short_name">19-20</field>
+        </record>
+        
+        <record id="2020_2021" model="school.year">
+            <field name="name">2020-2021</field>
+            <field name="short_name">20-21</field>
+        </record>
+        
+        <record id="group_program_management" model="res.groups">
+            <field name="name">Gestion des programmes</field>
+        </record>
+        
 
     </data>
 </openerp>
