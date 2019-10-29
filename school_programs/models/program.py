@@ -363,6 +363,7 @@ class Speciality(models.Model):
     _order = 'name'
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
+    saturn_code = fields.Text(string='Saturn Code')
     
     domain = fields.Selection([
             ('musique','Musique'),
