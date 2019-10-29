@@ -578,7 +578,7 @@
       <field name="name">school.program.kanban</field>
       <field name="model">school.program</field>
       <field name="arch" type="xml">
-        <kanban class="o_program_kanban" default_group_by="track_id">
+        <kanban class="o_program_kanban" default_group_by="speciality_id">
           <field name="title" />
           <templates>
             <t t-name="kanban-box">
