@@ -48,7 +48,7 @@
                                 var qweb = core.qweb;
                                 
                                 ajax.loadXML('/website_horizon_responsive/static/src/xml/main.xml', qweb).then(function(){
-                                    var Main = require('website_horizon_responsive.index');
+                                    var Main = require('website_horizon_responsive.main');
                                     var m = new Main();
                                     m.appendTo($(document.body));
                                 });
