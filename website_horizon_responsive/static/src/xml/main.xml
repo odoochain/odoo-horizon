@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
     
     <t t-name="website_horizon_responsive.index">
-        HERE COME THE SITE
+        <div>HERE COME THE SITE - <t t-esc="widget.user"/></div>
     </t>
     
 </templates>
