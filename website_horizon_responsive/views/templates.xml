@@ -42,7 +42,7 @@
                     <t t-call-assets="website_horizon_responsive.assets"/>
                     <script type="text/javascript">
                         $(function() {
-                            odoo.define('website_booking.index', function (require) {
+                            odoo.define('website_horizon_responsive.index', function (require) {
                                 var core = require('web.core');
                                 var ajax = require('web.ajax');
                                 var qweb = core.qweb;
