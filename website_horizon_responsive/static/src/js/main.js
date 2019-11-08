@@ -788,21 +788,11 @@ var Main = Widget.extend({
     //     },
     // },
     
-    // renderElement: function() {
-    //     this._super.apply(this, arguments);
-    //     this._current_state = $.deparam(window.location.hash.substring(1));
-    //     var self = this;
-    //     // Fill toolbar
-    //     self.tb = new Toolbar(this);
-    //     self.tb.appendTo(this.$(".booking_toolbar"));
-    //     // Fill navigation panel
-    //     self.nav = new Navigation(this);
-    //     self.nav.appendTo(this.$(".navbar"));
-    //     // Fill calendar panel
-    //     self.cal = new Calendar(this);
-    //     self.cal.appendTo(this.$(".calendar"));
-    //     self.cal.tb = self.tb;
-    // },
+    renderElement: function() {
+        this._super.apply(this, arguments);
+        this._current_state = $.deparam(window.location.hash.substring(1));
+        var self = this;
+    },
     
     // start: function() {
     //     this._super.apply(this, arguments);
