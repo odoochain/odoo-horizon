@@ -23,10 +23,16 @@
 <openerp>
     <data>
         <template id="assets" name="website_horizon_responsive assets">
-            
-            <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
-            
-            <script type="text/javascript" src="/website_horizon_responsive/static/src/js/main.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/ajax.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/time.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/mixins.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/widget.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/registry.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/session.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/model.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/utils.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/core.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/framework/dialog.js"></script>
         </template>
         
         <record id="action_website_horizon_responsive" model="ir.actions.act_url">

@@ -25,11 +25,21 @@
         <template id="index" name="Horizon Responsive Index" page="True">
             <t t-call="web.layout">
                 <t t-set="head">
-                    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-                    <meta name="format-detection" content="telephone=no"/>
-                    <meta name="msapplication-tap-highlight" content="no"/>
-
-                    <t t-call-assets="web.assets_common" t-css="false"/>
+                	<!-- set the encoding of your site -->
+                	<meta charset="utf-8">
+                	<!-- set the viewport width and initial-scale on mobile devices -->
+                	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                	<title>HerveJungblut</title>
+                	<!-- include google fonts -->
+                	<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet">
+                	<!-- include the site stylesheet -->
+                	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/bootstrap.css">
+                	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+                	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css">
+                	<!-- include custom JavaScript -->
+                	<script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
+                    <t t-call-assets="website_horizon_responsive.assets"/>
+                    <!--<t t-call-assets="web.assets_common" t-css="false"/>-->
                     <script type="text/javascript">
                         odoo.define('web.csrf', function (require) {
                             var token = "<t t-esc="request.csrf_token(None)"/>";
@@ -38,8 +48,8 @@
                         });
                         odoo.db_info = '<t t-raw="db_info"/>';
                     </script>
-                    <t t-call-assets="web.assets_backend" t-css="false"/>
-                    <t t-call-assets="website_horizon_responsive.assets"/>
+                    <!--<t t-call-assets="web.assets_backend" t-css="false"/>-->
+                    
                     <script type="text/javascript">
                         $(function() {
                             odoo.define('website_horizon_responsive.index', function (require) {
