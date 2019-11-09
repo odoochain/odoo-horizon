@@ -49,10 +49,8 @@ var Main = Widget.extend({
                         self.partner = session.partner;
                 });
                 self.avatar_src = session.url('/web/image', {model:'res.users', field: 'image_small', id: session.uid});
-                self.$el.html(qweb.render('website_booking.toolbar_log', {widget : self}));
-                self.$el.openFAB();
             } else {
-                self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
+                window.location = "/login"
             }
         });
     },
