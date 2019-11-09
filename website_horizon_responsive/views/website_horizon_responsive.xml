@@ -23,6 +23,7 @@
 <openerp>
     <data>
         <template id="assets" name="website_horizon_responsive assets">
+            <script type="text/javascript" src="/web/static/src/js/boot.js"></script>
             <script type="text/javascript" src="/web/static/src/js/framework/ajax.js"></script>
             <script type="text/javascript" src="/web/static/src/js/framework/time.js"></script>
             <script type="text/javascript" src="/web/static/src/js/framework/mixins.js"></script>
