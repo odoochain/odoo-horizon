@@ -26,16 +26,16 @@
             <t t-call="web.layout">
                 <t t-set="head">
                 	<!-- set the encoding of your site -->
-                	<meta charset="utf-8">
+                	<meta charset="utf-8"/>
                 	<!-- set the viewport width and initial-scale on mobile devices -->
-                	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
                 	<title>HerveJungblut</title>
                 	<!-- include google fonts -->
-                	<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet">
+                	<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet"/>
                 	<!-- include the site stylesheet -->
-                	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/bootstrap.css">
-                	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
-                	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css">
+                	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/bootstrap.css"/>
+                	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+                	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
                 	<!-- include custom JavaScript -->
                 	<script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
                     <t t-call-assets="website_horizon_responsive.assets"/>
