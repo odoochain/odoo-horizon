@@ -120,11 +120,11 @@
     							</li>
     							<li>
     								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse domicile</span>
-    								<address>Rue driesch 37<br> B-4720 Kelmis<br> Belgique</address>
+    								<address>Rue driesch 37<br/> B-4720 Kelmis<br/> Belgique</address>
     							</li>
     							<li>
     								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse résidence</span>
-    								<address>Rue sur les heids 48<br> B-4536 Saive<br> Belgique</address>
+    								<address>Rue sur les heids 48<br/> B-4536 Saive<br/> Belgique</address>
     							</li>
     						</ul>
     						<div class="d-flex justify-content-center d-lg-block">
