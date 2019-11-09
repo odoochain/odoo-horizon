@@ -41,6 +41,7 @@
             <script type="text/javascript" src="/web/static/src/js/framework/utils.js"></script>
             <script type="text/javascript" src="/web/static/src/js/framework/core.js"></script>
             <script type="text/javascript" src="/web/static/src/js/framework/dialog.js"></script>
+            <script type="text/javascript" src="/website_horizon_responsive/static/src/js/main.js"></script>
         </template>
         
         <record id="action_website_horizon_responsive" model="ir.actions.act_url">
