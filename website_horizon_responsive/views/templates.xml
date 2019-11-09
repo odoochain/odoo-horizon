@@ -24,6 +24,7 @@
     <data>
         <template id="index" name="Horizon Responsive Index" page="True">
             <t t-call="web.layout">
+                <t t-set="body_classname" t-value="'dashboard'"/>
                 <t t-set="head">
                 	<!-- set the encoding of your site -->
                 	<meta charset="utf-8"/>
