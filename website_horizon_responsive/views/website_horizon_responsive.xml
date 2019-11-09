@@ -23,6 +23,9 @@
 <openerp>
     <data>
         <template id="assets" name="website_horizon_responsive assets">
+            <script type="text/javascript" src="/web/static/lib/es5-shim/es5-shim.min.js"></script>
+            <script type="text/javascript" src="/web/static/lib/underscore/underscore.js"></script>
+            <script type="text/javascript" src="/web/static/lib/underscore.string/lib/underscore.string.js"></script>
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
             <script type="text/javascript" src="/web/static/lib/qweb/qweb2.js"></script>
             <script type="text/javascript" src="/web/static/src/js/boot.js"></script>
