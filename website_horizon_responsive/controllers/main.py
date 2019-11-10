@@ -44,7 +44,10 @@ class BookingController(http.Controller):
 
     @http.route('/responsive', type='http', auth='public', website=True)
     def booking_browser(self, debug=False, **k):
-        return request.render('website_horizon_responsive.index')
+        values = {
+            'user': request.env.user,
+        }
+        return request.render('website_horizon_responsive.index', values)
         
     # @http.route('/booking/category', type='json', auth='public', website=True)
     # def booking_category(self, id=False, debug=False, **k):
