@@ -113,7 +113,7 @@
             					<!-- user area -->
             					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
             						<div class="order-1 order-lg-0 entry-meta pr-2">
-            							<h4 class="text-truncate"><t t-esc="value.user.name"/></h4>
+            							<h4 class="text-truncate"><t t-esc="values.user.name"/></h4>
             							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="#">VOIR mon PROFIL</a>
             						</div>
             						<figure class="avatar rounded-circle">
