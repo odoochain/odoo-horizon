@@ -113,7 +113,7 @@
             					<!-- user area -->
             					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
             						<div class="order-1 order-lg-0 entry-meta pr-2">
-            							<h4 class="text-truncate"><t t-esc="values.user.name"/></h4>
+            							<h4 class="text-truncate"><t t-esc="user.name"/></h4>
             							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="#">VOIR mon PROFIL</a>
             						</div>
             						<figure class="avatar rounded-circle">
@@ -153,35 +153,35 @@
             						<ul class="profile-list list-unstyled pb-0 pb-md-2 pb-lg-0 mb-0 mb-md-5">
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">NOM</span>
-            								<p class="mb-0">Jungblut</p>
+            								<p class="mb-0"><t t-esc="user.lastname"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">prénom</span>
-            								<p class="mb-0">Hervé</p>
+            								<p class="mb-0"><t t-esc="user.firstname"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase">INITiales</span>
-            								<p class="mb-0">H.J.</p>
+            								<p class="mb-0"><t t-esc="user.initials"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Genre</span>
-            								<p class="mb-0">H.</p>
+            								<p class="mb-0"><t t-esc="user.gender"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Email Crlg</span>
-            								<p class="mb-0">h.jungblut@crlg.be</p>
+            								<p class="mb-0"><t t-esc="user.email"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Email </span>
-            								<p class="mb-0">rv@savoirfaire.digital</p>
+            								<p class="mb-0"><t t-esc="user.email_personel"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Téléphone</span>
-            								<p class="mb-0">+32 475 701 369</p>
+            								<p class="mb-0"><t t-esc="user.phone"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Mobile</span>
-            								<p class="mb-0">+32 475 701 369</p>
+            								<p class="mb-0"><t t-esc="user.mobile"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse domicile</span>
