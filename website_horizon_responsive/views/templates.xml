@@ -173,7 +173,7 @@
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Email </span>
-            								<p class="mb-0"><t t-esc="user.email_personel"/></p>
+            								<p class="mb-0"><t t-esc="user.email_personnel"/></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Téléphone</span>
