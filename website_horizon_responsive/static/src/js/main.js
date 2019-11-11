@@ -50,7 +50,7 @@ var Main = Widget.extend({
                 });
                 self.avatar_src = session.url('/web/image', {model:'res.users', field: 'image_small', id: session.uid});
             } else {
-                window.location = "/login"
+                window.location = "/web/login"
             }
         });
     },
