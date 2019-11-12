@@ -262,58 +262,42 @@
 							<!-- accordion -->
 							<ul class="accordion slide ul-row list-unstyled mb-0">
 								<!-- accordion item -->
-								<li class="d-flex flex-wrap align-items-start w-100" t-foreach="course_group_ids" t-as="course">
+								<li class="d-flex flex-wrap align-items-start w-100" t-foreach="bloc.course_group_ids" t-as="course_group">
 									<ul class="ul-body-row d-flex list-unstyled mb-0">
 										<li>
-											<span class="d-block"><t t-esc="course.ue_id"/></span>
+											<span class="d-block"><t t-esc="course_group.ue_id"/></span>
 										</li>
 										<li>
-											<span class="d-block"><t t-esc="course.name"/></span>
+											<span class="d-block"><t t-esc="course_group.title"/></span>
 										</li>
 										<li>
-											<span class="d-block"><t t-esc="course.total_credits"/></span>
+											<span class="d-block"><t t-esc="course_group.total_credits"/></span>
 										</li>
 										<li class="d-none d-md-block">
-											<span class="d-block"><t t-esc="course.total_hours"/></span>
+											<span class="d-block"><t t-esc="course_group.total_hours"/></span>
 										</li>
 										<li class="d-none d-md-block">
-											<span class="d-block"><t t-esc="course.weight"/></span>
+											<span class="d-block"><t t-esc="course_group.weight"/></span>
 										</li>
 									</ul>
 									<a class="opener" href="#">
 										<span class="plus"></span>
 									</a>
 									<div class="slide w-100 js-acc-hidden">
-										<ul class="ul-slide-row d-flex list-unstyled mb-0">
+										<ul class="ul-slide-row d-flex list-unstyled mb-0" t-foreach="course_group.course_ids" t-as="course">
 											<li>
 												<span class="d-inline-block">
-													<a class="link" href="#">Formation musicale <span>›</span></a>
+													<a class="link" href="#"><t t-esc="course_group.title"/><span>›</span></a>
 												</span>
 											</li>
 											<li>
-												<span class="d-block">8</span>
+												<span class="d-block"><t t-esc="course_group.credits"/></span>
 											</li>
 											<li class="d-none d-md-block">
-												<span class="d-block">3</span>
+												<span class="d-block"><t t-esc="course_group.hours"/></span>
 											</li>
 											<li class="d-none d-md-block">
-												<span class="d-block">3.0</span>
-											</li>
-										</ul>
-										<ul class="ul-slide-row d-flex list-unstyled mb-0">
-											<li>
-												<span class="d-inline-block">
-													<a class="link" href="#">Chant d'ensemble <span>›</span></a>
-												</span>
-											</li>
-											<li>
-												<span class="d-block">2</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">4</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">1.0</span>
+												<span class="d-block"><t t-esc="course_group.weight"/></span>
 											</li>
 										</ul>
 									</div>
