@@ -22,11 +22,10 @@
 -->
 <openerp>
     <data>
-        <template id="index" name="Horizon Responsive Index" page="True">
-            <t t-call="web.layout">
-                <t t-set="body_classname" t-value="'dashboard'"/>
-                <t t-set="head">
-                	<!-- set the encoding of your site -->
+        <template id="layout" name="Horizon Responsive Layout">
+            <html>
+                <head>
+                    <!-- set the encoding of your site -->
                 	<meta charset="utf-8"/>
                 	<!-- set the viewport width and initial-scale on mobile devices -->
                 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -39,8 +38,8 @@
                 	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
                 	<!-- include custom JavaScript -->
                 	<script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
-                    <t t-call-assets="website_horizon_responsive.assets"/>
-                    <!--<t t-call-assets="web.assets_common" t-css="false"/>-->
+                    <!--<t t-call-assets="website_horizon_responsive.assets"/>
+                    
                     <script type="text/javascript">
                         odoo.define('web.csrf', function (require) {
                             var token = "<t t-esc="request.csrf_token(None)"/>";
@@ -49,8 +48,6 @@
                         });
                         odoo.db_info = '<t t-raw="db_info"/>';
                     </script>
-                    <!--<t t-call-assets="web.assets_backend" t-css="false"/>-->
-                    
                     <script type="text/javascript">
                         $(function() {
                             odoo.define('website_horizon_responsive.index', function (require) {
@@ -65,165 +62,174 @@
                                 });
                             });
                         });
-                    </script>
-                </t>
-                <div id="wrapper" class="d-flex position-relative">
-            		<div class="w1 d-flex flex-column w-100">
-            			<!-- page background -->
-            			<div class="bg-image position-fixed">
-            				<!-- picturefill: full manual control -->
-            				<picture>
-            					<source srcset="/website_horizon_responsive/static/src/img/home-bg-small.jpg, /website_horizon_responsive/static/src/img/home-bg-small@2x.jpg 2x" media="(max-width: 767px)"/>
-            					<source srcset="/website_horizon_responsive/static/src/img/home-bg-middle.jpg, /website_horizon_responsive/static/src/img/home-bg-middle@2x.jpg 2x" media="(max-width: 1024px)"/>
-            					<source srcset="/website_horizon_responsive/static/src/img/dashbord-bg-large.jpg, /website_horizon_responsive/static/src/img/dashbord-bg-large@2x.jpg 2x"/>
-            					<img src="/website_horizon_responsive/static/src/img/dashbord-bg-large.jpg" alt="image description"/>
-            				</picture>
-            			</div>
-            			<!-- header of the page -->
-            			<header id="header">
-            				<div class="inner d-flex align-items-center">
-            					<div class="back-link mr-auto">
-            						<a class="d-inline-flex align-items-center text-white text-uppercase font-weight-bold" href="#">
-            							<i class="icon icon-arrow-right d-inline-block"></i>
-            							<span>ACCUEIL</span>
-            						</a>
-            					</div>
-            					<!-- header navigation -->
-            					<ul id="nav" class="list-unstyled d-flex align-items-center justify-content-lg-end text-uppercase font-weight-bold mb-0">
-            						<li class="d-none d-lg-inline-block">
-            							<a href="#">
-            								<img src="/website_horizon_responsive/static/src/img/logo-horizontal-white.svg" alt="Conservatoire royal de Liège"/>
-            							</a>
-            						</li>
-            						<li class="d-none d-lg-inline-block">
-            							<a href="#">Horizon 1.0</a>
-            						</li>
-            						<li class="ml-auto ml-lg-0">
-            							<a href="#">
-            								<i class="icon icon-power"></i>
-            							</a>
-            						</li>
-            					</ul>
-            				</div>
-            			</header>
-            			<!-- contain main informative part of the site -->
-            			<main id="main" class="d-flex flex-column flex-lg-row w-100">
-            				<!-- contain sidebar of the page -->
-            				<aside id="aside-left" class="profile-mod">
-            					<!-- user area -->
-            					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
-            						<div class="order-1 order-lg-0 entry-meta pr-2">
-            							<h4 class="text-truncate"><t t-esc="user.name"/></h4>
-            							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="#">VOIR mon PROFIL</a>
-            						</div>
-            						<figure class="avatar rounded-circle">
-            							<a href="#">
-            								<!-- picturefill: full manual control -->
-            								<picture>
-            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
-            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
-            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)"/>
-            									<img t-att-src="'/web/image/res.users/%s/image_small' % (user.id)" alt="image description" width="62" height="62"/>
-            								</picture>
-            							</a>
-            						</figure>
-            					</div>
-            					<!-- aside navigation -->
-            					<nav class="aside-nav d-none d-lg-block">
-            						<ul id="aside-nav" class="list-unstyled text-uppercase font-weight-bold mb-0">
-            							<li>
-            								<a class="d-flex align-items-center" href="#">
-            									<i class="icon icon-program"></i>
-            									<span class="position-relative">programme annuel</span>
-            								</a>
-            							</li>
-            							<li>
-            								<a class="d-flex align-items-center" href="#">
-            									<i class="icon icon-event-create"></i>
-            									<span class="position-relative">BOOKING</span>
-            								</a>
-            							</li>
-            						</ul>
-            					</nav>
-            				</aside>
-            				<!-- contain the main content of the page -->
-            				<div id="content" class="ml-lg-auto">
-            					<div class="content-body">
-            						<h1 class="d-none d-lg-block h2 mt-3 mb-5 ">Mon profil</h1>
-            						<ul class="profile-list list-unstyled pb-0 pb-md-2 pb-lg-0 mb-0 mb-md-5">
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">NOM</span>
-            								<p class="mb-0"><t t-esc="user.lastname"/></p>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">prénom</span>
-            								<p class="mb-0"><t t-esc="user.firstname"/></p>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase">INITiales</span>
-            								<p class="mb-0"><t t-esc="user.initials"/></p>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Genre</span>
-            								<p class="mb-0"><t t-if="user.gender == 'male'">M</t><t t-if="user.gender == 'female'">F</t></p>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Email Crlg</span>
-            								<p class="mb-0"><t t-esc="user.email"/></p>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Email </span>
-            								<p class="mb-0"><t t-esc="user.email_personnel"/></p>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Téléphone</span>
-            								<p class="mb-0"><t t-esc="user.phone"/></p>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Mobile</span>
-            								<p class="mb-0"><t t-esc="user.mobile"/></p>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse domicile</span>
-            								<address><t t-esc="user.street"/><br/> <t t-esc="user.zip"/> <t t-esc="user.city"/><br/> <t t-esc="user.country_id.name"/></address>
-            							</li>
-            							<li>
-            								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse résidence</span>
-            								<address><t t-esc="user.secondary_street"/><br/> <t t-esc="user.secondary_zip"/> <t t-esc="user.secondary_city"/><br/> <t t-esc="user.secondary_country_id.name"/></address>
-            							</li>
-            						</ul>
-            						<div class="d-flex justify-content-center d-lg-block">
-            							<a class="btn btn btn-outline-info" href="#" role="button">Signaler une erreur</a>
-            						</div>
-            					</div>
-            				</div>
-            			</main>
-            			<!-- footer of the page -->
-            			<footer id="footer" class="text-center">
-            				<div class="container">
-            					<div class="footer-inner d-md-flex align-items-md-center justify-content-md-between d-lg-block">
-            						<!-- footer links -->
-            						<ul class="footer-links list-unstyled d-flex flex-wrap align-items-center justify-content-between text-uppercase font-weight-bold">
-            							<li>
-            								<a href="#">Crlg.be</a>
-            							</li>
-            							<li>
-            								<a href="#">FACEBOOK</a>
-            							</li>
-            							<li>
-            								<a href="#">INSTAGRAM</a>
-            							</li>
-            						</ul>
-            						<!-- copyright -->
-            						<div class="copyright text-uppercase font-weight-bold">
-            							<p class="mb-0">© 2019 Crlg.be — politique de confidentialité</p>
-            						</div>
-            					</div>
-            				</div>
-            			</footer>
-            		</div>
-            	</div>
-            </t>
+                    </script>-->
+                </head>
+                <body class="dashboard">
+                    <div id="wrapper" class="d-flex position-relative">
+                		<div class="w1 d-flex flex-column w-100">
+                			<!-- page background -->
+                			<div class="bg-image position-fixed">
+                				<!-- picturefill: full manual control -->
+                				<picture>
+                					<source srcset="/website_horizon_responsive/static/src/img/home-bg-small.jpg, /website_horizon_responsive/static/src/img/home-bg-small@2x.jpg 2x" media="(max-width: 767px)"/>
+                					<source srcset="/website_horizon_responsive/static/src/img/home-bg-middle.jpg, /website_horizon_responsive/static/src/img/home-bg-middle@2x.jpg 2x" media="(max-width: 1024px)"/>
+                					<source srcset="/website_horizon_responsive/static/src/img/dashbord-bg-large.jpg, /website_horizon_responsive/static/src/img/dashbord-bg-large@2x.jpg 2x"/>
+                					<img src="/website_horizon_responsive/static/src/img/dashbord-bg-large.jpg" alt="image description"/>
+                				</picture>
+                			</div>
+                			<!-- header of the page -->
+                			<header id="header">
+                				<div class="inner d-flex align-items-center">
+                					<div class="back-link mr-auto">
+                						<a class="d-inline-flex align-items-center text-white text-uppercase font-weight-bold" href="#">
+                							<i class="icon icon-arrow-right d-inline-block"></i>
+                							<span>ACCUEIL</span>
+                						</a>
+                					</div>
+                					<!-- header navigation -->
+                					<ul id="nav" class="list-unstyled d-flex align-items-center justify-content-lg-end text-uppercase font-weight-bold mb-0">
+                						<li class="d-none d-lg-inline-block">
+                							<a href="#">
+                								<img src="/website_horizon_responsive/static/src/img/logo-horizontal-white.svg" alt="Conservatoire royal de Liège"/>
+                							</a>
+                						</li>
+                						<li class="d-none d-lg-inline-block">
+                							<a href="#">Horizon 1.0</a>
+                						</li>
+                						<li class="ml-auto ml-lg-0">
+                							<a href="#">
+                								<i class="icon icon-power"></i>
+                							</a>
+                						</li>
+                					</ul>
+                				</div>
+                			</header>
+                			<!-- contain main informative part of the site -->
+                			<main id="main" class="d-flex flex-column flex-lg-row w-100">
+                				<!-- contain sidebar of the page -->
+                				<aside id="aside-left" class="profile-mod">
+                					<!-- user area -->
+                					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
+                						<div class="order-1 order-lg-0 entry-meta pr-2">
+                							<h4 class="text-truncate"><t t-esc="user.name"/></h4>
+                							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="#">VOIR mon PROFIL</a>
+                						</div>
+                						<figure class="avatar rounded-circle">
+                							<a href="#">
+                								<!-- picturefill: full manual control -->
+                								<picture>
+                									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
+                									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
+                									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)"/>
+                									<img t-att-src="'/web/image/res.users/%s/image_small' % (user.id)" alt="image description" width="62" height="62"/>
+                								</picture>
+                							</a>
+                						</figure>
+                					</div>
+                					<!-- aside navigation -->
+                					<nav class="aside-nav d-none d-lg-block">
+                						<ul id="aside-nav" class="list-unstyled text-uppercase font-weight-bold mb-0">
+                							<li>
+                								<a class="d-flex align-items-center" href="#">
+                									<i class="icon icon-program"></i>
+                									<span class="position-relative">programme annuel</span>
+                								</a>
+                							</li>
+                							<li>
+                								<a class="d-flex align-items-center" href="#">
+                									<i class="icon icon-event-create"></i>
+                									<span class="position-relative">BOOKING</span>
+                								</a>
+                							</li>
+                						</ul>
+                					</nav>
+                				</aside>
+                				<!-- contain the main content of the page -->
+                				<t t-raw="0"/>
+                			</main>
+                			<!-- footer of the page -->
+                			<footer id="footer" class="text-center">
+                				<div class="container">
+                					<div class="footer-inner d-md-flex align-items-md-center justify-content-md-between d-lg-block">
+                						<!-- footer links -->
+                						<ul class="footer-links list-unstyled d-flex flex-wrap align-items-center justify-content-between text-uppercase font-weight-bold">
+                							<li>
+                								<a href="#">Crlg.be</a>
+                							</li>
+                							<li>
+                								<a href="#">FACEBOOK</a>
+                							</li>
+                							<li>
+                								<a href="#">INSTAGRAM</a>
+                							</li>
+                						</ul>
+                						<!-- copyright -->
+                						<div class="copyright text-uppercase font-weight-bold">
+                							<p class="mb-0">© 2019 Crlg.be — politique de confidentialité</p>
+                						</div>
+                					</div>
+                				</div>
+                			</footer>
+                		</div>
+                	</div>
+                </body>
+            </html>
+        </template>
+        
+        
+        <template id="profile" name="Horizon Responsive Profile" page="True">
+            <t t-call="website_horizon_responsive.layout">
+                <div id="content" class="ml-lg-auto">
+    				<div class="content-body">
+    					<h1 class="d-none d-lg-block h2 mt-3 mb-5 ">Mon profil</h1>
+    					<ul class="profile-list list-unstyled pb-0 pb-md-2 pb-lg-0 mb-0 mb-md-5">
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">NOM</span>
+    							<p class="mb-0"><t t-esc="user.lastname"/></p>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">prénom</span>
+    							<p class="mb-0"><t t-esc="user.firstname"/></p>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase">INITiales</span>
+    							<p class="mb-0"><t t-esc="user.initials"/></p>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Genre</span>
+    							<p class="mb-0"><t t-if="user.gender == 'male'">M</t><t t-if="user.gender == 'female'">F</t></p>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Email Crlg</span>
+    							<p class="mb-0"><t t-esc="user.email"/></p>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Email </span>
+    							<p class="mb-0"><t t-esc="user.email_personnel"/></p>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Téléphone</span>
+    							<p class="mb-0"><t t-esc="user.phone"/></p>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Mobile</span>
+    							<p class="mb-0"><t t-esc="user.mobile"/></p>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse domicile</span>
+    							<address><t t-esc="user.street"/><br/> <t t-esc="user.zip"/> <t t-esc="user.city"/><br/> <t t-esc="user.country_id.name"/></address>
+    						</li>
+    						<li>
+    							<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse résidence</span>
+    							<address><t t-esc="user.secondary_street"/><br/> <t t-esc="user.secondary_zip"/> <t t-esc="user.secondary_city"/><br/> <t t-esc="user.secondary_country_id.name"/></address>
+    						</li>
+    					</ul>
+    					<div class="d-flex justify-content-center d-lg-block">
+    						<a class="btn btn btn-outline-info" href="#" role="button">Signaler une erreur</a>
+    					</div>
+    				</div>
+    			</div>
+    		</t>
         </template>
     </data>
 </openerp>
