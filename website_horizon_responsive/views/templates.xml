@@ -112,7 +112,7 @@
                 					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
                 						<div class="order-1 order-lg-0 entry-meta pr-2">
                 							<h4 class="text-truncate"><t t-esc="user.name"/></h4>
-                							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="#">VOIR mon PROFIL</a>
+                							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="/responsive/profile">VOIR mon PROFIL</a>
                 						</div>
                 						<figure class="avatar rounded-circle">
                 							<a href="#">
@@ -130,7 +130,7 @@
                 					<nav class="aside-nav d-none d-lg-block">
                 						<ul id="aside-nav" class="list-unstyled text-uppercase font-weight-bold mb-0">
                 							<li>
-                								<a class="d-flex align-items-center" href="#">
+                								<a class="d-flex align-items-center" href="/responsive/blocs">
                 									<i class="icon icon-program"></i>
                 									<span class="position-relative">programme annuel</span>
                 								</a>
