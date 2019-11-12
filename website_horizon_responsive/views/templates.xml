@@ -120,7 +120,7 @@
             							<a href="#">
             								<!-- picturefill: full manual control -->
             								<picture>
-            									<source srcset="/website_horizon_responsive/static/src/img/avatar-small.png, /website_horizon_responsive/static/src/img/avatar-small@2x.png 2x" media="(max-width: 767px)"/>
+            									<source t-att-srcset="image_data_uri(user.image_small), image_data_uri(user.image_medium) 2x" media="(max-width: 767px)"/>
             									<source srcset="/website_horizon_responsive/static/src/img/avatar-small.png, /website_horizon_responsive/static/src/img/avatar-small@2x.png 2x" media="(max-width: 1024px)"/>
             									<source srcset="/website_horizon_responsive/static/src/img/avatar.png, /website_horizon_responsive/static/src/img/avatar@2x.png 2x"/>
             									<img src="/website_horizon_responsive/static/src/img/avatar.png" alt="image description" width="62" height="62"/>
@@ -165,7 +165,7 @@
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Genre</span>
-            								<p class="mb-0"><t t-esc="user.gender"/></p>
+            								<p class="mb-0"><t t-if="user.gender == 'male'">M</t><t t-if="user.gender == 'female'">F</t></p>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Email Crlg</span>
