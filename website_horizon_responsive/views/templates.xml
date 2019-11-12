@@ -120,7 +120,7 @@
             							<a href="#">
             								<!-- picturefill: full manual control -->
             								<picture>
-            									<source t-att-srcset="kanban_image('res.users', 'image_small', user.id), kanban_image('res.users', 'image_medium', user.id) 2x" media="(max-width: 767px)"/>
+            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
             									<source srcset="/website_horizon_responsive/static/src/img/avatar-small.png, /website_horizon_responsive/static/src/img/avatar-small@2x.png 2x" media="(max-width: 1024px)"/>
             									<source srcset="/website_horizon_responsive/static/src/img/avatar.png, /website_horizon_responsive/static/src/img/avatar@2x.png 2x"/>
             									<img src="/website_horizon_responsive/static/src/img/avatar.png" alt="image description" width="62" height="62"/>
