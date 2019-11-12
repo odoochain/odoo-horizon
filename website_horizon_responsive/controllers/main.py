@@ -42,12 +42,19 @@ class BookingLoginController(Home):
 
 class BookingController(http.Controller):
 
-    @http.route('/responsive/profile', type='http', auth='public', website=True)
+    @http.route('/responsive/profile', type='http', auth='user', website=True)
     def booking_browser(self, debug=False, **k):
         values = {
             'user': request.env.user,
         }
         return request.render('website_horizon_responsive.profile', values)
+        
+    @http.route('/responsive/blocs', type='http', auth='user', website=True)
+    def booking_browser(self, debug=False, **k):
+        values = {
+            'blocs': request.env.user.student_current_bloc_ids,
+        }
+        return request.render('website_horizon_responsive.blocs', values)
         
     # @http.route('/booking/category', type='json', auth='public', website=True)
     # def booking_category(self, id=False, debug=False, **k):
