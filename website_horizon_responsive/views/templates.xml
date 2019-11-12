@@ -97,7 +97,7 @@
                 							<a href="#">Horizon 1.0</a>
                 						</li>
                 						<li class="ml-auto ml-lg-0">
-                							<a href="#">
+                							<a href="/web/session/logout">
                 								<i class="icon icon-power"></i>
                 							</a>
                 						</li>
