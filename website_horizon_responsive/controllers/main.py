@@ -52,6 +52,7 @@ class BookingController(http.Controller):
     @http.route('/responsive/blocs', type='http', auth='user', website=True)
     def responsive_blocs(self, debug=False, **k):
         values = {
+            'user': request.env.user,
             'blocs': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.id),('year_id','=',request.env.user.current_year_id.id)])
         }
         return request.render('website_horizon_responsive.blocs', values)
