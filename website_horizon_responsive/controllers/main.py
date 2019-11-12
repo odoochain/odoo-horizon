@@ -55,6 +55,7 @@ class BookingController(http.Controller):
             'user': request.env.user,
             'blocs': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.id),('year_id','=',request.env.user.current_year_id.id)])
         }
+        _logger.info(values)
         return request.render('website_horizon_responsive.blocs', values)
         
     # @http.route('/booking/category', type='json', auth='public', website=True)
