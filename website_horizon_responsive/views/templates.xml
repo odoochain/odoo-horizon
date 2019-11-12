@@ -239,8 +239,8 @@
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">PROGRAMME ANNUEL</span>
 						<!-- accordion section -->
 						<section class="accordion-section pt-md-1" t-foreach="blocs" t-as="bloc">
-							<h2 class="mb-0 mb-1"><t t-esc="bloc.name"/></h2>
-							<span class="below-heading d-block text-info"><t t-esc="bloc.section_id.name"/> / <t t-esc="bloc.track_id.name"/></span>
+							<h2 class="mb-0 mb-1"><t t-esc="bloc.source_bloc_speciality_id.name"/></h2>
+							<span class="below-heading d-block text-info"><t t-esc="bloc.source_bloc_section_id.name"/> / <t t-esc="bloc.source_bloc_track_id.name"/></span>
 							<!-- accordion head -->
 							<ul class="ul-head-row d-flex list-unstyled">
 								<li>
@@ -262,193 +262,22 @@
 							<!-- accordion -->
 							<ul class="accordion slide ul-row list-unstyled mb-0">
 								<!-- accordion item -->
-								<li class="d-flex flex-wrap align-items-start w-100">
+								<li class="d-flex flex-wrap align-items-start w-100" t-foreach="course_group_ids" t-as="course">
 									<ul class="ul-body-row d-flex list-unstyled mb-0">
 										<li>
-											<span class="d-block">UE-4665</span>
+											<span class="d-block"><t t-esc="course.ue_id"/></span>
 										</li>
 										<li>
-											<span class="d-block">Finalité principale</span>
+											<span class="d-block"><t t-esc="course.name"/></span>
 										</li>
 										<li>
-											<span class="d-block">21</span>
+											<span class="d-block"><t t-esc="course.total_credits"/></span>
 										</li>
 										<li class="d-none d-md-block">
-											<span class="d-block">21</span>
+											<span class="d-block"><t t-esc="course.total_hours"/></span>
 										</li>
 										<li class="d-none d-md-block">
-											<span class="d-block"></span>
-										</li>
-									</ul>
-									<a class="opener" href="#">
-										<span class="plus"></span>
-									</a>
-									<div class="slide w-100 js-acc-hidden">
-										<ul class="ul-slide-row d-flex list-unstyled mb-0">
-											<li>
-												<span class="d-inline-block">
-													<a class="link" href="#">Formation musicale <span>›</span></a>
-												</span>
-											</li>
-											<li>
-												<span class="d-block">8</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">3</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">3.0</span>
-											</li>
-										</ul>
-										<ul class="ul-slide-row d-flex list-unstyled mb-0">
-											<li>
-												<span class="d-inline-block">
-													<a class="link" href="#">Chant d'ensemble <span>›</span></a>
-												</span>
-											</li>
-											<li>
-												<span class="d-block">2</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">4</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">1.0</span>
-											</li>
-										</ul>
-									</div>
-								</li>
-								<!-- accordion item -->
-								<li class="d-flex flex-wrap align-items-start w-100">
-									<ul class="ul-body-row d-flex list-unstyled mb-0">
-										<li>
-											<span class="d-block">UE-2490</span>
-										</li>
-										<li>
-											<span class="d-block">Formation musicale générale </span>
-										</li>
-										<li>
-											<span class="d-block">10</span>
-										</li>
-										<li class="d-none d-md-block">
-											<span class="d-block">10</span>
-										</li>
-										<li class="d-none d-md-block">
-											<span class="d-block"></span>
-										</li>
-									</ul>
-									<a class="opener" href="#">
-										<span class="plus"></span>
-									</a>
-									<div class="slide w-100 js-acc-hidden">
-										<ul class="ul-slide-row d-flex list-unstyled mb-0">
-											<li>
-												<span class="d-inline-block">
-													<a class="link" href="#">Formation musicale <span>›</span></a>
-												</span>
-											</li>
-											<li>
-												<span class="d-block">8</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">3</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">3.0</span>
-											</li>
-										</ul>
-										<ul class="ul-slide-row d-flex list-unstyled mb-0">
-											<li>
-												<span class="d-inline-block">
-													<a class="link" href="#">Chant d'ensemble <span>›</span></a>
-												</span>
-											</li>
-											<li>
-												<span class="d-block">2</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">4</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">1.0</span>
-											</li>
-										</ul>
-									</div>
-								</li>
-								<!-- accordion item -->
-								<li class="d-flex flex-wrap align-items-start w-100">
-									<ul class="ul-body-row d-flex list-unstyled mb-0">
-										<li>
-											<span class="d-block">UE-2493</span>
-										</li>
-										<li>
-											<span class="d-block">Pratique de l’écriture musicale </span>
-										</li>
-										<li>
-											<span class="d-block">3</span>
-										</li>
-										<li class="d-none d-md-block">
-											<span class="d-block">3</span>
-										</li>
-										<li class="d-none d-md-block">
-											<span class="d-block"></span>
-										</li>
-									</ul>
-									<a class="opener" href="#">
-										<span class="plus"></span>
-									</a>
-									<div class="slide w-100 js-acc-hidden">
-										<ul class="ul-slide-row d-flex list-unstyled mb-0">
-											<li>
-												<span class="d-inline-block">
-													<a class="link" href="#">Formation musicale <span>›</span></a>
-												</span>
-											</li>
-											<li>
-												<span class="d-block">8</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">3</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">3.0</span>
-											</li>
-										</ul>
-										<ul class="ul-slide-row d-flex list-unstyled mb-0">
-											<li>
-												<span class="d-inline-block">
-													<a class="link" href="#">Chant d'ensemble <span>›</span></a>
-												</span>
-											</li>
-											<li>
-												<span class="d-block">2</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">4</span>
-											</li>
-											<li class="d-none d-md-block">
-												<span class="d-block">1.0</span>
-											</li>
-										</ul>
-									</div>
-								</li>
-								<!-- accordion item -->
-								<li class="d-flex flex-wrap align-items-start w-100">
-									<ul class="ul-body-row d-flex list-unstyled mb-0">
-										<li>
-											<span class="d-block">UE-2498</span>
-										</li>
-										<li>
-											<span class="d-block">Histoire</span>
-										</li>
-										<li>
-											<span class="d-block">4</span>
-										</li>
-										<li class="d-none d-md-block">
-											<span class="d-block">4</span>
-										</li>
-										<li class="d-none d-md-block">
-											<span class="d-block"></span>
+											<span class="d-block"><t t-esc="course.weight"/></span>
 										</li>
 									</ul>
 									<a class="opener" href="#">
