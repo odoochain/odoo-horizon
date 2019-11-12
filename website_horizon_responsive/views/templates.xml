@@ -185,11 +185,11 @@
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse domicile</span>
-            								<address>Rue driesch 37<br/> B-4720 Kelmis<br/> Belgique</address>
+            								<address><t t-esc="user.street"/><br/> <t t-esc="user.zip"/> <t t-esc="user.city"/><br/> <t t-esc="user.country_id.name"/></address>
             							</li>
             							<li>
             								<span class="entry-label d-block text-muted text-uppercase font-weight-bold">Adresse résidence</span>
-            								<address>Rue sur les heids 48<br/> B-4536 Saive<br/> Belgique</address>
+            								<address><t t-esc="user.secondary_street"/><br/> <t t-esc="user.secondary_zip"/> <t t-esc="user.secondary_city"/><br/> <t t-esc="user.secondary_country_id.name"/></address>
             							</li>
             						</ul>
             						<div class="d-flex justify-content-center d-lg-block">
