@@ -239,8 +239,8 @@
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">PROGRAMME ANNUEL</span>
 						<!-- accordion section -->
 						<section class="accordion-section pt-md-1" t-foreach="blocs" t-as="bloc">
-							<h2 class="mb-0 mb-1">bloc.name</h2>
-							<span class="below-heading d-block text-info">Formation instrumentale / Cordes</span>
+							<h2 class="mb-0 mb-1"><t t-esc="bloc.name"/></h2>
+							<span class="below-heading d-block text-info"><t t-esc="bloc.section_id.name"/> / <t t-esc="bloc.track_id.name"/></span>
 							<!-- accordion head -->
 							<ul class="ul-head-row d-flex list-unstyled">
 								<li>
