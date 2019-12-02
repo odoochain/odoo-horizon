@@ -415,7 +415,7 @@
 							<li class="d-flex justify-content-between" t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><t t-esc="book.start.format('HH:mm')"/><span class="mx-1">›</span>  <t t-esc="book.end.format('HH:mm')"/></span>
-									<span><t t-esc="book.room_id[1]"></span>
+									<span><t t-esc="book.room_id[1]"/></span>
 								</div>
 							</li>
 						</ul>
