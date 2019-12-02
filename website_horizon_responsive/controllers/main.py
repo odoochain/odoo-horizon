@@ -62,8 +62,17 @@ class BookingController(http.Controller):
             'user': request.env.user,
             'blocs': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)])
         }
-        _logger.info(values)
         return request.render('website_horizon_responsive.blocs', values)
+        
+    @http.route('/responsive/bookings', type='http', auth='user', website=True)
+    def responsive_bookings(self, debug=False, **k):
+        values = {
+            'user': request.env.user,
+            'bookings': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)])
+        }
+        _logger.info(values)
+        return request.render('website_horizon_responsive.bookings', values)
+    
         
     # @http.route('/booking/category', type='json', auth='public', website=True)
     # def booking_category(self, id=False, debug=False, **k):
