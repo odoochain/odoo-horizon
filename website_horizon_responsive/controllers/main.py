@@ -23,6 +23,7 @@ import time
 import werkzeug.utils
 import json
 
+from datetime import datetime, timedelta
 import dateutil
 import dateutil.parser
 import dateutil.relativedelta
@@ -66,8 +67,8 @@ class BookingController(http.Controller):
     
     @http.route('/responsive/bookings', type='http', auth='user', website=True)
     def responsive_bookings(self, debug=False, **k):
-        start = fields.Datetime.to_string(fields.Datetime.today())
-        end = fields.Datetime.to_string(fields.Datetime.today().replace(hour=23, minute=59, second=59))
+        start = fields.Datetime.to_string(datetime.today())
+        end = fields.Datetime.to_string(datetime.today().replace(hour=23, minute=59, second=59))
         event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
         domain = [
             ('start', '<=', end),    
