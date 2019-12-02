@@ -63,12 +63,20 @@ class BookingController(http.Controller):
             'blocs': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)])
         }
         return request.render('website_horizon_responsive.blocs', values)
-        
+    
     @http.route('/responsive/bookings', type='http', auth='user', website=True)
     def responsive_bookings(self, debug=False, **k):
+        start = fields.Datetime.to_string(fields.Datetime.today())
+        end = fields.Datetime.to_string(fields.Datetime.today().replace(hour=23, minute=59, second=59))
+        event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        domain = [
+            ('start', '<=', end),    
+            ('stop', '>=', start),
+            ('user_id','=',request.uid),
+        ]
         values = {
             'user': request.env.user,
-            'bookings': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)])
+            'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,event_fields,order='start asc')
         }
         _logger.info(values)
         return request.render('website_horizon_responsive.bookings', values)
