@@ -412,22 +412,10 @@
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
 						<h2 class="mb-0 mb-2">Mes réservations</h2>
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
-							<li>
+							<li class="d-flex justify-content-between" t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
-									<span class="pr-3">08:00  <span class="mx-1">›</span>  09:00</span>
-									<span>A021 - 1 Piano Qu.</span>
-								</div>
-							</li>
-							<li>
-								<div class="d-flex justify-content-between">
-									<span class="pr-3">10:30 <span class="mx-1">›</span> 12:00</span>
-									<span>B12</span>
-								</div>
-							</li>
-							<li>
-								<div class="d-flex justify-content-between">
-									<span class="pr-3">20:30 <span class="mx-1">›</span> 21:00</span>
-									<span>B13</span>
+									<span class="pr-3"><t t-esc="book.start.format('HH:mm')"/><span class="mx-1">›</span>  <t t-esc="book.end.format('HH:mm')"/></span>
+									<span><t t-esc="book.room_id[1]"></span>
 								</div>
 							</li>
 						</ul>
