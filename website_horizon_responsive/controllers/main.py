@@ -77,7 +77,7 @@ class BookingController(http.Controller):
         ]
         values = {
             'user': request.env.user,
-            'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain,event_fields,order='start asc')
+            'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,event_fields,order='start asc')
         }
         _logger.info(values)
         return request.render('website_horizon_responsive.bookings', values)
