@@ -194,47 +194,47 @@
 										<div class="swiper-wrapper" style="transform: translate3d(-541px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style="width: 541px;">
 												<!-- picturefill: full manual control -->
 												<picture>
-													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
-													<img src="images/instagram-img.jpg" alt="image description">
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x"/>
+													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
 												</picture>
 											</div>
 											<!-- Slides -->
 											<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 541px;">
 												<!-- picturefill: full manual control -->
 												<picture>
-													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
-													<img src="images/instagram-img.jpg" alt="image description">
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x"/>
+													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
 												</picture>
 											</div>
 											<div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1" style="width: 541px;">
 												<!-- picturefill: full manual control -->
 												<picture>
-													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
-													<img src="images/instagram-img.jpg" alt="image description">
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x"/>
+													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
 												</picture>
 											</div>
 											<div class="swiper-slide swiper-slide-duplicate-prev" data-swiper-slide-index="2" style="width: 541px;">
 												<!-- picturefill: full manual control -->
 												<picture>
-													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
-													<img src="images/instagram-img.jpg" alt="image description">
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x"/>
+													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
 												</picture>
 											</div>
 										<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 541px;">
 												<!-- picturefill: full manual control -->
 												<picture>
-													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
-													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
-													<img src="images/instagram-img.jpg" alt="image description">
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, images/instagram-img@2x.jpg 2x"/>
+													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
 												</picture>
 											</div></div>
 										<!-- Slider pagination -->
