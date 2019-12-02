@@ -136,7 +136,7 @@
                 								</a>
                 							</li>
                 							<li>
-                								<a class="d-flex align-items-center" href="#">
+                								<a class="d-flex align-items-center" href="/responsive/bookings">
                 									<i class="icon icon-event-create"></i>
                 									<span class="position-relative">BOOKING</span>
                 								</a>
@@ -436,6 +436,7 @@
 						</div>
 					</div>
 				</div>
+			</t>
     	</template>
     </data>
 </openerp>
