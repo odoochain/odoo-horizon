@@ -38,8 +38,8 @@
                 	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
                 	<!-- include custom JavaScript -->
                 	<script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
-                    <!--<t t-call-assets="website_horizon_responsive.assets"/>
-                    
+                    <t t-call-assets="website_horizon_responsive.assets"/>
+                    <!--
                     <script type="text/javascript">
                         odoo.define('web.csrf', function (require) {
                             var token = "<t t-esc="request.csrf_token(None)"/>";
@@ -176,6 +176,102 @@
             </html>
         </template>
         
+        <template id="index" name="Horizon Responsive Index" page="True">
+            <t t-call="website_horizon_responsive.layout">
+                <div id="content" class="ml-lg-auto">
+					<div class="content-body">
+						<h1 class="d-none d-lg-block">Actualités</h1>
+						<div class="social-block d-md-flex flex-wrap">
+							<div class="position-relative">
+								<div class="social-box">
+									<div class="social-heading d-flex align-items-center mb-4 mb-md-5 pl-lg-1">
+										<i class="icon icon-instagram"></i>
+										<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">INSTRAGRAM</span>
+									</div>
+									<!-- Slider main container -->
+									<div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+										<!-- Additional required wrapper -->
+										<div class="swiper-wrapper" style="transform: translate3d(-541px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style="width: 541px;">
+												<!-- picturefill: full manual control -->
+												<picture>
+													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
+													<img src="images/instagram-img.jpg" alt="image description">
+												</picture>
+											</div>
+											<!-- Slides -->
+											<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 541px;">
+												<!-- picturefill: full manual control -->
+												<picture>
+													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
+													<img src="images/instagram-img.jpg" alt="image description">
+												</picture>
+											</div>
+											<div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1" style="width: 541px;">
+												<!-- picturefill: full manual control -->
+												<picture>
+													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
+													<img src="images/instagram-img.jpg" alt="image description">
+												</picture>
+											</div>
+											<div class="swiper-slide swiper-slide-duplicate-prev" data-swiper-slide-index="2" style="width: 541px;">
+												<!-- picturefill: full manual control -->
+												<picture>
+													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
+													<img src="images/instagram-img.jpg" alt="image description">
+												</picture>
+											</div>
+										<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 541px;">
+												<!-- picturefill: full manual control -->
+												<picture>
+													<source srcset="images/instagram-img-small.jpg, images/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x" media="(max-width: 1024px)">
+													<source srcset="images/instagram-img.jpg, images/instagram-img@2x.jpg 2x">
+													<img src="images/instagram-img.jpg" alt="image description">
+												</picture>
+											</div></div>
+										<!-- Slider pagination -->
+										<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
+									<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+								</div>
+							</div>
+							<div class="position-relative">
+								<div class="social-box">
+									<div class="social-heading d-flex align-items-center mt-md-2 mt-lg-1 mb-4 mb-lg-5">
+										<i class="icon icon-facebook"></i>
+										<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">FACEBOOK</span>
+									</div>
+									<ul class="facebook-list list-unstyled mb-0">
+										<li>
+											<div>
+												<time class="d-block text-uppercase font-weight-bold" datetime="2019-09-03">3 sept. 2019</time>
+												<p>Les examens de seconde session du domaine de la musique se déroule du 2 au 5 septembre….</p>
+												<a class="read-more d-inline-flex align-items-center text-light text-uppercase font-weight-bold" href="#">LIRE LA SUITE</a>
+											</div>
+										</li>
+										<li>
+											<div>
+												<time class="d-block text-uppercase font-weight-bold" datetime="2019-08-26">26 Août 2019</time>
+												<p>Félicitations à Wim Matheeuwese et Cément Monaux (Clem Monaux), étudiants au Conservatoire royal …</p>
+												<a class="read-more d-inline-flex align-items-center text-light text-uppercase font-weight-bold" href="#">LIRE LA SUITE</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </t>
+        </template>
+        
         
         <template id="profile" name="Horizon Responsive Profile" page="True">
             <t t-call="website_horizon_responsive.layout">
@@ -287,7 +383,7 @@
 										<ul class="ul-slide-row d-flex list-unstyled mb-0" t-foreach="course_group.course_ids" t-as="course">
 											<li>
 												<span class="d-inline-block">
-													<a class="link" t-att-href="'/course/%s' % course.id"><t t-esc="course.title"/><span>›</span></a>
+													<a class="link" t-att-href="'/course/%s' % course.source_course_id.id"><t t-esc="course.title"/><span>›</span></a>
 												</span>
 											</li>
 											<li>

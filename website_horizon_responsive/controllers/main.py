@@ -42,6 +42,13 @@ class BookingLoginController(Home):
 
 class BookingController(http.Controller):
 
+    @http.route('/responsive/', type='http', auth='user', website=True)
+    def responsive_index(self, debug=False, **k):
+        values = {
+            'user': request.env.user,
+        }
+        return request.render('website_horizon_responsive.index', values)
+
     @http.route('/responsive/profile', type='http', auth='user', website=True)
     def responsive_profile(self, debug=False, **k):
         values = {
