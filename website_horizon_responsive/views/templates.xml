@@ -287,7 +287,7 @@
 										<ul class="ul-slide-row d-flex list-unstyled mb-0" t-foreach="course_group.course_ids" t-as="course">
 											<li>
 												<span class="d-inline-block">
-													<a class="link" href="#"><t t-esc="course.title"/><span>›</span></a>
+													<a class="link" t-att-href="'/course/%s' % course.id"><t t-esc="course.title"/><span>›</span></a>
 												</span>
 											</li>
 											<li>
