@@ -414,7 +414,7 @@
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
 							<li t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
-									<span class="pr-3"><t t-esc="book.start.strftime('HH:mm')"/><span class="mx-1">›</span>  <t t-esc="book.stop.strftime('HH:mm')"/></span>
+									<span class="pr-3"><t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
 									<span><t t-esc="book.room_id.name"/></span>
 								</div>
 							</li>
