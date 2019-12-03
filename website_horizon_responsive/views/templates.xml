@@ -412,9 +412,9 @@
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
 						<h2 class="mb-0 mb-2">Mes réservations</h2>
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
-							<li class="d-flex justify-content-between" t-foreach="bookings" t-as="book">
+							<li t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
-									<span class="pr-3"><t t-esc="book.start.format('HH:mm')"/><span class="mx-1">›</span>  <t t-esc="book.stop.format('HH:mm')"/></span>
+									<span class="pr-3"><t t-esc="book.start.strftime('HH:mm')"/><span class="mx-1">›</span>  <t t-esc="book.stop.strftime('HH:mm')"/></span>
 									<span><t t-esc="book.room_id.name"/></span>
 								</div>
 							</li>
