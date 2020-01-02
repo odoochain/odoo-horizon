@@ -444,6 +444,12 @@
     	
     	<template id="booking_new" name="Horizon Responsive Bookings" page="True">
     		<t t-call="website_horizon_responsive.layout">
+    			<!-- Compiled and minified CSS -->
+			    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+			
+			    <!-- Compiled and minified JavaScript -->
+			    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+			    
     			<div id="content" class="ml-lg-auto">
 					<div class="content-body">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
@@ -454,11 +460,11 @@
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex pr-md-6 mb-4 mb-md-0 mb-lg-4 mb-xl-0">
 									<div class="form-group mr-4">
 										<label class="d-block text-uppercase font-weight-bold">Aujourd'hui</label>
-										<button class="form-control input-sm input-font-lg text-center bg-danger border border-danger border-0" type="button">19 / 09</button>
+										<button class="form-control input-sm input-font-lg text-center bg-danger border border-danger border-0" type="button"><t t-esc="datetime.datetime.today().strftime('%d / %m  ')"/></button>
 									</div>
 									<div class="form-group">
 										<label class="d-block text-uppercase font-weight-bold">demain</label>
-										<button type="button" class="form-control input-sm input-font-lg text-center" disabled="">20 / 09</button>
+										<button type="button" class="form-control input-sm input-font-lg text-center" disabled=""><t t-esc="(datetime.datetime.today() + datetime.datetime.timedelta(days=1)).strftime('%d / %m  ')"/></button>
 									</div>
 								</div>
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex">
