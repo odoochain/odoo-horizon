@@ -65,14 +65,14 @@ class BookingController(http.Controller):
         }
         return request.render('website_horizon_responsive.blocs', values)
     
-    @http.route('/responsive/bookings', type='http', auth='user', website=True)
-    def responsive_bookings(self, debug=False, **k):
+    @http.route('/responsive/booking_new', type='http', auth='user', website=True)
+    def responsive_booking_new(self, debug=False, **k):
         values = {
             'user': request.env.user,
         }
         return request.render('website_horizon_responsive.booking_new', values)
     
-    @http.route('/responsive/booking_new', type='http', auth='user', website=True)
+    @http.route('/responsive/bookings', type='http', auth='user', website=True)
     def responsive_bookings(self, debug=False, **k):
         start = fields.Datetime.to_string(datetime.today())
         end = fields.Datetime.to_string(datetime.today().replace(hour=23, minute=59, second=59))
