@@ -16,7 +16,12 @@ $(document).ready(function(){
     });
     $('#today').on('click',function() {
         $('#today').prop( "disabled", false );
-        $('#tommorow').prop( "disabled", false );
+        $('#tommorow').prop( "disabled", true );
         $('#day').prop( "value", "today" );
+    });
+    $('#tommorow').on('click',function() {
+        $('#today').prop( "disabled", true );
+        $('#tommorow').prop( "disabled", false );
+        $('#day').prop( "value", "tommorow" );
     });
 });
