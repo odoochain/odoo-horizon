@@ -418,7 +418,8 @@
 							<li t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
-									<span><t t-esc="book.room_id.name"/><i class="fa fa-trash d-inline-block"></i></span>
+									<span><t t-esc="book.room_id.name"/></span>
+									<i class="fa fa-trash d-inline-block"></i>
 								</div>
 							</li>
 						</ul>
@@ -428,7 +429,8 @@
 							<li t-foreach="bookings_next" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
-									<span><t t-esc="book.room_id.name"/><i class="fa fa-trash d-inline-block"></i></span>
+									<span><t t-esc="book.room_id.name"/></span>
+									<i class="fa fa-trash d-inline-block"></i>
 								</div>
 							</li>
 						</ul>
