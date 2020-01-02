@@ -76,8 +76,8 @@ class BookingController(http.Controller):
             ('user_id','=',request.uid),
         ]
         domain_next = [
-            ('start', '<=', end + timedelta(days=1)),    
-            ('stop', '>=', start + timedelta(days=1)),
+            ('start', '<=', fields.Datetime.to_string(datetime.today().replace(hour=23, minute=59, second=59) + timedelta(days=1))),
+            ('stop', '>=', fields.Datetime.to_string(datetime.today() + timedelta(days=1))),
             ('user_id','=',request.uid),
         ]
         values = {
