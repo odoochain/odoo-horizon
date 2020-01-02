@@ -37,6 +37,14 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-bin:before {
+	content: "\e9ac";
+}
+
+.icon-pencil:before {
+	content: "\e909";
+}
+
 .icon-power:before {
 	content: "\e908";
 }
@@ -1882,4 +1890,4 @@ a.float-link i {
 		transform: translateY(0);
 	}
 }
-
+
