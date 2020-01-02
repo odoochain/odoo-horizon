@@ -473,25 +473,7 @@
 										<label class="d-block text-uppercase font-weight-bold" for="endTime">Heure fin</label>
 										<input id="to_hour" type="text" data-length="10" class="invalid form-control no-appearance time-select input-sm input-font-lg text-center"/>
 									</div>
-									<script>
-										$(document).ready(function(){
-									    	$('#from_hour').timepicker({
-									            'timeFormat': 'H:i',
-									            'minTime': '8:00',
-									            'maxTime': '21:30',
-									        });
-									        $('#from_hour').on('change', function() {
-									            var newTime = $('#from_hour').timepicker('getTime');
-									            $('#to_hour').timepicker('option', 'minTime', newTime);
-									        });
-									        $('#to_hour').timepicker({
-									            'timeFormat': 'H:i',
-									            'minTime': '8:30',
-									            'maxTime': '22:00',
-									            'showDuration': true,
-									        });
-										});
-									</script>
+									<script type="text/javascript" src="/website_horizon_responsive/static/src/js/booking-new.js"></script>
 								</div>
 							</div>
 							<div class="form-group pt-2 pt-md-3 pr-lg-6 mb-3 mb-lg-5">
