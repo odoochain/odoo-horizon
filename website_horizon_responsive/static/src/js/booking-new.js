@@ -14,4 +14,9 @@ $(document).ready(function(){
         'maxTime': '22:00',
         'showDuration': true,
     });
+    $('#today').on('click',function() {
+        $('#today').prop( "disabled", false );
+        $('#tommorow').prop( "disabled", false );
+        $('#day').prop( "value", "today" );
+    });
 });
