@@ -412,22 +412,22 @@
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
 						<h2 class="mb-0 mb-2">Mes réservations</h2>
 						<h5>Aujourd'hui</h5>
-						<h5 t-if='len(bookings) == 0'>Aucune réservation</h5>
+						<i t-if='len(bookings) == 0'>Aucune réservation</i>
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
 							<li t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
-									<span><t t-esc="book.room_id.name"/></span>
+									<span><t t-esc="book.room_id.name"/><i class="icon icon-trash d-inline-block"></i></span>
 								</div>
 							</li>
 						</ul>
 						<h5>Demain</h5>
-						<h5 t-if='len(bookings_next) == 0'>Aucune réservation</h5>
+						<i t-if='len(bookings_next) == 0'>Aucune réservation</i>
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
 							<li t-foreach="bookings_next" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
-									<span><t t-esc="book.room_id.name"/></span>
+									<span><t t-esc="book.room_id.name"/><i class="icon icon-trash d-inline-block"></i></span>
 								</div>
 							</li>
 						</ul>
