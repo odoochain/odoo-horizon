@@ -457,12 +457,13 @@
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex pr-md-6 mb-4 mb-md-0 mb-lg-4 mb-xl-0">
 									<div class="form-group mr-4">
 										<label class="d-block text-uppercase font-weight-bold">Aujourd'hui</label>
-										<button class="form-control input-sm input-font-lg text-center bg-danger border border-danger border-0" type="button"><t t-esc="datetime.datetime.today().strftime('%d / %m  ')"/></button>
+										<button id="today" class="form-control input-sm input-font-lg text-center bg-danger border border-danger border-0" type="button"><t t-esc="datetime.datetime.today().strftime('%d / %m  ')"/></button>
 									</div>
 									<div class="form-group">
 										<label class="d-block text-uppercase font-weight-bold">demain</label>
-										<button type="button" class="form-control input-sm input-font-lg text-center" disabled=""><t t-esc="(datetime.datetime.today() + datetime.timedelta(days=1)).strftime('%d / %m  ')"/></button>
+										<button type="button" id="tomorrow" class="form-control input-sm input-font-lg text-center" disabled=""><t t-esc="(datetime.datetime.today() + datetime.timedelta(days=1)).strftime('%d / %m  ')"/></button>
 									</div>
+									<input id="day" type="hidden"/>
 								</div>
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex">
 									<div class="form-group mr-4 ml-md-auto ml-lg-0">
@@ -478,11 +479,8 @@
 							</div>
 							<div class="form-group pt-2 pt-md-3 pr-lg-6 mb-3 mb-lg-5">
 								<label class="d-block text-uppercase font-weight-bold" for="endTime">local</label>
-								<select class="custom-select">
-									<option selected="">A021 -1 Piano Qu.</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+								<select id="room" class="custom-select" disabled="">
+									<option selected="">Selectionner un local...</option>
 								</select>
 							</div>
 							<div class="form-group pt-3">
