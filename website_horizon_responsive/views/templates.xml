@@ -34,6 +34,7 @@
                 	<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet"/>
                 	<!-- include the site stylesheet -->
                 	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/bootstrap.css"/>
+                	<link rel="stylesheet" href="/web/static/lib/fontawesome/css/font-awesome.css"/>
                 	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
                 	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
                 	<!-- include custom JavaScript -->
@@ -417,7 +418,7 @@
 							<li t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
-									<span><t t-esc="book.room_id.name"/><i class="icon icon-trash d-inline-block"></i></span>
+									<span><t t-esc="book.room_id.name"/><i class="fa fa-trash d-inline-block"></i></span>
 								</div>
 							</li>
 						</ul>
@@ -427,7 +428,7 @@
 							<li t-foreach="bookings_next" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
-									<span><t t-esc="book.room_id.name"/><i class="icon icon-trash d-inline-block"></i></span>
+									<span><t t-esc="book.room_id.name"/><i class="fa fa-trash d-inline-block"></i></span>
 								</div>
 							</li>
 						</ul>
