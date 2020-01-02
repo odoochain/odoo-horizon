@@ -445,7 +445,7 @@
     	<template id="booking_new" name="Horizon Responsive Bookings" page="True">
     		<t t-call="website_horizon_responsive.layout">
     			<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
-    			<script type="text/javascript" src="website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
+    			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
     			
     			<div id="content" class="ml-lg-auto">
 					<div class="content-body">
