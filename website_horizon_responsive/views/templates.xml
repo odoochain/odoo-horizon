@@ -444,12 +444,9 @@
     	
     	<template id="booking_new" name="Horizon Responsive Bookings" page="True">
     		<t t-call="website_horizon_responsive.layout">
-    			<!-- Compiled and minified CSS -->
-			    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
-			
-			    <!-- Compiled and minified JavaScript -->
-			    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-			    
+    			<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
+    			<script type="text/javascript" src="website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
+    			
     			<div id="content" class="ml-lg-auto">
 					<div class="content-body">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
@@ -470,12 +467,7 @@
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex">
 									<div class="form-group mr-4 ml-md-auto ml-lg-0">
 										<label class="d-block text-uppercase font-weight-bold" for="beginningHour">Heure début</label>
-										<select id="beginningHour" class="form-control no-appearance time-select input-sm input-font-lg text-center">
-											<option selected="">08:00</option>
-											<option value="1">08:30</option>
-											<option value="2">09:00</option>
-											<option value="3">09:30</option>
-										</select>
+										<input id="from_hour" type="text" data-length="10" class="invalid"/>
 									</div>
 									<div class="form-group">
 										<label class="d-block text-uppercase font-weight-bold" for="endTime">Heure fin</label>
@@ -486,6 +478,21 @@
 											<option value="3">10:30</option>
 										</select>
 									</div>
+									<script>
+										$(document).ready(function(){
+									    	$('#from_hour').timepicker({
+									            'timeFormat': 'H:i',
+									            'minTime': '8:00',
+									            'maxTime': '21:30',
+									        });
+									        $('#to_hour').timepicker({
+									            'timeFormat': 'H:i',
+									            'minTime': '8:30',
+									            'maxTime': '22:00',
+									            'showDuration': true,
+									        });
+										});
+									</script>
 								</div>
 							</div>
 							<div class="form-group pt-2 pt-md-3 pr-lg-6 mb-3 mb-lg-5">
