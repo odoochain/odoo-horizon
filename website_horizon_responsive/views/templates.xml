@@ -435,11 +435,69 @@
 							</li>
 						</ul>
 						<div>
-							<a class="btn btn-danger" href="#">Réserver une salle</a>
+							<a class="btn btn-danger" href="/responsive/booking_new">Réserver une salle</a>
 						</div>
 					</div>
 				</div>
 			</t>
+    	</template>
+    	
+    	<template id="booking_new" name="Horizon Responsive Bookings" page="True">
+    		<t t-call="website_horizon_responsive.layout">
+    			<div id="content" class="ml-lg-auto">
+					<div class="content-body">
+						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
+						<h2 class="mb-0 mb-2 mb-lg-1">Réserver une salle</h2>
+						<a href="" class="float-link d-inline-flex align-items-center text-info text-uppercase font-weight-bold pt-1 pb-1">VOIR LE rêglement <i class="icon icon-arrow-right"></i></a>
+						<form action="#" class="pt-4 pt-lg-2 mt-4 mt-lg-5">
+							<div class="form-row mb-4 mb-md-5 mb-lg-4">
+								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex pr-md-6 mb-4 mb-md-0 mb-lg-4 mb-xl-0">
+									<div class="form-group mr-4">
+										<label class="d-block text-uppercase font-weight-bold">Aujourd'hui</label>
+										<button class="form-control input-sm input-font-lg text-center bg-danger border border-danger border-0" type="button">19 / 09</button>
+									</div>
+									<div class="form-group">
+										<label class="d-block text-uppercase font-weight-bold">demain</label>
+										<button type="button" class="form-control input-sm input-font-lg text-center" disabled="">20 / 09</button>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex">
+									<div class="form-group mr-4 ml-md-auto ml-lg-0">
+										<label class="d-block text-uppercase font-weight-bold" for="beginningHour">Heure début</label>
+										<select id="beginningHour" class="form-control no-appearance time-select input-sm input-font-lg text-center">
+											<option selected="">08:00</option>
+											<option value="1">08:30</option>
+											<option value="2">09:00</option>
+											<option value="3">09:30</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label class="d-block text-uppercase font-weight-bold" for="endTime">Heure fin</label>
+										<select id="beginningHour" class="form-control no-appearance time-select input-sm input-font-lg text-center">
+											<option selected="">09:00</option>
+											<option value="1">09:30</option>
+											<option value="2">10:00</option>
+											<option value="3">10:30</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group pt-2 pt-md-3 pr-lg-6 mb-3 mb-lg-5">
+								<label class="d-block text-uppercase font-weight-bold" for="endTime">local</label>
+								<select class="custom-select">
+									<option selected="">A021 -1 Piano Qu.</option>
+									<option value="1">One</option>
+									<option value="2">Two</option>
+									<option value="3">Three</option>
+								</select>
+							</div>
+							<div class="form-group pt-3">
+								<input class="btn btn-danger" type="submit" value="Envoyer ma demande">
+							</div>
+						</form>
+					</div>
+				</div>
+    		</t>
     	</template>
     </data>
 </openerp>

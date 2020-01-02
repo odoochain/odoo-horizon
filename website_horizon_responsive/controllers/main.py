@@ -67,6 +67,13 @@ class BookingController(http.Controller):
     
     @http.route('/responsive/bookings', type='http', auth='user', website=True)
     def responsive_bookings(self, debug=False, **k):
+        values = {
+            'user': request.env.user,
+        }
+        return request.render('website_horizon_responsive.booking_new', values)
+    
+    @http.route('/responsive/booking_new', type='http', auth='user', website=True)
+    def responsive_bookings(self, debug=False, **k):
         start = fields.Datetime.to_string(datetime.today())
         end = fields.Datetime.to_string(datetime.today().replace(hour=23, minute=59, second=59))
         event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
@@ -86,7 +93,6 @@ class BookingController(http.Controller):
             'bookings_next': request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain_next,event_fields,order='start asc'),
         }
         return request.render('website_horizon_responsive.bookings', values)
-    
         
     # @http.route('/booking/category', type='json', auth='public', website=True)
     # def booking_category(self, id=False, debug=False, **k):
