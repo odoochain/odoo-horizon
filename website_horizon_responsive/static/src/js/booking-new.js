@@ -15,13 +15,13 @@ $(document).ready(function(){
         'showDuration': true,
     });
     $('#today').on('click',function() {
-        $('#today').prop( "disabled", false );
-        $('#tommorow').prop( "disabled", true );
+        $('#today').addClass("bg-danger border border-danger border-0")
+        $('#tomorrow').removeClass("bg-danger border border-danger border-0")
         $('#day').prop( "value", "today" );
     });
-    $('#tommorow').on('click',function() {
-        $('#today').prop( "disabled", true );
-        $('#tommorow').prop( "disabled", false );
-        $('#day').prop( "value", "tommorow" );
+    $('#tomorrow').on('click',function() {
+        $('#today').removeClass("bg-danger border border-danger border-0")
+        $('#tomorrow').addClass("bg-danger border border-danger border-0")
+        $('#day').prop( "value", "tomorrow" );
     });
 });
