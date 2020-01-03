@@ -50,7 +50,7 @@ $(document).ready(function(){
                 console.log(result);
                 $('#room').empty().html(' ');
                 var rooms = result.result;
-                if(len(rooms) > 0) {
+                if(rooms.length > 0) {
                     $('#room').removeAttr( "disabled" )
                     for(var room_idx in rooms) {
                         var room = rooms[room_idx];
