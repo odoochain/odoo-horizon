@@ -36,7 +36,7 @@ $(document).ready(function(){
               dataType: "json",
               contentType: 'application/json',
               url: '/booking/rooms',
-              data: {
+              data: JSON.stringify({
                 jsonrpc: "2.0",
                 method: "call",
                 params: {
@@ -44,7 +44,7 @@ $(document).ready(function(){
                     "end": stop.toISOString(),
                 },
                 id: '844108350'
-              },
+              }),
               success: function( result ) {
                 console.log(result);
               }
