@@ -480,11 +480,11 @@
 							<div class="form-group pt-2 pt-md-3 pr-lg-6 mb-3 mb-lg-5">
 								<label class="d-block text-uppercase font-weight-bold" for="endTime">local</label>
 								<select id="room" class="custom-select" disabled="">
-									<option selected="">Selectionner un local...</option>
+									<option selected="">Selectionnez un local...</option>
 								</select>
 							</div>
 							<div class="form-group pt-3">
-								<input id="request-booking" class="btn btn-danger" value="Envoyer ma demande" disabled=""/>
+								<button type="button" id="request-booking" class="btn btn-danger" value="Envoyer ma demande" disabled=""/>
 							</div>
 						</form>
 					</div>
