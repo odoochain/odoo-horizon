@@ -32,6 +32,7 @@ $(document).ready(function(){
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
             $.ajax({
+              type: "POST",
               url: '/booking/rooms',
               data: {
                 jsonrpc: "2.0",
