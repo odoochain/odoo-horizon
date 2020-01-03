@@ -2,9 +2,9 @@ $(document).ready(function(){
     
     function updateSendButton() {
         if($('#room').val() > 0) {
-            this.$('#request-booking').removeAttr( 'disabled' );
+            $('#request-booking').removeAttr( 'disabled' );
         } else {
-            this.$('#request-booking').attr( 'disabled', true );
+            $('#request-booking').attr( 'disabled', true );
         }
     }
     
@@ -13,8 +13,8 @@ $(document).ready(function(){
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
         if (fromTime < toTime) {
-            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var start = moment().local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var stop = moment().local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
             var day = $('#day').attr('value');
             if( day == 1 ) {
                 start.add(1, 'days');
@@ -33,7 +33,7 @@ $(document).ready(function(){
                     "end": stop.toISOString(),
                     "self_id": 0,
                 },
-                id: '844108350'
+                id: Math.floor(Math.random()*100000000),
               }),
               success: function( result ) {
                 console.log(result);
@@ -110,4 +110,42 @@ $(document).ready(function(){
     $('#room').on('change', function() {
         updateSendButton();
     });
+    
+    $('#request-booking').on('click',function() {
+        var fromTime = $('#from_hour').timepicker('getTime');
+        var toTime = $('#to_hour').timepicker('getTime');
+        var start = moment().local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var stop = moment().local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var day = $('#day').attr('value');
+        if( day == 1 ) {
+            start.add(1, 'days');
+            stop.add(1, 'days');
+        }
+        var room = $('#room').val();
+        var description  = $('#description').val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            contentType: 'application/json',
+            url: '/booking/rooms',
+            data: JSON.stringify({
+            jsonrpc: "2.0",
+            method: "call",
+            params: {
+                model: "calendar.event",
+                method: "create",
+                args: {
+                    name: description,
+                    start: start.toISOString(),
+                    stop: stop.toISOString(),
+                    room_id: room,
+                    categ_ids: '[[4, 7]]',
+                },
+                kwargs: {}
+            },
+            id: Math.floor(Math.random()*100000000),
+        });
+            
+    });
+    
 });
