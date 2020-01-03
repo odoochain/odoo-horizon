@@ -129,23 +129,26 @@ $(document).ready(function(){
             contentType: 'application/json',
             url: '/booking/rooms',
             data: JSON.stringify({
-            jsonrpc: "2.0",
-            method: "call",
-            params: {
-                model: "calendar.event",
-                method: "create",
-                args: {
-                    name: description,
-                    start: start.toISOString(),
-                    stop: stop.toISOString(),
-                    room_id: room,
-                    categ_ids: '[[4, 7]]',
+                jsonrpc: "2.0",
+                method: "call",
+                params: {
+                    model: "calendar.event",
+                    method: "create",
+                    args: {
+                        name: description,
+                        start: start.toISOString(),
+                        stop: stop.toISOString(),
+                        room_id: room,
+                        categ_ids: '[[4, 7]]',
+                    },
+                    kwargs: {}
                 },
-                kwargs: {}
-            },
-            id: Math.floor(Math.random()*100000000),
+                id: Math.floor(Math.random()*100000000),
+            }),
+            success: function( result ) {
+                console.log(result);
+            },    
         });
-            
     });
     
 });
