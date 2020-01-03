@@ -42,6 +42,7 @@ $(document).ready(function(){
                 params: {
                     "start": start.toISOString(),
                     "end": stop.toISOString(),
+                    "self_id": 0,
                 },
                 id: '844108350'
               }),
