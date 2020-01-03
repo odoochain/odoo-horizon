@@ -67,10 +67,15 @@ $(document).ready(function(){
     
     $('#from_hour').on('change', function() {
         var fromTime = $('#from_hour').timepicker('getTime');
+        var toTime = $('#to_hour').timepicker('getTime');
         $('#to_hour').timepicker('option', 'minTime', fromTime);
+        if (fromTime > toTime) {
+            $('#to_hour').timepicker('setTime', fromTime);
+        }
+        updateRoomList();
     });
     
     $('#to_hour').on('change', function() {
-        
+        updateRoomList();
     });
 });
