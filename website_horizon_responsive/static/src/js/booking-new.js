@@ -38,6 +38,11 @@ $(document).ready(function(){
               success: function( result ) {
                 console.log(result);
                 $('#room').empty().html(' ');
+                $('#room').append(
+                  $("<option></option>")
+                    .attr("value",0)
+                    .text('Selectionnez un local...')
+                );
                 var rooms = result.result;
                 if(rooms.length > 0) {
                     $('#room').removeAttr( "disabled" )
