@@ -146,7 +146,7 @@ $(document).ready(function(){
                 id: Math.floor(Math.random()*100000000),
             }),
             success: function( result ) {
-                console.log(result);
+                window.location.href = "/responsive/bookings";
             },    
         });
     });
