@@ -50,13 +50,18 @@ $(document).ready(function(){
                 console.log(result);
                 $('#room').empty().html(' ');
                 var rooms = result.result;
-                for(var room_idx in rooms) {
-                    var room = rooms[room_idx];
-                    $('#room').append(
-                      $("<option></option>")
-                        .attr("value",room.id)
-                        .text(room.name)
-                    );
+                if(len(rooms) > 0) {
+                    $('#room').removeAttr( "disabled" )
+                    for(var room_idx in rooms) {
+                        var room = rooms[room_idx];
+                        $('#room').append(
+                          $("<option></option>")
+                            .attr("value",room.id)
+                            .text(room.name)
+                        );
+                    }    
+                } else {
+                    $('#room').addAttr( "disabled", true);
                 }
               }
             });
