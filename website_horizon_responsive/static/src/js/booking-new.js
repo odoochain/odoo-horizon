@@ -127,7 +127,7 @@ $(document).ready(function(){
             type: "POST",
             dataType: "json",
             contentType: 'application/json',
-            url: '/booking/rooms',
+            url: '/web/dataset/call_kw/calendar.event/create',
             data: JSON.stringify({
                 jsonrpc: "2.0",
                 method: "call",
