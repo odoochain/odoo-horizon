@@ -376,8 +376,8 @@ var NewBookingDialog = Widget.extend({
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
             ajax.jsonRpc('/booking/rooms', 'call', {
-        				'start' : time.moment_to_str(start),
-        				'end' : time.moment_to_str(stop),
+        				'start' : start.toISOString(),
+        				'end' : stop.toISOString(),
         				'self_id' : self.event ? self.event.id : '',
     	    	}).done(function(rooms){
                 var roomSelect = self.$('select.select-asset-id').empty().html(' ');
