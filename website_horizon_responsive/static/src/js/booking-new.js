@@ -48,6 +48,14 @@ $(document).ready(function(){
               }),
               success: function( result ) {
                 console.log(result);
+                $('#room').empty().html(' ');
+                for(var room in result.result) {
+                    $('#room').append(
+                      $("<option></option>")
+                        .attr("value",room.id)
+                        .text(room.name)
+                    );
+                }
               }
             });
             
