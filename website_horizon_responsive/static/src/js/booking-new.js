@@ -1,5 +1,13 @@
 $(document).ready(function(){
     
+    function updateSendButton() {
+        if($('#room').val() > 0) {
+            this.$('.request-booking').removeAttr( 'disabled' );
+        } else {
+            this.$('.request-booking').attr( 'disabled', true );
+        }
+    }
+    
     function updateRoomList() {
         var self = this;
         var fromTime = $('#from_hour').timepicker('getTime');
