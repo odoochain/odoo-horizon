@@ -463,7 +463,7 @@
 										<label class="d-block text-uppercase font-weight-bold">demain</label>
 										<button type="button" id="tomorrow" class="form-control input-sm input-font-lg text-center"><t t-esc="(datetime.datetime.today() + datetime.timedelta(days=1)).strftime('%d / %m  ')"/></button>
 									</div>
-									<input id="day" type="hidden" value="today"/>
+									<input id="day" type="hidden" value="0"/>
 								</div>
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex">
 									<div class="form-group mr-4 ml-md-auto ml-lg-0">

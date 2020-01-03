@@ -15,13 +15,13 @@ $(document).ready(function(){
     $('#today').on('click',function() {
         $('#today').addClass("bg-danger border border-danger border-0")
         $('#tomorrow').removeClass("bg-danger border border-danger border-0")
-        $('#day').prop( "value", "today" );
+        $('#day').prop( "value", "0" );
     });
     
     $('#tomorrow').on('click',function() {
         $('#today').removeClass("bg-danger border border-danger border-0")
         $('#tomorrow').addClass("bg-danger border border-danger border-0")
-        $('#day').prop( "value", "tomorrow" );
+        $('#day').prop( "value", "1" );
     });
     
     function updateRoomList() {
@@ -31,6 +31,11 @@ $(document).ready(function(){
         if (fromTime < toTime) {
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+            var day = $('#day').attr('value');
+            if( day == 1 ) {
+                start.add(1, 'days');
+                stop.add(1, 'days');
+            }
             $.ajax({
               type: "POST",
               dataType: "json",
