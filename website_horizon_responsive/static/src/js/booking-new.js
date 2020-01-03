@@ -33,6 +33,7 @@ $(document).ready(function(){
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
             $.ajax({
               type: "POST",
+              dataType: "json",
               url: '/booking/rooms',
               data: {
                 jsonrpc: "2.0",
