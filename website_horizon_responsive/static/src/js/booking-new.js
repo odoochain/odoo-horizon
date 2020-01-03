@@ -49,7 +49,9 @@ $(document).ready(function(){
               success: function( result ) {
                 console.log(result);
                 $('#room').empty().html(' ');
-                for(var room in result.result) {
+                var rooms = result.result;
+                for(var room_idx in rooms) {
+                    var room = rooms[room_idx];
                     $('#room').append(
                       $("<option></option>")
                         .attr("value",room.id)
