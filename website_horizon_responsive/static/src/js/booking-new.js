@@ -139,7 +139,7 @@ $(document).ready(function(){
                         start: start.toISOString().replace('T',' '),
                         stop: stop.toISOString().replace('T',' '),
                         room_id: room,
-                        categ_ids: '[[4, 7]]',
+                        categ_ids: [[4, 7]],
                     }],
                     kwargs: {}
                 },
