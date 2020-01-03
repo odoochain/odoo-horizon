@@ -1,28 +1,4 @@
 $(document).ready(function(){
-	$('#from_hour').timepicker({
-        'timeFormat': 'H:i',
-        'minTime': '8:00',
-        'maxTime': '21:30',
-    });
-    
-    $('#to_hour').timepicker({
-        'timeFormat': 'H:i',
-        'minTime': '8:30',
-        'maxTime': '22:00',
-        'showDuration': true,
-    });
-    
-    $('#today').on('click',function() {
-        $('#today').addClass("bg-danger border border-danger border-0")
-        $('#tomorrow').removeClass("bg-danger border border-danger border-0")
-        $('#day').prop( "value", "0" );
-    });
-    
-    $('#tomorrow').on('click',function() {
-        $('#today').removeClass("bg-danger border border-danger border-0")
-        $('#tomorrow').addClass("bg-danger border border-danger border-0")
-        $('#day').prop( "value", "1" );
-    });
     
     function updateRoomList() {
         var self = this;
@@ -70,24 +46,35 @@ $(document).ready(function(){
                 }
               }
             });
-            
-            /*
-                var roomSelect = self.$('select.select-asset-id').empty().html(' ');
-                for(var room_idx in rooms) {
-                    var room = rooms[room_idx];
-                    // add new value
-                    roomSelect.append(
-                      $("<option></option>")
-                        .attr("value",room.id)
-                        .text(room.name)
-                    );
-                }
-                roomSelect.removeAttr( "disabled" )
-        	    roomSelect.material_select();
-        	    Materialize.updateTextFields();
-        	    self.updateSendButton();*/
         }
     }
+    
+	$('#from_hour').timepicker({
+        'timeFormat': 'H:i',
+        'minTime': '8:00',
+        'maxTime': '21:30',
+    });
+    
+    $('#to_hour').timepicker({
+        'timeFormat': 'H:i',
+        'minTime': '8:30',
+        'maxTime': '22:00',
+        'showDuration': true,
+    });
+    
+    $('#today').on('click',function() {
+        $('#today').addClass("bg-danger border border-danger border-0")
+        $('#tomorrow').removeClass("bg-danger border border-danger border-0")
+        $('#day').prop( "value", "0" );
+        updateRoomList();
+    });
+    
+    $('#tomorrow').on('click',function() {
+        $('#today').removeClass("bg-danger border border-danger border-0")
+        $('#tomorrow').addClass("bg-danger border border-danger border-0")
+        $('#day').prop( "value", "1" );
+        updateRoomList();
+    });
     
     $('#from_hour').on('change', function() {
         var fromTime = $('#from_hour').timepicker('getTime');
