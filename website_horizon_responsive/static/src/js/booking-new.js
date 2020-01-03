@@ -134,13 +134,13 @@ $(document).ready(function(){
                 params: {
                     model: "calendar.event",
                     method: "create",
-                    args: {
+                    args: [{
                         name: description,
                         start: start.toISOString(),
                         stop: stop.toISOString(),
                         room_id: room,
                         categ_ids: '[[4, 7]]',
-                    },
+                    }],
                     kwargs: {}
                 },
                 id: Math.floor(Math.random()*100000000),
