@@ -75,6 +75,7 @@ $(document).ready(function(){
         $('#tomorrow').removeClass("bg-danger border border-danger border-0")
         $('#day').prop( "value", "0" );
         updateRoomList();
+        updateSendButton();
     });
     
     $('#tomorrow').on('click',function() {
@@ -82,6 +83,7 @@ $(document).ready(function(){
         $('#tomorrow').addClass("bg-danger border border-danger border-0")
         $('#day').prop( "value", "1" );
         updateRoomList();
+        updateSendButton();
     });
     
     $('#from_hour').on('change', function() {
@@ -92,9 +94,11 @@ $(document).ready(function(){
             $('#to_hour').timepicker('setTime', fromTime);
         }
         updateRoomList();
+        updateSendButton();
     });
     
     $('#to_hour').on('change', function() {
         updateRoomList();
+        updateSendButton();
     });
 });
