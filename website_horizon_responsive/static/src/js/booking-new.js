@@ -106,4 +106,8 @@ $(document).ready(function(){
         updateRoomList();
         updateSendButton();
     });
+    
+    $('#room').on('change', function() {
+        updateSendButton();
+    });
 });
