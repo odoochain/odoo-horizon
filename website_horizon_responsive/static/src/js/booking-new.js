@@ -136,8 +136,8 @@ $(document).ready(function(){
                     method: "create",
                     args: [{
                         name: description,
-                        start: start.toISOString(),
-                        stop: stop.toISOString(),
+                        start: start.toISOString().replace('T',' '),
+                        stop: stop.toISOString().replace('T',' '),
                         room_id: room,
                         categ_ids: '[[4, 7]]',
                     }],
