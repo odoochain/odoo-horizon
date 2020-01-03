@@ -34,6 +34,7 @@ $(document).ready(function(){
             $.ajax({
               type: "POST",
               dataType: "json",
+              contentType: 'application/json',
               url: '/booking/rooms',
               data: {
                 jsonrpc: "2.0",
