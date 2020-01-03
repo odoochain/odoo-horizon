@@ -29,8 +29,8 @@ $(document).ready(function(){
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
         if (fromTime < toTime) {
-            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
-            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
+            var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
             var day = $('#day').attr('value');
             if( day == 1 ) {
                 start.add(1, 'days');
