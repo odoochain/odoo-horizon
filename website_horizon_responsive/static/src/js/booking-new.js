@@ -37,8 +37,8 @@ $(document).ready(function(){
                 jsonrpc: "2.0",
                 method: "call",
                 params: {
-                    "start": start,
-                    "end": stop,
+                    "start": start.toISOString(),
+                    "end": stop.toISOString(),
                 },
                 id: '844108350'
               },
