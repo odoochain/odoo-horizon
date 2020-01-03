@@ -2,9 +2,9 @@ $(document).ready(function(){
     
     function updateSendButton() {
         if($('#room').val() > 0) {
-            this.$('.request-booking').removeAttr( 'disabled' );
+            this.$('#request-booking').removeAttr( 'disabled' );
         } else {
-            this.$('.request-booking').attr( 'disabled', true );
+            this.$('#request-booking').attr( 'disabled', true );
         }
     }
     
