@@ -40,30 +40,6 @@
                 	<!-- include custom JavaScript -->
                 	<script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
                     <t t-call-assets="website_horizon_responsive.assets"/>
-                    <!--
-                    <script type="text/javascript">
-                        odoo.define('web.csrf', function (require) {
-                            var token = "<t t-esc="request.csrf_token(None)"/>";
-                            require('web.core').csrf_token = token;
-                            require('qweb').default_dict.csrf_token = token;
-                        });
-                        odoo.db_info = '<t t-raw="db_info"/>';
-                    </script>
-                    <script type="text/javascript">
-                        $(function() {
-                            odoo.define('website_horizon_responsive.index', function (require) {
-                                var core = require('web.core');
-                                var ajax = require('web.ajax');
-                                var qweb = core.qweb;
-                                
-                                ajax.loadXML('/website_horizon_responsive/static/src/xml/main.xml', qweb).then(function(){
-                                    var Main = require('website_horizon_responsive.main');
-                                    var m = new Main();
-                                    m.appendTo($(document.body));
-                                });
-                            });
-                        });
-                    </script>-->
                 </head>
                 <body class="dashboard">
                     <div id="wrapper" class="d-flex position-relative">
