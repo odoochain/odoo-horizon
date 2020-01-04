@@ -23,40 +23,10 @@
 <openerp>
     <data>
         <template id="assets" name="website_horizon_responsive assets">
-            <!--<script type="text/javascript" src="/web/static/lib/es5-shim/es5-shim.min.js"></script>
-            <script type="text/javascript" src="/web/static/lib/underscore/underscore.js"></script>
-            <script type="text/javascript" src="/web/static/lib/underscore.string/lib/underscore.string.js"></script>-->
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
             <script type="text/javascript" src="/web/static/lib/jquery.ui/jquery-ui.js"></script>
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.browser.js"></script>
             <script type="text/javascript" src="/web/static/lib/moment/moment.js"></script>
-            <!--<script type="text/javascript" src="/web/static/lib/py.js/lib/py.js"></script>
-            <script type="text/javascript" src="/web/static/lib/jquery.ba-bbq/jquery.ba-bbq.js"></script>
-            <script type="text/javascript" src="/web/static/lib/qweb/qweb2.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/boot.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/class.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/translation.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/ajax.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/time.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/mixins.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/widget.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/registry.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/session.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/model.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/utils.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/core.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/dialog.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/session_instance.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/pyeval.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/crash_manager.js"></script>
-            <script >
-                // We do not want all bootstrap.js
-                $.fn.tooltip = { Constructor : { DEFAULTS : {}, prototype : { show : function() {}}}}
-                $.fn.modal = { Constructor : { DEFAULTS : {}, prototype : { enforceFocus : function() {}}}};
-            </script>
-            <script type="text/javascript" src="/web/static/src/js/framework/misc.js"></script>
-            <script type="text/javascript" src="/web/static/src/js/framework/data.js"></script>
-            <script type="text/javascript" src="/website_horizon_responsive/static/src/js/main.js"></script>-->
         </template>
         
         <record id="action_website_horizon_responsive" model="ir.actions.act_url">
