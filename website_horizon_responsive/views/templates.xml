@@ -156,7 +156,7 @@
 	            				<!-- contain the main content of the page -->
 	            				<t t-raw="0"/>
 	            			</main>
-	            			<t t-call="website_horizon_responsive.layout_footer">
+	            			<t t-call="website_horizon_responsive.layout_footer"></t>
 	            		</div>
 	            	</div>
 	            </body>
@@ -331,7 +331,7 @@
 								</div>
 							</div>
 						</main>
-						<t t-call="website_horizon_responsive.layout_footer">
+						<t t-call="website_horizon_responsive.layout_footer"></t>
 					</div>
 				</div>
 			</body>
