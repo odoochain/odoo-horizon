@@ -22,7 +22,7 @@
 -->
 <openerp>
     <data>
-        <template id="layout" name="Horizon Responsive Layout">
+        <template id="layout_container" name="Horizon Responsive Layout Container">
             <html>
                 <head>
                     <!-- set the encoding of your site -->
@@ -41,214 +41,302 @@
                 	<script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
                     <t t-call-assets="website_horizon_responsive.assets"/>
                 </head>
-                <body class="dashboard">
-                    <div id="wrapper" class="d-flex position-relative">
-                		<div class="w1 d-flex flex-column w-100">
-                			<!-- page background -->
-                			<div class="bg-image position-fixed">
-                				<!-- picturefill: full manual control -->
-                				<picture>
-                					<source srcset="/website_horizon_responsive/static/src/img/home-bg-small.jpg, /website_horizon_responsive/static/src/img/home-bg-small@2x.jpg 2x" media="(max-width: 767px)"/>
-                					<source srcset="/website_horizon_responsive/static/src/img/home-bg-middle.jpg, /website_horizon_responsive/static/src/img/home-bg-middle@2x.jpg 2x" media="(max-width: 1024px)"/>
-                					<source srcset="/website_horizon_responsive/static/src/img/dashbord-bg-large.jpg, /website_horizon_responsive/static/src/img/dashbord-bg-large@2x.jpg 2x"/>
-                					<img src="/website_horizon_responsive/static/src/img/dashbord-bg-large.jpg" alt="image description"/>
-                				</picture>
-                			</div>
-                			<!-- header of the page -->
-                			<header id="header">
-                				<div class="inner d-flex align-items-center">
-                					<div class="back-link mr-auto">
-                						<a class="d-inline-flex align-items-center text-white text-uppercase font-weight-bold" href="/responsive/">
-                							<i class="icon icon-arrow-right d-inline-block"></i>
-                							<span>ACCUEIL</span>
-                						</a>
-                					</div>
-                					<!-- header navigation -->
-                					<ul id="nav" class="list-unstyled d-flex align-items-center justify-content-lg-end text-uppercase font-weight-bold mb-0">
-                						<li class="d-none d-lg-inline-block">
-                							<a href="#">
-                								<img src="/website_horizon_responsive/static/src/img/logo-horizontal-white.svg" alt="Conservatoire royal de Liège"/>
-                							</a>
-                						</li>
-                						<li class="d-none d-lg-inline-block">
-                							<a href="/web">Horizon 1.0</a>
-                						</li>
-                						<li class="ml-auto ml-lg-0">
-                							<a href="/web/session/logout">
-                								<i class="icon icon-power"></i>
-                							</a>
-                						</li>
-                					</ul>
-                				</div>
-                			</header>
-                			<!-- contain main informative part of the site -->
-                			<main id="main" class="d-flex flex-column flex-lg-row w-100">
-                				<!-- contain sidebar of the page -->
-                				<aside id="aside-left" class="profile-mod">
-                					<!-- user area -->
-                					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
-                						<div class="order-1 order-lg-0 entry-meta pr-2">
-                							<h4 class="text-truncate"><t t-esc="user.name"/></h4>
-                							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="/responsive/profile">VOIR mon PROFIL</a>
-                						</div>
-                						<figure class="avatar rounded-circle">
-                							<a href="#">
-                								<!-- picturefill: full manual control -->
-                								<picture>
-                									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
-                									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
-                									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)"/>
-                									<img t-att-src="'/web/image/res.users/%s/image_small' % (user.id)" alt="image description" width="62" height="62"/>
-                								</picture>
-                							</a>
-                						</figure>
-                					</div>
-                					<!-- aside navigation -->
-                					<nav class="aside-nav d-none d-lg-block">
-                						<ul id="aside-nav" class="list-unstyled text-uppercase font-weight-bold mb-0">
-                							<li>
-                								<a class="d-flex align-items-center" href="/responsive/blocs">
-                									<i class="icon icon-program"></i>
-                									<span class="position-relative">programme annuel</span>
-                								</a>
-                							</li>
-                							<li>
-                								<a class="d-flex align-items-center" href="/responsive/bookings">
-                									<i class="icon icon-event-create"></i>
-                									<span class="position-relative">BOOKING</span>
-                								</a>
-                							</li>
-                						</ul>
-                					</nav>
-                				</aside>
-                				<!-- contain the main content of the page -->
-                				<t t-raw="0"/>
-                			</main>
-                			<!-- footer of the page -->
-                			<footer id="footer" class="text-center">
-                				<div class="container">
-                					<div class="footer-inner d-md-flex align-items-md-center justify-content-md-between d-lg-block">
-                						<!-- footer links -->
-                						<ul class="footer-links list-unstyled d-flex flex-wrap align-items-center justify-content-between text-uppercase font-weight-bold">
-                							<li>
-                								<a href="#">Crlg.be</a>
-                							</li>
-                							<li>
-                								<a href="#">FACEBOOK</a>
-                							</li>
-                							<li>
-                								<a href="#">INSTAGRAM</a>
-                							</li>
-                						</ul>
-                						<!-- copyright -->
-                						<div class="copyright text-uppercase font-weight-bold">
-                							<p class="mb-0">© 2019 Crlg.be — politique de confidentialité</p>
-                						</div>
-                					</div>
-                				</div>
-                			</footer>
-                		</div>
-                	</div>
-                </body>
+                <t t-raw="0"/>
             </html>
         </template>
         
-        <template id="index" name="Horizon Responsive Index" page="True">
-            <t t-call="website_horizon_responsive.layout">
-                <div id="content" class="ml-lg-auto">
-					<div class="content-body">
-						<h1 class="d-none d-lg-block">Actualités</h1>
-						<div class="social-block d-md-flex flex-wrap">
-							<div class="position-relative">
-								<div class="social-box">
-									<div class="social-heading d-flex align-items-center mb-4 mb-md-5 pl-lg-1">
-										<i class="icon icon-instagram"></i>
-										<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">INSTRAGRAM</span>
-									</div>
-									<!-- Slider main container -->
-									<div class="swiper-container swiper-container-initialized swiper-container-horizontal">
-										<!-- Additional required wrapper -->
-										<div class="swiper-wrapper" style="transform: translate3d(-541px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style="width: 541px;">
-												<!-- picturefill: full manual control -->
-												<picture>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
-													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
-												</picture>
-											</div>
-											<!-- Slides -->
-											<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 541px;">
-												<!-- picturefill: full manual control -->
-												<picture>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
-													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
-												</picture>
-											</div>
-											<div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1" style="width: 541px;">
-												<!-- picturefill: full manual control -->
-												<picture>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
-													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
-												</picture>
-											</div>
-											<div class="swiper-slide swiper-slide-duplicate-prev" data-swiper-slide-index="2" style="width: 541px;">
-												<!-- picturefill: full manual control -->
-												<picture>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
-													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
-												</picture>
-											</div>
-										<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 541px;">
-												<!-- picturefill: full manual control -->
-												<picture>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
-													<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
-													<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
-												</picture>
-											</div></div>
-										<!-- Slider pagination -->
-										<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
-									<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-								</div>
-							</div>
-							<div class="position-relative">
-								<div class="social-box">
-									<div class="social-heading d-flex align-items-center mt-md-2 mt-lg-1 mb-4 mb-lg-5">
-										<i class="icon icon-facebook"></i>
-										<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">FACEBOOK</span>
-									</div>
-									<ul class="facebook-list list-unstyled mb-0">
-										<li>
-											<div>
-												<time class="d-block text-uppercase font-weight-bold" datetime="2019-09-03">3 sept. 2019</time>
-												<p>Les examens de seconde session du domaine de la musique se déroule du 2 au 5 septembre….</p>
-												<a class="read-more d-inline-flex align-items-center text-light text-uppercase font-weight-bold" href="#">LIRE LA SUITE</a>
-											</div>
-										</li>
-										<li>
-											<div>
-												<time class="d-block text-uppercase font-weight-bold" datetime="2019-08-26">26 Août 2019</time>
-												<p>Félicitations à Wim Matheeuwese et Cément Monaux (Clem Monaux), étudiants au Conservatoire royal …</p>
-												<a class="read-more d-inline-flex align-items-center text-light text-uppercase font-weight-bold" href="#">LIRE LA SUITE</a>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
+        <template id="layout_footer" name="Horizon Responsive Layout Footer">
+        	<!-- footer of the page -->
+			<footer id="footer" class="text-center">
+				<div class="container">
+					<div class="footer-inner d-md-flex align-items-md-center justify-content-md-between d-lg-block">
+						<!-- footer links -->
+						<ul class="footer-links list-unstyled d-flex flex-wrap align-items-center justify-content-between text-uppercase font-weight-bold">
+							<li>
+								<a href="#">Crlg.be</a>
+							</li>
+							<li>
+								<a href="#">FACEBOOK</a>
+							</li>
+							<li>
+								<a href="#">INSTAGRAM</a>
+							</li>
+						</ul>
+						<!-- copyright -->
+						<div class="copyright text-uppercase font-weight-bold">
+							<p class="mb-0">© 2019 Crlg.be — politique de confidentialité</p>
 						</div>
 					</div>
 				</div>
-            </t>
+			</footer>
         </template>
         
+        <template id="layout" name="Horizon Responsive Layout">
+        	<t t-call="website_horizon_responsive.layout_container">
+	    	<body class="dashboard">
+	                <div id="wrapper" class="d-flex position-relative">
+	            		<div class="w1 d-flex flex-column w-100">
+	            			<!-- page background -->
+	            			<div class="bg-image position-fixed">
+	            				<!-- picturefill: full manual control -->
+	            				<picture>
+	            					<source srcset="/website_horizon_responsive/static/src/img/home-bg-small.jpg, /website_horizon_responsive/static/src/img/home-bg-small@2x.jpg 2x" media="(max-width: 767px)"/>
+	            					<source srcset="/website_horizon_responsive/static/src/img/home-bg-middle.jpg, /website_horizon_responsive/static/src/img/home-bg-middle@2x.jpg 2x" media="(max-width: 1024px)"/>
+	            					<source srcset="/website_horizon_responsive/static/src/img/dashbord-bg-large.jpg, /website_horizon_responsive/static/src/img/dashbord-bg-large@2x.jpg 2x"/>
+	            					<img src="/website_horizon_responsive/static/src/img/dashbord-bg-large.jpg" alt="image description"/>
+	            				</picture>
+	            			</div>
+	            			<!-- header of the page -->
+	            			<header id="header">
+	            				<div class="inner d-flex align-items-center">
+	            					<div class="back-link mr-auto">
+	            						<a class="d-inline-flex align-items-center text-white text-uppercase font-weight-bold" href="/responsive/">
+	            							<i class="icon icon-arrow-right d-inline-block"></i>
+	            							<span>ACCUEIL</span>
+	            						</a>
+	            					</div>
+	            					<!-- header navigation -->
+	            					<ul id="nav" class="list-unstyled d-flex align-items-center justify-content-lg-end text-uppercase font-weight-bold mb-0">
+	            						<li class="d-none d-lg-inline-block">
+	            							<a href="#">
+	            								<img src="/website_horizon_responsive/static/src/img/logo-horizontal-white.svg" alt="Conservatoire royal de Liège"/>
+	            							</a>
+	            						</li>
+	            						<li class="d-none d-lg-inline-block">
+	            							<a href="/web">Horizon 1.0</a>
+	            						</li>
+	            						<li class="ml-auto ml-lg-0">
+	            							<a href="/web/session/logout">
+	            								<i class="icon icon-power"></i>
+	            							</a>
+	            						</li>
+	            					</ul>
+	            				</div>
+	            			</header>
+	            			<!-- contain main informative part of the site -->
+	            			<main id="main" class="d-flex flex-column flex-lg-row w-100">
+	            				<!-- contain sidebar of the page -->
+	            				<aside id="aside-left" class="profile-mod">
+	            					<!-- user area -->
+	            					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
+	            						<div class="order-1 order-lg-0 entry-meta pr-2">
+	            							<h4 class="text-truncate"><t t-esc="user.name"/></h4>
+	            							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="/responsive/profile">VOIR mon PROFIL</a>
+	            						</div>
+	            						<figure class="avatar rounded-circle">
+	            							<a href="#">
+	            								<!-- picturefill: full manual control -->
+	            								<picture>
+	            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
+	            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
+	            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)"/>
+	            									<img t-att-src="'/web/image/res.users/%s/image_small' % (user.id)" alt="image description" width="62" height="62"/>
+	            								</picture>
+	            							</a>
+	            						</figure>
+	            					</div>
+	            					<!-- aside navigation -->
+	            					<nav class="aside-nav d-none d-lg-block">
+	            						<ul id="aside-nav" class="list-unstyled text-uppercase font-weight-bold mb-0">
+	            							<li>
+	            								<a class="d-flex align-items-center" href="/responsive/blocs">
+	            									<i class="icon icon-program"></i>
+	            									<span class="position-relative">programme annuel</span>
+	            								</a>
+	            							</li>
+	            							<li>
+	            								<a class="d-flex align-items-center" href="/responsive/bookings">
+	            									<i class="icon icon-event-create"></i>
+	            									<span class="position-relative">BOOKING</span>
+	            								</a>
+	            							</li>
+	            						</ul>
+	            					</nav>
+	            				</aside>
+	            				<!-- contain the main content of the page -->
+	            				<t t-raw="0"/>
+	            			</main>
+	            			<t t-call="website_horizon_responsive.layout_footer">
+	            		</div>
+	            	</div>
+	            </body>
+	          </t>
+        </template>
+        
+        <template id="index" name="Horizon Responsive Index" page="True">
+        	<t t-call="website_horizon_responsive.layout_container">
+        	<body class="dashboard white-mod">
+				<!-- main container of all the page elements -->
+				<div id="wrapper" class="d-flex position-relative">
+					<div class="w1 d-flex flex-column w-100">
+						<!-- page background -->
+						<div class="bg-image position-fixed d-none d-lg-block">
+							<!-- picturefill: full manual control -->
+							<picture>
+								<source srcset="images/dashbord-white-bg.jpg, images/dashbord-white-bg@2x.jpg 2x">
+								<img src="images/dashbord-white-bg.jpg" alt="image description">
+							</picture>
+						</div>
+						<!-- header of the page -->
+						<header id="header">
+							<div class="inner">
+								<!-- header navigation -->
+								<ul id="nav" class="list-unstyled d-flex align-items-center justify-content-lg-end text-uppercase font-weight-bold mb-0">
+									<li class="d-none d-lg-inline-block">
+            							<a href="#">
+            								<img src="/website_horizon_responsive/static/src/img/logo-horizontal-white.svg" alt="Conservatoire royal de Liège"/>
+            							</a>
+            						</li>
+            						<li class="d-none d-lg-inline-block">
+            							<a href="/web">Horizon 1.0</a>
+            						</li>
+            						<li class="ml-auto ml-lg-0">
+            							<a href="/web/session/logout">
+            								<i class="icon icon-power"></i>
+            							</a>
+            						</li>
+								</ul>
+							</div>
+						</header>
+						<!-- contain main informative part of the site -->
+						<main id="main" class="d-flex flex-column flex-lg-row w-100">
+							<!-- contain sidebar of the page -->
+							<aside id="aside-left" class="profile-mod">
+            					<!-- user area -->
+            					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
+            						<div class="order-1 order-lg-0 entry-meta pr-2">
+            							<h4 class="text-truncate"><t t-esc="user.name"/></h4>
+            							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="/responsive/profile">VOIR mon PROFIL</a>
+            						</div>
+            						<figure class="avatar rounded-circle">
+            							<a href="#">
+            								<!-- picturefill: full manual control -->
+            								<picture>
+            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
+            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
+            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)"/>
+            									<img t-att-src="'/web/image/res.users/%s/image_small' % (user.id)" alt="image description" width="62" height="62"/>
+            								</picture>
+            							</a>
+            						</figure>
+            					</div>
+            					<!-- aside navigation -->
+            					<nav class="aside-nav d-none d-lg-block">
+            						<ul id="aside-nav" class="list-unstyled text-uppercase font-weight-bold mb-0">
+            							<li>
+            								<a class="d-flex align-items-center" href="/responsive/blocs">
+            									<i class="icon icon-program"></i>
+            									<span class="position-relative">programme annuel</span>
+            								</a>
+            							</li>
+            							<li>
+            								<a class="d-flex align-items-center" href="/responsive/bookings">
+            									<i class="icon icon-event-create"></i>
+            									<span class="position-relative">BOOKING</span>
+            								</a>
+            							</li>
+            						</ul>
+            					</nav>
+            				</aside>
+							<!-- contain the main content of the page -->
+							<div id="content" class="ml-lg-auto">
+								<div class="content-body">
+									<h1 class="d-none d-lg-block">Actualités</h1>
+									<div class="social-block d-md-flex flex-wrap">
+										<div class="position-relative">
+											<div class="social-box">
+												<div class="social-heading d-flex align-items-center mb-4 mb-md-5 pl-lg-1">
+													<i class="icon icon-instagram"></i>
+													<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">INSTRAGRAM</span>
+												</div>
+												<!-- Slider main container -->
+												<div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+													<!-- Additional required wrapper -->
+													<div class="swiper-wrapper" style="transform: translate3d(-541px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style="width: 541px;">
+															<!-- picturefill: full manual control -->
+															<picture>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
+																<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
+															</picture>
+														</div>
+														<!-- Slides -->
+														<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 541px;">
+															<!-- picturefill: full manual control -->
+															<picture>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
+																<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
+															</picture>
+														</div>
+														<div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1" style="width: 541px;">
+															<!-- picturefill: full manual control -->
+															<picture>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
+																<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
+															</picture>
+														</div>
+														<div class="swiper-slide swiper-slide-duplicate-prev" data-swiper-slide-index="2" style="width: 541px;">
+															<!-- picturefill: full manual control -->
+															<picture>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
+																<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
+															</picture>
+														</div>
+													<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 541px;">
+															<!-- picturefill: full manual control -->
+															<picture>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img-small.jpg, /website_horizon_responsive/static/src/img/instagram-img-small@2x.jpg 2x" media="(max-width: 767px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x" media="(max-width: 1024px)"/>
+																<source srcset="/website_horizon_responsive/static/src/img/instagram-img.jpg, /website_horizon_responsive/static/src/img/instagram-img@2x.jpg 2x"/>
+																<img src="/website_horizon_responsive/static/src/img/instagram-img.jpg" alt="image description"/>
+															</picture>
+														</div></div>
+													<!-- Slider pagination -->
+													<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
+												<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+											</div>
+										</div>
+										<div class="position-relative">
+											<div class="social-box">
+												<div class="social-heading d-flex align-items-center mt-md-2 mt-lg-1 mb-4 mb-lg-5">
+													<i class="icon icon-facebook"></i>
+													<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">FACEBOOK</span>
+												</div>
+												<ul class="facebook-list list-unstyled mb-0">
+													<li>
+														<div>
+															<time class="d-block text-uppercase font-weight-bold" datetime="2019-09-03">3 sept. 2019</time>
+															<p>Les examens de seconde session du domaine de la musique se déroule du 2 au 5 septembre….</p>
+															<a class="read-more d-inline-flex align-items-center text-light text-uppercase font-weight-bold" href="#">LIRE LA SUITE</a>
+														</div>
+													</li>
+													<li>
+														<div>
+															<time class="d-block text-uppercase font-weight-bold" datetime="2019-08-26">26 Août 2019</time>
+															<p>Félicitations à Wim Matheeuwese et Cément Monaux (Clem Monaux), étudiants au Conservatoire royal …</p>
+															<a class="read-more d-inline-flex align-items-center text-light text-uppercase font-weight-bold" href="#">LIRE LA SUITE</a>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</main>
+						<t t-call="website_horizon_responsive.layout_footer">
+					</div>
+				</div>
+			</body>
+			</t>
+        </template>
         
         <template id="profile" name="Horizon Responsive Profile" page="True">
             <t t-call="website_horizon_responsive.layout">
