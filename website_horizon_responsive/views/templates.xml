@@ -173,8 +173,8 @@
 						<div class="bg-image position-fixed d-none d-lg-block">
 							<!-- picturefill: full manual control -->
 							<picture>
-								<source srcset="images/dashbord-white-bg.jpg, images/dashbord-white-bg@2x.jpg 2x">
-								<img src="images/dashbord-white-bg.jpg" alt="image description">
+								<source srcset="/website_horizon_responsive/static/src/img/dashbord-white-bg.jpg, /website_horizon_responsive/static/src/img/dashbord-white-bg@2x.jpg 2x">
+								<img src="/website_horizon_responsive/static/src/img/dashbord-white-bg.jpg" alt="image description"/>
 							</picture>
 						</div>
 						<!-- header of the page -->
