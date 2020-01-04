@@ -187,7 +187,7 @@
             								<img src="/website_horizon_responsive/static/src/img/logo-horizontal.svg" alt="Conservatoire royal de Liège"/>
             							</a>
             						</li>
-            						<li class="d-none d-lg-inline-block">
+            						<li>
             							<a href="/web">Horizon 1.0</a>
             						</li>
             						<li class="ml-auto ml-lg-0">
@@ -201,12 +201,12 @@
 						<!-- contain main informative part of the site -->
 						<main id="main" class="d-flex flex-column flex-lg-row w-100">
 							<!-- contain sidebar of the page -->
-							<aside id="aside-left" class="profile-mod">
+							<aside id="aside-left">
             					<!-- user area -->
-            					<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
-            						<div class="order-1 order-lg-0 entry-meta pr-2">
+            					<div class="user-area d-flex">
+            						<div class="entry-meta pr-2">
             							<h4 class="text-truncate"><t t-esc="user.name"/></h4>
-            							<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="/responsive/profile">VOIR mon PROFIL</a>
+            							<a class="text-uppercase font-weight-bold" href="/responsive/profile">VOIR mon PROFIL</a>
             						</div>
             						<figure class="avatar rounded-circle">
             							<a href="#">
@@ -221,7 +221,7 @@
             						</figure>
             					</div>
             					<!-- aside navigation -->
-            					<nav class="aside-nav d-none d-lg-block">
+            					<nav class="aside-nav">
             						<ul id="aside-nav" class="list-unstyled text-uppercase font-weight-bold mb-0">
             							<li>
             								<a class="d-flex align-items-center" href="/responsive/blocs">
