@@ -493,7 +493,6 @@
 							<li t-foreach="bookings_next" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3">
-										<span t-field="book.with_context(tz=book.date_tz).start" t-options="{'format': '%H:%M  '}" />
 										<t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
 									<span><t t-esc="book.room_id.name"/></span>
 									<i class="fa fa-trash d-inline-block"></i>
