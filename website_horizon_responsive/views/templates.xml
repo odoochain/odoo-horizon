@@ -481,7 +481,7 @@
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
 							<li t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
-									<span class="pr-3"><t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
+									<span class="pr-3"><span t-field="book.start" t-field-options='{"format": "HH:mm "}'/><span class="mx-1">›</span>  <span t-field="book.stop" t-field-options='{"format": "HH:mm "}'/></span>
 									<span><t t-esc="book.room_id.name"/></span>
 									<i class="fa fa-trash d-inline-block"></i>
 								</div>
@@ -493,7 +493,7 @@
 							<li t-foreach="bookings_next" t-as="book">
 								<div class="d-flex justify-content-between">
 									<span class="pr-3">
-										<t t-esc="datetime.datetime.strptime(book.start, '%Y-%m-%d %H:%M:%S').strftime('%H:%M  ')"/><span class="mx-1">›</span>  <t t-esc="datetime.datetime.strptime(book.stop, '%Y-%m-%d %H:%M:%S').strftime('  %H:%M')"/></span>
+									<span class="pr-3"><span t-field="book.start" t-field-options='{"format": "HH:mm "}'/><span class="mx-1">›</span>  <span t-field="book.stop" t-field-options='{"format": "HH:mm "}'/></span>
 									<span><t t-esc="book.room_id.name"/></span>
 									<i class="fa fa-trash d-inline-block"></i>
 								</div>
