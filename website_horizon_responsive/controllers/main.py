@@ -89,11 +89,14 @@ class BookingController(http.Controller):
             ('stop', '>=', fields.Datetime.to_string(datetime.today() + timedelta(days=1))),
             ('user_id','=',request.uid),
         ]
+        _logger.info(domain)
+        _logger.info(domain_next)
         values = {
             'user': request.env.user,
             'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True, 'tz':request.env.user.tz}).search(domain,event_fields,order='start asc'),
             'bookings_next': request.env['calendar.event'].sudo().with_context({'virtual_id': True,'tz':request.env.user.tz}).search(domain_next,event_fields,order='start asc'),
         }
+        _logger.info(values)
         return request.render('website_horizon_responsive.bookings', values)
         
     # @http.route('/booking/category', type='json', auth='public', website=True)
