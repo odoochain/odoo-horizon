@@ -386,7 +386,7 @@
     						</li>
     					</ul>
     					<div class="d-flex justify-content-center d-lg-block">
-    						<a class="btn btn btn-outline-info" href="#" role="button">Signaler une erreur</a>
+    						<a class="btn btn btn-outline-info" t-att-href="'mailto:info@crlg.be?subject=Erreur dans les données de %s' % user.name" role="button">Signaler une erreur</a>
     					</div>
     				</div>
     			</div>
