@@ -569,7 +569,7 @@
 					<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 					<title>HerveJungblut</title>
 					<!-- include google fonts -->
-					<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&display=swap" rel="stylesheet"/>
+					<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet"/>
 					<!-- include the site stylesheet -->
 					<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/bootstrap.css"/>
 					<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
