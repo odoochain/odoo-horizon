@@ -629,7 +629,7 @@
                     					<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                     					<input type="hidden" name="redirect" value="http%3A%2F%2Fhorizon-dev.student-crlg.be%2Fresponsive"/>
 										<div class="form-group">
-											<input id="login" name="login" class="form-control" type="email" placeholder="Email"/>
+											<input id="login" name="login" placeholder="Email"/>
 										</div>
 										<div class="form-group">
 											<div class="input-group">
