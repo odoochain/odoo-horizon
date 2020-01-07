@@ -556,5 +556,115 @@
 				</div>
     		</t>
     	</template>
+    	
+    	
+    	<template id="login_layout" inherit_id="web.login_layout" name="Horizon Responsive Login">
+            <xpath expr="//div[@class='row']" position="replace">
+            <t t-set="body_classname" t-value="'home'"/>
+            <t t-call="web.layout">
+                <t t-set="head">
+                    <link rel="stylesheet" href="/web/static/lib/bootstrap/css/bootstrap.css"/>
+                    <link rel="stylesheet" href="/web/static/lib/fontawesome/css/font-awesome.css"/>
+                    <!--Import MDL css-->
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+                    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-pink.min.css" />
+                    <link rel="stylesheet" href="/school_login_screen/static/css/school_login_screen.css"/>
+                    
+                    <script src="/web/static/lib/jquery/jquery.js" type="text/javascript"/>
+                    <!--Import MDL js-->
+                    <script type="text/javascript" src="/school_login_screen/static/lib/mdl/material.js"></script>
+                    <script type="text/javascript" src="/school_login_screen/static/lib/mdl/textfields.js"></script>
+                    
+                    <script type="text/javascript" src="/school_login_screen/static/js/announcements.js"></script>
+                    
+                    <script>
+                      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+                    
+                      ga('create', 'UA-46482925-6', 'auto');
+                      ga('send', 'pageview');
+                    
+                    </script>
+                    
+                    <script>
+                      $(document).ready(function(){
+                        $("#toggle_login_form_div").click(function(){
+                            $("#login_form_div").toggle();
+                        });
+                      });
+                    </script>
+                </t>
+                <!-- main container of all the page elements -->
+				<div id="wrapper" class="d-flex position-relative">
+					<div class="w1 d-flex flex-column w-100">
+						<!-- page background -->
+						<div class="bg-image position-fixed">
+							<!-- picturefill: full manual control -->
+							<picture>
+								<source srcset="/website_horizon_responsive/static/src/img/home-bg-small.jpg, /website_horizon_responsive/static/src/img/home-bg-small@2x.jpg 2x" media="(max-width: 767px)">
+								<source srcset="/website_horizon_responsive/static/src/img/home-bg-middle.jpg, /website_horizon_responsive/static/src/img/home-bg-middle@2x.jpg 2x" media="(max-width: 1024px)">
+								<source srcset="/website_horizon_responsive/static/src/img/home-bg-large.jpg, /website_horizon_responsive/static/src/img/home-bg-large@2x.jpg 2x">
+								<img src="/website_horizon_responsive/static/src/img/home-bg-middle.jpg" alt="">
+							</picture>
+						</div>
+						<!-- header of the page -->
+						<header id="header" class="text-center pt-3 pt-lg-7 pt-xl-8 mt-auto">
+							<div class="container">
+								<!-- page logo -->
+								<figure class="logo text-uppercase mb-5 pb-1">
+									<a class="d-inline-flex flex-column text-white" href="http://www.crlg.be/">
+										<img src="/website_horizon_responsive/static/src/img/logo.svg" alt="Conservatoire royal de Liège">
+										<figcaption class="d-inline-block pt-2 mt-4">Conservatoire royal de Liège</figcaption>
+									</a>
+								</figure>
+							</div>
+						</header>
+						<!-- contain main informative part of the site -->
+						<main id="main" class="mb-lg-auto">
+							<div class="container">
+								<div class="login-block text-center mx-auto pb-2 pb-lg-0">
+									<a class="btn btn-primary btn-icon w-100 mb-4" t-att-href="p['auth_link'].replace('http%3A%2F%2F','https%3A%2F%2F').replace('%252Fweb%22%2C','%252Fresponsive%22%2C')" role="button">
+										<i class="icon icon-google"></i>
+										<span>Se connecter avec Google</span>
+									</a>
+									<span class="hr-text d-flex align-items-center font-weight-bold mb-4">ou</span>
+									<!-- sign up form -->
+									<form role="form" t-attf-action="/web/login{{ '?debug' if debug else '' }}" method="post" onsubmit="this.action = this.action + location.hash">
+                    					<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+										<div class="form-group">
+											<input id="login" name="login" class="form-control" type="email" placeholder="Email">
+										</div>
+										<div class="form-group">
+											<div class="input-group">
+												<input name="password" id="password" class="form-control" type="password" placeholder="Mot de passe">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														<i class="icon icon-locked"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<input class="btn btn-primary btn-block" type="submit" value="Se connecter">
+										</div>
+									</form>
+								</div>
+							</div>
+						</main>
+						<!-- footer of the page -->
+						<footer id="footer" class="text-center">
+							<div class="container">
+								<div class="text-white">
+									<p class="mb-0">HORIZON V1.0</p>
+								</div>
+							</div>
+						</footer>
+					</div>
+				</div>
+            </t>
+            </xpath>
+        </template>
     </data>
 </openerp>
