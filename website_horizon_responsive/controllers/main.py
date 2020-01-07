@@ -91,8 +91,8 @@ class BookingController(http.Controller):
         ]
         values = {
             'user': request.env.user,
-            'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,event_fields,order='start asc'),
-            'bookings_next': request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain_next,event_fields,order='start asc'),
+            'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True, tz=self.env.user.tz}).search(domain,event_fields,order='start asc'),
+            'bookings_next': request.env['calendar.event'].sudo().with_context({'virtual_id': True, tz=self.env.user.tz}).search(domain_next,event_fields,order='start asc'),
         }
         return request.render('website_horizon_responsive.bookings', values)
         
