@@ -76,7 +76,7 @@ class BookingController(http.Controller):
     
     @http.route('/responsive/bookings', type='http', auth='user', website=True)
     def responsive_bookings(self, debug=False, **k):
-        start = fields.Datetime.to_string(datetime.today())
+        start = fields.Datetime.to_string(datetime.today().replace(hour=0, minute=0, second=0))
         end = fields.Datetime.to_string(datetime.today().replace(hour=23, minute=59, second=59))
         event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
         domain = [
@@ -86,17 +86,14 @@ class BookingController(http.Controller):
         ]
         domain_next = [
             ('start', '<=', fields.Datetime.to_string(datetime.today().replace(hour=23, minute=59, second=59) + timedelta(days=1))),
-            ('stop', '>=', fields.Datetime.to_string(datetime.today() + timedelta(days=1))),
+            ('stop', '>=', fields.Datetime.to_string(datetime.today().replace(hour=0, minute=0, second=0) + timedelta(days=1))),
             ('user_id','=',request.uid),
         ]
-        _logger.info(domain)
-        _logger.info(domain_next)
         values = {
             'user': request.env.user,
             'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True, 'tz':request.env.user.tz}).search(domain,event_fields,order='start asc'),
             'bookings_next': request.env['calendar.event'].sudo().with_context({'virtual_id': True,'tz':request.env.user.tz}).search(domain_next,event_fields,order='start asc'),
         }
-        _logger.info(values)
         return request.render('website_horizon_responsive.bookings', values)
         
     # @http.route('/booking/category', type='json', auth='public', website=True)
