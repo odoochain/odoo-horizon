@@ -1342,6 +1342,7 @@ a.float-link i {
 		max-width: 23%;
 		-webkit-box-flex: 0;
 		-ms-flex: 0 0 23%;
+		text-align: right;
 		flex: 0 0 23%;
 	}
 

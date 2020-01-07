@@ -29,7 +29,7 @@
                 	<meta charset="utf-8"/>
                 	<!-- set the viewport width and initial-scale on mobile devices -->
                 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-                	<title>HerveJungblut</title>
+                	<title>Horizon</title>
                 	<!-- include google fonts -->
                 	<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet"/>
                 	<!-- include the site stylesheet -->
@@ -53,13 +53,13 @@
 						<!-- footer links -->
 						<ul class="footer-links list-unstyled d-flex flex-wrap align-items-center justify-content-between text-uppercase font-weight-bold">
 							<li>
-								<a href="#">Crlg.be</a>
+								<a href="http://www.crlg.be/">Crlg.be</a>
 							</li>
 							<li>
-								<a href="#">FACEBOOK</a>
+								<a href="https://www.facebook.com/ConservatoireLiege/">FACEBOOK</a>
 							</li>
 							<li>
-								<a href="#">INSTAGRAM</a>
+								<a href="https://www.instagram.com/conservatoireroyalliege/">INSTAGRAM</a>
 							</li>
 						</ul>
 						<!-- copyright -->
@@ -386,7 +386,7 @@
     						</li>
     					</ul>
     					<div class="d-flex justify-content-center d-lg-block">
-    						<a class="btn btn btn-outline-info" t-att-href="'mailto:info@crlg.be?subject=Erreur dans le profil de %s' % user.name" role="button">Signaler une erreur</a>
+    						<a class="btn btn btn-outline-info" t-att-href="'mailto:info@crlg.be?subject=Erreur dans le profil de %s' % user.name" target="new" role="button">Signaler une erreur</a>
     					</div>
     				</div>
     			</div>
