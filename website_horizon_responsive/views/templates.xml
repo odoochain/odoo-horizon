@@ -358,7 +358,7 @@
 							<header id="header">
 								<div class="inner d-flex align-items-center">
 									<div class="back-link mr-auto">
-										<a class="d-inline-flex align-items-center text-white text-uppercase font-weight-bold" href="#">
+										<a class="d-inline-flex align-items-center text-white text-uppercase font-weight-bold" href="/responsive/">
 											<i class="icon icon-arrow-right d-inline-block"></i>
 											<span>ACCUEIL</span>
 										</a>
