@@ -258,22 +258,7 @@
 													<i class="icon icon-facebook"></i>
 													<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">FACEBOOK</span>
 												</div>
-												<ul class="facebook-list list-unstyled mb-0">
-													<li>
-														<div>
-															<time class="d-block text-uppercase font-weight-bold" datetime="2019-09-03">3 sept. 2019</time>
-															<p>Les examens de seconde session du domaine de la musique se déroule du 2 au 5 septembre….</p>
-															<a class="read-more d-inline-flex align-items-center text-light text-uppercase font-weight-bold" href="#">LIRE LA SUITE</a>
-														</div>
-													</li>
-													<li>
-														<div>
-															<time class="d-block text-uppercase font-weight-bold" datetime="2019-08-26">26 Août 2019</time>
-															<p>Félicitations à Wim Matheeuwese et Cément Monaux (Clem Monaux), étudiants au Conservatoire royal …</p>
-															<a class="read-more d-inline-flex align-items-center text-light text-uppercase font-weight-bold" href="#">LIRE LA SUITE</a>
-														</div>
-													</li>
-												</ul>
+												<rssapp-wall id="vEJDwqucJtMFQkQv"></rssapp-wall><script src="https://widget.rss.app/v1/wall.js" type="text/javascript" async=""></script>
 											</div>
 										</div>
 									</div>
