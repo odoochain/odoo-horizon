@@ -116,7 +116,7 @@
 	            			<!-- contain main informative part of the site -->
 	            			<main id="main" class="d-flex flex-column flex-lg-row w-100">
 	            				<!-- contain sidebar of the page -->
-	            				<aside id="aside-left" t-att-class="add_class">
+	            				<aside id="aside-left" class="d-none d-lg-block">
 	            					<!-- user area -->
 	            					<div t-att-class="add_class + 'user-area d-flex flex-column flex-lg-row mx-auto mx-lg-0' if add_class else 'user-area d-flex flex-column flex-lg-row mx-auto mx-lg-0'">
 	            						<div class="order-1 order-lg-0 entry-meta pr-2">
@@ -201,7 +201,7 @@
 						<!-- contain main informative part of the site -->
 						<main id="main" class="d-flex flex-column flex-lg-row w-100">
 							<!-- contain sidebar of the page -->
-							<aside id="aside-left" class="d-none d-lg-block">>
+							<aside id="aside-left">
             					<!-- user area -->
             					<div class="user-area d-flex">
             						<div class="entry-meta pr-2">
