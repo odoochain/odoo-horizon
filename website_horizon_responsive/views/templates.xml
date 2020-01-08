@@ -467,7 +467,7 @@
 				    						</li>
 				    					</ul>
 				    					<div class="d-flex justify-content-center d-lg-block">
-				    						<a class="btn btn btn-outline-info" t-att-href="'mailto:info@crlg.be?subject=Erreur dans le profil de %s' % user.name" target="new" role="button">Signaler une erreur</a>
+				    						<a class="btn btn btn-outline-info" t-att-href="'mailto:erreur.profil@crlg.be?subject=Erreur dans le profil de %s' % user.name" target="new" role="button">Signaler une erreur</a>
 				    					</div>
 				    				</div>
 				    			</div>
