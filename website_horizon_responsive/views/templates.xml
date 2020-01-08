@@ -201,7 +201,7 @@
 						<!-- contain main informative part of the site -->
 						<main id="main" class="d-flex flex-column flex-lg-row w-100">
 							<!-- contain sidebar of the page -->
-							<aside id="aside-left">
+							<aside id="aside-left" class="d-none d-lg-block">>
             					<!-- user area -->
             					<div class="user-area d-flex">
             						<div class="entry-meta pr-2">
