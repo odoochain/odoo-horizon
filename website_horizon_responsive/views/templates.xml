@@ -98,7 +98,7 @@
 	            					<!-- header navigation -->
 	            					<ul id="nav" class="list-unstyled d-flex align-items-center justify-content-lg-end text-uppercase font-weight-bold mb-0">
 	            						<li class="d-none d-lg-inline-block">
-	            							<a href="#">
+	            							<a href="http://www.crlg.be/">
 	            								<img src="/website_horizon_responsive/static/src/img/logo-horizontal-white.svg" alt="Conservatoire royal de Liège"/>
 	            							</a>
 	            						</li>
@@ -389,7 +389,7 @@
 									<div class="user-area profile-mod d-flex flex-column flex-lg-row mx-auto mx-lg-0">
 										<div class="order-1 order-lg-0 entry-meta pr-2">
 											<h4 class="text-truncate">Hervé Jungblut</h4>
-											<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="#">VOIR mon PROFIL</a>
+											<a class="d-none d-lg-inline-block text-uppercase font-weight-bold" href="/responsive/profile">VOIR mon PROFIL</a>
 										</div>
 										<figure class="avatar rounded-circle">
 											<a href="#">
@@ -547,7 +547,9 @@
 												<span class="d-block"><t t-esc="course.weight"/></span>
 											</li>
 											<li class="d-none d-md-block">
-												<span class="d-block"><t t-esc="course.second_session_result_disp"/></span>
+												<span class="d-block" t-if="not course.first_session_result and not course.second_session_result">-</span>
+												<span class="d-block" t-if="course.first_session_result and not course.second_session_result"><t t-esc="course.first_session_result_disp"/></span>
+												<span class="d-block" t-if="course.second_session_result"><t t-esc="course.second_session_result_disp"/></span>
 											</li>
 										</ul>
 									</div>
