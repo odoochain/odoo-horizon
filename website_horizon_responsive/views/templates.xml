@@ -449,7 +449,11 @@
 											<span class="d-block"><t t-esc="course_group.ue_id"/></span>
 										</li>
 										<li>
-											<span class="d-block"><t t-esc="course_group.title"/></span>
+											<span class="d-block">
+												<a class="link" t-att-href="'/course_group/%s' % course.source_course_group_id.id">
+													<t t-esc="course_group.title"/>
+												</a>
+											</span>
 										</li>
 										<li>
 											<span class="d-block"><t t-esc="course_group.total_credits"/></span>
