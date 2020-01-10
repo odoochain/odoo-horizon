@@ -450,7 +450,7 @@
 										</li>
 										<li>
 											<span class="d-block">
-												<a class="link" t-att-href="'/course_group/%s' % course.source_course_group_id.id">
+												<a class="link" t-att-href="'/course_group/%s' % course_group.source_course_group_id.id">
 													<t t-esc="course_group.title"/>
 												</a>
 											</span>
