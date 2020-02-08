@@ -100,7 +100,7 @@ class BookingController(http.Controller):
     def responsive_delete_booking(self, booking_id, debug=False, **k):
         booking = request.env['calendar.event'].browse(booking_id)
         booking.unlink()
-        return request.redirect('/responsive/bookings')
+        return werkzeug.utils.redirect.redirect('/responsive/bookings')
         
     # @http.route('/booking/category', type='json', auth='public', website=True)
     # def booking_category(self, id=False, debug=False, **k):
