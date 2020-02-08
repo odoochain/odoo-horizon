@@ -97,7 +97,7 @@ class BookingController(http.Controller):
         return request.render('website_horizon_responsive.bookings', values)
         
     @http.route('/responsive/delete/<int:booking_id>', type='http', auth='user', website=True)
-    def responsive_delete_booking(self, debug=False, **k):
+    def responsive_delete_booking(self, booking_id, debug=False, **k):
         booking = request.env['calendar.event'].browse(booking_id)
         booking.unlink()
         return request.redirect('/responsive/bookings')
