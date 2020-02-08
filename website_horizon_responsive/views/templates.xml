@@ -514,7 +514,7 @@
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><span t-field="book.start" t-field-options='{"format": "HH:mm "}'/><span class="mx-1">›</span>  <span t-field="book.stop" t-field-options='{"format": "HH:mm "}'/></span>
 									<span><t t-esc="book.room_id.name"/></span>
-									<i class="fa fa-trash d-inline-block"></i>
+									<a href="#"><i class="fa fa-trash d-inline-block"></i></a>
 								</div>
 							</li>
 						</ul>
@@ -525,7 +525,7 @@
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><span t-field="book.start" t-field-options='{"format": "HH:mm "}'/><span class="mx-1">›</span>  <span t-field="book.stop" t-field-options='{"format": "HH:mm "}'/></span>
 									<span><t t-esc="book.room_id.name"/></span>
-									<i class="fa fa-trash d-inline-block"></i>
+									<a t-att-href="'/responsive/delete/%s' % book.id"><i class="fa fa-trash d-inline-block"></i></a>
 								</div>
 							</li>
 						</ul>

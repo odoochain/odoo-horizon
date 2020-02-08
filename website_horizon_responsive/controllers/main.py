@@ -96,6 +96,12 @@ class BookingController(http.Controller):
         }
         return request.render('website_horizon_responsive.bookings', values)
         
+    @http.route('/responsive/delete/<int:booking_id>', type='http', auth='user', website=True)
+    def responsive_bookings(self, debug=False, **k):
+        booking = request.env['calendar.event'].browse(booking_id)
+        booking.unlink()
+        return request.redirect('/responsive/bookings')"
+        
     # @http.route('/booking/category', type='json', auth='public', website=True)
     # def booking_category(self, id=False, debug=False, **k):
     #     return request.env['school.asset.category'].sudo().search_read([('id', '=', id)],['name','display_name','sequence','parent_id','is_leaf'])
