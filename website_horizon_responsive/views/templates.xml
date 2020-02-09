@@ -486,11 +486,11 @@
 											<li class="d-none d-md-block">
 												<span class="d-block"><t t-esc="course.weight"/></span>
 											</li>
-											<li class="d-none d-md-block">
+											<!--<li class="d-none d-md-block">
 												<span class="d-block" t-if="not course.first_session_result and not course.second_session_result">-</span>
 												<span class="d-block" t-if="course.first_session_result and not course.second_session_result"><t t-esc="course.first_session_result_disp"/></span>
 												<span class="d-block" t-if="course.second_session_result"><t t-esc="course.second_session_result_disp"/></span>
-											</li>
+											</li>-->
 										</ul>
 									</div>
 								</li>
