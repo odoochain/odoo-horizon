@@ -46,7 +46,7 @@ $(document).ready(function(){
             for(var idx in list) {
                 var li = list[idx];
                 $('#booking-list').append(
-                  "<li><div class='d-flex justify-content-between'><span class='pr-3'>"+moment(li.start).hours()+":"+moment(li.start).minutes()+"<span class='mx-1'>›</span>"+moment(li.stop).hours()+":"+moment(li.stop).minutes()+"</span><span>"+li.name+"</span><span>"+li.room_id[1]+"</span></div></li>"
+                  "<li><div class='d-flex justify-content-between'><span class='pr-3'>"+moment(li.start).format('HH:mm')+"<span class='mx-1'>›</span>"+moment(li.stop).format('HH:mm')+"</span><span>"+li.name+"</span><span>"+li.room_id[1]+"</span></div></li>"
                 );
             }    
          },
