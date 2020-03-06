@@ -42,25 +42,13 @@ $(document).ready(function(){
           success: function( result ) {
             console.log(result);
             $('.mobile_list').empty()
-            $('.mobile_list').append(
-              $("<option></option>")
-                .attr("value",0)
-                .text('Selectionnez un local...')
-            );
-            var rooms = result.result;
-            if(rooms.length > 0) {
-                $('#room').removeAttr( "disabled" )
-                for(var room_idx in rooms) {
-                    var room = rooms[room_idx];
-                    $('#room').append(
-                      $("<option></option>")
-                        .attr("value",room.id)
-                        .text(room.name)
-                    );
-                }    
-            } else {
-                $('#room').addAttr( "disabled", true);
-            }
+            var list = result.result;
+            for(var idx in list) {
+                var li = list[idx];
+                $('.mobile_list').append(
+                  "<li><div class='d-flex justify-content-between'><span class='pr-3'>10:00<span class='mx-1'>›</span>11:00</span><span>TEST</span><span>A021</span></div></li>"
+                );
+            }    
          },
         });
     });
