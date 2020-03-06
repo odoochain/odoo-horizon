@@ -558,16 +558,18 @@
 										<button type="button" id="tomorrow" class="form-control input-sm input-font-lg text-center"><t t-esc="(datetime.datetime.today() + datetime.timedelta(days=1)).strftime('%d / %m  ')"/></button>
 									</div>
 									<input id="day" type="hidden" value="0"/>
+									<input id="today" type="hidden" t-att-value="today"/>
+									<input id="tomorrow" type="hidden" t-att-value="tomorrow"/>
 								</div>
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex">
+								<div class="col-12">
 									<div class="form-group mr-4 ml-md-auto ml-lg-0">
-										<input id="query" type="text" data-length="30" class="invalid form-control no-appearance time-select input-sm input-font-lg text-center"/>
+										<input id="query" type="text" data-length="30" class="form-control no-appearance time-select input-lg input-font-lg"/>
 									</div>
 									<script type="text/javascript" src="/website_horizon_responsive/static/src/js/booking-search.js"></script>
 								</div>
 							</div>
 							<div class="form-group pt-3">
-								<button type="button" id="request-booking" class="btn btn-danger" disabled="">Rechercher</button>
+								<button type="button" id="search-booking" class="btn btn-danger">Rechercher</button>
 							</div>
 						</form>
 					</div>
