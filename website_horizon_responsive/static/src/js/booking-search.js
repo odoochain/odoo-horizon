@@ -58,7 +58,6 @@ $(document).ready(function(){
             } else {
                 $('#room').addAttr( "disabled", true);
             }
-          }
-        });
-    }
+          });
+    });
 }
