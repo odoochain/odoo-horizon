@@ -1,5 +1,6 @@
+/* global $ */
+
 $(document).ready(function(){
-    
     
     $('#today').on('click',function() {
         $('#today').addClass("bg-danger border border-danger border-0")
@@ -58,6 +59,7 @@ $(document).ready(function(){
             } else {
                 $('#room').addAttr( "disabled", true);
             }
+         },
         });
     });
 });
