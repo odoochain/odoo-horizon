@@ -74,6 +74,15 @@ class BookingController(http.Controller):
         }
         return request.render('website_horizon_responsive.booking_new', values)
     
+    @http.route('/responsive/booking_search', type='http', auth='user', website=True)
+    def responsive_booking_search(self, debug=False, **k):
+        values = {
+            'user': request.env.user,
+            'today' : fields.Datetime.to_string(datetime.today()),
+            'tomorrow' : fields.Datetime.to_string(datetime.today() + timedelta(days=1))
+        }
+        return request.render('website_horizon_responsive.booking_search', values)
+    
     @http.route('/responsive/bookings', type='http', auth='user', website=True)
     def responsive_bookings(self, debug=False, **k):
         start = fields.Datetime.to_string(datetime.today().replace(hour=0, minute=0, second=0))
