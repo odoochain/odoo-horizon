@@ -571,7 +571,7 @@
 							</div>
 						</form>
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3 mt-4">RESULTATS</span>
-						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
+						<ul id="booking-list" class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
 						</ul>
 					</div>
 				</div>

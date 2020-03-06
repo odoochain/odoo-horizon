@@ -41,11 +41,11 @@ $(document).ready(function(){
           }),
           success: function( result ) {
             console.log(result);
-            $('.mobile_list').empty()
+            $('#booking-list').empty()
             var list = result.result;
             for(var idx in list) {
                 var li = list[idx];
-                $('.mobile_list').append(
+                $('#booking-list').append(
                   "<li><div class='d-flex justify-content-between'><span class='pr-3'>10:00<span class='mx-1'>›</span>11:00</span><span>TEST</span><span>A021</span></div></li>"
                 );
             }    
