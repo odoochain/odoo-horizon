@@ -544,6 +544,43 @@
     			
     			<div id="content" class="ml-lg-auto">
 					<div class="content-body">
+						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING SEARCH</span>
+						<form action="#" class="pt-4 pt-lg-2 mt-4 mt-lg-5">
+							<div class="form-row mb-4 mb-md-5 mb-lg-4">
+								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex pr-md-6 mb-4 mb-md-0 mb-lg-4 mb-xl-0">
+									<div class="form-group mr-4">
+										<label class="d-block text-uppercase font-weight-bold">Aujourd'hui</label>
+										<button id="today" class="form-control input-sm input-font-lg text-center bg-danger border border-danger border-0" type="button"><t t-esc="datetime.datetime.today().strftime('%d / %m  ')"/></button>
+									</div>
+									<div class="form-group">
+										<label class="d-block text-uppercase font-weight-bold">demain</label>
+										<button type="button" id="tomorrow" class="form-control input-sm input-font-lg text-center"><t t-esc="(datetime.datetime.today() + datetime.timedelta(days=1)).strftime('%d / %m  ')"/></button>
+									</div>
+									<input id="day" type="hidden" value="0"/>
+								</div>
+								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex">
+									<div class="form-group mr-4 ml-md-auto ml-lg-0">
+										<input id="query" type="text" data-length="30" class="invalid form-control no-appearance time-select input-sm input-font-lg text-center"/>
+									</div>
+									<script type="text/javascript" src="/website_horizon_responsive/static/src/js/booking-search.js"></script>
+								</div>
+							</div>
+							<div class="form-group pt-3">
+								<button type="button" id="request-booking" class="btn btn-danger" disabled="">Rechercher</button>
+							</div>
+						</form>
+					</div>
+				</div>
+    		</t>
+    	</template>
+    	
+    	<template id="booking_new" name="Horizon Responsive Bookings" page="True">
+    		<t t-call="website_horizon_responsive.layout">
+    			<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
+    			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
+    			
+    			<div id="content" class="ml-lg-auto">
+					<div class="content-body">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
 						<h2 class="mb-0 mb-2 mb-lg-1">Réserver une salle</h2>
 						<a href="http://www.crlg.be/locaux/" class="float-link d-inline-flex align-items-center text-info text-uppercase font-weight-bold pt-1 pb-1">VOIR LE rêglement <i class="icon icon-arrow-right"></i></a>
