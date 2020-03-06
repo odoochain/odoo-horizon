@@ -570,13 +570,8 @@
 								<button type="button" id="search-booking" class="btn btn-danger">Rechercher</button>
 							</div>
 						</form>
+						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">RESTULTAT</span>
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
-							<li>
-								<div class="d-flex justify-content-between">
-									<span class="pr-3"><span>16:00 </span><span class="mx-1">›</span>  <span>17:00 </span></span>
-									<span>A021</span>
-								</div>
-							</li>
 						</ul>
 					</div>
 				</div>
