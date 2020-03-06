@@ -18,7 +18,7 @@ $(document).ready(function(){
         var self = this;
         var query = $('#query').attr('value');
         var day = $('#day').attr('value');
-        var start = moment().local().set('hour',0).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var start = moment().local().set('hour',0).set('minutes',0).set('seconds',0).set('milliseconds',0);
         var stop = moment().local().set('hour',23).set('minutes',59).set('seconds',59).set('milliseconds',0);
         if( day == 1 ) {
             start.add(1, 'days');
