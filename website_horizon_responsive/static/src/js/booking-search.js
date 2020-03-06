@@ -41,8 +41,8 @@ $(document).ready(function(){
           }),
           success: function( result ) {
             console.log(result);
-            $('#room').empty().html(' ');
-            $('#room').append(
+            $('.mobile_list').empty()
+            $('.mobile_list').append(
               $("<option></option>")
                 .attr("value",0)
                 .text('Selectionnez un local...')
