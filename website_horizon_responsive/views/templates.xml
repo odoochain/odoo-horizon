@@ -252,7 +252,7 @@
 													<i class="icon icon-instagram"></i>
 													<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">DERNIERS POSTS</span>
 												</div>
-												<iframe src="//rss.bloople.net/?url=http%3A%2F%2Fwww.crlg.be%2Ffeed%2F&amp;showtitle=false&amp;type=html" style="height: 580px;"></iframe>			
+												<div id="crlg_news"></div>			
 											</div>
 										</div>
 										<div class="position-relative">
