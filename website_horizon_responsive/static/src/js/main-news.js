@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    const RSS_URL = `https://www.crlg.be/feed/`;
+    const RSS_URL = `https://horizon-dev.student-crlg.be/feed/feed.xml`;
 
     $.ajax(RSS_URL, {
       accepts: {
