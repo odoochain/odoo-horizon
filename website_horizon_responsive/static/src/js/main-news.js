@@ -14,10 +14,6 @@ $(document).ready(function(){
           .each(function() {
             const el = $(this);
     
-            const content = el.find("content:encoded").text();
-            
-            
-    
             const template = `
               <article class='mb-4'>
                 <h6>
