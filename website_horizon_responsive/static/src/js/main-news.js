@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    const RSS_URL = `http://www.crlg.be/feed/`;
+    const RSS_URL = `https://www.crlg.be/feed/`;
 
     $.ajax(RSS_URL, {
       accepts: {
