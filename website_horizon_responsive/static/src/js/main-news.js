@@ -1,0 +1,35 @@
+$(document).ready(function(){
+    const RSS_URL = `http://www.crlg.be/feed/`;
+
+    $.ajax(RSS_URL, {
+      accepts: {
+        xml: "application/rss+xml"
+      },
+    
+      dataType: "xml",
+    
+      success: function(data) {
+        $(data)
+          .find("item")
+          .each(function() {
+            const el = $(this);
+    
+            const template = `
+              <article>
+                <img src="${el.find("link").text()}/image/large.png" alt="">
+                <h2>
+                  <a href="${el
+                    .find("link")
+                    .text()}" target="_blank" rel="noopener">
+                    ${el.find("title").text()}
+                  </a>
+                </h2>
+              </article>
+            `;
+    
+            $('#crlg_news').append(template);
+          });
+      }
+    });
+      
+});

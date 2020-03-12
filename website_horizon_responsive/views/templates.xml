@@ -168,6 +168,7 @@
         	<body class="dashboard white-mod">
                 <div id="fb-root"></div>
 				<script async="" defer="" crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&amp;version=v5.0&amp;appId=1417714111648418"></script>
+				<script async="" defer="" crossorigin="anonymous" src="/website_horizon_responsive/static/src/js/main-news.js"></script>
 				<!-- main container of all the page elements -->
 				<div id="wrapper" class="d-flex position-relative">
 					<div class="w1 d-flex flex-column w-100">
