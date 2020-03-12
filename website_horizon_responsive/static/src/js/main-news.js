@@ -14,16 +14,21 @@ $(document).ready(function(){
           .each(function() {
             const el = $(this);
     
+            const content = el.find("content:encoded").text();
+            
+            
+    
             const template = `
               <article>
-                <img src="${el.find("link").text()}/image/large.png" alt="">
-                <h2>
+                <img src="${$($.parseHTML(el.find('content\\:encoded').text())).find('img').attr('src')}" alt="">
+                <h6>
                   <a href="${el
                     .find("link")
                     .text()}" target="_blank" rel="noopener">
                     ${el.find("title").text()}
                   </a>
-                </h2>
+                </h6>
+                <span>${el.find("description").text()}</span>
               </article>
             `;
     
