@@ -19,8 +19,7 @@ $(document).ready(function(){
             
     
             const template = `
-              <article>
-                <img src="${$($.parseHTML(el.find('content\\:encoded').text())).find('img').attr('src')}" alt="">
+              <article class='mb-4'>
                 <h6>
                   <a href="${el
                     .find("link")
@@ -28,6 +27,7 @@ $(document).ready(function(){
                     ${el.find("title").text()}
                   </a>
                 </h6>
+                <img src="${$($.parseHTML(el.find('content\\:encoded').text())).find('img').attr('src')}" alt="" class='mb-2'>
                 <span>${el.find("description").text()}</span>
               </article>
             `;
