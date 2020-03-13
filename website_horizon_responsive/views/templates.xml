@@ -252,7 +252,7 @@
 													<i class="icon icon-instagram"></i>
 													<span class="d-flex align-items-center text-light text-uppercase font-weight-bold">DERNIERS POSTS</span>
 												</div>
-												<div id="crlg_news"></div>			
+												<div id="crlg_news" class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-width: 300px; max-height: 575px;"></div>			
 											</div>
 										</div>
 										<div class="position-relative">
