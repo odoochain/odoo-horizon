@@ -43,12 +43,18 @@ $(document).ready(function(){
             console.log(result);
             $('#booking-list').empty()
             var list = result.result;
-            for(var idx in list) {
-                var li = list[idx];
+            if(list.length > 0) {
+                for(var idx in list) {
+                    var li = list[idx];
+                    $('#booking-list').append(
+                      "<li><div class='d-flex justify-content-between'><span class='pr-3'>"+moment.utc(li.start).local().format("HH:mm")+"<span class='mx-1'>›</span>"+moment.utc(li.stop).local().format("HH:mm")+"</span><span>"+li.name+"</span><span>"+li.room_id[1]+"</span></div></li>"
+                    );
+                }
+            } else {
                 $('#booking-list').append(
-                  "<li><div class='d-flex justify-content-between'><span class='pr-3'>"+moment.utc(li.start).local().format("HH:mm")+"<span class='mx-1'>›</span>"+moment.utc(li.stop).local().format("HH:mm")+"</span><span>"+li.name+"</span><span>"+li.room_id[1]+"</span></div></li>"
+                      "<li>Pas de résultat.</li>"
                 );
-            }    
+            }
          },
         });
     });
