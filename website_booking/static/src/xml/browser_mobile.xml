@@ -6,19 +6,19 @@
             <footer class="page-footer mobile_footer cyan darken-2">
                 <div class="container">
                     <div class="row">
-                        <div class="col s2" align="center">
+                        <div class="col s3" align="center">
                             <a id="editor" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">add_alarm</i></a>
                         </div>
-                        <div class="col s2" align="center">
+                        <div class="col s3" align="center">
                             <a id="search" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">search</i></a>
                         </div>
-                        <div class="col s2" align="center">
+                        <!--<div class="col s3" align="center">
                             <a id="desktop" class="btn-floating btn waves-effect waves-light cyan darken-1" href="/booking?#category_id=16" target="_blank"><i class="material-icons">desktop_windows</i></a>
-                        </div>
-                        <div class="col s2" align="center">
+                        </div>-->
+                        <div class="col s3" align="center">
                             <a id="covid" class="btn-floating btn waves-effect waves-light red darken-1" href="/covid" target="_blank"><i class="material-icons">bug_report</i></a>
                         </div>
-                        <div class="col s2" align="center">
+                        <div class="col s3" align="center">
                             <a id="logout" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">lock_outline</i></a>
                         </div>
                     </div>
