@@ -119,8 +119,19 @@
                     </nav>
                 </header>
                 <div class="container mobile_form" style="margin-top:10px;">
-                    <div class="card-panel teal">
+                    <div class="card-panel cyan">
                         <span class="white-text">Le Conservatoire est en train de préparer une application en vue de communiquer de manière plus efficace pendant la période de confinement.</span>
+                    </div>
+                    <div class="card-panel">
+                        <div class="input-field col s12">
+                            <select>
+                              <option value="" disabled selected>Sélectionnez votre réponse</option>
+                              <option value="1">Aucune</option>
+                              <option value="2">Quelques difficultés</option>
+                              <option value="3">Beaucoup de difficultés</option>
+                            </select>
+                            <label>Avez-vous des difficultés à vous alimenter normalement ?</label>
+                        </div>
                     </div>
                 </div>
             </t>
