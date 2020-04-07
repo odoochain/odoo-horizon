@@ -43,7 +43,7 @@ class BookingLoginController(Home):
 class BookingController(http.Controller):
     
     @http.route('/covid', type='http', auth='public', website=True)
-    def booking_browser(self, debug=False, **k):
+    def covid_tool(self, debug=False, **k):
         return request.render('website_booking.covid')
 
     @http.route('/booking', type='http', auth='public', website=True)
