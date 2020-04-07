@@ -108,6 +108,9 @@
                     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
                     <!--Import materialize.css-->
                     <link type="text/css" rel="stylesheet" href="/website_booking/static/lib/materialize/css/materialize.css"  media="screen,projection"/>
+                    <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+                    <script type="text/javascript" src="/web/static/lib/jquery.ui/jquery-ui.js"></script>
+                    <script type="text/javascript" src="/web/static/lib/jquery/jquery.browser.js"></script>
                     <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
                 </t>
                 <header class="mobile_header">
@@ -129,7 +132,7 @@
                           <option value="2">Quelques difficultés</option>
                           <option value="3">Beaucoup de difficultés</option>
                         </select>
-                        <label>Avez-vous des difficultés à vous alimenter normalement ?</label>
+                        <label>Eprouvez-vous des difficultés à vous alimenter normalement ?</label>
                     </div>
                 </div>
                 <script>
