@@ -94,5 +94,38 @@
                 </t>
             </t>
         </template>
+        
+        <template id="covid" name="Covid Mobile" page="True">
+            <t t-call="web.layout">
+                <t t-set="head">
+                    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+                    <meta name="format-detection" content="telephone=no"/>
+                    <meta name="msapplication-tap-highlight" content="no"/>
+
+                    <t t-call-assets="website_booking.assets"/>
+                    
+                    <!--Import Google Icon Font-->
+                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+                    <!--Import materialize.css-->
+                    <link type="text/css" rel="stylesheet" href="/website_booking/static/lib/materialize/css/materialize.css"  media="screen,projection"/>
+                    <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
+                </t>
+                <header class="mobile_header">
+                    <nav class="row cyan darken-2">
+                        <div class="nav-wrapper">
+                            <img style="margin: 0 10px 0 10px; vertical-align:middle;" src="/website_booking/static/src/img/logo.png"/>
+                            <a href="#" class="brand-logo">Suivi COVID-19/a>
+                        </div>
+                    </nav>
+                </header>
+                <div class="container mobile_form" style="margin-top:10px;">
+                    <div class="card-panel teal">
+                        <span class="white-text">Le Conservatoire est en train de préparer une application en vue de communiquer de manière plus efficace pendant la période de confinement.</span>
+                    </div>
+                </div>
+            </t>
+        </template>
+        
+        
     </data>
 </openerp>
