@@ -126,8 +126,8 @@
                         <span class="white-text">Le Conservatoire est en train de préparer une application en vue de communiquer de manière plus efficace pendant la période de confinement.</span>
                     </div>
                     <div class="card-panel">
+                        <label>Eprouvez-vous des difficultés à vous alimenter normalement ?</label>
                         <div class="input-field">
-                            <label>Eprouvez-vous des difficultés à vous alimenter normalement ?</label>
                             <select>
                               <option value="" disabled="" selected="">Sélectionnez votre réponse</option>
                               <option value="1">Aucune</option>
