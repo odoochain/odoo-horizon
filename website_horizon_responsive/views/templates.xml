@@ -480,6 +480,9 @@
 									<div class="slide w-100 js-acc-hidden">
 										<ul class="ul-slide-row d-flex list-unstyled mb-0" t-foreach="course_group.course_ids" t-as="course">
 											<li>
+												<span class="d-block"><p/></span>
+											</li>
+											<li>
 												<span class="d-inline-block">
 													<a class="link" t-att-href="'/course/%s' % course.source_course_id.id"><t t-esc="course.title"/><span>›</span></a>
 												</span>
