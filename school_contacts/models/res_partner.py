@@ -41,10 +41,9 @@ class Partner(models.Model):
     
     nationality_id = fields.Many2one("res.country", "Nationality")
     
-    @api.one
     @api.constrains('initials')
     def _check_initials(self):
-        _logger.info('Chech here !!')
+        self.ensure_one()
         if self.initials and not re.match('([A-Z]\.,)*([A-Z]\.)?',self.initials):
             raise UserError(_("Please encode initials as eg X.,V.,T."))
     
