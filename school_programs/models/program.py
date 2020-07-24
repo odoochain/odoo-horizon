@@ -413,4 +413,4 @@ class Users(models.Model):
         self.SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
         self.SELF_READABLE_FIELDS.extend(['current_year_id'])
     
-    current_year_id = fields.Many2one('school.year', string="Current Year", required=True, ondelete="set null")
+    current_year_id = fields.Many2one('school.year', string="Current Year", required=True, ondelete="restrict")
