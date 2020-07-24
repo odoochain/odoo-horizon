@@ -46,7 +46,6 @@
             <field name="name">Cycles</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">school.cycle</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
         
@@ -84,7 +83,6 @@
             <field name="name">Specialities</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">school.speciality</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
         
