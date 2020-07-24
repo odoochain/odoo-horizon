@@ -96,8 +96,6 @@ class Program(models.Model):
     year_id = fields.Many2one('school.year', required=True, string="Year")
     
     description = fields.Text(string='Description')
-        
-    competency_ids = fields.Many2many('school.competency','school_competency_program_rel', id1='program_id', id2='competency_id', string='Competencies', ondelete='set null')
     
     cycle_id = fields.Many2one('school.cycle', string='Cycle', required=True, domain=[('type', '!=', False)])
     
@@ -112,7 +110,6 @@ class Program(models.Model):
     notes = fields.Text(string='Notes')
     
     bloc_ids = fields.One2many('school.bloc', 'program_id', string='Blocs', copy=True)
-    
     course_group_ids = fields.One2many('school.course_group', string='Courses Groups',compute='_compute_course_group_ids')
     
     @api.one
@@ -364,24 +361,6 @@ class ReportProgram(models.AbstractModel):
         }
         return self.env['report'].render('school.report_program', docargs)
 
-class Competency(models.Model):
-    '''Competency'''
-    _order = 'name'
-    _name = 'school.competency'
-    _order = 'sequence asc'
-    sequence = fields.Integer(string='Sequence')
-    description = fields.Text(string='Description')
-    
-    program_ids = fields.Many2many('school.program','school_competency_program_rel', id1='competency_id', id2='program_id', string='Programs', ondelete='set null')
-    
-class Domain(models.Model):
-    '''Domain'''
-    _order = 'name'
-    _name = 'school.domain'
-    name = fields.Char(required=True, string='Name', size=40)
-    description = fields.Text(string='Description')
-    long_name = fields.Char(required=True, string='Long Name', size=40)
-    
 class Cycle(models.Model):
     '''Cycle'''
     _order = 'name'
@@ -396,6 +375,14 @@ class Cycle(models.Model):
             ('short', 'Short'),
         ], string='Type')
     grade = fields.Char(required=True, string='Grade', size=60)
+
+class Domain(models.Model):
+    '''Domain'''
+    _order = 'name'
+    _name = 'school.domain'
+    name = fields.Char(required=True, string='Name', size=40)
+    description = fields.Text(string='Description')
+    long_name = fields.Char(required=True, string='Long Name', size=40)
     
 class Section(models.Model):
     '''Section'''
@@ -424,20 +411,6 @@ class Speciality(models.Model):
     _sql_constraints = [
 	        ('uniq_speciality', 'unique(domain_id, name)', 'There shall be only one speciality in a domain'),
     ]
-    
-#    def init(self, cr):
-#        """ School Specialities View """
-#        tools.drop_view_if_exists(cr, 'school_speciality_view')
-#        cr.execute(""" 
-#            create view school_speciality_view as select 
-#                s.id, 
-#                s.name as speciality, 
-#                d.name as domain, 
-#                c.name as section, 
-#                t.name as track 
-#                from school_speciality s, school_domain d, school_section c, school_track t 
-#                where s.domain_id = d.id and s.section_id = c.id and s.track_id = t.id
-#        )""")
     
 class Year(models.Model):
     '''Year'''

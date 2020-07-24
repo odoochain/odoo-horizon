@@ -18,7 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import res_partner
 from . import program
 from . import individual_program
-from . import course_session
