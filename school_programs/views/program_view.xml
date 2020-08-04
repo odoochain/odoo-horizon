@@ -576,33 +576,32 @@
         <kanban class="o_program_kanban" default_group_by="speciality_id">
           <field name="title" />
           <templates>
-            <div style="position: relative">
-              <div class="oe_module_vignette">
-                <div class="row">
-                  <div class="col-3">
-                    BL-<field name="id"/>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_global_click o_program_kanban">
+                <div class="o_kanban_card_header">
+                  <div class="o_kanban_card_header_title">
+                    <div class="o_primary">
+                      <strong><field name="name" /></strong>
+                    </div>
                   </div>
-                  <div class="col-9">
-                      <field name="name"/>
+                  <div class="container o_kanban_card_content o_visible">
+                    <div class="row">
+                      <div class="col-xs-6 o_kanban_primary_left">
+                        <b>Credits : </b>
+                        <field name="total_credits" />
+                      </div>
+                      <div class="col-xs-6">
+                        <b>Hours : </b>
+                        <field name="total_hours" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-6">
-                    Heures : <field name="total_hours"/>
-                  </div>
-                  <div class="col-6">
-                    ECTS : <field name="total_credits"/>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-9">
-                  </div>
-                  <div class="col-3">
-                      <button type="action" name="%(action_specific_bloc_form)d" class="oe_highlight btn btn-primary">Open</button>
-                  </div>
+                  <!--<div class="o_kanban_manage_button_section">
+                    <a class="o_kanban_manage_toggle_button" href="#">More <i class="fa fa-caret-down"/></a>
+                  </div>-->
                 </div>
               </div>
-            </div>
+            </t>
           </templates>
         </kanban>
       </field>
@@ -680,8 +679,8 @@
                                 <div class="row">
                                   <div class="col-9">
                                   </div>
-                                  <div class="col-3 o_kanban_button">
-                                      <button type="action" name="%(action_open_bloc)d" class="oe_highlight btn btn-primary">Open</button>
+                                  <div class="col-3">
+                                      <button type="action" name="%(action_specific_bloc_form)d" class="oe_highlight btn btn-primary">Open</button>
                                   </div>
                                 </div>
                               </div>
