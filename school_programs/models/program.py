@@ -200,6 +200,16 @@ class Bloc(models.Model):
     _sql_constraints = [
 	        ('uniq_bloc', 'unique(program_id, sequence)', 'There shall be only one bloc with a given sequence within a program'),
     ]
+    
+    def action_open_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _(self.name),
+            'res_model': 'school.bloc',
+            'res_id': self.id,
+            'view_mode': 'form',
+        }
 
 class CourseGroup(models.Model):
     '''Courses Group'''

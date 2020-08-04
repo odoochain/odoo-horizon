@@ -515,17 +515,6 @@
       </field>
     </record>
 
-    <record id="action_specific_bloc_form" model="ir.actions.act_window">
-      <field name="name">Bloc</field>
-      <field name="type">ir.actions.act_window</field>
-      <field name="res_model">school.bloc</field>
-      <field name="view_mode">form</field>
-      <field name="context">{
-            'default_bloc_id': active_id,
-            'bloc_id': active_id
-        }</field>
-    </record>
-
     <record id="action_bloc_form" model="ir.actions.act_window">
       <field name="name">Blocs</field>
       <field name="type">ir.actions.act_window</field>
@@ -680,7 +669,7 @@
                                   <div class="col-9">
                                   </div>
                                   <div class="col-3">
-                                      <button type="action" name="%(action_specific_bloc_form)d" class="oe_highlight btn btn-primary">Open</button>
+                                      <button type="object" name="action_open_form" class="oe_highlight btn btn-primary">Open</button>
                                   </div>
                                 </div>
                               </div>
