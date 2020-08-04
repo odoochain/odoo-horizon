@@ -367,6 +367,7 @@ class Speciality(models.Model):
             ('ecriture','Écritures et théorie musicale'),
             ('instrument','Formation instrumentale'),
             ('vocale','Formation vocale')
+            ('general','Cours généraux')
         ], string='Section')
         
     track = fields.Selection([
@@ -379,6 +380,7 @@ class Speciality(models.Model):
             ('formation','Formation musicale'),
             ('percussion','Percussions'),
             ('vents','Vents')
+            ('theatre','Formation théatrale')
         ], string='Option')
     
     _sql_constraints = [
