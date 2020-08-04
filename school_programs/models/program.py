@@ -366,7 +366,7 @@ class Speciality(models.Model):
             ('artdram','Art dramatique'),
             ('ecriture','Écritures et théorie musicale'),
             ('instrument','Formation instrumentale'),
-            ('vocale','Formation vocale')
+            ('vocale','Formation vocale'),
             ('general','Cours généraux')
         ], string='Section')
         
@@ -379,7 +379,7 @@ class Speciality(models.Model):
             ('direction','Direction'),
             ('formation','Formation musicale'),
             ('percussion','Percussions'),
-            ('vents','Vents')
+            ('vents','Vents'),
             ('theatre','Formation théatrale')
         ], string='Option')
     
