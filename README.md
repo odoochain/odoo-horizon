@@ -6,3 +6,5 @@ institutions d'études supérieures en Wallonie dans le cadre du Décret Paysage
 
 ## Description des modules
 
+Update to Odoo 13
+
