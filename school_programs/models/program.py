@@ -86,11 +86,16 @@ class Program(models.Model):
     
     title = fields.Char(required=True, string='Title')
     name = fields.Char(string='Name', compute='compute_name', store=True)
+    uid = fields.Char(string='UID', compute='compute_uid')
     
     @api.depends('title','year_id')
     def compute_name(self):
-        for course_g in self:
-            course_g.name = "%s - %s" % (course_g.year_id.short_name, course_g.title)
+        for prog in self:
+            prog.name = "%s - %s" % (prog.year_id.short_name, prog.title)
+            
+    def compute_uid(self):
+        for prog in self:
+            prog.uid = "prog-%s" % prog.id
     
     domain = fields.Selection([
             ('musique','Musique'),

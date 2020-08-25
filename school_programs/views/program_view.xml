@@ -629,7 +629,7 @@
                <field name="title"/>
               </h1>
               <span class="oe_fade">
-                  Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
+                  Id : <field name="uid"/>
               </span>
             </div>
             <group col="4">
