@@ -651,7 +651,7 @@
             </group>
             <field name="bloc_ids" context="{'default_program_id':active_id}">
               <kanban quick_create="false" create="true">
-                  <field name="id"/>
+                  <field name="uid"/>
                   <field name="name" />
                   <field name="total_hours" />
                   <field name="total_credits" />
@@ -660,12 +660,10 @@
                           <div style="position: relative">
                               <div class="oe_module_vignette">
                                 <div class="row">
-                                  <div class="col-3">
-                                      <field name="uid" />
-                                  </div>
-                                  <div class="col-9">
-                                      <field name="name"/>
-                                  </div>
+                                  <field name="uid" />
+                                </div>
+                                <div class="row">
+                                  <field name="name"/>
                                 </div>
                                 <div class="row">
                                   <div class="col-6">
