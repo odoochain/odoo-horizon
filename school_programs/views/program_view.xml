@@ -107,9 +107,10 @@
               <h1>
                <field name="name"/>
               </h1>
-              <span class="oe_fade">
-                <field name="uid"/>
-              </span>
+              <div class="oe_fade">
+                  <div>
+                  <span class="o_field_widget">Id :</span><field name="uid"/>
+              </div>
             </div>
             <group col="4">
               <field name="title" colspan="4"/>
@@ -283,9 +284,10 @@
               <h1>
                <field name="name"/>
               </h1>
-              <span class="oe_fade">
-                  Id : <field name="uid"/>
-              </span>
+              <div class="oe_fade">
+                  <div>
+                  <span class="o_field_widget">Id :</span><field name="uid"/>
+              </div>
             </div>
             <group col="4">
               <!--<field name="course_group_id" colspan="4" readonly="1"/>
@@ -468,9 +470,10 @@
               <h1>
                <field name="name"/>
               </h1>
-              <span class="oe_fade">
-                  Id : <field name="uid"/>
-              </span>
+              <div class="oe_fade">
+                  <div>
+                  <span class="o_field_widget">Id :</span><field name="uid"/>
+              </div>
             </div>
             <group col="4">
               <field name="title" colspan="4"/>
@@ -637,9 +640,10 @@
               <h1>
                <field name="title"/>
               </h1>
-              <span class="oe_fade">
-                  Id : <field name="uid"/>
-              </span>
+              <div class="oe_fade">
+                  <div>
+                  <span class="o_field_widget">Id :</span><field name="uid"/>
+              </div>
             </div>
             <group col="4">
               <field name="year_id" />
