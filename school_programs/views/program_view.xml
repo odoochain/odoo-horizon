@@ -108,7 +108,6 @@
                <field name="name"/>
               </h1>
               <div class="oe_fade">
-                  <div>
                   <span class="o_field_widget">Id :</span><field name="uid"/>
               </div>
             </div>
@@ -285,7 +284,6 @@
                <field name="name"/>
               </h1>
               <div class="oe_fade">
-                  <div>
                   <span class="o_field_widget">Id :</span><field name="uid"/>
               </div>
             </div>
@@ -471,7 +469,6 @@
                <field name="name"/>
               </h1>
               <div class="oe_fade">
-                  <div>
                   <span class="o_field_widget">Id :</span><field name="uid"/>
               </div>
             </div>
@@ -582,6 +579,7 @@
                 <div class="o_kanban_card_header">
                   <div class="o_kanban_card_header_title">
                     <div class="o_primary">
+                      <field name="uid"/><br/>
                       <strong><field name="name" /></strong>
                     </div>
                   </div>
@@ -641,7 +639,6 @@
                <field name="title"/>
               </h1>
               <div class="oe_fade">
-                  <div>
                   <span class="o_field_widget">Id :</span><field name="uid"/>
               </div>
             </div>
