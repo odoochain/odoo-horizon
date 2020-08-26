@@ -264,7 +264,7 @@ class CourseGroup(models.Model):
             
     def compute_uid(self):
         for cg in self:
-            cg.uid = "UE-%s" % cg.id
+            cg.uid = "ue-%s" % cg.id
             
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
@@ -297,7 +297,7 @@ class CourseGroup(models.Model):
     @api.model
     def name_search(self, name='', args=None, operator='ilike', limit=100):
         if name :
-                args = ['|'] + (args or []) + [('ue_id', 'ilike', name)]
+                args = ['|'] + (args or []) + [('uid', 'ilike', name)]
         return super(CourseGroup, self).name_search(name=name, args=args, operator=operator, limit=limit)
     
 class Course(models.Model):
