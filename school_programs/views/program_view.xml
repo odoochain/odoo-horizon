@@ -660,10 +660,14 @@
                           <div style="position: relative">
                               <div class="oe_module_vignette">
                                 <div class="row">
-                                  <field name="uid" />
+                                  <div class="col-12">
+                                    <field name="uid" />
+                                  </div>
                                 </div>
                                 <div class="row">
-                                  <field name="name"/>
+                                  <div class="col-12">
+                                    <field name="name"/>
+                                  </div>
                                 </div>
                                 <div class="row">
                                   <div class="col-6">
