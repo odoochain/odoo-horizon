@@ -86,12 +86,13 @@ class Program(models.Model):
     
     title = fields.Char(required=True, string='Title')
     name = fields.Char(string='Name', compute='compute_name', store=True)
-    uid = fields.Char(string='UID', compute='compute_uid')
     
     @api.depends('title','year_id')
     def compute_name(self):
         for prog in self:
             prog.name = "%s - %s" % (prog.year_id.short_name, prog.title)
+    
+    uid = fields.Char(string='UID', compute='compute_uid')
             
     def compute_uid(self):
         for prog in self:
@@ -201,6 +202,12 @@ class Bloc(models.Model):
     def compute_name(self):
         for bloc in self:
             bloc.name = "%s - %d" % (bloc.title,bloc.sequence)
+            
+    uid = fields.Char(string='UID', compute='compute_uid')
+            
+    def compute_uid(self):
+        for bloc in self:
+            bloc.uid = "bloc-%s" % bloc.id
 
     _sql_constraints = [
 	        ('uniq_bloc', 'unique(program_id, sequence)', 'There shall be only one bloc with a given sequence within a program'),
@@ -245,8 +252,6 @@ class CourseGroup(models.Model):
     
     name = fields.Char(string='Name', compute='compute_ue_name', store=True)
     
-    ue_id = fields.Char(string="UE Id", compute='compute_ue_name', store=True)
-    
     @api.depends('title','level')
     def compute_ue_name(self):
         for course_g in self:
@@ -254,7 +259,12 @@ class CourseGroup(models.Model):
                 course_g.name = "%s - %s" % (course_g.title, course_g.level)
             else:
                 course_g.name = course_g.title
-            course_g.ue_id = "UE-%s" % course_g.id
+            
+    uid = fields.Char(string='UID', compute='compute_uid')
+            
+    def compute_uid(self):
+        for cg in self:
+            cg.uid = "UE-%s" % cg.id
             
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
@@ -328,6 +338,12 @@ class Course(models.Model):
                 course.name = "%s - %s" % (course.title, course.level)
             else:
                 course.name = course.title
+                
+    uid = fields.Char(string='UID', compute='compute_uid')
+            
+    def compute_uid(self):
+        for c in self:
+            c.uid = "aa-%s" % c.id
     
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]")
     

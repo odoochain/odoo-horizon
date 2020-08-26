@@ -36,7 +36,7 @@
       <field name="arch" type="xml">
         <kanban class="o_course_group_kanban">
           <field name="name" />
-          <field name="ue_id" />
+          <field name="uid" />
           <templates>
             <t t-name="kanban-box">
               <div class="oe_kanban_global_click o_course_group_kanban">
@@ -45,7 +45,7 @@
                     <div class="o_primary">
                       <strong><field name="name" /></strong>
                     </div>
-                    <div class="o_secondary"><field name="ue_id" /></div>
+                    <div class="o_secondary"><field name="uid" /></div>
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
@@ -74,7 +74,7 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Course Group">
-          <field name="ue_id"/>
+          <field name="uid"/>
           <field name="name" />
           <field name="responsible_id"/>
           <field name="total_hours" />
@@ -107,9 +107,9 @@
               <h1>
                <field name="name"/>
               </h1>
-              <h3 class="oe_fade">
-                <field name="ue_id" class="oe_inline"/>
-              </h3>
+              <span class="oe_fade">
+                <field name="uid"/>
+              </span>
             </div>
             <group col="4">
               <field name="title" colspan="4"/>
@@ -256,6 +256,7 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Courses" create="0">
+          <field name="uid" />
           <field name="name" />
           <field name="hours" />
           <field name="credits" />
@@ -282,6 +283,9 @@
               <h1>
                <field name="name"/>
               </h1>
+              <span class="oe_fade">
+                  Id : <field name="uid"/>
+              </span>
             </div>
             <group col="4">
               <!--<field name="course_group_id" colspan="4" readonly="1"/>
@@ -444,6 +448,7 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Blocs">
+          <field name="uid" />
           <field name="name" />
           <field name="total_hours" />
           <field name="total_credits" />
@@ -463,6 +468,9 @@
               <h1>
                <field name="name"/>
               </h1>
+              <span class="oe_fade">
+                  Id : <field name="uid"/>
+              </span>
             </div>
             <group col="4">
               <field name="title" colspan="4"/>
@@ -563,6 +571,7 @@
       <field name="model">school.program</field>
       <field name="arch" type="xml">
         <kanban class="o_program_kanban" default_group_by="speciality_id">
+          <field name="uid"/>
           <field name="title" />
           <templates>
             <t t-name="kanban-box">
@@ -651,7 +660,7 @@
                               <div class="oe_module_vignette">
                                 <div class="row">
                                   <div class="col-3">
-                                    BL-<field name="id"/>
+                                      <field name="uid" />
                                   </div>
                                   <div class="col-9">
                                       <field name="name"/>
