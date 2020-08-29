@@ -129,7 +129,6 @@
                 <field name="hours" />
                 <field name="credits" />
                 <field name="weight" />
-                <button name="details" string="Details" class="oe_highlight"/>
               </tree>
             </field>
             <notebook>
@@ -491,6 +490,7 @@
                 <field name="total_hours" />
                 <field name="total_credits" />
                 <field name="total_weight" />
+                <button name="open" string="Open" class="oe_highlight"/>
               </tree>
             </field>
             <notebook>
