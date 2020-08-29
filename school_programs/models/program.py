@@ -299,6 +299,17 @@ class CourseGroup(models.Model):
         if name :
                 args = ['|'] + (args or []) + [('uid', 'ilike', name)]
         return super(CourseGroup, self).name_search(name=name, args=args, operator=operator, limit=limit)
+        
+        
+    def action_open_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _(self.name),
+            'res_model': 'school.course_group',
+            'res_id': self.id,
+            'view_mode': 'form',
+        }
     
 class Course(models.Model):
     '''Course'''
