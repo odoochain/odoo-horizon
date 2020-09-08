@@ -123,6 +123,7 @@ $(document).ready(function(){
         }
         var room = $('#room').val();
         var description  = $('#description').val();
+        var event_type = $('#event_type').val();
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -139,7 +140,7 @@ $(document).ready(function(){
                         start: start.toISOString().replace('T',' '),
                         stop: stop.toISOString().replace('T',' '),
                         room_id: room,
-                        categ_ids: [[4, 7]],
+                        categ_ids: [[4, event_type]],
                     }],
                     kwargs: {}
                 },

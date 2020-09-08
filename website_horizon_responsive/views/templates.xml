@@ -599,6 +599,9 @@
 						<h2 class="mb-0 mb-2 mb-lg-1">Réserver une salle</h2>
 						<a href="http://www.crlg.be/locaux/" class="float-link d-inline-flex align-items-center text-info text-uppercase font-weight-bold pt-1 pb-1">VOIR LE rêglement <i class="icon icon-arrow-right"></i></a>
 						<form action="#" class="pt-4 pt-lg-2 mt-4 mt-lg-5">
+							<input id="event_type" type="hidden" t-if="user.has_group('school_management.group_student')" t-att-value="6"/>
+							<input id="event_type" type="hidden" t-if="user.has_group('school_management.group_teacher')" t-att-value="7"/>
+							<input id="event_type" type="hidden" t-if="user.has_group('school_management.group_employee')" t-att-value="8"/>
 							<input id="description" type="hidden" t-att-value="user.name"/>
 							<div class="form-row mb-4 mb-md-5 mb-lg-4">
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex pr-md-6 mb-4 mb-md-0 mb-lg-4 mb-xl-0">
