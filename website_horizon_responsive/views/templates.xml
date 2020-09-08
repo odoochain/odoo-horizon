@@ -603,10 +603,6 @@
 							<input id="event_type" type="hidden" t-if="user.has_group('school_management.group_teacher')" t-att-value="7"/>
 							<input id="event_type" type="hidden" t-if="user.has_group('school_management.group_employee')" t-att-value="8"/>
 							<input id="description" type="hidden" t-att-value="user.name"/>
-							<!--<input id="event_type" type="hidden" t-if="user.in_group_15" t-att-value="7"/>
-							<input id="event_type" type="hidden" t-if="user.in_group_14" t-att-value="8"/>
-							<input id="event_type" type="hidden" t-if="user.in_group_16" t-att-value="6"/>-->
-							<input id="event_type" type="hidden" t-att-value="6"/>
 							<div class="form-row mb-4 mb-md-5 mb-lg-4">
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex pr-md-6 mb-4 mb-md-0 mb-lg-4 mb-xl-0">
 									<div class="form-group mr-4">
