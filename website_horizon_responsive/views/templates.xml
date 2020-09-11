@@ -471,7 +471,7 @@
 											<span class="d-block"><t t-esc="course_group.weight"/></span>
 										</li>
                                         <li>
-                                            <span class="d-block"><t t-esc="course_group.final_result"/></span>
+                                            <span class="d-block"><t t-if="display_results" t-esc="course_group.final_result"/></span>
                                         </li>
 									</ul>
 									<a class="opener" href="#">
@@ -498,8 +498,8 @@
 											</li>
 											<li>
 												<span class="d-block" t-if="not course.first_session_result and not course.second_session_result">-</span>
-												<span class="d-block" t-if="course.first_session_result and not course.second_session_result"><t t-esc="course.first_session_result_disp"/></span>
-												<span class="d-block" t-if="course.second_session_result"><t t-esc="course.second_session_result_disp"/></span>
+												<span class="d-block" t-if="course.first_session_result and not course.second_session_result"><t t-if="display_results" t-esc="course.first_session_result_disp"/></span>
+												<span class="d-block" t-if="course.second_session_result"><t t-if="display_results" t-esc="course.second_session_result_disp"/></span>
 											</li>
 										</ul>
 									</div>

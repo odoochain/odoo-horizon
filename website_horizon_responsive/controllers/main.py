@@ -62,11 +62,13 @@ class BookingController(http.Controller):
         values = {
             'user': request.env.user,
             'blocs': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)])
+            'display_results': self.env['ir.config_parameter'].sudo().get_param('school.display.results', 'False'),
         }
         return request.render('website_horizon_responsive.blocs', values)
     
     @http.route('/responsive/booking_new', type='http', auth='user', website=True)
     def responsive_booking_new(self, debug=False, **k):
+        
         values = {
             'user': request.env.user,
             'today' : fields.Datetime.to_string(datetime.today()),
