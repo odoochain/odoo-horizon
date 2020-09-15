@@ -38,7 +38,7 @@ _logger = logging.getLogger(__name__)
 class BookingLoginController(Home):
     
     @http.route('/responsive/login_providers', type='json', auth="none")
-    def booking_login(self, redirect=None, *args, **kw):
+    def booking_login_responsive(self, redirect=None, *args, **kw):
         return self.list_providers()
 
 class BookingController(http.Controller):
