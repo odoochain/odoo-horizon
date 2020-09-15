@@ -140,7 +140,7 @@ $(document).ready(function(){
                         start: start.toISOString().replace('T',' '),
                         stop: stop.toISOString().replace('T',' '),
                         room_id: room,
-                        categ_ids: [[4, event_type]],
+                        categ_ids: [[4, parseInt(event_type)]],
                     }],
                     kwargs: {}
                 },
