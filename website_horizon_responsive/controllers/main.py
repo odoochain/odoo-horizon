@@ -62,7 +62,7 @@ class BookingController(http.Controller):
         values = {
             'user': request.env.user,
             'blocs': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)]),
-            'display_results': request.env['ir.config_parameter'].sudo().get_param('school.display.results', 'False'),
+            'display_results': request.env['ir.config_parameter'].sudo().get_param('school.display.results', '0'),
         }
         return request.render('website_horizon_responsive.blocs', values)
     
