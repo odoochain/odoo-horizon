@@ -547,7 +547,10 @@ class IndividualCourseGroup(models.Model):
                     self.first_session_computed_exclusion_result_bool = True
             # Compute Second Session
             if ic.second_session_result_bool :
-                running_second_session_result += ic.second_session_result * ic.c_weight
+                if ic.second_session_result_bool :
+                    running_second_session_result += ic.second_session_result * ic.c_weight
+                else
+                    running_second_session_result += ic.first_session_result * ic.c_weight
                 self.second_session_computed_result_bool = True
                 if max(ic.first_session_result,ic.second_session_result) < 10 :
                     self.second_session_computed_exclusion_result_bool = True
