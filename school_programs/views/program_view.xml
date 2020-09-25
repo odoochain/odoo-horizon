@@ -493,46 +493,27 @@
                   <field name="total_credits" />
                   <templates>
                       <t t-name="kanban-box">
-                          <div style="position: relative">
-                              <div class="oe_module_vignette">
-                                <div class="row">
-                                  <div class="col-12">
-                                    <field name="uid" />
+                            <div style="position: relative;width:100%;">
+                                <div class="oe_module_vignette">
+                                  <div class="row">
+                                    <div class="col-2">
+                                      <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
+                                    </div>
+                                    <div class="col-6">
+                                      <field name="name"/>
+                                    </div>
+                                    <div class="col-2">
+                                      Heures : <field name="total_hours"/>
+                                    </div>
+                                    <div class="col-2">
+                                      ECTS : <field name="total_credits"/>
+                                    </div>
                                   </div>
                                 </div>
-                                <div class="row">
-                                  <div class="col-12">
-                                    <field name="name"/>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-6">
-                                    Heures : <field name="total_hours"/>
-                                  </div>
-                                  <div class="col-6">
-                                    ECTS : <field name="total_credits"/>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-9">
-                                  </div>
-                                  <div class="col-3">
-                                      <button type="object" name="action_open_form" class="oe_highlight btn btn-primary">Open</button>
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
-                      </t>
+                            </div>
+                        </t>
                   </templates>
               </kanban>
-              <!--<tree string="Course Groups">
-                <field name="uid" />
-                <field name="name" />
-                <field name="total_hours" />
-                <field name="total_credits" />
-                <field name="total_weight" />
-                <button name="open" string="Open" class="oe_highlight"/>
-              </tree>-->
             </field>
             <notebook>
               <page string="Description">
