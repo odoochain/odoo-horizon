@@ -46,7 +46,8 @@ class OfficialDocument(models.Model):
     @api.constrains('is_available_online')
     def _check_is_available_online_constrains(self):
         for record in self:
-            if not record.is_available :
-                raise ValidationError("Document %s not yet available, plus upload your document first." % record.name)
-            if not record.online_attachment_id :
-                raise ValidationError("No PDF document available on %s. Only PDF document can be available online, please upload one first." % record.name)
+            if record.is_available_online:
+                if not record.is_available :
+                    raise ValidationError("Document %s not yet available, plus upload your document first." % record.name)
+                if not record.online_attachment_id :
+                    raise ValidationError("No PDF document available on %s. Only PDF document can be available online, please upload one first." % record.name)
