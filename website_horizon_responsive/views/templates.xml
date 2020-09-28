@@ -756,9 +756,13 @@
     				<div class="content-body">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">DOCUMENTS</span>
 						<!-- accordion section -->
-						<section class="pt-md-1" t-foreach="online_attachment_ids" t-as="attach">
+						<section class="pt-md-1" t-foreach="online_attachment_ids" t-as="attachment">
 							<ul>
-								<li><t t-esc='attach.name'/></li>
+								<li>
+									<a t-attf-href="/web/content/#{attachment.id}?download=true&amp;access_token=#{attachment.access_token}">
+										<span t-esc="attachment.name" class="fa fa-download"/>
+									</a>
+								</li>
 							</ul>
 						</section>
 					</div>
