@@ -35,10 +35,10 @@ class OfficialDocument(models.Model):
     
     online_attachment_id = fields.Many2one(compute="_compute_online_attachment_id", store=True, readonly=False)
     
-    @api.depends('official_document_ids')
-    def _compute_analytic_account(self):
+    @api.depends('attachment_ids')
+    def _compute_online_attachment_id(self):
         for record in self:
-            for a in record.official_document_ids:
+            for a in record.attachment_ids:
                 if a.mimetype == 'application/pdf':
                     record.online_attachment_id = a
                     break
