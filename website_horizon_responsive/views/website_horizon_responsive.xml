@@ -50,6 +50,19 @@
                 </xpath>
             </field>
         </record>
+        
+        <!-- Add program for student form view -->
+        <record id="view_official_document_form_responsive" model="ir.ui.view">
+            <field name="name">school.official_document.form.responsive</field>
+            <field name="model">school.official_document</field>
+            <field name="inherit_id" ref="school_registration_documents.view_official_document_form" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='is_available']" position="after">
+                    <field name="is_available_online" />
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </openerp>
