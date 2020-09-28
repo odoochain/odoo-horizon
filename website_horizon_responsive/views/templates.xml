@@ -749,5 +749,21 @@
             </t>
             </xpath>
         </template>
+        
+        <template id="documents" name="Horizon Responsive Documents" page="True">
+            <t t-call="website_horizon_responsive.layout">
+                <div id="content" class="ml-lg-auto">
+    				<div class="content-body">
+						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">DOCUMENTS</span>
+						<!-- accordion section -->
+						<section class="pt-md-1" t-foreach="online_attachment_ids" t-as="attach">
+							<ul>
+								<li><t t-esc='attach.name'/></li>
+							</ul>
+						</section>
+					</div>
+    			</div>
+    		</t>
+    	</template>
     </data>
 </openerp>
