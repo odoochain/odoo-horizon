@@ -23,7 +23,7 @@ import logging
 from datetime import date
 
 from openerp import api, fields, models, _
-from openerp.exceptions import UserError
+from openerp.exceptions import UserError,ValidationError
 
 _logger = logging.getLogger(__name__)
 
