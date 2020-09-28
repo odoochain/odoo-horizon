@@ -33,7 +33,7 @@ class OfficialDocument(models.Model):
 
     is_available_online = fields.Boolean(string="Is Available Online", default=False)
     
-    online_attachment_id = fields.Many2one(compute="_compute_online_attachment_id", store=True, readonly=False)
+    online_attachment_id = fields.Many2one('ir.attachment', compute="_compute_online_attachment_id", store=True, readonly=False)
     
     @api.depends('attachment_ids')
     def _compute_online_attachment_id(self):
