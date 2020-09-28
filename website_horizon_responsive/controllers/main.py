@@ -120,6 +120,6 @@ class BookingController(http.Controller):
         partner_id = user.partner_id
         values = {
             'user': user,
-            'online_attachment_ids' : partner_id.official_document_ids.mapped('online_attachment_id')
+            'official_document_ids' : partner_id.official_document_ids
         }
         return request.render('website_horizon_responsive.documents', values)
