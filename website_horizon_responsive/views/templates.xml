@@ -766,10 +766,6 @@
 							<a t-att-href="'/report/pdf/school_management.report_attendance_for_student_content/%i' % bloc.id">
 								<span class="fa fa-download"><span style="padding:10px;">Fréquentation - <t  t-esc="bloc.name"/></span></span>
 							</a>
-							
-							<div>
-								<a class="btn btn-danger" t-att-href="'/report/pdf/school_management.report_attendance_for_student_content/%i' % doc.online_attachment_id.id">FEQUENTATION</a>
-							</div>
 						</section>
 					</div>
     			</div>
