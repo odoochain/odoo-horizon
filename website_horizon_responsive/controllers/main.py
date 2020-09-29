@@ -120,6 +120,7 @@ class BookingController(http.Controller):
         partner_id = user.partner_id
         values = {
             'user': user,
-            'official_document_ids' : partner_id.official_document_ids
+            'official_document_ids' : partner_id.official_document_ids,
+            'blocs' : request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)]),
         }
         return request.render('website_horizon_responsive.documents', values)

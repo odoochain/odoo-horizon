@@ -756,10 +756,20 @@
     				<div class="content-body">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">DOCUMENTS</span>
 						<!-- accordion section -->
-						<section class="pt-md-1" t-foreach="official_document_ids" t-as="doc" style=="">
+						<section class="pt-md-1" t-foreach="official_document_ids" t-as="doc">
 							<a t-att-href="'/web/content/%i?download=true' % doc.online_attachment_id.id">
 								<span class="fa fa-download"><span style="padding:10px;"><t  t-esc="doc.name"/></span></span>
 							</a>
+						</section>
+						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mt-3 mt-md-4 mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">ATTESTATIONS</span>
+						<section class="pt-md-1" t-foreach="blocs" t-as="bloc">
+							<a t-att-href="'/report/pdf/school_management.report_attendance_for_student_content/%i' % bloc.id">
+								<span class="fa fa-download"><span style="padding:10px;">Fréquentation - <t  t-esc="bloc.name"/></span></span>
+							</a>
+							
+							<div>
+								<a class="btn btn-danger" t-att-href="'/report/pdf/school_management.report_attendance_for_student_content/%i' % doc.online_attachment_id.id">FEQUENTATION</a>
+							</div>
 						</section>
 					</div>
     			</div>
