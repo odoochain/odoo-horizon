@@ -19,31 +19,28 @@
 #
 ##############################################################################
 {
-    'name': 'School management',
+    'name': 'School Teacher Management',
     'version': '0.1',
     'license': 'AGPL-3',
     'author': 'be-Cloud.be (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': ['mail','partner_contact_gender'],
+    'depends': ['school_management'],
     'init_xml': [],
     'update_xml': [
         'school_data.xml',
-        'views/res_partner_view.xml',
-        'views/program_view.xml',
-        'views/course_session_view.xml',
-        'views/individual_program_view.xml',
-        'views/configuration_view.xml',
-        'wizard/course_session_generation.xml',
-        'report/student_report.xml',
-        'report/report_program.xml',
-        'sequences/school_sequence.xml',
+        'views/school_teacher_management_view.xml',
+        #'report/report_student_group.xml',
+        #'wizard/linked_group_wizard.xml',
+        #'wizard/merge_group_wizard.xml',
         'security/ir.model.access.csv',
-        'security/ir_rule.xml',
+    ],
+    'images': [
+        'static/src/img/*.png',
     ],
     'demo_xml': [],
     'description': '''
-        This modules add management tools for a school.
+        This modules manages teacher designation to specific activities.
     ''',
     'active': False,
     'installable': True,

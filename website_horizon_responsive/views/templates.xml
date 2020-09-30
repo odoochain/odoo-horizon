@@ -764,7 +764,7 @@
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mt-3 mt-md-4 mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">ATTESTATIONS</span>
 						<section class="pt-md-1" t-foreach="blocs" t-as="bloc">
 							<a t-att-href="'/report/pdf/school_management.report_attendance_for_student_content/%i' % bloc.id">
-								<span class="fa fa-download"><span style="padding:10px;">Fréquentation - <t  t-esc="bloc.name"/></span></span>
+								<span class="fa fa-download"><span style="padding:10px;">Fréquentation - <t  t-esc="bloc.source_bloc_id.name"/></span></span>
 							</a>
 						</section>
 					</div>
