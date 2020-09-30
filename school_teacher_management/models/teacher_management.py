@@ -75,13 +75,13 @@ class SchoolTeacherDesignation(models.Model):
     period_from = fields.Date(string='Pour la période du',required=True)
     period_to = fields.Date(string='au',required=True)
     
-    replace_teacher_id = fields.many2One('res.partner', string='En remplacement de', ondelete='restrict', domain=[('teacher','=',True)])
+    replace_teacher_id = fields.Many2one('res.partner', string='En remplacement de', ondelete='restrict', domain=[('teacher','=',True)])
     replace_reason = fields.Char(string='Motif de l''absence')
     
     cgp_number = fields.Integer(string='CGP n°')
     cgp_date = fields.Date(string='Date du CGP')
     
-    teacher_id = fields.many2One('res.partner', string='Remplacant', ondelete='restrict', domain=[('teacher','=',True)])
+    teacher_id = fields.Many2one('res.partner', string='Remplacant', ondelete='restrict', domain=[('teacher','=',True)])
     
     titre_capacite = fields.Char(string='Titre de capacité')
     date_capacite = fields.Date(string='Date d''obtention de l''expérience')
