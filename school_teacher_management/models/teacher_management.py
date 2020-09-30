@@ -63,7 +63,7 @@ class SchoolTeacherDesignation(models.Model):
     dgt_refereced_number = fields.Integer(string="le DGT") 
     
     def _compute_default_number(self):
-        numbers = self.env['school.teacher.designation'].search(['year_id', '=', self.env.user.current_year_id.id]))
+        numbers = self.env['school.teacher.designation'].search(['year_id', '=', self.env.user.current_year_id.id])
         return max(numbers) + 1 or 1
     
     type = fields.Selection([('R','Remplacement'),('V','Vacant')],'Type de désignation',default='V',required=True)
