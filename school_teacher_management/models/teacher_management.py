@@ -60,7 +60,10 @@ class SchoolTeacherDesignation(models.Model):
 
     def _compute_default_number(self):
         numbers = self.env['school.teacher.designation'].search([('year_id', '=', self.env.user.current_year_id.id)])
-        return max(numbers) + 1 or 1
+        if len(numbers) > 0 :
+            return max(numbers) + 1
+        else :
+            return 1
 
     dgt_number = fields.Integer(string="DGT PT ESA N°",default=_compute_default_number)
     dgt_state = fields.Selection([('A','Annule'),('R','Remplace'),('C','Complète')],string="Ce DGT",default='R')
