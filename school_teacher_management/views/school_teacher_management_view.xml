@@ -27,7 +27,7 @@
       <menuitem name="Teacher Management" id="menu_teacher_management" icon="fa-book" web_icon="school_teacher_management,static/description/icon.png" sequence="50" />
       
       <!-- Teacher Designation Tree View -->
-        <record id="view_student_group_tree" model="ir.ui.view">
+        <record id="view_teacher_designation_tree" model="ir.ui.view">
           <field name="name">school.teacher.designation.tree</field>
           <field name="model">school.teacher.designation</field>
           <field eval="8" name="priority" />
