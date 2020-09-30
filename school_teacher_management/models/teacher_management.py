@@ -58,13 +58,13 @@ class SchoolTeacherDesignation(models.Model):
     year_id = fields.Many2one('school.year', string='Year', required=True, default=lambda self: self.env.user.current_year_id)
     author_id = fields.Many2one('res.partner', string='Auteur', domain="[('type','=','contact')]", required=True, default=lambda self: self.env.user.partner_id)
 
-    dgt_number = fields.Integer(string="DGT PT ESA N°",default=_compute_default_number).mapped('dgt_number')
+    def _compute_default_number(self):
+    numbers = self.env['school.teacher.designation'].search(['year_id', '=', self.env.user.current_year_id.id])
+    return max(numbers) + 1 or 1
+
+    dgt_number = fields.Integer(string="DGT PT ESA N°",default=_compute_default_number)
     dgt_state = fields.Selection([('A','Annule'),('R','Remplace'),('C','Complète')],string="Ce DGT",default='R')
     dgt_refereced_number = fields.Integer(string="le DGT") 
-    
-    def _compute_default_number(self):
-        numbers = self.env['school.teacher.designation'].search(['year_id', '=', self.env.user.current_year_id.id])
-        return max(numbers) + 1 or 1
     
     type = fields.Selection([('R','Remplacement'),('V','Vacant')],'Type de désignation',default='V',required=True)
     fonction = fields.Selection([('C','Conférencier'),('E','Enseignant')], string='Fonction',default='C', required=True)
