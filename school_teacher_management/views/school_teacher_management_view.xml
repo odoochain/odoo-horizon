@@ -112,7 +112,7 @@
           <field name="act_window_id" ref="action_teacher_designation_form" />
         </record>
         
-        <menuitem id="menu_teacher_designation_form" parent="menu_groups_program" action="action_teacher_designation_form" sequence="25" />
+        <menuitem id="menu_teacher_designation_form" parent="menu_teacher_management" action="action_teacher_designation_form" sequence="25" />
  
     </data>
 </openerp>
