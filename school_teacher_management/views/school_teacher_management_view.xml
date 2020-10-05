@@ -49,23 +49,56 @@
           <field name="arch" type="xml">
             <form string="Teacher Designation">
               <header>
-                <button name="confirm" type="object" states="draft" string="Activate" class="oe_highlight" />
-                <button name="cancel" type="object" states="active" string="Cancel" />
-                <button name="reset_to_draft" type="object" states="active,cancel" string="Reset to draft" />
-                <field name="state" widget="statusbar" statusbar_visible="draft,active,cancel" />
+                <button name="confirm" type="object" states="draft" string="Activate" class="oe_highlight"/>
+                <button name="cancel" type="object" states="active" string="Cancel"/>
+                <button name="reset_to_draft" type="object" states="active,cancel" string="Reset to draft"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,active,cancel"/>
               </header>
               <sheet>
                 <group col="4">
-                  <field name="year_id" />
-                  <field name="dgt_number" />
-                  <field name="author_id" options="{'no_create': True, 'no_open': True}"/>
+                  <field name="dgt_number"/>
                   <field name="year_id" options="{'no_create': True, 'no_open': True}"/>
-                  <field name="type" />
+                  <field name="author_id" options="{'no_create': True, 'no_open': True}"/>
+                  <field name="type"/>
+                  <field name="dgt_state"/>
+                  <field name="dgt_refereced_number" attrs="{'readonly': [('dgt_state', '==', False)]}"/>
                 </group>
+                <separator></separator>
+                <group col="2">
+                  <field name="fonction"/>
+                  <field name="cours"/>
+                  <field name="experience"/>
+                </group>
+                <group col="8">
+                  <field name="volume" colspan="4"/>
+                  <field name="period_from" /><field name="period_to" />
+                </group>
+                <group col="4">
+                  <field name="replace_teacher_id" attrs="{'readonly': [('type', '==', 'V')]}"/>
+                  <field name="replace_reason" attrs="{'readonly': [('type', '==', 'V')]}"/>
+                </group>
+                <notebook>
+                  <page string="Proposition sur avis favorable">
+                    <group col="4">
+                      <field name="cgp_number"/>
+                      <field name="cgp_date"/>
+                      <field name="teacher_id"/>
+                    </group>
+                    <group col="4">
+                      <field name="titre_capacite"/>
+                      <field name="date_capacite"/>
+                      <field name="appel_mb"/>
+                      <field name="candidature_mb"/>
+                      <field name="emploi_numero"/>
+                      <field name="derogation"/>
+                      <field name="derogation_reason"/>
+                    </group>
+                  </page>
+                </notebook>
               </sheet>
               <div class="oe_chatter">
-                <field name="message_follower_ids" widget="mail_followers" />
-                <field name="message_ids" widget="mail_thread" />
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
               </div>
             </form>
           </field>

@@ -90,5 +90,6 @@ class SchoolTeacherDesignation(models.Model):
     date_capacite = fields.Date(string='Date d''obtention de l''expérience')
     appel_mb = fields.Boolean(string='A fait l''objet d''un appel au MB', default=False)
     candidature_mb = fields.Boolean(string='La personne a posé candidature', default=False)
-    emploi_numero = fields.Boolean(string='Numéro d''emploi')
+    emploi_numero = fields.Integer(string='Numéro d''emploi')
     derogation = fields.Boolean(string='Dérogation nécessaire', default=False)
+    derogation_reason = fields.Char(string='Raison de la dérogation')
