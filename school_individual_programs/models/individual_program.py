@@ -67,29 +67,29 @@ class IndividualProgram(models.Model):
     
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
-    @api.one
     def _compute_ind_course_group_ids(self):
-        course_group_ids = False
-        for bloc in self.source_program_id.bloc_ids:
-            if course_group_ids :
-                course_group_ids |= bloc.course_group_ids
-            else :
-                course_group_ids = bloc.course_group_ids
-        self.course_group_ids = course_group_ids
-        self.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids.ids)])
-        
+        for ip in self :
+            course_group_ids = False
+            for bloc in ip.source_program_id.bloc_ids:
+                if course_group_ids :
+                    course_group_ids |= bloc.course_group_ids
+                else :
+                    course_group_ids = bloc.course_group_ids
+            ip.course_group_ids = course_group_ids
+            ip.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids.ids)])
+            
     bloc_ids = fields.One2many('school.individual_bloc', 'program_id', string='Individual Blocs')
     
     highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
 
-    @api.one
     @api.depends('bloc_ids.source_bloc_level')
     def _compute_highest_level(self):
-        levels = self.bloc_ids.mapped('source_bloc_level')
-        if levels:
-            self.highest_level = max(levels)
-        else:
-            self.highest_level = 0
+        for ip in self :
+            levels = ip.bloc_ids.mapped('source_bloc_level')
+            if levels:
+                ip.highest_level = max(levels)
+            else:
+                ip.highest_level = 0
             
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
@@ -124,7 +124,6 @@ class IndividualBloc(models.Model):
     source_bloc_cycle_id = fields.Many2one('school.cycle',compute='compute_speciality', string='Cycle', readonly=True, store=True)
     
     @api.depends('source_bloc_id.speciality_id','program_id.speciality_id')
-    @api.multi
     def compute_speciality(self):
         for bloc in self:
             if bloc.source_bloc_id.speciality_id :
@@ -163,23 +162,22 @@ class IndividualBloc(models.Model):
             cg.write({'course_ids': courses})
 
     @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight','course_group_ids.is_ghost_cg')
-    @api.one
     def _get_courses_total(self):
-        _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
-        self.total_hours = sum(course_group.total_hours for course_group in self.course_group_ids if not course_group.is_ghost_cg)
-        self.total_credits = sum(course_group.total_credits for course_group in self.course_group_ids if not course_group.is_ghost_cg)
-        self.total_weight = sum(course_group.total_weight for course_group in self.course_group_ids if not course_group.is_ghost_cg)
+        for icg in self :
+            _logger.debug('Trigger "_get_courses_total" on Course Group %s' % icg.name)
+            icg.total_hours = sum(course_group.total_hours for course_group in icg.course_group_ids if not course_group.is_ghost_cg)
+            icg.total_credits = sum(course_group.total_credits for course_group in icg.course_group_ids if not course_group.is_ghost_cg)
+            icg.total_weight = sum(course_group.total_weight for course_group in icg.course_group_ids if not course_group.is_ghost_cg)
 
-    @api.one
     @api.depends('year_id.name','student_id.name')
     def _compute_name(self):
-        self.name = "%s - %s" % (self.year_id.name,self.student_id.name)
+        for icg in self :
+            icg.name = "%s - %s" % (icg.year_id.name,icg.student_id.name)
     
     _sql_constraints = [
 	        ('uniq_student_bloc', 'unique(year_id, student_id, source_bloc_id)', 'This individual bloc already exists.'),
     ]
     
-    @api.multi
     def message_get_suggested_recipients(self):
         recipients = super(IndividualBloc, self).message_get_suggested_recipients()
         try:
@@ -192,12 +190,10 @@ class IndividualBloc(models.Model):
           
     course_count = fields.Integer(compute='_compute_course_count', string="Course")
 
-    @api.multi
     def _compute_course_count(self):
         for bloc in self:
             bloc.course_count = self.env['school.individual_course'].search_count([('bloc_id', '=', bloc.id)])
 
-    @api.multi
     def open_courses(self):
         """ Utility method used to add an "Open Courses" button in bloc views """
         self.ensure_one()
@@ -267,12 +263,12 @@ class IndividualCourseGroup(models.Model):
         self.update({'course_ids': courses})
 
     @api.depends('course_ids.hours','course_ids.credits','course_ids.weight')
-    @api.one
     def _get_courses_total(self):
-        _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
-        self.total_hours = sum(course.hours for course in self.course_ids)
-        self.total_credits = sum(course.credits for course in self.course_ids)
-        self.total_weight = sum(course.weight for course in self.course_ids)
+        for icg in self :
+            _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.icg)
+            icg.total_hours = sum(course.hours for course in icg.course_ids)
+            icg.total_credits = sum(course.credits for course in icg.course_ids)
+            icg.total_weight = sum(course.weight for course in icg.course_ids)
 
 class IndividualCourse(models.Model):
     '''Individual Course'''
@@ -308,7 +304,7 @@ class IndividualCourse(models.Model):
     def guess_teacher_id(self):
         old_course = self.env['school.individual_course'].search([('student_id','=',self.student_id.id),('year_id','=',self.year_id.previous.id),('title', '=', self.source_course_id.title)])
         if len(old_course) == 1 and old_course.teacher_id:
-            self.teacher_id = old_course.teacher_id
+            ic.teacher_id = old_course.teacher_id
 
     image = fields.Binary('Image', attachment=True, related='student_id.image')
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
@@ -337,7 +333,6 @@ class IndividualCourse(models.Model):
     course_group_id = fields.Many2one('school.individual_course_group', string='Course Groups', ondelete='cascade', readonly=True)
     bloc_id = fields.Many2one('school.individual_bloc', string='Bloc', related='course_group_id.bloc_id', readonly=True, store=True)
     
-    @api.multi
     def open_program(self):
         """ Utility method used to add an "Open Bloc" button in course views """
         self.ensure_one()
@@ -392,8 +387,6 @@ class IndividualCourseProxy(models.Model):
                 school_individual_course.source_course_id
         )""")
         
-        
-    @api.multi
     def edit_course(self):
         self.ensure_one()
         value = {
