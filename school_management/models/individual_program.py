@@ -218,7 +218,7 @@ class IndividualCourseGroup(models.Model):
     _order = 'year_id, sequence'
     
     name = fields.Char(related="source_course_group_id.name", readonly=True) #, store=True)
-    ue_id = fields.Char(related="source_course_group_id.ue_id", readonly=True)# , store=True)
+    uid = fields.Char(related="source_course_group_id.uid", readonly=True)# , store=True)
     title = fields.Char(related="source_course_group_id.title", readonly=True, store=True)
     
     sequence = fields.Integer(related="source_course_group_id.sequence", readonly=True, store=True)
@@ -254,7 +254,7 @@ class IndividualCourseGroup(models.Model):
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight', store=True)
     weight = fields.Integer(related="source_course_group_id.weight",string='Weight', store=True)
     
-    ue_id =  fields.Char(related="source_course_group_id.ue_id", readonly=True)
+    uid =  fields.Char(related="source_course_group_id.uid", readonly=True)
     
     @api.onchange('source_course_group_id')
     def onchange_source_cg(self):

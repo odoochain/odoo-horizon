@@ -86,7 +86,7 @@
                                       </tr>
                                       <tr>
                                         <td>Course Group</td>
-                                        <td><span t-field="o.course_group_id.ue_id"/> - <span t-field="o.course_group_id"/></td>
+                                        <td><span t-field="o.course_group_id.uid"/> - <span t-field="o.course_group_id"/></td>
                                       </tr>
                                       <tr>
                                         <td>Level</td>
@@ -244,7 +244,7 @@
                                     <tbody>
                                       <tr>
                                         <td>Code</td>
-                                        <td><span t-field="o.ue_id"/></td>
+                                        <td><span t-field="o.uid"/></td>
                                       </tr>
                                       <tr>
                                         <td>Cycle</td>
