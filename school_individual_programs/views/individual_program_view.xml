@@ -389,8 +389,8 @@
             <filter string="Section" context="{'group_by':'source_bloc_section_id'}" />
             <filter string="Track" context="{'group_by':'source_bloc_track_id'}" />
             <filter string="Speciality" context="{'group_by':'source_bloc_speciality_id'}" />
-          </group>
-        </search>-->
+          </group>-->
+        </search>
       </field>
     </record>
 
