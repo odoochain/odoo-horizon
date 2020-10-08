@@ -52,6 +52,7 @@ class Partner(models.Model):
             raise UserError(_("Please encode initials as eg X.,V.,T."))
     
     birthplace = fields.Char('Birthplace')
+    birthcountry = fields.Many2one('res.country', 'Birth Country', ondelete='restrict')
     phone2 = fields.Char('Phone2')
     title = fields.Selection([('Mr', 'Monsieur'),('Mme', 'Madame'),('Mlle', 'Mademoiselle')])
     marial_status = fields.Selection([('M', 'Maried'),('S', 'Single')])
