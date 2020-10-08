@@ -117,7 +117,7 @@
         <search string="Search Programs">
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
           <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
-          <separator/>
+          <!--<separator/>
           <filter name="music" string="Musique" domain="[('speciality_id.domain_id', '=', 1)]"/>
           <filter name="theatre" string="Théatre" domain="[('speciality_id.domain_id', '=', 2)]"/>
           <separator/>
@@ -127,7 +127,7 @@
             <filter string="Section" context="{'group_by':'speciality_id.section_id'}"/>
             <filter string="Track" context="{'group_by':'speciality_id.track_id'}"/>
             <filter string="Speciality" context="{'group_by':'speciality_id'}"/>
-          </group>
+          </group>-->
         </search>
       </field>
     </record>
