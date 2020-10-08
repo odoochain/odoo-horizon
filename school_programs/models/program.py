@@ -26,36 +26,6 @@ from openerp.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
-class school_year_sequence_mixin(models.AbstractModel):
-    _name = "school.year_sequence.mixin"
-
-    year_sequence = fields.Selection([
-        ('current','Current'),
-        ('previous','Previous'),
-        ('next','Next'),
-        ], string="Year Sequence", compute="_compute_year_sequence", search="_search_year_sequence")
-        
-    def _compute_year_sequence(self):
-        for item in self:
-            current_year_id = self.env.user.current_year_id
-            if current_year_id.id == item.year_id.id:
-                item.year_sequence = 'current'
-            if current_year_id.previous.id == item.year_id.id:
-                item.year_sequence = 'previous'
-            if current_year_id.next.id == item.year_id.id:
-                item.year_sequence = 'next'
-        
-    def _search_year_sequence(self, operator, value):
-        current_year_id = self.env.user.current_year_id
-        year_ids = []
-        if 'current' in value:
-            year_ids.append(current_year_id.id)
-        if 'previous' in value:
-            year_ids.append(current_year_id.previous.id)
-        if 'next' in value:
-            year_ids.append(current_year_id.next.id)
-        return [('year_id','in',year_ids)]
-
 class Program(models.Model):
     '''Program'''
     _name = 'school.program'
@@ -440,33 +410,3 @@ class Speciality(models.Model):
     _sql_constraints = [
 	        ('uniq_speciality', 'unique(domain, name)', 'There shall be only one speciality in a domain'),
     ]
-
-    
-class Year(models.Model):
-    '''Year'''
-    _name = 'school.year'
-    _order = 'name'
-    name = fields.Char(required=True, string='Name', size=15)
-    short_name = fields.Char(required=True, string='Short Name', size=5)
-    
-    previous = fields.Many2one('school.year', string='Previous Year')
-    next = fields.Many2one('school.year', string='Next Year')
-    
-class Users(models.Model):
-    '''Users'''
-    _inherit = ['res.users']
-    
-    def __init__(self, pool, cr):
-        """ Override of __init__ to add access rights on notification_email_send
-            and alias fields. Access rights are disabled by default, but allowed
-            on some specific fields defined in self.SELF_{READ/WRITE}ABLE_FIELDS.
-        """
-        init_res = super(Users, self).__init__(pool, cr)
-        # duplicate list to avoid modifying the original reference
-        self.SELF_WRITEABLE_FIELDS = list(self.SELF_WRITEABLE_FIELDS)
-        self.SELF_WRITEABLE_FIELDS.extend(['current_year_id'])
-        # duplicate list to avoid modifying the original reference
-        self.SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
-        self.SELF_READABLE_FIELDS.extend(['current_year_id'])
-    
-    current_year_id = fields.Many2one('school.year', string="Current Year")
