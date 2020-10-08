@@ -270,7 +270,7 @@ class CourseGroup(models.Model):
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight')
 
-    # weight = fields.Integer(string='Weight')
+    weight = fields.Integer(string='Weight')
 
     @api.depends('course_ids')
     def _get_courses_total(self):
