@@ -79,19 +79,17 @@
                 </group>
                 <notebook>
                   <page string="Proposition sur avis favorable">
-                    <group col="4">
-                      <field name="cgp_number"/>
-                      <field name="cgp_date"/>
-                      <field name="teacher_id"/>
-                    </group>
-                    <group col="4">
-                      <field name="titre_capacite"/>
-                      <field name="date_capacite"/>
+                    <group col="6">
+                      <field name="cgp_number" colspan="3"/>
+                      <field name="cgp_date" colspan="3"/>
+                      <field name="teacher_id" colspan="6"/>
+                      <field name="titre_capacite" colspan="3"/>
+                      <field name="date_capacite" colspan="3"/>
                       <field name="appel_mb"/>
                       <field name="candidature_mb"/>
                       <field name="emploi_numero"/>
-                      <field name="derogation"/>
-                      <field name="derogation_reason"/>
+                      <field name="derogation" colspan="3"/>
+                      <field name="derogation_reason" colspan="3"/>
                     </group>
                   </page>
                 </notebook>
