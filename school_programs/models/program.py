@@ -62,7 +62,14 @@ class Program(models.Model):
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin']
     
-    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
+    uid = fields.Char(string="UID")
+    
+    @api.model
+    def create(self, values):
+        if not values.get('uid', False) :
+            values['uid'] = self.env['ir.sequence'].next_by_code('school.program')
+        record = super(Program, self).create(values)
+        return record
     
     @api.depends('bloc_ids')
     def _get_courses_total(self):
@@ -156,7 +163,14 @@ class Bloc(models.Model):
     _inherit = ['mail.thread','school.year_sequence.mixin']
     _order = 'program_id,sequence'
     
-    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
+    uid = fields.Char(string="UID")
+    
+    @api.model
+    def create(self, values):
+        if not values.get('uid', False) :
+            values['uid'] = self.env['ir.sequence'].next_by_code('school.bloc')
+        record = super(Bloc, self).create(values)
+        return record
     
     @api.depends('course_group_ids')
     def _get_courses_total(self):
@@ -228,7 +242,14 @@ class CourseGroup(models.Model):
     _inherit = ['mail.thread']
     _order = 'sequence'
 
-    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
+    uid = fields.Char(string="UID")
+    
+    @api.model
+    def create(self, values):
+        if not values.get('uid', False) :
+            values['uid'] = self.env['ir.sequence'].next_by_code('school.course_group')
+        record = super(CourseGroup, self).create(values)
+        return record
 
     sequence = fields.Integer(string='Sequence')
     
@@ -318,7 +339,14 @@ class Course(models.Model):
     _inherit = ['mail.thread']
     _order = 'sequence'
 
-    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
+    uid = fields.Char(string="UID")
+    
+    @api.model
+    def create(self, values):
+        if not values.get('uid', False) :
+            values['uid'] = self.env['ir.sequence'].next_by_code('school.course')
+        record = super(Course, self).create(values)
+        return record
 
     sequence = fields.Integer(string='Sequence')
     
