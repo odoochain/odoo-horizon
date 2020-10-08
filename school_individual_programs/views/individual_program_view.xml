@@ -24,7 +24,7 @@
   <data>
     
     <!-- Top menu item -->
-    <menuitem name="Individuals Programs" id="menu_individual_bloc" icon="fa-book" web_icon="hr_recruitment,static/description/icon.png" sequence="62" groups="school_management.group_registration"/>
+    <menuitem name="Individuals Programs" id="menu_individual_bloc" icon="fa-book" web_icon="hr_recruitment,static/description/icon.png" sequence="62" groups="school_individual_programs.group_registration"/>
 
     <!--
     
@@ -224,7 +224,7 @@
         <form string="Individual Bloc">
           <sheet>
             <div class="oe_button_box" name="button_box">
-              <button class="oe_stat_button" icon="fa-list" type="action" name="%(school_management.act_program_2_course)d">
+              <button class="oe_stat_button" icon="fa-list" type="action" name="%(school_individual_programs.act_program_2_course)d">
                 <field string="Courses" name="course_count" widget="statinfo" />
               </button>
             </div>
