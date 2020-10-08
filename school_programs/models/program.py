@@ -96,7 +96,7 @@ class Program(models.Model):
             
     def compute_uid(self):
         for prog in self:
-            prog.uid = "prog-%s" % prog.id
+            prog.uid = "PROG-%s" % prog.id
     
     domain = fields.Selection([
             ('musique','Musique'),
@@ -207,7 +207,7 @@ class Bloc(models.Model):
             
     def compute_uid(self):
         for bloc in self:
-            bloc.uid = "bloc-%s" % bloc.id
+            bloc.uid = "BLOC-%s" % bloc.id
 
     _sql_constraints = [
 	        ('uniq_bloc', 'unique(program_id, sequence)', 'There shall be only one bloc with a given sequence within a program'),
@@ -264,7 +264,7 @@ class CourseGroup(models.Model):
             
     def compute_uid(self):
         for cg in self:
-            cg.uid = "ue-%s" % cg.id
+            cg.uid = "UE-%s" % cg.id
             
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
@@ -354,7 +354,7 @@ class Course(models.Model):
             
     def compute_uid(self):
         for c in self:
-            c.uid = "aa-%s" % c.id
+            c.uid = "AA-%s" % c.id
     
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]")
     
