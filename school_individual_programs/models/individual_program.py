@@ -291,20 +291,20 @@ class IndividualCourse(models.Model):
     teacher_choice_id = fields.Many2one('res.partner', string='Teacher Choice', domain=[('teacher', '=',1)])
     
     @api.depends('teacher_choice_id','source_course_id.teacher_ids')
-    @api.one
     def compute_teacher_id(self):
-        if self.teacher_choice_id:
-            self.teacher_id = self.teacher_choice_id
-        elif len(self.source_course_id.teacher_ids) == 1:
-            self.teacher_id = self.source_course_id.teacher_ids[0]
-        else:
-            self.teacher_id = None
+        for ic in self:
+            if ic.teacher_choice_id:
+                ic.teacher_id = ic.teacher_choice_id
+            elif len(ic.source_course_id.teacher_ids) == 1:
+                ic.teacher_id = ic.source_course_id.teacher_ids[0]
+            else:
+                ic.teacher_id = None
 
-    @api.one
     def guess_teacher_id(self):
-        old_course = self.env['school.individual_course'].search([('student_id','=',self.student_id.id),('year_id','=',self.year_id.previous.id),('title', '=', self.source_course_id.title)])
-        if len(old_course) == 1 and old_course.teacher_id:
-            ic.teacher_id = old_course.teacher_id
+        for ic in self:
+            old_course = self.env['school.individual_course'].search([('student_id','=',ic.student_id.id),('year_id','=',ic.year_id.previous.id),('title', '=', ic.source_course_id.title)])
+            if len(old_course) == 1 and old_course.teacher_id:
+                ic.teacher_id = old_course.teacher_id
 
     image = fields.Binary('Image', attachment=True, related='student_id.image')
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
