@@ -60,7 +60,7 @@ class Program(models.Model):
     '''Program'''
     _name = 'school.program'
     _description = 'Program made of several Blocs'
-    _inherit = ['mail.thread','school.year_sequence.mixin',"school.unique_identifier.mixin"]
+    _inherit = ['mail.thread','school.year_sequence.mixin']
     
     uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
     
