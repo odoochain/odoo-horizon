@@ -369,7 +369,7 @@
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
           <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
           <field name="source_bloc_id" string="Programme"/>
-          <field name="source_bloc_domain_id"/>
+          <!--<field name="source_bloc_domain_id"/>
           <filter name="bloc_1" string="Bac 1" domain="[('source_bloc_level', '=', 1)]"/>
           <filter name="bloc_2" string="Bac 2" domain="[('source_bloc_level', '=', 2)]"/>
           <filter name="bloc_3" string="Bac 3" domain="[('source_bloc_level', '=', 3)]"/>
@@ -390,7 +390,7 @@
             <filter string="Track" context="{'group_by':'source_bloc_track_id'}" />
             <filter string="Speciality" context="{'group_by':'source_bloc_speciality_id'}" />
           </group>
-        </search>
+        </search>-->
       </field>
     </record>
 
