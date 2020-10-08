@@ -26,6 +26,28 @@ from openerp.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
+class school_unique_identifier_mixin(models.AbstractModel):
+    _name = "school.unique_identifier.mixin"
+    
+    uid = fields.Char(string='UID', compute='compute_uid')
+    
+    def _compute_default_uid_int(self):
+        self.ensure_one()
+        idx = self.Model.read_group([], fields=['uid_int:max'], groupby=[])
+        if idx:
+            prog.uid_int = idx + 1
+        else :
+            prog.uid_int =  1
+    
+    uid_int = fields.Integer(string='UIDInt', default=_compute_default_uid_int)
+    
+    def _get_uid_prefix(self):
+        raise ValidationError("No prefix defined on class %s." % self._name)
+    
+    def compute_uid(self):
+        for record in self:
+            record.uid = "%s-%s" % record._get_uid_prefix(), record.uid_int
+
 class school_year_sequence_mixin(models.AbstractModel):
     _name = "school.year_sequence.mixin"
 
@@ -60,9 +82,10 @@ class Program(models.Model):
     '''Program'''
     _name = 'school.program'
     _description = 'Program made of several Blocs'
-    _inherit = ['mail.thread','school.year_sequence.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin',"school.unique_identifier.mixin"]
     
-    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
+    def _get_uid_prefix(self):
+        return "CYC"
     
     @api.depends('bloc_ids')
     def _get_courses_total(self):
@@ -227,9 +250,14 @@ class CourseGroup(models.Model):
     _description = 'Courses Group'
     _inherit = ['mail.thread']
     _order = 'sequence'
+<<<<<<<<< saved version
 
-    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
-
+=========
+    
+    def _get_uid_prefix(self):
+        return "UE"
+    
+>>>>>>>>> local version
     sequence = fields.Integer(string='Sequence')
     
     active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
@@ -318,7 +346,12 @@ class Course(models.Model):
     _inherit = ['mail.thread']
     _order = 'sequence'
     
-    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
+<<<<<<<<< saved version
+
+=========
+    def _get_uid_prefix(self):
+        return "AA"
+>>>>>>>>> local version
     
     sequence = fields.Integer(string='Sequence')
     
@@ -459,4 +492,4 @@ class Users(models.Model):
         self.SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
         self.SELF_READABLE_FIELDS.extend(['current_year_id'])
     
-    current_year_id = fields.Many2one('school.year', string="Current Year", required=True, ondelete="restrict")
+    current_year_id = fields.Many2one('school.year', string="Current Year", required=True, ondelete="restrict", default=1)
