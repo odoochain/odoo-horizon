@@ -28,7 +28,6 @@
     'depends': ['school_programs'],
     'init_xml': [],
     'update_xml': [
-        'school_data.xml',
         'views/individual_program_view.xml',
         'report/report_individual_program.xml',
         'security/ir.model.access.csv',
