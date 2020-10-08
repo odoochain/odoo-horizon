@@ -21,7 +21,7 @@
 import logging
 
 from openerp import api, fields, models, tools, _
-from openerp.exceptions import UserError
+from openerp.exceptions import UserError, ValidationError
 from openerp.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
@@ -62,6 +62,8 @@ class Program(models.Model):
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin']
     
+    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
+    
     @api.depends('bloc_ids')
     def _get_courses_total(self):
         for rec in self :
@@ -91,12 +93,6 @@ class Program(models.Model):
     def compute_name(self):
         for prog in self:
             prog.name = "%s - %s" % (prog.year_id.short_name, prog.title)
-    
-    uid = fields.Char(string='UID', compute='compute_uid')
-            
-    def compute_uid(self):
-        for prog in self:
-            prog.uid = "PROG-%s" % prog.id
     
     domain = fields.Selection([
             ('musique','Musique'),
@@ -159,6 +155,8 @@ class Bloc(models.Model):
     _description = 'Program'
     _inherit = ['mail.thread','school.year_sequence.mixin']
     _order = 'program_id,sequence'
+    
+    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
     
     @api.depends('course_group_ids')
     def _get_courses_total(self):
@@ -229,7 +227,9 @@ class CourseGroup(models.Model):
     _description = 'Courses Group'
     _inherit = ['mail.thread']
     _order = 'sequence'
-    
+
+    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
+
     sequence = fields.Integer(string='Sequence')
     
     active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
@@ -317,6 +317,8 @@ class Course(models.Model):
     _description = 'Course'
     _inherit = ['mail.thread']
     _order = 'sequence'
+    
+    uid = fields.Char(string="UID", default=lambda self : self.env['ir.sequence'].next_by_code(self._name))
     
     sequence = fields.Integer(string='Sequence')
     
