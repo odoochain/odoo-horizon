@@ -42,6 +42,8 @@ class Partner(models.Model):
     nationality_id = fields.Many2one("res.country", "Nationality")
     
     image = fields.Binary('Image', oldname='image_1920')
+    image_medium = fields.Binary('Image', oldname='image_512')
+    image_small = fields.Binary('Image', oldname='image_128')
     
     @api.constrains('initials')
     def _check_initials(self):
