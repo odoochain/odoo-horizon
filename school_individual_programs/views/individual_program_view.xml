@@ -238,6 +238,22 @@
         </field>
     </record>
     
+    <!-- Individual Course Tree View -->
+    <record id="view_individual_course_tree" model="ir.ui.view">
+      <field name="name">school.individual_course.tree</field>
+      <field name="model">school.individual_course</field>
+      <field eval="8" name="priority" />
+      <field name="arch" type="xml">
+        <tree string="Individual Course" editable="top" create="0">
+          <field name="year_id" readonly="1"/>
+          <field name="student_id" />
+          <field name="name" />
+          <field name="teacher_id" />
+          <field name="dispense" />
+          <button type="object" icon="fa-book" name="open_program" string="Program" />
+        </tree>
+      </field>
+    </record>
     
     <record id="action_individual_bloc_course_tree_view" model="ir.actions.act_window.view">
       <field name="sequence" eval="1" />
@@ -506,22 +522,7 @@
     -->
 
 
-    <!-- Individual Course Tree View -->
-    <record id="view_individual_course_tree" model="ir.ui.view">
-      <field name="name">school.individual_course.tree</field>
-      <field name="model">school.individual_course</field>
-      <field eval="8" name="priority" />
-      <field name="arch" type="xml">
-        <tree string="Individual Course" editable="top" create="0">
-          <field name="year_id" readonly="1"/>
-          <field name="student_id" />
-          <field name="name" />
-          <field name="teacher_id" />
-          <field name="dispense" />
-          <button type="object" icon="fa-book" name="open_program" string="Program" />
-        </tree>
-      </field>
-    </record>
+
     
     <!-- Individual Course Form View -->
     <record model="ir.ui.view" id="view_individual_course_form">
