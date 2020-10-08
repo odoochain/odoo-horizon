@@ -214,12 +214,6 @@ class Bloc(models.Model):
     def compute_name(self):
         for bloc in self:
             bloc.name = "%s - %d" % (bloc.title,bloc.sequence)
-            
-    uid = fields.Char(string='UID', compute='compute_uid')
-            
-    def compute_uid(self):
-        for bloc in self:
-            bloc.uid = "BLOC-%s" % bloc.id
 
     _sql_constraints = [
 	        ('uniq_bloc', 'unique(program_id, sequence)', 'There shall be only one bloc with a given sequence within a program'),
@@ -280,12 +274,6 @@ class CourseGroup(models.Model):
                 course_g.name = "%s - %s" % (course_g.title, course_g.level)
             else:
                 course_g.name = course_g.title
-            
-    uid = fields.Char(string='UID', compute='compute_uid')
-            
-    def compute_uid(self):
-        for cg in self:
-            cg.uid = "UE-%s" % cg.id
             
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
@@ -379,13 +367,7 @@ class Course(models.Model):
                 course.name = "%s - %s" % (course.title, course.level)
             else:
                 course.name = course.title
-                
-    uid = fields.Char(string='UID', compute='compute_uid')
-            
-    def compute_uid(self):
-        for c in self:
-            c.uid = "AA-%s" % c.id
-    
+
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]")
     
     @api.onchange('hours','credits')
