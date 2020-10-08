@@ -52,9 +52,9 @@ class IndividualProgram(models.Model):
     cycle_id = fields.Many2one('school.cycle', related='source_program_id.cycle_id', string='Cycle', store=True, readonly=True)
     
     speciality_id = fields.Many2one('school.speciality', related='source_program_id.speciality_id', string='Speciality', store=True, readonly=True)
-    domain_id = fields.Many2one(related='speciality_id.domain_id', string='Domain',store=True)
-    section_id = fields.Many2one(related='speciality_id.section_id', string='Section',store=True)
-    track_id = fields.Many2one(related='speciality_id.track_id', string='Track',store=True)
+    #domain_id = fields.Many2one(related='speciality_id.domain_id', string='Domain',store=True)
+    #section_id = fields.Many2one(related='speciality_id.section_id', string='Section',store=True)
+    #track_id = fields.Many2one(related='speciality_id.track_id', string='Track',store=True)
     
     @api.depends('cycle_id.name','speciality_id.name','student_id.name')
     def _compute_name(self):
