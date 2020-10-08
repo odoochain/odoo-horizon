@@ -395,7 +395,7 @@
     </record>
 
     <record id="action_individual_bloc_form" model="ir.actions.act_window">
-      <field name="name">Individual Programs</field>
+      <field name="name">Individual Blocs</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.individual_bloc</field>
       <field name="view_mode">tree,form</field>
