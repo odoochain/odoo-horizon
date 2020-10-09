@@ -20,11 +20,11 @@
 ##############################################################################
 import logging
 
-from openerp.osv import fields, osv
-from openerp.tools.translate import _
-from openerp.tools import email_split
-from openerp import SUPERUSER_ID
-from openerp.exceptions import UserError
+from odoo.osv import fields, osv
+from odoo.tools.translate import _
+from odoo.tools import email_split
+from odoo import SUPERUSER_ID
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
