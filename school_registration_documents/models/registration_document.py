@@ -63,7 +63,7 @@ class Partner(models.Model):
 class OfficialDocument(models.Model):
     '''Official Document'''
     _name = 'school.official_document'
-    _inherit = ['ir.needaction_mixin']
+    _inherit = ['mail.activity.mixin']
     
     name = fields.Char('Name',compute='compute_name')
     

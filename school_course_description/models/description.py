@@ -28,7 +28,7 @@ class CourseDocumentation(models.Model):
     '''CourseDocumentation'''
     _name = 'school.course_documentation'
     _description = 'Documentation about a course'
-    _inherit = ['mail.thread', 'ir.needaction_mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     
     state = fields.Selection([
             ('draft','Draft'),

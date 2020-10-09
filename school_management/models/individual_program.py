@@ -277,7 +277,7 @@ class IndividualCourse(models.Model):
     '''Individual Course'''
     _name = 'school.individual_course'
     _description = 'Individual Course'
-    _inherit = ['mail.thread','school.year_sequence.mixin','ir.needaction_mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','mail.activity.mixin']
     
     _order = 'sequence'
     
