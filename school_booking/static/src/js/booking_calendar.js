@@ -29,8 +29,8 @@ odoo.define('school_booking.booking_calendar', function (require) {
     
     var Model = require('web.DataModel');
     var data = require('web.data');
-    var CalendarView = require('web_calendar.CalendarView');
-    var BaseCalendar = require('web_calendar.CalendarView');
+    var CalendarView = require('web.CalendarView');
+    var BaseCalendar = require('web.CalendarView');
     var widgets = require('web_calendar.widgets');
     
     function reload_favorite_list(result) {
