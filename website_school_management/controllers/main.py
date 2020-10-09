@@ -23,7 +23,7 @@ import logging
 
 import werkzeug
 
-from odoo.addons.website.models.website import slug, unslug
+from odoo.addons.http_routing.models.ir_http import slug, unslug
 
 from odoo import http
 from odoo.addons.web.controllers.main import CSVExport
