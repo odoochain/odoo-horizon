@@ -20,7 +20,8 @@
 ##############################################################################
 import logging
 
-from odoo.osv import fields, osv
+from odoo import models, fields, api, _
+
 from odoo.tools.translate import _
 from odoo.tools import email_split
 from odoo import SUPERUSER_ID
@@ -28,7 +29,7 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
-class wizard(osv.osv_memory):
+class wizard(models.TransientModel):
     _inherit = 'portal.wizard'
 
     def onchange_portal_id(self, cr, uid, ids, portal_id, context=None):
