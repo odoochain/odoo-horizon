@@ -39,6 +39,7 @@
         'report/report_program.xml',
         'sequences/school_sequence.xml',
         'security/ir.model.access.csv',
+        'security/ir_rule.xml',
     ],
     'demo_xml': [],
     'description': '''

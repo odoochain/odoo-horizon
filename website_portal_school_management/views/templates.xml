@@ -85,6 +85,7 @@
                         <th class="text-center">Heures</th> 
                         <th class="text-center">ECTS</th>
                         <th class="text-center">Pond</th>
+                        <th class="text-center">Eval</th>
                         <th>Pré-requis</th>
                         <th>Co-requis</th>
                     </tr> 
@@ -96,7 +97,7 @@
                         <td><t t-esc="course_group.title"/></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
-                        <td></td>
+                        <td class="text-center"><t t-esc="course_group.final_result"/></td>
                         <td><t t-foreach="course_group.pre_requisit_course_ids" t-as="pre_id"><t t-esc="pre_id.code_ue"/></t></td>
                         <td><t t-foreach="course_group.co_requisit_course_ids" t-as="cor_id"><t t-esc="cor_id.code_ue"/></t></td>
                     </tr>
@@ -107,7 +108,7 @@
                         <td class="text-center"><t t-esc="course.hours"/></td>
                         <td class="text-center"><t t-esc="course.credits"/></td>
                         <td class="text-center"><t t-esc="course.weight"/></td>
-                        <!--<td></td>-->
+                        <td class="text-center"><t t-esc="course.second_session_result_disp"/></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -118,7 +119,7 @@
                         <td class="text-center"><t t-esc="bloc.total_hours"/></td>
                         <td class="text-center"><t t-esc="bloc.total_credits"/></td>
                         <td></td>
-                        <!--<td></td>-->
+                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>

@@ -15,6 +15,10 @@
                         <div class="col s3" align="center">
                             <a id="desktop" class="btn-floating btn waves-effect waves-light cyan darken-1" href="/booking?#category_id=16" target="_blank"><i class="material-icons">desktop_windows</i></a>
                         </div>
+                        <!--
+                        <div class="col s3" align="center">
+                            <a id="covid" class="btn-floating btn waves-effect waves-light red darken-1" href="/covid" target="_blank"><i class="material-icons">bug_report</i></a>
+                        </div>-->
                         <div class="col s3" align="center">
                             <a id="logout" class="btn-floating btn waves-effect waves-light cyan darken-1"><i class="material-icons">lock_outline</i></a>
                         </div>

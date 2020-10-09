@@ -19,22 +19,28 @@
 #
 ##############################################################################
 {
-    'name': 'Website Horizon Responsive',
+    'name': 'School Teacher Management',
     'version': '0.1',
     'license': 'AGPL-3',
     'author': 'be-Cloud.be (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': [
-        'school_booking','school_registration_documents'
+    'depends': ['school_management'],
+    'init_xml': [],
+    'update_xml': [
+        'school_data.xml',
+        'views/school_teacher_management_view.xml',
+        #'report/report_student_group.xml',
+        #'wizard/linked_group_wizard.xml',
+        #'wizard/merge_group_wizard.xml',
+        'security/ir.model.access.csv',
     ],
-    'data': [
-        'views/website_horizon_responsive.xml',
-        'views/templates.xml',
+    'images': [
+        'static/src/img/*.png',
     ],
-    'qweb': ['static/src/xml/*.xml'],
+    'demo_xml': [],
     'description': '''
-        This module adds a responsive website to Horizon.
+        This modules manages teacher designation to specific activities.
     ''',
     'active': False,
     'installable': True,

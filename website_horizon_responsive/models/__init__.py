@@ -18,25 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Website Horizon Responsive',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': [
-        'school_booking','school_registration_documents'
-    ],
-    'data': [
-        'views/website_horizon_responsive.xml',
-        'views/templates.xml',
-    ],
-    'qweb': ['static/src/xml/*.xml'],
-    'description': '''
-        This module adds a responsive website to Horizon.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+import registration_document
