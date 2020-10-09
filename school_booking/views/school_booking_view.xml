@@ -139,7 +139,7 @@
       <field name="name">All Bookings</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">calendar.event</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
       <field name="context">{"search_default_today":1}</field>
@@ -157,7 +157,7 @@
       <field name="name">Student Bookings</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">calendar.event</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
       <field name="context" eval="{'search_default_student':1, 'search_default_today':1, 'default_categ_ids':[ref('school_booking.school_student_event_type')]}" />
@@ -175,7 +175,7 @@
       <field name="name">Teacher Bookings</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">calendar.event</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
       <field name="context" eval="{'search_default_teacher':1, 'search_default_today':1, 'default_categ_ids':[ref('school_booking.school_teacher_event_type')]}" />
@@ -193,7 +193,7 @@
       <field name="name">Management Bookings</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">calendar.event</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form,calendar</field>
       <field name="search_view_id" ref="view_booking_filter" />
       <field name="context" eval="{'search_default_management':1, 'search_default_today':1, 'default_categ_ids':[ref('school_booking.school_management_event_type')]}" />

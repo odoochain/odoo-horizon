@@ -68,7 +68,7 @@
         <record id="school_teacher_act" model="ir.actions.act_window">
             <field name="name">Dashboard</field>
             <field name="res_model">school.teacher.report</field>
-            <field name="view_type">form</field>
+            
             <field name="view_mode">school_teacher_dashboard</field>
             <field name="context">{}</field>
             <field name="domain">[('teacher_id.user_ids','=',uid)]</field>
@@ -99,7 +99,7 @@
         <record id="action_report_school_groups" model="ir.actions.act_window">
           <field name="name">My Groups</field>
           <field name="res_model">school.student_group</field>
-          <field name="view_type">form</field>
+          
           <field name="view_mode">kanban, tree, form</field>
           <field name="search_view_id" ref="view_student_group_filter" />
           <field name="domain=">[('year_sequence','=','current')]</field>
@@ -141,7 +141,7 @@
         <record id="action_report_school_student" model="ir.actions.act_window">
             <field name="name">Students</field>
             <field name="res_model">res.partner</field>
-            <field name="view_type">form</field>
+            
             <field name="view_mode">kanban, tree, form</field>
             <field name="search_view_id" ref="view_individual_students_filter" />
             <field name="context">{"search_default_my_students":1}</field>
@@ -187,7 +187,7 @@
         <record id="action_report_school_dispense" model="ir.actions.act_window">
             <field name="name">Dispenses</field>
             <field name="res_model">school.individual_course</field>
-            <field name="view_type">form</field>
+            
             <field name="view_mode">tree</field>
             <field name="search_view_id" ref="school_dispense_approval.view_individual_dispense_filter" />
             <field name="view_id" ref="view_individual_course_dispense_tree" />
