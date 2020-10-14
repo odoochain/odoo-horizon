@@ -361,8 +361,9 @@ class IndividualCourseProxy(models.Model):
     
     student_count = fields.Integer(string="Student Count", readonly=True)
 
-    def init(self, cr):
+    def init(self):
         """ School Individual Course Proxy """
+        cr = self._cr
         tools.drop_view_if_exists(cr, 'school_individual_course_proxy')
         cr.execute(""" CREATE VIEW school_individual_course_proxy AS (
             SELECT
