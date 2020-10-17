@@ -363,8 +363,9 @@ class IndividualCourseProxy(models.Model):
 
     def init(self):
         """ School Individual Course Proxy """
-        tools.drop_view_if_exists(self._cr, 'school_individual_course_proxy')
-        self._cr.execute(""" CREATE VIEW school_individual_course_proxy AS (
+        cr = self._cr
+        tools.drop_view_if_exists(cr, 'school_individual_course_proxy')
+        cr.execute(""" CREATE VIEW school_individual_course_proxy AS (
             SELECT
                 CAST(CAST(school_individual_course.year_id AS text)||
                 CAST(school_individual_course.teacher_id AS text)||

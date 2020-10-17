@@ -97,7 +97,7 @@ class Program(models.Model):
     
     description = fields.Text(string='Description')
         
-    competency_ids = fields.Many2many('school.competency','school_competency_program_rel', id1='program_id', id2='competency_id', string='Competencies', ondelete='set null')
+    competency_ids = fields.Many2many('school.competency','school_competency_program_rel', 'program_id', 'competency_id', string='Competencies', ondelete='set null')
     
     cycle_id = fields.Many2one('school.cycle', string='Cycle', required=True, domain=[('type', '!=', False)])
     
@@ -202,7 +202,7 @@ class Bloc(models.Model):
 
     name = fields.Char(string='Name', compute='compute_name', store=True)
     
-    course_group_ids = fields.Many2many('school.course_group','school_bloc_course_group_rel', id1='bloc_id', id2='group_id',string='Course Groups', copy=True, domain=['|',('active','=',False),('active','=',True)])
+    course_group_ids = fields.Many2many('school.course_group','school_bloc_course_group_rel', 'bloc_id', 'group_id',string='Course Groups', copy=True, domain=['|',('active','=',False),('active','=',True)])
     
     @api.depends('sequence','title')
     @api.multi
@@ -246,7 +246,7 @@ class CourseGroup(models.Model):
     
     course_ids = fields.One2many('school.course', 'course_group_id', domain=['|',('active','=',False),('active','=',True)], string='Courses', copy=True, ondelete="cascade")
 
-    bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', id1='group_id', id2='bloc_id',string='Blocs', copy=False)
+    bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', 'group_id', 'bloc_id',string='Blocs', copy=False)
     
     name = fields.Char(string='Name', compute='compute_ue_name', store=True)
     ue_id = fields.Char(string="UE Id", compute='compute_ue_name', store=True)
@@ -372,7 +372,7 @@ class Competency(models.Model):
     sequence = fields.Integer(string='Sequence')
     description = fields.Text(string='Description')
     
-    program_ids = fields.Many2many('school.program','school_competency_program_rel', id1='competency_id', id2='program_id', string='Programs', ondelete='set null')
+    program_ids = fields.Many2many('school.program','school_competency_program_rel', 'competency_id', 'program_id', string='Programs', ondelete='set null')
     
 class Domain(models.Model):
     '''Domain'''

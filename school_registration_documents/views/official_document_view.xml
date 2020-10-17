@@ -92,7 +92,5 @@
         
         <menuitem id="menu_official_document_form" parent="school_management.menu_individual_bloc" action="action_official_document_list" sequence="999" />
         
-        <!--<menuitem id="menu_partner_id_numbers_form" parent="school_management.menu_individual_bloc" action="partner_identification.action_partner_id_numbers_form" sequence="20" />-->
-        
     </data>
 </openerp>

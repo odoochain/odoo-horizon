@@ -39,8 +39,14 @@ class StudentReport(models.Model):
 
     def init(self):
         """ School Student main report """
+<<<<<<< HEAD
+        cr = self._cr
+        tools.drop_view_if_exists(cr, 'school_student_report')
+        cr.execute(""" CREATE VIEW school_student_report AS (
+=======
         tools.drop_view_if_exists(self._cr, 'school_student_report')
         self._cr.execute(""" CREATE VIEW school_student_report AS (
+>>>>>>> 11.0
             SELECT
                 school_individual_bloc.id as id,
                 school_year.id as year_id,
