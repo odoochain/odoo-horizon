@@ -109,7 +109,7 @@
         <field name="model">calendar.event</field>
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
-            <calendar string="Bookings" date_start="start" date_stop="stop" date_delay="duration" all_day="allday" display="[name]" color="main_categ_id" scheduler_group="room_id" quick_add="False">
+            <calendar string="Bookings" date_start="start" date_stop="stop" date_delay="duration" all_day="allday" color="main_categ_id" scheduler_group="room_id" quick_add="False">
                 <field name="name"/>
                 <field name="room_id"/>
                 <field name="main_categ_id" invisible="1"/>
