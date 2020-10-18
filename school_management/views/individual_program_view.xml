@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
   <data>
     
     <!-- Top menu item -->
@@ -601,4 +601,4 @@
     <menuitem id="menu_individual_course_form" parent="menu_individual_bloc" action="action_individual_course_form" sequence="70" />
 
   </data>
-</openerp>
+</odoo>

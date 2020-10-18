@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <!-- Add program for student form view -->
         <record id="view_student_kanban_school" model="ir.ui.view">
@@ -78,4 +78,4 @@
         </record>
         
     </data>
-</openerp>
+</odoo>

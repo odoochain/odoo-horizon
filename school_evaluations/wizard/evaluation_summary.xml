@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <!-- wizard action on res.partner -->
         <act_window id="school_evaluation_summary_wizard_action"
@@ -166,4 +166,4 @@
         </template>
             
     </data>
-</openerp>
+</odoo>

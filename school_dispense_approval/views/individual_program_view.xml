@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <!-- Add choice to Individual Course Group form view -->
         <record id="course_dispense_approuval_form" model="ir.ui.view">
@@ -97,4 +97,4 @@
         </record>
         
     </data>
-</openerp>
+</odoo>

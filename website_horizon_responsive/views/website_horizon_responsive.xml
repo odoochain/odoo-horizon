@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <template id="assets" name="website_horizon_responsive assets">
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
@@ -65,4 +65,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

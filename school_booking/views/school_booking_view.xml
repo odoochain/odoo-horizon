@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 
-<openerp>
+<odoo>
   <data>
 
     <template id="assets_backend" name="school calendar assets" inherit_id="calendar.assets_backend">
@@ -295,4 +295,4 @@
 
     
   </data>
-</openerp>
+</odoo>

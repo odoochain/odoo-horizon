@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <template id="assets" name="website_booking assets">
             <!--Import Google Icon Font-->
@@ -61,4 +61,4 @@
         <menuitem name="Online Booking" id="menu_school_booking" icon="fa-calendar" web_icon="hr_timesheet_sheet,static/description/icon.png" sequence="90" action="action_website_booking" />
 
     </data>
-</openerp>
+</odoo>

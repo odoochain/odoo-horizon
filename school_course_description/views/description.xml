@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
   <data>
         <!-- Course Documentation List View -->
         <record id="view_course_documentation_list" model="ir.ui.view">
@@ -221,4 +221,4 @@
         </record>
         
     </data>
-</openerp>
+</odoo>

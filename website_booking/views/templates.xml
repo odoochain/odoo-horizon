@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <template id="index" name="Booking Index" page="True">
             <t t-call="web.layout">
@@ -147,4 +147,4 @@
         
         
     </data>
-</openerp>
+</odoo>

@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         
         <!-- Official Document Type List View -->
@@ -87,4 +87,4 @@
         <menuitem id="menu_official_document_list" parent="school_registration.menu_admin_registration" action="action_official_document_type_list" sequence="10" />
         
     </data>
-</openerp>
+</odoo>

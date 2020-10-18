@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <template id="layout_container" name="Horizon Responsive Layout Container">
             <html>
@@ -772,4 +772,4 @@
     		</t>
     	</template>
     </data>
-</openerp>
+</odoo>

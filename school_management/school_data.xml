@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data noupdate="1">
 
         <record id="group_employee" model="res.groups">
@@ -48,4 +48,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

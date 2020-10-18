@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <!-- Split Course Group Wizard View -->
         <record model="ir.ui.view" id="split_cg_wizard_form">
@@ -109,4 +109,4 @@
         </record>
         
     </data>
-</openerp>
+</odoo>

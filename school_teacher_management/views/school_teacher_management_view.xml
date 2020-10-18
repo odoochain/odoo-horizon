@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
       
       <!-- Top menu item -->
@@ -146,4 +146,4 @@
         <menuitem id="menu_teacher_designation_form" parent="menu_teacher_management" action="action_teacher_designation_form" sequence="25" />
  
     </data>
-</openerp>
+</odoo>

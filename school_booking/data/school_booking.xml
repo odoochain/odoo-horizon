@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         <record id="school_student_event_type" model="calendar.event.type">
             <field name="name">Student Booking</field>
@@ -35,4 +35,4 @@
             <field name="name">Gestion des réservations</field>
         </record>
     </data>
-</openerp>
+</odoo>

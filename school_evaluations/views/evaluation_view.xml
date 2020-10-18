@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
     
         <!-- Top menu item -->
@@ -546,4 +546,4 @@
         <menuitem id="menu_school_eval" name="Deliberation" action="action_school_evaluations" icon="fa-envelope" web_icon="school_evaluations,static/description/icon.png" sequence="70" />
 
     </data>
-</openerp>
+</odoo>

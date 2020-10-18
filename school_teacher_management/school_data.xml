@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data noupdate="1">
 
         <record id="group_designation" model="res.groups">
@@ -28,4 +28,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

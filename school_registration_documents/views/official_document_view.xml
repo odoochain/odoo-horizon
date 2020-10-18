@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
     <data>
         
         <!--<menuitem name="Official Documents" id="menu_official_document" icon="fa-book" web_icon="website_portal_sale,static/description/icon.png" sequence="65" />-->
@@ -93,4 +93,4 @@
         <menuitem id="menu_official_document_form" parent="school_management.menu_individual_bloc" action="action_official_document_list" sequence="999" />
         
     </data>
-</openerp>
+</odoo>
