@@ -27,7 +27,7 @@
     'category': 'School Management',
     'depends': ['school_management','report_xlsx'],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'report/school_report_xlsx.xml',
     ],
     'demo_xml': [],

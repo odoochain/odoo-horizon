@@ -27,7 +27,7 @@
     'category': 'School Management',
     'depends': ['school_management'],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'school_data.xml',
         'views/school_teacher_management_view.xml',
         #'report/report_student_group.xml',

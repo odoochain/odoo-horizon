@@ -27,7 +27,7 @@
     'category': 'School Management',
     'depends': ['school_dispense_approval'],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'views/configuration_view.xml',
         'wizard/year_opening.xml',
         'views/registration_view.xml',

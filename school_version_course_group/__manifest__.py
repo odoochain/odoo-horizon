@@ -27,7 +27,7 @@
     'category': 'School Management',
     'depends': ['school_management'],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'views/program_view.xml',
     ],
     'demo_xml': [],

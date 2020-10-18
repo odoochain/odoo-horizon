@@ -27,7 +27,7 @@
     'category': 'School Management',
     'depends': ['school_management'],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'wizard/split_cg_wizard.xml',
     ],
     'demo_xml': [],

@@ -27,7 +27,7 @@
     'category': 'School Management',
     'depends': ['school_management','school_registration'],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'views/configuration_view.xml',
         'wizard/add_documents.xml',
         'views/res_partner_view.xml',

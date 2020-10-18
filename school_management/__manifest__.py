@@ -27,7 +27,7 @@
     'category': 'School Management',
     'depends': ['mail','partner_contact_gender'],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'school_data.xml',
         'views/res_partner_view.xml',
         'views/program_view.xml',

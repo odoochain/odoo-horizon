@@ -27,7 +27,7 @@
     'category': 'School Management',
     'depends': ['school_management','calendar','web','web_scheduler'],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'data/school_booking.xml',
         'views/school_booking_view.xml',
         'views/school_asset_view.xml',
