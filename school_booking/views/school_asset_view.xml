@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-  <data>
+  
 
     <menuitem name="Assets" parent="menu_main_booking" id="menu_assets" sequence="900" />
     
@@ -384,5 +384,5 @@
 
     <menuitem id="menu_asset_category" action="school_asset_category_action" parent="menu_assets" sequence="89" />
     
-  </data>
+  
 </odoo>

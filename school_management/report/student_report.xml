@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
+    
       <!--
     
     Evaluations report for students
@@ -186,5 +186,5 @@
         
         <!-- <menuitem id="menu_report_teacher_pivot" parent="menu_teaching_report" action="action_report_school_teacher" sequence="5"/> -->
         
-    </data>
+    
 </odoo>

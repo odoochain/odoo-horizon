@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
+    
       
       <!-- Top menu item -->
       <menuitem name="Teacher Management" id="menu_teacher_management" icon="fa-book" web_icon="school_teacher_management,static/description/icon.png" sequence="50" />
@@ -145,5 +145,5 @@
         
         <menuitem id="menu_teacher_designation_form" parent="menu_teacher_management" action="action_teacher_designation_form" sequence="25" />
  
-    </data>
+    
 </odoo>

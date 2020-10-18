@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
+    
 
         <!-- Prerequisits List View -->
         <record id="view_prerequisit_list" model="ir.ui.view">
@@ -109,5 +109,5 @@
             </field>
         </record>
 
-    </data>
+    
 </odoo>

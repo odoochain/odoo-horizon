@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
+    
     <!--
         <menuitem name="Course Sessions" parent="menu_main_program" id="menu_course_session" sequence="20" />
     -->
@@ -150,5 +150,5 @@
         <menuitem id="menu_course_session_list" parent="menu_course_session" action="action_course_session_list" sequence="10" />
         <menuitem id="menu_my_course_session_list" parent="menu_course_session" action="action_my_course_session_list" sequence="20" />
     -->
-    </data>
+    
 </odoo>

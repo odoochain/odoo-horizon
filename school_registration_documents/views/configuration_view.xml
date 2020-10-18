@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
+    
         
         <!-- Official Document Type List View -->
         <record id="view_official_document_type_list" model="ir.ui.view">
@@ -86,5 +86,5 @@
         
         <menuitem id="menu_official_document_list" parent="school_registration.menu_admin_registration" action="action_official_document_type_list" sequence="10" />
         
-    </data>
+    
 </odoo>

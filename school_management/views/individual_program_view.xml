@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-  <data>
+  
     
     <!-- Top menu item -->
     <menuitem name="Individuals Programs" id="menu_individual_bloc" icon="fa-book" web_icon="hr_recruitment,static/description/icon.png" sequence="62" groups="school_management.group_registration"/>
@@ -600,5 +600,5 @@
 
     <menuitem id="menu_individual_course_form" parent="menu_individual_bloc" action="action_individual_course_form" sequence="70" />
 
-  </data>
+  
 </odoo>

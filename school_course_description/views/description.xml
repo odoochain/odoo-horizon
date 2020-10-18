@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-  <data>
+  
         <!-- Course Documentation List View -->
         <record id="view_course_documentation_list" model="ir.ui.view">
             <field name="name">school.course_documentation.tree</field>
@@ -220,5 +220,5 @@
             </field>
         </record>
         
-    </data>
+    
 </odoo>

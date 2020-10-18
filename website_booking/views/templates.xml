@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
+    
         <template id="index" name="Booking Index" page="True">
             <t t-call="web.layout">
                 <t t-set="head">
@@ -146,5 +146,5 @@
         </template>
         
         
-    </data>
+    
 </odoo>

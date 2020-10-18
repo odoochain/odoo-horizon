@@ -22,7 +22,7 @@
 -->
 
 <odoo>
-  <data>
+  
 
     <template id="assets_backend" name="school calendar assets" inherit_id="calendar.assets_backend">
         <xpath expr="." position="inside">
@@ -294,5 +294,5 @@
     <menuitem id="menu_booking_man_tree" parent="menu_booking_booking_tree" action="action_booking_man_tree" sequence="30" />
 
     
-  </data>
+  
 </odoo>

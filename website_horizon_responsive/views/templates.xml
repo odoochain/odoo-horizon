@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
+    
         <template id="layout_container" name="Horizon Responsive Layout Container">
             <html>
                 <head>
@@ -771,5 +771,5 @@
     			</div>
     		</t>
     	</template>
-    </data>
+    
 </odoo>

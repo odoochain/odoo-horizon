@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
+    
         <!-- Add boolean for teacher, student, employee on partner form view -->
         <record id="view_partners_form_school" model="ir.ui.view">
             <field name="name">view.res.partner.form.school</field>
@@ -457,5 +457,5 @@
         
         <menuitem id="menu_archived_form" parent="menu_contacts" action="action_archived_form" sequence="99" />
 
-    </data>
+    
 </odoo>
