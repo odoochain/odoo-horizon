@@ -88,7 +88,7 @@ class Program(models.Model):
     name = fields.Char(string='Name', compute='compute_name', store=True)
     
     @api.depends('title','year_id')
-    
+    @api.multi
     def compute_name(self):
         for course_g in self:
             course_g.name = "%s - %s" % (course_g.year_id.short_name, course_g.title)
@@ -97,7 +97,7 @@ class Program(models.Model):
     
     description = fields.Text(string='Description')
         
-    competency_ids = fields.Many2many('school.competency','school_competency_program_rel', 'program_id', 'competency_id', string='Competencies', ondelete='set null')
+    competency_ids = fields.Many2many('school.competency','school_competency_program_rel', 'program_id', 'competency_id', string='Competencies', ondelete='restrict')
     
     cycle_id = fields.Many2one('school.cycle', string='Cycle', required=True, domain=[('type', '!=', False)])
     
