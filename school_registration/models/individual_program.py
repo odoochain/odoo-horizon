@@ -46,7 +46,7 @@ class IndividualProgram(models.Model):
             else :
                  _logger.info('Skip course groups : ' + group.ue_id + ' - ' +group.name)
     
-    @api.multi
+    
     def register_pae(self):
         self.ensure_one()
         context = dict(self._context or {})

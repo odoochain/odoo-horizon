@@ -41,7 +41,7 @@ class AddDocuments(models.TransientModel):
         res['document_type_ids'] = document_type_ids
         return res
         
-    @api.multi
+    
     def on_confirm_documents(self):
         self.ensure_one()
         for doc_type in self.document_type_ids:

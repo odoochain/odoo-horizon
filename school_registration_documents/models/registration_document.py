@@ -38,7 +38,7 @@ class Partner(models.Model):
     google_drive_folder = fields.Char(string="Google Drive Folder")
     
     @api.depends('official_document_ids','official_document_ids.is_available')
-    @api.multi
+    
     def _compute_official_document_missing_count(self):
         docs_data = self.env['school.official_document'].read_group(
             [('student_id', 'in', self.ids), ('is_available', '=', False)], ['student_id'], ['student_id'])
@@ -47,7 +47,7 @@ class Partner(models.Model):
             partner.official_document_count = len(partner.official_document_ids)
             partner.official_document_missing_count = result.get(partner.id, 0)
             
-    @api.multi
+    
     def action_view_documents(self):
         official_document_ids = self.mapped('official_document_ids')
         domain = "[('id', 'in', " + str(official_document_ids.ids) + ")]"
@@ -68,7 +68,7 @@ class OfficialDocument(models.Model):
     name = fields.Char('Name',compute='compute_name')
     
     @api.depends('student_id.name','type_id.name')
-    @api.multi
+    
     def compute_name(self):
         for doc in self:
             doc.name = "%s - %s" % (doc.student_id.name, doc.type_id.name)

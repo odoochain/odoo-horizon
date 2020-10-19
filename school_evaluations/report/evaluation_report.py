@@ -41,7 +41,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
     
     send_as_email = fields.Boolean(string="Send as email")
     
-    @api.multi
+    
     def print_report(self, data):
         self.ensure_one()
         data['year_id'] = self.year_id.id
@@ -132,7 +132,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
 class ReportEvaluationByTeacher(models.AbstractModel):
     _name = 'report.school_evaluations.report_evaluation_by_teacher_content'
     
-    @api.multi
+    
     def render_html(self, data):
         res_data = []
         current_year_id = self.env.user.current_year_id

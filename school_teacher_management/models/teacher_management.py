@@ -43,15 +43,15 @@ class SchoolTeacherDesignation(models.Model):
              " * The 'Active' status is when a designation is currently active.\n"
              " * The 'Canceled' status is used when a designation is canceled.")
     
-    @api.multi
+    
     def reset_to_draft(self):
         return self.write({'state': 'draft'})
     
-    @api.multi
+    
     def confirm(self):
         return self.write({'state': 'active'})
     
-    @api.multi
+    
     def cancel(self):
         return self.write({'state': 'canceled'})
     

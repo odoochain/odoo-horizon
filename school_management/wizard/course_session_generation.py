@@ -31,27 +31,27 @@ class CourseSessionGeneration(models.TransientModel):
     
     year_id = fields.Many2one('school.year', string="Year", ondelete='cascade')
 
-    @api.one
     @api.depends('year_id')
     def generate_assigments(self):
-        self.env.cr.execute("""
-        SELECT school_course.id 
-        from 
-            school_bloc, school_bloc_course_group_rel, school_course_group, school_course
-        WHERE 
-            school_bloc.year_id = %s
-            AND school_bloc.id = school_bloc_course_group_rel.bloc_id
-            AND school_bloc_course_group_rel.group_id = school_course_group.id
-            AND school_course_group.id = school_course.course_group_id;
-        """ % (self.year_id.id))
+        pass
+        # self.env.cr.execute("""
+        # SELECT school_course.id 
+        # from 
+        #     school_bloc, school_bloc_course_group_rel, school_course_group, school_course
+        # WHERE 
+        #     school_bloc.year_id = %s
+        #     AND school_bloc.id = school_bloc_course_group_rel.bloc_id
+        #     AND school_bloc_course_group_rel.group_id = school_course_group.id
+        #     AND school_course_group.id = school_course.course_group_id;
+        # """ % (self.year_id.id))
         
-        res = self.env.cr.fetchall()
-        for (course_id) in res:
-            try:
-                _logger.info('Create course session %s',course_id)
-                self.env['school.course_session'].create({"year_id":self.year_id,"course_id":course_id})
-            except Exception as e:
-                _logger.info(_('Error during creation of course session %s' % e))
-                pass
-                #TODO : detect missing course_session and insert them
+        # res = self.env.cr.fetchall()
+        # for (course_id) in res:
+        #     try:
+        #         _logger.info('Create course session %s',course_id)
+        #         self.env['school.course_session'].create({"year_id":self.year_id,"course_id":course_id})
+        #     except Exception as e:
+        #         _logger.info(_('Error during creation of course session %s' % e))
+        #         pass
+        #         #TODO : detect missing course_session and insert them
             

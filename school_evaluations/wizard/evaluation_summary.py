@@ -44,7 +44,7 @@ class EvaluationSummaryWizard(models.TransientModel):
             ('second','Second Session'),
             ], string="Session")
     
-    @api.multi
+    
     def generate_summary(self):
         self.ensure_one()
         data = {}
@@ -56,7 +56,7 @@ class EvaluationSummaryWizard(models.TransientModel):
 class ReportEvaluationSummary(models.AbstractModel):
     _name = 'report.school_evaluations.evaluation_summary_content'
 
-    @api.multi
+    
     def render_html(self, data):
         _logger.info('render_html')
         year_id = data['year_id']

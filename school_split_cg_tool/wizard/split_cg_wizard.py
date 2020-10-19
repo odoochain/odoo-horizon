@@ -46,10 +46,10 @@ class SplitUEWizard(models.TransientModel):
     total_total_credits = fields.Integer(compute='_compute_totals')
     
     @api.depends('target_first_course_group_id','target_second_course_group_id')
-    @api.one
     def _compute_totals(self):
-        self.total_total_hours = self.target_first_course_group_id.total_hours + self.target_second_course_group_id.total_hours
-        self.total_total_credits = self.target_first_course_group_id.total_credits + self.target_second_course_group_id.total_credits
+        for rec in self:
+            rec.total_total_hours = rec.target_first_course_group_id.total_hours + rec.target_second_course_group_id.total_hours
+            rec.total_total_credits = rec.target_first_course_group_id.total_credits + rec.target_second_course_group_id.total_credits
     
     @api.onchange('source_course_group_id')
     def on_change_source_course_group_id(self):
@@ -85,7 +85,7 @@ class SplitUEWizard(models.TransientModel):
             'target_second_course_group_id': second,
         })
     
-    @api.multi
+    
     def on_confirm(self):
         self.ensure_one()
         b_count = 0
@@ -119,7 +119,7 @@ class SplitUEWizard(models.TransientModel):
             }
         }
         
-    @api.multi
+    
     def on_cancel(self):
         self.ensure_one()
         self.target_first_course_group_id.unlink()
@@ -130,7 +130,7 @@ class CourseGroup(models.Model):
     '''Courses Group'''
     _inherit = 'school.course_group'
     
-    @api.multi
+    
     def on_split(self):
         value = {
                 'name': _('Split Course Group Wizard'),

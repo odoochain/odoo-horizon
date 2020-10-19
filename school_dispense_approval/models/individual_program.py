@@ -28,7 +28,7 @@ class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
     
-    @api.multi
+    
     def set_to_progress(self, context):
         for bloc in self:
             for icg in bloc.course_group_ids:
@@ -48,7 +48,7 @@ class IndividualCourse(models.Model):
     is_dispense_approved_char = fields.Char(string="Is Dispense Approved Text", compute="_compute_char", store=True)
     
     @api.depends('dispense','is_dispense_approved')
-    @api.multi
+    
     def _compute_char(self):
         for ic in self:
             ic.dispense_char = _('Dispensed') if ic.dispense else _('Not Dispensed')

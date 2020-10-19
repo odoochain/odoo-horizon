@@ -35,7 +35,7 @@ class CourseGroup(models.Model):
     total_weight_to_select = fields.Integer(string='Total Weight to Select')
 
     @api.depends('title','level','speciality_id.name', 'is_choice_course_group')
-    @api.multi
+    
     def compute_name(self):
         for course_g in self:
             if course_g.is_choice_course_group :
@@ -49,22 +49,22 @@ class CourseGroup(models.Model):
                 else:
                     course_g.name = "%s - %s" % (course_g.title, course_g.speciality_id.name)
             
-    @api.one
     @api.depends('course_ids','is_choice_course_group','total_credits_to_select','total_hours_to_select','total_weight_to_select')
     def _get_courses_total(self):
-        if self.is_choice_course_group:
-            self.total_hours = self.total_hours_to_select
-            self.total_credits = self.total_credits_to_select
-            self.total_weight = self.total_weight_to_select
-        else:
-            super(CourseGroup, self)._get_courses_total()
+        for rec in self:
+            if rec.is_choice_course_group:
+                rec.total_hours = rec.total_hours_to_select
+                rec.total_credits = rec.total_credits_to_select
+                rec.total_weight = rec.total_weight_to_select
+            else:
+                super(CourseGroup, rec)._get_courses_total()
             
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
 
     # TODO : RE IMPLEMENT THIS CHECK
-    #@api.multi
+    #
     #def set_to_progress(self, context):
     #    for bloc in self:
     #        for icg in bloc.course_group_ids:

@@ -63,25 +63,18 @@ class CourseDocumentation(models.Model):
             'course_ids' : [(4,self.course_id)]
         })
     
-    #@api.one
-    #@api.constrains('state', 'course_id')
-    #def _check_uniqueness(self):
-    #    num_active = self.env['school.course_documentation'].search_count([['course_id', '=', self.course_id.id],['state','=','published']])
-    #    if num_active > 1:
-    #        raise ValidationError("Only on documentation shall be published at a given time")
     
-    @api.multi
     def unpublish(self):
         return self.write({'state': 'draft'})
     
-    @api.multi
+    
     def publish(self):
         current = self.env['school.course_documentation'].search([['course_id', '=', self.course_id.id],['state','=','published']])
         if current:
             current[0].write({'state': 'archived'})
         return self.write({'state': 'published'})
     
-    @api.multi
+    
     def archive(self):
         return self.write({'state': 'archived'})
 
@@ -161,20 +154,20 @@ class Course(models.Model):
 
     all_documentation_count = fields.Integer(string="Documentation Count", compute="_compute_count")
     
-    @api.one
     @api.depends('all_documentation_ids')
     def _compute_count(self):
-        self.all_documentation_count = len(self.documentation_ids)
+        for rec in self:
+            rec.all_documentation_count = len(rec.documentation_ids)
     
-    @api.one
     def compute_documentation_id(self):
-        docs = self.documentation_ids.filtered(lambda r: r.state == 'published')
-        if docs:
-            self.documentation_id = docs[0]
-        else:
-            self.documentation_id = False
+        for rec in self:
+            docs = rec.documentation_ids.filtered(lambda r: r.state == 'published')
+            if docs:
+                rec.documentation_id = docs[0]
+            else:
+                rec.documentation_id = False
             
-    @api.multi
+    
     def _search_documentation_id(self, operator, value):
         if value == 'missing' :
             current_year_id = self.env.user.current_year_id

@@ -45,7 +45,7 @@ class YearOpening(models.TransientModel):
             'program_to_duplicate_ids': [(4, program_id.id, False) for program_id in program_ids],
         }
         
-    @api.multi
+    
     @api.depends('year_id','program_to_duplicate_ids')
     def open_year(self):
         ids = []

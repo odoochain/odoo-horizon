@@ -39,12 +39,11 @@ class Partner(models.Model):
     
     initials = fields.Char('Initials')
     
-    @api.one
     @api.constrains('initials')
     def _check_initials(self):
-        _logger.info('Chech here !!')
-        if self.initials and not re.match('([A-Z]\.,)*([A-Z]\.)?',self.initials):
-            raise UserError(_("Please encode initials as eg X.,V.,T."))
+        for rec in self:
+            if rec.initials and not re.match('([A-Z]\.,)*([A-Z]\.)?',rec.initials):
+                raise UserError(_("Please encode initials as eg X.,V.,T."))
     
     birthplace = fields.Char('Birthplace')
     phone2 = fields.Char('Phone2')
@@ -109,19 +108,18 @@ class Partner(models.Model):
     
     teacher_curriculum_vitae = fields.Html('Curriculum Vitae')
     
-    @api.one
     def _get_teacher_current_individual_course_ids(self):
-        self.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', self.id]])
+        for rec in self:
+            rec.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', rec.id]])
 
-    @api.one
     def _get_student_current_individual_course_ids(self):
-        self.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', self.id]])
+        for rec in self:
+            rec.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', rec.id]])
 
-    @api.one
     def _get_teacher_current_course_session_ids(self):
-        res = self.env['school.course_session'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', self.id]])
-        self.teacher_current_assigment_ids = res
-    
+        for rec in self:
+            rec.teacher_current_assigment_ids = self.env['school.course_session'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', rec.id]])
+        
     # TODO : This is not working but don't know why
     @api.model
     def _get_default_image(self, is_company, colorize=False):
