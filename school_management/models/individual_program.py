@@ -137,9 +137,9 @@ class IndividualBloc(models.Model):
                 bloc.source_bloc_section_id = bloc.program_id.section_id
                 bloc.source_bloc_track_id = bloc.program_id.track_id
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
+    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', track_visibility='onchange')
     
