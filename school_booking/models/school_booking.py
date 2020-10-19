@@ -62,8 +62,8 @@ class Event(models.Model):
     """ Model for School Event """
     _inherit = 'calendar.event'
     
-    group_id = fields.Many2one('school.student_group', string='Group', ondelete='set null')
-    yearly_booking_id = fields.Many2one('school.yearly_booking', string='Group', ondelete='set null')
+    group_id = fields.Many2one('school.student_group', string='Group', ondelete='restrict')
+    yearly_booking_id = fields.Many2one('school.yearly_booking', string='Group', ondelete='restrict')
     
     room_id = fields.Many2one('school.asset', string='Room', copy=False)
     asset_ids = fields.Many2many('school.asset', 'event_assets_ref','event_id','asset_id', string='Assets')

@@ -371,7 +371,7 @@ class Competency(models.Model):
     sequence = fields.Integer(string='Sequence')
     description = fields.Text(string='Description')
     
-    program_ids = fields.Many2many('school.program','school_competency_program_rel', 'competency_id', 'program_id', string='Programs', ondelete='set null')
+    program_ids = fields.Many2many('school.program','school_competency_program_rel', 'competency_id', 'program_id', string='Programs', ondelete='restrict')
     
 class Domain(models.Model):
     '''Domain'''
