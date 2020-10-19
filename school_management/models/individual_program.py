@@ -309,9 +309,9 @@ class IndividualCourse(models.Model):
             if len(old_course) == 1 and old_course.teacher_id:
                 rec.teacher_id = old_course.teacher_id
 
-    image = fields.Binary('Image', attachment=True, related='student_id.image')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
+    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
 
     url_ref = fields.Char(related="source_course_id.url_ref", readonly=True)
 
