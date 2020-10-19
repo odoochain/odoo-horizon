@@ -88,7 +88,6 @@ class Program(models.Model):
     name = fields.Char(string='Name', compute='compute_name', store=True)
     
     @api.depends('title','year_id')
-    @api.multi
     def compute_name(self):
         for course_g in self:
             course_g.name = "%s - %s" % (course_g.year_id.short_name, course_g.title)
