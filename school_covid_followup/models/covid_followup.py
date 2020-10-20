@@ -44,7 +44,7 @@ class CovidFollowup(models.Model):
             ('start_quar', 'Début quarantaine'),
             ('end_quar', 'Fin quarantaine'),
             ('other', 'Autre'),
-        ], string='Reporting Type', index=True, readonly=True, default='nothing',
+        ], string='Reporting Type', index=True, default='nothing',
         track_visibility='onchange',
         copy=False,
         help="")
