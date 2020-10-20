@@ -53,7 +53,7 @@ class CovidFollowup(models.Model):
         copy=False,
         help="")
     
-    details = fields.Char(string="Details")
+    details = fields.Text(string="Details")
     
     probing_doc = fields.Many2many('ir.attachment', 'probing_doc_attachment_rel', 'covid_followup_id',
                                       'attachment_id', 'Probing docs',
