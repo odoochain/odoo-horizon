@@ -139,8 +139,8 @@
                         <field name="student_id"/>
                         <field name="reporting_date"/>
                         <field name="reporting_type"/>
-                        <field name="probing_doc"/>
                         <field name="author_id"/>
+                        <field name="probing_doc" widget="many2many_binary"/>
                       </group>
                     </sheet>
                 </form>
