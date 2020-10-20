@@ -171,7 +171,7 @@
         <!-- Top menu item -->
         <menuitem name="COVID Followup" id="menu_covid_followup" icon="fa-book" web_icon="school_covid_followup,static/description/icon.png" sequence="61" groups="school_management.group_employee"/>
         
-        <menuitem id="menu_covid_followup_contact_list" parent="school_covid_followup.menu_covid_followup_contact" action="action_covid_followup_contact_list" sequence="10" />
+        <menuitem id="menu_covid_followup_contact_list" parent="school_covid_followup.menu_covid_followup" action="action_covid_followup_contact_list" sequence="10" />
         
         <menuitem id="menu_covid_followup_list" parent="school_covid_followup.menu_covid_followup" action="action_covid_followup_list" sequence="20" />
         
