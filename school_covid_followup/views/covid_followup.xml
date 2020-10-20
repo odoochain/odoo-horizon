@@ -22,6 +22,98 @@
 -->
 <openerp>
   <data>
+        <!-- Covid Followup Contact List View -->
+        <record id="view_covid_followup_contact_list" model="ir.ui.view">
+            <field name="name">school.covid_followup_contact.tree</field>
+            <field name="model">res.partner</field>
+            <field eval="8" name="priority" />
+            <field name="arch" type="xml">
+                <tree string="Covid Followup Contacts">
+                    <field name="name"/>
+                    <field name="last_covid_followup_date"/>
+                    <field name="last_covid_followup_type"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="covid_followup_contact_form">
+            <field name="name">school.covid_followup_contact.view</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Covid Contact Followup">
+                    <sheet>
+                        <div class="row">
+                          <div class="col-md-2">
+                              <div style="margin: 0 auto">
+                                  <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [200, 200]}"/>
+                              </div>
+                          </div>
+                          <div class="col-md-7">
+                              <div class="oe_title">
+                                  <h1>
+                                      <field name="name" readonly="1" class="oe_inline"/> <field name='initials' placeholder="I.,J.,F." class="oe_inline"/>
+                                  </h1>
+                                  <span class="oe_fade">
+                                        Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
+                                  </span>
+                                  <group>
+                                      <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
+                                      <field name="user_ids" invisible="1"/>
+                                      <field name="email" widget="email" attrs="{'required': [('user_ids','!=', [])]}" placeholder="Email"/>
+                                      <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': ['|',('is_company','=', True),('student','=',True)]}"/>
+                                  </group>
+                      			</div>
+                              </div>
+                          </div>
+                          <!--<div class="col-md-3">
+                              <div name="button_box" class="oe_button_box">
+                                  <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                      <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                                  </button>
+                              </div>         
+                          </div>-->
+                        </div>
+                        <field name="covid_followup_ids">
+                            <tree string="COVID Followup" default_order='date desc' editable="bottom">
+                                <field name="student_id"/>
+                                <field name="reporting_date"/>
+                                <field name="reporting_type"/>
+                                <field name="author_id"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+      
+        <record id="view_covid_followup_contact_filter" model="ir.ui.view">
+            <field name="name">covid_followup_contact.select</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+            <search string="Search Groups">
+                <field name="name"/>
+            </search>
+            </field>
+        </record>
+        
+        <record id="action_covid_followup_contact_list" model="ir.actions.act_window">
+            <field name="name">Covid Followup</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="search_view_id" ref="view_covid_followup_contact_filter" />
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+        
+        <record id="action_covid_followup_contact_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_covid_followup_contact_list" />
+            <field name="act_window_id" ref="action_covid_followup_contact_list" />
+        </record>
+      
         <!-- Covid Followup List View -->
         <record id="view_covid_followup_list" model="ir.ui.view">
             <field name="name">school.covid_followup.tree</field>
@@ -32,6 +124,7 @@
                     <field name="student_id"/>
                     <field name="reporting_date"/>
                     <field name="reporting_type"/>
+                    <field name="author_id"/>
                 </tree>
             </field>
         </record>
@@ -43,13 +136,13 @@
             <field name="arch" type="xml">
                 <form string="Covid Followup">
                     <sheet>
-                        <group col="4">
-                          <field name="student_id"/>
-                          <field name="reporting_date"/>
-                          <field name="reporting_type"/>
-                          <field name="probing_doc"/>
-                          <field name="author_id" readonly="1" colspan="4"/>
-                        </group>
+                      <group col="4">
+                        <field name="student_id"/>
+                        <field name="reporting_date"/>
+                        <field name="reporting_type"/>
+                        <field name="probing_doc"/>
+                        <field name="author_id"/>
+                      </group>
                     </sheet>
                 </form>
             </field>
@@ -85,8 +178,10 @@
         
         <!-- Top menu item -->
         <menuitem name="COVID Followup" id="menu_covid_followup" icon="fa-book" web_icon="school_covid_followup,static/description/icon.png" sequence="61" groups="school_management.group_employee"/>
-
-        <menuitem id="menu_covid_followup_list" parent="school_covid_followup.menu_covid_followup" action="action_covid_followup_list" sequence="10" />
+        
+        <menuitem id="menu_covid_followup_contact_list" parent="school_covid_followup.menu_covid_followup_contact" action="action_covid_followup_contact_list" sequence="10" />
+        
+        <menuitem id="menu_covid_followup_list" parent="school_covid_followup.menu_covid_followup" action="action_covid_followup_list" sequence="20" />
         
         <!--<record id="action_new_covid_followup" model="ir.actions.act_window">
             <field name="name">New Covid Followup</field>
