@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+##############################################################################
+#
+#    Copyright (c) 2015 be-cloud.be
+#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<openerp>
+  <data>
+        <!-- Covid Followup List View -->
+        <record id="view_covid_followup_list" model="ir.ui.view">
+            <field name="name">school.covid_followup.tree</field>
+            <field name="model">school.covid_followup</field>
+            <field eval="8" name="priority" />
+            <field name="arch" type="xml">
+                <tree string="Covid Followup">
+                    <field name="student_id"/>
+                    <field name="reporting_date"/>
+                    <field name="reporting_type"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="covid_followup_form">
+            <field name="name">school.covid_followup.view</field>
+            <field name="model">school.covid_followup</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Covid Followup">
+                    <sheet>
+                        <group col="4">
+                          <field name="student_id"/>
+                          <field name="reporting_date"/>
+                          <field name="reporting_type"/>
+                          <field name="probing_doc"/>
+                          <field name="author_id" readonly="1" colspan="4"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_covid_followup_filter" model="ir.ui.view">
+            <field name="name">covid_followup.select</field>
+            <field name="model">school.covid_followup</field>
+            <field name="arch" type="xml">
+            <search string="Search Groups">
+                <field name="student_id"/>
+                <field name="author_id"/>
+            </search>
+            </field>
+        </record>
+        
+        <record id="action_covid_followup_list" model="ir.actions.act_window">
+            <field name="name">Covid Followup</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.covid_followup</field>
+            <field name="search_view_id" ref="view_covid_followup_filter" />
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context"></field>
+        </record>
+        
+        <record id="action_covid_followup_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_covid_followup_list" />
+            <field name="act_window_id" ref="action_covid_followup_list" />
+        </record>
+        
+        <!-- Top menu item -->
+        <menuitem name="COVID Followup" id="menu_covid_followup" icon="fa-book" web_icon="school_covid_followup,static/description/icon.png" sequence="61" groups="school_management.group_employee"/>
+
+        <menuitem id="menu_covid_followup_list" parent="school_covid_followup.menu_covid_followup" action="action_covid_followup_list" sequence="10" />
+        
+        <!--<record id="action_new_covid_followup" model="ir.actions.act_window">
+            <field name="name">New Covid Followup</field>
+            <field name="res_model">school.covid_followup</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="covid_followup_form"/>
+            <field name="context">{'default_course_id': context.get('active_id', False)}</field>
+        </record>
+        
+        <record id="course_doc_form" model="ir.ui.view">
+            <field name="name">school.course.doc.view</field>
+            <field name="model">school.course</field>
+            <field name="inherit_id" ref="school_management.course_form" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button type="action" 
+                            name="%(action_new_covid_followup)d" string="Add doc" >
+                        </button>
+                    </header>
+                </xpath>
+            </field>
+        </record>-->
+        
+    </data>
+</openerp>

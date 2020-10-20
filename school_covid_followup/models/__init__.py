@@ -18,33 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School management',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['mail','partner_contact_gender'],
-    'init_xml': [],
-    'update_xml': [
-        'school_data.xml',
-        'views/res_partner_view.xml',
-        'views/program_view.xml',
-        'views/course_session_view.xml',
-        'views/individual_program_view.xml',
-        'views/configuration_view.xml',
-        'wizard/course_session_generation.xml',
-        'report/student_report.xml',
-        'report/report_program.xml',
-        'sequences/school_sequence.xml',
-        'security/ir.model.access.csv',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules add management tools for a school.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+from . import covid_followup

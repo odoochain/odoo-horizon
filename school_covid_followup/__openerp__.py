@@ -19,30 +19,21 @@
 #
 ##############################################################################
 {
-    'name': 'School management',
+    'name': 'School COVID followup',
     'version': '0.1',
     'license': 'AGPL-3',
     'author': 'be-Cloud.be (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': ['mail','partner_contact_gender'],
+    'depends': ['school_management'],
     'init_xml': [],
     'update_xml': [
-        'school_data.xml',
-        'views/res_partner_view.xml',
-        'views/program_view.xml',
-        'views/course_session_view.xml',
-        'views/individual_program_view.xml',
-        'views/configuration_view.xml',
-        'wizard/course_session_generation.xml',
-        'report/student_report.xml',
-        'report/report_program.xml',
-        'sequences/school_sequence.xml',
+        'views/covid_followup.xml',
         'security/ir.model.access.csv',
     ],
     'demo_xml': [],
     'description': '''
-        This modules add management tools for a school.
+        This modules manages the COVID followup for a school.
     ''',
     'active': False,
     'installable': True,
