@@ -68,8 +68,8 @@
                       			</div>
                               </div>
                           </div>
-                        <field name="covid_followup_ids">
-                            <tree string="COVID Followup" default_order='date desc' context="{'default_student_id': active_id}">
+                        <field name="covid_followup_ids" context="{'default_student_id': active_id}">
+                            <tree string="COVID Followup" default_order='date desc'>
                                 <field name="reporting_date"/>
                                 <field name="reporting_type"/>
                                 <field name="author_id"/>
@@ -139,7 +139,7 @@
                         <field name="student_id"/>
                         <field name="reporting_date"/>
                         <field name="reporting_type"/>
-                        <field name="author_id"/>
+                        <field name="author_id" readonly="1"/>
                         <field name="probing_doc" widget="many2many_binary"/>
                       </group>
                     </sheet>
