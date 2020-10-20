@@ -28,7 +28,7 @@
             <field name="model">res.partner</field>
             <field eval="8" name="priority" />
             <field name="arch" type="xml">
-                <tree string="Covid Followup Contacts">
+                <tree string="Covid Followup Contacts" create="0">
                     <field name="name"/>
                     <field name="last_covid_followup_date"/>
                     <field name="last_covid_followup_type"/>
