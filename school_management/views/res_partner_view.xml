@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div style="margin: 0 auto">
-                                <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [200, 200]}"/>
+                                <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -136,21 +136,6 @@
                                 <field name="mat_number"/>
             				</group>
             			</page>
-                        <page name="sales_purchases" string="Sales &amp; Purchases" invisible="1">
-                            <group name="container_row_2">
-                                <group string="Sale" name="sale">
-                                    <field name="customer"/>
-                                    <field name="user_id" context="{'default_groups_ref': ['base.group_partner_manager']}"/>
-                                </group>
-                                <group string="Purchase" name="purchase">
-                                    <field name="supplier"/>
-                                </group>
-                                <group string="Misc">
-                                    <field name="ref"/>
-                                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
-                                </group>
-                            </group>
-                        </page>
                     </notebook>
                 </sheet>
                 </xpath>
