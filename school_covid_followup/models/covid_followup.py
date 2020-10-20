@@ -91,6 +91,7 @@ class Partner(models.Model):
     @api.depends('covid_followup_ids')
     def _compute_last_covid_followup(self):
         for rec in self:
-            last_covid_followup = rec.covid_followup_ids.sorted(key=lambda r: r.reporting_date)[-1]
-            self.last_covid_followup_date = last_covid_followup.reporting_date
-            self.last_covid_followup_type = last_covid_followup.reporting_type
+            if rec.covid_followup_ids :
+                last_covid_followup = rec.covid_followup_ids.sorted(key=lambda r: r.reporting_date)[-1]
+                self.last_covid_followup_date = last_covid_followup.reporting_date
+                self.last_covid_followup_type = last_covid_followup.reporting_type
