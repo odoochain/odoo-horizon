@@ -30,7 +30,7 @@ class CovidFollowup(models.Model):
     _description = 'Repodrint of a COVID follow up'
     _inherit = ['mail.thread']
     
-    _order = 'name asc, date desc'
+    _order = 'name asc, reporting_date desc'
     
     name = fields.Char(string="Name", related='student_id.name', store=True)
     
