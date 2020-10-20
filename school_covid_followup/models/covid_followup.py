@@ -54,11 +54,11 @@ class CovidFollowup(models.Model):
     probing_doc = fields.Binary(string="Document probant", attachment=True)
     
     @api.model
-    def default_get(self, fields):
-        res = super(CovidFollowup, self).default_get(fields)
-        if 'author_id' in fields:
+    def default_get(self, fds):
+        res = super(CovidFollowup, self).default_get(fds)
+        if 'author_id' in fds:
             res['author_id'] = self.env.user.id
-        if 'reporting_date' in fields:
+        if 'reporting_date' in fds:
             res['reporting_date'] = fields.Date.today()
         return res
     
