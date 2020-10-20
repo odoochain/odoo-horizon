@@ -55,7 +55,9 @@ class CovidFollowup(models.Model):
     
     details = fields.Char(string="Details")
     
-    probing_doc = fields.Binary(string="Document probant", attachment=True)
+    probing_doc = fields.Many2many('ir.attachment', 'probing_doc_attachment_rel', 'covid_followup_id',
+                                      'attachment_id', 'Probing docs',
+                                      help="You may attach files to this followup")
     
     @api.model
     def default_get(self, fds):
