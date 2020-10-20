@@ -90,7 +90,7 @@
         </record>
         
         <record id="action_covid_followup_contact_list" model="ir.actions.act_window">
-            <field name="name">Covid Followup</field>
+            <field name="name">Covid Followup Contacts</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
             <field name="search_view_id" ref="view_covid_followup_contact_filter" />
@@ -103,6 +103,13 @@
             <field name="sequence" eval="1" />
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_covid_followup_contact_list" />
+            <field name="act_window_id" ref="action_covid_followup_contact_list" />
+        </record>
+        
+        <record id="action_covid_followup_contact_form_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="covid_followup_contact_form" />
             <field name="act_window_id" ref="action_covid_followup_contact_list" />
         </record>
       
@@ -165,6 +172,13 @@
             <field name="sequence" eval="1" />
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_covid_followup_list" />
+            <field name="act_window_id" ref="action_covid_followup_list" />
+        </record>
+        
+        <record id="action_covid_followup_form_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="covid_followup_form" />
             <field name="act_window_id" ref="action_covid_followup_list" />
         </record>
         
