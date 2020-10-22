@@ -270,7 +270,7 @@
         <search string="Search Blocs">
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
           <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
-          <field name="source_bloc_id" string="Programme"/>
+          <!--<field name="source_bloc_id" string="Programme"/>
           <field name="source_bloc_domain_id"/>
           <filter name="bloc_1" string="Bac 1" domain="[('source_bloc_level', '=', 1)]"/>
           <filter name="bloc_2" string="Bac 2" domain="[('source_bloc_level', '=', 2)]"/>
@@ -291,7 +291,7 @@
             <filter string="Section" context="{'group_by':'source_bloc_section_id'}" />
             <filter string="Track" context="{'group_by':'source_bloc_track_id'}" />
             <filter string="Speciality" context="{'group_by':'source_bloc_speciality_id'}" />
-          </group>
+          </group>-->
         </search>
       </field>
     </record>
@@ -406,7 +406,7 @@
         <search string="Search Courses">
           <field name="ue_id" string="UE Id"/>
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
-          <field name="source_course_group_id" string="Activité"/>
+          <!--<field name="source_course_group_id" string="Activité"/>
           <filter name="bloc_1" string="Bloc 1" domain="[('source_bloc_level', '=', 1)]"/>
           <filter name="bloc_2" string="Bloc 2" domain="[('source_bloc_level', '=', 2)]"/>
           <filter name="bloc_3" string="Bloc 3" domain="[('source_bloc_level', '=', 3)]"/>
@@ -426,7 +426,7 @@
             <filter string="Section" context="{'group_by':'source_bloc_section_id'}" />
             <filter string="Track" context="{'group_by':'source_bloc_track_id'}" />
             <filter string="Speciality" context="{'group_by':'source_bloc_speciality_id'}" />
-          </group>
+          </group>-->
         </search>
       </field>
     </record>
@@ -536,7 +536,7 @@
         <search string="Search Courses">
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
           <field name="teacher_id" />
-          <field name="bloc_id" />
+          <!--<field name="bloc_id" />
           <field name="source_bloc_id" string="Programme"/>
           <field name="source_course_id" string="Activité"/>
           <filter name="bloc_1" string="Bloc 1" domain="[('source_bloc_level', '=', 1)]"/>
@@ -564,7 +564,7 @@
             <filter string="Section" context="{'group_by':'source_bloc_section_id'}" />
             <filter string="Track" context="{'group_by':'source_bloc_track_id'}" />
             <filter string="Speciality" context="{'group_by':'source_bloc_speciality_id'}" />
-          </group>
+          </group>-->
         </search>
       </field>
     </record>
