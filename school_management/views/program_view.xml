@@ -871,4 +871,4 @@
     
     <menuitem id="menu_course_list" parent="menu_main_program" action="action_course_list" sequence="80" />
     
-<odoo>
+</odoo>
