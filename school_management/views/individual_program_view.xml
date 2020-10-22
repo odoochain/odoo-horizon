@@ -127,8 +127,8 @@
             <filter string="Section" context="{'group_by':'section_id'}"/>
             <filter string="Track" context="{'group_by':'track_id'}"/>
             <filter string="Speciality" context="{'group_by':'speciality_id'}"/>
-          </group>
-        </search>-->
+          </group>-->
+        </search>
       </field>
     </record>
     
