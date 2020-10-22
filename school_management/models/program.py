@@ -221,6 +221,8 @@ class CourseGroup(models.Model):
     
     title = fields.Char(required=True, string='Title')
   
+    cycle_id = fields.Many2one('school.cycle', string='Cycle')
+  
     level = fields.Integer(string='Level')
     
     period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period')
@@ -315,6 +317,8 @@ class Course(models.Model):
     title = fields.Char(required=True, string='Title')
     
     description = fields.Text(string='Description')
+    
+    cycle_id = fields.Many2one(related='course_group_id.cycle_id', string='Cycle',store=True, readonly=True)
     
     url_ref = fields.Char(string='Url Reference')
     
