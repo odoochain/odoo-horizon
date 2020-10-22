@@ -178,7 +178,7 @@ class Bloc(models.Model):
 
     name = fields.Char(string='Name', compute='compute_name', store=True)
     
-    course_group_ids = fields.Many2many('school.course_group','school_bloc_course_group_rel', id1='bloc_id', id2='group_id',string='Course Groups', copy=True, domain=['|',('active','=',False),('active','=',True)])
+    course_group_ids = fields.Many2many('school.course_group','school_bloc_course_group_rel', 'bloc_id', 'group_id',string='Course Groups', copy=True, domain=['|',('active','=',False),('active','=',True)])
     
     @api.depends('sequence','title')
     def compute_name(self):
@@ -235,7 +235,7 @@ class CourseGroup(models.Model):
     
     course_ids = fields.One2many('school.course', 'course_group_id', domain=['|',('active','=',False),('active','=',True)], string='Courses', copy=True, ondelete="cascade")
 
-    bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', id1='group_id', id2='bloc_id', string='Blocs', copy=False)
+    bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', 'group_id', 'bloc_id', string='Blocs', copy=False)
     
     name = fields.Char(string='Name', compute='compute_ue_name', store=True)
     ue_id = fields.Char(string="UE Id", compute='compute_ue_name', store=True)
