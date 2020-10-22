@@ -20,9 +20,9 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, tools, _
-from openerp.exceptions import UserError
-from openerp.tools.safe_eval import safe_eval
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -31,6 +31,15 @@ class Program(models.Model):
     _name = 'school.program'
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin']
+    
+    uid = fields.Char(string="UID")
+    
+    @api.model
+    def create(self, values):
+        if not values.get('uid', False) :
+            values['uid'] = self.env['ir.sequence'].next_by_code('school.program')
+        record = super(Program, self).create(values)
+        return record
     
     @api.depends('bloc_ids')
     def _get_courses_total(self):
@@ -59,21 +68,21 @@ class Program(models.Model):
     
     @api.depends('title','year_id')
     def compute_name(self):
-        for course_g in self:
-            course_g.name = "%s - %s" % (course_g.year_id.short_name, course_g.title)
+        for prog in self:
+            prog.name = "%s - %s" % (prog.year_id.short_name, prog.title)
+    
+    domain = fields.Selection([
+            ('musique','Musique'),
+            ('theatre', 'Théatre')
+        ], string='Domaine')
     
     year_id = fields.Many2one('school.year', required=True, string="Year")
     
     description = fields.Text(string='Description')
         
-    competency_ids = fields.Many2many('school.competency','school_competency_program_rel', 'program_id', 'competency_id', string='Competencies', ondelete='restrict')
-    
     cycle_id = fields.Many2one('school.cycle', string='Cycle', required=True, domain=[('type', '!=', False)])
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
-    domain_id = fields.Many2one(related='speciality_id.domain_id', string='Domain',store=True)
-    section_id = fields.Many2one(related='speciality_id.section_id', string='Section',store=True)
-    track_id = fields.Many2one(related='speciality_id.track_id', string='Track',store=True)
     
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
@@ -85,44 +94,35 @@ class Program(models.Model):
     course_group_ids = fields.One2many('school.course_group', string='Courses Groups',compute='_compute_course_group_ids')
     
     def _compute_course_group_ids(self):
-        for rec in self:
-            course_group_ids = False
-            for bloc in rec.bloc_ids:
-                if course_group_ids :
-                    course_group_ids |= bloc.course_group_ids
-                else :
-                    course_group_ids = bloc.course_group_ids
-            rec.course_group_ids = course_group_ids
+        for rec in self :
+            rec.course_group_ids = rec.mapped(bloc_ids.course_group_ids)
         
-    bloc1_title = fields.Text(compute='_compute_bloc_course_group_ids')
-    bloc2_title = fields.Text(compute='_compute_bloc_course_group_ids')
-    bloc3_title = fields.Text(compute='_compute_bloc_course_group_ids')
+    # bloc1_title = fields.Text(compute='_compute_bloc_course_group_ids')
+    # bloc2_title = fields.Text(compute='_compute_bloc_course_group_ids')
+    # bloc3_title = fields.Text(compute='_compute_bloc_course_group_ids')
         
-    bloc1_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 1', compute='_compute_bloc_course_group_ids')
-    bloc2_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 2', compute='_compute_bloc_course_group_ids')
-    bloc3_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 3', compute='_compute_bloc_course_group_ids')
+    # bloc1_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 1', compute='_compute_bloc_course_group_ids')
+    # bloc2_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 2', compute='_compute_bloc_course_group_ids')
+    # bloc3_course_group_ids = fields.One2many('school.course_group', string='Courses Groups Bloc 3', compute='_compute_bloc_course_group_ids')
     
-    def _compute_bloc_course_group_ids(self):
-        for rec in self:
-            if len(rec.bloc_ids) > 0 :
-                rec.bloc1_title = rec.bloc_ids[0].name
-                rec.bloc1_course_group_ids = rec.bloc_ids[0].course_group_ids
-            if len(rec.bloc_ids) > 1 :
-                rec.bloc2_title = rec.bloc_ids[1].name
-                rec.bloc2_course_group_ids = rec.bloc_ids[1].course_group_ids
-            if len(rec.bloc_ids) > 2 :
-                rec.bloc3_title = rec.bloc_ids[2].name
-                rec.bloc3_course_group_ids = rec.bloc_ids[2].course_group_ids
+    # @api.one
+    # def _compute_bloc_course_group_ids(self):
+    #     if len(self.bloc_ids) > 0 :
+    #         self.bloc1_title = self.bloc_ids[0].name
+    #         self.bloc1_course_group_ids = self.bloc_ids[0].course_group_ids
+    #     if len(self.bloc_ids) > 1 :
+    #         self.bloc2_title = self.bloc_ids[1].name
+    #         self.bloc2_course_group_ids = self.bloc_ids[1].course_group_ids
+    #     if len(self.bloc_ids) > 2 :
+    #         self.bloc3_title = self.bloc_ids[2].name
+    #         self.bloc3_course_group_ids = self.bloc_ids[2].course_group_ids
         
-    
     def unpublish(self):
         return self.write({'state': 'draft'})
-    
-    
+
     def publish(self):
         return self.write({'state': 'published'})
-    
-    
+
     def archive(self):
         return self.write({'state': 'archived'})
 
@@ -133,9 +133,18 @@ class Bloc(models.Model):
     _inherit = ['mail.thread','school.year_sequence.mixin']
     _order = 'program_id,sequence'
     
+    uid = fields.Char(string="UID")
+    
+    @api.model
+    def create(self, values):
+        if not values.get('uid', False) :
+            values['uid'] = self.env['ir.sequence'].next_by_code('school.bloc')
+        record = super(Bloc, self).create(values)
+        return record
+    
     @api.depends('course_group_ids')
     def _get_courses_total(self):
-        for rec in self:
+        for rec in self :
             total_hours = 0.0
             total_credits = 0.0
             total_weight = 0.0
@@ -155,12 +164,10 @@ class Bloc(models.Model):
     cycle_id = fields.Many2one(related='program_id.cycle_id', string='Cycle',store=True)
     
     level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),('6','Agregation'),],string='Level')
-    
+ 
+    domain = fields.Selection(related='program_id.domain', string='Domain',store=True)   
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
-    domain_id = fields.Many2one(related='program_id.domain_id', string='Domain',store=True)
-    section_id = fields.Many2one(related='program_id.section_id', string='Section',store=True)
-    track_id = fields.Many2one(related='program_id.track_id', string='Track',store=True)
-    
+ 
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight')
@@ -171,10 +178,9 @@ class Bloc(models.Model):
 
     name = fields.Char(string='Name', compute='compute_name', store=True)
     
-    course_group_ids = fields.Many2many('school.course_group','school_bloc_course_group_rel', 'bloc_id', 'group_id',string='Course Groups', copy=True, domain=['|',('active','=',False),('active','=',True)])
+    course_group_ids = fields.Many2many('school.course_group','school_bloc_course_group_rel', id1='bloc_id', id2='group_id',string='Course Groups', copy=True, domain=['|',('active','=',False),('active','=',True)])
     
     @api.depends('sequence','title')
-    
     def compute_name(self):
         for bloc in self:
             bloc.name = "%s - %d" % (bloc.title,bloc.sequence)
@@ -182,6 +188,16 @@ class Bloc(models.Model):
     _sql_constraints = [
 	        ('uniq_bloc', 'unique(program_id, sequence)', 'There shall be only one bloc with a given sequence within a program'),
     ]
+    
+    def action_open_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _(self.name),
+            'res_model': 'school.bloc',
+            'res_id': self.id,
+            'view_mode': 'form',
+        }
 
 class CourseGroup(models.Model):
     '''Courses Group'''
@@ -189,20 +205,22 @@ class CourseGroup(models.Model):
     _description = 'Courses Group'
     _inherit = ['mail.thread']
     _order = 'sequence'
+
+    uid = fields.Char(string="UID")
     
-    sequence = fields.Integer(string='Sequence', required=True)
+    @api.model
+    def create(self, values):
+        if not values.get('uid', False) :
+            values['uid'] = self.env['ir.sequence'].next_by_code('school.course_group')
+        record = super(CourseGroup, self).create(values)
+        return record
+
+    sequence = fields.Integer(string='Sequence')
     
     active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
     
     title = fields.Char(required=True, string='Title')
-    
-    speciality_id = fields.Many2one('school.speciality', string='Speciality')
-    domain_id = fields.Many2one(related='speciality_id.domain_id', string='Domain',store=True)
-    section_id = fields.Many2one(related='speciality_id.section_id', string='Section',store=True)
-    track_id = fields.Many2one(related='speciality_id.track_id', string='Track',store=True)
-    
-    cycle_id = fields.Many2one('school.cycle', string='Cycle')
-    
+  
     level = fields.Integer(string='Level')
     
     period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period')
@@ -211,24 +229,21 @@ class CourseGroup(models.Model):
     
     description = fields.Text(string='Description')
     
-    teacher_id = fields.Many2one('res.partner',string='Teacher',domain="[('teacher', '=', '1')]", copy=True)
+    responsible_id = fields.Many2one('res.partner',string='Responsible teacher',domain="[('teacher', '=', '1')]", copy=True)
     
     course_ids = fields.One2many('school.course', 'course_group_id', domain=['|',('active','=',False),('active','=',True)], string='Courses', copy=True, ondelete="cascade")
 
-    bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', 'group_id', 'bloc_id',string='Blocs', copy=False)
+    bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', id1='group_id', id2='bloc_id', string='Blocs', copy=False)
     
     name = fields.Char(string='Name', compute='compute_ue_name', store=True)
-    ue_id = fields.Char(string="UE Id", compute='compute_ue_name', store=True)
     
-    @api.depends('title','level','speciality_id.name', 'cycle_id.short_name')
-    
+    @api.depends('title','level')
     def compute_ue_name(self):
         for course_g in self:
             if course_g.level:
-                course_g.name = "%s - %s - %s%s" % (course_g.title, course_g.speciality_id.name, course_g.cycle_id.short_name, course_g.level)
+                course_g.name = "%s - %s" % (course_g.title, course_g.level)
             else:
-                course_g.name = "%s - %s - %s" % (course_g.title, course_g.speciality_id.name, course_g.cycle_id.short_name)
-            course_g.ue_id = "UE-%s" % course_g.id
+                course_g.name = course_g.title
             
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
@@ -238,7 +253,7 @@ class CourseGroup(models.Model):
 
     @api.depends('course_ids')
     def _get_courses_total(self):
-        for rec in self:
+        for rec in self :
             total_hours = 0.0
             total_credits = 0.0
             total_weight = 0.0
@@ -253,17 +268,27 @@ class CourseGroup(models.Model):
     notes = fields.Text(string='Notes')
     
     def onchange_check_programs(self, course_id):
-        for rec in self:
-            for bloc_id in rec.bloc_ids:
-                if bloc_id.program_id.state in ('published','archived') and not self.env.user._is_admin() :
-                    raise UserError('Cannot change credits or hours of courses used in an active or archived program : %s in %s' % (course_id.name, bloc_id.name))
-    
+        self.ensure_one()
+        for bloc_id in self.bloc_ids:
+            if bloc_id.program_id.state in ('published','archived') and not self.env.user._is_admin() :
+                raise UserError('Cannot change credits or hours of courses used in an active or archived program : %s in %s' % (course_id.name, bloc_id.name))
     
     @api.model
     def name_search(self, name='', args=None, operator='ilike', limit=100):
         if name :
-                args = ['|'] + (args or []) + [('ue_id', 'ilike', name)]
+                args = ['|'] + (args or []) + [('uid', 'ilike', name)]
         return super(CourseGroup, self).name_search(name=name, args=args, operator=operator, limit=limit)
+        
+        
+    def action_open_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _(self.name),
+            'res_model': 'school.course_group',
+            'res_id': self.id,
+            'view_mode': 'form',
+        }
     
 class Course(models.Model):
     '''Course'''
@@ -271,7 +296,16 @@ class Course(models.Model):
     _description = 'Course'
     _inherit = ['mail.thread']
     _order = 'sequence'
+
+    uid = fields.Char(string="UID")
     
+    @api.model
+    def create(self, values):
+        if not values.get('uid', False) :
+            values['uid'] = self.env['ir.sequence'].next_by_code('school.course')
+        record = super(Course, self).create(values)
+        return record
+
     sequence = fields.Integer(string='Sequence')
     
     active = fields.Boolean(related="course_group_id.active", store=True, readonly=True)
@@ -286,13 +320,6 @@ class Course(models.Model):
     
     level = fields.Integer(related='course_group_id.level',string='Level', readonly=True)
     
-    cycle_id = fields.Many2one(related='course_group_id.cycle_id', string='Cycle',store=True, readonly=True)
-    
-    speciality_id = fields.Many2one(related='course_group_id.speciality_id', string='Speciality',store=True, readonly=True)
-    domain_id = fields.Many2one(related='course_group_id.domain_id', string='Domain',store=True, readonly=True)
-    section_id = fields.Many2one(related='course_group_id.section_id', string='Section',store=True, readonly=True)
-    track_id = fields.Many2one(related='course_group_id.track_id', string='Track',store=True, readonly=True)
-    
     hours = fields.Integer(string = 'Hours')
     credits = fields.Integer(string = 'Credits')
     weight =  fields.Float(string = 'Weight',digits=(6,2))
@@ -303,27 +330,25 @@ class Course(models.Model):
     
     has_second_session = fields.Boolean(string="Has a second session", default=True)
     
-    @api.depends('title','level','speciality_id.name', 'cycle_id.short_name', 'course_group_id.level')
-    
+    @api.depends('title','level')
     def compute_name(self):
         for course in self:
             if course.level:
-                course.name = "%s - %s - %s%s" % (course.title, course.speciality_id.name, course.cycle_id.short_name, course.level)
+                course.name = "%s - %s" % (course.title, course.level)
             else:
-                course.name = "%s - %s - %s" % (course.title, course.speciality_id.name, course.cycle_id.short_name)
-    
+                course.name = course.title
+
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]")
     
     @api.onchange('hours','credits')
     def onchange_check_programs(self):
-        for rec in self:
+        for rec in self :
             rec.course_group_id.onchange_check_programs(rec)
         
 
 class ReportProgram(models.AbstractModel):
     _name = 'report.school_management.report_program'
 
-    
     def render_html(self, data):
         _logger.info('render_html')
         docargs = {
@@ -333,24 +358,6 @@ class ReportProgram(models.AbstractModel):
         }
         return self.env['report'].render('school.report_program', docargs)
 
-class Competency(models.Model):
-    '''Competency'''
-    _order = 'name'
-    _name = 'school.competency'
-    _order = 'sequence asc'
-    sequence = fields.Integer(string='Sequence')
-    description = fields.Text(string='Description')
-    
-    program_ids = fields.Many2many('school.program','school_competency_program_rel', 'competency_id', 'program_id', string='Programs', ondelete='restrict')
-    
-class Domain(models.Model):
-    '''Domain'''
-    _order = 'name'
-    _name = 'school.domain'
-    name = fields.Char(required=True, string='Name', size=40)
-    description = fields.Text(string='Description')
-    long_name = fields.Char(required=True, string='Long Name', size=40)
-    
 class Cycle(models.Model):
     '''Cycle'''
     _order = 'name'
