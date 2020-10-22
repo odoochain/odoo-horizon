@@ -31,7 +31,6 @@
         'school_data.xml',
         'views/res_partner_view.xml',
         'views/program_view.xml',
-        'views/course_session_view.xml',
         'views/individual_program_view.xml',
         'views/configuration_view.xml',
         'wizard/course_session_generation.xml',
