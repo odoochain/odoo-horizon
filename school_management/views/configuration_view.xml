@@ -173,7 +173,7 @@
         
         <menuitem id="menu_track_list" parent="menu_admin_program" action="action_track_list" sequence="40" />
         
-        <!-- Domain List View -->
+        <!-- Domain List View 
         <record id="view_domain_list" model="ir.ui.view">
             <field name="name">school.domain.tree</field>
             <field name="model">school.domain</field>
@@ -206,7 +206,7 @@
             <field name="act_window_id" ref="action_domain_list" />
         </record>
         
-        <menuitem id="menu_domain_list" parent="menu_admin_program" action="action_domain_list" sequence="50" />
+        <menuitem id="menu_domain_list" parent="menu_admin_program" action="action_domain_list" sequence="50" />-->
         
     
 </odoo>
