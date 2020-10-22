@@ -27,7 +27,7 @@ from odoo.tools.safe_eval import safe_eval
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from dateutil.relativedelta import relativedelta
 from datetime import datetime,date
-import openerp.addons.decimal_precision as dp
+import odoo.addons.base.models.decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
 

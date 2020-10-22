@@ -22,7 +22,6 @@ import logging
 import threading
 import re
 
-import openerp
 from odoo import tools, api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
