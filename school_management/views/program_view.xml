@@ -657,10 +657,10 @@
       <field name="arch" type="xml">
         <form string="Program">
           <header>
-            <button name="unpublish" type="object" states="published,archived" string="Set to Draft" groups="school_programs.group_program_management"/>
-            <button name="publish" type="object" states="draft" string="Publish Program" class="oe_highlight" groups="school_programs.group_program_management"/>
-            <button name="archive" type="object" states="draft,published" string="Archive Program" groups="school_programs.group_program_management"/>
-            <field name="state" widget="statusbar" statusbar_visible="draft,published,archived" groups="school_programs.group_program_management"/>
+            <button name="unpublish" type="object" states="published,archived" string="Set to Draft" groups="school_management.group_program_management"/>
+            <button name="publish" type="object" states="draft" string="Publish Program" class="oe_highlight" groups="school_management.group_program_management"/>
+            <button name="archive" type="object" states="draft,published" string="Archive Program" groups="school_management.group_program_management"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,published,archived" groups="school_management.group_program_management"/>
           </header>
           <sheet>
             <div class="oe_title">
@@ -855,7 +855,7 @@
         </record>
   
     <!-- Top menu item -->
-    <menuitem name="Programs" id="menu_main_program" icon="fa-book" web_icon="school_management,static/description/icon.png" sequence="60"  groups="school_programs.group_program_management"/>
+    <menuitem name="Programs" id="menu_main_program" icon="fa-book" web_icon="school_management,static/description/icon.png" sequence="60"  groups="school_management.group_program_management"/>
 
     <!-- <menuitem name="Programs" parent="menu_main_program" id="menu_program" sequence="5" />
 
