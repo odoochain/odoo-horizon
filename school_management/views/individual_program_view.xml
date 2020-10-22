@@ -116,7 +116,7 @@
       <field name="arch" type="xml">
         <search string="Search Programs">
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
-          <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+          <!--<filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
           <separator/>
           <filter name="music" string="Musique" domain="[('domain_id', '=', 1)]"/>
           <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
@@ -128,7 +128,7 @@
             <filter string="Track" context="{'group_by':'track_id'}"/>
             <filter string="Speciality" context="{'group_by':'speciality_id'}"/>
           </group>
-        </search>
+        </search>-->
       </field>
     </record>
     
