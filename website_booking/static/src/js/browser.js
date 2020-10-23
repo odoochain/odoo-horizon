@@ -657,9 +657,8 @@ var Calendar = CalendarWidget.extend({
                 });
                 callback(self.ressources);
                 self.trigger_up('switch_ressources', {'ressources' : self.ressources});
-            }).fail(function(err){
-                console.log(err); 
-            });
+            }
+        );
     },
     
     fetch_events: function(start, end, timezone, callback) {
