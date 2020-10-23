@@ -544,10 +544,10 @@
           <filter string="Current Year" name="current" domain="[('year_sequence','=','current')]" />
           <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
           <filter string="Previous Year" name="previous" domain="[('year_sequence','=','previous')]" />
-          <!--<group expand="1" string="Group By">
-            <filter string="Cycle" context="{'group_by':'cycle_id'}" />
-            <filter string="Speciality" context="{'group_by':'speciality_id'}" />
-          </group>-->
+          <group expand="1" string="Group By">
+            <filter string="Cycle" name="cycle_id_group" context="{'group_by':'cycle_id'}" />
+            <filter string="Speciality" name="speciality_id_group" context="{'group_by':'speciality_id'}" />
+          </group>
         </search>
       </field>
     </record>
@@ -784,10 +784,10 @@
           <filter string="Draft" name="draft" domain="[('state','=','draft')]" />
           <filter string="Published" name="draft" domain="[('state','=','published')]" />
           <filter string="Archived" name="archived" domain="[('state','=','archived')]" />
-          <!--<group expand="1" string="Group By">
-            <filter string="Cycle" context="{'group_by':'cycle_id'}" />
-            <filter string="Speciality" context="{'group_by':'speciality_id'}" />
-          </group>-->
+          <group expand="1" string="Group By">
+            <filter string="Cycle" name="cycle_id_group" context="{'group_by':'cycle_id'}" />
+            <filter string="Speciality" name="speciality_id_group" context="{'group_by':'speciality_id'}" />s
+          </group>
         </search>
       </field>
     </record>

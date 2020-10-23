@@ -169,12 +169,12 @@
                     <filter string="Never registered" name="registered_never" domain="[('year_sequence','=','never')]" />
                     <separator/>
                    <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
-                   <!--<field name="user_id"/>
+                   <field name="user_id"/>
                    <field name="parent_id" domain="[('is_company','=',1)]" operator="child_of"/>
                    <group expand="0" name="group_by" string="Group By">
-                       <filter string="Company" context="{'group_by': 'parent_id'}"/>
-                       <filter string="Country" context="{'group_by': 'country_id'}"/>
-                   </group>-->
+                       <filter string="Company" name="parent_id_group" context="{'group_by': 'parent_id'}"/>
+                       <filter string="Country" name="country_id_group" context="{'group_by': 'country_id'}"/>
+                   </group>
                 </search>
             </field>
         </record>
