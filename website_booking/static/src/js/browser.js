@@ -645,7 +645,7 @@ var Calendar = CalendarWidget.extend({
         var self = this;
         self.ressources = [];
 	    self._rpc({
-            route: '/booking/assets', 
+            model: '/booking/assets', 
             param : {'category_id':self.category_id}
             }).then(function(assets){
                 assets.forEach(function(asset) {
