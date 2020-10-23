@@ -384,11 +384,13 @@ var NewBookingDialog = Widget.extend({
         if (fromTime && toTime) {
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
-            ajax.jsonRpc('/booking/rooms', 'call', {
-        				'start' : time.moment_to_str(start),
-        				'end' : time.moment_to_str(stop),
-        				'self_id' : self.event ? self.event.id : '',
-    	    	}).done(function(rooms){
+            self._rpc({
+                route : '/booking/rooms', 
+                param : {
+    				'start' : time.moment_to_str(start),
+    				'end' : time.moment_to_str(stop),
+    				'self_id' : self.event ? self.event.id : '',
+            	}}).done(function(rooms){
                 var roomSelect = self.$('select.select-asset-id').empty().html(' ');
                 for(var room_idx in rooms) {
                     var room = rooms[room_idx];
@@ -461,13 +463,23 @@ var Navigation = Widget.extend({
         var self = this;
         this.state = this.getParent()._current_state;
         if(this.state.category_id && this.state.category_id > 0) {
-            ajax.jsonRpc('/booking/category', 'call', {'id' : this.state.category_id}).done(function(category){
+            self._rpc({
+                route : '/booking/category',
+                param : {
+                    'id' : this.state.category_id
+                }}).done(function(category){
                 if(category[0].is_leaf) {
                     self.selected_category = category[0];
-                    ajax.jsonRpc('/booking/category', 'call', {'id' : self.selected_category.parent_id[0]}).done(function(category){
+                    self._rpc({
+                            route : '/booking/category',
+                            param : {'id' : self.selected_category.parent_id[0]
+                        }}).done(function(category){
                         self.display_category = category[0];
                         if(self.display_category.parent_id) {
-                            ajax.jsonRpc('/booking/category', 'call', {'id' : self.display_category.parent_id[0]}).done(function(category){
+                            self._rpc({
+                                    route : '/booking/category',
+                                    param : {'id' : self.display_category.parent_id[0]
+                                }}).done(function(category){
                                 self.parent_category = category[0];
                                 self.renderCategories();
                                 self.trigger_up('switch_category', {'category' : self.selected_category});
@@ -482,7 +494,10 @@ var Navigation = Widget.extend({
                     self.selected_category = false;
                     self.display_category = category[0];
                     if(self.display_category.parent_id) {
-                        ajax.jsonRpc('/booking/category', 'call', {'id' : self.display_category.parent_id[0]}).done(function(category){
+                        self._rpc({
+                            route : '/booking/category',
+                            param : {'id' : self.display_category.parent_id[0]
+                            }}).done(function(category){
                             self.parent_category = category[0];
                             self.renderCategories();
                             self.trigger_up('switch_category', {'category' : self.display_category});
@@ -629,7 +644,10 @@ var Calendar = CalendarWidget.extend({
     fetch_resources : function(callback) {
         var self = this;
         self.ressources = [];
-	    ajax.jsonRpc('/booking/assets', 'call', {'category_id':self.category_id}).done(function(assets){
+	    self._rpc({
+            model: '/booking/assets', 
+            param : {'category_id':self.category_id}
+            }).done(function(assets){
                 assets.forEach(function(asset) {
                     self.ressources.push({
                         'id' : asset.id,
