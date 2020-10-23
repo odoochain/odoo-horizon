@@ -89,7 +89,7 @@
       <field name="arch" type="xml">
         <search string="Search Building">
           <field name="name" filter_domain="[('name','ilike',self)]" />
-          <group expand="1" string="Group By">
+          <group string="Group By">
             <filter string="Resource Type" context="{'group_by':['resource_type']}" />
           </group>
         </search>
