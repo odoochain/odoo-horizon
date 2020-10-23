@@ -425,7 +425,6 @@
             <filter string="Cycle" name="source_bloc_cycle_id_group" context="{'group_by':'source_bloc_cycle_id'}" />
             <filter string="Section" name="source_bloc_section_id_group" context="{'group_by':'source_bloc_section_id'}" />
             <filter string="Track" name="source_bloc_track_id_group" context="{'group_by':'source_bloc_track_id'}" />
-            <filter string="Speciality" name="source_bloc_speciality_id_group" context="{'group_by':'source_bloc_speciality_id'}" />
           </group>
         </search>
       </field>
@@ -563,7 +562,6 @@
             <filter string="Cycle" name="source_bloc_cycle_id_group" context="{'group_by':'source_bloc_cycle_id'}" />
             <filter string="Section" name="source_bloc_section_id_group" context="{'group_by':'source_bloc_section_id'}" />
             <filter string="Track" name="source_bloc_track_id_group" context="{'group_by':'source_bloc_track_id'}" />
-            <filter string="Speciality" name="source_bloc_speciality_id_group" context="{'group_by':'source_bloc_speciality_id'}" />
           </group>
         </search>
       </field>
