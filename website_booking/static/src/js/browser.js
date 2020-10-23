@@ -5,14 +5,9 @@ odoo.define('website_booking.browser', function (require) {
 
 var core = require('web.core');
 var ajax = require('web.ajax');
-var data = require('web.data');
 var session = require('web.session');
 var Widget = require('web.Widget');
-var Dialog = require("web.Dialog");
 var time = require('web.time');
-var framework = require('web.framework');
-
-var Model = require("web.Model");
 
 var _t = core._t;
 var qweb = core.qweb;
@@ -190,25 +185,39 @@ var NewBookingDialog = Widget.extend({
             if(self.user.in_group_14) {
                 event_type = 'school_management_event_type';
             }
-            new Model('ir.model.data').call('get_object_reference', ['school_booking', event_type]).then(function(categ) {
+            self._rpc({
+                model: 'ir.model.data',
+                method: 'get_object_reference',
+                args: ['school_booking', event_type]
+            }).then(function(categ) {
                 if(self.edit_mode) {
-                    new Model('calendar.event').call('write', [[self.event.id], {
-                        'name' : self.$('#description').val(),
-                        'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
-                        'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
-                        'room_id': roomId,
-                        'categ_ids': [[4, categ[1]]],
-                    }]).then(function (id) {
+                    self._rpc({
+                        model: 'calendar.event',
+                        method: 'write',
+                        args: [[self.event.id], 
+                            {
+                                'name' : self.$('#description').val(),
+                                'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                'room_id': roomId,
+                                'categ_ids': [[4, categ[1]]]
+                            }
+                        ]
+                    }).then(function (id) {
                         self.trigger_up('updateEvent', {'id': id});
                     });
                 } else {
-                    new Model('calendar.event').call('create', [{
-                        'name' : self.$('#description').val(),
-                        'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
-                        'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
-                        'room_id': roomId,
-                        'categ_ids': [[4, categ[1]]],
-                    }]).fail(function(error) {
+                    self._rpc({
+                        model: 'calendar.event',
+                        method: 'create', 
+                        args: [{
+                                    'name' : self.$('#description').val(),
+                                    'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                    'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                    'room_id': roomId,
+                                    'categ_ids': [[4, categ[1]]],
+                                }]
+                        }).fail(function(error) {
                         if(error.data.exception_type == "validation_error"){
                             Materialize.toast(error.data.arguments[0], 4000)
                         }
