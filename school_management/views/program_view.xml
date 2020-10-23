@@ -786,7 +786,7 @@
           <filter string="Archived" name="archived" domain="[('state','=','archived')]" />
           <group expand="1" string="Group By">
             <filter string="Cycle" name="cycle_id_group" context="{'group_by':'cycle_id'}" />
-            <filter string="Speciality" name="speciality_id_group" context="{'group_by':'speciality_id'}" />s
+            <filter string="Speciality" name="speciality_id_group" context="{'group_by':'speciality_id'}" />
           </group>
         </search>
       </field>
