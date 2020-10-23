@@ -386,7 +386,7 @@ var NewBookingDialog = Widget.extend({
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
             self._rpc({
                 route : '/booking/rooms', 
-                param : {
+                params : {
     				'start' : time.moment_to_str(start),
     				'end' : time.moment_to_str(stop),
     				'self_id' : self.event ? self.event.id : '',
@@ -465,20 +465,20 @@ var Navigation = Widget.extend({
         if(this.state.category_id && this.state.category_id > 0) {
             self._rpc({
                 route : '/booking/category',
-                param : {
+                params : {
                     'id' : this.state.category_id
                 }}).then(function(category){
                 if(category[0].is_leaf) {
                     self.selected_category = category[0];
                     self._rpc({
                             route : '/booking/category',
-                            param : {'id' : self.selected_category.parent_id[0]
+                            params : {'id' : self.selected_category.parent_id[0]
                         }}).then(function(category){
                         self.display_category = category[0];
                         if(self.display_category.parent_id) {
                             self._rpc({
                                     route : '/booking/category',
-                                    param : {'id' : self.display_category.parent_id[0]
+                                    params : {'id' : self.display_category.parent_id[0]
                                 }}).then(function(category){
                                 self.parent_category = category[0];
                                 self.renderCategories();
@@ -496,7 +496,7 @@ var Navigation = Widget.extend({
                     if(self.display_category.parent_id) {
                         self._rpc({
                             route : '/booking/category',
-                            param : {'id' : self.display_category.parent_id[0]
+                            params : {'id' : self.display_category.parent_id[0]
                             }}).then(function(category){
                             self.parent_category = category[0];
                             self.renderCategories();
@@ -646,7 +646,7 @@ var Calendar = CalendarWidget.extend({
         self.ressources = [];
 	    self._rpc({
             route: '/booking/assets', 
-            param : {'category_id':self.category_id}
+            params : {'category_id':self.category_id}
             }).then(function(assets){
                 assets.forEach(function(asset) {
                     self.ressources.push({
