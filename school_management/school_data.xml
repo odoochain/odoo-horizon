@@ -46,4 +46,44 @@
         <field name="name">Enseignant Portail</field>
     </record>
 
+    <record id="sequence_school_program" model="ir.sequence">
+        <field name="name">School Program Sequence</field>
+        <field name="code">school.program</field>
+        <field name="prefix">PROG-</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id"></field>
+    </record>
+    
+    <record id="sequence_school_bloc" model="ir.sequence">
+        <field name="name">School Bloc Sequence</field>
+        <field name="code">school.bloc</field>
+        <field name="prefix">BLOC-</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id"></field>
+    </record>
+    
+    <record id="sequence_school_course_group" model="ir.sequence">
+        <field name="name">School Course Group Sequence</field>
+        <field name="code">school.course_group</field>
+        <field name="prefix">UE-</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id"></field>
+    </record>
+    
+    <record id="sequence_school_course" model="ir.sequence">
+        <field name="name">School Course Sequence</field>
+        <field name="code">school.course</field>
+        <field name="prefix">AA-</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id"></field>
+    </record>
+
 </odoo>
