@@ -475,15 +475,19 @@ var Navigation = Widget.extend({
         'up_category' : 'up_category',
     },
     
-    renderElement: function () {
-        var self = this;
+    start: function() {
         this._super.apply(this, arguments);
-        self.state = self.getParent().;
-        if(this.state.category_id && this.state.category_id > 0) {
+        this.state = this.getParent()._current_state;
+    },
+    
+    renderElement: function () {
+        this._super.apply(this, arguments);
+        var self = this;
+        if(self.state.category_id && self.state.category_id > 0) {
             rpc.query({
                 route: "/booking/category",
                 params: {
-                    'id' : this.state.category_id
+                    'id' : self.state.category_id
                 },
             }).then(category => {
                 if(category[0].is_leaf) {
@@ -504,10 +508,12 @@ var Navigation = Widget.extend({
                             }).then(category => {
                                 self.parent_category = category[0];
                                 self.renderCategories();
+                                self.trigger_up('switch_category', {'category' : self.selected_category});
                             });
                         } else {
                             self.parent_category = self.create_root();
                             self.renderCategories();
+                            self.trigger_up('switch_category', {'category' : self.selected_category});
                         }
                     });
                 } else {
@@ -522,10 +528,12 @@ var Navigation = Widget.extend({
                         }).then(category => {
                             self.parent_category = category[0];
                             self.renderCategories();
+                            self.trigger_up('switch_category', {'category' : self.selected_category});
                         });
                     } else {
                         self.parent_category = self.create_root();
                         self.renderCategories();
+                        self.trigger_up('switch_category', {'category' : self.selected_category});
                     }
                 }
             });
