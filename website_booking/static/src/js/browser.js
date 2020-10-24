@@ -475,9 +475,9 @@ var Navigation = Widget.extend({
         'up_category' : 'up_category',
     },
     
-    start: function() {
+    init: function(parent) {
         this._super.apply(this, arguments);
-        this.state = this.getParent()._current_state;
+        this.state = parent._current_state;
     },
     
     renderElement: function () {
