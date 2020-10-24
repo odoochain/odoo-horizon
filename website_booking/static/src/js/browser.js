@@ -475,9 +475,10 @@ var Navigation = Widget.extend({
         'up_category' : 'up_category',
     },
     
-    start: function() {
-        this._super.apply(this, arguments);
+    willStart: function() {
         var self = this;
+        var superDef = this._super.apply(this, arguments);
+        
         this.state = this.getParent()._current_state;
         if(this.state.category_id && this.state.category_id > 0) {
             rpc.query({
@@ -503,13 +504,9 @@ var Navigation = Widget.extend({
                                 },
                             }).then(category => {
                                 self.parent_category = category[0];
-                                self.renderCategories();
-                                self.trigger_up('switch_category', {'category' : self.selected_category});
                             });
                         } else {
                             self.parent_category = self.create_root();
-                            self.renderCategories();
-                            self.trigger_up('switch_category', {'category' : self.selected_category});
                         }
                     });
                 } else {
@@ -523,13 +520,9 @@ var Navigation = Widget.extend({
                             },
                         }).then(category => {
                             self.parent_category = category[0];
-                            self.renderCategories();
-                            self.trigger_up('switch_category', {'category' : self.display_category});
                         });
                     } else {
                         self.parent_category = self.create_root();
-                        self.renderCategories();
-                        self.trigger_up('switch_category', {'category' : self.display_category});
                     }
                 }
             });
@@ -537,8 +530,12 @@ var Navigation = Widget.extend({
             this.display_category = this.create_root();
             this.selected_category = false;
             this.parent_category = false;
-            this.renderCategories();
         }
+    },
+    
+    renderElement: function () {
+        this._super.apply(this, arguments);
+        this.renderCategories();
     },
     
     create_root : function(){
