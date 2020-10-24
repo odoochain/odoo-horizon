@@ -71,16 +71,16 @@ var CalendarWidget = Widget.extend({
         this.$calendar.fullCalendar('refetchEvents');
     },
     
-    /*do_show : function() {
+    do_show : function() {
         this._super.apply(this, arguments);
         var self = this;
         setTimeout(function() {
-            self.$calendar.fullCalendar('refetchEvents').then(function(){
+            self.$calendar.fullCalendar('fetchEvents').then(function(){
                 self.$calendar.fullCalendar('changeView','agendaDay');    
             });
             //self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
         }, 100);
-    },*/
+    },
     
 });
 
