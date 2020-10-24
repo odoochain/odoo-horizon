@@ -478,7 +478,7 @@ var Navigation = Widget.extend({
     renderElement: function () {
         var self = this;
         this._super.apply(this, arguments);
-        self.state = self.getParent()._current_state;
+        self.state = self.getParent().;
         if(this.state.category_id && this.state.category_id > 0) {
             rpc.query({
                 route: "/booking/category",
@@ -864,30 +864,28 @@ var Browser = Widget.extend({
             this.cal.refetch_events();
         },
     },
+
+    start: function() {
+        this._super.apply(this, arguments);
+        /* TODO : why this.$('#main-modal') does not work ? */
+        this.main_modal = this.$('#main-modal-content').parent().modal();
+        this.details_modal = this.$('#modal-details-content').parent().modal();
+        this.$('.collapsible').collapsible();
+        this._current_state = $.deparam(window.location.hash.substring(1));
+    },
     
     renderElement: function() {
         this._super.apply(this, arguments);
-        this._current_state = $.deparam(window.location.hash.substring(1));
-        var self = this;
         // Fill toolbar
-        self.tb = new Toolbar(this);
-        self.tb.appendTo(this.$(".booking_toolbar"));
+        this.tb = new Toolbar(this);
+        this.tb.appendTo(this.$(".booking_toolbar"));
         // Fill navigation panel
-        self.nav = new Navigation(this);
-        self.nav.appendTo(this.$(".navbar"));
+        this.nav = new Navigation(this);
+        this.nav.appendTo(this.$(".navbar"));
         // Fill calendar panel
-        self.cal = new Calendar(this);
-        self.cal.appendTo(this.$(".calendar"));
-        self.cal.tb = self.tb;
-    },
-    
-    start: function() {
-        this._super.apply(this, arguments);
-        var self = this;
-        /* TODO : why this.$('#main-modal') does not work ? */
-        self.main_modal = this.$('#main-modal-content').parent().modal();
-        self.details_modal = this.$('#modal-details-content').parent().modal();
-        this.$('.collapsible').collapsible();
+        this.cal = new Calendar(this);
+        this.cal.appendTo(this.$(".calendar"));
+        this.cal.tb = this.tb;
     },
     
     switch_category: function(event) {
