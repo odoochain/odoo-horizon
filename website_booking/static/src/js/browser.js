@@ -126,11 +126,14 @@ var Schedule =  CalendarWidget.extend({
         } catch(e) {}
         if(self.asset_id) {
             self.events = [];
-            ajax.jsonRpc('/booking/events', 'call', {
+            rpc.query({
+                route: '/booking/events',
+                params: {
     	    		'asset_id':this.asset_id,
     				'start' : time.moment_to_str(start),
     				'end' : time.moment_to_str(end),
-    	    	}).done(function(events){
+    	    	},
+            }).then(events => {
                     events.forEach(function(evt) {
                         self.events.push({
                             'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
@@ -186,15 +189,15 @@ var NewBookingDialog = Widget.extend({
             if(self.user.in_group_14) {
                 event_type = 'school_management_event_type';
             }
-            ajax.jsonRpc('/web/dataset/call', 'call', {
-                    model: 'ir.model.data',
-                    method: 'get_object_reference',
-                    args: [
-                      'school_booking', event_type
-                    ],
-                }).then(function(categ) {
+            rpc.query({
+                model: 'ir.model.data',
+                method: 'get_object_reference',
+                args: [
+                  'school_booking', event_type
+                ],
+            }).then(categ => {
                 if(self.edit_mode) {
-                    ajax.jsonRpc('/web/dataset/call', 'call', {
+                    rpc.query({
                         model: 'calendar.event',
                         method: 'write',
                         args: [
@@ -207,11 +210,11 @@ var NewBookingDialog = Widget.extend({
                                 'categ_ids': [[4, categ[1]]]
                             }
                         ],
-                    }).then(function (id) {
+                    }).then(id => {
                         self.trigger_up('updateEvent', {'id': id});
                     });
                 } else {
-                    ajax.jsonRpc('/web/dataset/call', 'call', {
+                    rpc.query({
                         model: 'calendar.event',
                         method: 'create',
                         args: [
@@ -224,19 +227,19 @@ var NewBookingDialog = Widget.extend({
                                 'categ_ids': [[4, categ[1]]]
                             }
                         ],
-                    }).fail(function(error) {
+                    }).then(id => {
+                        self.trigger_up('newEvent', {'id': id});
+                    }).fail(error => {
                         if(error.data.exception_type == "validation_error"){
                             Materialize.toast(error.data.arguments[0], 4000)
                         }
-                    }).then(function (id) {
-                        self.trigger_up('newEvent', {'id': id});
                     });
                 }
             });
         },
         "click .delete-booking" : function (event) {
             var self = this;
-            ajax.jsonRpc('/web/dataset/call', 'call', {
+            rpc.query({
                 model: 'calendar.event',
                 method: 'unlink',
                 args: [
@@ -397,11 +400,14 @@ var NewBookingDialog = Widget.extend({
         if (fromTime && toTime) {
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
-            ajax.jsonRpc('/booking/rooms', 'call', {
+            rpc.query({
+                route: '/booking/rooms',
+                params: {
         				'start' : time.moment_to_str(start),
         				'end' : time.moment_to_str(stop),
         				'self_id' : self.event ? self.event.id : '',
-    	    	}).done(function(rooms){
+    	    	},
+            }).then(rooms => {
                 var roomSelect = self.$('select.select-asset-id').empty().html(' ');
                 for(var room_idx in rooms) {
                     var room = rooms[room_idx];
@@ -678,8 +684,12 @@ var Calendar = CalendarWidget.extend({
         var self = this;
         self.ressources = [];
         
-        
-	    ajax.jsonRpc('/booking/assets', 'call', {'category_id':self.category_id}).done(function(assets){
+        rpc.query({
+            route: "/booking/assets",
+            params: {
+                'category_id':self.category_id
+            },
+        }).then(assets => {
                 assets.forEach(function(asset) {
                     self.ressources.push({
                         'id' : asset.id,
@@ -705,12 +715,14 @@ var Calendar = CalendarWidget.extend({
                 end = moment(end.format())        
             }
         } catch(e) {}
-	    ajax.jsonRpc('/booking/events', 'call', {
-	    		    'category_id':self.category_id,
-    				'start' : time.moment_to_str(start),
-    				'end' : time.moment_to_str(end),
-	    	}).done(function(events){
-	    	    
+        rpc.query({
+            route: "/booking/events",
+            params: {
+    		    'category_id':self.category_id,
+				'start' : time.moment_to_str(start),
+				'end' : time.moment_to_str(end),
+	    	},
+        }).then(events => {
 	    	    events.forEach(function(evt) {
                     var color = '#ff4355';
     	    	    if (evt.categ_ids.includes(9)) {
@@ -764,7 +776,12 @@ var Toolbar = Widget.extend({
     
     events : {
         "click #login-button" : function (event) {
-            ajax.jsonRpc('/booking/login_providers', 'call', {redirect : '/booking#category_id=16'}).done(function(providers){
+            rpc.query({
+                route: '/booking/login_providers',
+                params: {
+        		    redirect : '/booking#category_id=16'
+    	    	},
+            }).then(providers => {
                 if(providers.length > 0) {
                     var provider = providers[0];
                     var link = provider.auth_link
@@ -781,9 +798,13 @@ var Toolbar = Widget.extend({
             self.uid = false;
             self.avatar_src = false;
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
-            self.rpc("/web/session/destroy", {}).always(function(o) {
-                    window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
-                    location.reload();
+            rpc.query({
+                route: '/web/session/destroy',
+                params: {
+    	    	},
+            }).then(function() {
+                window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
+                location.reload();
             })
         },
     },
