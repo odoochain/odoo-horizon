@@ -475,14 +475,10 @@ var Navigation = Widget.extend({
         'up_category' : 'up_category',
     },
     
-    start: function() {
-        var self = this;
-        this.state = this.getParent()._current_state;
-    },
-    
     renderElement: function () {
         var self = this;
         this._super.apply(this, arguments);
+        self.state = self.getParent()._current_state;
         if(this.state.category_id && this.state.category_id > 0) {
             rpc.query({
                 route: "/booking/category",
