@@ -475,14 +475,16 @@ var Navigation = Widget.extend({
         'up_category' : 'up_category',
     },
     
-    willStart: function() {
+    start: function() {
         var self = this;
-        var superDef = this._super.apply(this, arguments);
-        var def;
-        
         this.state = this.getParent()._current_state;
+    },
+    
+    renderElement: function () {
+        var self = this;
+        this._super.apply(this, arguments);
         if(this.state.category_id && this.state.category_id > 0) {
-            def = rpc.query({
+            rpc.query({
                 route: "/booking/category",
                 params: {
                     'id' : this.state.category_id
@@ -505,9 +507,11 @@ var Navigation = Widget.extend({
                                 },
                             }).then(category => {
                                 self.parent_category = category[0];
+                                self.renderCategories();
                             });
                         } else {
                             self.parent_category = self.create_root();
+                            self.renderCategories();
                         }
                     });
                 } else {
@@ -521,26 +525,21 @@ var Navigation = Widget.extend({
                             },
                         }).then(category => {
                             self.parent_category = category[0];
+                            self.renderCategories();
                         });
                     } else {
                         self.parent_category = self.create_root();
+                        self.renderCategories();
                     }
                 }
             });
+            
         } else {
-            def = new Promise(function(resolve, reject) {
-                self.display_category = self.create_root();
-                self.selected_category = false;
-                self.parent_category = false;
-                resolve();
-            });
+            self.display_category = self.create_root();
+            self.selected_category = false;
+            self.parent_category = false;
+            self.renderCategories();
         }
-        return Promise.all([superDef, def]);
-    },
-    
-    renderElement: function () {
-        this._super.apply(this, arguments);
-        this.renderCategories();
     },
     
     create_root : function(){
