@@ -884,7 +884,6 @@ var Browser = Widget.extend({
         // Manage modals
         this.main_modal = this.$('#main-modal-content').parent().modal();
         this.details_modal = this.$('#modal-details-content').parent().modal();
-        this.$('.collapsible').collapsible();
         // Fill toolbar
         this.tb = new Toolbar(this);
         this.tb.appendTo(this.$(".booking_toolbar"));
