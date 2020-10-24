@@ -71,7 +71,7 @@ var CalendarWidget = Widget.extend({
         this.$calendar.fullCalendar('refetchEvents');
     },
     
-    do_show : function() {
+    /*do_show : function() {
         this._super.apply(this, arguments);
         var self = this;
         setTimeout(function() {
@@ -80,7 +80,7 @@ var CalendarWidget = Widget.extend({
             });
             //self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
         }, 100);
-    },
+    },*/
     
 });
 
