@@ -547,7 +547,12 @@ var Navigation = Widget.extend({
         var self = this;
         if(this.display_category) {
             if(this.display_category.isRoot) {
-                ajax.jsonRpc('/booking/categories', 'call', {'root' : 1}).done(function(categories){
+                rpc.query({
+                    route: "/booking/categories",
+                    params: {
+                        'root' : 1
+                    },
+                }).then(categories => {
                     self.$(".categories").empty();
                     categories.forEach(function(category) {
                         var card = new NavigationCard(self, category, false);
@@ -558,7 +563,12 @@ var Navigation = Widget.extend({
                     });
                 });
             } else {
-                ajax.jsonRpc('/booking/categories', 'call', {'parent_id' : this.display_category.id}).done(function(categories){
+                rpc.query({
+                    route: "/booking/categories",
+                    params: {
+                        'parent_id' : this.display_category.id
+                    },
+                }).then(categories => {
                     self.$(".categories").empty();
                     categories.forEach(function(category) {
                         var card = new NavigationCard(self, category, false);
@@ -599,7 +609,12 @@ var Navigation = Widget.extend({
             self.renderCategories();
         } else {
             if (self.parent_category.parent_id) {
-                ajax.jsonRpc('/booking/category', 'call', {'id' : self.parent_category.parent_id[0]}).done(function(category){
+                rpc.query({
+                    route: "/booking/category",
+                    params: {
+                        'id' : self.parent_category.parent_id[0]
+                    },
+                }).then(category => {
                     self.display_category = self.parent_category;
                     self.parent_category = category;
                     self.selected_category = false;
