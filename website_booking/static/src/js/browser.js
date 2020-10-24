@@ -482,10 +482,20 @@ var Navigation = Widget.extend({
             }).then(category => {
                 if(category[0].is_leaf) {
                     self.selected_category = category[0];
-                    ajax.jsonRpc('/booking/category', 'call', {'id' : self.selected_category.parent_id[0]}).done(function(category){
+                    rpc.query({
+                        route: "/booking/category",
+                        params: {
+                            'id' : self.selected_category.parent_id[0]
+                        },
+                    }).then(category => {
                         self.display_category = category[0];
                         if(self.display_category.parent_id) {
-                            ajax.jsonRpc('/booking/category', 'call', {'id' : self.display_category.parent_id[0]}).done(function(category){
+                            rpc.query({
+                                route: "/booking/category",
+                                params: {
+                                    'id' : self.display_category.parent_id[0]
+                                },
+                            }).then(category => {
                                 self.parent_category = category[0];
                                 self.renderCategories();
                                 self.trigger_up('switch_category', {'category' : self.selected_category});
@@ -500,7 +510,12 @@ var Navigation = Widget.extend({
                     self.selected_category = false;
                     self.display_category = category[0];
                     if(self.display_category.parent_id) {
-                        ajax.jsonRpc('/booking/category', 'call', {'id' : self.display_category.parent_id[0]}).done(function(category){
+                        rpc.query({
+                            route: "/booking/category",
+                            params: {
+                                'id' : self.display_category.parent_id[0]
+                            },
+                        }).then(category => {
                             self.parent_category = category[0];
                             self.renderCategories();
                             self.trigger_up('switch_category', {'category' : self.display_category});
