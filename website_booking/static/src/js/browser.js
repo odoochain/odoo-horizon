@@ -462,7 +462,7 @@ var NavigationCard = Widget.extend({
     
     set_active: function() {
         this.getParent().$el.find('.darken-4').removeClass('darken-4').addClass('darken-3')
-        this.$el.find('.cat_button').addClass('darken-4');
+        this.$('.cat_button').addClass('darken-4');
     },
     
 });
