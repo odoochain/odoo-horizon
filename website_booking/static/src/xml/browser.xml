@@ -139,19 +139,9 @@
         <td>
             <t t-if="!widget.to_parent">
             <a class="cat_button waves-effect waves-light btn cyan" t-att-class="{'darken-4' : is_active}" t-att-data-category-id="widget.category.id"><span t-esc="widget.category.name"/></a>
-            <!--<div class="card navbar-card waves-effect waves-block waves-light" t-att-data-category-id="widget.category.id" t-attf-style="background: url('/booking/categories/image/#{widget.category.id}')  center / cover;">
-                <div class="navbar-card-title">
-                  <span class="card-title"><span t-esc="widget.category.display_name"/></span>
-                </div>
-            </div>-->
             </t>
             <t t-if="widget.to_parent">
             <a class="cat_button waves-effect waves-light btn cyan darken-5" t-att-data-category-id="widget.category.id">Retour...</a>
-            <!-- <div class="card navbar-card waves-effect waves-block waves-light" t-att-data-category-id="widget.category.id" style="background: url('/website_booking/static/src/img/up.png')  center / cover;">
-                <div class="navbar-card-title">
-                  <span class="card-title">Previous</span>
-                </div>
-            </div> -->
             </t>
         </td>
     </t>
