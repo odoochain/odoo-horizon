@@ -138,7 +138,7 @@
     <t t-name="website_booking.browser_navigation_card">
         <td>
             <t t-if="!widget.to_parent">
-            <a t-att-class="'cat_button waves-effect waves-light btn cyan darken-4' if is_active else 'cat_button waves-effect waves-light btn cyan darken-3'" t-att-data-category-id="widget.category.id"><span t-esc="widget.category.name"/></a>
+            <a t-att-class="{'cat_button waves-effect waves-light btn cyan darken-4' if is_active else 'cat_button waves-effect waves-light btn cyan darken-3'}" t-att-data-category-id="widget.category.id"><span t-esc="widget.category.name"/></a>
             <!--<div class="card navbar-card waves-effect waves-block waves-light" t-att-data-category-id="widget.category.id" t-attf-style="background: url('/booking/categories/image/#{widget.category.id}')  center / cover;">
                 <div class="navbar-card-title">
                   <span class="card-title"><span t-esc="widget.category.display_name"/></span>
