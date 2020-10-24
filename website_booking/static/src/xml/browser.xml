@@ -130,7 +130,7 @@
     <t t-name="website_booking.browser_navigation_card">
         <td>
             <t t-if="!widget.to_parent">
-            <a t-att-class="(is_active ? 'cat_button waves-effect waves-light btn cyan darken-3' : 'cat_button waves-effect waves-light btn cyan darken-4')" t-att-data-category-id="widget.category.id"><span t-esc="widget.category.name"/></a>
+            <a t-att-class="(widget.is_active ? 'cat_button waves-effect waves-light btn cyan darken-3' : 'cat_button waves-effect waves-light btn cyan darken-4')" t-att-data-category-id="widget.category.id"><span t-esc="widget.category.name"/></a>
             </t>
             <t t-if="widget.to_parent">
             <a class="cat_button waves-effect waves-light btn cyan darken-5" t-att-data-category-id="widget.category.id">Retour...</a>
