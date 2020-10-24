@@ -98,22 +98,14 @@
             <div class="booking_toolbar"/>
         </header>
         <main>
-            <ul class="collapsible" data-collapsible="expandable">
-                <li>
-                    <div class="collapsible-header navbar_header active hide"></div>
-                    <div class="collapsible-body navbar" style="padding:5px;"/>    
-                </li>
-                <li>
-                    <div class="collapsible-header calendar_header hide"></div>
-                    <div class="collapsible-body calendar_body" >
-                        <div class="row">
-                            <div class="col s12 l12">
-                                <div class='calendar'/>
-                            </div>
-                        </div>
+            <div class="navbar" style="padding:5px;"/>    
+            <div class="collapsible-body calendar_body" >
+                <div class="row">
+                    <div class="col s12 l12">
+                        <div class='calendar'/>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </main>
         <div id="main-modal" class="modal">
             <div id="main-modal-content" class="modal-content"/>
