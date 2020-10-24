@@ -478,10 +478,11 @@ var Navigation = Widget.extend({
     willStart: function() {
         var self = this;
         var superDef = this._super.apply(this, arguments);
+        var def;
         
         this.state = this.getParent()._current_state;
         if(this.state.category_id && this.state.category_id > 0) {
-            rpc.query({
+            def = rpc.query({
                 route: "/booking/category",
                 params: {
                     'id' : this.state.category_id
@@ -527,10 +528,14 @@ var Navigation = Widget.extend({
                 }
             });
         } else {
-            this.display_category = this.create_root();
-            this.selected_category = false;
-            this.parent_category = false;
+            def = new Promise(function(resolve, reject) {
+                self.display_category = self.create_root();
+                self.selected_category = false;
+                self.parent_category = false;
+                resolve();
+            });
         }
+        return Promise.all([superDef, def]);
     },
     
     renderElement: function () {
