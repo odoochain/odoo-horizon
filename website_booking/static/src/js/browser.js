@@ -873,17 +873,18 @@ var Browser = Widget.extend({
         },
     },
 
-    start: function() {
+    init: function(parent) {
         this._super.apply(this, arguments);
         /* TODO : why this.$('#main-modal') does not work ? */
-        this.main_modal = this.$('#main-modal-content').parent().modal();
-        this.details_modal = this.$('#modal-details-content').parent().modal();
-        this.$('.collapsible').collapsible();
         this._current_state = $.deparam(window.location.hash.substring(1));
     },
     
     renderElement: function() {
         this._super.apply(this, arguments);
+        // Manage modals
+        this.main_modal = this.$('#main-modal-content').parent().modal();
+        this.details_modal = this.$('#modal-details-content').parent().modal();
+        this.$('.collapsible').collapsible();
         // Fill toolbar
         this.tb = new Toolbar(this);
         this.tb.appendTo(this.$(".booking_toolbar"));
