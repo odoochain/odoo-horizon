@@ -5,6 +5,7 @@ odoo.define('website_booking.browser', function (require) {
 
 var core = require('web.core');
 var ajax = require('web.ajax');
+var rpc = require('web.rpc')
 var session = require('web.session');
 var Widget = require('web.Widget');
 var time = require('web.time');
@@ -473,7 +474,7 @@ var Navigation = Widget.extend({
         var self = this;
         this.state = this.getParent()._current_state;
         if(this.state.category_id && this.state.category_id > 0) {
-            this._rpc({
+            rpc.query({
                 route: "/booking/category",
                 params: {
                     'id' : this.state.category_id
