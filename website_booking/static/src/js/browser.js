@@ -884,6 +884,7 @@ var Browser = Widget.extend({
         // Manage modals
         this.main_modal = this.$('#main-modal-content').parent().modal();
         this.details_modal = this.$('#modal-details-content').parent().modal();
+        this.$('.collapsible').collapsible();
         // Fill toolbar
         this.tb = new Toolbar(this);
         this.tb.appendTo(this.$(".booking_toolbar"));
@@ -894,6 +895,7 @@ var Browser = Widget.extend({
         this.cal = new Calendar(this);
         this.cal.appendTo(this.$(".calendar"));
         this.cal.tb = this.tb;
+        this.$('.collapsible').open();
     },
     
     switch_category: function(event) {
