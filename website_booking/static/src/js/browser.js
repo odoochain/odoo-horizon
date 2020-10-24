@@ -185,16 +185,19 @@ var NewBookingDialog = Widget.extend({
             if(self.user.in_group_14) {
                 event_type = 'school_management_event_type';
             }
-            self._rpc({
-                model: 'ir.model.data',
-                method: 'get_object_reference',
-                args: ['school_booking', event_type]
-            }).then(function(categ) {
+            ajax.jsonRpc('/web/dataset/call', 'call', {
+                    model: 'ir.model.data',
+                    method: 'get_object_reference',
+                    args: [
+                      'school_booking', event_type
+                    ],
+                }).then(function(categ) {
                 if(self.edit_mode) {
-                    self._rpc({
+                    ajax.jsonRpc('/web/dataset/call', 'call', {
                         model: 'calendar.event',
                         method: 'write',
-                        args: [[self.event.id], 
+                        args: [
+                            [self.event.id], 
                             {
                                 'name' : self.$('#description').val(),
                                 'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
@@ -202,22 +205,25 @@ var NewBookingDialog = Widget.extend({
                                 'room_id': roomId,
                                 'categ_ids': [[4, categ[1]]]
                             }
-                        ]
+                        ],
                     }).then(function (id) {
                         self.trigger_up('updateEvent', {'id': id});
                     });
                 } else {
-                    self._rpc({
+                    ajax.jsonRpc('/web/dataset/call', 'call', {
                         model: 'calendar.event',
-                        method: 'create', 
-                        args: [{
-                                    'name' : self.$('#description').val(),
-                                    'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
-                                    'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
-                                    'room_id': roomId,
-                                    'categ_ids': [[4, categ[1]]],
-                                }]
-                        }).fail(function(error) {
+                        method: 'create',
+                        args: [
+                            [self.event.id], 
+                            {
+                                'name' : self.$('#description').val(),
+                                'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                'room_id': roomId,
+                                'categ_ids': [[4, categ[1]]]
+                            }
+                        ],
+                    }).fail(function(error) {
                         if(error.data.exception_type == "validation_error"){
                             Materialize.toast(error.data.arguments[0], 4000)
                         }
@@ -229,7 +235,13 @@ var NewBookingDialog = Widget.extend({
         },
         "click .delete-booking" : function (event) {
             var self = this;
-            new Model('calendar.event').call('unlink', [self.event.id]).done(function () {
+            ajax.jsonRpc('/web/dataset/call', 'call', {
+                model: 'calendar.event',
+                method: 'unlink',
+                args: [
+                    self.event.id
+                ]
+            }).then(function () {
                 self.trigger_up('deleteEvent', self.event.id);
             });
         },
@@ -461,7 +473,12 @@ var Navigation = Widget.extend({
         var self = this;
         this.state = this.getParent()._current_state;
         if(this.state.category_id && this.state.category_id > 0) {
-            ajax.jsonRpc('/booking/category', 'call', {'id' : this.state.category_id}).done(function(category){
+            this._rpc({
+                route: "/booking/category",
+                params: {
+                    'id' : this.state.category_id
+                },
+            }).then(category => {
                 if(category[0].is_leaf) {
                     self.selected_category = category[0];
                     ajax.jsonRpc('/booking/category', 'call', {'id' : self.selected_category.parent_id[0]}).done(function(category){
@@ -629,6 +646,8 @@ var Calendar = CalendarWidget.extend({
     fetch_resources : function(callback) {
         var self = this;
         self.ressources = [];
+        
+        
 	    ajax.jsonRpc('/booking/assets', 'call', {'category_id':self.category_id}).done(function(assets){
                 assets.forEach(function(asset) {
                     self.ressources.push({
