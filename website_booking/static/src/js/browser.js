@@ -458,11 +458,11 @@ var NavigationCard = Widget.extend({
         this._super(parent);
         this.category = category;
         this.to_parent = to_parent;
+        this.is_active = false;
     },
     
     set_active: function() {
-        this.getParent().$el.find('.darken-4').removeClass('darken-4').addClass('darken-3')
-        this.$('.cat_button').addClass('darken-4');
+        this.is_active = true;
     },
     
 });
