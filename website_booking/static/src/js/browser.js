@@ -454,15 +454,11 @@ var NavigationCard = Widget.extend({
         },
     },
     
-    init: function(parent, category, to_parent) {
+    init: function(parent, category, to_parent, is_active) {
         this._super(parent);
         this.category = category;
         this.to_parent = to_parent;
-        this.is_active = false;
-    },
-    
-    set_active: function() {
-        this.is_active = true;
+        this.is_active = is_active;
     },
     
 });
@@ -566,11 +562,8 @@ var Navigation = Widget.extend({
                 }).then(categories => {
                     self.$(".categories").empty();
                     categories.forEach(function(category) {
-                        var card = new NavigationCard(self, category, false);
+                        var card = new NavigationCard(self, category, false, category.id == self.selected_category.id);
                         card.appendTo(self.$(".categories"));
-                        if(category.id == self.selected_category.id) {
-                            card.set_active();
-                        }
                     });
                 });
             } else {
@@ -582,11 +575,8 @@ var Navigation = Widget.extend({
                 }).then(categories => {
                     self.$(".categories").empty();
                     categories.forEach(function(category) {
-                        var card = new NavigationCard(self, category, false);
+                        var card = new NavigationCard(self, category, false, category.id == self.selected_category.id);
                         card.appendTo(self.$(".categories"));
-                        if(category.id == self.selected_category.id) {
-                            card.set_active();
-                        }
                     });
                     if(self.parent_category) {
                         var card = new NavigationCard(self, self.parent_category, true);
