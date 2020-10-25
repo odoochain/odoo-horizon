@@ -595,7 +595,7 @@ var Navigation = Widget.extend({
         if(cat.is_leaf) {
             this.selected_category = cat;
             this.$('.cat_button').removeClass('active');
-            this.selected_category.set_active();
+            event.target.set_active();
             this.trigger_up('switch_resource', {'resource' : cat});
         } else {
             this.parent_category = this.display_category;
