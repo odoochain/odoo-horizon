@@ -462,7 +462,7 @@ var NavigationCard = Widget.extend({
     },
     
     set_active: function() {
-        this.$el.addClass('active');  
+        this.$('a').addClass('active');  
     },
 });
 
