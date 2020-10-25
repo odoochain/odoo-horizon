@@ -462,7 +462,7 @@ var NavigationCard = Widget.extend({
     },
     
     set_active: function() {
-        //this.$('a').addClass('active');  
+        this.$('a').addClass('active');  
     },
 });
 
@@ -594,8 +594,8 @@ var Navigation = Widget.extend({
         var cat = event.data.category;
         if(cat.is_leaf) {
             this.selected_category = cat;
-            //this.$('.cat_button').removeClass('active');
-            //event.target.set_active();
+            this.$('.active').removeClass('active');
+            event.target.set_active();
             this.trigger_up('switch_resource', {'resource' : cat});
         } else {
             this.parent_category = this.display_category;
