@@ -74,9 +74,7 @@ var CalendarWidget = Widget.extend({
     do_show : function() {
         this._super.apply(this, arguments);
         var self = this;
-        self.$calendar.fullCalendar('fetchEvents').then(function(){
-            self.$calendar.fullCalendar('changeView','agendaDay');    
-        });
+        self.$calendar.fullCalendar('changeView','agendaDay');    
     },
     
 });
