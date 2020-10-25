@@ -57,26 +57,10 @@ var CalendarWidget = Widget.extend({
 		);
     },
     
-    start : function() {
-        this._super.apply(this, arguments);
-        var self = this;
-        // Force a refresh to get it right
-        setTimeout(function() {
-            self.$calendar.fullCalendar('changeView','agendaDay');
-            //self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
-        }, 100);
-    },
-    
     refetch_events: function() {
         this.$calendar.fullCalendar('refetchEvents');
     },
-    
-    do_show : function() {
-        this._super.apply(this, arguments);
-        var self = this;
-        self.$calendar.fullCalendar('changeView','agendaDay');    
-    },
-    
+
 });
 
 var Schedule =  CalendarWidget.extend({
