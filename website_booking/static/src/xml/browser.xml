@@ -128,7 +128,7 @@
     </t>
     
     <t t-name="website_booking.browser_navigation_card">
-        <td>
+        <td class="nav-wrapper">
             <t t-if="!widget.to_parent">
             <a t-att-class="(widget.is_active ? 'cat_button waves-effect waves-light btn active' : 'cat_button waves-effect waves-light btn')" t-att-data-category-id="widget.category.id"><span t-esc="widget.category.name"/></a>
             </t>
