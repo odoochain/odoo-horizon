@@ -639,9 +639,9 @@ var Navigation = Widget.extend({
 
 var Calendar = CalendarWidget.extend({
 
-    _getFullCalendarOptions: function(fcOptions) {
+    get_fc_init_options: function() {
         var self = this;
-        return $.extend(this._super(fcOptions),{
+        return $.extend(this._super(),{
             events: self.fetch_events.bind(this),
     		resources: self.fetch_resources.bind(this),
     		viewRender: function(view,element){
