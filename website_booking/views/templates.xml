@@ -27,9 +27,7 @@
                 <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
                 <meta name="format-detection" content="telephone=no"/>
                 <meta name="msapplication-tap-highlight" content="no"/>
-                
-                <t t-call-assets="web.assets_common" t-css="false"/>
-                
+
                 <script type="text/javascript">
                     var odoo = <t t-raw="json.dumps({
                         'csrf_token': request.csrf_token(None),
@@ -38,6 +36,8 @@
                         'debug': debug,
                     })"/>;
                 </script>
+                
+                <t t-call-assets="web.assets_common" t-css="false"/>
                 
                 <t t-call-assets="web.assets_backend" t-css="false"/>
                 <t t-call-assets="website_booking.assets"/>
