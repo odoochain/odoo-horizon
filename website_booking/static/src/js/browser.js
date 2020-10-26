@@ -9,6 +9,7 @@ var rpc = require('web.rpc')
 var session = require('web.session');
 var Widget = require('web.Widget');
 var time = require('web.time');
+var fieldUtils = require('web.field_utils');
 
 var _t = core._t;
 var qweb = core.qweb;
@@ -109,8 +110,8 @@ var Schedule =  CalendarWidget.extend({
                 route: '/booking/events',
                 params: {
     	    		'asset_id':this.asset_id,
-    				'start' : time.moment_to_str(start),
-    				'end' : time.moment_to_str(end),
+    				'start' : fieldUtils.format.datetime(start),
+    				'end' : fieldUtils.format.datetime(end),
     	    	},
             }).then(events => {
                     events.forEach(function(evt) {
