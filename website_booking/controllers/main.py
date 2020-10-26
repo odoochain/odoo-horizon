@@ -52,7 +52,7 @@ class BookingController(http.Controller):
         context = {
             'session_info': session_info,
         }
-        return request.render('website_booking.index')
+        return request.render('website_booking.index',qcontext=context)
     
     @http.route('/booking_mobile', type='http', auth='public', website=True)
     def booking_mobile_browser(self, debug=False, **k):
@@ -60,7 +60,7 @@ class BookingController(http.Controller):
         context = {
             'session_info': session_info,
         }
-        return request.render('website_booking.index_mobile')
+        return request.render('website_booking.index_mobile',qcontext=context)
         
     @http.route('/booking/category', type='json', auth='public', website=True)
     def booking_category(self, id=False, debug=False, **k):
