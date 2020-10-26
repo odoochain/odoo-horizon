@@ -110,8 +110,8 @@ var Schedule =  CalendarWidget.extend({
                 route: '/booking/events',
                 params: {
     	    		'asset_id':this.asset_id,
-    				'start' : fieldUtils.format.datetime(start),
-    				'end' : fieldUtils.format.datetime(end),
+    				'start' : fieldutils.format.datetime(start),
+    				'end' : fieldutils.format.datetime(end),
     	    	},
             }).then(events => {
                     events.forEach(function(evt) {
@@ -656,6 +656,8 @@ var Calendar = CalendarWidget.extend({
         this.init_state = this.getParent()._current_state;
         if(this.init_state.date) {
             this.$calendar.fullCalendar( 'gotoDate', moment(this.init_state.date));
+        } else {
+            this.$calendar.fullCalendar( 'gotoDate', moment());
         }
     },
            
