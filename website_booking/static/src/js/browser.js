@@ -9,7 +9,7 @@ var rpc = require('web.rpc')
 var session = require('web.session');
 var Widget = require('web.Widget');
 var time = require('web.time');
-var fieldUtils = require('web.field_utils');
+var fieldutils = require('web.field_utils');
 
 var _t = core._t;
 var qweb = core.qweb;
@@ -383,8 +383,8 @@ var NewBookingDialog = Widget.extend({
             rpc.query({
                 route: '/booking/rooms',
                 params: {
-        				'start' : time.moment_to_str(start),
-        				'end' : time.moment_to_str(stop),
+        				'start' : fieldutils.format.datetime(start),
+        				'end' : fieldutils.format.datetime(stop),
         				'self_id' : self.event ? self.event.id : '',
     	    	},
             }).then(rooms => {
@@ -698,8 +698,8 @@ var Calendar = CalendarWidget.extend({
             route: "/booking/events",
             params: {
     		    'category_id':self.category_id,
-				'start' : time.moment_to_str(start),
-				'end' : time.moment_to_str(end),
+				'start' : fieldutils.format.datetime(start),
+				'end' : fieldutils.format.datetime(end),
 	    	},
         }).then(events => {
 	    	    events.forEach(function(evt) {
