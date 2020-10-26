@@ -49,15 +49,6 @@
             <script type="text/javascript" src="/website_booking/static/lib/mdtimepicker/mdtimepicker.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser_mobile.js"></script>
-            
-            <script type="text/javascript">
-                var odoo = <t t-raw="json.dumps({
-                    'csrf_token': request.csrf_token(None),
-                    'session_info': session_info,
-                    'login_number': login_number,
-                    'debug': debug,
-                })"/>;
-            </script>
         </template>
         
         <record id="action_website_booking" model="ir.actions.act_url">

@@ -27,16 +27,18 @@
                 <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
                 <meta name="format-detection" content="telephone=no"/>
                 <meta name="msapplication-tap-highlight" content="no"/>
-
+                
                 <t t-call-assets="web.assets_common" t-css="false"/>
+                
                 <script type="text/javascript">
-                    odoo.define('web.csrf', function (require) {
-                        var token = "<t t-esc="request.csrf_token(None)"/>";
-                        require('web.core').csrf_token = token;
-                        require('qweb').default_dict.csrf_token = token;
-                    });
-                    odoo.db_info = '<t t-raw="db_info"/>';
+                    var odoo = <t t-raw="json.dumps({
+                        'csrf_token': request.csrf_token(None),
+                        'session_info': session_info,
+                        'login_number': login_number,
+                        'debug': debug,
+                    })"/>;
                 </script>
+                
                 <t t-call-assets="web.assets_backend" t-css="false"/>
                 <t t-call-assets="website_booking.assets"/>
                 <script type="text/javascript">
