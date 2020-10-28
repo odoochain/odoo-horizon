@@ -178,7 +178,7 @@ class IndividualProgram(models.Model):
             if credit_count > 0:
                 rec.evaluation = total/credit_count
         
-    @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval'
+    @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     def compute_evaluation_details(self):
         self.ensure_one();
         ret = [0,0,0,0,0,0]
