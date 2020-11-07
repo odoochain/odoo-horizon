@@ -27,6 +27,9 @@ from openerp.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
+def to_tz(datetime, tz):
+    return pytz.UTC.localize(datetime.replace(tzinfo=None), is_dst=False).astimezone(tz).replace(tzinfo=None)
+
 class Event(models.Model):
     """ Model for School Event """
     _inherit = 'calendar.event'
