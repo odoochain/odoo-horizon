@@ -26,7 +26,7 @@
     <record id="view_calendar_event_form_covid" model="ir.ui.view">
       <field name="name">calendar.event.form.covid</field>
       <field name="model">calendar.event</field>
-      <field name="inherit_id" ref="web_calendar.view_calendar_event_form" />
+      <field name="inherit_id" ref="calendar.view_calendar_event_form" />
       <field name="priority" eval="25"/>
       <field name="arch" type="xml">
           <xpath expr="//sheet" position="before">
