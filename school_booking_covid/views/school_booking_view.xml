@@ -31,8 +31,8 @@
       <field name="arch" type="xml">
           <xpath expr="//sheet" position="before">
             <header>
-              <button name="confirm" states="draft" string="Confirm" class="oe_highlight"/>
-	            <button name="to_draft" states="open" string="Reset to draft" class="oe_highlight"/>
+              <button name="confirm" type="object" states="draft" string="Confirm" class="oe_highlight"/>
+	            <button name="to_draft" type="object" states="open" string="Reset to draft" class="oe_highlight"/>
               <field name="state" widget="statusbar" statusbar_visible="draft, open"/>
             </header>
           </xpath>
