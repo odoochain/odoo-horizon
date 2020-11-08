@@ -56,17 +56,16 @@ class Event(models.Model):
                 name = name[:-5]
             self.name = '%s [OK] ' % name
             
-            self._send_confirmation_mail(self.env.cr, self.env.uid, self.env.context)
-            
-    @api.v7
-    def _send_confirmation_mail(self,cr,uid,context=None):
+            cr = self.env.cr
+            uid = self.env.uid
+            context = self.env.context
         
-        mail_to_ids = self.attendee_ids.mapped('id')
-            
-        if mail_to_ids:
-            current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-            if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
-                self.message_post(cr, uid, the_id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
+            mail_to_ids = self.attendee_ids.mapped('id')
+                
+            if mail_to_ids:
+                current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+                if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
+                    self.message_post(cr, uid, the_id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
 
     @api.one
     @api.constrains('room_id')
