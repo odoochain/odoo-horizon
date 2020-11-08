@@ -56,10 +56,11 @@ class Event(models.Model):
                 name = name[:-5]
             self.name = '%s [OK] ' % name
             
-            self._send_confirmation_mail()
+            self._send_confirmation_mail(self.env.cr, self.env.uid, self.env.context)
             
     @api.cr_uid_id_context
-    def _send_confirmation_mail(self,cr,uid,id,context=None):
+    def _send_confirmation_mail(self,cr,uid,context=None):
+        
         mail_to_ids = self.attendee_ids.mapped('id')
             
         if mail_to_ids:
