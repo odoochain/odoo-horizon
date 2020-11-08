@@ -45,27 +45,28 @@ class Event(models.Model):
     @api.one
     @api.constrains('state')
     def _change_name_from_state(self):
-        if self.state == 'draft':
-            name = self.name
-            if name.find('[') != -1:
-                name = name[:-5]
-            self.name = '%s [NC] ' % name
-        elif self.state == 'open':
-            name = self.name
-            if name.find('[') != -1:
-                name = name[:-5]
-            self.name = '%s [OK] ' % name
-            
-            cr = self.env.cr
-            uid = self.env.uid
-            context = self.env.context
-        
-            mail_to_ids = self.attendee_ids.mapped('id')
+        if not self.recurrency :
+            if self.state == 'draft':
+                name = self.name
+                if name.find('[') != -1:
+                    name = name[:-5]
+                self.name = '%s [NC] ' % name
+            elif self.state == 'open':
+                name = self.name
+                if name.find('[') != -1:
+                    name = name[:-5]
+                self.name = '%s [OK] ' % name
                 
-            if mail_to_ids:
-                current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-                if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
-                    self.pool['calendar.event'].message_post(cr, uid, self.id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
+                cr = self.env.cr
+                uid = self.env.uid
+                context = self.env.context
+            
+                mail_to_ids = self.attendee_ids.mapped('id')
+                    
+                if mail_to_ids:
+                    current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+                    if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
+                        self.pool['calendar.event'].message_post(cr, uid, self.id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
 
     @api.one
     @api.constrains('room_id')
