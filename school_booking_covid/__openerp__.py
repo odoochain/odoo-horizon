@@ -28,6 +28,7 @@
     'depends': ['school_booking'],
     'init_xml': [],
     'update_xml': [
+        'school_data.xml',
         'views/school_booking_view.xml',
     ],
     'demo_xml': [],
