@@ -56,13 +56,17 @@ class Event(models.Model):
                 name = name[:-5]
             self.name = '%s [OK] ' % name
             
-            mail_to_ids = self.attendee_ids.mapped('id')
+            self._send_confirmation_mail()
+            
+    @api.cr_uid_ids_context
+    def _send_confirmation_mail(self,cr,uid,ids,context=None):
+        mail_to_ids = self.attendee_ids.mapped('id')
+            
+        if mail_to_ids:
+            current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+            if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
+                self.message_post(cr, uid, the_id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
 
-            if mail_to_ids:
-                current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-                if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
-                    self.message_post(cr, uid, the_id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
-    
     @api.one
     @api.constrains('room_id')
     def _check_room_quota(self):
