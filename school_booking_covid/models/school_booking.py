@@ -79,7 +79,10 @@ class Event(models.Model):
             
             if self.env.uid == 1 :
                 return
-    
+            
+            if self.recurrency :
+                return
+            
             # Get user timezone
             
             utc_tz = pytz.UTC

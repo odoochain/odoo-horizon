@@ -91,6 +91,7 @@ class WeeklyBooking(models.Model):
                 'room_id':  wb.room_id.id,
                 'asset_ids': [ (4, record.id) for record in  wb.asset_ids ],
                 'show_as': 'busy' if (wb.type == 'col') else 'free',
+                'state': 'open'
             })
             wb['state'] = 'confirmed'
             wb['event_id'] = event.id
