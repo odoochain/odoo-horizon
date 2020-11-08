@@ -58,7 +58,7 @@ class Event(models.Model):
             
             self._send_confirmation_mail(self.env.cr, self.env.uid, self.env.context)
             
-    @api.cr_uid_id_context
+    @api.v7
     def _send_confirmation_mail(self,cr,uid,context=None):
         
         mail_to_ids = self.attendee_ids.mapped('id')
