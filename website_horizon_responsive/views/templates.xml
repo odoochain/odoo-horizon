@@ -595,7 +595,7 @@
     			
     			<script type="text/javascript">
     				var today = moment('<t t-esc="today"/>');
-    				var tommorow = moment('<t t-esc="tommorrow"/>');
+    				var tommorow = moment('<t t-esc="tomorrow"/>');
     			</script>
     			
     			<div id="content" class="ml-lg-auto">
