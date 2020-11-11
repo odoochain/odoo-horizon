@@ -68,11 +68,14 @@ class BookingController(http.Controller):
     
     @http.route('/responsive/booking_new', type='http', auth='user', website=True)
     def responsive_booking_new(self, debug=False, **k):
-        
+        now = datetime.now()
+        next_day = now + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
+        next_next_day = next_day + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
+        next_next_next_day = next_day - timedelta(days=now.weekday()) + timedelta(days=6) # end of week
         values = {
             'user': request.env.user,
-            'today' : fields.Datetime.to_string(datetime.today()),
-            'tomorrow' : fields.Datetime.to_string(datetime.today() + timedelta(days=1))
+            'today' : next_next_day,
+            'tomorrow' : next_next_next_day
         }
         return request.render('website_horizon_responsive.booking_new', values)
     
