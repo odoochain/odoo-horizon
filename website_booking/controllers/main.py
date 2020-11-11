@@ -27,6 +27,8 @@ import dateutil
 import dateutil.parser
 import dateutil.relativedelta
 
+from datetime import datetime, date, time, timedelta
+
 from openerp import api, fields
 from openerp import http
 from openerp.http import request
