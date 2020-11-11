@@ -1,3 +1,5 @@
+/* global $, moment */
+
 $(document).ready(function(){
     
     function updateSendButton() {
@@ -65,13 +67,13 @@ $(document).ready(function(){
 	$('#from_hour').timepicker({
         'timeFormat': 'H:i',
         'minTime': '8:00',
-        'maxTime': '21:30',
+        'maxTime': '16:30',
     });
     
     $('#to_hour').timepicker({
         'timeFormat': 'H:i',
         'minTime': '8:30',
-        'maxTime': '22:00',
+        'maxTime': '17:00',
         'showDuration': true,
     });
     

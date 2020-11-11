@@ -455,6 +455,11 @@ var BrowserMobile = Widget.extend({
         },
     },
     
+    setDays: function(day_0, day_1) {
+        this.day_0 = moment(day_0);
+        this.day_1 = moment(day_1);
+    },
+    
     renderElement: function() {
         this._super.apply(this, arguments);
         this._current_state = $.deparam(window.location.hash.substring(1));
