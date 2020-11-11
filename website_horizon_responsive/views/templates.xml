@@ -607,11 +607,11 @@
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex pr-md-6 mb-4 mb-md-0 mb-lg-4 mb-xl-0">
 									<div class="form-group mr-4">
 										<label class="d-block text-uppercase font-weight-bold">Aujourd'hui</label>
-										<button id="today" class="form-control input-sm input-font-lg text-center bg-danger border border-danger border-0" type="button"><t t-esc="datetime.datetime.today().strftime('%d / %m  ')"/></button>
+										<button id="today" class="form-control input-sm input-font-lg text-center bg-danger border border-danger border-0" type="button"><t t-esc="widget.today.format('DD/MM')"/></button>
 									</div>
 									<div class="form-group">
 										<label class="d-block text-uppercase font-weight-bold">demain</label>
-										<button type="button" id="tomorrow" class="form-control input-sm input-font-lg text-center"><t t-esc="(datetime.datetime.today() + datetime.timedelta(days=1)).strftime('%d / %m  ')"/></button>
+										<button type="button" id="tomorrow" class="form-control input-sm input-font-lg text-center"><t t-esc="widget.tomorrow.format('DD/MM')"/></button>
 									</div>
 									<input id="day" type="hidden" value="0"/>
 								</div>
