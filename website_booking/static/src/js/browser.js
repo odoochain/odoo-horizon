@@ -40,7 +40,7 @@ var CalendarWidget = Widget.extend({
     		defaultDate: moment(),
     		defaultView: 'agendaDay',
     		minTime: "08:00:00",
-    		maxTime: "22:00:00",
+    		maxTime: "17:00:00",
     		navLinks: true, // can click day/week names to navigate views
     		eventLimit: true, // allow "more" link when too many events
     		refetchResourcesOnNavigate : false,
