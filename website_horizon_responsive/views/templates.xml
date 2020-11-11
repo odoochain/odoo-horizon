@@ -593,6 +593,11 @@
     			<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
     			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
     			
+    			<script type="text/javascript">
+    				var today = moment('<t t-esc="today"/>');
+    				var tommorow = moment('<t t-esc="tommorrow"/>');
+    			</script>
+    			
     			<div id="content" class="ml-lg-auto">
 					<div class="content-body">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
