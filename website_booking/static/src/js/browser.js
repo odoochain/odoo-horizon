@@ -314,6 +314,7 @@ var NewBookingDialog = Widget.extend({
             'timeFormat': 'H:i',
             'minTime': '8:30',
             'maxTime': '16:30',
+            interval: 60,
         });
         self.$('#from_hour').on('change', function() {
             var newTime = self.$('#from_hour').timepicker('getTime');
@@ -324,6 +325,7 @@ var NewBookingDialog = Widget.extend({
             'minTime': '8:30',
             'maxTime': '16:30',
             'showDuration': true,
+            interval: 60,
         });
         if(self.edit_mode) {
             self.$('#from_hour').val(self.event.start.format('H:mm'));
