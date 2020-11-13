@@ -227,6 +227,7 @@ var BrowserEditor = BrowserWidget.extend({
             'timeFormat': 'H:i',
             'minTime': '8:30',
             'maxTime': '15:30',
+            'step' : 60,
             disableTextInput: true,
             disableTouchKeyboard: true,
         });
@@ -239,6 +240,7 @@ var BrowserEditor = BrowserWidget.extend({
             'minTime': '9:30',
             'maxTime': '16:30',
             'showDuration': true,
+            'step' : 60,
             disableTextInput: true,
             disableTouchKeyboard: true,
         });
