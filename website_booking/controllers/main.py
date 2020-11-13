@@ -57,7 +57,7 @@ class BookingController(http.Controller):
         now = datetime.now()
         next_day = now + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
         next_next_day = next_day + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
-        next_next_next_day = next_day + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
+        next_next_next_day = next_next_day + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
         values = {
             'day_0' : next_next_day,
             'day_1' : next_next_next_day,
