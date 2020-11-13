@@ -225,8 +225,8 @@ var BrowserEditor = BrowserWidget.extend({
         self.$('select.select-asset-id').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
-            'minTime': '8:00',
-            'maxTime': '16:30',
+            'minTime': '8:30',
+            'maxTime': '15:30',
             disableTextInput: true,
             disableTouchKeyboard: true,
         });
@@ -236,8 +236,8 @@ var BrowserEditor = BrowserWidget.extend({
         });
         self.$('#to_hour').timepicker({
             'timeFormat': 'H:i',
-            'minTime': '8:30',
-            'maxTime': '17:00',
+            'minTime': '9:30',
+            'maxTime': '16:30',
             'showDuration': true,
             disableTextInput: true,
             disableTouchKeyboard: true,
