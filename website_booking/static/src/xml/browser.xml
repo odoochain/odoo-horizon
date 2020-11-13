@@ -24,7 +24,7 @@
                               </div>
                               <div class="input-field col s6">
                                 <input id="to_hour" type="text" data-length="10" class="invalid" />
-                                <label for="input_text" data-error="Minimum 30min et maximum 2h">To Hour</label>
+                                <label for="input_text" data-error="Minimum 1h et maximum 3h">To Hour</label>
                               </div>
                             </div>
                             <div class="input-field col s12" style="margin-top:40px;">
