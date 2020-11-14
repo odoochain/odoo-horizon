@@ -73,8 +73,8 @@ var BrowserWidget = Widget.extend({
     
     init: function(parent) {
         this._super(parent);
-        this.date = this.today = moment(new Date());
-        this.tomorrow = moment(new Date()).add(1,'days');
+        this.date = this.today = parent.day_0;
+        this.tomorrow = parent.day_1;
     },
     
     start: function() {
@@ -223,24 +223,11 @@ var BrowserEditor = BrowserWidget.extend({
         var self = this;
         this.edit_mode = false;
         self.$('select.select-asset-id').material_select();
-        /*self.$('#from_hour').mdtimepicker({
-    		timeFormat: 'hh:mm:ss',	// format of the time value (data-time attribute)
-    		format: 'hh:mm tt',			// format of the input value
-    		theme: 'teal',				// theme of the timepicker
-    		readOnly: true,				// determines if input is readonly
-    		hourPadding: false			// determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
-	    });
-        self.$('#to_hour').mdtimepicker({
-    		timeFormat: 'hh:mm:ss',	// format of the time value (data-time attribute)
-    		format: 'hh:mm tt',			// format of the input value
-    		theme: 'teal',				// theme of the timepicker
-    		readOnly: true,				// determines if input is readonly
-    		hourPadding: false			// determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
-	    });*/
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
-            'minTime': '8:00',
-            'maxTime': '21:30',
+            'minTime': '8:30',
+            'maxTime': '15:30',
+            'step' : 60,
             disableTextInput: true,
             disableTouchKeyboard: true,
         });
@@ -250,9 +237,10 @@ var BrowserEditor = BrowserWidget.extend({
         });
         self.$('#to_hour').timepicker({
             'timeFormat': 'H:i',
-            'minTime': '8:30',
-            'maxTime': '22:00',
+            'minTime': '9:30',
+            'maxTime': '16:30',
             'showDuration': true,
+            'step' : 60,
             disableTextInput: true,
             disableTouchKeyboard: true,
         });
@@ -453,6 +441,11 @@ var BrowserMobile = Widget.extend({
                     location.reload();
             });
         },
+    },
+    
+    setDays: function(day_0, day_1) {
+        this.day_0 = moment(day_0);
+        this.day_1 = moment(day_1);
     },
     
     renderElement: function() {
