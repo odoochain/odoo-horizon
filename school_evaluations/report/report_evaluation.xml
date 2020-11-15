@@ -27,9 +27,17 @@
     Success Certificate
     
     -->
-
-    <report id="report_success_certificate" model="school.individual_bloc" string="Success Certificate" report_type="qweb-pdf" name="school_evaluations.report_success_certificate_content" file="school_evaluations.report_success_certificate_content" attachment_use="True"
-        attachment="object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'" />
+    
+    <record id="report_success_certificate" model="ir.actions.report">
+        <field name="name">Success Certificate</field>
+        <field name="model">school.individual_bloc</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_evaluations.report_success_certificate_content</field>
+        <field name="report_file">school_evaluations.report_success_certificate_content</field>
+        <field name="print_report_name">object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'</field>
+        <field name="binding_model_id" ref="model_school_individual_bloc"/>
+        <field name="binding_type">report</field>
+    </record>
 
     <!--Email template -->
     <record id="email_template_success_certificate" model="mail.template">
@@ -120,8 +128,17 @@
     
     -->
 
-    <report id="report_success_certificate_prog" model="school.individual_program" string="Success Certificate" report_type="qweb-pdf" name="school_evaluations.report_success_certificate_prog_content" file="school_evaluations.report_success_certificate_prog_content"
-        attachment_use="True" attachment="object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'" />
+    <record id="report_success_certificate_prog" model="ir.actions.report">
+        <field name="name">Success Certificate</field>
+        <field name="model">school.individual_program</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_evaluations.report_success_certificate_prog_content</field>
+        <field name="report_file">school_evaluations.report_success_certificate_prog_content</field>
+        <field name="print_report_name">object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'</field>
+        <field name="binding_model_id" ref="model_school_individual_program"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
 
     <!--Email template -->
     <record id="email_template_success_certificate_prog" model="mail.template">
@@ -207,9 +224,18 @@
     Evaluations report for students
     
     -->
-
-    <report id="report_evaluation_for_student" model="school.individual_bloc" string="Evaluations for student" report_type="qweb-pdf" name="school_evaluations.report_evaluation_for_student_content" file="school_evaluations.report_evaluation_for_student_content"
-        attachment_use="True" attachment="object.name+'-RES-'+time.strftime('%d-%m-%Y')+'.pdf'" />
+        
+    <record id="report_evaluation_for_student" model="ir.actions.report">
+        <field name="name">Evaluations for student</field>
+        <field name="model">school.individual_bloc</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_evaluations.report_evaluation_for_student_content</field>
+        <field name="report_file">school_evaluations.report_evaluation_for_student_content</field>
+        <field name="print_report_name">object.name+'-RES-'+time.strftime('%d-%m-%Y')+'.pdf'</field>
+        <field name="binding_model_id" ref="model_school_individual_bloc"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
 
     <!--Email template -->
     <record id="email_template_evaluation_for_student" model="mail.template">
@@ -361,9 +387,16 @@
     
     -->
 
-    <report id="report_deliberation_program_annexe" model="school.individual_program" string="Deliberation Report Program" report_type="qweb-pdf" name="school_evaluations.report_deliberation_annexe_program" file="school_evaluations.report_deliberation_annexe_program"
-    />
-
+    <record id="report_deliberation_program_annexe" model="ir.actions.report">
+        <field name="name">Deliberation Report Program</field>
+        <field name="model">school.individual_program</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_evaluations.report_deliberation_annexe_program</field>
+        <field name="report_file">school_evaluations.report_deliberation_annexe_program</field>
+        <field name="binding_model_id" ref="model_school_individual_program"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
 
     <template id="report_deliberation_annexe_program">
         <t t-call="report.html_container">
@@ -419,9 +452,16 @@
         </t>
     </template>
 
-
-    <report id="report_deliberation_annexe" model="school.individual_bloc" string="Deliberation Report" report_type="qweb-pdf" name="school_evaluations.report_deliberation_annexe_content" file="school_evaluations.report_deliberation_annexe_content" />
-
+    <record id="report_deliberation_annexe" model="ir.actions.report">
+        <field name="name">Deliberation Report Annexes</field>
+        <field name="model">school.individual_bloc</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_evaluations.report_deliberation_annexe_content</field>
+        <field name="report_file">school_evaluations.report_deliberation_annexe_content</field>
+        <field name="binding_model_id" ref="model_school_individual_bloc"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
 
     <template id="report_deliberation_annexe_content">
         <t t-call="report.html_container">
@@ -568,8 +608,16 @@
 
     <!-- Individual Bloc Definition Report -->
 
-    <report id="report_individual_bloc_definition" model="school.individual_program" string="Individual Bloc Definition Report" report_type="qweb-pdf" name="school_evaluations.report_individual_bloc_definition_content" file="school_evaluations.report_individual_bloc_definition_content"
-    />
+    <record id="report_individual_bloc_definition" model="ir.actions.report">
+        <field name="name">Individual Bloc Definition Report</field>
+        <field name="model">school.individual_program</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_evaluations.report_individual_bloc_definition_content</field>
+        <field name="report_file">school_evaluations.report_individual_bloc_definition_content</field>
+        <field name="binding_model_id" ref="model_school_individual_program"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
 
     <template id="report_individual_bloc_definition_content">
         <t t-call="report.html_container">
@@ -904,9 +952,17 @@
         <field name="auto_delete" eval="True"/>
         <field name="user_signature" eval="False"/>
     </record> -->
-
-    <report id="report_evaluation_by_teacher" model="school.individual_course" string="Evaluation by Teacher" report_type="qweb-pdf" name="school_evaluations.report_evaluation_by_teacher_content" file="school_evaluations.report_evaluation_by_teacher_content"
-    />
+    
+    <record id="report_evaluation_by_teacher" model="ir.actions.report">
+        <field name="name">Evaluation by Teacher</field>
+        <field name="model">school.individual_course</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_evaluations.report_evaluation_by_teacher_content</field>
+        <field name="report_file">school_evaluations.report_evaluation_by_teacher_content</field>
+        <field name="binding_model_id" ref="model_school_individual_course"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
 
     <record id="action_evaluation_report_by_teacher" model="ir.actions.act_window">
         <field name="name">Evaluations by teatcher</field>
