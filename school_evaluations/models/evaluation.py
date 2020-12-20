@@ -127,12 +127,12 @@ class IndividualProgram(models.Model):
     
     grade_comments = fields.Text(string="Grade Comments",track_visibility='onchange')
     
-    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
+    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     
-    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',track_visibility='onchange')
-    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True, track_visibility='onchange')
+    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',track_visibility='onchange',store=True)
+    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True, track_visibility='onchange',store=True)
 
-    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True,track_visibility='onchange')
+    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed",track_visibility='onchange',store=True)
 
     valuated_course_group_ids = fields.One2many('school.individual_course_group', 'valuated_program_id', string='Valuated Courses Groups', track_visibility='onchange')
 
@@ -239,12 +239,12 @@ class IndividualBloc(models.Model):
     total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Not Dispensed Hours',store=True)
     total_acquiered_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Acquiered Not Dispensed Credits",store=True)
     
-    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
+    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     decision = fields.Text(string="Decision",track_visibility='onchange')
     exclude_from_deliberation = fields.Boolean(string='Exclude from Deliberation', default=False)
     
-    first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
-    second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
+    first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
+    second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     
     @api.onchange('state')
     def _onchange_state(self):
@@ -493,9 +493,9 @@ class IndividualCourseGroup(models.Model):
     
     dispense =  fields.Boolean(compute='compute_dispense', string='Valuation',default=False,track_visibility='onchange', store=True)
     
-    final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True,digits=dp.get_precision('Evaluation'),track_visibility='onchange')
+    final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True, digits=dp.get_precision('Evaluation'), track_visibility='onchange')
+    final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active', store=True)
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_results_disp')
-    final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active')
     
     acquiered = fields.Selection(([('A', 'Acquiered'),('NA', 'Not Acquiered')]), compute='compute_acquiered', string='Acquired Credits', store=True, track_visibility='onchange',default='NA')
     
