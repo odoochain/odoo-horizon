@@ -40,6 +40,7 @@ class school_year_sequence_mixin(models.AbstractModel):
     def _compute_year_sequence(self):
         for item in self:
             current_year_id = self.env.user.current_year_id
+            item.year_sequence = False
             if current_year_id.id == item.year_id.id:
                 item.year_sequence = 'current'
             if current_year_id.previous.id == item.year_id.id:
