@@ -95,10 +95,10 @@ class Program(models.Model):
     
     def _compute_course_group_ids(self):
         for rec in self :
-            course_group_ids = []
+            course_group_ids = self.env['school.course_group']
             for bloc in rec.bloc_ids:
-                course_group_ids |= bloc.course_group_ids.ids
-            rec.course_group_ids = self.env['school.course_group'].browse(course_group_ids)
+                course_group_ids |= bloc.course_group_ids
+            rec.course_group_ids = course_group_ids
         
     # bloc1_title = fields.Text(compute='_compute_bloc_course_group_ids')
     # bloc2_title = fields.Text(compute='_compute_bloc_course_group_ids')
