@@ -95,12 +95,9 @@ class Program(models.Model):
     
     def _compute_course_group_ids(self):
         for rec in self :
-            course_group_ids = False
+            course_group_ids = []
             for bloc in rec.bloc_ids:
-                if course_group_ids :
-                    course_group_ids |= bloc.course_group_ids
-                else :
-                    course_group_ids = bloc.course_group_ids
+                course_group_ids |= bloc.course_group_ids
             rec.course_group_ids = course_group_ids
         
     # bloc1_title = fields.Text(compute='_compute_bloc_course_group_ids')
