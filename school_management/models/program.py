@@ -26,6 +26,19 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
+class open_form_mixin():
+    _name = "school.open.form.mixin"
+    
+    def action_open_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _(self.name),
+            'res_model': self/_name,
+            'res_id': self.id,
+            'view_mode': 'form',
+        }
+
 class uid_mixin(models.AbstractModel):
     _name = "school.uid.mixin"
     
@@ -129,7 +142,7 @@ class Bloc(models.Model):
     '''Bloc'''
     _name = 'school.bloc'
     _description = 'Program'
-    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     _order = 'program_id,sequence'
     
     @api.depends('course_group_ids')
@@ -178,22 +191,12 @@ class Bloc(models.Model):
     _sql_constraints = [
 	        ('uniq_bloc', 'unique(program_id, sequence)', 'There shall be only one bloc with a given sequence within a program'),
     ]
-    
-    def action_open_form(self):
-        self.ensure_one()
-        return {
-            'type': 'ir.actions.act_window',
-            'name': _(self.name),
-            'res_model': 'school.bloc',
-            'res_id': self.id,
-            'view_mode': 'form',
-        }
 
 class CourseGroup(models.Model):
     '''Courses Group'''
     _name = 'school.course_group'
     _description = 'Courses Group'
-    _inherit = ['mail.thread','school.uid.mixin']
+    _inherit = ['mail.thread','school.uid.mixin','school.open.form.mixin']
     _order = 'sequence'
 
     sequence = fields.Integer(string='Sequence')
@@ -264,17 +267,6 @@ class CourseGroup(models.Model):
                 args = ['|'] + (args or []) + [('uid', 'ilike', name)]
         return super(CourseGroup, self).name_search(name=name, args=args, operator=operator, limit=limit)
         
-        
-    def action_open_form(self):
-        self.ensure_one()
-        return {
-            'type': 'ir.actions.act_window',
-            'name': _(self.name),
-            'res_model': 'school.course_group',
-            'res_id': self.id,
-            'view_mode': 'form',
-        }
-    
 class Course(models.Model):
     '''Course'''
     _name = 'school.course'

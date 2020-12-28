@@ -94,7 +94,7 @@ class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _name='school.individual_bloc'
     _description='Individual Bloc'
-    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
     _order = 'year_id, source_bloc_level desc, source_bloc_name'
     
@@ -212,7 +212,7 @@ class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _name='school.individual_course_group'
     _description='Individual Course Group'
-    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
     _order = 'year_id, sequence'
     
