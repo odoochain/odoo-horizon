@@ -36,17 +36,11 @@ class CourseGroup(models.Model):
 
     def _compute_pre_requisit_ids(self):
         for rec in self:
-            ret_ids = []
-            for pre_requisit in rec.pre_requisit_ids:
-                ret_ids.append(pre_requisit.course_id.id)
-            rec.pre_requisit_course_ids = ret_ids
+            rec.pre_requisit_course_ids = rec.pre_requisit_ids.mapped('course_id')
 
     def _compute_co_requisit_ids(self):
         for rec in self:
-            ret_ids = []
-            for co_requisit in rec.co_requisit_ids:
-                ret_ids.append(co_requisit.course_id.id)
-            rec.co_requisit_ids = ret_ids
+            rec.co_requisit_course_ids = rec.co_requisit_ids.mapped('course_id')
         
 class PreRequisit(models.Model):
     '''PreRequisit'''
