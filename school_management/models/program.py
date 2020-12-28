@@ -32,14 +32,11 @@ class Program(models.Model):
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin']
     
-    uid = fields.Char(string="UID",copy=False,readonly=True)
+    uid = fields.Char(string="UID",copy=False,readonly=True,default='_get_uid_default')
     
-    @api.model
-    def create(self, values):
-        if not values.get('uid', False) :
-            values['uid'] = self.env['ir.sequence'].next_by_code('school.program')
-        record = super(Program, self).create(values)
-        return record
+    def _get_uid_default(self, values):
+        for prog in self :
+            prog.uid = self.env['ir.sequence'].next_by_code('school.program')
     
     @api.depends('bloc_ids')
     def _get_courses_total(self):
