@@ -29,7 +29,7 @@ _logger = logging.getLogger(__name__)
 class uid_mixin(models.AbstractModel):
     _name = "school.uid.mixin"
     
-    uid = fields.Char(string="UID",copy=False,readonly=True,default=lambda self: self.env['ir.sequence'].next_by_code(self._model))
+    uid = fields.Char(string="UID",copy=False,readonly=True,default=lambda self: self.env['ir.sequence'].next_by_code(self._name))
 
 class Program(models.Model):
     '''Program'''
