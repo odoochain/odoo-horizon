@@ -54,7 +54,7 @@
       <field name="arch" type="xml">
         <form string="Individual Program">
           <sheet>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
+            <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
             <div class="oe_title" style="padding-left: 260px;width: 100%;">
               <h1>
                 <field name="student_id"/>
@@ -396,7 +396,7 @@
     		            <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,paid"/>
     		        </header>-->
           <sheet>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/>
+            <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/>
             <div class="oe_title">
               <h1>
                <field name="name"/>
@@ -536,7 +536,7 @@
             <div class="oe_button_box" name="button_box">
               <button type="object" icon="fa-book" name="open_program" string="Porgram"/>
             </div>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
+            <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
             <div class="oe_title" style="padding-left: 130px;">
               <h1>
                <field name="name"/>
