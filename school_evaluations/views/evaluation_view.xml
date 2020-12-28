@@ -26,21 +26,6 @@
         <!-- Top menu item -->
         <menuitem name="Evaluations" id="menu_main_evaluation" icon="fa-book" web_icon="survey,static/description/icon.png" sequence="65" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
 
-        <template id="assets_backend" name="school_evaluations_assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/metisMenu.min.css" /> <!-- TODO : change to not min version -->
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/sb-admin-2.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_program.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_bloc.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluations.css" />
-                <script type="text/javascript" src="/school_evaluations/static/src/js/metisMenu.min.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/sb-admin-2.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluations.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluation_bloc.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluation_program.js"></script>
-            </xpath>
-        </template>
-
         <!-- Partner -->
         <record id="view_partners_form_school_eval" model="ir.ui.view">
             <field name="name">view.res.partner.form.school.eval</field>
