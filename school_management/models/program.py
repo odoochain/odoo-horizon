@@ -32,7 +32,7 @@ class Program(models.Model):
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin']
     
-    uid = fields.Char(string="UID")
+    uid = fields.Char(string="UID",copy=False,readonly=True)
     
     @api.model
     def create(self, values):

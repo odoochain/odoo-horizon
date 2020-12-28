@@ -642,6 +642,7 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Program">
+          <field name="uid"/>
           <field name="name" />
           <field name="total_hours" />
           <field name="total_credits" />
