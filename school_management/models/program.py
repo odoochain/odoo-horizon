@@ -34,7 +34,7 @@ class open_form_mixin(models.AbstractModel):
         return {
             'type': 'ir.actions.act_window',
             'name': _(self.name),
-            'res_model': self/_name,
+            'res_model': self._name,
             'res_id': self.id,
             'view_mode': 'form',
         }
