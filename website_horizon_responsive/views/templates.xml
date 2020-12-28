@@ -452,7 +452,7 @@
 								<li class="d-flex flex-wrap align-items-start w-100" t-foreach="bloc.course_group_ids" t-as="course_group">
 									<ul class="ul-body-row d-flex list-unstyled mb-0">
 										<li>
-											<span class="d-block"><t t-esc="course_group.ue_id"/></span>
+											<span class="d-block"><t t-esc="course_group.uid"/></span>
 										</li>
 										<li>
 											<span class="d-block">
