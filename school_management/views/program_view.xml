@@ -102,14 +102,16 @@
                                 options='{"terminology": "archive"}'/>
                         </button>
             </div>
-            <div class="oe_title">
-              <h1>
-               <field name="name"/>
-              </h1>
-              <div class="oe_fade">
-                  <span class="o_field_widget">Id :</span><field name="uid"/>
+            <group col="2">
+              <div class="oe_title">
+                <h1>
+                 <field name="name"/>
+                </h1>
+                <div class="oe_fade">
+                    <span class="o_field_widget">Id :</span><field name="uid"/>
+                </div>
               </div>
-            </div>
+            </group>
             <group col="4">
               <field name="title" colspan="4"/>
               <field name="responsible_id" colspan="4"/>
