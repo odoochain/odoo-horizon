@@ -32,9 +32,9 @@ class Program(models.Model):
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin']
     
-    uid = fields.Char(string="UID",copy=False,readonly=True,default='_get_uid_default')
+    uid = fields.Char(string="UID",copy=False,readonly=True,default=lambda self: self._get_uid_default())
     
-    def _get_uid_default(self, values):
+    def _get_uid_default(self):
         for prog in self :
             prog.uid = self.env['ir.sequence'].next_by_code('school.program')
     
