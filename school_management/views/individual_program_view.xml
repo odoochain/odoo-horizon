@@ -122,11 +122,11 @@
           <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
           <separator/>
           <group expand="1" string="Group By">
-            <filter string="Domain" name="source_bloc_domain_id_group" context="{'group_by':'source_bloc_domain_id'}" />
-            <filter string="Cycle" name="source_bloc_cycle_id_group" context="{'group_by':'source_bloc_cycle_id'}" />
-            <filter string="Section" name="source_bloc_section_id_group" context="{'group_by':'source_bloc_section_id'}" />
-            <filter string="Track" name="source_bloc_track_id_group" context="{'group_by':'source_bloc_track_id'}" />
-            <filter string="Speciality" name="source_bloc_speciality_id_group" context="{'group_by':'source_bloc_speciality_id'}" />
+            <filter string="Domain" name="domain_id_group" context="{'group_by':'domain_id'}" />
+            <filter string="Cycle" name="cycle_id_group" context="{'group_by':'cycle_id'}" />
+            <filter string="Section" name="section_id_group" context="{'group_by':'section_id'}" />
+            <filter string="Track" name="track_id_group" context="{'group_by':'track_id'}" />
+            <filter string="Speciality" name="speciality_id_group" context="{'group_by':'speciality_id'}" />
           </group>
         </search>
       </field>

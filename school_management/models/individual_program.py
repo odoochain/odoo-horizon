@@ -123,7 +123,6 @@ class IndividualBloc(models.Model):
     source_bloc_cycle_id = fields.Many2one('school.cycle',compute='compute_speciality', string='Cycle', readonly=True, store=True)
     
     @api.depends('source_bloc_id.speciality_id','program_id.speciality_id')
-    
     def compute_speciality(self):
         for bloc in self:
             if bloc.source_bloc_id.speciality_id :
@@ -328,7 +327,7 @@ class IndividualCourse(models.Model):
     source_bloc_level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),],related='course_group_id.bloc_id.source_bloc_level', string="Source Course Bloc Level", readonly=True, store=True)
     
     source_bloc_domain_id = fields.Many2one(related='course_group_id.bloc_id.source_bloc_domain_id', string='Domain', readonly=True, store=True)
-    source_bloc_speciality_id = fields.Many2one(related='course_group_id.bloc_id.source_bloc_speciality_id', string='Speciality', readonly=True, store=True)
+rm    source_bloc_speciality_id = fields.Many2one(related='course_group_id.bloc_id.source_bloc_speciality_id', string='Speciality', readonly=True, store=True)
     source_bloc_section_id = fields.Many2one(related='course_group_id.bloc_id.source_bloc_section_id', string='Section', readonly=True, store=True)
     source_bloc_track_id = fields.Many2one(related='course_group_id.bloc_id.source_bloc_track_id', string='Track', readonly=True, store=True)
     source_bloc_cycle_id = fields.Many2one(related='course_group_id.bloc_id.source_bloc_cycle_id', string='Cycle', readonly=True, store=True)
