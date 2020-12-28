@@ -26,7 +26,7 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
-class open_form_mixin():
+class open_form_mixin(models.AbstractModel):
     _name = "school.open.form.mixin"
     
     def action_open_form(self):
