@@ -26,17 +26,16 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
+class uid_mixin(models.AbstractModel):
+    _name = "school.uid.mixin"
+    
+    uid = fields.Char(string="UID",copy=False,readonly=True,default=lambda self: self.env['ir.sequence'].next_by_code(self._model))
+
 class Program(models.Model):
     '''Program'''
     _name = 'school.program'
     _description = 'Program made of several Blocs'
-    _inherit = ['mail.thread','school.year_sequence.mixin']
-    
-    uid = fields.Char(string="UID",copy=False,readonly=True,default=lambda self: self._get_uid_default())
-    
-    def _get_uid_default(self):
-        for prog in self :
-            prog.uid = self.env['ir.sequence'].next_by_code('school.program')
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin']
     
     @api.depends('bloc_ids')
     def _get_courses_total(self):
@@ -130,17 +129,8 @@ class Bloc(models.Model):
     '''Bloc'''
     _name = 'school.bloc'
     _description = 'Program'
-    _inherit = ['mail.thread','school.year_sequence.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin']
     _order = 'program_id,sequence'
-    
-    uid = fields.Char(string="UID")
-    
-    @api.model
-    def create(self, values):
-        if not values.get('uid', False) :
-            values['uid'] = self.env['ir.sequence'].next_by_code('school.bloc')
-        record = super(Bloc, self).create(values)
-        return record
     
     @api.depends('course_group_ids')
     def _get_courses_total(self):
@@ -203,17 +193,8 @@ class CourseGroup(models.Model):
     '''Courses Group'''
     _name = 'school.course_group'
     _description = 'Courses Group'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread','school.uid.mixin']
     _order = 'sequence'
-
-    uid = fields.Char(string="UID")
-    
-    @api.model
-    def create(self, values):
-        if not values.get('uid', False) :
-            values['uid'] = self.env['ir.sequence'].next_by_code('school.course_group')
-        record = super(CourseGroup, self).create(values)
-        return record
 
     sequence = fields.Integer(string='Sequence')
     
@@ -298,17 +279,8 @@ class Course(models.Model):
     '''Course'''
     _name = 'school.course'
     _description = 'Course'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread','school.uid.mixin']
     _order = 'sequence'
-
-    uid = fields.Char(string="UID")
-    
-    @api.model
-    def create(self, values):
-        if not values.get('uid', False) :
-            values['uid'] = self.env['ir.sequence'].next_by_code('school.course')
-        record = super(Course, self).create(values)
-        return record
 
     sequence = fields.Integer(string='Sequence')
     
