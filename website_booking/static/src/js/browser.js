@@ -39,8 +39,8 @@ var CalendarWidget = Widget.extend({
     		titleFormat: 'dddd D MMMM YYYY',
     		defaultDate: moment(),
     		defaultView: 'agendaDay',
-    		minTime: "08:30:00",
-    		maxTime: "16:30:00",
+    		minTime: "08:00:00",
+    		maxTime: "20:00:00",
     		navLinks: true, // can click day/week names to navigate views
     		eventLimit: true, // allow "more" link when too many events
     		refetchResourcesOnNavigate : false,
@@ -312,8 +312,8 @@ var NewBookingDialog = Widget.extend({
         self.$('select.select-asset-id').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
-            'minTime': '8:30',
-            'maxTime': '15:30',
+            'minTime': '8:00',
+            'maxTime': '19:30',
             'step' : 60,
         });
         self.$('#from_hour').on('change', function() {
