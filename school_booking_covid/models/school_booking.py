@@ -112,7 +112,7 @@ class Event(models.Model):
                 
                 dt = to_tz(fields.Datetime.from_string(self.start_datetime),utc_tz)
                 
-                if dt.minute != 30 :
+                if dt.minute != 0 and dt.minute != 30 :
                     raise ValidationError(_("Invalid booking, please use standard booking."))
                 
                 now = to_tz(datetime.now(),user_tz)
