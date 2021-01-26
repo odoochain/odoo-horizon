@@ -114,7 +114,7 @@ class Event(models.Model):
                 
                 if dt.minute != 0 and dt.minute != 30 :
                     raise ValidationError(_("Invalid booking, please use standard booking."))
-                
+                    
                 now = to_tz(datetime.now(),user_tz)
                 
                 start_time = fields.Datetime.from_string(self.start_datetime)
@@ -123,13 +123,15 @@ class Event(models.Model):
                 
                 last_booking_day = now - timedelta(days=now.weekday()) + timedelta(days=6) # end of week
                 
+                _logger.info('check at %s : %s < %s < %s' % (now, next_day, start_time, last_booking_day))
+                
                 if now.weekday > 3 :
                     last_booking_day = last_booking_day + timedelta(days=7) # end of next week
                 
-                if start_time.day <= next_day.day :
+                if start_time <= next_day :
                     raise ValidationError(_("You must make your booking two days in advance."))
                 
-                if start_time.day > last_booking_day.day :
+                if start_time > last_booking_day :
                     raise ValidationError(_("Bookings are not yet open for this date."))
                 
                 if dt < (datetime.now() + timedelta(minutes=-30)):
