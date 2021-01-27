@@ -752,7 +752,7 @@ var Toolbar = Widget.extend({
                 });
                 self.avatar_src = session.url('/web/image', {model:'res.users', field: 'image_small', id: session.uid});
                 self.$el.html(qweb.render('website_booking.toolbar_log', {widget : self}));
-                self.$el.open();
+                self.$el.openFAB();
             } else {
                 self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
             }
@@ -804,9 +804,7 @@ var Browser = Widget.extend({
         self.cal = new Calendar(this);
         self.cal.appendTo(this.$(".calendar"));
         self.cal.tb = self.tb;
-        this.$('.datepicker').datepicker({
-            container: 'body'
-        });
+        this.$('.datepicker').datepicker();
     },
     
     start: function() {
