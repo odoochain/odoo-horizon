@@ -111,11 +111,6 @@
                                 <div class='calendar'/>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col s4 l4">
-                                <input type="text" class="datepicker"/>
-                            </div>
-                        </div>
                     </div>
                 </li>
             </ul>
