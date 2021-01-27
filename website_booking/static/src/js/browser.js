@@ -607,7 +607,24 @@ var Calendar = CalendarWidget.extend({
                 left:   'prev',
                 center: 'title,today',
                 right:  'next'
-            }
+            },
+            customButtons: {
+                gotoDate: {
+                    text: 'Go to date',
+                    click: function () {
+                        $(this).datepicker({
+                            autoclose: true
+                        });
+                        $(this).datepicker().on('changeDate', function (e) {
+                            $('#fullcalendar').fullCalendar('gotoDate', e.date);
+                        });
+                        $(this).datepicker('show');
+                    }
+                },
+            },
+            footer: {
+                'center': 'gotoDate'
+            },
         });
     },
     
