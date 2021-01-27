@@ -24,6 +24,7 @@ from datetime import datetime, date, time, timedelta
 
 from openerp import api, fields, models, _, tools
 from openerp.exceptions import UserError, ValidationError
+from openerp.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
