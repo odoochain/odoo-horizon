@@ -608,23 +608,6 @@ var Calendar = CalendarWidget.extend({
                 center: 'title,today',
                 right:  'next'
             },
-            customButtons: {
-                gotoDate: {
-                    text: 'Go to date',
-                    click: function () {
-                        $(this).datepicker({
-                            autoclose: true
-                        });
-                        $(this).datepicker().on('changeDate', function (e) {
-                            $('#fullcalendar').fullCalendar('gotoDate', e.date);
-                        });
-                        $(this).datepicker('show');
-                    }
-                },
-            },
-            footer: {
-                'center': 'gotoDate'
-            },
         });
     },
     
@@ -821,6 +804,7 @@ var Browser = Widget.extend({
         self.cal = new Calendar(this);
         self.cal.appendTo(this.$(".calendar"));
         self.cal.tb = self.tb;
+        this.$('.datepicker').datepicker();
     },
     
     start: function() {
