@@ -156,3 +156,12 @@ class Event(models.Model):
                 _logger.info('Check done')
                     
             
+    @api.model
+    def archive_old_events(self, *args, **kwargs):
+        timeout_ago = datetime.datetime.utcnow()-datetime.timedelta(day=30)
+        _logger.info('Archive old event')
+        domain = [('stop', '<', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT)),('recurrency','=',False)]
+        self.sudo().search(domain).write({'active': False})
+        _logger.info('Archive reccuring event')
+        domain = [('final_date', '<', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT)),('recurrency','=',True)]
+        self.sudo().search(domain).write({'active': False})
