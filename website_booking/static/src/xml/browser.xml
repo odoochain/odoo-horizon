@@ -113,7 +113,15 @@
                         </div>
                         <div class="row">
                             <div class="col s4 l4">
-                                <input type="text" class="datepicker"/>
+                                <style>
+                                    ui-datepicker-div {
+                                            margin: 5px;
+                                            padding: 5px;
+                                            background: rgb(226, 252, 255);
+                                    }
+                                </style>
+                                <div id="datepicker"></div>
+                                <a href="#!" class="goto-date waves-effect waves-green btn-flat">Goto Date</a>
                             </div>
                         </div>
                     </div>
