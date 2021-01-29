@@ -113,6 +113,13 @@
                         </div>
                         <div class="row">
                             <div class="col s4 l4">
+                                <style>
+                                ui-datepicker-div {
+                                            margin: 5px;
+                                            padding: 5px;
+                                            background: rgb(226, 252, 255);
+                                }
+                                </style>
                                 <input type="text" class="datepicker"/>
                             </div>
                             <div class="col s2 l2">
