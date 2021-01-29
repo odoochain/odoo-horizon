@@ -121,7 +121,9 @@
                                     }
                                 </style>
                                 <div id="datepicker"></div>
-                                <a href="#!" class="goto-date waves-effect waves-green btn-flat">Goto Date</a>
+                            </div>
+                            <div class="col s2 l2">
+                                <a href="#!" class="goto-date waves-effect waves-green btn-flat">-> Date</a>
                             </div>
                         </div>
                     </div>
