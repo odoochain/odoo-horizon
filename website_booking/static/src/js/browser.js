@@ -700,6 +700,10 @@ var Calendar = CalendarWidget.extend({
         this.$calendar.fullCalendar( 'refetchEvents' );
     },
     
+    goto_date : function(d) {
+        this.$calendar.fullCalendar('gotoDate', d);
+    },
+    
 });
 
 var Toolbar = Widget.extend({
@@ -771,6 +775,10 @@ var Browser = Widget.extend({
             var dialog = new NewBookingDialog(this);
             dialog.appendTo(self.main_modal.empty());
             self.main_modal.modal('open');
+        },
+        "click #goto-date-button": function (event) {
+            var self = this;
+            this.cal.goto_date(this.$('.datepicker').val);
         },
     },
     

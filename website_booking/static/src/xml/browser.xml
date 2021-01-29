@@ -116,7 +116,7 @@
                                 <input type="text" class="datepicker"/>
                             </div>
                             <div class="col s2 l2">
-                                <a href="#!" class="goto-date waves-effect waves-green btn">-> Date</a>
+                                <a href="#!" id="goto-date-button" class="waves-effect waves-green btn">-> Date</a>
                             </div>
                         </div>
                     </div>
