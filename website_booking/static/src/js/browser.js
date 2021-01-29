@@ -779,7 +779,7 @@ var Browser = Widget.extend({
         
         "click #goto-date-button": function (event) {
             var self = this;
-            this.cal.goto_date(moment(this.$('.datepicker').val,'DD/MM/YYYY'));
+            this.cal.goto_date(moment(this.$('.datepicker').val(),'DD/MM/YYYY'));
         },
         
     },
