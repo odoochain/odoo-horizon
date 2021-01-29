@@ -589,7 +589,7 @@ var Calendar = CalendarWidget.extend({
     		},
     		eventClick: function(calEvent, jsEvent, view) {
     		    var now = moment();
-    		    if(session.uid == calEvent.user_id) {
+    		    if(self.user.in_group_14 || session.uid == calEvent.user_id) {
     		        if (moment(calEvent.start) > now) {
             		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
                         dialog.appendTo(self.getParent().main_modal.empty());
