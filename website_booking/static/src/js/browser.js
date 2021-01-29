@@ -804,7 +804,7 @@ var Browser = Widget.extend({
         self.cal = new Calendar(this);
         self.cal.appendTo(this.$(".calendar"));
         self.cal.tb = self.tb;
-        this.$('.datepicker').datepicker();
+        this.$('.datepicker').datepicker(this.$.datepicker.regional[ "fr" ]);
     },
     
     start: function() {
