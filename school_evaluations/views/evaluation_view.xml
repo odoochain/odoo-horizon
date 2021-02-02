@@ -215,7 +215,7 @@
                         <button name="set_to_awarded_first_session" type="object" states="progress" string="Awarded" class="oe_highlight" />
                         <button name="set_to_awarded_second_session" type="object" states="postponed" string="Awarded" class="oe_highlight" />
                         <button name="set_to_failed" type="object" states="progress,postponed" string="Failed" class="oe_highlight" />
-                        <button name="set_to_draft" type="object" states="progress,postponed,awarded_first_session,awarded_second_session,failed" string="Reset to Draft" />
+                        <button name="set_to_draft" type="object" states="progress,postponed,awarded_first_session,awarded_second_session,failed,abandoned" string="Reset to Draft" />
                         <button name="set_to_abandoned" type="object" states="draft,progress,postponed" string="Abandon" />
                         <field name="state" widget="statusbar" states="draft,progress" statusbar_visible="draft,progress,postponed,awarded_first_session,failed,abandoned" />
                         <field name="state" widget="statusbar" states="postponed" statusbar_visible="draft,postponed,awarded_second_session,failed,abandoned" />
