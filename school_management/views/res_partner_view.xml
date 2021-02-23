@@ -80,8 +80,8 @@
                                     <field name="uid"/>
                                     <field name="year_id"/>
                                     <field name="name"/>
-                                    <field name="total_hours"/>
-                                    <field name="total_credits"/>
+                                    <field name="total_acquiered_credits"/>
+                                    <field name="total_registered_credits"/>
                                     <templates>
                                       <t t-name="kanban-box">
                                           <div style="position: relative">
@@ -98,10 +98,10 @@
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-6">
-                                                    Heures : <field name="total_hours"/>
+                                                    ECTS acquis : <field name="total_acquiered_credits"/>
                                                   </div>
                                                   <div class="col-6">
-                                                    ECTS : <field name="total_credits"/>
+                                                    ECTS : <field name="total_registered_credits"/>
                                                   </div>
                                                 </div>
                                                 <div class="row">
