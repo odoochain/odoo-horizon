@@ -644,7 +644,7 @@
     	
     	
     	<template id="login_layout" inherit_id="web.login_layout" name="Horizon Responsive Login">
-            <xpath expr="/" position="replace">
+            <xpath expr="//div[hasclass('py-5')]" position="replace">
             <t t-set="body_classname" t-value="'home'"/>
             <t t-call="web.layout">
                 <t t-set="head">
