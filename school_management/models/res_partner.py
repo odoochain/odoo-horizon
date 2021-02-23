@@ -120,6 +120,7 @@ class Partner(models.Model):
     reg_number = fields.Char('Registration Number')
     mat_number = fields.Char('Matricule Number')
     
+    student_program_ids = fields.One2many('school.individual_program', 'student_id', string='Cycles')
     student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
 
     # Secondary adress
