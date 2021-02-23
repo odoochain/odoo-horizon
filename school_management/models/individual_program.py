@@ -29,7 +29,7 @@ class IndividualProgram(models.Model):
     '''Individual Program'''
     _name='school.individual_program'
     _description='Individual Program'
-    _inherit = ['mail.thread','school.uid.mixin']
+    _inherit = ['mail.thread','school.uid.mixin','school.open.form.mixin']
     
     _order = 'name'
 
