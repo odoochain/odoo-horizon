@@ -54,6 +54,7 @@
       <field name="arch" type="xml">
         <form string="Individual Program">
           <sheet>
+            <widget name="web_ribbon" text="Cycle" bg_color="bg-warning"/>
             <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
             <div class="oe_title" style="padding-left: 260px;width: 100%;">
               <h1>
@@ -281,6 +282,7 @@
       <field name="arch" type="xml">
         <form string="Individual Bloc">
           <sheet>
+            <widget name="web_ribbon" text="PAE" />
             <div class="oe_button_box" name="button_box">
               <button class="oe_stat_button" icon="fa-list" type="action" name="%(school_management.act_program_2_course)d">
                 <field string="Courses" name="course_count" widget="statinfo" />

@@ -84,7 +84,7 @@
                                     <field name="total_registered_credits"/>
                                     <templates>
                                       <t t-name="kanban-box">
-                                          <div style="position: relative">
+                                          <div style="position: relative; border-top : 10px solid #ffc107;">
                                               <div class="oe_module_vignette">
                                                 <div class="row">
                                                   <div class="col-12">
@@ -93,7 +93,7 @@
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-12">
-                                                    <field name="name"/>
+                                                    <field name="source_program_id"/>
                                                   </div>
                                                 </div>
                                                 <div class="row">
@@ -128,7 +128,7 @@
                                     <field name="total_credits"/>
                                     <templates>
                                       <t t-name="kanban-box">
-                                          <div style="position: relative">
+                                          <div style="position: relative; border-top : 10px solid #28a745;">
                                               <div class="oe_module_vignette">
                                                 <div class="row">
                                                   <div class="col-12">
