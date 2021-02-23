@@ -790,13 +790,14 @@ var Toolbar = Widget.extend({
         },
     },
     
-    init : function() {
+    init : function(parent) {
         this._super.apply(this, arguments);
         var self = this;
         session.session_bind().then(function(){
             if (session.uid) {
                 self.is_logged = true;
                 self.uid = session.uid;
+                self.parent.session = session;
                 rpc.query({
                     model: 'res.users',
                     method: 'search_read',
