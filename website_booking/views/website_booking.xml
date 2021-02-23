@@ -42,7 +42,7 @@
             
             <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
             <script type="text/javascript" src="/web/static/lib/fullcalendar/js/fullcalendar.js"></script>
-            <script type="text/javascript" src="/web/static/lib/fullcalendar/js/locale-all.js"></script>
+            <script type="text/javascript" src="/web_scheduler/static/lib/fullcalendar/fr.js"></script>
             <script type="text/javascript" src="/web_scheduler/static/lib/fullcalendar/scheduler.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
