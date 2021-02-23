@@ -74,7 +74,95 @@
                         </div>
                     </div>
                     <notebook colspan="4">
-                        <page string="Contacts &amp; Addresses" autofocus="autofocus" groups="school_management.group_employee">
+                        <page name="cycles_page" string="Cycles" autofocus="autofocus" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
+            				<field name="student_program_ids" attrs="{'invisible': [('student','=',False)]}">
+                                <kanban quick_create="false" create="false">
+                                    <field name="uid"/>
+                                    <field name="year_id"/>
+                                    <field name="name"/>
+                                    <field name="total_hours"/>
+                                    <field name="total_credits"/>
+                                    <templates>
+                                      <t t-name="kanban-box">
+                                          <div style="position: relative">
+                                              <div class="oe_module_vignette">
+                                                <div class="row">
+                                                  <div class="col-12">
+                                                    <field name="uid"/>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-12">
+                                                    <field name="name"/>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-6">
+                                                    Heures : <field name="total_hours"/>
+                                                  </div>
+                                                  <div class="col-6">
+                                                    ECTS : <field name="total_credits"/>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-9">
+                                                  </div>
+                                                  <div class="col-3">
+                                                      <button type="object" name="action_open_form" class="oe_highlight btn btn-primary">Open</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                      </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+            			</page>
+                        <page name="program_page" string="PAEs" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
+            				<field name="student_bloc_ids" attrs="{'invisible': [('student','=',False)]}">
+                                <kanban quick_create="false" create="false">
+                                    <field name="uid"/>
+                                    <field name="year_id"/>
+                                    <field name="name"/>
+                                    <field name="total_hours"/>
+                                    <field name="total_credits"/>
+                                    <templates>
+                                      <t t-name="kanban-box">
+                                          <div style="position: relative">
+                                              <div class="oe_module_vignette">
+                                                <div class="row">
+                                                  <div class="col-12">
+                                                    <field name="uid"/>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-12">
+                                                    <field name="name"/>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-6">
+                                                    Heures : <field name="total_hours"/>
+                                                  </div>
+                                                  <div class="col-6">
+                                                    ECTS : <field name="total_credits"/>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-9">
+                                                  </div>
+                                                  <div class="col-3">
+                                                      <button type="object" name="action_open_form" class="oe_highlight btn btn-primary">Open</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                      </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+            			</page>
+                        <page string="Contacts &amp; Addresses" groups="school_management.group_employee">
                             <field name="is_company" invisible="1"/>
                             <field name="parent_id" invisible="1"/>
                             <field name="type" attrs="{'invisible': [('parent_id','=', False)]}" groups="base.group_no_one"/>
@@ -114,16 +202,6 @@
                                 </div>
                             </div>
                         </page>
-                        <page name="program_page" string="Etudes" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
-            				<field name="student_bloc_ids" attrs="{'invisible': [('student','=',False)]}">
-                                <tree string="Blocs" default_order='year_id desc' create="false" edit="false" delete="false">
-                                    <field name="year_id" />
-                                    <field name="program_id" />
-                                    <field name="source_bloc_name" />
-                                    <field name="total_credits" />
-                                </tree>
-                            </field>
-            			</page>
                         <page name="personal_information_page" string="Informations personnelles" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}" groups="school_management.group_employee">
             				<group name="personal_information_group">
             				    <field name="title" options="{&quot;no_open&quot;: True}" attrs="{'invisible': [('is_company', '=', True)]}"/>
