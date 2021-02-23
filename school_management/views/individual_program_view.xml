@@ -133,7 +133,7 @@
                                   </div>
                                   <div class="col-12 col-md-7">
                                     <field name="name"/><br/>
-                                    <i><field name="responsible_id"/></i>
+                                    <i><field name="teacher_id"/></i>
                                   </div>
                                   
                                   <div class="col-2">
