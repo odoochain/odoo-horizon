@@ -48,7 +48,7 @@ class Program(models.Model):
     '''Program'''
     _name = 'school.program'
     _description = 'Program made of several Blocs'
-    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
     @api.depends('bloc_ids')
     def _get_courses_total(self):
