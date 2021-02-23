@@ -793,6 +793,7 @@ var Toolbar = Widget.extend({
     init : function(parent) {
         this._super.apply(this, arguments);
         var self = this;
+        self.parent = parent;
         session.session_bind().then(function(){
             if (session.uid) {
                 self.is_logged = true;
