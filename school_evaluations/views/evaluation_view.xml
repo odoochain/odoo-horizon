@@ -88,7 +88,7 @@
                         <field name="state" widget="statusbar" statusbar_visible=" " />
                     </header>
                 </xpath>
-                <xpath expr="//field[@name='image']" position="before">
+                <!--<xpath expr="//field[@name='image']" position="before">
                     <div class="oe_button_box" name="button_box">
                             <button name="toggle_active" type="object"
                                     class="oe_stat_button" icon="fa-archive">
@@ -96,7 +96,7 @@
                                     options='{"terminology": "archive"}'/>
                             </button>
                     </div>
-                </xpath>
+                </xpath>-->
                 <xpath expr="//field[@name='required_credits']" position="after">         
                     <!--<field name="historical_bloc_1_credits"/>
                     <field name="historical_bloc_1_eval"/>
@@ -138,17 +138,41 @@
                        </tree>
                     </field>
                 </xpath>
-                <xpath expr="//field[@name='ind_course_group_ids']" position="after">
-                    <h2>Unités d'enseignement restant à acquérir</h2>
-                    <field name="remaining_not_planned_course_group_ids" context="{'program_id': active_id}" options="{'not_delete': True, 'reload_on_button': True, 'no_create': True}">
-                      <tree string="Course Group" create="0" delete="0">
-                        <field name="uid"/>
-                        <field name="name"/>
-                        <field name="total_hours" sum="total_hours_rem"/>
-                        <field name="total_credits" sum="total_credits_rem"/>
-                        <button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group"/>
-                       </tree>
-                    </field>
+                <xpath expr="//div[@id='individual_cgs']" position="replace">
+                    <h2>Unités d'enseignement</h2>
+                      <field name="all_ind_course_group_ids" widget="many2many_kanban" context="{'order_display': 'status desc, sequence asc' }">
+                        <kanban quick_create="false" create="false" delete="false" group_create="false" default_group_by="year_id">
+                          <field name="uid"/>
+                          <field name="year_id" />
+                          <field name="name" />
+                          <field name="total_hours" />
+                          <field name="total_credits" />
+                          <field name="state" />
+                          <templates>
+                              <t t-name="kanban-box">
+                                    <div style="position: relative;width:100%;">
+                                        <div class="o_kanban_record_top">
+                                          <div class="row o_kanban_record_headings">
+                                            <div class="col-12 col-md-2">
+                                              <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
+                                            </div>
+                                            <div class="col-12 col-md-7">
+                                              <field name="name"/><br/>
+                                              <i><field name="teacher_id"/></i>
+                                            </div>
+                                            
+                                            <div class="col-2">
+                                              Heures : <field name="total_hours"/>
+                                              <br/>
+                                              ECTS : <field name="total_credits"/>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </t>
+                          </templates>
+                        </kanban>
+                      </field>
                 </xpath>
             </field>
         </record>
@@ -283,7 +307,7 @@
                 <xpath expr="//sheet" position="before">
                     <header>
                         <button name="set_to_valuated" type="object" states="candidate" string="Confirm valuation" class="oe_highlight" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed,valuated" />
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='source_course_id']" position="before">

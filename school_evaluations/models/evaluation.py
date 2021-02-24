@@ -191,6 +191,7 @@ class IndividualProgram(models.Model):
             'bloc_evaluations' : ret
         }
     
+    all_ind_course_group_ids = fields.One2many('school.individual_course_group', string='All Courses Groups',compute='_compute_ind_course_group_ids_eval')
     not_acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Not Acquiered Courses Groups',compute='_compute_ind_course_group_ids_eval')
     acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Acquiered Courses Groups',compute='_compute_ind_course_group_ids_eval')
     remaining_course_group_ids  = fields.One2many('school.course_group', string='Remaining Courses Groups',compute='_compute_ind_course_group_ids_eval')
@@ -198,6 +199,7 @@ class IndividualProgram(models.Model):
     
     def _compute_ind_course_group_ids_eval(self):
         for rec in self:
+            rec.all_ind_course_group_ids = rec valuated_course_group_ids | rec.ind_course_group_ids
             rec.not_acquired_ind_course_group_ids = rec.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
             rec.acquired_ind_course_group_ids = rec.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A') + rec.valuated_course_group_ids
             rec.remaining_course_group_ids = rec.source_program_id.course_group_ids - rec.acquired_ind_course_group_ids.mapped('source_course_group_id')
