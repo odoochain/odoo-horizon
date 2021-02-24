@@ -126,7 +126,7 @@
                     <field name="state"/>
                     <!--<button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group" attrs="{'invisible': [('state', '!=', ('draft'))]}"/>-->
                 </xpath>
-                <xpath expr="//field[@name='bloc_ids']" position="after">
+                <!--<xpath expr="//field[@name='bloc_ids']" position="after">
                     <h2>Unités d'enseignement valorisées</h2>
                     <field name="valuated_course_group_ids">
                       <tree string="Course Group" create="0">
@@ -137,7 +137,7 @@
                         <field name="state"/>
                        </tree>
                     </field>
-                </xpath>
+                </xpath>-->
                 <xpath expr="//div[@id='individual_cgs']" position="replace">
                     <h2>Unités d'enseignement</h2>
                       <field name="all_ind_course_group_ids" widget="many2many_kanban" context="{'order_display': 'status desc, sequence asc' }">
@@ -150,14 +150,19 @@
                           <field name="state" />
                           <templates>
                               <t t-name="kanban-box">
-                                    <div style="position: relative;width:100%;">
+                                    <t t-if="record['state'].raw_value == 'valuated'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid blue;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'candicate'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid lightblue;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'confirmed'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid green;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'progess'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid yellow;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'draft'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid grey;'"/></t>
+                                    <div t-att-style="divstyle">
                                         <div class="o_kanban_record_top">
                                           <div class="row o_kanban_record_headings">
                                             <div class="col-12 col-md-2">
                                               <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
                                             </div>
                                             <div class="col-12 col-md-7">
-                                              <field name="name"/><br/>
+                                              <field name="source_course_group_uid"/> - <field name="name"/><br/>
                                               <i><field name="teacher_id"/></i>
                                             </div>
                                             

@@ -231,6 +231,8 @@ class IndividualCourseGroup(models.Model):
     
     source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict")
     
+    source_course_group_uid = field.Char(related='source_course_group_id.uid', string="Source Course Group UID")
+    
     bloc_id = fields.Many2one('school.individual_bloc', string="Bloc", ondelete='cascade', readonly=True)
 
     source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc", related='bloc_id.source_bloc_id', readonly=True, store=True)
