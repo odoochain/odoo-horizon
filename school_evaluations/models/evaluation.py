@@ -199,7 +199,7 @@ class IndividualProgram(models.Model):
     
     def _compute_ind_course_group_ids_eval(self):
         for rec in self:
-            rec.all_ind_course_group_ids = rec valuated_course_group_ids + rec.ind_course_group_ids
+            rec.all_ind_course_group_ids = rec.valuated_course_group_ids + rec.ind_course_group_ids
             rec.not_acquired_ind_course_group_ids = rec.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
             rec.acquired_ind_course_group_ids = rec.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A') + rec.valuated_course_group_ids
             rec.remaining_course_group_ids = rec.source_program_id.course_group_ids - rec.acquired_ind_course_group_ids.mapped('source_course_group_id')
