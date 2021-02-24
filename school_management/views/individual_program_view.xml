@@ -54,20 +54,32 @@
       <field name="arch" type="xml">
         <form string="Individual Program">
           <sheet>
+            <field name="image" widget="image" class="oe_left oe_inline m-2" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
             <widget name="web_ribbon" text="Cycle" bg_color="bg-warning"/>
-            <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
-            <div class="oe_title" style="padding-left: 260px;width: 100%;">
-              <h1>
-                <field name="student_id"/>
-              </h1>
-              <h4>
-                Année de début de cycle : <field name="year_id" class="oe_inline" />
-              </h4>
-              <h4>
-                Cycle basé sur le profil d'enseignement : <field name="source_program_id" class="oe_inline" />
-              </h4>
-                <field name="cycle_id" invisible="1"/>
-                <field name="speciality_id" invisible="1"/>
+            <div class="oe_title">
+              <h1 class="pt-5"><field name="student_id"/></h1>
+              <h5 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="year_id" invisible="1"/>
+                    <span>Année de début de cycle :</span>
+                    <span><field name="year_id"/></span>
+                  </div>
+              </h5>
+              <h5 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="source_program_id" invisible="1"/>
+                    <span>Cycle basé sur le profil d'enseignement :</span>
+                    <span><field name="source_program_id"/></span>
+                  </div>
+              </h5>
+              <h3 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="uid" class="oe_edit_only"/>
+                    <small class="oe_grey" ><field name="uid"/></small>
+                  </div>
+              </h3>
+              <field name="cycle_id" invisible="1"/>
+              <field name="speciality_id" invisible="1"/>
             </div>
             <group col="4">
               <field name="required_credits" colspan="4" readonly="1"/>
@@ -282,21 +294,28 @@
       <field name="arch" type="xml">
         <form string="Individual Bloc">
           <sheet>
-            <widget name="web_ribbon" text="PAE" />
             <!--<div class="oe_button_box" name="button_box">
               <button class="oe_stat_button" icon="fa-list" type="action" name="%(school_management.act_program_2_course)d">
                 <field string="Courses" name="course_count" widget="statinfo" />
               </button>
             </div>-->
-            <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
-            <div class="oe_title" style="padding-left: 260px;width: 100%;">
-              <h1>
-               <field name="name"/>
-              </h1>
-              <h3 class="oe_fade">
-               Based on <field name="source_bloc_id" options='{"no_open":True}' class="oe_inline"/>
+            <field name="image" widget="image" class="oe_left oe_inline m-2" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
+            <widget name="web_ribbon" text="PAE" />
+            <div class="oe_title">
+              <h1 class="pt-5"><field name="name"/></h1>
+              <h3 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="source_bloc_id" invisible="1"/>
+                    <span class="oe_grey"> Based on </span>
+                    <span class="oe_grey" ><field name="source_bloc_id"/></span>
+                  </div>
               </h3>
-              <h3 class="oe_fade">PAE-<field name="id" options='{"no_open":True}' class="oe_inline"/></h3>
+              <h3 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="uid" class="oe_edit_only"/>
+                    <small class="oe_grey" ><field name="uid"/></small>
+                  </div>
+              </h3>
             </div>
             <group col="4">
               <field name="program_id" colspan="4"/>

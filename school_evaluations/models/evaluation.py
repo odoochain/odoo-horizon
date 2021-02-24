@@ -33,7 +33,6 @@ class CourseGroup(models.Model):
     ## If set a course with an evaluation < 10 will make this course group not acquiered.
     enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=False)
     
-    
     def valuate_course_group(self):
         self.ensure_one()
         program_id = self.env.context.get('program_id')
@@ -443,19 +442,24 @@ class IndividualCourseGroup(models.Model):
     state = fields.Selection([
             ('draft','Draft'),
             ('progress','In Progress'),
-            ('candidate','Candidate'),
             ('confirmed', 'Confirmed'),
+            ('candidate','Candidate'),
+            ('valuated', 'Valuated'),
         ], string='Status', index=True, readonly=True, default='draft',
         track_visibility='onchange',
         copy=False,
         help=" * The 'Draft' status is used when course group is only plan.\n"
              " * The 'In Progress' status is used when results are not confirmed yet.\n"
+             " * The 'Confirmed' status is when restults are confirmed.\n"
              " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
-             " * The 'Confirmed' status is when restults are confirmed.")
+             " * The 'Valuated' status is used when the course group is confirmed for valuation.")
         
     
     def set_to_confirmed(self, context):
         return self.write({'state': 'confirmed'})
+        
+    def set_to_valuated(self, context):
+        return self.write({'state': 'valuated'})
     
     ## If set a course with an evaluation < 10 will make this course group not acquiered.
     

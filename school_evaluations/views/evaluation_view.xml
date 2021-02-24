@@ -282,7 +282,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="before">
                     <header>
-                        <button name="set_to_confirmed" type="object" states="candidate" string="Confirm valuation" class="oe_highlight" />
+                        <button name="set_to_valuated" type="object" states="candidate" string="Confirm valuation" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed" />
                     </header>
                 </xpath>
