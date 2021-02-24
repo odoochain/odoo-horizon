@@ -153,7 +153,7 @@
                                     <t t-if="record['state'].raw_value == 'valuated'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid blue;'"/></t>
                                     <t t-if="record['state'].raw_value == 'candicate'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid lightblue;'"/></t>
                                     <t t-if="record['state'].raw_value == 'confirmed'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid green;'"/></t>
-                                    <t t-if="record['state'].raw_value == 'progess'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid yellow;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'progress'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid yellow;'"/></t>
                                     <t t-if="record['state'].raw_value == 'draft'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid grey;'"/></t>
                                     <div t-att-style="divstyle">
                                         <div class="o_kanban_record_top">
