@@ -376,6 +376,22 @@ var EvaluationsAction = Widget.extend({
         return this._title;
     },
     
+    /**
+     * In some situations, we need confirmation from the controller that the
+     * current state can be destroyed without prejudice to the user.  For
+     * example, if the user has edited a form, maybe we should ask him if we
+     * can discard all his changes when we switch to another action.  In that
+     * case, the action manager will call this method.  If the returned
+     * promise is successfully resolved, then we can destroy the current action,
+     * otherwise, we need to stop.
+     *
+     * @returns {Promise} resolved if the action can be removed, rejected
+     *   otherwise
+     */
+    canBeRemoved: function () {
+        return Promise.resolve();
+    },
+    
     });
        
     core.action_registry.add('school_evaluations.main', EvaluationsAction);
