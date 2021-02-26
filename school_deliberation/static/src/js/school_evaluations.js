@@ -238,7 +238,7 @@ var EvaluationsAction = Widget.extend({
         defs.push(rpc.query({
                     model: 'school.individual_bloc',
                     method: 'search_read',
-                    domain: self.build_domain().concat(['source_bloc_level', '=', 1]),
+                    domain: self.build_domain().concat([['source_bloc_level', '=', 1]]),
                     fields: ['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'],
                     context: this.context,
                     order: 'student_name'
@@ -304,7 +304,7 @@ var EvaluationsAction = Widget.extend({
         defs.push(rpc.query({
                     model: 'school.individual_bloc',
                     method: 'search_read',
-                    domain: self.build_domain().concat(['source_bloc_level', '=', 6]),
+                    domain: self.build_domain().concat([['source_bloc_level', '=', 6]]),
                     fields: ['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'],
                     context: this.context,
                     order: 'student_name'
