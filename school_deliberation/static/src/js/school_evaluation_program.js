@@ -19,17 +19,18 @@
 #
 ##############################################################################
 */
+
+/* global odoo, $ */
+
 odoo.define('school_evaluations.school_evaluations_program_editor', function (require) {
 "use strict";
 
-var config = require('web.config');
-var form_common = require('web.form_common');
 var core = require('web.core');
+var rpc = require('web.rpc');
 var data = require('web.data');
 var session = require('web.session');
 
 var Widget = require('web.Widget');
-var Model = require('web.DataModel');
 var Dialog = require('web.Dialog');
 
 var QWeb = core.qweb;
@@ -65,7 +66,11 @@ var DetailEvalDialog = Dialog.extend({
     changeGrade: function() {
         var self = this;
         var grade = this.$('#grade-list').val()
-        new Model('school.individual_program').call('write', [self.program.id,{'grade':grade}]).then(function(result){
+        rpc.query({
+                model: 'school.individual_program',
+                method: 'write',
+                args: [self.program.id,{'grade':grade}],
+            }).then(function(result){
             self.program.grade = grade;
             self.parent.update(); 
         })
@@ -75,7 +80,11 @@ var DetailEvalDialog = Dialog.extend({
         var self = this;
         var mess_idx = parseInt(this.$('#grade-comment-list').val());
         var message = this.messages[mess_idx];
-        new Model('school.individual_program').call('write', [self.program.id,{'grade_comments':message}]).then(function(result){
+        rpc.query({
+                model: 'school.individual_program',
+                method: 'write',
+                args: [self.program.id,{'grade_comments':message}],
+            }).then(function(result){
             self.program.grade_comments = message;
             self.parent.update();
         })
@@ -96,7 +105,11 @@ return Widget.extend({
         "click .btn-award": function (event) {
             event.preventDefault();
             var self = this;
-            new Model(self.dataset.model).call("set_to_awarded",[self.datarecord.id,self.dataset.get_context(),self.parent.year_id]).then(function(result) {
+            rpc.query({
+                model: 'school.individual_program',
+                method: "set_to_awarded",
+                args: [self.datarecord.id,self.dataset.get_context(),self.parent.year_id],
+            }).then(function(result) {
                 self.parent.$(".o_school_bloc_item.active i").removeClass('fa-user');
                 self.parent.$(".o_school_bloc_item.active i").addClass('fa-check');
                 self.next().then(function(){
@@ -195,19 +208,30 @@ return Widget.extend({
             break;
         };
         
-        return new Model('school.individual_program').call('compute_evaluation_details', [self.program.id]).then(
+        return rpc.query({
+                model: 'school.individual_program',
+                method: "compute_evaluation_details",
+                args: [self.program.id],
+            }).then(
                 function(results){
                     self.program.evaluation_details = results;
                 }).then(
                     function() {
-                        return new Model('school.individual_bloc').query().filter([['program_id','=',self.program.id]]).all().then(
+                        return rpc.query({
+                                model: 'school.individual_bloc',
+                                method: 'search_read',
+                                domain: [['program_id','=',self.program.id]],
+                                fields: [],
+                            }).then(
                             function(blocs) {
                                 self.course_groups = [];
-                                return new Model('school.individual_course_group')
-                                    .query(['id','name','title','course_ids','dispense','final_result_bool','acquiered','year_id','first_session_computed_result','first_session_deliberated_result_bool','second_session_computed_result','second_session_deliberated_result_bool','second_session_result_bool','final_result','total_credits','total_weight'])
-                                    .filter([['bloc_id', 'in', blocs.map(function(b){return b.id})],['is_ghost_cg','=',false]])
-                                    .order_by('year_id desc, sequence')
-                                    .all().then(
+                                return rpc.query({
+                                    model: 'school.individual_course_group',
+                                    method: 'search_read',
+                                    domain: [['bloc_id', 'in', blocs.map(function(b){return b.id})],['is_ghost_cg','=',false]],
+                                    fields: ['id','name','title','course_ids','dispense','final_result_bool','acquiered','year_id','first_session_computed_result','first_session_deliberated_result_bool','second_session_computed_result','second_session_deliberated_result_bool','second_session_result_bool','final_result','total_credits','total_weight'],
+                                    order: 'year_id desc, sequence'
+                                }).then(
                                     function(course_groups) {
                                         self.course_groups = self.course_groups.concat(course_groups);
                                     });
