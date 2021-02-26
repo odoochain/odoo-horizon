@@ -249,9 +249,6 @@ return Widget.extend({
         this.title = title;
         this.parent = parent;
         this.records = false;
-    },
-    
-    start: function() {
         this.dataset = new data.DataSet(this, 'school.individual_bloc', {});
         this.bloc = false;
     },
