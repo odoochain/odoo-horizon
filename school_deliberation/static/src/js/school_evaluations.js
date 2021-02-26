@@ -150,7 +150,8 @@ var EvaluationsAction = Widget.extend({
         this.school_domain = 1;
         this.school_session = new Date().getMonth() < 7 ? 1 : 2;
         this.parent = parent;
-        this.parent.webclient.$el.find('#oe_main_menu_navbar').addClass('o_hidden');
+        this.$iframe.contents().find('#oe_main_menu_navbar').remove();
+        $('#oe_main_menu_navbar').addClass('o_hidden');
     },
     
     start: function() {
