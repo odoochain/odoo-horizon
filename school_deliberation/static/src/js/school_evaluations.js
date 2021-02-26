@@ -265,7 +265,7 @@ var EvaluationsAction = Widget.extend({
                     model: 'school.individual_program',
                     method: 'search_read',
                     domain: [['state','in',['progress']],['cycle_id.short_name', '=', 'B'],['program_completed', '=', true],['domain_id','=',this.school_domain]],
-                    fields: ['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'],
+                    fields: [],
                     context: this.context,
                     order: 'student_name'
                 }).then(function (data) {
@@ -291,7 +291,7 @@ var EvaluationsAction = Widget.extend({
                     model: 'school.individual_program',
                     method: 'search_read',
                     domain: [['state','in',['progress']],['cycle_id.short_name', '=', 'M'],['program_completed', '=', true],['domain_id','=',this.school_domain]],
-                    fields: ['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'],
+                    fields: [],
                     context: this.context,
                     order: 'student_name'
                 }).then(function (data) {
