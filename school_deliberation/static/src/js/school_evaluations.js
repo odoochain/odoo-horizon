@@ -146,7 +146,7 @@ var EvaluationsAction = Widget.extend({
     init: function(parent, title) {
         this._super.apply(this, arguments);
         this.title = title;
-        this.context = new data.CompoundContext();
+        this.context = {};
         this.school_domain = 1;
         this.school_session = new Date().getMonth() < 7 ? 1 : 2;
         this.parent = parent;
