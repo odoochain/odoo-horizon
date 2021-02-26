@@ -292,7 +292,7 @@ return Widget.extend({
         var self = this;
         return self.read_ids(self.ids,self.record_idx).then(function(){
             self.bloc = self.datarecord = self.records[self.record_idx];
-            self._read_bloc_data().done(
+            self._read_bloc_data().then(
                 function(){
                     self.parent.hide_startup();
                     self.renderElement();
@@ -305,7 +305,7 @@ return Widget.extend({
         if(!this.records) {
             return self.read_ids(self.ids,self.record_idx).then(function(){
                 self.bloc = self.datarecord = self.records[self.record_idx];
-                self._read_bloc_data().done(
+                self._read_bloc_data().then(
                     function(){
                         self.parent.hide_startup();
                         self.renderElement();
@@ -313,7 +313,7 @@ return Widget.extend({
             });
         } else {
             self.bloc = self.datarecord = self.records[self.record_idx];
-            return self._read_bloc_data().done(
+            return self._read_bloc_data().then(
                 function(){
                     self.parent.hide_startup();
                     self.renderElement();
