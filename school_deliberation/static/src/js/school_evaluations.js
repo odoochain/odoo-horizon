@@ -26,7 +26,7 @@ var core = require('web.core');
 
 var Widget = require('web.Widget');
 var Dialog = require('web.Dialog');
-var Model = require('web.DataModel');
+var rpc = require('web.rpc');
 var data = require('web.data');
 var session = require('web.session');
 
@@ -43,8 +43,8 @@ var EvaluationConfigDialog = Dialog.extend({
     events: {
         'change .o_school_year_select': function (event) {
             event.preventDefault();
-            self.parent.year_id = parseInt(this.$(event.currentTarget).find(":selected").attr('value'))
-            self.parent.year_name = this.$(event.currentTarget).find(":selected").text();
+            this.parent.year_id = parseInt(this.$(event.currentTarget).find(":selected").attr('value'))
+            this.parent.year_name = this.$(event.currentTarget).find(":selected").text();
         },
         "click .o_school_first_session": function (event) {
             event.preventDefault();
@@ -63,8 +63,8 @@ var EvaluationConfigDialog = Dialog.extend({
     init: function(parent, title) {
         self = this;
         this._super.apply(this, arguments);
-        self.parent = parent;
-        self.school_session = parent.school_session;
+        this.parent = parent;
+        this.school_session = parent.school_session;
     },
     
     start: function() {
@@ -72,17 +72,20 @@ var EvaluationConfigDialog = Dialog.extend({
         var tmp = this._super.apply(this, arguments);
         var defs = [];
         self.$school_year_select = this.$('select.o_school_year_select');
-        defs.push(new Model('school.year').query(['id','name']).all().then(
-                        function(years) {
-                            years.map(function(year){
+        defs.push(
+            rpc.query({
+                model: 'school.year',
+                method: 'read',
+                args: [[],['id','name']],
+            }).then(function(years) {
+                years.map(function(year){
                                 var o = new Option(year.name,year.id);
                                 if (year.id == self.parent.year_id) {
                                     $(o).attr('selected',true);
                                 }
                                 self.$school_year_select.append(o);
                             });
-                        }
-                    ));
+                }));
         return $.when(tmp, defs);
     },
     
@@ -151,7 +154,11 @@ var EvaluationsAction = Widget.extend({
     
     start: function() {
         var self = this;
-        return new Model("res.users").call("read", [session.uid, ['id','name','current_year_id']]).then(
+        return rpc.query({
+                model: 'res.users',
+                method: 'read',
+                args:  [session.uid, ['id','name','current_year_id']],
+            }).then(
                     function(user) {
                         self.user = user;
                         self.year_id = self.user.current_year_id[0];
