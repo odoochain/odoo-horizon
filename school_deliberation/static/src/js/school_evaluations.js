@@ -179,9 +179,9 @@ var EvaluationsAction = Widget.extend({
     build_domain: function() {
         var domain = [];
         if(this.school_session == 1) {
-            domain.add([['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['progress','postponed','awarded_first_session']]]);
+            domain.push(([['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['progress','postponed','awarded_first_session']]]);
         } else {
-            domain.add([['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['postponed','awarded_second_session','failed']]]);
+            domain.push([['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['postponed','awarded_second_session','failed']]]);
         }
         return domain;
     },
@@ -238,7 +238,7 @@ var EvaluationsAction = Widget.extend({
         defs.push(rpc.query({
                     model: 'school.individual_bloc',
                     method: 'search_read',
-                    domain: self.build_domain().add([['source_bloc_level', '=', 1]]),
+                    domain: self.build_domain().push(['source_bloc_level', '=', 1]),
                     fields: ['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'],
                     context: this.context,
                     order: 'student_name'
@@ -251,7 +251,7 @@ var EvaluationsAction = Widget.extend({
         defs.push(rpc.query({
                     model: 'school.individual_bloc',
                     method: 'search_read',
-                    domain: self.build_domain().add(['|',['source_bloc_level', '=', 2],['source_bloc_level', '=', 3]]),
+                    domain: self.build_domain().push(['|',['source_bloc_level', '=', 2],['source_bloc_level', '=', 3]]),
                     fields: ['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'],
                     context: this.context,
                     order: 'student_name'
@@ -277,7 +277,7 @@ var EvaluationsAction = Widget.extend({
         defs.push(rpc.query({
                     model: 'school.individual_bloc',
                     method: 'search_read',
-                    domain: self.build_domain().add(['|',['source_bloc_level', '=', 4],['source_bloc_level', '=', 5]]),
+                    domain: self.build_domain().push(['|',['source_bloc_level', '=', 4],['source_bloc_level', '=', 5]]),
                     fields: ['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'],
                     context: this.context,
                     order: 'student_name'
@@ -304,7 +304,7 @@ var EvaluationsAction = Widget.extend({
         defs.push(rpc.query({
                     model: 'school.individual_bloc',
                     method: 'search_read',
-                    domain: self.build_domain().add([['source_bloc_level', '=', 6]]),
+                    domain: self.build_domain().push(['source_bloc_level', '=', 6]),
                     fields: ['id','name','student_id','student_name','source_bloc_level','source_bloc_title','state'],
                     context: this.context,
                     order: 'student_name'
