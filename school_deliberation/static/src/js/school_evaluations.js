@@ -155,6 +155,7 @@ var EvaluationsAction = Widget.extend({
     
     start: function() {
         var self = this;
+        this._title = "Delibération";
         return rpc.query({
                 model: 'res.users',
                 method: 'read',
@@ -364,6 +365,16 @@ var EvaluationsAction = Widget.extend({
     
     hide_startup: function() {
         this.$('.o_startup_screen').addClass('o_hidden');
+    },
+    
+    /**
+     * Get the title of the thread window, which usually contains the name of
+     * the thread.
+     *
+     * @returns {string}
+     */
+    getTitle: function () {
+        return this._title;
     },
     
 });
