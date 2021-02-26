@@ -36,6 +36,6 @@
     ''',
     'qweb': ['static/src/xml/*.xml'],
     'active': False,
-    'installable': False,
+    'installable': True,
     'application': True,
 }
