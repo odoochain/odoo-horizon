@@ -22,6 +22,21 @@
 -->
 <odoo>
     
+        <template id="assets_backend" name="school_evaluations_assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/school_deliberation/static/src/css/metisMenu.min.css" /> <!-- TODO : change to not min version -->
+                <link rel="stylesheet" href="/school_deliberation/static/src/css/sb-admin-2.css" />
+                <link rel="stylesheet" href="/school_deliberation/static/src/css/school_evaluation_program.css" />
+                <link rel="stylesheet" href="/school_deliberation/static/src/css/school_evaluation_bloc.css" />
+                <link rel="stylesheet" href="/school_deliberation/static/src/css/school_evaluations.css" />
+                <script type="text/javascript" src="/school_deliberation/static/src/js/metisMenu.min.js"></script>
+                <script type="text/javascript" src="/school_deliberation/static/src/js/sb-admin-2.js"></script>
+                <script type="text/javascript" src="/school_deliberation/static/src/js/school_evaluations.js"></script>
+                <script type="text/javascript" src="/school_deliberation/static/src/js/school_evaluation_bloc.js"></script>
+                <script type="text/javascript" src="/school_deliberation/static/src/js/school_evaluation_program.js"></script>
+            </xpath>
+        </template>
+    
         <record id="action_school_deliberation" model="ir.actions.client">
             <field name="name">Evaluations</field>
             <field name="tag">school_evaluations.main</field>
