@@ -162,7 +162,7 @@ var EvaluationsAction = Widget.extend({
                 args:  [session.uid, ['id','name','current_year_id']],
             }).then(
                     function(user) {
-                        self.user = user;
+                        self.user = user[0];
                         self.year_id = self.user.current_year_id[0];
                         self.year_name = self.user.current_year_id[1];
                         if(self.school_session == 1) {
@@ -177,7 +177,7 @@ var EvaluationsAction = Widget.extend({
     },
 
     build_domain: function() {
-        var domain = new data.CompoundDomain();
+        var domain = [];
         if(this.school_session == 1) {
             domain.add([['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['progress','postponed','awarded_first_session']]]);
         } else {
