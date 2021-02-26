@@ -30,8 +30,8 @@ var rpc = require('web.rpc');
 var data = require('web.data');
 var session = require('web.session');
 
-var BlocEditor = require('school_evaluations.school_evaluations_bloc_editor');
-var ProgramEditor = require('school_evaluations.school_evaluations_program_editor');
+//var BlocEditor = require('school_evaluations.school_evaluations_bloc_editor');
+//var ProgramEditor = require('school_evaluations.school_evaluations_program_editor');
 
 
 var QWeb = core.qweb;
