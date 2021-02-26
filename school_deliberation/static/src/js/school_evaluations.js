@@ -179,9 +179,9 @@ var EvaluationsAction = Widget.extend({
     build_domain: function() {
         var domain = [];
         if(this.school_session == 1) {
-            domain.push(([['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['progress','postponed','awarded_first_session']]]);
+            domain.push(['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['progress','postponed','awarded_first_session']]);
         } else {
-            domain.push([['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['postponed','awarded_second_session','failed']]]);
+            domain.push(['exclude_from_deliberation','=',false],['source_bloc_domain_id','=',this.school_domain],['year_id','=',this.year_id],['state','in',['postponed','awarded_second_session','failed']]);
         }
         return domain;
     },
@@ -377,8 +377,8 @@ var EvaluationsAction = Widget.extend({
         return this._title;
     },
     
-});
-   
-core.action_registry.add('school_evaluations.main', EvaluationsAction);
+    });
+       
+    core.action_registry.add('school_evaluations.main', EvaluationsAction);
 
 });
