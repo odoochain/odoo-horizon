@@ -426,7 +426,7 @@ return Widget.extend({
                         }
                 });
             }
-        ).done(
+        ).then(
             rpc.query({
                 model: 'school.individual_program',
                 method: 'search_read',
