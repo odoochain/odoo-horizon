@@ -125,9 +125,6 @@ return Widget.extend({
         this._super.apply(this, arguments);
         this.title = title;
         this.parent = parent;
-    },
-    
-    start: function() {
         this.dataset = new data.DataSet(this, 'school.individual_program', new data.CompoundContext());
         this.program = false;
     },
