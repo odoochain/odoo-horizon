@@ -19,17 +19,18 @@
 #
 ##############################################################################
 */
+
+/* global odoo, $ */
+
 odoo.define('school_evaluations.school_evaluations_bloc_editor', function (require) {
 "use strict";
 
-var config = require('web.config');
-var form_common = require('web.form_common');
 var core = require('web.core');
+var rpc = require('web.rpc');
 var data = require('web.data');
 var session = require('web.session');
 
 var Widget = require('web.Widget');
-var Model = require('web.DataModel');
 var Dialog = require('web.Dialog');
 
 var QWeb = core.qweb;
@@ -65,20 +66,28 @@ var DetailEvalDialog = Dialog.extend({
     changeGrade: function() {
         var self = this;
         var grade = this.$('#grade-list').val()
-        new Model('school.individual_program').call('write', [self.program.id,{'grade':grade}]).then(function(result){
+        rpc.query({
+                model: 'school.individual_program',
+                method: 'write',
+                args: [self.program.id,{'grade':grade}],
+            }).then(function(result){
             self.program.grade = grade;
             self.parent.update(); 
-        })
+        });
     },
     
     changeGradeComment: function() {
         var self = this;
         var mess_idx = parseInt(this.$('#grade-comment-list').val());
         var message = this.messages[mess_idx];
-        new Model('school.individual_program').call('write', [self.program.id,{'grade_comments':message}]).then(function(result){
+        rpc.query({
+                model: 'school.individual_program',
+                method: 'write',
+                args: [self.program.id,{'grade_comments':message}],
+            }).then(function(result){
             self.program.grade_comments = message;
             self.parent.update();
-        })
+        });
     },
     
 });
@@ -142,7 +151,11 @@ var DeliberateCourseGroupDialog = Dialog.extend({
     
     confirm_callback: function() {
         var self=this;
-        new Model('school.individual_course_group').call("set_deliberated_to_ten",[self.course_group.id,self.school_session, self.messages[self.message]]).then(function(result) {
+        rpc.query({
+            model: 'school.individual_course_group',
+            method: "set_deliberated_to_ten",
+            args: [self.course_group.id,self.school_session, self.messages[self.message]],
+        }).then(function(result) {
             self.parent.update();
         });
     }
@@ -154,7 +167,11 @@ return Widget.extend({
         "click .bloc_award": function (event) {
             event.preventDefault();
             var self = this;
-            new Model(self.dataset.model).call(this.school_session == 1 ? "set_to_awarded_first_session" : "set_to_awarded_second_session",[self.datarecord.id,self.bloc_result.message,self.dataset.get_context()]).then(function(result) {
+            rpc.query({
+                model: 'school.individual_bloc',
+                method: this.school_session == 1 ? "set_to_awarded_first_session" : "set_to_awarded_second_session",
+                args: [self.datarecord.id,self.bloc_result.message],
+            }).then(function(result) {
                 self.parent.$(".o_school_bloc_item.active i").removeClass('fa-user');
                 self.parent.$(".o_school_bloc_item.active i").addClass('fa-check');
                 if (this.school_session == 1) {
@@ -172,7 +189,11 @@ return Widget.extend({
         "click .bloc_postpone": function (event) {
             event.preventDefault();
             var self = this;
-            new Model(self.dataset.model).call("set_to_postponed",[self.datarecord.id,self.bloc_result.message,self.dataset.get_context()]).then(function(result) {
+            rpc.query({
+                model: 'school.individual_bloc',
+                method: "set_to_postponed",
+                args: [self.datarecord.id,self.bloc_result.message,],
+            }).then(function(result) {
                 self.parent.$(".o_school_bloc_item.active i").removeClass('fa-user');
                 self.parent.$(".o_school_bloc_item.active i").addClass('fa-check');
                 self.bloc.state = "postponed";
@@ -186,7 +207,11 @@ return Widget.extend({
         "click .bloc_failed": function (event) {
             event.preventDefault();
             var self = this;
-            new Model(self.dataset.model).call("set_to_failed",[self.datarecord.id,self.bloc_result.message,self.dataset.get_context()]).then(function(result) {
+            rpc.query({
+                model: 'school.individual_bloc',
+                method: "set_to_failed",
+                args: [self.datarecord.id,self.bloc_result.message,],
+            }).then(function(result) {
                 self.parent.$(".o_school_bloc_item.active i").removeClass('fa-user');
                 self.parent.$(".o_school_bloc_item.active i").addClass('fa-check');
                 self.bloc.state = "failed";
@@ -227,7 +252,7 @@ return Widget.extend({
     },
     
     start: function() {
-        this.dataset = new data.DataSet(this, 'school.individual_bloc', new data.CompoundContext());
+        this.dataset = new data.DataSet(this, 'school.individual_bloc', {});
         this.bloc = false;
     },
     
@@ -375,8 +400,12 @@ return Widget.extend({
             unique: (self.datarecord.__last_update || '').replace(/[^0-9]/g, '')
         });
         
-        return new Model('school.individual_course_group').query(['id','name','title','course_ids','dispense','final_result_bool','acquiered','first_session_computed_result','first_session_deliberated_result_bool','second_session_computed_result','second_session_deliberated_result_bool','second_session_result_bool','final_result','total_credits','total_weight'])
-        .filter([['id', 'in', self.bloc.course_group_ids],['is_ghost_cg','=',false]]).all().then(
+        return rpc.query({
+                    model: 'school.individual_course_group',
+                    method: 'search_read',
+                    domain: [['id', 'in', self.bloc.course_group_ids],['is_ghost_cg','=',false]],
+                    fields: ['id','name','title','course_ids','dispense','final_result_bool','acquiered','first_session_computed_result','first_session_deliberated_result_bool','second_session_computed_result','second_session_deliberated_result_bool','second_session_result_bool','final_result','total_credits','total_weight'],
+                }).then(
             function(course_groups) {
                 self.course_groups = course_groups;
                 var all_course_ids = [];
@@ -387,7 +416,12 @@ return Widget.extend({
                     self.course_groups[i].courses = [];
                 }
                 
-                return new Model('school.individual_course').query().filter([['id', 'in', all_course_ids]]).all().then(
+                return rpc.query({
+                    model: 'school.individual_course',
+                    method: 'search_read',
+                    domain: [['id', 'in', all_course_ids]],
+                    fields: [],
+                }).then(
                     function(courses) {
                         for (var i=0, ii=courses.length; i<ii; i++) {
                             var course = courses[i];
@@ -396,7 +430,12 @@ return Widget.extend({
                 });
             }
         ).done(
-                new Model('school.individual_program').query().filter([['id','=',self.bloc.program_id[0]]]).all().then(
+            rpc.query({
+                model: 'school.individual_program',
+                method: 'search_read',
+                domain: [['id','=',self.bloc.program_id[0]]],
+                fields: [],
+            }).then(
                 function(program) {
                     if (program) {
                         self.program = program[0];
@@ -417,7 +456,11 @@ return Widget.extend({
                             self.program.grade_text = "avec la Plus Grande Distinction";
                             break;
                         };
-                        new Model('school.individual_program').call('compute_evaluation_details', [self.program.id]).then(function(results){
+                        rpc.query({
+                            model: 'school.individual_program',
+                            method: 'compute_evaluation_details',
+                            args: [self.program.id],
+                        }).then(function(results){
                             self.program.evaluation_details = results;
                         })
                     }

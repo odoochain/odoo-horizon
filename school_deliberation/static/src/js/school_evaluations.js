@@ -30,7 +30,6 @@ var core = require('web.core');
 var Widget = require('web.Widget');
 var Dialog = require('web.Dialog');
 var rpc = require('web.rpc');
-var data = require('web.data');
 var session = require('web.session');
 
 //var BlocEditor = require('school_evaluations.school_evaluations_bloc_editor');
