@@ -20,8 +20,8 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
-from openerp.exceptions import MissingError
+from odoo import api, fields, models, _
+from odoo.exceptions import MissingError
 
 _logger = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ class BookingWizard(models.TransientModel):
     from_date = fields.Datetime('From Date')
     to_date = fields.Datetime('From Date')
     
-    @api.multi
+    
     @api.onchange('from_date', 'to_date')
     def find_rooms(self):
         self.ensure_one()
@@ -53,7 +53,6 @@ class BookingWizard(models.TransientModel):
         else:
             return {'domain': {'room_id': [('is_room','=',True)]}}
         
-    @api.one
     @api.depends('from_date', 'to_date')
     def create_booking(self):
         pass

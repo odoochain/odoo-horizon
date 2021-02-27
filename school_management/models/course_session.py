@@ -20,8 +20,8 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
-from openerp.exceptions import UserError
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -40,4 +40,4 @@ class CourseSession(models.Model):
     schedule = fields.Text(string='Schedule')
     room = fields.Text(string='Room')
     
-    student_ids = fields.Many2many('res.partner','school_course_session_student_rel', id1='course_session_id', id2='student_id', string='Students')
+    student_ids = fields.Many2many('res.partner','school_course_session_student_rel', 'course_session_id', 'student_id', string='Students')

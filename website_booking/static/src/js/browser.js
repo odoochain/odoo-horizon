@@ -5,14 +5,11 @@ odoo.define('website_booking.browser', function (require) {
 
 var core = require('web.core');
 var ajax = require('web.ajax');
-var data = require('web.data');
+var rpc = require('web.rpc')
 var session = require('web.session');
 var Widget = require('web.Widget');
-var Dialog = require("web.Dialog");
 var time = require('web.time');
-var framework = require('web.framework');
-
-var Model = require("web.Model");
+var fieldutils = require('web.field_utils');
 
 var _t = core._t;
 var qweb = core.qweb;
@@ -61,31 +58,10 @@ var CalendarWidget = Widget.extend({
 		);
     },
     
-    start : function() {
-        this._super.apply(this, arguments);
-        var self = this;
-        // Force a refresh to get it right
-        setTimeout(function() {
-            self.$calendar.fullCalendar('changeView','agendaDay');
-            //self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
-        }, 100);
-    },
-    
     refetch_events: function() {
         this.$calendar.fullCalendar('refetchEvents');
     },
-    
-    do_show : function() {
-        this._super.apply(this, arguments);
-        var self = this;
-        setTimeout(function() {
-            self.$calendar.fullCalendar('refetchEvents').then(function(){
-                self.$calendar.fullCalendar('changeView','agendaDay');    
-            });
-            //self.$('.fc-button').removeClass('fc-button fc-state-default fc-corner-left fc-corner-right').addClass('waves-effect waves-light btn');
-        }, 100);
-    },
-    
+
 });
 
 var Schedule =  CalendarWidget.extend({
@@ -130,11 +106,14 @@ var Schedule =  CalendarWidget.extend({
         } catch(e) {}
         if(self.asset_id) {
             self.events = [];
-            ajax.jsonRpc('/booking/events', 'call', {
+            rpc.query({
+                route: '/booking/events',
+                params: {
     	    		'asset_id':this.asset_id,
-    				'start' : time.moment_to_str(start),
-    				'end' : time.moment_to_str(end),
-    	    	}).done(function(events){
+    				'start' : fieldutils.format.datetime(start),
+    				'end' : fieldutils.format.datetime(end),
+    	    	},
+            }).then(events => {
                     events.forEach(function(evt) {
                         self.events.push({
                             'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
@@ -190,37 +169,63 @@ var NewBookingDialog = Widget.extend({
             if(self.user.in_group_14) {
                 event_type = 'school_management_event_type';
             }
-            new Model('ir.model.data').call('get_object_reference', ['school_booking', event_type]).then(function(categ) {
+            rpc.query({
+                model: 'ir.model.data',
+                method: 'get_object_reference',
+                args: [
+                  'school_booking', event_type
+                ],
+            }).then(categ => {
                 if(self.edit_mode) {
-                    new Model('calendar.event').call('write', [[self.event.id], {
-                        'name' : self.$('#description').val(),
-                        'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
-                        'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
-                        'room_id': roomId,
-                        'categ_ids': [[4, categ[1]]],
-                    }]).then(function (id) {
+                    rpc.query({
+                        model: 'calendar.event',
+                        method: 'write',
+                        args: [
+                            [self.event.id], 
+                            {
+                                'name' : self.$('#description').val(),
+                                'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                'room_id': roomId,
+                                'categ_ids': [[4, categ[1]]]
+                            }
+                        ],
+                    }).then(id => {
                         self.trigger_up('updateEvent', {'id': id});
                     });
                 } else {
-                    new Model('calendar.event').call('create', [{
-                        'name' : self.$('#description').val(),
-                        'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
-                        'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
-                        'room_id': roomId,
-                        'categ_ids': [[4, categ[1]]],
-                    }]).fail(function(error) {
+                    rpc.query({
+                        model: 'calendar.event',
+                        method: 'create',
+                        args: [
+                            [self.event.id], 
+                            {
+                                'name' : self.$('#description').val(),
+                                'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                'stop': stop.utc().format('YYYY-MM-DD HH:mm:ss'),
+                                'room_id': roomId,
+                                'categ_ids': [[4, categ[1]]]
+                            }
+                        ],
+                    }).then(id => {
+                        self.trigger_up('newEvent', {'id': id});
+                    }).fail(error => {
                         if(error.data.exception_type == "validation_error"){
                             Materialize.toast(error.data.arguments[0], 4000)
                         }
-                    }).then(function (id) {
-                        self.trigger_up('newEvent', {'id': id});
                     });
                 }
             });
         },
         "click .delete-booking" : function (event) {
             var self = this;
-            new Model('calendar.event').call('unlink', [self.event.id]).done(function () {
+            rpc.query({
+                model: 'calendar.event',
+                method: 'unlink',
+                args: [
+                    self.event.id
+                ]
+            }).then(function () {
                 self.trigger_up('deleteEvent', self.event.id);
             });
         },
@@ -377,11 +382,14 @@ var NewBookingDialog = Widget.extend({
         if (fromTime && toTime) {
             var start = moment(self.date).local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0);
             var stop = moment(self.date).local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0);
-            ajax.jsonRpc('/booking/rooms', 'call', {
-        				'start' : time.moment_to_str(start),
-        				'end' : time.moment_to_str(stop),
+            rpc.query({
+                route: '/booking/rooms',
+                params: {
+        				'start' : fieldutils.format.datetime(start),
+        				'end' : fieldutils.format.datetime(stop),
         				'self_id' : self.event ? self.event.id : '',
-    	    	}).done(function(rooms){
+    	    	},
+            }).then(rooms => {
                 var roomSelect = self.$('select.select-asset-id').empty().html(' ');
                 for(var room_idx in rooms) {
                     var room = rooms[room_idx];
@@ -428,17 +436,16 @@ var NavigationCard = Widget.extend({
         },
     },
     
-    init: function(parent, category, to_parent) {
+    init: function(parent, category, to_parent, is_active) {
         this._super(parent);
         this.category = category;
         this.to_parent = to_parent;
+        this.is_active = is_active;
     },
     
     set_active: function() {
-        this.getParent().$el.find('.darken-4').removeClass('darken-4').addClass('darken-3')
-        this.$el.find('.cat_button').addClass('darken-4');
+        this.$('a').addClass('active');  
     },
-    
 });
 
 var Navigation = Widget.extend({
@@ -449,18 +456,37 @@ var Navigation = Widget.extend({
         'up_category' : 'up_category',
     },
     
-    start: function() {
+    init: function(parent) {
+        this._super.apply(this, arguments);
+        this.state = parent._current_state;
+    },
+    
+    renderElement: function () {
         this._super.apply(this, arguments);
         var self = this;
-        this.state = this.getParent()._current_state;
-        if(this.state.category_id && this.state.category_id > 0) {
-            ajax.jsonRpc('/booking/category', 'call', {'id' : this.state.category_id}).done(function(category){
+        if(self.state.category_id && self.state.category_id > 0) {
+            rpc.query({
+                route: "/booking/category",
+                params: {
+                    'id' : self.state.category_id
+                },
+            }).then(category => {
                 if(category[0].is_leaf) {
                     self.selected_category = category[0];
-                    ajax.jsonRpc('/booking/category', 'call', {'id' : self.selected_category.parent_id[0]}).done(function(category){
+                    rpc.query({
+                        route: "/booking/category",
+                        params: {
+                            'id' : self.selected_category.parent_id[0]
+                        },
+                    }).then(category => {
                         self.display_category = category[0];
                         if(self.display_category.parent_id) {
-                            ajax.jsonRpc('/booking/category', 'call', {'id' : self.display_category.parent_id[0]}).done(function(category){
+                            rpc.query({
+                                route: "/booking/category",
+                                params: {
+                                    'id' : self.display_category.parent_id[0]
+                                },
+                            }).then(category => {
                                 self.parent_category = category[0];
                                 self.renderCategories();
                                 self.trigger_up('switch_category', {'category' : self.selected_category});
@@ -475,23 +501,29 @@ var Navigation = Widget.extend({
                     self.selected_category = false;
                     self.display_category = category[0];
                     if(self.display_category.parent_id) {
-                        ajax.jsonRpc('/booking/category', 'call', {'id' : self.display_category.parent_id[0]}).done(function(category){
+                        rpc.query({
+                            route: "/booking/category",
+                            params: {
+                                'id' : self.display_category.parent_id[0]
+                            },
+                        }).then(category => {
                             self.parent_category = category[0];
                             self.renderCategories();
-                            self.trigger_up('switch_category', {'category' : self.display_category});
+                            self.trigger_up('switch_category', {'category' : self.selected_category});
                         });
                     } else {
                         self.parent_category = self.create_root();
                         self.renderCategories();
-                        self.trigger_up('switch_category', {'category' : self.display_category});
+                        self.trigger_up('switch_category', {'category' : self.selected_category});
                     }
                 }
             });
+            
         } else {
-            this.display_category = this.create_root();
-            this.selected_category = false;
-            this.parent_category = false;
-            this.renderCategories();
+            self.display_category = self.create_root();
+            self.selected_category = false;
+            self.parent_category = false;
+            self.renderCategories();
         }
     },
     
@@ -507,25 +539,29 @@ var Navigation = Widget.extend({
         var self = this;
         if(this.display_category) {
             if(this.display_category.isRoot) {
-                ajax.jsonRpc('/booking/categories', 'call', {'root' : 1}).done(function(categories){
+                rpc.query({
+                    route: "/booking/categories",
+                    params: {
+                        'root' : 1
+                    },
+                }).then(categories => {
                     self.$(".categories").empty();
                     categories.forEach(function(category) {
-                        var card = new NavigationCard(self, category, false);
+                        var card = new NavigationCard(self, category, false, category.id == self.selected_category.id);
                         card.appendTo(self.$(".categories"));
-                        if(category.id == self.selected_category.id) {
-                            card.set_active();
-                        }
                     });
                 });
             } else {
-                ajax.jsonRpc('/booking/categories', 'call', {'parent_id' : this.display_category.id}).done(function(categories){
+                rpc.query({
+                    route: "/booking/categories",
+                    params: {
+                        'parent_id' : this.display_category.id
+                    },
+                }).then(categories => {
                     self.$(".categories").empty();
                     categories.forEach(function(category) {
-                        var card = new NavigationCard(self, category, false);
+                        var card = new NavigationCard(self, category, false, category.id == self.selected_category.id);
                         card.appendTo(self.$(".categories"));
-                        if(category.id == self.selected_category.id) {
-                            card.set_active();
-                        }
                     });
                     if(self.parent_category) {
                         var card = new NavigationCard(self, self.parent_category, true);
@@ -540,6 +576,7 @@ var Navigation = Widget.extend({
         var cat = event.data.category;
         if(cat.is_leaf) {
             this.selected_category = cat;
+            this.$('.active').removeClass('active');
             event.target.set_active();
             this.trigger_up('switch_resource', {'resource' : cat});
         } else {
@@ -559,7 +596,12 @@ var Navigation = Widget.extend({
             self.renderCategories();
         } else {
             if (self.parent_category.parent_id) {
-                ajax.jsonRpc('/booking/category', 'call', {'id' : self.parent_category.parent_id[0]}).done(function(category){
+                rpc.query({
+                    route: "/booking/category",
+                    params: {
+                        'id' : self.parent_category.parent_id[0]
+                    },
+                }).then(category => {
                     self.display_category = self.parent_category;
                     self.parent_category = category;
                     self.selected_category = false;
@@ -616,13 +658,21 @@ var Calendar = CalendarWidget.extend({
         this.init_state = this.getParent()._current_state;
         if(this.init_state.date) {
             this.$calendar.fullCalendar( 'gotoDate', moment(this.init_state.date));
+        } else {
+            this.$calendar.fullCalendar( 'gotoDate', moment());
         }
     },
            
     fetch_resources : function(callback) {
         var self = this;
         self.ressources = [];
-	    ajax.jsonRpc('/booking/assets', 'call', {'category_id':self.category_id}).done(function(assets){
+        
+        rpc.query({
+            route: "/booking/assets",
+            params: {
+                'category_id':self.category_id
+            },
+        }).then(assets => {
                 assets.forEach(function(asset) {
                     self.ressources.push({
                         'id' : asset.id,
@@ -648,12 +698,14 @@ var Calendar = CalendarWidget.extend({
                 end = moment(end.format())        
             }
         } catch(e) {}
-	    ajax.jsonRpc('/booking/events', 'call', {
-	    		    'category_id':self.category_id,
-    				'start' : time.moment_to_str(start),
-    				'end' : time.moment_to_str(end),
-	    	}).done(function(events){
-	    	    
+        rpc.query({
+            route: "/booking/events",
+            params: {
+    		    'category_id':self.category_id,
+				'start' : fieldutils.format.datetime(start),
+				'end' : fieldutils.format.datetime(end),
+	    	},
+        }).then(events => {
 	    	    events.forEach(function(evt) {
                     var color = '#ff4355';
     	    	    if (evt.categ_ids.includes(9)) {
@@ -711,7 +763,12 @@ var Toolbar = Widget.extend({
     
     events : {
         "click #login-button" : function (event) {
-            ajax.jsonRpc('/booking/login_providers', 'call', {redirect : '/booking#category_id=16'}).done(function(providers){
+            rpc.query({
+                route: '/booking/login_providers',
+                params: {
+        		    redirect : '/booking#category_id=16'
+    	    	},
+            }).then(providers => {
                 if(providers.length > 0) {
                     var provider = providers[0];
                     var link = provider.auth_link
@@ -728,29 +785,43 @@ var Toolbar = Widget.extend({
             self.uid = false;
             self.avatar_src = false;
             self.$el.html(qweb.render('website_booking.toolbar_nolog', {widget : self}));
-            self.rpc("/web/session/destroy", {}).always(function(o) {
-                    window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
-                    location.reload();
+            rpc.query({
+                route: '/web/session/destroy',
+                params: {
+    	    	},
+            }).then(function() {
+                window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
+                location.reload();
             })
         },
     },
     
-    init : function() {
+    init : function(parent) {
         this._super.apply(this, arguments);
         var self = this;
+        self.parent = parent;
         session.session_bind().then(function(){
             if (session.uid) {
                 self.is_logged = true;
                 self.uid = session.uid;
-                new Model('res.users').call("search_read", 
-                    [[["id", "=", session.uid]], ["id","name","in_group_14","in_group_15","in_group_16",]],
-                    {context: session.context}).then(function (user_ids) {
+                self.parent.session = session;
+                rpc.query({
+                    model: 'res.users',
+                    method: 'search_read',
+                    args: [[["id", "=", session.uid]], ["id","name","in_group_14","in_group_15","in_group_16",]],
+                    context: session.context,
+                })
+                .then(function (user_ids){
                         session.user = user_ids[0];
                         self.user = session.partner;
                 });
-                new Model('res.partner').call("search_read", 
-                    [[["id", "=", session.partner_id]], ["id","name"]],
-                    {context: session.context}).then(function (partner_ids) {
+                rpc.query({
+                    model: 'res.partner',
+                    method: 'search_read',
+                    args: [[["id", "=", session.partner_id]], ["id","name"]],
+                    context: session.context,
+                })
+                .then(function (partner_ids){
                         session.partner = partner_ids[0];
                         self.partner = session.partner;
                 });
@@ -799,30 +870,29 @@ var Browser = Widget.extend({
             this.cal.refetch_events();
         },
     },
+
+    init: function(parent) {
+        this._super.apply(this, arguments);
+        /* TODO : why this.$('#main-modal') does not work ? */
+        this._current_state = $.deparam(window.location.hash.substring(1));
+    },
     
     renderElement: function() {
         this._super.apply(this, arguments);
-        this._current_state = $.deparam(window.location.hash.substring(1));
-        var self = this;
+        // Manage modals
+        this.main_modal = this.$('#main-modal-content').parent().modal();
+        this.details_modal = this.$('#modal-details-content').parent().modal();
         // Fill toolbar
-        self.tb = new Toolbar(this);
-        self.tb.appendTo(this.$(".booking_toolbar"));
+        this.tb = new Toolbar(this);
+        this.tb.appendTo(this.$(".booking_toolbar"));
         // Fill navigation panel
-        self.nav = new Navigation(this);
-        self.nav.appendTo(this.$(".navbar"));
+        this.nav = new Navigation(this);
+        this.nav.appendTo(this.$(".navbar"));
         // Fill calendar panel
-        self.cal = new Calendar(this);
-        self.cal.appendTo(this.$(".calendar"));
-        self.cal.tb = self.tb;
+        this.cal = new Calendar(this);
+        this.cal.appendTo(this.$(".calendar"));
+        this.cal.tb = this.tb;
         this.$('.datepicker').datepicker($.datepicker.regional[ "fr" ]);
-    },
-    
-    start: function() {
-        this._super.apply(this, arguments);
-        var self = this;
-        /* TODO : why this.$('#main-modal') does not work ? */
-        self.main_modal = this.$('#main-modal-content').parent().modal();
-        self.details_modal = this.$('#modal-details-content').parent().modal();
         this.$('.collapsible').collapsible();
     },
     

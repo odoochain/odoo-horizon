@@ -20,8 +20,8 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, tools, _
-from openerp.exceptions import MissingError
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import MissingError
 
 _logger = logging.getLogger(__name__)
 
@@ -37,8 +37,9 @@ class StudentReport(models.Model):
     #has_paid_current_minerval = fields.Integer(string="Has paid current minerval")
     dispenses = fields.Integer(string="Dispenses")
 
-    def init(self, cr):
+    def init(self):
         """ School Student main report """
+        cr = self._cr
         tools.drop_view_if_exists(cr, 'school_student_report')
         cr.execute(""" CREATE VIEW school_student_report AS (
             SELECT

@@ -20,26 +20,11 @@
 #
 ##############################################################################
 -->
-<openerp>
-    <data>
+<odoo>
+    
     
         <!-- Top menu item -->
         <menuitem name="Evaluations" id="menu_main_evaluation" icon="fa-book" web_icon="survey,static/description/icon.png" sequence="65" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
-
-        <template id="assets_backend" name="school_evaluations_assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/metisMenu.min.css" /> <!-- TODO : change to not min version -->
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/sb-admin-2.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_program.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_bloc.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluations.css" />
-                <script type="text/javascript" src="/school_evaluations/static/src/js/metisMenu.min.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/sb-admin-2.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluations.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluation_bloc.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluation_program.js"></script>
-            </xpath>
-        </template>
 
         <!-- Partner -->
         <record id="view_partners_form_school_eval" model="ir.ui.view">
@@ -103,7 +88,7 @@
                         <field name="state" widget="statusbar" statusbar_visible=" " />
                     </header>
                 </xpath>
-                <xpath expr="//field[@name='image']" position="before">
+                <!--<xpath expr="//field[@name='image']" position="before">
                     <div class="oe_button_box" name="button_box">
                             <button name="toggle_active" type="object"
                                     class="oe_stat_button" icon="fa-archive">
@@ -111,7 +96,7 @@
                                     options='{"terminology": "archive"}'/>
                             </button>
                     </div>
-                </xpath>
+                </xpath>-->
                 <xpath expr="//field[@name='required_credits']" position="after">         
                     <!--<field name="historical_bloc_1_credits"/>
                     <field name="historical_bloc_1_eval"/>
@@ -125,45 +110,74 @@
                     <newline/>
                     <field name="grade_comments" colspan="4"/>
                 </xpath>
-                <xpath expr="//field[@name='source_bloc_name']" position="after">
+                <xpath expr="//field[@name='bloc_ids']/kanban/field[@name='total_credits']" position="after">
                     <field name="total_acquiered_not_dispensed_credits" />
                     <field name="total_not_dispensed_credits" />
                     <field name="evaluation"/>
                     <field name="state"/>
                 </xpath>
-                <xpath expr="//field[@name='ind_course_group_ids']/tree" position="attributes">
+                <!--<xpath expr="//field[@name='ind_course_group_ids']/tree" position="attributes">
                     <attribute name="colors">green:state=='confirmed' and acquiered == 'A';grey:state=='confirmed' and acquiered == 'NA';orange:state=='draft';blue:state=='progress'</attribute>
-                </xpath>
-                <xpath expr="//field[@name='ind_course_group_ids']/tree/field[@name='total_credits']" position="after">
+                </xpath>-->
+                <xpath expr="//field[@name='ind_course_group_ids']/kanban/field[@name='total_credits']" position="after">
                     <field name="dispense"/>
                     <field name="final_result"/>
                     <field name="acquiered"/>
                     <field name="state"/>
-                    <button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group" attrs="{'invisible': [('state', '!=', ('draft'))]}"/>
+                    <!--<button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group" attrs="{'invisible': [('state', '!=', ('draft'))]}"/>-->
                 </xpath>
-                <xpath expr="//field[@name='bloc_ids']" position="after">
+                <!--<xpath expr="//field[@name='bloc_ids']" position="after">
                     <h2>Unités d'enseignement valorisées</h2>
                     <field name="valuated_course_group_ids">
                       <tree string="Course Group" create="0">
-                        <field name="ue_id"/>
+                        <field name="uid"/>
                         <field name="name"/>
                         <field name="total_hours" sum="total_hours_valo"/>
                         <field name="total_credits" sum="total_credits_valo"/>
                         <field name="state"/>
                        </tree>
                     </field>
-                </xpath>
-                <xpath expr="//field[@name='ind_course_group_ids']" position="after">
-                    <h2>Unités d'enseignement restant à acquérir</h2>
-                    <field name="remaining_not_planned_course_group_ids" context="{'program_id': active_id}" options="{'not_delete': True, 'reload_on_button': True, 'no_create': True}">
-                      <tree string="Course Group" create="0" delete="0">
-                        <field name="ue_id"/>
-                        <field name="name"/>
-                        <field name="total_hours" sum="total_hours_rem"/>
-                        <field name="total_credits" sum="total_credits_rem"/>
-                        <button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group"/>
-                       </tree>
-                    </field>
+                </xpath>-->
+                <xpath expr="//div[@id='individual_cgs']" position="replace">
+                    <h2>Unités d'enseignement</h2>
+                      <field name="all_ind_course_group_ids" widget="many2many_kanban" context="{'order_display': 'status desc, sequence asc' }">
+                        <kanban quick_create="false" create="false" delete="false" group_create="false" default_group_by="year_id">
+                          <field name="uid"/>
+                          <field name="year_id" />
+                          <field name="name" />
+                          <field name="total_hours" />
+                          <field name="total_credits" />
+                          <field name="state" />
+                          <templates>
+                              <t t-name="kanban-box">
+                                    <t t-if="record['state'].raw_value == 'valuated'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid blue;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'candicate'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid lightblue;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'confirmed'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid green;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'progress'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid yellow;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'draft'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid grey;'"/></t>
+                                    <div t-att-style="divstyle">
+                                        <div class="o_kanban_record_top">
+                                          <div class="row o_kanban_record_headings">
+                                            <div class="col-12 col-md-2">
+                                              <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
+                                            </div>
+                                            <div class="col-12 col-md-7">
+                                              <field name="source_course_group_uid"/> - <field name="name"/><br/>
+                                              <i><field name="teacher_id"/></i>
+                                            </div>
+                                            
+                                            <div class="col-2">
+                                              Heures : <field name="total_hours"/>
+                                              <br/>
+                                              ECTS : <field name="total_credits"/>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </t>
+                          </templates>
+                        </kanban>
+                      </field>
                 </xpath>
             </field>
         </record>
@@ -265,7 +279,7 @@
             <field name="inherit_id" ref="school_management.course_group_form" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='weight']" position="after">
+                <xpath expr="//field[@name='total_weight']" position="after">
                     <field name="enable_exclusion_bool"/>
                 </xpath>
             </field>
@@ -297,8 +311,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="before">
                     <header>
-                        <button name="set_to_confirmed" type="object" states="candidate" string="Confirm valuation" class="oe_highlight" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed" />
+                        <button name="set_to_valuated" type="object" states="candidate" string="Confirm valuation" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed,valuated" />
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='source_course_id']" position="before">
@@ -505,7 +519,7 @@
           <field name="name">Encodage Résultats AA</field>
           <field name="type">ir.actions.act_window</field>
           <field name="res_model">school.individual_course</field>
-          <field name="view_type">form</field>
+          
           <field name="view_mode">tree,form</field>
           <field name="context">{"search_default_current":1}</field>
           <field name="search_view_id" ref="school_management.view_individual_courses_filter" />
@@ -520,7 +534,7 @@
           <field name="name">Encodage Résultats AA</field>
           <field name="type">ir.actions.act_window</field>
           <field name="res_model">school.individual_course</field>
-          <field name="view_type">form</field>
+          
           <field name="view_mode">tree,form</field>
           <field name="context">{"search_default_my_current_courses":1}</field>
           <field name="search_view_id" ref="school_management.view_individual_courses_filter" />
@@ -537,13 +551,4 @@
         
         <menuitem name="Evaluations" id="menu_main_evaluation" icon="fa-book" web_icon="survey,static/description/icon.png" sequence="65" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
 
-        <record id="action_school_evaluations" model="ir.actions.client">
-            <field name="name">Evaluations</field>
-            <field name="tag">school_evaluations.main</field>
-            <field name="res_model">school.bloc</field>
-        </record>
-    
-        <menuitem id="menu_school_eval" name="Deliberation" action="action_school_evaluations" icon="fa-envelope" web_icon="school_evaluations,static/description/icon.png" sequence="70" />
-
-    </data>
-</openerp>
+</odoo>

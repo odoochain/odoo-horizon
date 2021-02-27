@@ -20,8 +20,8 @@
 #
 ##############################################################################
 -->
-<openerp>
-  <data>
+<odoo>
+  
     
     <!-- Top menu item -->
     <menuitem name="Individuals Programs" id="menu_individual_bloc" icon="fa-book" web_icon="hr_recruitment,static/description/icon.png" sequence="62" groups="school_management.group_registration"/>
@@ -54,53 +54,127 @@
       <field name="arch" type="xml">
         <form string="Individual Program">
           <sheet>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
-            <div class="oe_title" style="padding-left: 260px;width: 100%;">
-              <h1>
-                <field name="student_id"/>
-              </h1>
-              <h4>
-                Année de début de cycle : <field name="year_id" class="oe_inline" />
-              </h4>
-              <h4>
-                Cycle basé sur le profil d'enseignement : <field name="source_program_id" class="oe_inline" />
-              </h4>
-                <field name="cycle_id" invisible="1"/>
-                <field name="speciality_id" invisible="1"/>
+            <field name="image" widget="image" class="oe_left oe_inline m-2" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
+            <widget name="web_ribbon" text="Cycle" bg_color="bg-warning"/>
+            <div class="oe_title">
+              <h1 class="pt-5"><field name="student_id"/></h1>
+              <h5 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="year_id" invisible="1"/>
+                    <span>Année de début de cycle :</span>
+                    <span><field name="year_id"/></span>
+                  </div>
+              </h5>
+              <h5 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="source_program_id" invisible="1"/>
+                    <span>Cycle basé sur le profil d'enseignement :</span>
+                    <span><field name="source_program_id"/></span>
+                  </div>
+              </h5>
+              <h3 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="uid" class="oe_edit_only"/>
+                    <small class="oe_grey" ><field name="uid"/></small>
+                  </div>
+              </h3>
+              <field name="cycle_id" invisible="1"/>
+              <field name="speciality_id" invisible="1"/>
             </div>
             <group col="4">
               <field name="required_credits" colspan="4" readonly="1"/>
             </group>
-            <h2>Programmes Annuels de l'Etudiant (PAE)</h2>
-            <field name="bloc_ids">
-              <tree string="Individual Blocs" create="0" delete="0">
-                <field name="year_id"/>
-                <field name="student_id"/>
-                <field name="source_bloc_name"/>
-              </tree>
-            </field>
-            <br/>
-            <h2>Unités d'enseignement reprise dans les PAE</h2>
-            <field name="ind_course_group_ids" options="{'not_delete': True, 'reload_on_button': True, 'no_create': True}">
-              <tree string="Course Group" create="0" delete="0">
-                <field name="year_id" />
-                <field name="ue_id"/>
-                <field name="name"/>
-                <field name="total_hours" sum="hours_pae"/>
-                <field name="total_credits" sum="credits_pae"/>
-               </tree>
-            </field>
-            <br/>
-            <h2>Unités d'enseignement du cycle</h2>
-            <field name="course_group_ids">
-              <tree string="Course Group" create="0" delete="0">
-                <field name="ue_id"/>
-                <field name="name"/>
-                <field name="total_hours" sum="hours_program"/>
-                <field name="total_credits" sum="credits_program"/>
-               </tree>
-            </field>
-            <br/>
+            <div id="paes" class="mb-4">
+              <h2>Programmes Annuels de l'Etudiant (PAE)</h2>
+              <field name="bloc_ids">
+                <kanban quick_create="false" create="false">
+                    <field name="uid"/>
+                    <field name="year_id"/>
+                    <field name="name" />
+                    <field name="total_hours" />
+                    <field name="total_credits" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div style="position: relative; border-top : 10px solid #28a745;">
+                                <div class="oe_module_vignette">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <field name="uid" />
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <field name="name"/>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-6">
+                                      Heures : <field name="total_hours"/>
+                                    </div>
+                                    <div class="col-6">
+                                      ECTS : <field name="total_credits"/>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-9">
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="object" name="action_open_form" class="oe_highlight btn btn-primary">Open</button>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+              </field>
+            </div>
+            <div id="individual_cgs" class="mb-4">
+              <h2>Unités d'enseignement reprises dans les PAE</h2>
+              <field name="ind_course_group_ids" widget="many2many_kanban">
+                <kanban quick_create="false" create="false" delete="false" group_create="false" default_group_by="year_id">
+                  <field name="uid"/>
+                  <field name="year_id" />
+                  <field name="name" />
+                  <field name="total_hours" />
+                  <field name="total_credits" />
+                  <templates>
+                      <t t-name="kanban-box">
+                            <div style="position: relative;width:100%;">
+                                <div class="o_kanban_record_top">
+                                  <div class="row o_kanban_record_headings">
+                                    <div class="col-12 col-md-2">
+                                      <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
+                                    </div>
+                                    <div class="col-12 col-md-7">
+                                      <field name="name"/><br/>
+                                      <i><field name="teacher_id"/></i>
+                                    </div>
+                                    
+                                    <div class="col-2">
+                                      Heures : <field name="total_hours"/>
+                                      <br/>
+                                      ECTS : <field name="total_credits"/>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </t>
+                  </templates>
+                </kanban>
+              </field>
+            </div>
+            <div id="program_cgs" class="mb-4">
+              <h2>Unités d'enseignement du cycle</h2>
+              <field name="course_group_ids">
+                <tree string="Course Group" create="0" delete="0">
+                  <field name="uid"/>
+                  <field name="name"/>
+                  <field name="total_hours" sum="hours_program"/>
+                  <field name="total_credits" sum="credits_program"/>
+                 </tree>
+              </field>
+            </div>
           </sheet>
           <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers" />
@@ -122,11 +196,11 @@
           <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
           <separator/>
           <group expand="1" string="Group By">
-            <filter string="Domain" context="{'group_by':'domain_id'}"/>
-            <filter string="Cycle" context="{'group_by':'cycle_id'}"/>
-            <filter string="Section" context="{'group_by':'section_id'}"/>
-            <filter string="Track" context="{'group_by':'track_id'}"/>
-            <filter string="Speciality" context="{'group_by':'speciality_id'}"/>
+            <filter string="Domain" name="domain_id_group" context="{'group_by':'domain_id'}" />
+            <filter string="Cycle" name="cycle_id_group" context="{'group_by':'cycle_id'}" />
+            <filter string="Section" name="section_id_group" context="{'group_by':'section_id'}" />
+            <filter string="Track" name="track_id_group" context="{'group_by':'track_id'}" />
+            <filter string="Speciality" name="speciality_id_group" context="{'group_by':'speciality_id'}" />
           </group>
         </search>
       </field>
@@ -136,7 +210,7 @@
       <field name="name">Individual Programs</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.individual_program</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form</field>
       <field name="context">{}</field>
       <field name="search_view_id" ref="view_individual_program_filter" />
@@ -188,7 +262,7 @@
     <record id="act_program_2_course" model="ir.actions.act_window">
         <field name="name">Courses</field>
         <field name="res_model">school.individual_course</field>
-        <field name="view_type">form</field>
+        
         <field name="view_mode">tree,form</field>
         <field name="context">{'search_default_bloc_id': active_id}</field>
         <field name="search_view_id" ref="view_individual_courses_filter" />
@@ -223,20 +297,28 @@
       <field name="arch" type="xml">
         <form string="Individual Bloc">
           <sheet>
-            <div class="oe_button_box" name="button_box">
+            <!--<div class="oe_button_box" name="button_box">
               <button class="oe_stat_button" icon="fa-list" type="action" name="%(school_management.act_program_2_course)d">
                 <field string="Courses" name="course_count" widget="statinfo" />
               </button>
-            </div>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
-            <div class="oe_title" style="padding-left: 130px;">
-              <h1>
-               <field name="name"/>
-              </h1>
-              <h3 class="oe_fade">
-               Based on <field name="source_bloc_id" options='{"no_open":True}' class="oe_inline"/>
+            </div>-->
+            <field name="image" widget="image" class="oe_left oe_inline m-2" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
+            <widget name="web_ribbon" text="PAE" />
+            <div class="oe_title">
+              <h1 class="pt-5"><field name="name"/></h1>
+              <h3 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="source_bloc_id" invisible="1"/>
+                    <span class="oe_grey"> Based on </span>
+                    <span class="oe_grey" ><field name="source_bloc_id"/></span>
+                  </div>
               </h3>
-              <h3 class="oe_fade">PAE-<field name="id" options='{"no_open":True}' class="oe_inline"/></h3>
+              <h3 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="uid" class="oe_edit_only"/>
+                    <small class="oe_grey" ><field name="uid"/></small>
+                  </div>
+              </h3>
             </div>
             <group col="4">
               <field name="program_id" colspan="4"/>
@@ -247,7 +329,7 @@
             </group>
             <field name="course_group_ids">
               <tree string="Course Groups" context="{'default_bloc_id':active_id}">
-                <field name="ue_id"/>
+                <field name="uid"/>
                 <field name="name" />
                 <field name="total_hours" string="Hrs"/>
                 <field name="total_credits" />
@@ -286,11 +368,11 @@
           <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
           <filter string="Previous Year" name="previous" domain="[('year_sequence','=','previous')]" />
           <group expand="1" string="Group By">
-            <filter string="Domain" context="{'group_by':'source_bloc_domain_id'}" />
-            <filter string="Cycle" context="{'group_by':'source_bloc_cycle_id'}" />
-            <filter string="Section" context="{'group_by':'source_bloc_section_id'}" />
-            <filter string="Track" context="{'group_by':'source_bloc_track_id'}" />
-            <filter string="Speciality" context="{'group_by':'source_bloc_speciality_id'}" />
+            <filter string="Domain" name="source_bloc_domain_id_group" context="{'group_by':'source_bloc_domain_id'}" />
+            <filter string="Cycle" name="source_bloc_cycle_id_group" context="{'group_by':'source_bloc_cycle_id'}" />
+            <filter string="Section" name="source_bloc_section_id_group" context="{'group_by':'source_bloc_section_id'}" />
+            <filter string="Track" name="source_bloc_track_id_group" context="{'group_by':'source_bloc_track_id'}" />
+            <filter string="Speciality" name="source_bloc_speciality_id_group" context="{'group_by':'source_bloc_speciality_id'}" />
           </group>
         </search>
       </field>
@@ -300,7 +382,7 @@
       <field name="name">Individual Programs</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.individual_bloc</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form</field>
       <field name="context">{"search_default_current":1}</field>
       <field name="search_view_id" ref="view_individual_bloc_filter" />
@@ -340,7 +422,7 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Individual Course" editable="top" create="0">
-          <field name="ue_id"/>
+          <field name="uid"/>
           <field name="year_id"/>
           <field name="student_id" />
           <field name="name" />
@@ -361,13 +443,16 @@
     		            <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,paid"/>
     		        </header>-->
           <sheet>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/>
+            <field name="image" widget="image" class="oe_left oe_inline m-2" options="{&quot;preview_image&quot;: &quot;image&quot;, &quot;size&quot;: [250, 250]}"/>
+            <widget name="web_ribbon" text="Unité" bg_color="bg-primary"/>
             <div class="oe_title">
-              <h1>
-               <field name="name"/>
-              </h1>
-              <h3 class="oe_fade">
-               <field name="ue_id"/> - <field name="bloc_id" options='{"no_open":True}'/>
+              <h1 class="pt-5"><field name="name"/></h1>
+              <h3 class="o_row row no-gutters d-flex">
+                  <div class="col">
+                    <label for="uid" invisible="1"/>
+                    <label for="bloc_id" invisible="1"/>
+                    <small class="oe_grey" ><field name="uid"/></small>
+                  </div>
               </h3>
             </div>
             <group col="2" colspan="2">
@@ -404,7 +489,7 @@
       <field name="model">school.individual_course_group</field>
       <field name="arch" type="xml">
         <search string="Search Courses">
-          <field name="ue_id" string="UE Id"/>
+          <field name="uid" string="UID"/>
           <field name="student_id" domain="[('type', '=', 'contact')]"/>
           <field name="source_course_group_id" string="Activité"/>
           <filter name="bloc_1" string="Bloc 1" domain="[('source_bloc_level', '=', 1)]"/>
@@ -421,11 +506,10 @@
           <filter name="dispensed" string="Dispensed" domain="[('dispense', '=', True)]"/>
           <filter name="not_dispensed" string="Not Dispensed" domain="[('dispense', '=', False)]"/>
           <group expand="1" string="Group By">
-            <filter string="Domain" context="{'group_by':'source_bloc_domain_id'}" />
-            <filter string="Cycle" context="{'group_by':'source_bloc_cycle_id'}" />
-            <filter string="Section" context="{'group_by':'source_bloc_section_id'}" />
-            <filter string="Track" context="{'group_by':'source_bloc_track_id'}" />
-            <filter string="Speciality" context="{'group_by':'source_bloc_speciality_id'}" />
+            <filter string="Domain" name="source_bloc_domain_id_group" context="{'group_by':'source_bloc_domain_id'}" />
+            <filter string="Cycle" name="source_bloc_cycle_id_group" context="{'group_by':'source_bloc_cycle_id'}" />
+            <filter string="Section" name="source_bloc_section_id_group" context="{'group_by':'source_bloc_section_id'}" />
+            <filter string="Track" name="source_bloc_track_id_group" context="{'group_by':'source_bloc_track_id'}" />
           </group>
         </search>
       </field>
@@ -435,7 +519,7 @@
       <field name="name">Individual Course Groups</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.individual_course_group</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form</field>
       <field name="context">{"search_default_current":1}</field>
       <field name="search_view_id" ref="view_individual_course_groups_filter" />
@@ -502,7 +586,7 @@
             <div class="oe_button_box" name="button_box">
               <button type="object" icon="fa-book" name="open_program" string="Porgram"/>
             </div>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
+            <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
             <div class="oe_title" style="padding-left: 130px;">
               <h1>
                <field name="name"/>
@@ -557,13 +641,12 @@
           <separator/>
           <filter name="my_current_courses" string="My Current Courses" domain="[('teacher_id.user_ids','=',uid),('year_sequence','=','current')]" />
           <group expand="1" string="Group By">
-            <filter string="Source Course" context="{'group_by':'source_course_id'}" />
+            <filter string="Source Course" name="source_course_id_group" context="{'group_by':'source_course_id'}" />
             <separator/>
-            <filter string="Domain" context="{'group_by':'source_bloc_domain_id'}" />
-            <filter string="Cycle" context="{'group_by':'source_bloc_cycle_id'}" />
-            <filter string="Section" context="{'group_by':'source_bloc_section_id'}" />
-            <filter string="Track" context="{'group_by':'source_bloc_track_id'}" />
-            <filter string="Speciality" context="{'group_by':'source_bloc_speciality_id'}" />
+            <filter string="Domain" name="source_bloc_domain_id_group" context="{'group_by':'source_bloc_domain_id'}" />
+            <filter string="Cycle" name="source_bloc_cycle_id_group" context="{'group_by':'source_bloc_cycle_id'}" />
+            <filter string="Section" name="source_bloc_section_id_group" context="{'group_by':'source_bloc_section_id'}" />
+            <filter string="Track" name="source_bloc_track_id_group" context="{'group_by':'source_bloc_track_id'}" />
           </group>
         </search>
       </field>
@@ -573,7 +656,7 @@
       <field name="name">Individual Courses</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.individual_course</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form</field>
       <field name="context">{"search_default_current":1}</field>
       <field name="search_view_id" ref="view_individual_courses_filter" />
@@ -600,5 +683,5 @@
 
     <menuitem id="menu_individual_course_form" parent="menu_individual_bloc" action="action_individual_course_form" sequence="70" />
 
-  </data>
-</openerp>
+  
+</odoo>

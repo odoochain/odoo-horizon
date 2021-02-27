@@ -27,12 +27,10 @@ import dateutil
 import dateutil.parser
 import dateutil.relativedelta
 
-from datetime import datetime, date, time, timedelta
-
-from openerp import api, fields
-from openerp import http
-from openerp.http import request
-from openerp.addons.auth_oauth.controllers.main import OAuthLogin as Home
+from odoo import api, fields
+from odoo import http
+from odoo.http import request
+from odoo.addons.auth_oauth.controllers.main import OAuthLogin as Home
 
 _logger = logging.getLogger(__name__)
 
@@ -50,7 +48,11 @@ class BookingController(http.Controller):
 
     @http.route('/booking', type='http', auth='public', website=True)
     def booking_browser(self, debug=False, **k):
-        return request.render('website_booking.index')
+        session_info = request.env['ir.http'].session_info()
+        context = {
+            'session_info': session_info,
+        }
+        return request.render('website_booking.index',qcontext=context)
     
     @http.route('/booking_mobile', type='http', auth='public', website=True)
     def booking_mobile_browser(self, debug=False, **k):

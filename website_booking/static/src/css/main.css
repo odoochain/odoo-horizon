@@ -30,6 +30,14 @@ nav .nav-title {
   min-height: 200px;
 }
 
+.cat_button {
+  background-color: #006064 !important;
+}
+
+.cat_button.active {
+  background-color: #00838f !important;
+}
+
 .navbar-card-title {
   height: 55px;
   width: 100%;

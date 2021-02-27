@@ -20,8 +20,8 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, tools, _
-from openerp.exceptions import UserError, AccessError
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import UserError, AccessError
 
 _logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ class IndividualProgram(models.Model):
     '''Individual Program'''
     _name='school.individual_program'
     _description='Individual Program'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread','school.uid.mixin','school.open.form.mixin']
     
     _order = 'name'
 
@@ -42,9 +42,9 @@ class IndividualProgram(models.Model):
     student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", required=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
+    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict")
     
@@ -61,40 +61,40 @@ class IndividualProgram(models.Model):
     
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
-    @api.one
     def _compute_ind_course_group_ids(self):
-        course_group_ids = False
-        for bloc in self.source_program_id.bloc_ids:
-            if course_group_ids :
-                course_group_ids |= bloc.course_group_ids
-            else :
-                course_group_ids = bloc.course_group_ids
-        self.course_group_ids = course_group_ids
-        self.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.bloc_ids.ids)])
+        for rec in self:
+            course_group_ids = False
+            for bloc in rec.source_program_id.bloc_ids:
+                if course_group_ids :
+                    course_group_ids |= bloc.course_group_ids
+                else :
+                    course_group_ids = bloc.course_group_ids
+            rec.course_group_ids = course_group_ids
+            rec.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',rec.bloc_ids.ids)])
     
-    @api.one
     @api.depends('cycle_id.name','speciality_id.name','student_id.name')
     def _compute_name(self):
-        self.name = "%s - %s - %s" % (self.student_id.name,self.cycle_id.name,self.speciality_id.name)
+        for rec in self:
+            rec.name = "%s - %s - %s" % (rec.student_id.name,rec.cycle_id.name,rec.speciality_id.name)
         
     bloc_ids = fields.One2many('school.individual_bloc', 'program_id', string='Individual Blocs')
     
     highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
 
-    @api.one
     @api.depends('bloc_ids.source_bloc_level')
     def _compute_highest_level(self):
-        levels = self.bloc_ids.mapped('source_bloc_level')
-        if levels:
-            self.highest_level = max(levels)
-        else:
-            self.highest_level = 0
+        for rec in self:
+            levels = rec.bloc_ids.mapped('source_bloc_level')
+            if levels:
+                rec.highest_level = max(levels)
+            else:
+                rec.highest_level = 0
 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _name='school.individual_bloc'
     _description='Individual Bloc'
-    _inherit = ['mail.thread','school.year_sequence.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
     _order = 'year_id, source_bloc_level desc, source_bloc_name'
     
@@ -123,7 +123,6 @@ class IndividualBloc(models.Model):
     source_bloc_cycle_id = fields.Many2one('school.cycle',compute='compute_speciality', string='Cycle', readonly=True, store=True)
     
     @api.depends('source_bloc_id.speciality_id','program_id.speciality_id')
-    @api.multi
     def compute_speciality(self):
         for bloc in self:
             if bloc.source_bloc_id.speciality_id :
@@ -137,9 +136,9 @@ class IndividualBloc(models.Model):
                 bloc.source_bloc_section_id = bloc.program_id.section_id
                 bloc.source_bloc_track_id = bloc.program_id.track_id
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
+    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', track_visibility='onchange')
     
@@ -162,23 +161,23 @@ class IndividualBloc(models.Model):
     #         cg.write({'course_ids': courses})
 
     @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight','course_group_ids.is_ghost_cg')
-    @api.one
     def _get_courses_total(self):
-        _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
-        self.total_hours = sum(course_group.total_hours for course_group in self.course_group_ids if not course_group.is_ghost_cg)
-        self.total_credits = sum(course_group.total_credits for course_group in self.course_group_ids if not course_group.is_ghost_cg)
-        self.total_weight = sum(course_group.total_weight for course_group in self.course_group_ids if not course_group.is_ghost_cg)
+        for rec in self:
+            _logger.debug('Trigger "_get_courses_total" on Course Group %s' % rec.name)
+            rec.total_hours = sum(course_group.total_hours for course_group in rec.course_group_ids if not course_group.is_ghost_cg)
+            rec.total_credits = sum(course_group.total_credits for course_group in rec.course_group_ids if not course_group.is_ghost_cg)
+            rec.total_weight = sum(course_group.total_weight for course_group in rec.course_group_ids if not course_group.is_ghost_cg)
 
-    @api.one
     @api.depends('year_id.name','student_id.name')
     def _compute_name(self):
-        self.name = "%s - %s" % (self.year_id.name,self.student_id.name)
+        for rec in self:
+            rec.name = "%s - %s" % (rec.year_id.name,rec.student_id.name)
     
     _sql_constraints = [
 	        ('uniq_student_bloc', 'unique(year_id, student_id, source_bloc_id)', 'This individual bloc already exists.'),
     ]
     
-    @api.multi
+    
     def message_get_suggested_recipients(self):
         recipients = super(IndividualBloc, self).message_get_suggested_recipients()
         try:
@@ -191,12 +190,12 @@ class IndividualBloc(models.Model):
           
     course_count = fields.Integer(compute='_compute_course_count', string="Course")
 
-    @api.multi
+    
     def _compute_course_count(self):
         for bloc in self:
             bloc.course_count = self.env['school.individual_course'].search_count([('bloc_id', '=', bloc.id)])
 
-    @api.multi
+    
     def open_courses(self):
         """ Utility method used to add an "Open Courses" button in bloc views """
         self.ensure_one()
@@ -213,12 +212,11 @@ class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _name='school.individual_course_group'
     _description='Individual Course Group'
-    _inherit = ['mail.thread','school.year_sequence.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
     _order = 'year_id, sequence'
     
     name = fields.Char(related="source_course_group_id.name", readonly=True) #, store=True)
-    ue_id = fields.Char(related="source_course_group_id.ue_id", readonly=True)# , store=True)
     title = fields.Char(related="source_course_group_id.title", readonly=True, store=True)
     
     sequence = fields.Integer(related="source_course_group_id.sequence", readonly=True, store=True)
@@ -227,11 +225,13 @@ class IndividualCourseGroup(models.Model):
     student_id = fields.Many2one(related="bloc_id.student_id", string='Student', store=True, domain=[('student', '=', True)])
     teacher_id = fields.Many2one('res.partner', string='Teacher', store=True, domain=[('teacher', '=', True)])
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
+    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict")
+    
+    source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
     
     bloc_id = fields.Many2one('school.individual_bloc', string="Bloc", ondelete='cascade', readonly=True)
 
@@ -254,8 +254,6 @@ class IndividualCourseGroup(models.Model):
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight', store=True)
     weight = fields.Integer(related="source_course_group_id.weight",string='Weight', store=True)
     
-    ue_id =  fields.Char(related="source_course_group_id.ue_id", readonly=True)
-    
     @api.onchange('source_course_group_id')
     def onchange_source_cg(self):
         courses = []
@@ -266,18 +264,18 @@ class IndividualCourseGroup(models.Model):
         self.update({'course_ids': courses})
 
     @api.depends('course_ids.hours','course_ids.credits','course_ids.weight')
-    @api.one
     def _get_courses_total(self):
-        _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
-        self.total_hours = sum(course.hours for course in self.course_ids)
-        self.total_credits = sum(course.credits for course in self.course_ids)
-        self.total_weight = sum(course.weight for course in self.course_ids)
+        for rec in self:
+            _logger.debug('Trigger "_get_courses_total" on Course Group %s' % rec.name)
+            rec.total_hours = sum(course.hours for course in rec.course_ids)
+            rec.total_credits = sum(course.credits for course in rec.course_ids)
+            rec.total_weight = sum(course.weight for course in rec.course_ids)
 
 class IndividualCourse(models.Model):
     '''Individual Course'''
     _name = 'school.individual_course'
     _description = 'Individual Course'
-    _inherit = ['mail.thread','school.year_sequence.mixin','ir.needaction_mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','mail.activity.mixin']
     
     _order = 'sequence'
     
@@ -294,24 +292,24 @@ class IndividualCourse(models.Model):
     teacher_choice_id = fields.Many2one('res.partner', string='Teacher Choice', domain=[('teacher', '=',1)])
     
     @api.depends('teacher_choice_id','source_course_id.teacher_ids')
-    @api.one
     def compute_teacher_id(self):
-        if self.teacher_choice_id:
-            self.teacher_id = self.teacher_choice_id
-        elif len(self.source_course_id.teacher_ids) == 1:
-            self.teacher_id = self.source_course_id.teacher_ids[0]
-        else:
-            self.teacher_id = None
+        for rec in self:
+            if rec.teacher_choice_id:
+                rec.teacher_id = rec.teacher_choice_id
+            elif len(rec.source_course_id.teacher_ids) == 1:
+                rec.teacher_id = rec.source_course_id.teacher_ids[0]
+            else:
+                rec.teacher_id = None
 
-    @api.one
     def guess_teacher_id(self):
-        old_course = self.env['school.individual_course'].search([('student_id','=',self.student_id.id),('year_id','=',self.year_id.previous.id),('title', '=', self.source_course_id.title)])
-        if len(old_course) == 1 and old_course.teacher_id:
-            self.teacher_id = old_course.teacher_id
+        for rec in self:
+            old_course = self.env['school.individual_course'].search([('student_id','=',rec.student_id.id),('year_id','=',rec.year_id.previous.id),('title', '=', rec.source_course_id.title)])
+            if len(old_course) == 1 and old_course.teacher_id:
+                rec.teacher_id = old_course.teacher_id
 
-    image = fields.Binary('Image', attachment=True, related='student_id.image')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
+    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
 
     url_ref = fields.Char(related="source_course_id.url_ref", readonly=True)
 
@@ -336,7 +334,7 @@ class IndividualCourse(models.Model):
     course_group_id = fields.Many2one('school.individual_course_group', string='Course Groups', ondelete='cascade', readonly=True)
     bloc_id = fields.Many2one('school.individual_bloc', string='Bloc', related='course_group_id.bloc_id', readonly=True, store=True)
     
-    @api.multi
+    
     def open_program(self):
         """ Utility method used to add an "Open Bloc" button in course views """
         self.ensure_one()
@@ -361,8 +359,9 @@ class IndividualCourseProxy(models.Model):
     
     student_count = fields.Integer(string="Student Count", readonly=True)
 
-    def init(self, cr):
+    def init(self):
         """ School Individual Course Proxy """
+        cr = self._cr
         tools.drop_view_if_exists(cr, 'school_individual_course_proxy')
         cr.execute(""" CREATE VIEW school_individual_course_proxy AS (
             SELECT
@@ -392,7 +391,7 @@ class IndividualCourseProxy(models.Model):
         )""")
         
         
-    @api.multi
+    
     def edit_course(self):
         self.ensure_one()
         value = {

@@ -20,9 +20,9 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
-from openerp.exceptions import MissingError
-from openerp.tools.safe_eval import safe_eval
+from odoo import api, fields, models, _
+from odoo.exceptions import MissingError
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -45,7 +45,7 @@ class YearOpening(models.TransientModel):
             'program_to_duplicate_ids': [(4, program_id.id, False) for program_id in program_ids],
         }
         
-    @api.multi
+    
     @api.depends('year_id','program_to_duplicate_ids')
     def open_year(self):
         ids = []

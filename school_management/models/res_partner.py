@@ -22,12 +22,71 @@ import logging
 import threading
 import re
 
-import openerp
-from openerp import tools, api, fields, models, _
-from openerp.exceptions import UserError
-from openerp.tools.safe_eval import safe_eval
+from odoo import tools, api, fields, models, _
+from odoo.exceptions import UserError
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
+
+class school_year_sequence_mixin(models.AbstractModel):
+    _name = "school.year_sequence.mixin"
+
+    year_sequence = fields.Selection([
+        ('current','Current'),
+        ('previous','Previous'),
+        ('next','Next'),
+        ], string="Year Sequence", compute="_compute_year_sequence", search="_search_year_sequence")
+        
+    def _compute_year_sequence(self):
+        for item in self:
+            current_year_id = self.env.user.current_year_id
+            item.year_sequence = False
+            if current_year_id.id == item.year_id.id:
+                item.year_sequence = 'current'
+            if current_year_id.previous.id == item.year_id.id:
+                item.year_sequence = 'previous'
+            if current_year_id.next.id == item.year_id.id:
+                item.year_sequence = 'next'
+        
+    def _search_year_sequence(self, operator, value):
+        current_year_id = self.env.user.current_year_id
+        year_ids = []
+        if 'current' in value:
+            year_ids.append(current_year_id.id)
+        if 'previous' in value:
+            year_ids.append(current_year_id.previous.id)
+        if 'next' in value:
+            year_ids.append(current_year_id.next.id)
+        return [('year_id','in',year_ids)]
+        
+class Year(models.Model):
+    '''Year'''
+    _name = 'school.year'
+    _order = 'name'
+    name = fields.Char(required=True, string='Name', size=15)
+    short_name = fields.Char(required=True, string='Short Name', size=5)
+    
+    previous = fields.Many2one('school.year', string='Previous Year')
+    next = fields.Many2one('school.year', string='Next Year')
+    
+class Users(models.Model):
+    '''Users'''
+    _inherit = ['res.users']
+    
+    def __init__(self, pool, cr):
+        """ Override of __init__ to add access rights on notification_email_send
+            and alias fields. Access rights are disabled by default, but allowed
+            on some specific fields defined in self.SELF_{READ/WRITE}ABLE_FIELDS.
+        """
+        init_res = super(Users, self).__init__(pool, cr)
+        # duplicate list to avoid modifying the original reference
+        self.SELF_WRITEABLE_FIELDS = list(self.SELF_WRITEABLE_FIELDS)
+        self.SELF_WRITEABLE_FIELDS.extend(['current_year_id'])
+        # duplicate list to avoid modifying the original reference
+        self.SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
+        self.SELF_READABLE_FIELDS.extend(['current_year_id'])
+    
+    current_year_id = fields.Many2one('school.year', string="Current Year", default="1")
 
 class Partner(models.Model):
     '''Partner'''
@@ -39,14 +98,20 @@ class Partner(models.Model):
     
     initials = fields.Char('Initials')
     
-    @api.one
+    nationality_id = fields.Many2one("res.country", "Nationality")
+    
+    image = fields.Binary('Image', oldname='image_1920')
+    image_medium = fields.Binary('Image Medium', oldname='image_512')
+    image_small = fields.Binary('Image Small', oldname='image_128')
+    
     @api.constrains('initials')
     def _check_initials(self):
-        _logger.info('Chech here !!')
-        if self.initials and not re.match('([A-Z]\.,)*([A-Z]\.)?',self.initials):
-            raise UserError(_("Please encode initials as eg X.,V.,T."))
+        for rec in self:
+            if rec.initials and not re.match('([A-Z]\.,)*([A-Z]\.)?',rec.initials):
+                raise UserError(_("Please encode initials as eg X.,V.,T."))
     
     birthplace = fields.Char('Birthplace')
+    birthcountry = fields.Many2one('res.country', 'Birth Country', ondelete='restrict')
     phone2 = fields.Char('Phone2')
     title = fields.Selection([('Mr', 'Monsieur'),('Mme', 'Madame'),('Mlle', 'Mademoiselle')])
     marial_status = fields.Selection([('M', 'Maried'),('S', 'Single')])
@@ -55,6 +120,7 @@ class Partner(models.Model):
     reg_number = fields.Char('Registration Number')
     mat_number = fields.Char('Matricule Number')
     
+    student_program_ids = fields.One2many('school.individual_program', 'student_id', string='Cycles')
     student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
 
     # Secondary adress
@@ -109,19 +175,18 @@ class Partner(models.Model):
     
     teacher_curriculum_vitae = fields.Html('Curriculum Vitae')
     
-    @api.one
     def _get_teacher_current_individual_course_ids(self):
-        self.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', self.id]])
+        for rec in self:
+            rec.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', rec.id]])
 
-    @api.one
     def _get_student_current_individual_course_ids(self):
-        self.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', self.id]])
+        for rec in self:
+            rec.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', rec.id]])
 
-    @api.one
     def _get_teacher_current_course_session_ids(self):
-        res = self.env['school.course_session'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', self.id]])
-        self.teacher_current_assigment_ids = res
-    
+        for rec in self:
+            rec.teacher_current_assigment_ids = self.env['school.course_session'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', rec.id]])
+        
     # TODO : This is not working but don't know why
     @api.model
     def _get_default_image(self, is_company, colorize=False):
