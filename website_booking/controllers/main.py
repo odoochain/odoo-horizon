@@ -56,11 +56,15 @@ class BookingController(http.Controller):
     
     @http.route('/booking_mobile', type='http', auth='public', website=True)
     def booking_mobile_browser(self, debug=False, **k):
-        session_info = request.env['ir.http'].session_info()
-        context = {
-            'session_info': session_info,
+        now = datetime.now()
+        next_day = now + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
+        next_next_day = next_day + timedelta(days= 7-next_day.weekday() if next_day.weekday()>3 else 1)
+        next_next_next_day = next_next_day + timedelta(days= 7-next_next_day.weekday() if next_next_day.weekday()>3 else 1)
+        values = {
+            'day_0' : next_next_day,
+            'day_1' : next_next_next_day,
         }
-        return request.render('website_booking.index_mobile',qcontext=context)
+        return request.render('website_booking.index_mobile', values)
         
     @http.route('/booking/category', type='json', auth='public', website=True)
     def booking_category(self, id=False, debug=False, **k):
@@ -168,8 +172,12 @@ class BookingController(http.Controller):
                 ('room_id', '<>', False),
                 ('id', '!=', self_id),
             ]
+        _logger.info('Get all rooms')
         all_rooms_ids = request.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
+        _logger.info('Get all events')
         busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,room_fields)
+        _logger.info('Filter events - results %s' % busy_rooms_ids)
         busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start_datetime <= end).filtered(lambda r : r.stop_datetime >= start).mapped('room_id')
+        _logger.info('Filter done')
         return (all_rooms_ids - busy_rooms_ids).read(['name'])
         

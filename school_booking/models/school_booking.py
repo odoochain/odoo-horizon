@@ -24,6 +24,7 @@ from datetime import datetime, date, time, timedelta
 
 from odoo import api, fields, models, _, tools
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -155,4 +156,13 @@ class Event(models.Model):
                             
                     _logger.info('Check done')
                         
-                
+    @api.model
+    def archive_old_events(self, *args, **kwargs):
+        timeout_ago = datetime.utcnow()-timedelta(days=30)
+        _logger.info('Archive old event')
+        domain = [('stop', '<', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT)),('recurrency','=',False)]
+        self.sudo().search(domain).write({'active': False})
+        _logger.info('Archive reccuring event')
+        domain = [('final_date', '<', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT)),('recurrency','=',True)]
+        self.sudo().search(domain).write({'active': False})
+

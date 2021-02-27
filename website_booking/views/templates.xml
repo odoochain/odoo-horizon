@@ -66,6 +66,32 @@
                 <meta name="format-detection" content="telephone=no"/>
                 <meta name="msapplication-tap-highlight" content="no"/>
 
+<<<<<<< HEAD
+                    <t t-call-assets="web.assets_common" t-css="false"/>
+                    <script type="text/javascript">
+                        odoo.define('web.csrf', function (require) {
+                            var token = "<t t-esc="request.csrf_token(None)"/>";
+                            require('web.core').csrf_token = token;
+                            require('qweb').default_dict.csrf_token = token;
+                        });
+                        odoo.db_info = '<t t-raw="db_info"/>';
+                    </script>
+                    <t t-call-assets="web.assets_backend" t-css="false"/>
+                    <t t-call-assets="website_booking.assets"/>
+                    <script type="text/javascript">
+                        $(function() {
+                            odoo.define('website_booking.index', function (require) {
+                                var core = require('web.core');
+                                var ajax = require('web.ajax');
+                                var qweb = core.qweb;
+                                
+                                ajax.loadXML('/website_booking/static/src/xml/browser_mobile.xml', qweb).then(function(){
+                                    var BrowserMobile = require('website_booking.browser_mobile');
+                                    var b = new BrowserMobile();
+                                    b.setDays('<t t-esc="day_0"/>','<t t-esc="day_1"/>');
+                                    b.appendTo($(document.body));
+                                });
+=======
                 <t t-call-assets="web.assets_common" t-css="false"/>
                 <script type="text/javascript">
                     odoo.define('web.csrf', function (require) {
@@ -88,6 +114,7 @@
                                 var BrowserMobile = require('website_booking.browser_mobile');
                                 var b = new BrowserMobile();
                                 b.appendTo($(document.body));
+>>>>>>> 13.0
                             });
                         });
                     });

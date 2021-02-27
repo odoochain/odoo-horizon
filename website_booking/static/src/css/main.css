@@ -149,3 +149,9 @@ footer.mobile_footer {
   height:60px;
   padding-top: 10px;
 }
+
+.ui-datepicker {
+  margin: 5px;
+  padding: 5px;
+  background: rgb(226, 252, 255);
+}

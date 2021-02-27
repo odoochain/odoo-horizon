@@ -1,3 +1,5 @@
+/* global $, moment, date_today, date_tomorrow */
+
 $(document).ready(function(){
     
     function updateSendButton() {
@@ -13,12 +15,12 @@ $(document).ready(function(){
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
         if (fromTime < toTime) {
-            var start = moment().local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-            var stop = moment().local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var start = date_today.set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var stop = date_today.set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
             var day = $('#day').attr('value');
             if( day == 1 ) {
-                start.add(1, 'days');
-                stop.add(1, 'days');
+                start = date_tomorrow.set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                stop = date_tomorrow.set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
             }
             $.ajax({
               type: "POST",
@@ -65,13 +67,15 @@ $(document).ready(function(){
 	$('#from_hour').timepicker({
         'timeFormat': 'H:i',
         'minTime': '8:00',
-        'maxTime': '21:30',
+        'maxTime': '19:30',
+        'step': 60,
     });
     
     $('#to_hour').timepicker({
         'timeFormat': 'H:i',
-        'minTime': '8:30',
-        'maxTime': '22:00',
+        'minTime': '9:00',
+        'maxTime': '20:00',
+        'step': 60,
         'showDuration': true,
     });
     
@@ -114,12 +118,12 @@ $(document).ready(function(){
     $('#request-booking').on('click',function() {
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
-        var start = moment().local().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-        var stop = moment().local().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var start = date_today.set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var stop = date_today.set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
         var day = $('#day').attr('value');
         if( day == 1 ) {
-            start.add(1, 'days');
-            stop.add(1, 'days');
+            start = date_tomorrow.set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            stop = date_tomorrow.set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
         }
         var room = $('#room').val();
         var description  = $('#description').val();

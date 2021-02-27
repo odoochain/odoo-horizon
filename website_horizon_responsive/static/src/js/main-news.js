@@ -1,3 +1,5 @@
+/* global $, moment */
+
 $(document).ready(function(){
     const RSS_URL = `https://horizon-dev.student-crlg.be/feed/feed.xml`;
 
