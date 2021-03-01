@@ -268,46 +268,49 @@ class IndividualBloc(models.Model):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'progress'})
     
-    
     def set_to_postponed(self, decision=None, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         if isinstance(decision, dict):
             context = decision
             decision = None
+        self._deliberate_cg(self.course_group_ids)
         return self.write({'state': 'postponed','decision' : decision})
-    
     
     def set_to_awarded_first_session(self, decision=None, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         if isinstance(decision, dict):
             context = decision
             decision = None
-        self.course_group_ids.write({'state': 'confirmed'})
+        self._deliberate_cg(self.course_group_ids)
         return self.write({'state': 'awarded_first_session','decision' : decision})
         
-    
     def set_to_awarded_second_session(self, decision=None, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         if isinstance(decision, dict):
             context = decision
             decision = None
-        self.course_group_ids.write({'state': 'confirmed'})
+        self._deliberate_cg(self.course_group_ids)
         return self.write({'state': 'awarded_second_session','decision' : decision})
-    
     
     def set_to_failed(self, decision=None, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         if isinstance(decision, dict):
             context = decision
             decision = None
-        self.course_group_ids.write({'state': 'confirmed'})
+        self._deliberate_cg(self.course_group_ids)
         return self.write({'state': 'failed','decision' : decision})
     
+    def _deliberate_cg(self, cgs):
+        for cg in cgs:
+            if cg.acquiered :
+                cg.write({'state': 'success'})
+            else :
+                cg.write({'state': 'failure'})
+        pass
     
     def set_to_abandoned(self, decision=None, context=None):
         return self.write({'state': 'abandoned','decision' : None})
         
-    
     def report_send(self):
         """ Open a window to compose an email, with the default template
             message loaded by default
@@ -431,14 +434,12 @@ class IndividualCourseGroup(models.Model):
                     'first_session_deliberated_result' : max(rec.first_session_computed_result, 10),
                     'first_session_deliberated_result_bool' : True,
                     'first_session_note': message,
-                    'state' : 'confirmed',
                 })
             else:
                 rec.write({
                     'second_session_deliberated_result' : max(rec.second_session_computed_result, 10) if rec.second_session_computed_result_bool else max(rec.first_session_computed_result, 10),
                     'second_session_deliberated_result_bool' : True,
                     'second_session_note': message,
-                    'state' : 'confirmed',
                 })
     
     state = fields.Selection([
@@ -462,6 +463,12 @@ class IndividualCourseGroup(models.Model):
         
     def set_to_confirmed(self, context):
         return self.write({'state': 'confirmed'})
+        
+    def set_to_success(self, context):
+        return self.write({'state': 'sucess'})
+        
+    def set_to_failed(self, context):
+        return self.write({'state': 'failed'})
         
     def set_to_valuated(self, context):
         return self.write({'state': 'valuated'})

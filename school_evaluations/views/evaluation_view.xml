@@ -150,11 +150,13 @@
                           <field name="state" />
                           <templates>
                               <t t-name="kanban-box">
-                                    <t t-if="record['state'].raw_value == 'valuated'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid blue;'"/></t>
-                                    <t t-if="record['state'].raw_value == 'candicate'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid lightblue;'"/></t>
-                                    <t t-if="record['state'].raw_value == 'confirmed'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid green;'"/></t>
-                                    <t t-if="record['state'].raw_value == 'progress'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid yellow;'"/></t>
                                     <t t-if="record['state'].raw_value == 'draft'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid grey;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'candicate'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid lightblue;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'valuated'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid blue;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'progress'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid yellow;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'confirmed'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid lightgreen;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'success'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid green;'"/></t>
+                                    <t t-if="record['state'].raw_value == 'failed'"><t t-set="divstyle" t-value="'position: relative;width:100%;border-left: 20px solid red;'"/></t>
                                     <div t-att-style="divstyle">
                                         <div class="o_kanban_record_top">
                                           <div class="row o_kanban_record_headings">
@@ -312,7 +314,8 @@
                 <xpath expr="//sheet" position="before">
                     <header>
                         <button name="set_to_valuated" type="object" states="candidate" string="Confirm valuation" class="oe_highlight" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed,valuated" />
+                        <button name="set_to_confirmed" type="object" states="progress" string="Confirm evaluation" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed,success, failure, valuated" />
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='source_course_id']" position="before">
