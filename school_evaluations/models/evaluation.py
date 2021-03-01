@@ -445,6 +445,8 @@ class IndividualCourseGroup(models.Model):
             ('draft','Draft'),
             ('progress','In Progress'),
             ('confirmed', 'Confirmed'),
+            ('sucess', 'Success'),
+            ('failed', 'Failed'),
             ('candidate','Candidate'),
             ('valuated', 'Valuated'),
         ], string='Status', index=True, readonly=True, default='draft',
@@ -453,10 +455,11 @@ class IndividualCourseGroup(models.Model):
         help=" * The 'Draft' status is used when course group is only plan.\n"
              " * The 'In Progress' status is used when results are not confirmed yet.\n"
              " * The 'Confirmed' status is when restults are confirmed.\n"
+             " * The 'Success' status is when delibration has confirmed success.\n"
+             " * The 'Failed' status is when delibration has confirmed failure.\n"
              " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
              " * The 'Valuated' status is used when the course group is confirmed for valuation.")
         
-    
     def set_to_confirmed(self, context):
         return self.write({'state': 'confirmed'})
         
