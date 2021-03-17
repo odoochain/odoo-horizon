@@ -121,7 +121,9 @@ class Event(models.Model):
                
                 next_day = now + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
                 
-                last_booking_day = now - timedelta(days=now.weekday()) + timedelta(days=6) # end of week
+                #last_booking_day = now - timedelta(days=now.weekday()) + timedelta(days=6) # end of week
+                # change suivant email Marie-Catherine Bach Mon, 1 Mar, 13:14
+                last_booking_day = next_day + timedelta(days=3) # 3 following days
                 
                 _logger.info('check at %s : %s < %s < %s' % (now, next_day, start_time, last_booking_day))
                 
