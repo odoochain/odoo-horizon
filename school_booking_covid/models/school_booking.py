@@ -123,12 +123,15 @@ class Event(models.Model):
                 
                 #last_booking_day = now - timedelta(days=now.weekday()) + timedelta(days=6) # end of week
                 # change suivant email Marie-Catherine Bach Mon, 1 Mar, 13:14
-                last_booking_day = next_day + timedelta(days=3) # 3 following days
+                
+                # change suivant call du 05/05/21
+                last_booking_day = next_day + timedelta(days=2) # 2 following days
                 
                 _logger.info('check at %s : %s < %s < %s' % (now, next_day, start_time, last_booking_day))
                 
-                if now.weekday > 3 :
-                    last_booking_day = last_booking_day + timedelta(days=7) # end of next week
+                # removed suivant call du 05/05/21
+                #if now.weekday > 3 :
+                #    last_booking_day = last_booking_day + timedelta(days=7) # end of next week
                 
                 if start_time <= next_day :
                     raise ValidationError(_("You must make your booking two days in advance."))
