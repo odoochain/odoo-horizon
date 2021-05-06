@@ -80,7 +80,7 @@
                                     <field name="uid"/>
                                     <field name="year_id"/>
                                     <field name="name"/>
-                                    <field name="total_acquiered_credits"/>
+                                    <!-- <field name="total_acquiered_credits"/>-->
                                     <field name="total_registered_credits"/>
                                     <templates>
                                       <t t-name="kanban-box">
@@ -97,9 +97,9 @@
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-6">
+                                                  <!-- <div class="col-6"> TODO add in evaluation
                                                     ECTS acquis : <field name="total_acquiered_credits"/>
-                                                  </div>
+                                                  </div>-->
                                                   <div class="col-6">
                                                     ECTS : <field name="total_registered_credits"/>
                                                   </div>
