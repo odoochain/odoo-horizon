@@ -102,8 +102,6 @@ class IndividualProgram(models.Model):
                     'individual_course_group_ids' : (6, 0, self.env['school.individual_course_group'].search(group['__domain']).ids),
                 })
             rec.course_group_summaries = summaries
-    
-    rec = self.env['school.individual_program'].browse(1357)
 
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
