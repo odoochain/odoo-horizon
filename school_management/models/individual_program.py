@@ -100,7 +100,7 @@ class IndividualProgram(models.Model):
                 summaries.append(self.env['school.individual_course_summary'].create({
                     'course_group' : group['source_course_group_id'][0],
                     'individual_course_group_ids' : (6, 0, self.env['school.individual_course_group'].search(group['__domain']).ids),
-                })
+                }))
             rec.course_group_summaries = summaries
 
 class IndividualCourseSummary(models.Model):
