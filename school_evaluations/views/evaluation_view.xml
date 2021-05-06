@@ -115,6 +115,22 @@
                     <field name="total_not_dispensed_credits" />
                     <field name="evaluation"/>
                     <field name="state"/>
+                    <field name="decision"/>
+                </xpath>
+                <xpath expr="//field[@name='bloc_ids']//div[@class='row'][last()]" position="before">
+                    <div class="row">
+                        <div class="col-6">
+                            Acquis : <field name="total_acquiered_not_dispensed_credits" /> ECTS
+                        </div>
+                        <div class="col-6">
+                            Moyenne : <field name="evaluation"/>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            Decision : <field name="decision"/>
+                        </div>
+                    </div>
                 </xpath>
                 <!--<xpath expr="//field[@name='ind_course_group_ids']/tree" position="attributes">
                     <attribute name="colors">green:state=='confirmed' and acquiered == 'A';grey:state=='confirmed' and acquiered == 'NA';orange:state=='draft';blue:state=='progress'</attribute>

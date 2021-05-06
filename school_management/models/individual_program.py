@@ -89,6 +89,37 @@ class IndividualProgram(models.Model):
                 rec.highest_level = max(levels)
             else:
                 rec.highest_level = 0
+    
+    course_group_summaries = fields.One2many('school.individual_course_summary',string='Courses Groups Summaries',compute='_compute_course_group_summaries')
+    
+    def _compute_ind_course_group_ids_eval(self):
+        for rec in self:
+            summaries = self.env['school.individual_course_summary']
+            groups = self.env['school.individual_course_group'].read_group([('bloc_id','in',rec.bloc_ids.ids)],['source_course_group_id'],'source_course_group_id')
+            for group in groups:
+                summaries.append(self.env['school.individual_course_summary'].create({
+                    'course_group' : group['source_course_group_id'][0],
+                    'individual_course_group_ids' : (6, 0, self.env['school.individual_course_group'].search(group['__domain']).ids),
+                })
+            rec.course_group_summaries = summaries
+    
+    rec = self.env['school.individual_program'].browse(1357)
+
+class IndividualCourseSummary(models.Model):
+    '''IndividualCourse Summary'''
+    _auto = False
+    _name='school.individual_course_summary'
+    
+    _order = 'sequence'
+    
+    course_group = fields.Many2one('school.course_group', string='Course Group')
+    
+    individual_course_group_ids = fields.One2many('school.individual_course_group', string='Individual Course Groups')
+    
+    uid = fields.Char(string="UID",related="course_group.uid")
+    name = fields.Char(string="Name",related="course_group.name")
+    total_hours = fields.Integer(string="Credits",related="course_group.total_hours")
+    total_credits = fields.Integer(string="Hours",related="course_group.total_credits")
 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''

@@ -207,7 +207,34 @@ class IndividualProgram(models.Model):
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids - rec.bloc_ids[-1].course_group_ids.mapped('source_course_group_id')
             else :
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
+                
+class IndividualCourseSummary(models.Model):
+    '''IndividualCourse Summary'''
+    _inherit = 'school.individual_course_summary'
     
+    state = fields.Selection([
+            ('1_candicate', 'Candidate'),
+            ('2_valuated', 'Valuated'),
+            ('4_progress', 'Progess'),
+            ('6_confirmed', 'Confirmed'),
+            ('9_none', 'None'),
+        ], string='State', compute="_compute_state")
+        
+    def _compute_state(self):
+        for rec in self:
+            if not rec.individual_course_group_ids:
+                rec.state = '9_none'
+            else:
+                states = rec.individual_course_group_ids.mapped(state)
+                if states.contains('candidate'):
+                    rec.state = '1_candicate'
+                elif states.contains('valuated'):
+                    rec.state = '2_valuated'
+                elif states.contains('sucess'):
+                    rec.state = '6_confirmed'
+                else:
+                    rec.state = '4_progress'
+                
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
