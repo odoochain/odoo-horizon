@@ -29,7 +29,6 @@
     'init_xml': [],
     'data': [
         'views/configuration_view.xml',
-        'wizard/year_opening.xml',
         'views/registration_view.xml',
         #'security/ir.model.access.csv',
     ],
