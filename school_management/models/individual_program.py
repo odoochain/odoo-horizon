@@ -90,14 +90,14 @@ class IndividualProgram(models.Model):
             else:
                 rec.highest_level = 0
     
-    course_group_summaries = fields.One2many('school.individual_course_sum',string='Courses Groups Summaries',compute='_compute_course_group_summaries')
+    course_group_summaries = fields.One2many('school.individual_course_summary',string='Courses Groups Summaries',compute='_compute_course_group_summaries')
     
     def _compute_ind_course_group_ids_eval(self):
         for rec in self:
-            summaries = self.env['school.individual_course_sum']
+            summaries = self.env['school.individual_course_summary']
             groups = self.env['school.individual_course_group'].read_group([('bloc_id','in',rec.bloc_ids.ids)],['source_course_group_id'],'source_course_group_id')
             for group in groups:
-                summaries.append(self.env['school.individual_course_sum'].create({
+                summaries.append(self.env['school.individual_course_summary'].create({
                     'course_group' : group['source_course_group_id'][0],
                     'individual_course_group_ids' : (6, 0, self.env['school.individual_course_group'].search(group['__domain']).ids),
                 }))
@@ -105,7 +105,7 @@ class IndividualProgram(models.Model):
 
 class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
-    _name='school.individual_course_sum'
+    _name='school.individual_course_summary'
     
     _order = 'sequence'
     
