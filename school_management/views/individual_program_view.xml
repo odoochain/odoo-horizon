@@ -135,6 +135,7 @@
                 <kanban quick_create="false" create="false" delete="false" group_create="false" default_group_by="year_id">
                   <field name="uid"/>
                   <field name="name" />
+                  <field name="responsible_id"/>
                   <field name="total_hours" />
                   <field name="total_credits" />
                   <templates>
@@ -147,7 +148,7 @@
                                     </div>
                                     <div class="col-12 col-md-7">
                                       <field name="name"/><br/>
-                                      <i><field name="teacher_id"/></i>
+                                      <i><field name="responsible_id"/></i>
                                     </div>
                                     
                                     <div class="col-2">

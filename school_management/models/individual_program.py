@@ -115,7 +115,7 @@ class IndividualCourseSummary(models.TransientModel):
     
     uid = fields.Char(string="UID",related="course_group.uid")
     name = fields.Char(string="Name",related="course_group.name")
-    teacher_id = fields.Many2one('res.partner', string="Name",related="course_group.teacher_id")
+    responsible_id = fields.Many2one('res.partner', string="Name",related="course_group.responsible_id")
     total_hours = fields.Integer(string="Credits",related="course_group.total_hours")
     total_credits = fields.Integer(string="Hours",related="course_group.total_credits")
 
