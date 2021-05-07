@@ -208,7 +208,7 @@ class IndividualProgram(models.Model):
             else :
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
                 
-class IndividualCourseSummary(models.Model):
+class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
     
