@@ -222,7 +222,7 @@ class IndividualCourseSummary(models.TransientModel):
         
     def _compute_state(self):
         for rec in self:
-            if not rec.individual_course_group_ids:
+            if len(rec.individual_course_group_ids.ids) == 0:
                 rec.state = '9_none'
             else:
                 states = rec.individual_course_group_ids.mapped('state')
@@ -230,7 +230,7 @@ class IndividualCourseSummary(models.TransientModel):
                     rec.state = '1_candicate'
                 elif 'valuated' in states:
                     rec.state = '2_valuated'
-                elif 'sucess' in states:
+                elif 'success' in states:
                     rec.state = '6_confirmed'
                 else:
                     rec.state = '4_progress'
