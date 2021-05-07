@@ -135,13 +135,13 @@
                 <!--<xpath expr="//field[@name='ind_course_group_ids']/tree" position="attributes">
                     <attribute name="colors">green:state=='confirmed' and acquiered == 'A';grey:state=='confirmed' and acquiered == 'NA';orange:state=='draft';blue:state=='progress'</attribute>
                 </xpath>-->
-                <xpath expr="//field[@name='ind_course_group_ids']/kanban/field[@name='total_credits']" position="after">
+                <!--<xpath expr="//field[@name='course_group_summaries']/kanban/field[@name='total_credits']" position="after">
                     <field name="dispense"/>
                     <field name="final_result"/>
                     <field name="acquiered"/>
                     <field name="state"/>
-                    <!--<button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group" attrs="{'invisible': [('state', '!=', ('draft'))]}"/>-->
-                </xpath>
+                    <!--<button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group" attrs="{'invisible': [('state', '!=', ('draft'))]}"/> - ->
+                </xpath>-->
                 <!--<xpath expr="//field[@name='bloc_ids']" position="after">
                     <h2>Unités d'enseignement valorisées</h2>
                     <field name="valuated_course_group_ids">

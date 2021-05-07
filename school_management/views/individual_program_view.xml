@@ -130,11 +130,10 @@
               </field>
             </div>
             <div id="individual_cgs" class="mb-4">
-              <h2>Unités d'enseignement reprises dans les PAE</h2>
-              <field name="ind_course_group_ids" widget="many2many_kanban">
+              <h2>Unités d'enseignement</h2>
+              <field name="course_group_summaries" widget="many2many_kanban">
                 <kanban quick_create="false" create="false" delete="false" group_create="false" default_group_by="year_id">
                   <field name="uid"/>
-                  <field name="year_id" />
                   <field name="name" />
                   <field name="total_hours" />
                   <field name="total_credits" />
