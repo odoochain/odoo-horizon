@@ -226,11 +226,11 @@ class IndividualCourseSummary(models.TransientModel):
                 rec.state = '9_none'
             else:
                 states = rec.individual_course_group_ids.mapped('state')
-                if states.contains('candidate'):
+                if 'candidate' in states:
                     rec.state = '1_candicate'
-                elif states.contains('valuated'):
+                elif 'valuated' in states:
                     rec.state = '2_valuated'
-                elif states.contains('sucess'):
+                elif 'sucess' in states:
                     rec.state = '6_confirmed'
                 else:
                     rec.state = '4_progress'
