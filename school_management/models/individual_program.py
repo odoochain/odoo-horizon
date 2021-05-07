@@ -97,10 +97,10 @@ class IndividualProgram(models.Model):
             summaries = self.env['school.individual_course_summary']
             groups = self.env['school.individual_course_group'].read_group([('bloc_id','in',rec.bloc_ids.ids)],['source_course_group_id'],'source_course_group_id')
             for group in groups:
-                summaries.append(self.env['school.individual_course_summary'].create({
+                summaries |= self.env['school.individual_course_summary'].create({
                     'course_group' : group['source_course_group_id'][0],
-                    'individual_course_group_ids' : (6, 0, self.env['school.individual_course_group'].search(group['__domain']).ids),
-                }))
+                    'individual_course_group_ids' : self.env['school.individual_course_group'].search(group['__domain']),
+                    })
             rec.course_group_summaries = summaries
 
 class IndividualCourseSummary(models.TransientModel):
