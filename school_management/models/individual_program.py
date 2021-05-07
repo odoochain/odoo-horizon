@@ -92,7 +92,7 @@ class IndividualProgram(models.Model):
     
     course_group_summaries = fields.One2many('school.individual_course_summary',string='Courses Groups Summaries',compute='_compute_course_group_summaries')
     
-    def _compute_ind_course_group_ids_eval(self):
+    def _compute_course_group_summaries(self):
         for rec in self:
             summaries = self.env['school.individual_course_summary']
             groups = self.env['school.individual_course_group'].read_group([('bloc_id','in',rec.bloc_ids.ids)],['source_course_group_id'],'source_course_group_id')

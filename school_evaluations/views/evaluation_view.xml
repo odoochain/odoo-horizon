@@ -153,7 +153,7 @@
                         <field name="state"/>
                        </tree>
                     </field>
-                </xpath>-->
+                </xpath>
                 <xpath expr="//div[@id='individual_cgs']" position="replace">
                     <h2>Unités d'enseignement</h2>
                       <field name="all_ind_course_group_ids" widget="many2many_kanban" context="{'order_display': 'status desc, sequence asc' }">
@@ -196,7 +196,7 @@
                           </templates>
                         </kanban>
                       </field>
-                </xpath>
+                </xpath>-->
             </field>
         </record>
         

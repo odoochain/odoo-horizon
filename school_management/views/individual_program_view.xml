@@ -132,7 +132,7 @@
             <div id="individual_cgs" class="mb-4">
               <h2>Unités d'enseignement</h2>
               <field name="course_group_summaries" widget="many2many_kanban">
-                <kanban quick_create="false" create="false" delete="false" group_create="false" default_group_by="year_id">
+                <kanban quick_create="false" create="false" delete="false" group_create="false">
                   <field name="uid"/>
                   <field name="name" />
                   <field name="responsible_id"/>
