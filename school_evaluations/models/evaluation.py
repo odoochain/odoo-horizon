@@ -225,7 +225,7 @@ class IndividualCourseSummary(models.TransientModel):
             if not rec.individual_course_group_ids:
                 rec.state = '9_none'
             else:
-                states = rec.individual_course_group_ids.mapped(state)
+                states = rec.individual_course_group_ids.mapped('state')
                 if states.contains('candidate'):
                     rec.state = '1_candicate'
                 elif states.contains('valuated'):
