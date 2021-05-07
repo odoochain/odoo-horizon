@@ -111,7 +111,7 @@ class IndividualCourseSummary(models.TransientModel):
     
     course_group = fields.Many2one('school.course_group', string='Course Group')
     
-    individual_course_group_ids = fields.Many2many('school.individual_course_group', 'school_ics_icg_rel'string='Individual Course Groups')
+    individual_course_group_ids = fields.Many2many('school.individual_course_group', 'school_ics_icg_rel',string='Individual Course Groups')
     
     uid = fields.Char(string="UID",related="course_group.uid")
     name = fields.Char(string="Name",related="course_group.name")
