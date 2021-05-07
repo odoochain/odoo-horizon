@@ -103,9 +103,8 @@ class IndividualProgram(models.Model):
                 }))
             rec.course_group_summaries = summaries
 
-class IndividualCourseSummary(models.Model):
+class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
-    _auto = False
     _name='school.individual_course_summary'
     
     _order = 'sequence'
