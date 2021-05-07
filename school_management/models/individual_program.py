@@ -94,10 +94,10 @@ class IndividualProgram(models.Model):
     
     def _compute_ind_course_group_ids_eval(self):
         for rec in self:
-            summaries = self.env['school.individual_course_summary']
+            summaries = self.env['school.individual_course_sum']
             groups = self.env['school.individual_course_group'].read_group([('bloc_id','in',rec.bloc_ids.ids)],['source_course_group_id'],'source_course_group_id')
             for group in groups:
-                summaries.append(self.env['school.individual_course_summary'].create({
+                summaries.append(self.env['school.individual_course_sum'].create({
                     'course_group' : group['source_course_group_id'][0],
                     'individual_course_group_ids' : (6, 0, self.env['school.individual_course_group'].search(group['__domain']).ids),
                 }))
@@ -105,7 +105,7 @@ class IndividualProgram(models.Model):
 
 class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
-    _name='school.individual_course_summary'
+    _name='school.individual_course_sum'
     
     _order = 'sequence'
     
