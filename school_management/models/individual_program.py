@@ -90,7 +90,7 @@ class IndividualProgram(models.Model):
             else:
                 rec.highest_level = 0
     
-    course_group_summaries = fields.One2many('school.individual_course_summary',string='Courses Groups Summaries',compute='_compute_course_group_summaries')
+    course_group_summaries = fields.One2many('school.individual_course_sum',string='Courses Groups Summaries',compute='_compute_course_group_summaries')
     
     def _compute_ind_course_group_ids_eval(self):
         for rec in self:
