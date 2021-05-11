@@ -314,6 +314,23 @@
                           <p style="page-break-after:always;">   </p>
                           <t t-call="school_course_description.report_course_doc_section"/>
                         </t>
+                        <t t-else="">
+                          <p style="page-break-after:always;">   </p>
+                          <t t-call="school_course_description.report_course_doc_section"/>
+                          <section>
+                            <div class="row mt64 mb64">
+                                <h1>
+                                    <t t-if="desc.state == 'draft'">Draft </t>Course Description
+                                </h1>
+                                <h1>
+                                    <span t-field="course.name"/>
+                                </h1>
+                                <h2>
+                                    Pas de descriptif disponible.
+                                </h2>
+                            </div>
+                          </section>
+                        </t>
                       </t>
                       <div class="row" style="margin-top:40px;margin-bottom:40px;">
                             Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
