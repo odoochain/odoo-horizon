@@ -25,7 +25,17 @@
     
     Description Course
     
-    
+    -->
+
+    <report id="report_diploma_for_student" 
+            model="school.course_documentation" 
+            string="Course Documentation" 
+            report_type="qweb-pdf" 
+            name="school_course_description.report_course_documentation_content" 
+            file="school_course_description.report_course_documentation_content"
+            attachment_use="True"
+            attachment="object.name+'-DESC-'+time.strftime('%d-%m-%Y')+'.pdf'"
+    />
 
     <template id="report_course_documentation_no_content">
         <t t-call="report.html_container">
@@ -52,7 +62,7 @@
         </t>
     </template>
     
-    <tempolate id="report_course_doc_page">
+    <template id="report_course_doc_page">
       <div class="page">
         <div class="container">
           <section>
@@ -178,13 +188,13 @@
           </section>
         </div>
       </div>
-    </tempolate>
+    </template>
     
-    <!- -
+    <!--
     
     Description Coure Group
     
-    - ->
+    -->
 
     <report id="report_course_group_description" 
             model="school.course_group" 
@@ -311,5 +321,5 @@
             </t>
         </t>
     </template>
-    -->
+
 </odoo>
