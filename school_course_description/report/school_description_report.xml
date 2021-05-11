@@ -309,6 +309,7 @@
                         
                         <t t-foreach="o.course_ids" t-as="course">
                           <t t-set="desc" t-value="course.documentation_id"/>
+                          <p style="page-break-after:always;">   </p>
                           <t t-call="school_course_description.report_course_doc_page"/>
                         </t>
                         
