@@ -57,14 +57,15 @@
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
             <t t-foreach="docs" t-as="desc">
-                <t t-call="school_course_description.report_course_doc_page"/>
+              <div class="page">
+                <div class="container">
+                <t t-call="school_course_description.report_course_doc_section"/>
+                
             </t>
         </t>
     </template>
     
-    <template id="report_course_doc_page">
-      <div class="page">
-        <div class="container">
+    <template id="report_course_doc_section">
           <section>
             <div class="row mt64 mb64">
                 <h1>
@@ -278,6 +279,7 @@
                                  </table>
                             </div>
                         </div>
+                        
                         <div class="panel panel-default">
                             <div class="panel-heading">Course Informations</div>
                             <div class="panel-body">
@@ -307,22 +309,20 @@
                             </div>
                         </div>
                         
+                        <t t-foreach="o.course_ids" t-as="course">
+                          <t t-set="desc" t-value="course.documentation_id"/>
+                          <t t-if="desc">
+                            <p style="page-break-after:always;">   </p>
+                            <t t-call="school_course_description.report_course_doc_section"/>
+                          </t>
+                        </t>
+                        
                         <div class="row" style="margin-top:40px;margin-bottom:40px;">
                             Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
                         </div>
                       </section>
                     </div>
                 </div>
-                <t t-foreach="o.course_ids" t-as="course">
-                  <t t-set="desc" t-value="course.documentation_id"/>
-                  <t t-if="desc">
-                    <div class="page">
-                      <div class="container">
-                        <t t-call="school_course_description.report_course_doc_page"/>
-                      </div>
-                    </div>
-                  </t>
-                </t>
             </t>
         </t>
     </template>
