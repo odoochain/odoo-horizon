@@ -25,7 +25,7 @@
     
     Description Course
     
-    -->
+    
 
     <template id="report_course_documentation_no_content">
         <t t-call="report.html_container">
@@ -180,11 +180,11 @@
       </div>
     </tempolate>
     
-    <!--
+    <!- -
     
     Description Coure Group
     
-    -->
+    - ->
 
     <report id="report_course_group_description" 
             model="school.course_group" 
@@ -311,4 +311,5 @@
             </t>
         </t>
     </template>
+    -->
 </odoo>
