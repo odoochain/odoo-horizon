@@ -21,23 +21,12 @@
 ##############################################################################
 -->
 <odoo>
-  <data>
     <!--
     
     Description Course
     
     -->
 
-    <report id="report_diploma_for_student" 
-            model="school.course_documentation" 
-            string="Course Documentation" 
-            report_type="qweb-pdf" 
-            name="school_course_description.report_course_documentation_content" 
-            file="school_course_description.report_course_documentation_content"
-            attachment_use="True"
-            attachment="object.name+'-DESC-'+time.strftime('%d-%m-%Y')+'.pdf'"
-    />
-    
     <template id="report_course_documentation_no_content">
         <t t-call="report.html_container">
             <t t-set="data_report_margin_top" t-value="30"/>
@@ -322,5 +311,4 @@
             </t>
         </t>
     </template>
-  </data>
 </odoo>
