@@ -316,7 +316,6 @@
                         </t>
                         <t t-else="">
                           <p style="page-break-after:always;">   </p>
-                          <t t-call="school_course_description.report_course_doc_section"/>
                           <section>
                             <div class="row mt64 mb64">
                                 <h1>
