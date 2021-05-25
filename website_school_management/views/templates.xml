@@ -568,7 +568,7 @@
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
                     <tr class="oe_school_course_group" style="font-weight: 600;">
                         <td style="font-size: x-small;"><t t-esc="course_group.ue_id"/></td>
-                        <td><a t-esc="course_group.title" t-att-href="'/course_group/%s' % course_group.id" target="_" style="cursor: pointer;"/><br/><i style="color:grey;"><t t-esc="course_group.teacher_id.name"/></i></td>
+                        <td><a t-esc="course_group.title" t-att-href="'/course_group/%s' % course_group.id" target="_self" style="cursor: pointer;"/><br/><i style="color:grey;"><t t-esc="course_group.teacher_id.name"/></i></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
                         <td></td>
@@ -577,7 +577,7 @@
                     </tr>
                     <tr t-foreach="course_group.course_ids" t-as="course">
                         <td></td>
-                        <td><a t-esc="course.title" t-att-href="'/course/%s' % course.id" target="_" style="cursor: pointer;"/></td>
+                        <td><a t-esc="course.title" t-att-href="'/course/%s' % course.id" target="_self" style="cursor: pointer;"/></td>
                         <!--<td t-if="not course.url_ref"><a t-esc="course.title" data-toggle="modal" data-target="#noDescription" style="cursor: pointer;"/></td>-->
                         <td class="text-center"><t t-esc="course.hours"/></td>
                         <td class="text-center"><t t-esc="course.credits"/></td>
