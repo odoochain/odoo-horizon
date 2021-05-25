@@ -619,51 +619,25 @@
         <section>
             <div class="row mt64 mb64">
                 <h1>
-                    Course Group Description
-                </h1>
-                <h1>
                     <span t-field="course_group.title"/>
                 </h1>
+                <h2>
+                    Description de l'unité d'enseignement
+                </h2>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Course Group Informations</div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <colgroup>
-                            <col style="width:250px"/>
-                            <col style="width:100%"/>
-                        </colgroup>
-                        <tbody>
-                          <tr>
-                            <td>Code</td>
-                            <td><span t-field="course_group.ue_id"/></td>
-                          </tr>
-                          <tr>
-                            <td>Cycle</td>
-                            <td><span t-field="course_group.cycle_id.grade"/></td>
-                          </tr>
-                          <tr>
-                            <td>Teacher</td>
-                            <td><span t-field="course_group.teacher_id"/></td>
-                          </tr>
-                          <tr>
-                            <td>Period</td>
-                            <td><span t-field="course_group.period"/></td>
-                          </tr>
-                          <tr>
-                            <td>Credits</td>
-                            <td><span t-field="course_group.total_credits"/></td>
-                          </tr>
-                          <tr>
-                            <td>Hours</td>
-                            <td><span t-field="course_group.total_hours"/></td>
-                          </tr>
-                          <tr>
-                            <td>Mandatory</td>
-                            <td><t t-if="course_group.mandatory"><input type="checkbox" value="" checked=""/></t><t t-if="not(course_group.mandatory)"><input type="checkbox" value=""/></t></td>
-                          </tr>
-                        </tbody>
-                     </table>
+           <main id="main" class="site-main" role="main">
+                <article class="page type-page status-publish hentry">
+                	<header class="entry-header">
+                		<h1 class="entry-title">Information générale</h1>			
+                	</header><!-- .entry-header -->
+                	<div class="entry-content">
+                    <p><strong>Code d'unité</strong> – <span t-field="course_group.ue_id"/></p>
+                    <p><strong>Cycle</strong> – <span t-field="course_group.grade"/></p>
+                    <p><strong>Enseignant</strong> – <span t-field="course_group.teacher_id"/></p>
+                    <p><strong>Période</strong> – <span t-field="course_group.period"/></p>
+                    <p><strong>ECTS</strong> – <span t-field="course_group.total_credits"/></p>
+                    <p><strong>Heures</strong> – <span t-field="course_group.total_hours"/></p>
+                    <p><strong>Obligatoire</strong> – <t t-if="course_group.mandatory"><input type="checkbox" value="" checked=""/></t><t t-if="not(course_group.mandatory)"><input type="checkbox" value=""/></t></p>
                 </div>
             </div>
             
