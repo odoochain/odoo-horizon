@@ -704,17 +704,17 @@
                             </ul>
                         </p>
                         <h5>Contenu</h5>
-                        <p><span t-field="desc.content" /></p>
+                        <p><span t-raw="desc.content" /></p>
                         <h5>Méthode</h5>
-                        <p><span t-field="desc.method" /></p>
+                        <p><span t-raw="desc.method" /></p>
                         <h5>Acquis d'apprentissage spécifiques</h5>
-                        <p><span t-field="desc.learning_outcomes" /></p>
+                        <p><span t-raw="desc.learning_outcomes" /></p>
                         <h5>Éléments de référence</h5>
-                        <p><span t-field="desc.references" /></p>
+                        <p><span t-raw="desc.references" /></p>
                         <h5>Pre-Co Requis</h5>
-                        <p><span t-field="desc.pre_co_requiered" /></p>
+                        <p><span t-raw="desc.pre_co_requiered" /></p>
                         <h5>Modes d'évaluation</h5>
-                        <p><span t-field="desc.evaluation_method" /></p>
+                        <p><span t-raw="desc.evaluation_method" /></p>
                     </div>
                 </div>
             </article>
