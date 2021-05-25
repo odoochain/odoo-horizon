@@ -447,8 +447,14 @@
 
     <template id="program_details" name="Program Details">
         <t t-call="website_school_management.website_school_layout">
-            <div class="container mt64 mb64">
-                <t t-call="website_school_management.program_details_content_global"/>
+            <div id="content" class="site-content">
+                <div class="wrap">
+                	<div id="primary" class="content-area">
+                		<main id="main" class="site-main" role="main">
+                        <t t-call="website_school_management.program_details_content_global"/>
+                        </main>
+                    </div>
+                </div>
             </div>
             <!-- <t t-call="website_school_management.no_description"/> -->
         </t>
