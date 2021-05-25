@@ -126,12 +126,11 @@
         <html t-att-lang="lang and lang.replace('_', '-')" t-att-data-website-id="website.id if website else None" t-att-data-editable="'1' if editable else None" t-att-data-translatable="'1' if translatable else None" t-att-data-edit_translations="'1' if edit_translations else None" t-att-data-view-xmlid="xmlid if editable or translatable else None" t-att-data-main-object="repr(main_object) if editable or translatable else None" t-att-data-oe-company-name="res_company.name if res_company else None">
             <head>
                 <meta charset="utf-8"/>
-                <t t-set="title" t-value="program.name"/>
+                <t t-set="title" t-value="main.name"/>
                 
                 <meta name="viewport" content="initial-scale=1"/>
-                <meta name="keywords" content="programme enseignement musique"/>
                 
-                <title><t t-esc="program.name"/></title>
+                <title><t t-esc="main.name"/></title>
     
                 <t t-call-assets="web.assets_common" t-js="false"/>
                 <t t-call-assets="web.assets_common" t-css="false"/>
@@ -555,7 +554,6 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>Code UE</th> 
                         <th>Unités d’enseignement</th> 
                         <th class="text-center">Heures</th> 
                         <th class="text-center">ECTS</th>
@@ -624,7 +622,7 @@
                     Course Group Description
                 </h1>
                 <h1>
-                    <span t-field="o.title"/>
+                    <span t-field="course_group.title"/>
                 </h1>
             </div>
             <div class="panel panel-default">

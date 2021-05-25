@@ -435,6 +435,7 @@ class website_portal_school_management(http.Controller):
         program = request.env['school.program'].sudo().search([('id','=',program_id)])
         if program :
             values = {
+                'main': program,
                 'program': program,
                 'slug_id' : program_id,
             }
@@ -448,6 +449,7 @@ class website_portal_school_management(http.Controller):
         course_docs = request.env['school.course_documentation'].sudo().search([('state', '=', 'published'),'|',('course_ids','=',course_id),('course_id','=',course_id)],order="author_id")
         if course_docs:
             values = {
+                'main': course_docs[0],
                 'course_group': course_docs[0],
                 'slug_id' : course_id,
             }
@@ -462,6 +464,7 @@ class website_portal_school_management(http.Controller):
         course_group = request.env['school.course_group'].sudo().browse([course_group_id])
         if course_group:
             values = {
+                'main': course_group,
                 'course_group': course_group,
                 'slug_id' : course_group_id,
             }
