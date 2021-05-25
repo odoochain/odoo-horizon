@@ -146,8 +146,10 @@
                         require('qweb').default_dict.csrf_token = token;
                     });
                 </script>
+                <script src="https://www.crlg.be/wp-includes/js/jquery/jquery.min.js?ver=3.5.1" id="jquery-core-js"></script>
+                <script src="https://www.crlg.be/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js"></script>
             </head>
-            <body>
+            <body class="page-template-default page wp-custom-logo wp-embed-responsive has-header-image page-two-column colors-light">
                 <header id="masthead" class="site-header" role="banner">
                 
                     <div class="custom-header" style="margin-bottom: 72px;">
@@ -616,82 +618,121 @@
     </template>
     
     <template id="course_group_details_content" name="Course Group Details Content">
-        <section>
-            <div class="row mt64 mb64">
-                <h1>
-                    <span t-field="course_group.title"/>
-                </h1>
-                <h2>
-                    Description de l'unité d'enseignement
-                </h2>
-            </div>
-           <main id="main" class="site-main" role="main">
-                <article class="page type-page status-publish hentry">
+        <div class="row">
+            <h1>
+                <span t-field="course_group.title"/>
+            </h1>
+        </div>
+        <main id="main" class="site-main" role="main">
+            <article class="twentyseventeen-panel page type-page status-publish hentry">
+            	<div class="panel-content">
                 	<header class="entry-header">
                 		<h1 class="entry-title">Information générale</h1>			
                 	</header><!-- .entry-header -->
                 	<div class="entry-content">
-                    <p><strong>Code d'unité</strong> – <span t-field="course_group.ue_id"/></p>
-                    <p><strong>Cycle</strong> – <span t-field="course_group.grade"/></p>
-                    <p><strong>Enseignant</strong> – <span t-field="course_group.teacher_id"/></p>
-                    <p><strong>Période</strong> – <span t-field="course_group.period"/></p>
-                    <p><strong>ECTS</strong> – <span t-field="course_group.total_credits"/></p>
-                    <p><strong>Heures</strong> – <span t-field="course_group.total_hours"/></p>
-                    <p><strong>Obligatoire</strong> – <t t-if="course_group.mandatory"><input type="checkbox" value="" checked=""/></t><t t-if="not(course_group.mandatory)"><input type="checkbox" value=""/></t></p>
+                        <p><strong>Code d'unité</strong> – <span t-field="course_group.ue_id"/></p>
+                        <p><strong>Cycle</strong> – <!--<span t-field="course_group.grade"/>--></p>
+                        <p><strong>Enseignant</strong> – <span t-field="course_group.teacher_id"/></p>
+                        <p><strong>Période</strong> – <span t-field="course_group.period"/></p>
+                        <p><strong>ECTS</strong> – <span t-field="course_group.total_credits"/></p>
+                        <p><strong>Heures</strong> – <span t-field="course_group.total_hours"/></p>
+                        <p><strong>Obligatoire</strong> – <t t-if="course_group.mandatory"><input type="checkbox" value="" checked=""/></t><t t-if="not(course_group.mandatory)"><input type="checkbox" value=""/></t></p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="panel panel-default">
-                <div class="panel-heading">Course Informations</div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <colgroup>
-                            <col style="width:600px"/>
-                            <col style="width:100px"/>
-                            <col style="width:100px"/>
-                            <col style="width:100px"/>
-                        </colgroup>
-                        <tr>
-                          <td>Title</td>
-                          <td>Hours</td>
-                          <td>Credits</td>
-                          <td>Weight</td>
-                        </tr>
-                        <tr t-foreach="course_group.course_ids" t-as="course">
-                          <td>
-                            <a t-esc="course.title" t-att-href="'/course/%s' % course.id" target="new" style="cursor: pointer;"/>
-                            <br/><t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name"/><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t>
-                          </td>
-                          <td class="text-center"><t t-esc="course.hours"/></td>
-                          <td class="text-center"><t t-esc="course.credits"/></td>
-                          <td class="text-center"><t t-esc="course.weight"/></td>
-                        </tr>
-                    </table>
+            </article>
+            <article class="twentyseventeen-panel page type-page status-publish hentry">
+                <div class="panel-content">
+                    <header class="entry-header">
+                        <h1 class="entry-title">Détails des activités</h1>
+                    </header>
+                    <!-- .entry-header -->
+                    <div class="entry-content">
+                        <table class="table table-striped">
+                            <colgroup>
+                                <col style="width:600px" />
+                                <col style="width:100px" />
+                                <col style="width:100px" />
+                                <col style="width:100px" />
+                            </colgroup>
+                            <tr>
+                                <td>Titre</td>
+                                <td>Heures</td>
+                                <td>Crédits</td>
+                                <td>Poid</td>
+                            </tr>
+                            <tr t-foreach="course_group.course_ids" t-as="course">
+                                <td>
+                                    <a t-esc="course.title" t-att-href="'/course/%s' % course.id" target="new" style="cursor: pointer;" />
+                                    <br/>
+                                    <t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name" />
+                                        <t t-if="teacher_index &lt; (teacher_size - 1)">,</t>
+                                    </t>
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="course.hours" />
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="course.credits" />
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="course.weight" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-            </div>
-          </section>
-          <t t-foreach="course_group.course_ids" t-as="course">
-            <t t-set="desc" t-value="course.documentation_id"/>
+            </article>
+            <t t-foreach="course_group.course_ids" t-as="course">
+            <t t-set="desc" t-value="course.documentation_id" />
             <t t-if="desc">
-              <p style="page-break-after:always;">   </p>
-              <t t-call="school_course_description.report_course_doc_section"/>
-            </t>
-            <t t-else="">
-              <p style="page-break-after:always;">   </p>
-              <section>
-                <div class="row mt64 mb64">
-                    <h1>
-                        <t t-if="desc.state == 'draft'">Draft </t>Course Description
-                    </h1>
-                    <h1>
-                        <span t-field="course.name"/>
-                    </h1>
-                    <h2>
-                        Pas de descriptif disponible.
-                    </h2>
+            <article class="twentyseventeen-panel page type-page status-publish hentry">
+                <div class="panel-content">
+                    <header class="entry-header">
+                        <h1 class="entry-title"><span t-field="course.title" /> </h1>
+                        <i>by <t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name" /><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t></i>
+                    </header>
+                    <!-- .entry-header -->
+                    <div class="entry-content">
+                        <h5>Identification</h5>
+                        <p>
+                            <ul class="list-group">
+                                <li class="list-group-item">Nombre de crédits associés : <span t-field="course.credits" /> Crédits ECTS</li>
+                                <li class="list-group-item">Pondération au sein de l’UE : <span t-field="course.weight" /></li>
+                                <li class="list-group-item">Caractère obligatoire : OUI</li>
+                                <li class="list-group-item">Période de l’activité d’apprentissage : 1er Quadrimestre et 2e Quadrimestre</li>
+                                <li class="list-group-item">Volume horaire : <span t-field="course.hours" /> h</li>
+                            </ul>
+                        </p>
+                        <h5>Contenu</h5>
+                        <p><span t-field="desc.content" /></p>
+                        <h5>Méthode</h5>
+                        <p><span t-field="desc.method" /></p>
+                        <h5>Acquis d'apprentissage spécifiques</h5>
+                        <p><span t-field="desc.learning_outcomes" /></p>
+                        <h5>Éléments de référence</h5>
+                        <p><span t-field="desc.references" /></p>
+                        <h5>Pre-Co Requis</h5>
+                        <p><span t-field="desc.pre_co_requiered" /></p>
+                        <h5>Modes d'évaluation</h5>
+                        <p><span t-field="desc.evaluation_method" /></p>
+                    </div>
                 </div>
-              </section>
+            </article>
             </t>
-          </t>
+            <t t-if="not desc">
+            <article class="twentyseventeen-panel page type-page status-publish hentry">
+                <div class="panel-content">
+                    <header class="entry-header">
+                        <h1 class="entry-title"><span t-field="course.title" /> </h1>
+                    </header>
+                    <!-- .entry-header -->
+                    <div class="entry-content">
+                        Pas de descriptif disponible.
+                    </div>
+                </div>
+            </article>
+            </t>
+            </t>
+        </main>
     </template>
 </odoo>
