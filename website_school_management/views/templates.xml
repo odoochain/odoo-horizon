@@ -601,4 +601,125 @@
             </table>
         </div>
     </template>
+    
+    <template id="course_group_details" name="Course Group Details">
+        <t t-call="website_school_management.website_school_layout">
+            <div id="content" class="site-content">
+                <div class="wrap">
+                	<div id="primary" class="content-area">
+                		<main id="main" class="site-main" role="main">
+                        <t t-call="website_school_management.course_group_details_content"/>
+                        </main>
+                    </div>
+                </div>
+            </div>
+            <!-- <t t-call="website_school_management.no_description"/> -->
+        </t>
+    </template>
+    
+    <template id="course_group_details_content" name="Course Group Details Content">
+        <section>
+            <div class="row mt64 mb64">
+                <h1>
+                    Course Group Description
+                </h1>
+                <h1>
+                    <span t-field="o.title"/>
+                </h1>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Course Group Informations</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <colgroup>
+                            <col style="width:250px"/>
+                            <col style="width:100%"/>
+                        </colgroup>
+                        <tbody>
+                          <tr>
+                            <td>Code</td>
+                            <td><span t-field="o.ue_id"/></td>
+                          </tr>
+                          <tr>
+                            <td>Cycle</td>
+                            <td><span t-field="o.cycle_id.grade"/></td>
+                          </tr>
+                          <tr>
+                            <td>Teacher</td>
+                            <td><span t-field="o.teacher_id"/></td>
+                          </tr>
+                          <tr>
+                            <td>Period</td>
+                            <td><span t-field="o.period"/></td>
+                          </tr>
+                          <tr>
+                            <td>Credits</td>
+                            <td><span t-field="o.total_credits"/></td>
+                          </tr>
+                          <tr>
+                            <td>Hours</td>
+                            <td><span t-field="o.total_hours"/></td>
+                          </tr>
+                          <tr>
+                            <td>Mandatory</td>
+                            <td><t t-if="o.mandatory"><input type="checkbox" value="" checked=""/></t><t t-if="not(o.mandatory)"><input type="checkbox" value=""/></t></td>
+                          </tr>
+                        </tbody>
+                     </table>
+                </div>
+            </div>
+            
+            <div class="panel panel-default">
+                <div class="panel-heading">Course Informations</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <colgroup>
+                            <col style="width:600px"/>
+                            <col style="width:100px"/>
+                            <col style="width:100px"/>
+                            <col style="width:100px"/>
+                        </colgroup>
+                        <tr>
+                          <td>Title</td>
+                          <td>Hours</td>
+                          <td>Credits</td>
+                          <td>Weight</td>
+                        </tr>
+                        <tr t-foreach="o.course_ids" t-as="course">
+                          <td>
+                            <a t-esc="course.title" t-att-href="'/course/%s' % course.id" target="new" style="cursor: pointer;"/>
+                            <br/><t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name"/><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t>
+                          </td>
+                          <td class="text-center"><t t-esc="course.hours"/></td>
+                          <td class="text-center"><t t-esc="course.credits"/></td>
+                          <td class="text-center"><t t-esc="course.weight"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+          </section>
+          <t t-foreach="o.course_ids" t-as="course">
+            <t t-set="desc" t-value="course.documentation_id"/>
+            <t t-if="desc">
+              <p style="page-break-after:always;">   </p>
+              <t t-call="school_course_description.report_course_doc_section"/>
+            </t>
+            <t t-else="">
+              <p style="page-break-after:always;">   </p>
+              <section>
+                <div class="row mt64 mb64">
+                    <h1>
+                        <t t-if="desc.state == 'draft'">Draft </t>Course Description
+                    </h1>
+                    <h1>
+                        <span t-field="course.name"/>
+                    </h1>
+                    <h2>
+                        Pas de descriptif disponible.
+                    </h2>
+                </div>
+              </section>
+            </t>
+          </t>
+    </template>
 </odoo>
