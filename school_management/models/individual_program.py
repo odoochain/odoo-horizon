@@ -102,7 +102,7 @@ class IndividualProgram(models.Model):
                     'course_group' : group['source_course_group_id'][0],
                     'individual_course_group_ids' : self.env['school.individual_course_group'].search(group['__domain']),
                     })
-                existing_groups |= group['source_course_group_id'][0]
+                existing_groups.append(group['source_course_group_id'][0])
             cg_todo = self.course_group_ids.filtered(lambda cg: cg.id not in existing_groups)
             for group in cg_todo:
                 summaries |= self.env['school.individual_course_summary'].create({
