@@ -211,7 +211,7 @@ class IndividualProgram(models.Model):
     def _compute_course_group_summaries(self):
         super(IndividualProgram, self)._compute_course_group_summaries()
         for rec in self:
-            pass #rec.course_group_summaries = sorted(rec.course_group_summaries, key = lambda r : r.state)
+            rec.course_group_summaries = rec.course_group_summaries.sorted('state')
                 
 class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
