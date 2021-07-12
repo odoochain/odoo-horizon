@@ -236,6 +236,7 @@ class IndividualCourseSummary(models.TransientModel):
                     rec.state = '4_progress'
                     
     def _compute_course_group_summaries(self):
+        _logger.info('_compute_course_group_summaries HERE HERE HERE')
         super(IndividualCourseSummary, self)._compute_course_group_summaries()
         for rec in self:
             _logger.info('sort '+rec.course_group_summaries)
