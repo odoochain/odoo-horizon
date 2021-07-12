@@ -1,3 +1,7 @@
 .horizon_cgs_6_confirmed {
     border-left : 10px solid #28a745 !important;
 }
+
+.horizon_cgs_4_progress {
+    border-left : 10px solid #ffc107 !important;
+}
