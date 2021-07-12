@@ -5,3 +5,7 @@
 .horizon_cgs_4_progress {
     border-left : 10px solid #ffc107 !important;
 }
+
+.horizon_cgs_9_none {
+    border-left : 10px solid grey !important;
+}
