@@ -113,6 +113,7 @@ class IndividualProgram(models.Model):
 class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
     _name='school.individual_course_summary'
+    _inherit = ['school.open.form.mixin']
     
     _order = 'sequence'
     
