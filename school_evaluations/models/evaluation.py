@@ -209,7 +209,7 @@ class IndividualProgram(models.Model):
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
                 
     def _compute_course_group_summaries(self):
-        super(IndividualCourseSummary, self)._compute_course_group_summaries()
+        super(IndividualProgram, self)._compute_course_group_summaries()
         for rec in self:
             rec.course_group_summaries = sorted(rec.course_group_summaries, lambda r : r.state.raw_value)
                 
