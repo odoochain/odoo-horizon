@@ -101,6 +101,11 @@ class IndividualProgram(models.Model):
                     'course_group' : group['source_course_group_id'][0],
                     'individual_course_group_ids' : self.env['school.individual_course_group'].search(group['__domain']),
                     })
+            cg_todo = course_group_ids.filtered(lambda cg: cg not in groups.mapped('source_course_group_id'))
+            for group in cg_todo:
+                summaries |= self.env['school.individual_course_summary'].create({
+                    'course_group' : group.id,
+                    })
             rec.course_group_summaries = summaries
 
 class IndividualCourseSummary(models.TransientModel):
