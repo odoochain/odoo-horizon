@@ -208,6 +208,11 @@ class IndividualProgram(models.Model):
             else :
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
                 
+    def _compute_course_group_summaries(self):
+        super(IndividualCourseSummary, self)._compute_course_group_summaries()
+        for rec in self:
+            rec.course_group_summaries = sorted(rec.course_group_summaries, lambda r : r.state.raw_value)
+                
 class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
@@ -221,7 +226,6 @@ class IndividualCourseSummary(models.TransientModel):
         ], string='State', compute="_compute_state")
         
     def _compute_state(self):
-        _logger.info('_compute_state HERE HERE HERE')
         for rec in self:
             if len(rec.individual_course_group_ids.ids) == 0:
                 rec.state = '9_none'
@@ -235,14 +239,6 @@ class IndividualCourseSummary(models.TransientModel):
                     rec.state = '6_confirmed'
                 else:
                     rec.state = '4_progress'
-                    
-    def _compute_course_group_summaries(self):
-        _logger.info('_compute_course_group_summaries HERE HERE HERE')
-        super(IndividualCourseSummary, self)._compute_course_group_summaries()
-        for rec in self:
-            _logger.info('sort '+rec.course_group_summaries)
-            rec.course_group_summaries = sorted(rec.course_group_summaries, lambda r : r.state.raw_value)
-            _logger.info('sorted as '+rec.course_group_summaries)
                 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
