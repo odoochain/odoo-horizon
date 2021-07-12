@@ -239,6 +239,22 @@ class IndividualCourseSummary(models.TransientModel):
                     rec.state = '6_confirmed'
                 else:
                     rec.state = '4_progress'
+    
+    trials = fields.Integer(string="Trials",compute="_compute_trials")
+                
+    def _compute_trials(self):
+        for rec in self:
+            rec.trials = len(rec.individual_course_group_ids.ids)
+            
+    last_result = fields.Integer(string="Last Result",compute="_compute_last_result")
+                
+    def _compute_last_result(self):
+        for rec in self:
+            if len(rec.individual_course_group_ids.ids) == 0:
+                rec.last_result = 0
+            else :
+                rec.last_result = rec.individual_course_group_ids[-1].final_result
+    
                 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
