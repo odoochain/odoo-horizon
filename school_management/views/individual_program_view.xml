@@ -140,7 +140,7 @@
                   <field name="total_credits" />
                   <templates>
                       <t t-name="kanban-box">
-                            <div style="position: relative;width:100%;">
+                            <div style="position: relative;width:100%;" t-attf-class="horizon_cgs">
                                 <div class="o_kanban_record_top">
                                   <div class="row o_kanban_record_headings">
                                     <div class="col-12 col-md-2">
