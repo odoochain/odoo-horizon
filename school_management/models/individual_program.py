@@ -96,12 +96,14 @@ class IndividualProgram(models.Model):
         for rec in self:
             summaries = self.env['school.individual_course_summary']
             groups = self.env['school.individual_course_group'].read_group([('bloc_id','in',rec.bloc_ids.ids)],['source_course_group_id'],'source_course_group_id')
+            existing_groups = []
             for group in groups:
                 summaries |= self.env['school.individual_course_summary'].create({
                     'course_group' : group['source_course_group_id'][0],
                     'individual_course_group_ids' : self.env['school.individual_course_group'].search(group['__domain']),
                     })
-            cg_todo = self.course_group_ids.filtered(lambda cg: cg not in groups.mapped('source_course_group_id'))
+                existing_groups |= group.id
+            cg_todo = self.course_group_ids.filtered(lambda cg: cg.id not in existing_groups)
             for group in cg_todo:
                 summaries |= self.env['school.individual_course_summary'].create({
                     'course_group' : group.id,
