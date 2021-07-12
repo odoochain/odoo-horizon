@@ -238,7 +238,9 @@ class IndividualCourseSummary(models.TransientModel):
     def _compute_course_group_summaries(self):
         super(IndividualCourseSummary, self)._compute_course_group_summaries()
         for rec in self:
+            _logger.info('sort '+rec.course_group_summaries)
             rec.course_group_summaries = sorted(rec.course_group_summaries, lambda r : r.state.raw_value)
+            _logger.info('sorted as '+rec.course_group_summaries)
                 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
