@@ -221,6 +221,7 @@ class IndividualCourseSummary(models.TransientModel):
         ], string='State', compute="_compute_state")
         
     def _compute_state(self):
+        _logger.info('_compute_state HERE HERE HERE')
         for rec in self:
             if len(rec.individual_course_group_ids.ids) == 0:
                 rec.state = '9_none'
