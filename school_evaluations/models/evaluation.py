@@ -211,6 +211,7 @@ class IndividualProgram(models.Model):
 class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
+    _order = 'state, sequence'
     
     state = fields.Selection([
             ('1_candicate', 'Candidate'),
@@ -234,11 +235,6 @@ class IndividualCourseSummary(models.TransientModel):
                     rec.state = '6_confirmed'
                 else:
                     rec.state = '4_progress'
-    
-    def _compute_course_group_summaries(self):
-        for rec in self :
-            result = super(IndividualCourseSummary, rec)._compute_course_group_summaries()
-            rec.course_group_summaries = sorted(result, key=lambda cgs: cgs.state)
                 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
