@@ -167,52 +167,52 @@ class IndividualProgram(models.Model):
             else :
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
                 
-    def _compute_course_group_summaries(self):
-        super(IndividualProgram, self)._compute_course_group_summaries()
-        for rec in self:
-            rec.course_group_summaries = rec.course_group_summaries.sorted('state')
+    # def _compute_course_group_summaries(self):
+    #     super(IndividualProgram, self)._compute_course_group_summaries()
+    #     for rec in self:
+    #         rec.course_group_summaries = rec.course_group_summaries.sorted('state')
                 
-class IndividualCourseSummary(models.TransientModel):
-    '''IndividualCourse Summary'''
-    _inherit = 'school.individual_course_summary'
+# class IndividualCourseSummary(models.TransientModel):
+#     '''IndividualCourse Summary'''
+#     _inherit = 'school.individual_course_summary'
     
-    state = fields.Selection([
-            ('1_candicate', 'Candidate'),
-            ('2_valuated', 'Valuated'),
-            ('4_progress', 'Progess'),
-            ('6_confirmed', 'Confirmed'),
-            ('9_none', 'None'),
-        ], string='State', compute="_compute_state")
+#     state = fields.Selection([
+#             ('1_candicate', 'Candidate'),
+#             ('2_valuated', 'Valuated'),
+#             ('4_progress', 'Progess'),
+#             ('6_confirmed', 'Confirmed'),
+#             ('9_none', 'None'),
+#         ], string='State', compute="_compute_state")
         
-    def _compute_state(self):
-        for rec in self:
-            if len(rec.individual_course_group_ids.ids) == 0:
-                rec.state = '9_none'
-            else:
-                states = rec.individual_course_group_ids.mapped('state')
-                if 'candidate' in states:
-                    rec.state = '1_candicate'
-                elif 'valuated' in states:
-                    rec.state = '2_valuated'
-                elif 'success' in states:
-                    rec.state = '6_confirmed'
-                else:
-                    rec.state = '4_progress'
+#     def _compute_state(self):
+#         for rec in self:
+#             if len(rec.individual_course_group_ids.ids) == 0:
+#                 rec.state = '9_none'
+#             else:
+#                 states = rec.individual_course_group_ids.mapped('state')
+#                 if 'candidate' in states:
+#                     rec.state = '1_candicate'
+#                 elif 'valuated' in states:
+#                     rec.state = '2_valuated'
+#                 elif 'success' in states:
+#                     rec.state = '6_confirmed'
+#                 else:
+#                     rec.state = '4_progress'
     
-    trials = fields.Integer(string="Trials",compute="_compute_trials")
+#     trials = fields.Integer(string="Trials",compute="_compute_trials")
                 
-    def _compute_trials(self):
-        for rec in self:
-            rec.trials = len(rec.individual_course_group_ids.ids)
+#     def _compute_trials(self):
+#         for rec in self:
+#             rec.trials = len(rec.individual_course_group_ids.ids)
             
-    last_result = fields.Integer(string="Last Result",compute="_compute_last_result")
+#     last_result = fields.Integer(string="Last Result",compute="_compute_last_result")
                 
-    def _compute_last_result(self):
-        for rec in self:
-            if len(rec.individual_course_group_ids.ids) == 0:
-                rec.last_result = 0
-            else :
-                rec.last_result = rec.individual_course_group_ids[-1].final_result
+#     def _compute_last_result(self):
+#         for rec in self:
+#             if len(rec.individual_course_group_ids.ids) == 0:
+#                 rec.last_result = 0
+#             else :
+#                 rec.last_result = rec.individual_course_group_ids[-1].final_result
     
                 
 class IndividualBloc(models.Model):

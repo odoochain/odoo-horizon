@@ -85,7 +85,7 @@ class IndividualProgram(models.Model):
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
-    source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict")
+    source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict", readonly=True, states={'draft': [('readonly', False)]}, domain="[('year_id', '=', self.env.user.current_year_id.id)]")
     
     cycle_id = fields.Many2one('school.cycle', related='source_program_id.cycle_id', string='Cycle', store=True, readonly=True)
     
@@ -95,18 +95,8 @@ class IndividualProgram(models.Model):
     track_id = fields.Many2one(related='speciality_id.track_id', string='Track',store=True)
     
     required_credits = fields.Integer(related='cycle_id.required_credits',string='Requiered Credits')
-    
-    @api.model
-    def _default_course_group_ids(self):
-        course_group_ids = False
-        for bloc in rec.source_program_id.bloc_ids:
-            if course_group_ids :
-                course_group_ids |= bloc.course_group_ids
-            else :
-                course_group_ids = bloc.course_group_ids
-        return rec.course_group_ids = course_group_ids
-    
-    course_group_ids = fields.One2many('school.course_group', string='Courses Groups', default=_default_course_group_ids, readonly=True, states={'draft': [('readonly', False)]},)
+
+    course_group_ids = fields.One2many('school.course_group', string='Courses Groups', default=_default_course_group_ids, readonly=True, states={'draft': [('readonly', False)]})
     
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
@@ -132,42 +122,42 @@ class IndividualProgram(models.Model):
             else:
                 rec.highest_level = 0
     
-    course_group_summaries = fields.One2many('school.individual_course_summary',string='Courses Groups Summaries',compute='_compute_course_group_summaries')
+#     course_group_summaries = fields.One2many('school.individual_course_summary',string='Courses Groups Summaries',compute='_compute_course_group_summaries')
     
-    def _compute_course_group_summaries(self):
-        for rec in self:
-            summaries = self.env['school.individual_course_summary']
-            groups = self.env['school.individual_course_group'].read_group([('bloc_id','in',rec.bloc_ids.ids)],['source_course_group_id'],'source_course_group_id')
-            existing_groups = []
-            for group in groups:
-                summaries |= self.env['school.individual_course_summary'].create({
-                    'course_group' : group['source_course_group_id'][0],
-                    'individual_course_group_ids' : self.env['school.individual_course_group'].search(group['__domain']),
-                    })
-                existing_groups.append(group['source_course_group_id'][0])
-            cg_todo = self.course_group_ids.filtered(lambda cg: cg.id not in existing_groups)
-            for group in cg_todo:
-                summaries |= self.env['school.individual_course_summary'].create({
-                    'course_group' : group.id,
-                    })
-            rec.course_group_summaries = summaries
+#     def _compute_course_group_summaries(self):
+#         for rec in self:
+#             summaries = self.env['school.individual_course_summary']
+#             groups = self.env['school.individual_course_group'].read_group([('bloc_id','in',rec.bloc_ids.ids)],['source_course_group_id'],'source_course_group_id')
+#             existing_groups = []
+#             for group in groups:
+#                 summaries |= self.env['school.individual_course_summary'].create({
+#                     'course_group' : group['source_course_group_id'][0],
+#                     'individual_course_group_ids' : self.env['school.individual_course_group'].search(group['__domain']),
+#                     })
+#                 existing_groups.append(group['source_course_group_id'][0])
+#             cg_todo = self.course_group_ids.filtered(lambda cg: cg.id not in existing_groups)
+#             for group in cg_todo:
+#                 summaries |= self.env['school.individual_course_summary'].create({
+#                     'course_group' : group.id,
+#                     })
+#             rec.course_group_summaries = summaries
 
-class IndividualCourseSummary(models.TransientModel):
-    '''IndividualCourse Summary'''
-    _name='school.individual_course_summary'
-    _inherit = ['school.open.form.mixin']
+# class IndividualCourseSummary(models.TransientModel):
+#     '''IndividualCourse Summary'''
+#     _name='school.individual_course_summary'
+#     _inherit = ['school.open.form.mixin']
     
-    _order = 'sequence'
+#     _order = 'sequence'
     
-    course_group = fields.Many2one('school.course_group', string='Course Group')
+#     course_group = fields.Many2one('school.course_group', string='Course Group')
     
-    individual_course_group_ids = fields.Many2many('school.individual_course_group', 'school_ics_icg_rel',string='Individual Course Groups')
+#     individual_course_group_ids = fields.Many2many('school.individual_course_group', 'school_ics_icg_rel',string='Individual Course Groups')
     
-    uid = fields.Char(string="UID",related="course_group.uid")
-    name = fields.Char(string="Name",related="course_group.name")
-    responsible_id = fields.Many2one('res.partner', string="Name",related="course_group.responsible_id")
-    total_hours = fields.Integer(string="Credits",related="course_group.total_hours")
-    total_credits = fields.Integer(string="Hours",related="course_group.total_credits")
+#     uid = fields.Char(string="UID",related="course_group.uid")
+#     name = fields.Char(string="Name",related="course_group.name")
+#     responsible_id = fields.Many2one('res.partner', string="Name",related="course_group.responsible_id")
+#     total_hours = fields.Integer(string="Credits",related="course_group.total_hours")
+#     total_credits = fields.Integer(string="Hours",related="course_group.total_credits")
 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
