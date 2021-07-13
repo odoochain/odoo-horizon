@@ -98,6 +98,11 @@ class IndividualProgram(models.Model):
 
     course_group_ids = fields.Many2many('school.course_group', 'school_ind_prog_course_group_rel', 'ind_program_id', 'course_group_id', string='Courses Groups', readonly=True, states={'draft': [('readonly', False)]}, copy=True)
     
+    @api.onchange('source_program_id')
+    def _on_change_source_program_id(self):
+        self.ensure_one()
+        self.course_group_ids = self.source_program_id.course_group_ids
+    
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
     def _compute_ind_course_group_ids(self):
