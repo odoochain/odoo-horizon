@@ -564,6 +564,7 @@
                 </colgroup>
                 <thead>
                     <tr>
+                        <th>UID</th> 
                         <th>Unités d’enseignement</th> 
                         <th class="text-center">Heures</th> 
                         <th class="text-center">ECTS</th>
