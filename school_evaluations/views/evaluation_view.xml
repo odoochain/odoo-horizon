@@ -147,7 +147,7 @@
                     <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
                 </xpath>
                 <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="inside">
-                    <div class="o_kanban_tags_section"/>
+                    <div class="o_kanban_tags_section">
                         <ul>
                             <li><field name="parent_id"/> Trials</li>
                             <li>Last Res : <field name="parent_id"/></li>
