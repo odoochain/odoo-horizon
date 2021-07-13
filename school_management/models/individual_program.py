@@ -96,7 +96,7 @@ class IndividualProgram(models.Model):
     
     required_credits = fields.Integer(related='cycle_id.required_credits',string='Requiered Credits')
 
-    course_group_ids = fields.One2many('school.course_group', string='Courses Groups', readonly=True, states={'draft': [('readonly', False)]})
+    course_group_ids = fields.Many2many('school.course_group', 'school_ind_prog_course_group_rel', 'ind_program_id', 'course_group_id', string='Courses Groups', readonly=True, states={'draft': [('readonly', False)]}, copy=True)
     
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
