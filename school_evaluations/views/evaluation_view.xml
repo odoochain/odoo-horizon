@@ -138,7 +138,7 @@
                         </div>
                     </div>
                 </xpath>
-                <xpath expr="//field[@name='course_group_summaries']/kanban/field[@name='total_credits']" position="after">
+                <!--<xpath expr="//field[@name='course_group_summaries']/kanban/field[@name='total_credits']" position="after">
                     <field name="state"/>
                     <field name="trials"/>
                     <field name="last_result"/>
@@ -153,7 +153,7 @@
                             <li>Last Res : <field name="parent_id"/></li>
                         </ul>
                     </div>
-                </xpath>
+                </xpath>-->
                 <!--<xpath expr="//field[@name='ind_course_group_ids']/tree" position="attributes">
                     <attribute name="colors">green:state=='confirmed' and acquiered == 'A';grey:state=='confirmed' and acquiered == 'NA';orange:state=='draft';blue:state=='progress'</attribute>
                 </xpath>-->
