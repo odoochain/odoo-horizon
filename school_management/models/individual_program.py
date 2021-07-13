@@ -35,6 +35,45 @@ class IndividualProgram(models.Model):
 
     active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
 
+    state = fields.Selection([
+            ('draft','Draft'),
+            ('progress','In Progress'),
+            ('awarded', 'Awarded'),
+            ('abandonned', 'Abandonned'),
+        ], string='Status', index=True, default='draft',copy=False,
+        help=" * The 'Draft' status is used when results are not confirmed yet.\n"
+             " * The 'In Progress' status is used during the cycle.\n"
+             " * The 'Awarded' status is used when the cycle is awarded.\n"
+             " * The 'Abandonned' status is used if a student leave the program.\n"
+             ,track_visibility='onchange')
+    
+    abandonned_date = fields.Date('Abandonned Date')
+    
+    def set_to_draft(self, context):
+        # TODO use a workflow to make sure only valid changes are used.
+        return self.write({'state': 'draft'})
+    
+    
+    def set_to_progress(self, context):
+        # TODO use a workflow to make sure only valid changes are used.
+        return self.write({'state': 'progress'})
+    
+    
+    def set_to_awarded(self, context, grade_year_id=None, grade=None, grade_comments=None):
+        # TODO use a workflow to make sure only valid changes are used.
+        if(grade):
+            self.write({'state': 'awarded',
+                           'grade' : grade,
+                           'grade_year_id' : grade_year_id,
+                           'grade_comments' : grade_comments,
+                           'graduation_date' : fields.Date.today(),
+            })
+        else:
+            self.write({'state': 'awarded',
+                        'grade_year_id' : grade_year_id,
+                        'graduation_date' : fields.Date.today(),
+            })
+
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
     year_id = fields.Many2one('school.year', string='Registration Year', default=lambda self: self.env.user.current_year_id)
@@ -57,19 +96,22 @@ class IndividualProgram(models.Model):
     
     required_credits = fields.Integer(related='cycle_id.required_credits',string='Requiered Credits')
     
-    course_group_ids = fields.One2many('school.course_group', string='Courses Groups', compute='_compute_ind_course_group_ids')
+    @api.model
+    def _default_course_group_ids(self):
+        course_group_ids = False
+        for bloc in rec.source_program_id.bloc_ids:
+            if course_group_ids :
+                course_group_ids |= bloc.course_group_ids
+            else :
+                course_group_ids = bloc.course_group_ids
+        return rec.course_group_ids = course_group_ids
+    
+    course_group_ids = fields.One2many('school.course_group', string='Courses Groups', default=_default_course_group_ids, readonly=True, states={'draft': [('readonly', False)]},)
     
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
     def _compute_ind_course_group_ids(self):
         for rec in self:
-            course_group_ids = False
-            for bloc in rec.source_program_id.bloc_ids:
-                if course_group_ids :
-                    course_group_ids |= bloc.course_group_ids
-                else :
-                    course_group_ids = bloc.course_group_ids
-            rec.course_group_ids = course_group_ids
             rec.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',rec.bloc_ids.ids)])
     
     @api.depends('cycle_id.name','speciality_id.name','student_id.name')
