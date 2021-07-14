@@ -49,17 +49,17 @@ class IndividualProgram(models.Model):
     
     abandonned_date = fields.Date('Abandonned Date')
     
-    def set_to_draft(self, context):
+    def set_to_draft(self):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'draft'})
     
     
-    def set_to_progress(self, context):
+    def set_to_progress(self):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'progress'})
     
     
-    def set_to_awarded(self, context, grade_year_id=None, grade=None, grade_comments=None):
+    def set_to_awarded(self, grade_year_id=None, grade=None, grade_comments=None):
         # TODO use a workflow to make sure only valid changes are used.
         if(grade):
             self.write({'state': 'awarded',
