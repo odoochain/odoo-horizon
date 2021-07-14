@@ -104,7 +104,7 @@ class IndividualProgram(models.Model):
         summaries = self.env['school.individual_course_summary']
         for cg in self.source_program_id.course_group_ids:
             course_group_summary = self.env['school.individual_course_summary'].create({
-                'cycle_id' : self.id,
+                'program_id' : self.id,
                 'course_group_id' : cg.id,
             })
         self.course_group_summaries = summaries
