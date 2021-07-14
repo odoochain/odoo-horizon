@@ -109,7 +109,7 @@ class IndividualProgram(models.Model):
             })
         self.course_group_summaries = summaries
             
-    ind_course_group_ids = fields.One2many('school.individual_course_group', 'program_id', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
+    ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
     def _compute_ind_course_group_ids(self):
         for rec in self:
@@ -140,7 +140,7 @@ class IndividualCourseSummary(models.Model):
     
     _order = 'level,sequence'
     
-    program_id = fields.Many2one('school.individual_program', string='Individual Program', required=True)
+    program_id = fields.Many2one('school.individual_program', string='Individual Program')
     
     course_group_id = fields.Many2one('school.course_group', string='Course Group')
     
