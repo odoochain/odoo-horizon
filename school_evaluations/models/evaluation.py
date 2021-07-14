@@ -189,8 +189,9 @@ class IndividualCourseSummary(models.Model):
         for rec in self:
             all_rec = self.env['school.individual_course_group'].search([('bloc_id','in',self.program_id.bloc_ids.ids),('source_course_group_id','=',rec.course_group_id.id)])
             rec.trials = len(all_rec)
-            rec.state = all_rec[-1].state
-            rec.final_result_disp = all_rec[-1].final_result_disp
+            if len(all_rec) > 0 :
+                rec.state = all_rec[-1].state
+                rec.final_result_disp = all_rec[-1].final_result_disp
                 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
