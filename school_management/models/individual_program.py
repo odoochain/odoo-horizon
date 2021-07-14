@@ -133,24 +133,24 @@ class IndividualProgram(models.Model):
             else:
                 rec.highest_level = 0
 
-# class IndividualCourseSummary(models.Model):
-#     '''IndividualCourse Summary'''
-#     _name='school.individual_course_summary'
-#     _inherit = ['school.open.form.mixin']
+class IndividualCourseSummary(models.Model):
+    '''IndividualCourse Summary'''
+    _name='school.individual_course_summary'
+    _inherit = ['school.open.form.mixin']
     
-#     _order = 'level,sequence'
+    _order = 'level,sequence'
     
-#     cycle_id = fields.Many2one('school.individual_program', string='Individual Program')
+    cycle_id = fields.Many2one('school.individual_program', string='Individual Program')
     
-#     course_group_id = fields.Many2one('school.course_group', string='Course Group')
+    course_group_id = fields.Many2one('school.course_group', string='Course Group')
     
-#     uid = fields.Char(string="UID",related="course_group.uid")
-#     name = fields.Char(string="Name",related="course_group.name")
-#     responsible_id = fields.Many2one('res.partner', string="Name",related="course_group.responsible_id")
-#     total_hours = fields.Integer(string="Credits",related="course_group.total_hours")
-#     total_credits = fields.Integer(string="Hours",related="course_group.total_credits")
-#     sequence = fields.Integer(string="Sequence",related="course_group.sequence")
-#     level = fields.Integer(string="Level",related="course_group.level")
+    uid = fields.Char(string="UID",related="course_group.uid")
+    name = fields.Char(string="Name",related="course_group.name")
+    responsible_id = fields.Many2one('res.partner', string="Name",related="course_group.responsible_id")
+    total_hours = fields.Integer(string="Credits",related="course_group.total_hours")
+    total_credits = fields.Integer(string="Hours",related="course_group.total_credits")
+    sequence = fields.Integer(string="Sequence",related="course_group.sequence")
+    level = fields.Integer(string="Level",related="course_group.level")
 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
