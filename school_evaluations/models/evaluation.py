@@ -175,7 +175,7 @@ class IndividualCourseSummary(models.Model):
             ('draft','Draft'),
             ('progress','In Progress'),
             ('confirmed', 'Confirmed'),
-            ('sucess', 'Success'),
+            ('success', 'Success'),
             ('failed', 'Failed'),
             ('candidate','Candidate'),
             ('valuated', 'Valuated'),
@@ -429,7 +429,7 @@ class IndividualCourseGroup(models.Model):
             ('draft','Draft'),
             ('progress','In Progress'),
             ('confirmed', 'Confirmed'),
-            ('sucess', 'Success'),
+            ('success', 'Success'),
             ('failed', 'Failed'),
             ('candidate','Candidate'),
             ('valuated', 'Valuated'),
@@ -448,7 +448,7 @@ class IndividualCourseGroup(models.Model):
         return self.write({'state': 'confirmed'})
         
     def set_to_success(self, context):
-        return self.write({'state': 'sucess'})
+        return self.write({'state': 'success'})
         
     def set_to_failed(self, context):
         return self.write({'state': 'failed'})
