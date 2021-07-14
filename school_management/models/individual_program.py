@@ -103,11 +103,11 @@ class IndividualProgram(models.Model):
         self.ensure_one()
         summaries = self.env['school.individual_course_summary']
         for cg in self.source_program_id.course_group_ids:
+            _logger.info('Self is %s' % self.id)
             course_group_summary = self.env['school.individual_course_summary'].create({
                 'program_id' : self.id,
                 'course_group_id' : cg.id,
             })
-        self.course_group_summaries = summaries
             
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Ind Courses Groups', compute='_compute_ind_course_group_ids')
     
