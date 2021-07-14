@@ -172,9 +172,9 @@ class IndividualCourseSummary(models.Model):
     _inherit = 'school.individual_course_summary'
     
     def _compute_ind_course_group_ids(self):
-        super(IndividualCourseSummary, self)._compute_ind_course_group_ids()
         _logger.info('We are here : %s' % self)
         for rec in self:
+            super(IndividualCourseSummary, rec)._compute_ind_course_group_ids()
             _logger.info(rec.program_id.valuated_course_group_ids)
             _logger.info('Source Course Group : ' % rec.program_id.valuated_course_group_ids.mapped('source_course_group_id'))
             _logger.info('Check against :%s' % rec.course_group_id.id)
