@@ -103,7 +103,6 @@ class IndividualProgram(models.Model):
         self.ensure_one()
         summaries = self.env['school.individual_course_summary']
         for cg in self.source_program_id.course_group_ids:
-            _logger.info('Self is %s' % self.id)
             course_group_summary = self.env['school.individual_course_summary'].create({
                 'program_id' : self.id,
                 'course_group_id' : cg.id,
