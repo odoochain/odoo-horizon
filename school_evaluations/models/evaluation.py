@@ -171,6 +171,11 @@ class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
     
+    def _compute_ind_course_group_ids(self):
+        super(IndividualCourseSummary, self)._compute_ind_course_group_ids()
+        for rec in self:
+            rec.ind_course_group_ids |= rec.valuated_course_group_ids.filtered(lambda item: item.source_course_group_id == rec.course_group_id.id)
+    
     state = fields.Selection([
             ('draft','Draft'),
             ('progress','In Progress'),
