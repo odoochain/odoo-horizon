@@ -174,6 +174,9 @@ class IndividualCourseSummary(models.Model):
     def _compute_ind_course_group_ids(self):
         super(IndividualCourseSummary, self)._compute_ind_course_group_ids()
         for rec in self:
+            _logger.info(rec.program_id.valuated_course_group_ids)
+            _logger.info('Source Course Group : ' % rec.program_id.valuated_course_group_ids.mapped('source_course_group_id'))
+            _logger.info('Check against :%s' % rec.course_group_id.id)
             rec.ind_course_group_ids |= rec.program_id.valuated_course_group_ids.filtered(lambda item: item.source_course_group_id.id == rec.course_group_id.id)
     
     state = fields.Selection([
