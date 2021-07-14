@@ -96,7 +96,7 @@ class IndividualProgram(models.Model):
     
     required_credits = fields.Integer(related='cycle_id.required_credits',string='Requiered Credits')
 
-    course_group_summaries = fields.One2many('school.individual_course_summary', '', string='Courses Group Summaries', readonly=True, states={'draft': [('readonly', False)]}, copy=True)
+    course_group_summaries = fields.One2many('school.individual_course_summary', 'program_id', string='Courses Group Summaries', readonly=True, states={'draft': [('readonly', False)]}, copy=True)
     
     @api.onchange('source_program_id')
     def _on_change_source_program_id(self):
