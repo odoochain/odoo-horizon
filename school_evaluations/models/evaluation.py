@@ -167,11 +167,6 @@ class IndividualProgram(models.Model):
             else :
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
                 
-    # def _compute_course_group_summaries(self):
-    #     super(IndividualProgram, self)._compute_course_group_summaries()
-    #     for rec in self:
-    #         rec.course_group_summaries = rec.course_group_summaries.sorted('state')
-                
 class IndividualCourseSummary(models.TransientModel):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
