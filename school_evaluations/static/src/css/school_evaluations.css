@@ -1,11 +1,23 @@
-.horizon_cgs_6_confirmed {
+.horizon_cgs_success {
     border-left : 10px solid #28a745 !important;
 }
 
-.horizon_cgs_4_progress {
+.horizon_cgs_progress {
     border-left : 10px solid #ffc107 !important;
 }
 
-.horizon_cgs_9_none {
+.horizon_cgs_failed {
+    border-left : 10px solid red !important;
+}
+
+.horizon_cgs_valuated {
+    border-left : 10px solid #0000FF !important;
+}
+
+.horizon_cgs_candidate {
+    border-left : 10px solid #ADD8E6 !important;
+}
+
+.horizon_cgs_none {
     border-left : 10px solid grey !important;
 }
