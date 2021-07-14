@@ -157,27 +157,6 @@ class IndividualCourseSummary(models.Model):
     def _compute_ind_course_group_ids(self):
         for rec in self:
             rec.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.program_id.bloc_ids.ids),('source_course_group_id','=',rec.course_group_id.id)])
-            
-    state = fields.Selection([
-            ('draft','Draft'),
-            ('progress','In Progress'),
-            ('confirmed', 'Confirmed'),
-            ('sucess', 'Success'),
-            ('failed', 'Failed'),
-            ('candidate','Candidate'),
-            ('valuated', 'Valuated'),
-        ], compute="_compute_state")
-        
-    trials = fields.Integer(string="Trials",compute='_compute_state')
-        
-    final_result_disp = fields.Char(string='Final Result Display', compute='_compute_state')
-        
-    def _compute_state(self):
-        for rec in self:
-            last_rec = self.env['school.individual_course_group'].search([('bloc_id','in',self.program_id.bloc_ids.ids),('source_course_group_id','=',rec.course_group_id.id)])[-1]
-            rec.state = last_rec.state
-            rec.final_result_disp = last_rec.final_result_disp
-            
     
 
 class IndividualBloc(models.Model):

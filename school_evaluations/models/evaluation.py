@@ -172,48 +172,29 @@ class IndividualProgram(models.Model):
     #     for rec in self:
     #         rec.course_group_summaries = rec.course_group_summaries.sorted('state')
                 
-# class IndividualCourseSummary(models.TransientModel):
-#     '''IndividualCourse Summary'''
-#     _inherit = 'school.individual_course_summary'
+class IndividualCourseSummary(models.TransientModel):
+    '''IndividualCourse Summary'''
+    _inherit = 'school.individual_course_summary'
     
-#     state = fields.Selection([
-#             ('1_candicate', 'Candidate'),
-#             ('2_valuated', 'Valuated'),
-#             ('4_progress', 'Progess'),
-#             ('6_confirmed', 'Confirmed'),
-#             ('9_none', 'None'),
-#         ], string='State', compute="_compute_state")
+    state = fields.Selection([
+            ('draft','Draft'),
+            ('progress','In Progress'),
+            ('confirmed', 'Confirmed'),
+            ('sucess', 'Success'),
+            ('failed', 'Failed'),
+            ('candidate','Candidate'),
+            ('valuated', 'Valuated'),
+        ], compute="_compute_state")
         
-#     def _compute_state(self):
-#         for rec in self:
-#             if len(rec.individual_course_group_ids.ids) == 0:
-#                 rec.state = '9_none'
-#             else:
-#                 states = rec.individual_course_group_ids.mapped('state')
-#                 if 'candidate' in states:
-#                     rec.state = '1_candicate'
-#                 elif 'valuated' in states:
-#                     rec.state = '2_valuated'
-#                 elif 'success' in states:
-#                     rec.state = '6_confirmed'
-#                 else:
-#                     rec.state = '4_progress'
-    
-#     trials = fields.Integer(string="Trials",compute="_compute_trials")
-                
-#     def _compute_trials(self):
-#         for rec in self:
-#             rec.trials = len(rec.individual_course_group_ids.ids)
-            
-#     last_result = fields.Integer(string="Last Result",compute="_compute_last_result")
-                
-#     def _compute_last_result(self):
-#         for rec in self:
-#             if len(rec.individual_course_group_ids.ids) == 0:
-#                 rec.last_result = 0
-#             else :
-#                 rec.last_result = rec.individual_course_group_ids[-1].final_result
-    
+    trials = fields.Integer(string="Trials",compute='_compute_state')
+        
+    final_result_disp = fields.Char(string='Final Result Display', compute='_compute_state')
+        
+    def _compute_state(self):
+        for rec in self:
+            last_rec = self.env['school.individual_course_group'].search([('bloc_id','in',self.program_id.bloc_ids.ids),('source_course_group_id','=',rec.course_group_id.id)])[-1]
+            rec.state = last_rec.state
+            rec.final_result_disp = last_rec.final_result_disp
                 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
@@ -384,7 +365,7 @@ class IndividualBloc(models.Model):
                 _logger.debug('total_weight is 0 on Bloc %s' % rec.name)
                 rec.evaluation = None
         
-    
+        
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _inherit = 'school.individual_course_group'
