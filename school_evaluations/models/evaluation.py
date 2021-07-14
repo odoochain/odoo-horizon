@@ -196,7 +196,7 @@ class IndividualCourseSummary(models.Model):
         
     def _compute_state(self):
         for rec in self:
-            all_rec = self.env['school.individual_course_group'].search([('bloc_id','in',self.program_id.bloc_ids.ids),('source_course_group_id','=',rec.course_group_id.id)])
+            all_rec = rec.ind_course_group_ids
             rec.trials = len(all_rec)
             if len(all_rec) > 0 :
                 rec.state = all_rec[-1].state
