@@ -102,6 +102,7 @@ class IndividualProgram(models.Model):
     def _on_change_source_program_id(self):
         self.ensure_one()
         summaries = self.env['school.individual_course_summary']
+        self.env['school.individual_course_summary'].search(('program_id',"=",self.id)).unlink()
         for cg in self.source_program_id.course_group_ids:
             course_group_summary = self.env['school.individual_course_summary'].create({
                 'program_id' : self.id,
@@ -154,7 +155,6 @@ class IndividualCourseSummary(models.Model):
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups', compute="_compute_ind_course_group_ids")
     
     def _compute_ind_course_group_ids(self):
-        _logger.info('We are here : %s' % self)
         for rec in self:
             rec.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.program_id.bloc_ids.ids),('source_course_group_id','=',rec.course_group_id.id)])
     

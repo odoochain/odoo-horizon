@@ -147,13 +147,12 @@
                                       <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
                                     </div>
                                     <div class="col-12 col-md-7">
-                                      <div class="row">
-                                        <field name="name"/><br/>
+                                      <div class="row m-2">
+                                        <h5><field name="name"/><br/></h5>
                                         <i><field name="responsible_id"/></i>
                                       </div>
-                                      <div class="row">
-                                        <div class="col-6"><field name="total_hours"/> H</div>
-                                        <div class="col-6"><field name="total_credits"/> ECTS</div>
+                                      <div class="row m-2">
+                                        <i class="fa fa-clock-o"></i><![CDATA[&nbsp;]]><field name="total_hours"/><![CDATA[&nbsp;]]>-<![CDATA[&nbsp;]]><i class="fa fa-graduation-cap"></i><![CDATA[&nbsp;]]><field name="total_credits"/>
                                       </div>
                                     </div>
                                     <div class="col-12 col-md-3 horizon_cgs_evals">

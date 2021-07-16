@@ -146,12 +146,12 @@
                 <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="attributes">
                     <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
                 </xpath>
-                <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="inside">
-                    <div class="o_kanban_tags_section">
-                        <ul>
-                            <li><field name="trials"/> Trials</li>
-                            <li>Last Res : <field name="final_result_disp"/></li>
-                        </ul>
+                <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs_evals')]" position="inside">
+                    <div class="row">
+                        <field name="trials"/>
+                    </div>
+                    <div class="row">
+                        <field name="final_result_disp"/>
                     </div>
                 </xpath>
                 <!--<xpath expr="//field[@name='ind_course_group_ids']/tree" position="attributes">
