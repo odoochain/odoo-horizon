@@ -102,7 +102,7 @@ class IndividualProgram(models.Model):
     def _on_change_source_program_id(self):
         self.ensure_one()
         summaries = self.env['school.individual_course_summary']
-        self.env['school.individual_course_summary'].search(('program_id',"=",self.id)).unlink()
+        self.env['school.individual_course_summary'].search([('program_id','=',self.id)]).unlink()
         for cg in self.source_program_id.course_group_ids:
             course_group_summary = self.env['school.individual_course_summary'].create({
                 'program_id' : self.id,
