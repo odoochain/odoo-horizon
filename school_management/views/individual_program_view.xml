@@ -147,14 +147,16 @@
                                       <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
                                     </div>
                                     <div class="col-12 col-md-7">
-                                      <field name="name"/><br/>
-                                      <i><field name="responsible_id"/></i>
+                                      <div class="row">
+                                        <field name="name"/><br/>
+                                        <i><field name="responsible_id"/></i>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-6"><field name="total_hours"/> H</div>
+                                        <div class="col-6"><field name="total_credits"/> ECTS</div>
+                                      </div>
                                     </div>
-                                    
-                                    <div class="col-2">
-                                      Heures : <field name="total_hours"/>
-                                      <br/>
-                                      ECTS : <field name="total_credits"/>
+                                    <div class="col-12 col-md-3 horizon_cgs_evals">
                                     </div>
                                   </div>
                                 </div>
