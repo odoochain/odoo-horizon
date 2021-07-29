@@ -318,6 +318,10 @@ class Course(models.Model):
                 rec.course_group_id.write {
                     'responsible_id' : all_teacher_ids[0],
                 }
+            else :
+                rec.course_group_id.write {
+                    'responsible_id' : False,
+                }
     
     @api.onchange('hours','credits')
     def onchange_check_programs(self):
