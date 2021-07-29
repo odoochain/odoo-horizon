@@ -313,7 +313,7 @@ class Course(models.Model):
     @api.onchange('teacher_ids')
     def onchange_teachers(self):
         for rec in self :
-            all_teacher_ids = rec.course_ids.mapped('teacher_ids')
+            all_teacher_ids = rec.course_id.course_ids.mapped('teacher_ids')
             if len(all_teacher_ids) == 1:
                 rec.responsible_id = all_teacher_ids[0]
     
