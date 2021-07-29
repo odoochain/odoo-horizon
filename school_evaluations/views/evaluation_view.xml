@@ -171,7 +171,7 @@
                 <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="attributes">
                     <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
                 </xpath>
-                <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs_evals')]" position="inside">
+                <xpath expr="//div[contains(@class, 'horizon_cgs_evals')]" position="inside">
                     <div class="row">
                         Unité suivie à <field name="trials" class="oe_inline"/> reprise(s).
                     </div>
