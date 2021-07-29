@@ -226,7 +226,9 @@ class CourseGroup(models.Model):
             if len(all_teacher_ids) == 1 :
                 _logger.info('Set teacher %s on %s' % (all_teacher_ids[0], rec))
                 rec.responsible_id = all_teacher_ids[0]
-                
+            elif len(all_teacher_ids) == 0 :
+                _logger.info('Set teacher None on %s' % (all_teacher_ids[0], rec))
+                rec.responsible_id = None
 
     bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', 'group_id', 'bloc_id', string='Blocs', copy=False)
     
