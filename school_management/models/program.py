@@ -315,13 +315,8 @@ class Course(models.Model):
         for rec in self :
             all_teacher_ids = rec.course_group_id.course_ids.mapped('teacher_ids')
             if len(all_teacher_ids) == 1:
-                rec.course_group_id.write ({
-                    'responsible_id' : all_teacher_ids[0],
-                })
-            else :
-                rec.course_group_id.write ({
-                    'responsible_id' : False,
-                })
+                _logger.info('Set teacher %s on %s' % (all_teacher_ids[0], rec.course_group_id))
+                rec.course_group_id.responsible_id = all_teacher_ids[0]
     
     @api.onchange('hours','credits')
     def onchange_check_programs(self):
