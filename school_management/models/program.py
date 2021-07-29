@@ -309,6 +309,13 @@ class Course(models.Model):
                 course.name = course.title
 
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]")
+
+    @api.onchange('teacher_ids')
+    def onchange_teachers(self):
+        for rec in self :
+            all_teacher_ids = rec.course_ids.mapped('teacher_ids')
+            if len(all_teacher_ids) == 1:
+                rec.responsible_id = all_teacher_ids[0]
     
     @api.onchange('hours','credits')
     def onchange_check_programs(self):

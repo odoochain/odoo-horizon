@@ -123,19 +123,44 @@
                     <field name="state"/>
                     <field name="decision"/>
                 </xpath>
-                <xpath expr="//field[@name='bloc_ids']//div[@class='row'][last()]" position="before">
-                    <div class="row">
+                <xpath expr="//field[@name='bloc_ids']//div[@class='oe_module_vignette']" position="replace">
+                    <div class="oe_module_vignette">
+                      <div class="row mb-2">
+                        <div class="col-6">
+                          <h5><field name="uid" /></h5>
+                        </div>
+                        <div class="col-6 text-right">
+                          <field name="year_id"/>
+                        </div>
+                      </div>
+                      <div class="row">
                         <div class="col-6">
                             Acquis : <field name="total_acquiered_not_dispensed_credits" /> ECTS
                         </div>
                         <div class="col-6">
+                            Total : <field name="total_credits"/> ECTS
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          Heures : <field name="total_hours"/>
+                        </div>
+                        <div class="col-6">
                             Moyenne : <field name="evaluation"/>
                         </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            Decision : <field name="decision"/>
+                      </div>
+                      <div class="row mb-2" style="min-height: 45px;">
+                         <div class="col-12">
+                           Decision : <field name="decision"/>
+                         </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-8">
                         </div>
+                        <div class="col-4">
+                            <button type="object" name="action_open_form" class="oe_highlight btn btn-primary">Open</button>
+                        </div>
+                      </div>
                     </div>
                 </xpath>
                 <xpath expr="//field[@name='course_group_summaries']/kanban/field[@name='total_credits']" position="after">
@@ -148,10 +173,10 @@
                 </xpath>
                 <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs_evals')]" position="inside">
                     <div class="row">
-                        <field name="trials"/>
+                        Unité suivie à <field name="trials" class="oe_inline"/> reprise(s).
                     </div>
                     <div class="row">
-                        <field name="final_result_disp"/>
+                        Dernière évaluation de <field name="final_result_disp" class="oe_inline"/>.
                     </div>
                 </xpath>
                 <!--<xpath expr="//field[@name='ind_course_group_ids']/tree" position="attributes">

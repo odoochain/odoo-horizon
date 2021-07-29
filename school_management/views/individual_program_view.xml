@@ -98,13 +98,11 @@
                             <div style="position: relative; border-top : 10px solid #28a745;">
                                 <div class="oe_module_vignette">
                                   <div class="row">
-                                    <div class="col-12">
-                                      <field name="uid" />
+                                    <div class="col-6">
+                                      <h5><field name="uid" /></h5>
                                     </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-12">
-                                      <field name="name"/>
+                                    <div class="col-6 text-right">
+                                      <field name="year_id"/>
                                     </div>
                                   </div>
                                   <div class="row">
@@ -152,7 +150,8 @@
                                         <i><field name="responsible_id"/></i>
                                       </div>
                                       <div class="row m-2">
-                                        <i class="fa fa-clock-o"></i><![CDATA[&nbsp;]]><field name="total_hours"/><![CDATA[&nbsp;]]>-<![CDATA[&nbsp;]]><i class="fa fa-graduation-cap"></i><![CDATA[&nbsp;]]><field name="total_credits"/>
+                                        <div class="col-3"><b><field name="total_credits"/> ECTS</b></div>
+                                        <div class="col-3"><field name="total_hours"/> Heures</div>
                                       </div>
                                     </div>
                                     <div class="col-12 col-md-3 horizon_cgs_evals">
