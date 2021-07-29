@@ -219,6 +219,18 @@ class CourseGroup(models.Model):
     
     course_ids = fields.One2many('school.course', 'course_group_id', domain=['|',('active','=',False),('active','=',True)], string='Courses', copy=True, ondelete="cascade")
 
+    @api.onchange('course_ids')
+    def onchange_teachers(self):
+        for rec in self :
+            all_teacher_ids = rec.course_ids.mapped('teacher_ids')
+            if len(all_teacher_ids) == 1 :
+                _logger.info('Set teacher %s on %s' % (all_teacher_ids[0], rec))
+                rec.responsible_id = all_teacher_ids[0]
+            elif len(all_teacher_ids) == 1 :
+                _logger.info('Set teacher None on %s' % rec)
+                rec.responsible_id = None
+                
+
     bloc_ids = fields.Many2many('school.bloc','school_bloc_course_group_rel', 'group_id', 'bloc_id', string='Blocs', copy=False)
     
     name = fields.Char(string='Name', compute='compute_ue_name', store=True)
@@ -309,14 +321,6 @@ class Course(models.Model):
                 course.name = course.title
 
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]")
-
-    @api.onchange('teacher_ids')
-    def onchange_teachers(self):
-        for rec in self :
-            all_teacher_ids = rec.course_group_id.course_ids.mapped('teacher_ids')
-            if len(all_teacher_ids) == 1:
-                _logger.info('Set teacher %s on %s' % (all_teacher_ids[0], rec.course_group_id))
-                rec.course_group_id.responsible_id = all_teacher_ids[0]
     
     @api.onchange('hours','credits')
     def onchange_check_programs(self):
