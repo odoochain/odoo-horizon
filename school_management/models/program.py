@@ -223,6 +223,7 @@ class CourseGroup(models.Model):
 
     @api.depends('course_ids.teacher_ids')
     def compute_default_responsible_id(self):
+        _logger.info('compute_default_responsible_id')
         for rec in self :
             all_teacher_ids = rec.course_ids.mapped('teacher_ids')
             if len(all_teacher_ids) == 1 :
