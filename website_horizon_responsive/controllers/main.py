@@ -70,7 +70,7 @@ class BookingController(http.Controller):
     def responsive_booking_new(self, debug=False, **k):
         values = {
             'user': request.env.user,
-            'today' : fields.Datetime.to_string(datetime.today()),,
+            'today' : fields.Datetime.to_string(datetime.today()),
             'tomorrow' : fields.Datetime.to_string(datetime.today() + timedelta(days=1))
         }
         return request.render('website_horizon_responsive.booking_new', values)
