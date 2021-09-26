@@ -658,10 +658,10 @@
                     <div class="entry-content">
                         <table class="table table-striped">
                             <colgroup>
-                                <col style="width:600px" />
-                                <col style="width:100px" />
-                                <col style="width:100px" />
-                                <col style="width:100px" />
+                                <col style="width:600px"/>
+                                <col style="width:100px"/>
+                                <col style="width:100px"/>
+                                <col style="width:100px"/>
                             </colgroup>
                             <tr>
                                 <td>Titre</td>
@@ -671,20 +671,20 @@
                             </tr>
                             <tr t-foreach="course_group.course_ids" t-as="course">
                                 <td>
-                                    <a t-esc="course.title" t-att-href="'/course/%s' % course.id" target="new" style="cursor: pointer;" />
+                                    <a t-esc="course.title" t-att-href="'#course_documentation_id_%d' % course.id" style="cursor: pointer;"/>
                                     <br/>
-                                    <t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name" />
+                                    <t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name"/>
                                         <t t-if="teacher_index &lt; (teacher_size - 1)">,</t>
                                     </t>
                                 </td>
                                 <td class="text-center">
-                                    <t t-esc="course.hours" />
+                                    <t t-esc="course.hours"/>
                                 </td>
                                 <td class="text-center">
-                                    <t t-esc="course.credits" />
+                                    <t t-esc="course.credits"/>
                                 </td>
                                 <td class="text-center">
-                                    <t t-esc="course.weight" />
+                                    <t t-esc="course.weight"/>
                                 </td>
                             </tr>
                         </table>
@@ -692,47 +692,47 @@
                 </div>
             </article>
             <t t-foreach="course_group.course_ids" t-as="course">
-            <t t-set="desc" t-value="course.documentation_id" />
+            <t t-set="desc" t-value="course.documentation_id"/>
             <t t-if="desc">
-            <article class="twentyseventeen-panel page type-page status-publish hentry">
+            <article t-att-id="'course_documentation_id_%d' % course.id" class="twentyseventeen-panel page type-page status-publish hentry">
                 <div class="panel-content">
                     <header class="entry-header">
-                        <h1 class="entry-title"><span t-field="course.title" /> </h1>
-                        <i>by <t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name" /><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t></i>
+                        <h1 class="entry-title"><span t-field="course.title"/> </h1>
+                        <i>by <t t-foreach="course.teacher_ids" t-as="teacher"><i style="color:grey;" t-esc="teacher.name"/><t t-if="teacher_index &lt; (teacher_size - 1)">,</t></t></i>
                     </header>
                     <!-- .entry-header -->
                     <div class="entry-content">
                         <h5>Identification</h5>
                         <p>
                             <ul class="list-group">
-                                <li class="list-group-item">Nombre de crédits associés : <span t-field="course.credits" /> Crédits ECTS</li>
-                                <li class="list-group-item">Pondération au sein de l’UE : <span t-field="course.weight" /></li>
+                                <li class="list-group-item">Nombre de crédits associés : <span t-field="course.credits"/> Crédits ECTS</li>
+                                <li class="list-group-item">Pondération au sein de l’UE : <span t-field="course.weight"/></li>
                                 <li class="list-group-item">Caractère obligatoire : OUI</li>
                                 <li class="list-group-item">Période de l’activité d’apprentissage : 1er Quadrimestre et 2e Quadrimestre</li>
-                                <li class="list-group-item">Volume horaire : <span t-field="course.hours" /> h</li>
+                                <li class="list-group-item">Volume horaire : <span t-field="course.hours"/> h</li>
                             </ul>
                         </p>
                         <h5>Contenu</h5>
-                        <p><span t-raw="desc.content" /></p>
+                        <p><span t-raw="desc.content"/></p>
                         <h5>Méthode</h5>
-                        <p><span t-raw="desc.method" /></p>
+                        <p><span t-raw="desc.method"/></p>
                         <h5>Acquis d'apprentissage spécifiques</h5>
-                        <p><span t-raw="desc.learning_outcomes" /></p>
+                        <p><span t-raw="desc.learning_outcomes"/></p>
                         <h5>Éléments de référence</h5>
-                        <p><span t-raw="desc.references" /></p>
+                        <p><span t-raw="desc.references"/></p>
                         <h5>Pre-Co Requis</h5>
-                        <p><span t-raw="desc.pre_co_requiered" /></p>
+                        <p><span t-raw="desc.pre_co_requiered"/></p>
                         <h5>Modes d'évaluation</h5>
-                        <p><span t-raw="desc.evaluation_method" /></p>
+                        <p><span t-raw="desc.evaluation_method"/></p>
                     </div>
                 </div>
             </article>
             </t>
             <t t-if="not desc">
-            <article class="twentyseventeen-panel page type-page status-publish hentry">
+            <article t-att-id="'course_documentation_id_%d' % course.id" class="twentyseventeen-panel page type-page status-publish hentry">
                 <div class="panel-content">
                     <header class="entry-header">
-                        <h1 class="entry-title"><span t-field="course.title" /> </h1>
+                        <h1 class="entry-title"><span t-field="course.title"/> </h1>
                     </header>
                     <!-- .entry-header -->
                     <div class="entry-content">
