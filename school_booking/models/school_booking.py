@@ -130,6 +130,9 @@ class Event(models.Model):
                 
                 if dt < (datetime.now() + timedelta(minutes=-30)):
                     raise ValidationError(_("You cannot book in the past."))
+                    
+                if dt.hour > 19 and dt.weekday() > 0 :
+                    raise ValidationError(_("You cannot book after 20:00 during the WE."))
                 
                 event_day = fields.Datetime.from_string(self.start_datetime).date()
                 
