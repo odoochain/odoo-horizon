@@ -164,17 +164,6 @@
                 </kanban>
               </field>
             </div>
-            <!--<div id="program_cgs" class="mb-4">
-              <h2>Unités d'enseignement du cycle</h2>
-              <field name="course_group_ids">
-                <tree string="Course Group" create="0" delete="0">
-                  <field name="uid"/>
-                  <field name="name"/>
-                  <field name="total_hours" sum="hours_program"/>
-                  <field name="total_credits" sum="credits_program"/>
-                 </tree>
-              </field>
-            </div>-->
           </sheet>
           <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers" />

@@ -108,7 +108,7 @@
                  <field name="name"/>
                 </h1>
                 <div class="oe_fade">
-                    <span class="o_field_widget">Id :</span><field name="uid"/>
+                    <field name="uid"/>
                 </div>
               </div>
             </group>
@@ -287,7 +287,7 @@
                <field name="name"/>
               </h1>
               <div class="oe_fade">
-                  <span class="o_field_widget">Id :</span><field name="uid"/>
+                  <field name="uid"/>
               </div>
             </div>
             <group col="4">
@@ -472,7 +472,7 @@
                <field name="name"/>
               </h1>
               <div class="oe_fade">
-                  <span class="o_field_widget">Id :</span><field name="uid"/>
+                  <field name="uid"/>
               </div>
             </div>
             <group col="4">
@@ -671,7 +671,7 @@
                <field name="title"/>
               </h1>
               <div class="oe_fade">
-                  <span class="o_field_widget">Id :</span><field name="uid"/>
+                  <field name="uid"/>
               </div>
             </div>
             <group col="4">
