@@ -353,16 +353,10 @@
             <field name="inherit_id" ref="school_management.view_individual_course_form" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='weight']" position="after">
-                    <label for="type" string="Type of results" />
-                    <field name="type" widget="radio" colspan="5" nolabel="1" options="{'horizontal': true}" />
-                </xpath>
                 <xpath expr="//sheet" position="inside">
                     <group col="4" string="Results">
-                        <field name="ann_result" attrs="{'invisible': [('type','in',['S','T','D'])]}" />
-                        <field name="jan_result" attrs="{'invisible': [('type','in',['S','D'])]}" />
                         <field name="jun_result" />
-                        <field name="sept_result" attrs="{'invisible': [('type','in',['D'])]}" />
+                        <field name="sept_result" />
                     </group>
                     <group col="4">
                         <group col="2" colspan="2" string="First Session">
