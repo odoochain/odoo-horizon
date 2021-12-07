@@ -34,22 +34,8 @@
             <field eval="18" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='total_credits']" position="after">
-                    <field name="total_acquiered_not_dispensed_credits" />
-                    <field name="total_not_dispensed_credits" />
                     <field name="state"/>
                 </xpath>
-                <!--<xpath expr="//notebook[last()]" position="inside">
-                    <page name="credit_lines" string="Credit Lines" attrs="{'invisible': [('student','=',False)]}">
-                        <field name="credit_line_ids">
-                            <tree string="Credit Lines" context="{'default_student_id' : active_id}">
-                                <field name="date" />
-                                <field name="cycle_id" />
-                                <field name="individual_bloc_id" />
-                                <field name="credits" />
-                            </tree>
-                        </field>
-                    </page>
-                </xpath>-->
             </field>
         </record>
 
@@ -104,10 +90,6 @@
                     </div>
                 </xpath>-->
                 <xpath expr="//field[@name='required_credits']" position="after">         
-                    <!--<field name="historical_bloc_1_credits"/>
-                    <field name="historical_bloc_1_eval"/>
-                    <field name="historical_bloc_2_credits"/>
-                    <field name="historical_bloc_2_eval"/>-->
                     <field name="total_registered_credits" />
                     <field name="total_acquiered_credits" />
                     <field name="evaluation" />
@@ -117,8 +99,6 @@
                     <field name="grade_comments" colspan="4"/>
                 </xpath>
                 <xpath expr="//field[@name='bloc_ids']/kanban/field[@name='total_credits']" position="after">
-                    <field name="total_acquiered_not_dispensed_credits" />
-                    <field name="total_not_dispensed_credits" />
                     <field name="evaluation"/>
                     <field name="state"/>
                     <field name="decision"/>

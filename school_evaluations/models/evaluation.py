@@ -227,12 +227,7 @@ class IndividualBloc(models.Model):
     total_acquiered_hours = fields.Integer(compute="compute_credits",string="Acquiered Hours",store=True)
     total_not_acquiered_credits = fields.Integer(compute='compute_credits', string='Not Acquiered Credits',store=True)
     total_not_acquiered_hours = fields.Integer(compute='compute_credits', string='Not Acquiered Hours',store=True)
-    total_dispensed_credits = fields.Integer(compute="compute_credits",string="Dispensed Credits",store=True)
-    total_dispensed_hours = fields.Integer(compute="compute_credits",string="Dispensed Hours",store=True)
-    total_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Not Dispensed Credits",store=True)
-    total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Not Dispensed Hours',store=True)
-    total_acquiered_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Acquiered Not Dispensed Credits",store=True)
-    
+
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     decision = fields.Text(string="Decision",track_visibility='onchange')
     exclude_from_deliberation = fields.Boolean(string='Exclude from Deliberation', default=False)
@@ -338,17 +333,7 @@ class IndividualBloc(models.Model):
             rec.total_acquiered_hours = sum([icg.total_hours for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
             rec.total_not_acquiered_credits = rec.total_credits - rec.total_acquiered_credits
             rec.total_not_acquiered_hours = rec.total_hours - rec.total_acquiered_hours
-            
-            # WAS BEFORE May 2018
-            #rec.total_dispensed_credits = sum([icg.total_dispensed_credits for icg in rec.course_group_ids])
-            #rec.total_dispensed_hours = sum([icg.total_dispensed_hours for icg in rec.course_group_ids])
-            
-            rec.total_dispensed_credits = sum([icg.total_credits for icg in rec.course_group_ids if icg.dispense and not icg.is_ghost_cg])
-            rec.total_dispensed_hours = sum([icg.total_hours for icg in rec.course_group_ids if icg.dispense and not icg.is_ghost_cg])
-            rec.total_not_dispensed_credits = rec.total_credits - rec.total_dispensed_credits
-            rec.total_not_dispensed_hours = rec.total_hours - rec.total_dispensed_hours
-            rec.total_acquiered_not_dispensed_credits = rec.total_acquiered_credits - rec.total_dispensed_credits
-        
+
     @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered', 'course_group_ids.is_ghost_cg')
     def compute_evaluation(self):
         for rec in self:
@@ -357,7 +342,7 @@ class IndividualBloc(models.Model):
             total_second = 0
             total_weight = 0
             for icg in rec.course_group_ids:
-                if icg.acquiered == 'A' and icg.total_weight > 0 and not icg.is_ghost_cg : # if total_weight == 0 means full dispense
+                if icg.acquiered == 'A'
                     total += icg.final_result * icg.total_weight
                     total_first += icg.first_session_result * icg.total_weight
                     total_second += icg.second_session_result * icg.total_weight
@@ -369,7 +354,6 @@ class IndividualBloc(models.Model):
             else:
                 _logger.debug('total_weight is 0 on Bloc %s' % rec.name)
                 rec.evaluation = None
-        
         
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
