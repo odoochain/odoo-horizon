@@ -1343,11 +1343,6 @@ msgstr ""
 msgid "Discussions"
 msgstr ""
 
-#. module: school_management
-#: model:ir.model.fields,field_description:school_management.field_school_individual_course_dispense
-msgid "Dispensed"
-msgstr "Dispensé"
-
 #. modules: mail, school_management
 #: model:ir.model.fields,field_description:mail.field_email_template_preview_display_name
 #: model:ir.model.fields,field_description:mail.field_mail_alias_display_name

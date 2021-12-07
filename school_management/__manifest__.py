@@ -33,7 +33,6 @@
         'views/program_view.xml',
         'views/individual_program_view.xml',
         'views/configuration_view.xml',
-        'report/student_report.xml',
         'report/report_program.xml',
         'sequences/school_sequence.xml',
         'security/ir.model.access.csv',
