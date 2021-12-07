@@ -342,7 +342,7 @@ class IndividualBloc(models.Model):
             total_second = 0
             total_weight = 0
             for icg in rec.course_group_ids:
-                if icg.acquiered == 'A'
+                if icg.acquiered == 'A' :
                     total += icg.final_result * icg.total_weight
                     total_first += icg.first_session_result * icg.total_weight
                     total_second += icg.second_session_result * icg.total_weight
