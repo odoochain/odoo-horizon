@@ -316,13 +316,8 @@
                                                     <t t-esc="course_group.total_credits"/>
                                                 </td>
                                                 <td>
-                                                    <t t-if="course_group.dispense">
-                                                        <span class="label label-info">Val</span>
-                                                    </t>
-                                                    <t t-if="not course_group.dispense">
-                                                        <span class="label label-success" t-if="course_group.acquiered == 'A'">Acquis</span>
-                                                        <span class="label label-warning" t-if="course_group.acquiered == 'NA'">Non Acquis</span>
-                                                    </t>
+                                                    <span class="label label-success" t-if="course_group.acquiered == 'A'">Acquis</span>
+                                                    <span class="label label-warning" t-if="course_group.acquiered == 'NA'">Non Acquis</span>
                                                 </td>
                                             </tr>
                                             <t t-foreach="course_group.course_ids" t-as="course">
@@ -525,13 +520,8 @@
                                                     <t t-esc="course_group.total_credits"/>
                                                 </td>
                                                 <td>
-                                                    <t t-if="course_group.dispense">
-                                                        <span class="label label-info btn" t-att-data-course-group-id="course_group.id">Val</span>
-                                                    </t>
-                                                    <t t-if="not(course_group.dispense)">
-                                                        <span class="label label-success" t-if="course_group.acquiered == 'A'">Acq</span>
-                                                        <span class="label label-warning btn o_set_delib" t-if="course_group.acquiered == 'NA'" t-att-data-course-group-id="course_group.id">NoAcq</span>
-                                                    </t>
+                                                    <span class="label label-success" t-if="course_group.acquiered == 'A'">Acq</span>
+                                                    <span class="label label-warning btn o_set_delib" t-if="course_group.acquiered == 'NA'" t-att-data-course-group-id="course_group.id">NoAcq</span>
                                                 </td>
                                             </tr>
                                             <t t-foreach="course_group.course_ids" t-as="course">
@@ -687,7 +677,7 @@
                                                     <t t-esc="course_group.final_result_disp"/>
                                                 </td>
                                                 <td>
-                                                    <t t-esc="course_group.total_not_dispensed_credits"/>
+                                                    <t t-esc="course_group.total_credits"/>
                                                 </td>
                                                 <td>
                                                     <t t-if="course_group.bloc_id">
@@ -723,7 +713,7 @@
                                                     <i><t t-esc="course.credits"/></i>
                                                 </td>
                                                 <td colspan="5">
-                                                    <i><t t-esc="course.dispense_approval_comment"/></i>
+                                                    <i></i>
                                                 </td>
                                             </tr>
                                             </t>
@@ -733,7 +723,7 @@
                                 </table>
                             </div>
                             <div t-if="len(o.bloc_ids) > 0" class="col-xs-12 mb16" style="font-size:160%;font-weight:800;">
-                                Programme annuel de l'étudiant - PAE-<t t-esc="o.bloc_ids[-1].id"/> (<t t-esc="o.bloc_ids[-1].total_not_dispensed_credits"/> Crédits)
+                                Programme annuel de l'étudiant - PAE-<t t-esc="o.bloc_ids[-1].id"/> (<t t-esc="o.bloc_ids[-1].total_credits"/> Crédits)
                             </div>
                             <div class="col-xs-12">
                                     <table class="table table-condensed table-bordered result_table">

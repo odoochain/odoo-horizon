@@ -39,14 +39,11 @@ class CourseGroup(models.Model):
         _logger.info('Add cg %s to %s' % (self.id, program_id))
         if program_id :
             program_id = self.env['school.individual_program'].browse(program_id)[0]
-            courses = []
-            for course in self.course_ids:
-                courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
             cg = program_id.valuated_course_group_ids.create({
                 'valuated_program_id' : program_id.id,
                 'source_course_group_id': self.id, 
                 'acquiered' : 'A',
-                'course_ids': courses,
+                'course_ids': self.course_ids.ids,
                 'state' : 'candidate',})
             program_id._get_total_acquiered_credits()
             return {
@@ -104,15 +101,7 @@ class IndividualProgram(models.Model):
             rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
             rec.total_registered_credits = rec.total_acquiered_credits + total_current
             rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
-    
-    @api.depends('valuated_course_group_ids')
-    def _onchange_valuated_course_group_ids(self):
-        for cg in self.valuated_course_group_ids :
-            cg.course_ids.write({
-                'dispense' : True
-            })
-            self._get_total_acquiered_credits()
-            
+
     @api.depends('grade')
     def _onchange_grade(self):
         if self.grade:
@@ -326,7 +315,7 @@ class IndividualBloc(models.Model):
             'context': ctx,
         }
         
-    @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.dispense', 'course_group_ids.first_session_computed_result_bool', 'course_group_ids.is_ghost_cg')
+    @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.first_session_computed_result_bool', 'course_group_ids.is_ghost_cg')
     def compute_credits(self):
         for rec in self:
             rec.total_acquiered_credits = sum([icg.total_credits for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
@@ -472,8 +461,6 @@ class IndividualCourseGroup(models.Model):
         for rec in self:
             if not rec.final_result_bool:
                 rec.final_result_disp = ""
-            if rec.dispense:
-                rec.final_result_disp = "Val"
             else :
                 rec.final_result_disp = "%.2f" % rec.final_result
     
@@ -583,13 +570,6 @@ class IndividualCourseGroup(models.Model):
                 rec.final_result_bool = False
             if final_result >= 10 : 
                 rec.acquiered = 'A'
-    
-    def compute_acquiered(self):
-        for rec in self:
-            if rec.dispense:
-                rec.acquiered  = 'A'
-            else :
-                rec.acquiered = rec.second_session_acquiered
 
 class IndividualCourse(models.Model):
     '''Individual Course'''

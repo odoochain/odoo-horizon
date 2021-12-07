@@ -35,7 +35,6 @@ class StudentReport(models.Model):
     bloc_id = fields.Many2one('school.bloc', string="Bloc")
     gender = fields.Selection([('male', 'Male'),('female', 'Female')])
     #has_paid_current_minerval = fields.Integer(string="Has paid current minerval")
-    dispenses = fields.Integer(string="Dispenses")
 
     def init(self):
         """ School Student main report """
