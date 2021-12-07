@@ -330,21 +330,6 @@
         </record>
 
         <!-- Add evaluation to Individual Course form view -->
-        <record id="course_eval_form" model="ir.ui.view">
-            <field name="name">school.course.eval.view</field>
-            <field name="model">school.course</field>
-            <field name="inherit_id" ref="school_management.course_form" />
-            <field eval="25" name="priority" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='url_ref']" position="after">
-                    <newline/>
-                    <label for="type" string="Type of results" />
-                    <field name="type" widget="radio" colspan="3" nolabel="1" options="{'horizontal': true}" />
-                </xpath>
-            </field>
-        </record>
-
-        <!-- Add evaluation to Individual Course form view -->
         <record id="individual_course_eval_form" model="ir.ui.view">
             <field name="name">school.individual_course.eval.view</field>
             <field name="model">school.individual_course</field>
@@ -411,19 +396,6 @@
                     <separator/>
                     <filter name="no_res_s1" string="No result for S1" domain="[('first_session_result_bool', '=', False)]" />
                     <filter name="no_res_s2" string="No result for S2" domain="[('second_session_result_bool', '=', False)]" />
-                </xpath>
-            </field>
-        </record>
-
-        <!-- Add evaluation to Individual Course form view -->
-        <record id="course_eval_tree" model="ir.ui.view">
-            <field name="name">school.course.eval.tree</field>
-            <field name="model">school.course</field>
-            <field name="inherit_id" ref="school_management.view_course_tree" />
-            <field eval="25" name="priority" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='hours']" position="before">
-                    <field name="type" />
                 </xpath>
             </field>
         </record>
