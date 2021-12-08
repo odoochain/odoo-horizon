@@ -439,7 +439,6 @@
               <h3 class="o_row row no-gutters d-flex">
                   <div class="col">
                     <label for="uid" invisible="1"/>
-                    <label for="bloc_id" invisible="1"/>
                     <small class="oe_grey" ><field name="uid"/></small>
                   </div>
               </h3>
