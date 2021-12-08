@@ -359,7 +359,15 @@ class Cycle(models.Model):
             ('short', 'Short'),
         ], string='Type')
     grade = fields.Char(required=True, string='Grade', size=60)
-    
+
+class Domain(models.Model):
+    '''Domain'''
+    _order = 'name'
+    _name = 'school.domain'
+    name = fields.Char(required=True, string='Name', size=40)
+    description = fields.Text(string='Description')
+    long_name = fields.Char(required=True, string='Long Name', size=40)
+
 class Section(models.Model):
     '''Section'''
     _order = 'name'

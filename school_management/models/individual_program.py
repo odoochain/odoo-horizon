@@ -386,8 +386,6 @@ class IndividualCourse(models.Model):
     hours = fields.Integer(related="source_course_id.hours", readonly=True)
     weight =  fields.Float(related="source_course_id.weight", readonly=True, default=1.00)
     
-    dispense = fields.Boolean(string="Dispensed",default=False,track_visibility='onchange')
-    
     source_course_id = fields.Many2one('school.course', string="Source Course", auto_join=True, ondelete="restrict")
     
     source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc", related='course_group_id.bloc_id.source_bloc_id', readonly=True, store=True)
