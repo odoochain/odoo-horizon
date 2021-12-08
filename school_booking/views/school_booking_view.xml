@@ -78,7 +78,6 @@
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
         <tree string="Bookings">
-          <field name="state" invisible="1" />
           <field name="name" />
           <field name="room_id" />
           <field name="start" />
