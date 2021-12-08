@@ -83,7 +83,7 @@
           <field name="start" />
           <field name="stop" />
           <field name="recurrency" />
-          <field name="final_date" />
+          <!--<field name="final_date" />-->
         </tree>
       </field>
     </record>
