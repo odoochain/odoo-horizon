@@ -73,18 +73,13 @@ class Users(models.Model):
     '''Users'''
     _inherit = ['res.users']
     
-    def __init__(self, pool, cr):
-        """ Override of __init__ to add access rights on notification_email_send
-            and alias fields. Access rights are disabled by default, but allowed
-            on some specific fields defined in self.SELF_{READ/WRITE}ABLE_FIELDS.
-        """
-        init_res = super(Users, self).__init__(pool, cr)
-        # duplicate list to avoid modifying the original reference
-        self.SELF_WRITEABLE_FIELDS = list(self.SELF_WRITEABLE_FIELDS)
-        self.SELF_WRITEABLE_FIELDS.extend(['current_year_id'])
-        # duplicate list to avoid modifying the original reference
-        self.SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
-        self.SELF_READABLE_FIELDS.extend(['current_year_id'])
+    @property
+    def SELF_READABLE_FIELDS(self):
+        return super().SELF_READABLE_FIELDS + ['current_year_id']
+    
+    @property
+    def SELF_READABLE_FIELDS(self):
+        return super().SELF_READABLE_FIELDS + ['current_year_id']
     
     current_year_id = fields.Many2one('school.year', string="Current Year", default="1")
 
@@ -120,7 +115,7 @@ class Partner(models.Model):
     reg_number = fields.Char('Registration Number')
     mat_number = fields.Char('Matricule Number')
     
-    student_program_ids = fields.One2many('school.individual_program', 'student_id', string='Cycles')
+    student_program_ids = fields.One2many('school.individual_program', 'student_id', string='Programs')
     student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
 
     # Secondary adress
