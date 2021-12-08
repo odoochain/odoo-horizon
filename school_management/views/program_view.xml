@@ -858,7 +858,7 @@
         </record>
   
     <!-- Top menu item -->
-    <menuitem name="Programs" id="menu_main_program" icon="fa-book" web_icon="school_management,static/description/icon.png" sequence="60"  groups="school_management.group_program_management"/>
+    <menuitem name="Programs" id="menu_main_program" web_icon="school_management,static/description/icon.png" sequence="60"  groups="school_management.group_program_management"/>
 
     <!-- <menuitem name="Programs" parent="menu_main_program" id="menu_program" sequence="5" /> -->
     

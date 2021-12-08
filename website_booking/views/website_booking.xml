@@ -58,7 +58,7 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem name="Online Booking" id="menu_school_booking" icon="fa-calendar" web_icon="calendar,static/description/icon.png" sequence="90" action="action_website_booking" />
+        <menuitem name="Online Booking" id="menu_school_booking" web_icon="calendar,static/description/icon.png" sequence="90" action="action_website_booking" />
 
     
 </odoo>

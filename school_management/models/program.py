@@ -325,7 +325,7 @@ class Course(models.Model):
             else:
                 course.name = course.title
 
-    teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]")
+    teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]") # TODO RENAME RELATION TABLE
     
     @api.onchange('hours','credits')
     def onchange_check_programs(self):

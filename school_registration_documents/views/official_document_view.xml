@@ -22,9 +22,6 @@
 -->
 <odoo>
     
-        
-        <!--<menuitem name="Official Documents" id="menu_official_document" icon="fa-book" web_icon="website_portal_sale,static/description/icon.png" sequence="65" />-->
-        
         <!-- Official Document List View -->
         <record id="view_official_document_list" model="ir.ui.view">
             <field name="name">school.official_document.tree</field>

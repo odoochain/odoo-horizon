@@ -24,7 +24,7 @@
     
       
       <!-- Top menu item -->
-      <menuitem name="Teacher Management" id="menu_teacher_management" icon="fa-book" web_icon="school_teacher_management,static/description/icon.png" sequence="50" />
+      <menuitem name="Teacher Management" id="menu_teacher_management" web_icon="school_teacher_management,static/description/icon.png" sequence="50" />
       
       <!-- Teacher Designation Tree View -->
         <record id="view_teacher_designation_tree" model="ir.ui.view">
