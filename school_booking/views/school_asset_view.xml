@@ -91,7 +91,7 @@
           <field name="name" />
           <!--<field name="name" filter_domain="[('name','ilike',self)]" />
           <group expand="1" string="Group By">
-            <filter string="Resource Type" name="resource_type" context="{'group_by':['resource_type']}" />
+            <filter string="Resource Type" name="resource_type" context="{'group_by':'resource_type'}" />
           </group>-->
         </search>
       </field>
@@ -200,7 +200,7 @@
         <search string="Search Asset">
           <field name="name" filter_domain="[('name','ilike',self)]" />
           <group expand="1" string="Group By">
-            <filter string="Resource Type" name="resource_type" context="{'group_by':['resource_type']}" />
+            <filter string="Resource Type" name="resource_type" context="{'group_by':'resource_type'}" />
           </group>
         </search>
       </field>
