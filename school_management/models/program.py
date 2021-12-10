@@ -315,6 +315,7 @@ class Course(models.Model):
     
     name = fields.Char(string='Name', compute='compute_name', store=True)
     
+    is_annual = fields.Boolean(string="Is Annual", default=False)
     has_second_session = fields.Boolean(string="Has a second session", default=True)
     
     @api.depends('title','level')

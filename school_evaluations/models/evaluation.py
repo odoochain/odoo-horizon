@@ -575,8 +575,18 @@ class IndividualCourse(models.Model):
     '''Individual Course'''
     _inherit = 'school.individual_course'
     
-    jun_result= fields.Char(string='June Result',track_visibility='onchange')
-    sept_result= fields.Char(string='September Result',track_visibility='onchange')
+    type = fields.Selection(([('S', 'Simple'),('C', 'Complex'),('D','Deferred')]),string='Type', readonly=True) # Kept for archiving purpose
+    
+    ann_result= fields.Char(string='Annual Result',readonly=True) # Kept for archiving purpose
+    jan_result= fields.Char(string='January Result',readonly=True) # Kept for archiving purpose
+    jun_result= fields.Char(string='June Result',readonly=True) # Kept for archiving purpose
+    sept_result= fields.Char(string='September Result',readonly=True) # Kept for archiving purpose
+    
+    partial_result = fields.Char(string='Partial Result',track_visibility='onchange')
+    final_result = fields.Char(string='Final Result',track_visibility='onchange')
+    second_result = fields.Char(string='Second Result',track_visibility='onchange')
+    
+    is_annual = fields.Boolean(string="Is Annual", related='source_course_id.is_annual',readonly=True)
     
     ## First Session ##
     
