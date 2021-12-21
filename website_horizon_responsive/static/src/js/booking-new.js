@@ -99,11 +99,7 @@ $(document).ready(function(){
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
         $('#to_hour').timepicker('option', 'minTime', fromTime);
-        if (fromTime > toTime) {
-            $('#to_hour').timepicker('setTime', moment(fromTime).add(moment.duration(1, 'hours')).toDate());
-        }
-        updateRoomList();
-        updateSendButton();
+        $('#to_hour').timepicker('setTime', moment(fromTime).add(moment.duration(1, 'hours')).toDate());
     });
     
     $('#to_hour').on('change', function() {
