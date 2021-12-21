@@ -100,7 +100,7 @@ $(document).ready(function(){
         var toTime = $('#to_hour').timepicker('getTime');
         $('#to_hour').timepicker('option', 'minTime', fromTime);
         if (fromTime > toTime) {
-            $('#to_hour').timepicker('setTime', fromTime.add(moment.duration(1, 'hours')));
+            $('#to_hour').timepicker('setTime', moment(fromTime).add(moment.duration(1, 'hours')));
         }
         updateRoomList();
         updateSendButton();
