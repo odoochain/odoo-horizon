@@ -575,29 +575,33 @@ class IndividualCourse(models.Model):
     '''Individual Course'''
     _inherit = 'school.individual_course'
     
-    jun_result= fields.Char(string='June Result',track_visibility='onchange')
-    sept_result= fields.Char(string='September Result',track_visibility='onchange')
+    type = fields.Selection(([('S', 'Simple'),('C', 'Complex'),('D','Deferred')]),string='Type', readonly=True) # Kept for archiving purpose
+    
+    ann_result= fields.Char(string='Annual Result',readonly=True) # Kept for archiving purpose
+    jan_result= fields.Char(string='January Result',readonly=True) # Kept for archiving purpose
+    jun_result= fields.Char(string='June Result',readonly=True) # Kept for archiving purpose
+    sept_result= fields.Char(string='September Result',readonly=True) # Kept for archiving purpose
+    
+    partial_result = fields.Char(string='Partial Result',track_visibility='onchange')
+    final_result = fields.Char(string='Final Result',track_visibility='onchange')
+    second_result = fields.Char(string='Second Result',track_visibility='onchange')
+    
+    is_annual = fields.Boolean(string="Is Annual", related='source_course_id.is_annual',readonly=True)
     
     ## First Session ##
     
+    first_session_exception = fiels.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),string='First Session Exception')
     first_session_result= fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
     first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
 
     ## Second Session ##
     
+    second_session_exception = fiels.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),string='Second Session Exception')
     second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg', digits=dp.get_precision('Evaluation'))
     second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
 
-            
-    def _parse_result(self,input):
-        f = float(input)
-        if(f < 0 or f > 20):
-            raise ValidationError("Evaluation shall be between 0 and 20")
-        else:
-            return f
-    
     @api.depends('jun_result','sept_result')
     def compute_results(self):
         for rec in self:
@@ -605,21 +609,44 @@ class IndividualCourse(models.Model):
             rec.second_session_result_bool = False
             if rec.jun_result :
                 try:
-                    f = rec._parse_result(rec.jun_result)
+                    if rec.jun_result == "NP":
+                        rec.first_session_exception = 'NP'
+                        rec.first_session_result_bool = True
+                    if rec.jun_result == "AB":
+                        rec.first_session_exception = 'AB'
+                        rec.first_session_result_bool = True
+                    if rec.jun_result == "TP":
+                        rec.first_session_exception = 'TP'
+                        rec.first_session_result_bool = True
+                    f = float(rec.jun_result)
+                    if(f < 0 or f > 20):
+                        raise ValidationError("Evaluation shall be between 0 and 20")
+                    else:
+                        rec.first_session_result = f
+                        rec.first_session_result_bool = True
                 except ValueError:
                     rec.first_session_result = 0
                     rec.first_session_result_bool = False
-                    raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00".' % rec.jun_result))
-            if f >= 0 :
-                rec.first_session_result = f
-                rec.first_session_result_bool = True
-                
+                    raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.jun_result))
+
             if rec.sept_result :
                 try:
-                    f = rec._parse_result(rec.sept_result)
-                    rec.second_session_result = f
-                    rec.second_session_result_bool = True 
+                    if rec.sept_result == "NP":
+                        rec.second_session_exception = 'NP'
+                        rec.first_session_result_bool = True
+                    if rec.sept_result == "AB":
+                        rec.second_session_exception = 'AB'
+                        rec.first_session_result_bool = True
+                    if rec.sept_result == "TP":
+                        rec.second_session_exception = 'TP'
+                        rec.first_session_result_bool = True
+                    f = float(rec.sept_result)
+                    if(f < 0 or f > 20):
+                        raise ValidationError("Evaluation shall be between 0 and 20")
+                    else:
+                        rec.second_session_result = f
+                        rec.second_session_result_bool = True
                 except ValueError:
                     rec.second_session_result = 0
                     rec.second_session_result_bool = False
-                    raise UserError(_('Cannot decode %s in September Result, please encode a Float eg "12.00".' % rec.sept_result))
+                    raise UserError(_('Cannot decode %s in September Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.sept_result))
