@@ -377,10 +377,10 @@
                     <attribute name="decoration-danger">second_session_result_bool and (second_session_result &lt; 10)</attribute>
                 </xpath>
                 <xpath expr="//field[@name='name']" position="after">
-                    <field name="partial_result" string="Partial" readonly="1" />
-                    <field name="final_result" string="Partial" readonly="1" />
+                    <field name="partial_result" string="Par" readonly="1" />
+                    <field name="final_result" string="Fin" readonly="1" />
                     <field name="first_session_result" string="S1"/>
-                    <field name="second_result" string="Second" readonly="1" />
+                    <field name="second_result" string="Sec" readonly="1" />
                     <field name="second_session_result" string="S2"/>
                     <field name="first_session_result_bool" invisible="1" />
                     <field name="second_session_result_bool" invisible="1" />
