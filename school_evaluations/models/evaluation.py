@@ -566,7 +566,7 @@ class IndividualCourseGroup(models.Model):
                 rec.final_result_bool = True
             else :
                 rec.final_result_bool = False
-            if final_result >= 10 : 
+            if rec.final_result >= 10 : 
                 rec.acquiered = 'A'
 
 class IndividualCourse(models.Model):
