@@ -605,23 +605,41 @@ class IndividualCourse(models.Model):
         for rec in self:
             rec.first_session_result_bool = False
             rec.second_session_result_bool = False
-            if rec.jun_result :
+            if rec.partial_result :
                 try:
-                    if rec.jun_result == "NP":
+                    if rec.partial_result == "NP":
+                        pass
+                    elif rec.partial_result == "AB":
+                        pass
+                    elif rec.partial_result == "TP":
+                        pass
+                    else :
+                        f = float(rec.partial_result)
+                        if(f < 0 or f > 20):
+                            raise ValidationError("Evaluation shall be between 0 and 20")
+                        else:
+                            pass
+                except ValueError:
+                    raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.partial_result))
+                    
+            if final_result :
+                try:
+                    if rec.final_result == "NP":
                         rec.first_session_exception = 'NP'
                         rec.first_session_result_bool = True
-                    if rec.jun_result == "AB":
+                    elif rec.final_result == "AB":
                         rec.first_session_exception = 'AB'
                         rec.first_session_result_bool = True
-                    if rec.jun_result == "TP":
+                    elif rec.final_result == "TP":
                         rec.first_session_exception = 'TP'
                         rec.first_session_result_bool = True
-                    f = float(rec.jun_result)
-                    if(f < 0 or f > 20):
-                        raise ValidationError("Evaluation shall be between 0 and 20")
-                    else:
-                        rec.first_session_result = f
-                        rec.first_session_result_bool = True
+                    else :
+                        f = float(rec.final_result)
+                        if(f < 0 or f > 20):
+                            raise ValidationError("Evaluation shall be between 0 and 20")
+                        else:
+                            rec.first_session_result = f
+                            rec.first_session_result_bool = True
                 except ValueError:
                     rec.first_session_result = 0
                     rec.first_session_result_bool = False
