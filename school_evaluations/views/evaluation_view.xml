@@ -377,15 +377,68 @@
                     <attribute name="decoration-danger">second_session_result_bool and (second_session_result &lt; 10)</attribute>
                 </xpath>
                 <xpath expr="//field[@name='name']" position="after">
-                    <field name="jun_result" string="June" readonly="1" />
-                    <field name="first_session_result" string="S1" attrs="{'invisible':[('first_session_result_bool','=',False)]}"/>
-                    <field name="sept_result" string="Sept" readonly="1" />
-                    <field name="second_session_result" string="S2" attrs="{'invisible':[('second_session_result_bool','=',False)]}"/>
+                    <field name="partial_result" string="Partial" readonly="1" />
+                    <field name="final_result" string="Partial" readonly="1" />
+                    <field name="first_session_result" string="S1"/>
+                    <field name="second_result" string="Second" readonly="1" />
+                    <field name="second_session_result" string="S2"/>
                     <field name="first_session_result_bool" invisible="1" />
                     <field name="second_session_result_bool" invisible="1" />
                 </xpath>
             </field>
         </record>
+        
+        <!-- Add evaluation to Individual Course tree view - ->
+        <record id="individual_course_eval_tree_security" model="ir.ui.view">
+            <field name="name">school.individual_course.eval.tree.sec</field>
+            <field name="model">school.individual_course</field>
+            <field name="inherit_id" ref="individual_course_eval_tree" />
+            <field eval="25" name="priority" />
+            <field name="groups_id" eval="[(6, 0, [ref('school_evaluations.group_evaluations') ])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='dispense']" position="replace">
+                    <field name="dispense" string="Dis" />
+                </xpath>
+                <xpath expr="//field[@name='type']" position="replace">
+                    <field name="type" />
+                </xpath>
+                <xpath expr="//field[@name='ann_result']" position="replace">
+                    <field name="ann_result" string="Ann" attrs="{'readonly': [('type','in',['S','T','D'])]}" />
+                </xpath>
+                <xpath expr="//field[@name='jan_result']" position="replace">
+                    <field name="jan_result" string="Jan" attrs="{'readonly': [('type','in',['S','D'])]}" />
+                </xpath>
+                <xpath expr="//field[@name='jun_result']" position="replace">
+                    <field name="jun_result" string="June"/>
+                </xpath>
+                <xpath expr="//field[@name='sept_result']" position="replace">
+                    <field name="sept_result" string="Sept" attrs="{'readonly': [('type','in',['D'])]}" />
+                </xpath>
+            </field>
+        </record>
+        
+        <!- - Add evaluation to Individual Course form view - ->
+        <record id="individual_course_eval_tree_security_teacher" model="ir.ui.view">
+            <field name="name">school.individual_course.eval.tree.sec</field>
+            <field name="model">school.individual_course</field>
+            <field name="inherit_id" ref="individual_course_eval_tree" />
+            <field eval="25" name="priority" />
+            <field name="groups_id" eval="[(6, 0, [ref('school_management.group_teacher') ])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ann_result']" position="replace">
+                    <field name="ann_result" string="Ann" attrs="{'readonly': [('type','in',['S','T','D'])]}" />
+                </xpath>
+                <xpath expr="//field[@name='jan_result']" position="replace">
+                    <field name="jan_result" string="Jan" attrs="{'readonly': [('type','in',['S','D'])]}" />
+                </xpath>
+                <xpath expr="//field[@name='jun_result']" position="replace">
+                    <field name="jun_result" string="June"/>
+                </xpath>
+                <xpath expr="//field[@name='sept_result']" position="replace">
+                    <field name="sept_result" string="Sept" attrs="{'readonly': [('type','in',['D'])]}" />
+                </xpath>
+            </field>
+        </record> -->
 
         <record id="view_individual_courses_filter_eval" model="ir.ui.view">
             <field name="name">individual_course.select.eval</field>
