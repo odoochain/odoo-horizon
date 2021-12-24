@@ -622,7 +622,7 @@ class IndividualCourse(models.Model):
                 except ValueError:
                     raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.partial_result))
                     
-            if final_result :
+            if rec.final_result :
                 try:
                     if rec.final_result == "NP":
                         rec.first_session_exception = 'NP'
@@ -645,18 +645,18 @@ class IndividualCourse(models.Model):
                     rec.first_session_result_bool = False
                     raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.jun_result))
 
-            if rec.sept_result :
+            if rec.second_result :
                 try:
-                    if rec.sept_result == "NP":
+                    if rec.second_result == "NP":
                         rec.second_session_exception = 'NP'
                         rec.first_session_result_bool = True
-                    if rec.sept_result == "AB":
+                    if rec.second_result == "AB":
                         rec.second_session_exception = 'AB'
                         rec.first_session_result_bool = True
-                    if rec.sept_result == "TP":
+                    if rec.second_result == "TP":
                         rec.second_session_exception = 'TP'
                         rec.first_session_result_bool = True
-                    f = float(rec.sept_result)
+                    f = float(rec.second_result)
                     if(f < 0 or f > 20):
                         raise ValidationError("Evaluation shall be between 0 and 20")
                     else:
