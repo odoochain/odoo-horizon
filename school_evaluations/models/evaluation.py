@@ -602,7 +602,7 @@ class IndividualCourse(models.Model):
     second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
 
-    @api.depends('jun_result','sept_result')
+    @api.depends('partial_result','final_result','second_result')
     def compute_results(self):
         for rec in self:
             rec.first_session_result_bool = False
