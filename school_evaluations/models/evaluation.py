@@ -648,7 +648,7 @@ class IndividualCourse(models.Model):
                     rec.first_session_result_bool = False
                     raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.jun_result))
    
-    @api.depends('partial_result','final_result')
+    @api.depends('second_result')
     def compute_second_session_results(self):
         for rec in self:
             if rec.second_result :
@@ -656,15 +656,15 @@ class IndividualCourse(models.Model):
                     if rec.second_result == "NP":
                         rec.second_session_exception = 'NP'
                         rec.second_session_result = 0
-                        rec.first_session_result_bool = True
+                        rec.second_session_result_bool = True
                     if rec.second_result == "AB":
                         rec.second_session_exception = 'AB'
                         rec.second_session_result = 0
-                        rec.first_session_result_bool = True
+                        rec.second_session_result_bool = True
                     if rec.second_result == "TP":
                         rec.second_session_exception = 'TP'
                         rec.second_session_result = 0
-                        rec.first_session_result_bool = True
+                        rec.second_session_result_bool = True
                     f = float(rec.second_result)
                     if(f < 0 or f > 20):
                         raise ValidationError("Evaluation shall be between 0 and 20")
