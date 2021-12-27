@@ -588,14 +588,14 @@ class IndividualCourse(models.Model):
     
     ## First Session ##
     
-    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),string='First Session Exception')
+    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='First Session Exception')
     first_session_result= fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
     first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
 
     ## Second Session ##
     
-    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),string='Second Session Exception')
+    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='Second Session Exception')
     second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg', digits=dp.get_precision('Evaluation'))
     second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
@@ -625,12 +625,15 @@ class IndividualCourse(models.Model):
             if rec.final_result :
                 try:
                     if rec.final_result == "NP":
+                        rec.first_session_result = 0
                         rec.first_session_exception = 'NP'
                         rec.first_session_result_bool = True
                     elif rec.final_result == "AB":
+                        rec.first_session_result = 0
                         rec.first_session_exception = 'AB'
                         rec.first_session_result_bool = True
                     elif rec.final_result == "TP":
+                        rec.first_session_result = 0
                         rec.first_session_exception = 'TP'
                         rec.first_session_result_bool = True
                     else :
@@ -649,12 +652,15 @@ class IndividualCourse(models.Model):
                 try:
                     if rec.second_result == "NP":
                         rec.second_session_exception = 'NP'
+                        rec.second_session_result = 0
                         rec.first_session_result_bool = True
                     if rec.second_result == "AB":
                         rec.second_session_exception = 'AB'
+                        rec.second_session_result = 0
                         rec.first_session_result_bool = True
                     if rec.second_result == "TP":
                         rec.second_session_exception = 'TP'
+                        rec.second_session_result = 0
                         rec.first_session_result_bool = True
                     f = float(rec.second_result)
                     if(f < 0 or f > 20):
