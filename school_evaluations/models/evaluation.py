@@ -602,7 +602,7 @@ class IndividualCourse(models.Model):
 
     is_danger = fields.Boolean(compute="compute_results", store=True)
 
-    @api.depends('partial_result','final_result')
+    @api.depends('partial_result','final_result','second_result')
     def compute_results(self):
         for rec in self:
             if rec.partial_result :

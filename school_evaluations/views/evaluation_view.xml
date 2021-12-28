@@ -377,13 +377,14 @@
                     <attribute name="decoration-danger">is_danger</attribute>
                 </xpath>
                 <xpath expr="//field[@name='name']" position="after">
-                    <field name="partial_result" string="Par" class="horizon_eval_cell" /> <!-- readonly="1" /> -->
+                    <field name="partial_result" string="Par" class="horizon_eval_cell" attrs="{'readonly': [('is_annual','=',False)]}" />
                     <field name="final_result" string="Fin" class="horizon_eval_cell" /> <!-- readonly="1" /> -->
                     <field name="first_session_result" string="S1" invisible="1" />
                     <field name="second_result" string="Sec" class="horizon_eval_cell" /> <!-- readonly="1" /> -->
                     <field name="second_session_result" string="S2" invisible="1" />
                     <field name="first_session_result_bool" invisible="1" />
                     <field name="second_session_result_bool" invisible="1" />
+                    <field name="is_annual" invisible="1" />
                     <field name="is_danger" invisible="1" />
                 </xpath>
             </field>
