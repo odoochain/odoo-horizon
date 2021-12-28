@@ -664,17 +664,17 @@ class IndividualCourse(models.Model):
                         rec.second_session_result = 0
                         rec.second_session_result_bool = True
                         rec.is_danger = True
-                    if rec.second_result == "AB":
+                    elif rec.second_result == "AB":
                         rec.second_session_exception = 'AB'
                         rec.second_session_result = 0
                         rec.second_session_result_bool = True
                         rec.is_danger = True
-                    if rec.second_result == "TP":
+                    elif rec.second_result == "TP":
                         rec.second_session_exception = 'TP'
                         rec.second_session_result = 0
                         rec.second_session_result_bool = True
                         rec.is_danger = True
-                    elif :
+                    else :
                         f = float(rec.second_result)
                         if(f < 0 or f > 20):
                             raise ValidationError("Evaluation shall be between 0 and 20")
