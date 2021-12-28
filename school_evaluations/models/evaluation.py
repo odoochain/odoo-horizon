@@ -650,6 +650,8 @@ class IndividualCourse(models.Model):
                             rec.first_session_exception = None
                             rec.first_session_result_bool = True
                             if f < 10 :
+                                rec.is_danger = True
+                            else:
                                 rec.is_danger = False
                 except ValueError:
                     rec.first_session_result = 0
@@ -684,6 +686,8 @@ class IndividualCourse(models.Model):
                             rec.second_session_exception = None
                             rec.second_session_result_bool = True
                             if f < 10 :
+                                rec.is_danger = True
+                            else:
                                 rec.is_danger = False
                 except ValueError:
                     rec.second_session_result = 0
