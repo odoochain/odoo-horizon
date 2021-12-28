@@ -589,7 +589,7 @@ class IndividualCourse(models.Model):
     ## First Session ##
     
     first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception')
-    first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
+    first_session_result = fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
     first_session_result_bool = fields.Boolean(compute='compute_first_session_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
 
