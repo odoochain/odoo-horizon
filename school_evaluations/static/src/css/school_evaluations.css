@@ -25,4 +25,5 @@
 .horizon_eval_cell {
     border-left : 1px solid lightgrey !important;
     border-right : 1px solid lightgrey !important;
+    width: 70px;
 }
