@@ -588,20 +588,22 @@ class IndividualCourse(models.Model):
     
     ## First Session ##
     
-    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception')
-    first_session_result = fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
-    first_session_result_bool = fields.Boolean(compute='compute_first_session_results', string='First Session Active', store=True)
+    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='First Session Exception')
+    first_session_result = fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
+    first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
 
     ## Second Session ##
     
-    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_second_session_results',string='Second Session Exception')
-    second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', store=True, group_operator='avg', digits=dp.get_precision('Evaluation'))
-    second_session_result_bool = fields.Boolean(compute='compute_second_session_results', string='Second Session Active', store=True)
+    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='Second Session Exception')
+    second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg', digits=dp.get_precision('Evaluation'))
+    second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
 
+    is_danger = fields.Boolean(compute="compute_results", store=True)
+
     @api.depends('partial_result','final_result')
-    def compute_first_session_results(self):
+    def compute_results(self):
         for rec in self:
             if rec.partial_result :
                 try:
@@ -627,14 +629,17 @@ class IndividualCourse(models.Model):
                         rec.first_session_result = 0
                         rec.first_session_exception = 'NP'
                         rec.first_session_result_bool = True
+                        rec.is_danger = True
                     elif rec.final_result == "AB":
                         rec.first_session_result = 0
                         rec.first_session_exception = 'AB'
                         rec.first_session_result_bool = True
+                        rec.is_danger = True
                     elif rec.final_result == "TP":
                         rec.first_session_result = 0
                         rec.first_session_exception = 'TP'
                         rec.first_session_result_bool = True
+                        rec.is_danger = True
                     else :
                         f = float(rec.final_result)
                         if(f < 0 or f > 20):
@@ -644,37 +649,42 @@ class IndividualCourse(models.Model):
                             rec.first_session_result = f
                             rec.first_session_exception = None
                             rec.first_session_result_bool = True
+                            if f < 10 :
+                                rec.is_danger = False
                 except ValueError:
                     rec.first_session_result = 0
                     rec.first_session_exception = None
                     rec.first_session_result_bool = False
                     raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.jun_result))
-   
-    @api.depends('second_result')
-    def compute_second_session_results(self):
-        for rec in self:
+
             if rec.second_result :
                 try:
                     if rec.second_result == "NP":
                         rec.second_session_exception = 'NP'
                         rec.second_session_result = 0
                         rec.second_session_result_bool = True
+                        rec.is_danger = True
                     if rec.second_result == "AB":
                         rec.second_session_exception = 'AB'
                         rec.second_session_result = 0
                         rec.second_session_result_bool = True
+                        rec.is_danger = True
                     if rec.second_result == "TP":
                         rec.second_session_exception = 'TP'
                         rec.second_session_result = 0
                         rec.second_session_result_bool = True
-                    f = float(rec.second_result)
-                    if(f < 0 or f > 20):
-                        raise ValidationError("Evaluation shall be between 0 and 20")
-                    else:
-                        rec.second_result = format(f,".2f")
-                        rec.second_session_result = f
-                        rec.second_session_exception = None
-                        rec.second_session_result_bool = True
+                        rec.is_danger = True
+                    elif :
+                        f = float(rec.second_result)
+                        if(f < 0 or f > 20):
+                            raise ValidationError("Evaluation shall be between 0 and 20")
+                        else:
+                            rec.second_result = format(f,".2f")
+                            rec.second_session_result = f
+                            rec.second_session_exception = None
+                            rec.second_session_result_bool = True
+                            if f < 10 :
+                                rec.is_danger = False
                 except ValueError:
                     rec.second_session_result = 0
                     rec.second_session_exception = None

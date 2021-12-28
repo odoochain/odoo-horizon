@@ -374,7 +374,7 @@
             <field name="arch" type="xml">
                 <xpath expr='//tree' position="attributes">
                     <attribute name="decoration-muted">not first_session_result_bool</attribute>
-                    <attribute name="decoration-danger">second_session_result_bool and (second_session_result &lt; 10)</attribute>
+                    <attribute name="decoration-danger">is_danger</attribute>
                 </xpath>
                 <xpath expr="//field[@name='name']" position="after">
                     <field name="partial_result" string="Par" class="horizon_eval_cell" /> <!-- readonly="1" /> -->
