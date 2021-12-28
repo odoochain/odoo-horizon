@@ -384,6 +384,7 @@
                     <field name="second_session_result" string="S2" invisible="1" />
                     <field name="first_session_result_bool" invisible="1" />
                     <field name="second_session_result_bool" invisible="1" />
+                    <field name="is_danger" invisible="1" />
                 </xpath>
             </field>
         </record>
