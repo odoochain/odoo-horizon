@@ -549,7 +549,7 @@
           <field name="student_id" />
           <field name="name" />
           <field name="teacher_id" />
-          <button type="object" icon="fa-book" name="open_program" string="Program" />
+          <button type="object" icon="fa-book" name="open_program" string="" />
         </tree>
       </field>
     </record>
