@@ -613,6 +613,7 @@ class IndividualCourse(models.Model):
                         pass
                     else :
                         f = float(rec.partial_result)
+                        rec.partial_result = format(f,".2f")
                         if(f < 0 or f > 20):
                             raise ValidationError("Evaluation shall be between 0 and 20")
                         else:
