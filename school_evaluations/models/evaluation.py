@@ -639,6 +639,7 @@ class IndividualCourse(models.Model):
                         if(f < 0 or f > 20):
                             raise ValidationError("Evaluation shall be between 0 and 20")
                         else:
+                            rec.final_result = parseFloat(f).toFixed(2);
                             rec.first_session_result = f
                             rec.first_session_exception = None
                             rec.first_session_result_bool = True
@@ -669,6 +670,7 @@ class IndividualCourse(models.Model):
                     if(f < 0 or f > 20):
                         raise ValidationError("Evaluation shall be between 0 and 20")
                     else:
+                        rec.second_result = parseFloat(f).toFixed(2);
                         rec.second_session_result = f
                         rec.second_session_exception = None
                         rec.second_session_result_bool = True
