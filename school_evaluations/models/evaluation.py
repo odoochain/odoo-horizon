@@ -423,12 +423,14 @@ class IndividualCourseGroup(models.Model):
     
     ## First Session ##
     
+    first_session_computed_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_average_results',string='First Session Computed Exception')
     first_session_computed_result = fields.Float(compute='compute_average_results', string='First Session Computed Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='First Session Computed Active', store=True)
 
     first_session_deliberated_result = fields.Char(string='First Session Deliberated Result',track_visibility='onchange')
     first_session_deliberated_result_bool= fields.Boolean(string='First Session Deliberated Active',track_visibility='onchange')
     
+    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception')
     first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_result_bool= fields.Boolean(compute='compute_first_session_results', string='First Session Active', store=True)
 
@@ -436,12 +438,14 @@ class IndividualCourseGroup(models.Model):
     
     ## Second Session ##
     
+    second_session_computed_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_average_results',string='Second Session Computed Exception')
     second_session_computed_result = fields.Float(compute='compute_average_results', string='Second Session Computed Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='Second Session Computed Active', store=True)
     
     second_session_deliberated_result = fields.Char(string='Second Session Deliberated Result', digits=(5, 2),track_visibility='onchange')
     second_session_deliberated_result_bool= fields.Boolean(string='Second Session Deliberated Active',track_visibility='onchange')
     
+    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_second_session_results',string='Second Session Exception')
     second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_result_bool= fields.Boolean(compute='compute_second_session_results', string='Second Session Active', store=True)
     
@@ -449,6 +453,7 @@ class IndividualCourseGroup(models.Model):
     
     ## Final ##
     
+    final_result_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_final_results',string='Final Exception')
     final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True, digits=dp.get_precision('Evaluation'), track_visibility='onchange')
     final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active', store=True)
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_results_disp')
@@ -461,6 +466,8 @@ class IndividualCourseGroup(models.Model):
         for rec in self:
             if not rec.final_result_bool:
                 rec.final_result_disp = ""
+            elif rec.final_result_exception :
+                rec.final_result_disp = rec.final_result_exception
             else :
                 rec.final_result_disp = "%.2f" % rec.final_result
     
@@ -471,7 +478,7 @@ class IndividualCourseGroup(models.Model):
         else:
             return f
     
-    @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.second_session_result_bool','course_ids.second_session_result','course_ids.weight')
+    @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.first_session_exception','course_ids.second_session_result_bool','course_ids.second_session_result''course_ids.second_session_exception','course_ids.weight')
     def compute_average_results(self):
         for rec in self:
             _logger.debug('Trigger "compute_average_results" on Course Group %s' % rec.name)
@@ -500,10 +507,25 @@ class IndividualCourseGroup(models.Model):
             if rec.second_session_computed_result_bool :
                 if rec.total_weight > 0:
                     rec.second_session_computed_result = running_second_session_result / rec.total_weight
+                    
+            for ic in rec.course_ids:
+                if ic.first_session_exception :
+                    rec.first_session_computed_result = 0
+                    rec.first_session_computed_exception = ic.first_session_exception
+                    rec.first_session_computed_result_bool = True
+                    break
+            
+            for ic in rec.course_ids:
+                if ic.second_session_exception :
+                    rec.second_session_computed_result = 0
+                    rec.second_session_computed_exception = ic.first_session_exception
+                    rec.second_session_computed_result_bool = True
+                    break 
+                    
             rec.compute_first_session_results()
             rec.compute_second_session_results()
         
-    @api.depends('first_session_deliberated_result_bool','first_session_deliberated_result','first_session_computed_result_bool','first_session_computed_result')
+    @api.depends('first_session_deliberated_result_bool','first_session_deliberated_result','first_session_computed_result_bool','first_session_computed_result','first_session_computed_exception')
     def compute_first_session_results(self):
         for rec in self:
             _logger.debug('Trigger "compute_first_session_results" on Course Group %s' % rec.name)
@@ -517,20 +539,27 @@ class IndividualCourseGroup(models.Model):
                 #if (f < rec.first_session_computed_result):
                 #    # TODO : take care of this - removed due to Cours artistiques B - Art dramatique - 2 - 2015-2016 - VALERIO Maddy 
                 #    # raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s." % (rec.first_session_deliberated_result, rec.first_session_computed_result))
+                rec.first_session_exception = None
                 rec.first_session_result = f
                 #else:
                 #    rec.first_session_result = f
                 rec.first_session_result_bool = True
+            elif rec.first_session_computed_exception :
+                rec.first_session_exception = rec.first_session_computed_exception
+                rec.first_session_result = 0
+                rec.first_session_result_bool = True
             elif rec.first_session_computed_result_bool :
+                rec.first_session_exception = None
                 rec.first_session_result = rec.first_session_computed_result
                 rec.first_session_result_bool = True
             else :
+                rec.first_session_exception = None
                 rec.first_session_result = 0
                 rec.first_session_result_bool = False
             rec.compute_final_results()
 
 
-    @api.depends('second_session_deliberated_result_bool','second_session_deliberated_result','second_session_computed_result_bool','second_session_computed_result')
+    @api.depends('second_session_deliberated_result_bool','second_session_deliberated_result','second_session_computed_result_bool','second_session_computed_result','second_session_computed_exception')
     def compute_second_session_results(self):
         for rec in self:
             _logger.debug('Trigger "compute_second_session_results" on Course Group %s' % rec.name)
@@ -544,11 +573,18 @@ class IndividualCourseGroup(models.Model):
                     raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s." % (rec.second_session_deliberated_result, rec.second_session_computed_result))
                 else:
                     rec.second_session_result = f
+                rec.second_session_exception = None
+                rec.second_session_result_bool = True
+            elif rec.second_session_computed_exception :
+                rec.second_session_exception = rec.first_session_computed_exception
+                rec.second_session_result = 0
                 rec.second_session_result_bool = True
             elif rec.second_session_computed_result_bool :
-                rec.second_session_result = rec.second_session_computed_result
+                rec.second_session_exception = None
+                rec.second_session_result = rec.first_session_computed_result
                 rec.second_session_result_bool = True
             else :
+                rec.second_session_exception = None
                 rec.second_session_result = 0
                 rec.second_session_result_bool = False
             rec.compute_final_results()
@@ -559,12 +595,26 @@ class IndividualCourseGroup(models.Model):
             _logger.debug('Trigger "compute_final_results" on Course Group %s' % rec.name)
             ## Compute Final Results
             if rec.second_session_result_bool :
-                rec.final_result = rec.second_session_result
-                rec.final_result_bool = True
+                if rec.second_session_exception :
+                    rec.final_exception = rec.second_session_exception
+                    rec.final_result = 0
+                    rec.final_result_bool = True
+                else :
+                    rec.final_exception = None
+                    rec.final_result = rec.second_session_result
+                    rec.final_result_bool = True
             elif rec.first_session_result_bool :
-                rec.final_result = rec.first_session_result
-                rec.final_result_bool = True
+                if rec.first_session_exception :
+                    rec.final_exception = rec.first_session_exception
+                    rec.final_result = 0
+                    rec.final_result_bool = True
+                else :
+                    rec.final_exception = None
+                    rec.final_result = rec.first_session_result
+                    rec.final_result_bool = True
             else :
+                rec.final_exception = None
+                rec.final_result = 0
                 rec.final_result_bool = False
             if rec.final_result >= 10 : 
                 rec.acquiered = 'A'

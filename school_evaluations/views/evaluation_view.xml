@@ -339,7 +339,7 @@
                 <xpath expr="//sheet" position="inside">
                     <notebook>
                         <page string="Results">
-                            <group col="6" string="Results">
+                            <group col="2" string="Results">
                                 <field name="partial_result" attrs="{'readonly': [('is_annual','=',False)]}" />
                                 <field name="final_result" />
                                 <field name="second_result" />
