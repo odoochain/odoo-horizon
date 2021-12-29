@@ -478,7 +478,7 @@ class IndividualCourseGroup(models.Model):
         else:
             return f
     
-    @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.first_session_exception','course_ids.second_session_result_bool','course_ids.second_session_result''course_ids.second_session_exception','course_ids.weight')
+    @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.first_session_exception','course_ids.second_session_result_bool','course_ids.second_session_result','course_ids.second_session_exception','course_ids.weight')
     def compute_average_results(self):
         for rec in self:
             _logger.debug('Trigger "compute_average_results" on Course Group %s' % rec.name)
