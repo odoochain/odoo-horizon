@@ -28,3 +28,7 @@
     width: 70px;
     text-align:center;
 }
+
+.o_readonly_modifier.horizon_eval_cell {
+    background-color: lightgrey !important;
+}

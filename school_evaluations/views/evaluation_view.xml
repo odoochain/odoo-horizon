@@ -337,30 +337,43 @@
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="inside">
-                    <group col="4" string="Results">
-                        <field name="jun_result" />
-                        <field name="sept_result" />
-                    </group>
-                    <group col="4">
-                        <group col="2" colspan="2" string="First Session">
-                            <field name="first_session_result_bool" invisible="1" />
-                            <div class="col-md-5">
-                                <h1>
-                                    <field name="first_session_result" attrs="{'invisible':[('first_session_result_bool','==',False)]}"  nolabel="1" class="label label-primary" readonly="1" style="padding:.2em .6em .3em;"/>
-                                </h1>
-                            </div>
-                            <field name="first_session_note" colspan="2" nolabel="1" placeholder="Justify the evaluation here." />
-                        </group>
-                        <group col="2" colspan="2" string="Second Session">
-                            <field name="second_session_result_bool" invisible="1" />
-                            <div class="col-md-5">
-                                <h1>
-                                    <field name="second_session_result" attrs="{'invisible':[('second_session_result_bool','==',False)]}"  nolabel="1" class="label label-primary" readonly="1" style="padding:.2em .6em .3em;"/>
-                                </h1>
-                            </div>
-                            <field name="second_session_note" colspan="2" nolabel="1" placeholder="Justify the evaluation here." />
-                        </group>
-                    </group>
+                    <notebook>
+                        <page string="Results">
+                            <group col="6" string="Results">
+                                <field name="partial_result" attrs="{'readonly': [('is_annual','=',False)]}" />
+                                <field name="final_result" />
+                                <field name="second_result" />
+                                <field name="is_annual" invisible="1" />
+                                <field name="is_danger" invisible="1" />
+                            </group>
+                        </page>
+                        <page string="Archive">
+                            <group col="4" string="Results">
+                                <field name="jun_result" />
+                                <field name="sept_result" />
+                            </group>
+                            <group col="4">
+                                <group col="2" colspan="2" string="First Session">
+                                    <field name="first_session_result_bool" invisible="1" />
+                                    <div class="col-md-5">
+                                        <h1>
+                                            <field name="first_session_result" attrs="{'invisible':[('first_session_result_bool','==',False)]}"  nolabel="1" class="label label-primary" readonly="1" style="padding:.2em .6em .3em;"/>
+                                        </h1>
+                                    </div>
+                                    <field name="first_session_note" colspan="2" nolabel="1" placeholder="Justify the evaluation here." />
+                                </group>
+                                <group col="2" colspan="2" string="Second Session">
+                                    <field name="second_session_result_bool" invisible="1" />
+                                    <div class="col-md-5">
+                                        <h1>
+                                            <field name="second_session_result" attrs="{'invisible':[('second_session_result_bool','==',False)]}"  nolabel="1" class="label label-primary" readonly="1" style="padding:.2em .6em .3em;"/>
+                                        </h1>
+                                    </div>
+                                    <field name="second_session_note" colspan="2" nolabel="1" placeholder="Justify the evaluation here." />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
                 </xpath>
             </field>
         </record>
