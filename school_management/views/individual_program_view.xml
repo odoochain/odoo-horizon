@@ -410,7 +410,7 @@
       <field name="model">school.individual_course_group</field>
       <field eval="8" name="priority" />
       <field name="arch" type="xml">
-        <tree string="Individual Course" editable="top" create="0">
+        <tree string="Individual Course Group" create="0">
           <field name="uid"/>
           <field name="year_id"/>
           <field name="student_id" />
@@ -549,6 +549,7 @@
           <field name="student_id" />
           <field name="name" />
           <field name="teacher_id" />
+          <button type="object" icon="fa-folder-open" name="action_open_form" string="" />
           <button type="object" icon="fa-book" name="open_program" string="" />
         </tree>
       </field>
