@@ -180,10 +180,6 @@ class csv_school_management(CSVExport):
                       "label": "Titre"
                     },
                     {
-                      "name": "enable_exclusion_bool",
-                      "label": "Tient compte des côtes d'exclusion"
-                    },
-                    {
                       "name": "total_weight",
                       "label": "Total de la pondération"
                     },
