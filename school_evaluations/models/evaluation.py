@@ -423,14 +423,14 @@ class IndividualCourseGroup(models.Model):
     
     ## First Session ##
     
-    first_session_computed_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_average_results',string='First Session Computed Exception')
+    first_session_computed_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_average_results',string='First Session Computed Exception', store=True)
     first_session_computed_result = fields.Float(compute='compute_average_results', string='First Session Computed Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='First Session Computed Active', store=True)
 
     first_session_deliberated_result = fields.Char(string='First Session Deliberated Result',track_visibility='onchange')
     first_session_deliberated_result_bool= fields.Boolean(string='First Session Deliberated Active',track_visibility='onchange')
     
-    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception')
+    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception', store=True)
     first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_result_bool= fields.Boolean(compute='compute_first_session_results', string='First Session Active', store=True)
 
@@ -438,14 +438,14 @@ class IndividualCourseGroup(models.Model):
     
     ## Second Session ##
     
-    second_session_computed_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_average_results',string='Second Session Computed Exception')
+    second_session_computed_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_average_results',string='Second Session Computed Exception', store=True)
     second_session_computed_result = fields.Float(compute='compute_average_results', string='Second Session Computed Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='Second Session Computed Active', store=True)
     
     second_session_deliberated_result = fields.Char(string='Second Session Deliberated Result', digits=(5, 2),track_visibility='onchange')
     second_session_deliberated_result_bool= fields.Boolean(string='Second Session Deliberated Active',track_visibility='onchange')
     
-    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_second_session_results',string='Second Session Exception')
+    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_second_session_results',string='Second Session Exception', store=True)
     second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_result_bool= fields.Boolean(compute='compute_second_session_results', string='Second Session Active', store=True)
     
@@ -453,7 +453,7 @@ class IndividualCourseGroup(models.Model):
     
     ## Final ##
     
-    final_result_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_final_results',string='Final Exception')
+    final_result_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_final_results',string='Final Exception', store=True, track_visibility='onchange')
     final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True, digits=dp.get_precision('Evaluation'), track_visibility='onchange')
     final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active', store=True)
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_results_disp')
