@@ -538,7 +538,7 @@ class IndividualCourseGroup(models.Model):
                     raise UserError(_('Cannot decode %s, please encode a Float eg "12.00".' % rec.first_session_deliberated_result))
                 #if (f < rec.first_session_computed_result):
                 #    # TODO : take care of this - removed due to Cours artistiques B - Art dramatique - 2 - 2015-2016 - VALERIO Maddy 
-                #    # raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s." % (rec.first_session_deliberated_result, rec.first_session_computed_result))
+                #    # raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s in %s." % (rec.first_session_deliberated_result, rec.first_session_computed_result, rec.uid))
                 rec.first_session_exception = None
                 rec.first_session_result = f
                 #else:
@@ -570,7 +570,7 @@ class IndividualCourseGroup(models.Model):
                     rec.write('second_session_deliberated_result', None)
                     raise UserError(_('Cannot decode %s, please encode a Float eg "12.00".' % rec.second_session_deliberated_result))
                 if (f < rec.second_session_computed_result):
-                    raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s." % (rec.second_session_deliberated_result, rec.second_session_computed_result))
+                    raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s in %s." % (rec.second_session_deliberated_result, rec.second_session_computed_result, rec.uid))
                 else:
                     rec.second_session_result = f
                 rec.second_session_exception = None
