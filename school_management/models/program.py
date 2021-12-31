@@ -50,7 +50,7 @@ class Program(models.Model):
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
-    @api.depends('bloc_ids')
+    @api.depends('bloc_ids.total_hours','bloc_ids.total_credits')
     def _get_courses_total(self):
         for rec in self:
             total_hours = 0.0
@@ -93,8 +93,8 @@ class Program(models.Model):
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
     
-    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
-    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
+    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits',store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours',store=True)
 
     notes = fields.Text(string='Notes')
     
@@ -145,7 +145,7 @@ class Bloc(models.Model):
     _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     _order = 'program_id,sequence'
     
-    @api.depends('course_group_ids')
+    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight')
     def _get_courses_total(self):
         for rec in self :
             total_hours = 0.0
@@ -171,9 +171,9 @@ class Bloc(models.Model):
     domain = fields.Selection(related='program_id.domain', string='Domain',store=True)   
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
  
-    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
-    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
-    total_weight = fields.Float(compute='_get_courses_total', string='Total Weight')
+    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits',store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours',store=True)
+    total_weight = fields.Float(compute='_get_courses_total', string='Total Weight',store=True)
 
     notes = fields.Text(string='Notes')
     
@@ -250,9 +250,9 @@ class CourseGroup(models.Model):
                 course_g.name = course_g.title
             course_g.ue_id = "UE-%s" % course_g.id
             
-    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
-    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
-    total_weight = fields.Float(compute='_get_courses_total', string='Total Weight')
+    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits',store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours',store=True)
+    total_weight = fields.Float(compute='_get_courses_total', string='Total Weight',store=True)
 
     weight = fields.Integer(string='Weight')
 
