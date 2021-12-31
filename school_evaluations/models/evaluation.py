@@ -473,13 +473,14 @@ class IndividualCourseGroup(models.Model):
     final_note = fields.Text(string='Final Notes')
     
     def compute_results_disp(self):
-        if not rec.final_result_bool:
-            rec.final_result_disp = ""
-        elif rec.final_result_exception :
-            rec.final_result_disp = rec.final_result_exception
-        else :
-            rec.final_result_disp = "%.2f" % rec.final_result
-    
+        for rec in self :
+            if not rec.final_result_bool:
+                rec.final_result_disp = ""
+            elif rec.final_result_exception :
+                rec.final_result_disp = rec.final_result_exception
+            else :
+                rec.final_result_disp = "%.2f" % rec.final_result
+        
     def _parse_result(self,input):
         f = float(input)
         if(f < 0 or f > 20):
