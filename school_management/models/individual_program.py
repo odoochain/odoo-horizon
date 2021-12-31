@@ -211,9 +211,9 @@ class IndividualBloc(models.Model):
     
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', track_visibility='onchange')
     
-    total_credits = fields.Integer(compute='_get_courses_total', string='Credits')
-    total_hours = fields.Integer(compute='_get_courses_total', string='Hours')
-    total_weight = fields.Float(compute='_get_courses_total', string='Weight')
+    total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)
+    total_weight = fields.Float(compute='_get_courses_total', string='Weight', store=True)
 
     # @api.onchange('source_bloc_id')
     # @api.depends('course_group_ids')
@@ -321,7 +321,6 @@ class IndividualCourseGroup(models.Model):
     total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight', store=True)
-    weight = fields.Integer(related="source_course_group_id.weight",string='Weight', store=True)
     
     @api.onchange('source_course_group_id')
     def onchange_source_cg(self):
