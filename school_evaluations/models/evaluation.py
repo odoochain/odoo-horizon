@@ -366,7 +366,7 @@ class IndividualCourseGroup(models.Model):
             ('2_candidate','Candidate'),
             ('1_confirmed','Candidate'),
             ('0_valuated', 'Valuated'),
-        ], string='Status', index=True, readonly=True, default='9_draft',
+        ], string='Status', index=True, default='9_draft',
         track_visibility='onchange',
         copy=False,
         help=" * The 'Draft' status is used when course group is only plan.\n"
