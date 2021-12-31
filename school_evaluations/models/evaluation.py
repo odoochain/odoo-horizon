@@ -430,9 +430,9 @@ class IndividualCourseGroup(models.Model):
     first_session_deliberated_result = fields.Char(string='First Session Deliberated Result',track_visibility='onchange')
     first_session_deliberated_result_bool= fields.Boolean(string='First Session Deliberated Active',track_visibility='onchange')
     
-    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception', compute_sudo=True,store=True)
-    first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', compute_sudo=True,store=True, digits=dp.get_precision('Evaluation'))
-    first_session_result_bool= fields.Boolean(compute='compute_first_session_results', string='First Session Active', compute_sudo=True,store=True)
+    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception', store=True)
+    first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, digits=dp.get_precision('Evaluation'))
+    first_session_result_bool= fields.Boolean(compute='compute_first_session_results', string='First Session Active', store=True)
 
     first_session_note = fields.Text(string='First Session Notes')
     
@@ -445,9 +445,9 @@ class IndividualCourseGroup(models.Model):
     second_session_deliberated_result = fields.Char(string='Second Session Deliberated Result', digits=(5, 2),track_visibility='onchange')
     second_session_deliberated_result_bool= fields.Boolean(string='Second Session Deliberated Active',track_visibility='onchange')
     
-    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_second_session_results',string='Second Session Exception', compute_sudo=True,store=True)
-    second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', compute_sudo=True,store=True,digits=dp.get_precision('Evaluation'))
-    second_session_result_bool= fields.Boolean(compute='compute_second_session_results', string='Second Session Active', compute_sudo=True,store=True)
+    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_second_session_results',string='Second Session Exception', store=True)
+    second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', store=True,digits=dp.get_precision('Evaluation'))
+    second_session_result_bool= fields.Boolean(compute='compute_second_session_results', string='Second Session Active', store=True)
     
     second_session_note = fields.Text(string='Second Session Notes')
     
@@ -638,19 +638,19 @@ class IndividualCourse(models.Model):
     
     ## First Session ##
     
-    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='First Session Exception', compute_sudo=True, store=True)
-    first_session_result = fields.Float(compute='compute_results', string='First Session Result', compute_sudo=True, store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
-    first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', compute_sudo=True, store=True)
+    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='First Session Exception', store=True)
+    first_session_result = fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
+    first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
 
     ## Second Session ##
     
-    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='Second Session Exception', compute_sudo=True, store=True)
-    second_session_result= fields.Float(compute='compute_results', string='Second Session Result', compute_sudo=True, store=True, group_operator='avg', digits=dp.get_precision('Evaluation'))
-    second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', compute_sudo=True, store=True)
+    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='Second Session Exception', store=True)
+    second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg', digits=dp.get_precision('Evaluation'))
+    second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
 
-    is_danger = fields.Boolean(compute="compute_results", compute_sudo=True, store=True)
+    is_danger = fields.Boolean(compute="compute_results", store=True)
 
     @api.depends('partial_result','final_result','second_result')
     def compute_results(self):
