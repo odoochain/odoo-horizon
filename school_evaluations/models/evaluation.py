@@ -508,19 +508,19 @@ class IndividualCourseGroup(models.Model):
                 if rec.total_weight > 0:
                     rec.second_session_computed_result = running_second_session_result / rec.total_weight
                     
-            # for ic in rec.course_ids:
-            #     if ic.first_session_exception :
-            #         rec.first_session_computed_result = 0
-            #         rec.first_session_computed_exception = ic.first_session_exception
-            #         rec.first_session_computed_result_bool = True
-            #         break
+            for ic in rec.course_ids:
+                if ic.first_session_exception :
+                    rec.first_session_computed_result = 0
+                    rec.first_session_computed_exception = ic.first_session_exception
+                    rec.first_session_computed_result_bool = True
+                    break
             
-            # for ic in rec.course_ids:
-            #     if ic.second_session_exception :
-            #         rec.second_session_computed_result = 0
-            #         rec.second_session_computed_exception = ic.first_session_exception
-            #         rec.second_session_computed_result_bool = True
-            #         break 
+            for ic in rec.course_ids:
+                if ic.second_session_exception :
+                    rec.second_session_computed_result = 0
+                    rec.second_session_computed_exception = ic.first_session_exception
+                    rec.second_session_computed_result_bool = True
+                    break 
                     
             rec.compute_first_session_results()
             rec.compute_second_session_results()
