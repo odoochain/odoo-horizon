@@ -31,7 +31,7 @@ class CourseGroup(models.Model):
     _inherit = 'school.course_group'
     
     ## If set a course with an evaluation < 10 will make this course group not acquiered.
-    enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=False)
+    # enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=False)
     
     def valuate_course_group(self):
         self.ensure_one()
@@ -230,6 +230,8 @@ class IndividualBloc(models.Model):
             self.course_group_ids.write({'state': 'draft'})
         elif self.state == 'progress' :
             self.course_group_ids.write({'state': 'progress'})
+        elif self.state == 'postponed' :
+            self.course_group_ids.write({'state': 'progress'})
         else :
             self.course_group_ids.write({'state': 'confirmed'})
     
@@ -318,31 +320,39 @@ class IndividualBloc(models.Model):
     @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.first_session_computed_result_bool', 'course_group_ids.is_ghost_cg')
     def compute_credits(self):
         for rec in self:
-            rec.total_acquiered_credits = sum([icg.total_credits for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
-            rec.total_acquiered_hours = sum([icg.total_hours for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
-            rec.total_not_acquiered_credits = rec.total_credits - rec.total_acquiered_credits
-            rec.total_not_acquiered_hours = rec.total_hours - rec.total_acquiered_hours
+            if rec.state in ['progress','postponed'] :
+                rec.total_acquiered_credits = sum([icg.total_credits for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
+                rec.total_acquiered_hours = sum([icg.total_hours for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
+                rec.total_not_acquiered_credits = rec.total_credits - rec.total_acquiered_credits
+                rec.total_not_acquiered_hours = rec.total_hours - rec.total_acquiered_hours
+            else:
+                # Don't compute if draft or finished
+                pass
 
     @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered', 'course_group_ids.is_ghost_cg')
     def compute_evaluation(self):
         for rec in self:
-            total = 0
-            total_first = 0
-            total_second = 0
-            total_weight = 0
-            for icg in rec.course_group_ids:
-                if icg.acquiered == 'A' :
-                    total += icg.final_result * icg.total_weight
-                    total_first += icg.first_session_result * icg.total_weight
-                    total_second += icg.second_session_result * icg.total_weight
-                    total_weight += icg.total_weight
-            if total_weight > 0 :
-                rec.evaluation = total / total_weight
-                rec.first_session_result = total_first / total_weight
-                rec.second_session_result = total_second / total_weight
+            if rec.state in ['progress','postponed'] :
+                total = 0
+                total_first = 0
+                total_second = 0
+                total_weight = 0
+                for icg in rec.course_group_ids:
+                    if icg.acquiered == 'A' :
+                        total += icg.final_result * icg.total_weight
+                        total_first += icg.first_session_result * icg.total_weight
+                        total_second += icg.second_session_result * icg.total_weight
+                        total_weight += icg.total_weight
+                if total_weight > 0 :
+                    rec.evaluation = total / total_weight
+                    rec.first_session_result = total_first / total_weight
+                    rec.second_session_result = total_second / total_weight
+                else:
+                    _logger.debug('total_weight is 0 on Bloc %s' % rec.name)
+                    rec.evaluation = None
             else:
-                _logger.debug('total_weight is 0 on Bloc %s' % rec.name)
-                rec.evaluation = None
+                # Don't compute if draft or finished
+                pass
         
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
