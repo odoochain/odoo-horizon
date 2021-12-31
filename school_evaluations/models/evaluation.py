@@ -664,8 +664,8 @@ class IndividualCourse(models.Model):
 
     @api.depends('partial_result','final_result','second_result')
     def compute_results(self):
+        _logger.info('Trigger "compute_results" on Course %s (%s)' % (rec.uid,rec.course_group_id.state))
         for rec in self.filtered(lambda r: r.course_group_id.state in ['7_failed','5_progress']) :
-            _logger.info('Trigger "compute_results" on Course %s' % rec.uid)
             if rec.partial_result :
                 try:
                     if rec.partial_result == "NP":
