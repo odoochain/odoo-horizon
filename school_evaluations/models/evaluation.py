@@ -589,31 +589,31 @@ class IndividualCourseGroup(models.Model):
                 rec.second_session_result_bool = False
             rec.compute_final_results()
 
-    @api.depends()
+    @api.depends('second_session_result_bool','second_session_exception','second_session_result','first_session_result_bool','first_session_exception','first_session_result')
     def compute_final_results(self):
         for rec in self:
             _logger.debug('Trigger "compute_final_results" on Course Group %s' % rec.name)
             ## Compute Final Results
             if rec.second_session_result_bool :
                 if rec.second_session_exception :
-                    rec.final_exception = rec.second_session_exception
+                    rec.final_result_exception = rec.second_session_exception
                     rec.final_result = 0
                     rec.final_result_bool = True
                 else :
-                    rec.final_exception = None
+                    rec.final_result_exception = None
                     rec.final_result = rec.second_session_result
                     rec.final_result_bool = True
             elif rec.first_session_result_bool :
                 if rec.first_session_exception :
-                    rec.final_exception = rec.first_session_exception
+                    rec.final_result_exception = rec.first_session_exception
                     rec.final_result = 0
                     rec.final_result_bool = True
                 else :
-                    rec.final_exception = None
+                    rec.final_result_exception = None
                     rec.final_result = rec.first_session_result
                     rec.final_result_bool = True
             else :
-                rec.final_exception = None
+                rec.final_result_exception = None
                 rec.final_result = 0
                 rec.final_result_bool = False
             if rec.final_result >= 10 : 
