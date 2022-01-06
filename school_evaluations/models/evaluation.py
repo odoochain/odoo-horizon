@@ -166,13 +166,13 @@ class IndividualCourseSummary(models.Model):
             rec.ind_course_group_ids |= rec.program_id.valuated_course_group_ids.filtered(lambda item: item.source_course_group_id.id == rec.course_group_id.id)
     
     state = fields.Selection([
-            ('draft','Draft'),
-            ('progress','In Progress'),
-            ('confirmed', 'Confirmed'),
-            ('success', 'Success'),
-            ('failed', 'Failed'),
-            ('candidate','Candidate'),
-            ('valuated', 'Valuated'),
+            ('9_draft','Draft'),
+            ('7_failed', 'Failed'),
+            ('6_success', 'Success'),
+            ('5_progress','In Progress'),
+            ('2_candidate','Candidate'),
+            ('1_confirmed','Candidate'),
+            ('0_valuated', 'Valuated'),
         ], compute="_compute_state")
         
     trials = fields.Integer(string="Trials",compute='_compute_state')

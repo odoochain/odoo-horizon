@@ -287,9 +287,9 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="before">
                     <header>
-                        <button name="set_to_valuated" type="object" states="candidate" string="Confirm valuation" class="oe_highlight" />
-                        <button name="set_to_confirmed" type="object" states="progress" string="Confirm evaluation" class="oe_highlight" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,candidate,confirmed,success,failure,valuated" />
+                        <button name="set_to_confirmed" type="object" states="2_candidate" string="Confirm valuation" class="oe_highlight" />
+                        <button name="set_to_valuated" type="object" states="1_confirmed" string="Valuate" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="9_draft,7_failed,6_success,5_progress,2_candidate,1_confirmed,0_valuated" />
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='source_course_id']" position="before">
