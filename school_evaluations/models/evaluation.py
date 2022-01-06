@@ -187,7 +187,7 @@ class IndividualCourseSummary(models.Model):
                 rec.state = all_rec[-1].state
                 rec.final_result_disp = all_rec[-1].final_result_disp
             else : 
-                rec.state = 'draft'
+                rec.state = '9_draft'
                 rec.final_result_disp = ""
                 
 class IndividualBloc(models.Model):
