@@ -138,8 +138,6 @@ class IndividualCourseSummary(models.Model):
     _name='school.individual_course_summary'
     _inherit = ['school.open.form.mixin']
     
-    _order = 'level,sequence'
-    
     program_id = fields.Many2one('school.individual_program', string='Individual Program')
     
     course_group_id = fields.Many2one('school.course_group', string='Course Group')

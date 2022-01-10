@@ -143,6 +143,9 @@
                       </div>
                     </div>
                 </xpath>
+                <xpath expr="//field[@name='course_group_summaries']/kanban" position="attributes">
+                  <attribute name="default_order">state,uid</attribute>
+                </xpath>
                 <xpath expr="//field[@name='course_group_summaries']/kanban/field[@name='total_credits']" position="after">
                     <field name="state"/>
                     <field name="trials"/>
