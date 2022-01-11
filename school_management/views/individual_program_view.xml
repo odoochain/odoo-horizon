@@ -344,6 +344,7 @@
                 <field name="total_hours" />
                 <field name="total_credits" />
                 <field name="source_course_group_id"/>
+                <field name="source_course_group_uid"/>
                 <templates>
                     <t t-name="kanban-box">
                           <div style="position: relative;width:100%;" t-attf-class="horizon_cgs">
@@ -352,15 +353,17 @@
                                   <div class="col-12 col-md-2">
                                     <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
                                   </div>
-                                  <div class="col-12 col-md-7">
+                                  <div class="col-12 col-md-10">
                                     <div class="row m-2">
                                       <h5><field name="name"/><br/></h5>
-                                      <i><field name="responsible_id"/></i>
+                                      <!--<i><field name="responsible_id"/></i>-->
                                     </div>
                                     <div class="row m-2">
                                       <div class="col-3"><b><field name="total_credits"/> ECTS</b></div>
                                       <div class="col-3"><field name="total_hours"/> Heures</div>
-                                      <div class="col-3"><field name="source_course_group_id"/></div>
+                                      <div class="col-6">
+                                        <a type="object" name="action_open_source_form"><i class="fa fa-book mr-2"></i>UE Source (<field name="source_course_group_uid"/>)</a>
+                                      </div>
                                     </div>
                                   </div>
                                   <div class="col-12 col-md-3 horizon_cgs_evals">
