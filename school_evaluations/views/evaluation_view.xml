@@ -222,18 +222,38 @@
                 <xpath expr="//field[@name='total_credits']" position="after">
                     <newline/>
                     <field name="total_acquiered_credits"/>
-                    <field name="total_credits"/>
                     <field name="evaluation"/>
-                    <field name="exclude_from_deliberation" string="Exc Delib"/>
                     <field name="decision" colspan="4"/>
                 </xpath>
-                <xpath expr="//field[@name='source_course_group_id']" position="before">
+                <!--<xpath expr="//field[@name='source_course_group_id']" position="before">
                     <field name="first_session_result" string="S1" />
                     <field name="second_session_result" string="S2" />
                     <field name="final_result" string="Fin" />
                     <field name="acquiered" string="Acq" />
                     <field name="state"/>
                     <button type="object" icon="fa-archive" name="valuate_course_group" string="Valuate Course Group" attrs="{'invisible': [('state', '!=', ('draft'))]}"/>
+                </xpath>-->
+                <!--<xpath expr="//field[@name='course_group_ids']/kanban" position="attributes">
+                  <attribute name="default_order">state,uid</attribute>
+                </xpath>-->
+                <xpath expr="//field[@name='course_group_ids']/kanban/field[@name='total_credits']" position="after">
+                    <field name="state"/>
+                    <field name="first_session_result"/>
+                    <field name="first_session_result_bool"/>
+                    <field name="second_session_result"/>
+                    <field name="second_session_result_bool"/>
+                    <field name="final_result_disp"/>
+                    <field name="final_result_bool"/>
+                </xpath>
+                <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="attributes">
+                    <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
+                </xpath>
+                <xpath expr="//div[contains(@class, 'horizon_cgs_evals')]" position="after">
+                    <div class="row m-2">
+                        <div class="col-12 col-md-3" t-if="first_session_result_bool">Première session : <field name="first_session_result"/></div>
+                        <div class="col-12 col-md-3" t-if="second_session_result_bool">Seconde session : <field name="second_session_result"/></div>
+                        <div class="col-12 col-md-3" t-if="final_result_bool">Résultat final: <field name="final_result_disp"/></div>
+                    </div>
                 </xpath>
             </field>
         </record>

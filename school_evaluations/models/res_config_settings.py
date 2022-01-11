@@ -18,5 +18,21 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import evaluation
-from . import res_config_settings
+
+from odoo import api, fields, models, _
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    evaluation_current_year_id = fields.Many2one(
+        comodel_name='school.year',
+        string='Current Year for Evaluations',
+        readonly=False,
+        help='Only courses in current year could be evaluated.')
+        
+    evaluation_open_session = fields.Selection(
+        ([('part','Partial'),('fin','Final'),('sec','Second'),('none','None')]),
+        string='Open Session',
+        readonly=False,
+        help='Only evaluation for current session can be encoded.')

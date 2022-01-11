@@ -358,15 +358,13 @@
                                       <h5><field name="name"/><br/></h5>
                                       <!--<i><field name="responsible_id"/></i>-->
                                     </div>
-                                    <div class="row m-2">
-                                      <div class="col-3"><b><field name="total_credits"/> ECTS</b></div>
-                                      <div class="col-3"><field name="total_hours"/> Heures</div>
-                                      <div class="col-6">
+                                    <div class="row m-2 horizon_cgs_evals">
+                                      <div class="col-12 col-md-3"><b><field name="total_credits"/> ECTS</b></div>
+                                      <div class="col-12 col-md-3"><field name="total_hours"/> Heures</div>
+                                      <div class="col-12 col-md-6">
                                         <a type="object" name="action_open_source_form"><i class="fa fa-book mr-2"></i>UE Source (<field name="source_course_group_uid"/>)</a>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="col-12 col-md-3 horizon_cgs_evals">
                                   </div>
                                 </div>
                               </div>
