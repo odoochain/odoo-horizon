@@ -51,6 +51,23 @@
                                 </div>
                             </div>
                         </div>
+                        <h2>Affichage dans Responsive</h2>
+                        <div class="row mt16 o_settings_container" name="display_results_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="display_results"
+                                title="Display results in student portal.">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Display Results</span>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label string="Afficher" for="display_results" class="col-lg-3 o_light_label"/>
+                                            <field name="display_results" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </xpath>
             </field>

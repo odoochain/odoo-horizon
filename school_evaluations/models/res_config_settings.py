@@ -36,3 +36,8 @@ class ResConfigSettings(models.TransientModel):
         string='Open Session',
         readonly=False,
         help='Only evaluation for current session can be encoded.', config_parameter='school.evaluation_open_session')
+        
+    display_results = fields.Boolean(
+        string='Display Results',
+        readonly=False,
+        help='Only evaluation for current session can be encoded.', config_parameter='school.display.results')
