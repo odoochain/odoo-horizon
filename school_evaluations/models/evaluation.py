@@ -671,27 +671,27 @@ class IndividualCourse(models.Model):
     def open_evaluations(self):
         evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
         evaluation_open_session = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_session', 'none')
-        for rec in self.filtered(lambda r: r.year_id == evaluation_open_year_id) :
-            if rec.evaluation_open_session == 'part' :
-                rec.open_partial_result = True
-                rec.open_final_result = False
-                rec.open_second_result = False
-            elif rec.evaluation_open_session == 'fin' :
-                rec.open_partial_result = False
-                rec.open_final_result = True
-                rec.open_second_result = False
-            elif rec.evaluation_open_session == 'fin' :
-                rec.open_partial_result = False
-                rec.open_final_result = False
-                rec.open_second_result = True
-            else :
-                rec.open_partial_result = False
-                rec.open_final_result = False
-                rec.open_second_result = False
-        for rec in self.filtered(lambda r: r.year_id != evaluation_open_year_id) :
-            rec.open_partial_result = False
-            rec.open_final_result = False
-            rec.open_second_result = False
+        open_recs = rec in self.filtered(lambda r: r.year_id == evaluation_open_year_id)
+        if evaluation_open_session == 'part' :
+            open_recs.open_partial_result = True
+            open_recs.open_final_result = False
+            open_recs.open_second_result = False
+        elif evaluation_open_session == 'fin' :
+            open_recs.open_partial_result = False
+            open_recs.open_final_result = True
+            open_recs.open_second_result = False
+        elif evaluation_open_session == 'sec' :
+            open_recs.open_partial_result = False
+            open_recs.open_final_result = False
+            open_recs.open_second_result = True
+        else
+            open_recs.open_partial_result = False
+            open_recs.open_final_result = False
+            open_recs.open_second_result = False
+        closed_recs = self.filtered(lambda r: r.year_id != evaluation_open_year_id or r.evaluation_open_session == 'none')
+        closed_recs.open_partial_result = False
+        closed_recs.open_final_result = False
+        closed_recs.open_second_result = False
             
 
     @api.depends('partial_result','final_result','second_result')
