@@ -642,6 +642,10 @@ class IndividualCourse(models.Model):
     jun_result= fields.Char(string='June Result',readonly=True) # Kept for archiving purpose
     sept_result= fields.Char(string='September Result',readonly=True) # Kept for archiving purpose
     
+    open_partial_result = fields.Char(string='Partial Result',compue='open_evaluations')
+    open_final_result = fields.Char(string='Final Result',compue='open_evaluations')
+    open_second_result = fields.Char(string='Second Result',compue='open_evaluations')
+    
     partial_result = fields.Char(string='Partial Result',track_visibility='onchange')
     final_result = fields.Char(string='Final Result',track_visibility='onchange')
     second_result = fields.Char(string='Second Result',track_visibility='onchange')
@@ -664,10 +668,34 @@ class IndividualCourse(models.Model):
 
     is_danger = fields.Boolean(compute="compute_results", store=True)
 
+    def open_evaluations(self):
+        evaluation_open_year_id = literal_eval(self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0'))
+        evaluation_open_session = literal_eval(self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_session', 'none'))
+        for rec in self.filtered(lambda r: r.year_id == evaluation_open_year_id) :
+            if rec.evaluation_open_session == 'part' :
+                rec.open_partial_result = True
+                rec.open_final_result = False
+                rec.open_second_result = False
+            elif rec.evaluation_open_session == 'fin' :
+                rec.open_partial_result = False
+                rec.open_final_result = True
+                rec.open_second_result = False
+            elif rec.evaluation_open_session == 'fin' :
+                rec.open_partial_result = False
+                rec.open_final_result = False
+                rec.open_second_result = True
+            else :
+                rec.open_partial_result = False
+                rec.open_final_result = False
+                rec.open_second_result = False
+        for rec in self.filtered(lambda r: r.year_id != evaluation_open_year_id) :
+            rec.open_partial_result = False
+            rec.open_final_result = False
+            rec.open_second_result = False
+            
+
     @api.depends('partial_result','final_result','second_result')
     def compute_results(self):
-        for rec in self :
-            _logger.info('Trigger "compute_results" on Course %s (%s)' % (rec.uid,rec.course_group_id.state))
         for rec in self.filtered(lambda r: r.course_group_id.state in ['7_failed','5_progress']) :
             if rec.partial_result :
                 try:
