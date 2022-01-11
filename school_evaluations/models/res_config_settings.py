@@ -25,14 +25,14 @@ from odoo import api, fields, models, _
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    evaluation_current_year_id = fields.Many2one(
+    evaluation_open_year_id = fields.Many2one(
         comodel_name='school.year',
         string='Current Year for Evaluations',
         readonly=False,
-        help='Only courses in current year could be evaluated.')
+        help='Only courses in current year could be evaluated.', config_parameter='school.evaluation_open_year_id')
         
     evaluation_open_session = fields.Selection(
         ([('part','Partial'),('fin','Final'),('sec','Second'),('none','None')]),
         string='Open Session',
         readonly=False,
-        help='Only evaluation for current session can be encoded.')
+        help='Only evaluation for current session can be encoded.', config_parameter='school.evaluation_open_session')
