@@ -422,6 +422,9 @@
                     <field name="second_session_result_bool" invisible="1" />
                     <field name="is_annual" invisible="1" />
                     <field name="is_danger" invisible="1" />
+                    <field name="open_partial_result" invisible="1" />
+                    <field name="open_final_result" invisible="1" />
+                    <field name="open_second_result" invisible="1" />
                 </xpath>
             </field>
         </record>
