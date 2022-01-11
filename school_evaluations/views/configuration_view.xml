@@ -65,6 +65,6 @@
             <field name="context">{'module' : 'evaluation'}</field>
         </record>
         
-        <menuitem id="menu_action_evaluation_config" parent="menu_main_evaluation" action="action_evaluation_config" sequence="99" groups="base.group_configuration"/>
+        <menuitem id="menu_action_evaluation_config" parent="menu_main_evaluation" action="action_evaluation_config" sequence="99" groups="base.access_res_config_settings"/>
     </data>
 </odoo>
