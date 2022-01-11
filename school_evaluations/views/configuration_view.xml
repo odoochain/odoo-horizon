@@ -41,7 +41,7 @@
                                     <div class="content-group">
                                         <div class="row mt16">
                                             <label string="Open Year" for="evaluation_open_year_id" class="col-lg-3 o_light_label"/>
-                                            <field name="evaluation_current_year_id" />
+                                            <field name="evaluation_open_year_id" />
                                         </div>
                                         <div class="row">
                                             <label string="Open Session" for="evaluation_open_session" class="col-lg-3 o_light_label"/>
