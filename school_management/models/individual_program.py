@@ -336,6 +336,16 @@ class IndividualCourseGroup(models.Model):
             rec.total_hours = sum(course.hours for course in rec.course_ids)
             rec.total_credits = sum(course.credits for course in rec.course_ids)
             rec.total_weight = sum(course.weight for course in rec.course_ids)
+            
+    def action_open_source_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Course Group',
+            'res_model': 'school.course_group',
+            'res_id': self.source_course_id,
+            'view_mode': 'form',
+        }
 
 class IndividualCourse(models.Model):
     '''Individual Course'''
