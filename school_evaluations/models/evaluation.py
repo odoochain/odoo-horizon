@@ -642,9 +642,9 @@ class IndividualCourse(models.Model):
     jun_result= fields.Char(string='June Result',readonly=True) # Kept for archiving purpose
     sept_result= fields.Char(string='September Result',readonly=True) # Kept for archiving purpose
     
-    open_partial_result = fields.Char(string='Partial Result',compue='open_evaluations')
-    open_final_result = fields.Char(string='Final Result',compue='open_evaluations')
-    open_second_result = fields.Char(string='Second Result',compue='open_evaluations')
+    open_partial_result = fields.Char(string='Partial Result',compute='open_evaluations')
+    open_final_result = fields.Char(string='Final Result',compute='open_evaluations')
+    open_second_result = fields.Char(string='Second Result',compute='open_evaluations')
     
     partial_result = fields.Char(string='Partial Result',track_visibility='onchange')
     final_result = fields.Char(string='Final Result',track_visibility='onchange')
