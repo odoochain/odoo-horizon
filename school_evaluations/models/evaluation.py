@@ -19,8 +19,6 @@
 ##############################################################################
 import logging
 
-from ast import literal_eval
-
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
@@ -671,8 +669,8 @@ class IndividualCourse(models.Model):
     is_danger = fields.Boolean(compute="compute_results", store=True)
 
     def open_evaluations(self):
-        evaluation_open_year_id = literal_eval(self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0'))
-        evaluation_open_session = literal_eval(self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_session', 'none'))
+        evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
+        evaluation_open_session = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_session', 'none')
         for rec in self.filtered(lambda r: r.year_id == evaluation_open_year_id) :
             if rec.evaluation_open_session == 'part' :
                 rec.open_partial_result = True
