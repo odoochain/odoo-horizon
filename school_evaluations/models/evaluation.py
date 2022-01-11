@@ -19,6 +19,8 @@
 ##############################################################################
 import logging
 
+from ast import literal_eval
+
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
