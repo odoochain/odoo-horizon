@@ -671,7 +671,8 @@ class IndividualCourse(models.Model):
     def open_evaluations(self):
         evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
         evaluation_open_session = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_session', 'none')
-        open_recs = rec in self.filtered(lambda r: r.year_id == evaluation_open_year_id)
+        
+        open_recs = self.filtered(lambda r: r.year_id == evaluation_open_year_id)
         if evaluation_open_session == 'part' :
             open_recs.open_partial_result = True
             open_recs.open_final_result = False
@@ -688,7 +689,8 @@ class IndividualCourse(models.Model):
             open_recs.open_partial_result = False
             open_recs.open_final_result = False
             open_recs.open_second_result = False
-        closed_recs = self.filtered(lambda r: r.year_id != evaluation_open_year_id or r.evaluation_open_session == 'none')
+            
+        closed_recs = self.filtered(lambda r: r.year_id != evaluation_open_year_id)
         closed_recs.open_partial_result = False
         closed_recs.open_final_result = False
         closed_recs.open_second_result = False
