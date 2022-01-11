@@ -54,17 +54,6 @@
                     </div>
                 </xpath>
             </field>
-        </record>    
-    
-        <record id="action_evaluation_config" model="ir.actions.act_window">
-            <field name="name">Settings</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.config.settings</field>
-            <field name="view_mode">form</field>
-            <field name="target">inline</field>
-            <field name="context">{'module' : 'evaluation'}</field>
         </record>
-        
-        <menuitem id="menu_action_evaluation_config" parent="menu_main_evaluation" action="action_evaluation_config" sequence="99" groups="base.group_system"/>
     </data>
 </odoo>
