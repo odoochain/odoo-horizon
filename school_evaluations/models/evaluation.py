@@ -642,9 +642,9 @@ class IndividualCourse(models.Model):
     jun_result= fields.Char(string='June Result',readonly=True) # Kept for archiving purpose
     sept_result= fields.Char(string='September Result',readonly=True) # Kept for archiving purpose
     
-    open_partial_result = fields.Char(string='Partial Result',compute='open_evaluations')
-    open_final_result = fields.Char(string='Final Result',compute='open_evaluations')
-    open_second_result = fields.Char(string='Second Result',compute='open_evaluations')
+    open_partial_result = fields.Boolean(string='Partial Result',compute='open_evaluations')
+    open_final_result = fields.Boolean(string='Final Result',compute='open_evaluations')
+    open_second_result = fields.Boolean(string='Second Result',compute='open_evaluations')
     
     partial_result = fields.Char(string='Partial Result',track_visibility='onchange')
     final_result = fields.Char(string='Final Result',track_visibility='onchange')
@@ -672,7 +672,7 @@ class IndividualCourse(models.Model):
         evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
         evaluation_open_session = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_session', 'none')
         
-        open_recs = self.filtered(lambda r: r.year_id == evaluation_open_year_id)
+        open_recs = self.filtered(lambda r: r.year_id.id == int(evaluation_open_year_id))
         if evaluation_open_session == 'part' :
             open_recs.open_partial_result = True
             open_recs.open_final_result = False
@@ -690,7 +690,7 @@ class IndividualCourse(models.Model):
             open_recs.open_final_result = False
             open_recs.open_second_result = False
             
-        closed_recs = self.filtered(lambda r: r.year_id != evaluation_open_year_id)
+        closed_recs = self.filtered(lambda r: r.year_id.id != int(evaluation_open_year_id))
         closed_recs.open_partial_result = False
         closed_recs.open_final_result = False
         closed_recs.open_second_result = False
