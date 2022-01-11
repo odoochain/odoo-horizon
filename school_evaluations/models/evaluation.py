@@ -684,7 +684,7 @@ class IndividualCourse(models.Model):
             open_recs.open_partial_result = False
             open_recs.open_final_result = False
             open_recs.open_second_result = True
-        else
+        else :
             open_recs.open_partial_result = False
             open_recs.open_final_result = False
             open_recs.open_second_result = False
