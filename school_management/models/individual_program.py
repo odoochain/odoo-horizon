@@ -343,7 +343,7 @@ class IndividualCourseGroup(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Course Group',
             'res_model': 'school.course_group',
-            'res_id': self.source_course_id,
+            'res_id': self.source_course_group_id,
             'view_mode': 'form',
         }
 
