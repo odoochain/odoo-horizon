@@ -116,10 +116,10 @@
           <filter string="Draft" name="draft" domain="[('state','=','draft')]" />
           <filter string="Active" name="active" domain="[('state','=','active')]" />
           <filter string="Archived" name="archived" domain="[('state','=','archived')]" />
+          <searchpanel>
+            <field name="state" icon="fa-users" enable_counters="1" />
+          </searchpanel>
         </search>
-        <searchpanel>
-          <field name="state" icon="fa-users" enable_counters="1" />
-        </searchpanel>
       </field>
     </record>
   
