@@ -155,6 +155,6 @@
   
     <!-- Top Menu item -->
   
-    <menuitem id="menu_deliberation_tree" parent="school_deliberation.menu_main_evaluation" action="action_deliberation_tree" sequence="60" />
+    <menuitem id="menu_deliberation_tree" parent="school_evaluation.menu_main_evaluation" action="action_deliberation_tree" sequence="60" />
   </data>
 </odoo>
