@@ -87,16 +87,18 @@
               <h1>
                 <field name="title" />
               </h1>
-              <div class="oe_fade">
-                <field name="secretary_id" />
-              </div>
             </div>
             <group col="4">
               <field name="year_id" />
               <field name="session" />
               <field name="date" />
+              <field name="secretary_id" />
               <field name="individual_program_count" />
               <field name="individual_bloc_count" />
+            </group>
+            <group col="2">
+              <field name="individual_program_ids" />
+              <field name="individual_bloc_ids" />
             </group>
           </sheet>
         </form>

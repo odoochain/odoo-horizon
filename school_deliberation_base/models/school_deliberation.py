@@ -58,11 +58,11 @@ class Deliberation(models.Model):
     
     individual_program_ids = fields.Many2many('school.individual_program', 'school_deliberation_program_rel', 'deliberation_id', 'program_id', string='Programs')
     
-    individual_program_count = fields.Integer(string='Programs Count', compute="_compute_count")
+    individual_program_count = fields.Integer(string='Programs Count', compute="_compute_counts")
     
     individual_bloc_ids = fields.Many2many('school.individual_bloc', 'school_deliberation_bloc_rel', 'deliberation_id', 'bloc_id', string='Blocs')
     
-    individual_bloc_count = fields.Integer(string='Blocs Count', compute="_compute_count")
+    individual_bloc_count = fields.Integer(string='Blocs Count', compute="_compute_counts")
     
     def _compute_counts(self):
         for rec in self:
