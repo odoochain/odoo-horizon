@@ -33,34 +33,34 @@
     <field name="name">school.deliberation.kanban</field>
     <field name="model">school.deliberation</field>
     <field name="arch" type="xml">
-      <kanban class="o_deliberation_kanban" default_group_by="state">
-        <field name="uid" />
+      <kanban class="o_deliberation_kanban">
+        <field name="individual_program_count" />
+        <field name="individual_bloc_count" />
         <field name="title" />
+        <field name="year_id" />
+        <field name="session" />
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click o_deliberation_kanban">
               <div class="o_kanban_card_header">
                 <div class="o_kanban_card_header_title">
                   <div class="o_primary">
-                    <field name="uid" /><br/>
-                    <strong><field name="name" /></strong>
+                    <field name="title" /><br/>
+                    <field name="year_id" />-<field name="session" />
                   </div>
                 </div>
                 <div class="container o_kanban_card_content o_visible">
                   <div class="row">
                     <div class="col-xs-6 o_kanban_primary_left">
-                      <b>Credits : </b>
-                      <field name="total_credits" />
+                      <b>Programs : </b>
+                      <field name="individual_program_count" />
                     </div>
                     <div class="col-xs-6">
-                      <b>Hours : </b>
-                      <field name="total_hours" />
+                      <b>Blocs : </b>
+                      <field name="individual_bloc_count" />
                     </div>
                   </div>
                 </div>
-                <!--<div class="o_kanban_manage_button_section">
-                    <a class="o_kanban_manage_toggle_button" href="#">More <i class="fa fa-caret-down"/></a>
-                  </div>-->
               </div>
             </div>
           </t>
