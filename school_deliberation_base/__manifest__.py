@@ -35,7 +35,7 @@
         This modules add deliberation management for a school.
     ''',
     'qweb': ['static/src/xml/*.xml'],
-    'active': False,
+    'active': True,
     'installable': True,
     'application': True,
 }
