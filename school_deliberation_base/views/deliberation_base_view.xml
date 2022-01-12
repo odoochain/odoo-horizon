@@ -46,7 +46,7 @@
                 <div class="o_kanban_card_header">
                   <div class="o_kanban_card_header_title">
                     <div class="o_primary">
-                      <field name="title"/><br/>
+                      <field name="name"/><br/>
                       <field name="year_id"/> - <field name="session"/><br/>
                       <field name="secretary_id"/>
                     </div>
@@ -87,7 +87,7 @@
           <sheet>
             <div class="oe_title">
               <h1>
-                <field name="title" />
+                <field name="name" />
               </h1>
             </div>
             <group col="4">
@@ -112,7 +112,7 @@
       <field name="model">school.deliberation</field>
       <field name="arch" type="xml">
         <search string="Search Deliberation">
-          <field name="title" filter_domain="[('title', 'ilike',self)]" />
+          <field name="name" filter_domain="[('name', 'ilike',self)]" />
           <filter string="Current Year" name="current" domain="[('year_sequence','=','current')]" />
           <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
           <filter string="Previous Year" name="previous" domain="[('year_sequence','=','previous')]" />

@@ -52,7 +52,7 @@ class Deliberation(models.Model):
     
     date = fields.Date(required=True, string="Date")
     
-    title = fields.Char(required=True, string="Title")
+    name = fields.Char(required=True, string="Title")
     
     secretary_id = fields.Many2one('res.partner', required=True, domain=[('teacher','=',True)])
     
