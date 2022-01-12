@@ -68,3 +68,12 @@ class Deliberation(models.Model):
         for rec in self:
             rec.individual_program_count = len(rec.individual_program_ids)
             rec.individual_bloc_count = len(rec.individual_bloc_ids)
+    
+    def to_draft(self):
+        return self.write({'state': 'draft'})
+
+    def activate(self):
+        return self.write({'state': 'active'})
+
+    def archive(self):
+        return self.write({'state': 'archived'})
