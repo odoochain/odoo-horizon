@@ -54,13 +54,13 @@ class Deliberation(models.Model):
     
     title = fields.Char(required=True, string="Title")
     
-    secretary_id = fields.Many2one('res.partner', required=True)
+    secretary_id = fields.Many2one('res.partner', required=True, domain=[('teacher','=',True)])
     
-    individual_program_ids = fields.Many2many('school.individual_program', 'school_deliberation_program_rel', 'deliberation_id', 'program_id', string='Programs')
+    individual_program_ids = fields.Many2many('school.individual_program', 'school_deliberation_program_rel', 'deliberation_id', 'program_id', string='Programs',domain=[('state','=','progess')])
     
     individual_program_count = fields.Integer(string='Programs Count', compute="_compute_counts")
     
-    individual_bloc_ids = fields.Many2many('school.individual_bloc', 'school_deliberation_bloc_rel', 'deliberation_id', 'bloc_id', string='Blocs')
+    individual_bloc_ids = fields.Many2many('school.individual_bloc', 'school_deliberation_bloc_rel', 'deliberation_id', 'bloc_id', string='Blocs',domain=[('state','=','progess')])
     
     individual_bloc_count = fields.Integer(string='Blocs Count', compute="_compute_counts")
     
