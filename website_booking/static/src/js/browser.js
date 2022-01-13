@@ -35,7 +35,7 @@ var CalendarWidget = Widget.extend({
     		locale: 'fr',
     		titleFormat: 'dddd D MMMM YYYY',
     		defaultDate: moment(),
-    		defaultView: 'agendaDay',
+    		defaultView: 'resourceTimeGridDay',
     		minTime: "08:00:00",
     		maxTime: "22:00:00",
     		navLinks: true, // can click day/week names to navigate views
