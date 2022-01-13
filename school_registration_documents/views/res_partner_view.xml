@@ -32,7 +32,7 @@
                 <field name="mobile" position="after">
                     <field name="official_document_missing_count" />
                 </field>
-                <xpath expr="//div[@class='oe_kanban_partner_links']" position="inside">
+                <xpath expr="//span[@class='oe_kanban_partner_links']" position="after">
                     <span class="badge" style="color:white;background-color:red;" attrs="{'invisible': [('official_document_missing_count','=',0)]}" >Missing <field name='official_document_missing_count' /> doc(s)</span>
                 </xpath>
             </field>
