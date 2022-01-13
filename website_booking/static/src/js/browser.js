@@ -55,14 +55,10 @@ var CalendarWidget = Widget.extend({
      */
     start: function () {
         var def = this._super.apply(this, arguments);
-
-        var self = this;
-
-        self.$calendar = self.$el;
         
-        self.calendar = new FullCalendar.Calendar(self.$calendar, self.get_fc_init_options());
+        this.calendar = new FullCalendar.Calendar(this.$el, this.get_fc_init_options());
     
-        self.calendar.render();
+        this.calendar.render();
 
         return def;
     },
