@@ -24,6 +24,7 @@ from datetime import datetime, date, time, timedelta
 
 from openerp import api, fields, models, _, tools
 from openerp.exceptions import UserError, ValidationError
+from openerp.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -129,6 +130,9 @@ class Event(models.Model):
                 
                 if dt < (datetime.now() + timedelta(minutes=-30)):
                     raise ValidationError(_("You cannot book in the past."))
+                    
+                if dt.hour > 19 and dt.weekday() > 0 :
+                    raise ValidationError(_("You cannot book after 20:00 during the WE."))
                 
                 event_day = fields.Datetime.from_string(self.start_datetime).date()
                 
@@ -156,3 +160,12 @@ class Event(models.Model):
                 _logger.info('Check done')
                     
             
+    @api.model
+    def archive_old_events(self, *args, **kwargs):
+        timeout_ago = datetime.utcnow()-timedelta(days=30)
+        _logger.info('Archive old event')
+        domain = [('stop', '<', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT)),('recurrency','=',False)]
+        self.sudo().search(domain).write({'active': False})
+        _logger.info('Archive reccuring event')
+        domain = [('final_date', '<', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT)),('recurrency','=',True)]
+        self.sudo().search(domain).write({'active': False})

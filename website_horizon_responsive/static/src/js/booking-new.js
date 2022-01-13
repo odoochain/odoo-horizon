@@ -15,12 +15,12 @@ $(document).ready(function(){
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
         if (fromTime < toTime) {
-            var start = date_today.set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-            var stop = date_today.set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var start = date_today.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var stop = date_today.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
             var day = $('#day').attr('value');
             if( day == 1 ) {
-                start = date_tomorrow.set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-                stop = date_tomorrow.set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                start = date_tomorrow.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                stop = date_tomorrow.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
             }
             $.ajax({
               type: "POST",
@@ -66,15 +66,15 @@ $(document).ready(function(){
     
 	$('#from_hour').timepicker({
         'timeFormat': 'H:i',
-        'minTime': '8:30',
-        'maxTime': '15:30',
+        'minTime': '8:00',
+        'maxTime': '21:30',
         'step': 60,
     });
     
     $('#to_hour').timepicker({
         'timeFormat': 'H:i',
-        'minTime': '9:30',
-        'maxTime': '16:30',
+        'minTime': '9:00',
+        'maxTime': '22:00',
         'step': 60,
         'showDuration': true,
     });
@@ -99,9 +99,7 @@ $(document).ready(function(){
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
         $('#to_hour').timepicker('option', 'minTime', fromTime);
-        if (fromTime > toTime) {
-            $('#to_hour').timepicker('setTime', fromTime);
-        }
+        $('#to_hour').timepicker('setTime', moment(fromTime).add(moment.duration(1, 'hours')).toDate());
         updateRoomList();
         updateSendButton();
     });
@@ -118,12 +116,12 @@ $(document).ready(function(){
     $('#request-booking').on('click',function() {
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
-        var start = date_today.set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-        var stop = date_today.set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var start = date_today.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var stop = date_today.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
         var day = $('#day').attr('value');
         if( day == 1 ) {
-            start = date_tomorrow.set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-            stop = date_tomorrow.set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            start = date_tomorrow.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            stop = date_tomorrow.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
         }
         var room = $('#room').val();
         var description  = $('#description').val();

@@ -39,8 +39,8 @@ var CalendarWidget = Widget.extend({
     		titleFormat: 'dddd D MMMM YYYY',
     		defaultDate: moment(),
     		defaultView: 'agendaDay',
-    		minTime: "08:30:00",
-    		maxTime: "16:30:00",
+    		minTime: "08:00:00",
+    		maxTime: "22:00:00",
     		navLinks: true, // can click day/week names to navigate views
     		eventLimit: true, // allow "more" link when too many events
     		refetchResourcesOnNavigate : false,
@@ -312,8 +312,8 @@ var NewBookingDialog = Widget.extend({
         self.$('select.select-asset-id').material_select();
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
-            'minTime': '8:30',
-            'maxTime': '15:30',
+            'minTime': '8:00',
+            'maxTime': '21:30',
             'step' : 60,
         });
         self.$('#from_hour').on('change', function() {
@@ -323,7 +323,7 @@ var NewBookingDialog = Widget.extend({
         self.$('#to_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:30',
-            'maxTime': '16:30',
+            'maxTime': '22:00',
             'showDuration': true,
             'step' : 60,
         });
@@ -589,7 +589,7 @@ var Calendar = CalendarWidget.extend({
     		},
     		eventClick: function(calEvent, jsEvent, view) {
     		    var now = moment();
-    		    if(session.uid == calEvent.user_id) {
+    		    if(session.user.in_group_14 || session.uid == calEvent.user_id) {
     		        if (moment(calEvent.start) > now) {
             		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
                         dialog.appendTo(self.getParent().main_modal.empty());
@@ -607,7 +607,7 @@ var Calendar = CalendarWidget.extend({
                 left:   'prev',
                 center: 'title,today',
                 right:  'next'
-            }
+            },
         });
     },
     
@@ -700,6 +700,10 @@ var Calendar = CalendarWidget.extend({
         this.$calendar.fullCalendar( 'refetchEvents' );
     },
     
+    goto_date : function(d) {
+        this.$calendar.fullCalendar('gotoDate', d);
+    },
+    
 });
 
 var Toolbar = Widget.extend({
@@ -772,6 +776,12 @@ var Browser = Widget.extend({
             dialog.appendTo(self.main_modal.empty());
             self.main_modal.modal('open');
         },
+        
+        "click #goto-date-button": function (event) {
+            var self = this;
+            this.cal.goto_date(moment(this.$('.datepicker').val(),'DD/MM/YYYY'));
+        },
+        
     },
     
     custom_events: {
@@ -804,6 +814,7 @@ var Browser = Widget.extend({
         self.cal = new Calendar(this);
         self.cal.appendTo(this.$(".calendar"));
         self.cal.tb = self.tb;
+        this.$('.datepicker').datepicker($.datepicker.regional[ "fr" ]);
     },
     
     start: function() {

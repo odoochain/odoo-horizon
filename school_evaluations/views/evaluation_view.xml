@@ -26,21 +26,6 @@
         <!-- Top menu item -->
         <menuitem name="Evaluations" id="menu_main_evaluation" icon="fa-book" web_icon="survey,static/description/icon.png" sequence="65" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
 
-        <template id="assets_backend" name="school_evaluations_assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/metisMenu.min.css" /> <!-- TODO : change to not min version -->
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/sb-admin-2.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_program.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluation_bloc.css" />
-                <link rel="stylesheet" href="/school_evaluations/static/src/css/school_evaluations.css" />
-                <script type="text/javascript" src="/school_evaluations/static/src/js/metisMenu.min.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/sb-admin-2.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluations.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluation_bloc.js"></script>
-                <script type="text/javascript" src="/school_evaluations/static/src/js/school_evaluation_program.js"></script>
-            </xpath>
-        </template>
-
         <!-- Partner -->
         <record id="view_partners_form_school_eval" model="ir.ui.view">
             <field name="name">view.res.partner.form.school.eval</field>
@@ -82,7 +67,7 @@
                     <filter name="draft" string="Draft" domain="[('state', 'in', ['draft'])]" />
                     <filter name="progress" string="Progress" domain="[('state', 'in', ['progress'])]" />
                     <filter name="awarded" string="Awarded" domain="[('state', 'in', ['awarded'])]" />
-                    <filter name="abandonned" string="Abandonned" domain="[('state', 'in', ['abandonned'])]" />
+                    <filter name="abandoned" string="Abandonned" domain="[('state', 'in', ['abandoned'])]" />
                 </xpath>
             </field>
         </record>
@@ -99,7 +84,7 @@
                         <button name="set_to_progress" type="object" states="draft" string="Progress" class="oe_highlight" />
                         <button name="set_to_awarded" type="object" states="progress" string="Awarded" class="oe_highlight" />
                         <button name="set_to_abandonned" type="object" states="progress" string="Abandoned" class="oe_highlight" />
-                        <button name="set_to_draft" type="object" states="progress,awarded,abandonned" string="Reset to Draft" />
+                        <button name="set_to_draft" type="object" states="progress,awarded,abandoned" string="Reset to Draft" />
                         <field name="state" widget="statusbar" statusbar_visible=" " />
                     </header>
                 </xpath>
@@ -215,7 +200,7 @@
                         <button name="set_to_awarded_first_session" type="object" states="progress" string="Awarded" class="oe_highlight" />
                         <button name="set_to_awarded_second_session" type="object" states="postponed" string="Awarded" class="oe_highlight" />
                         <button name="set_to_failed" type="object" states="progress,postponed" string="Failed" class="oe_highlight" />
-                        <button name="set_to_draft" type="object" states="progress,postponed,awarded_first_session,awarded_second_session,failed" string="Reset to Draft" />
+                        <button name="set_to_draft" type="object" states="progress,postponed,awarded_first_session,awarded_second_session,failed,abandoned" string="Reset to Draft" />
                         <button name="set_to_abandoned" type="object" states="draft,progress,postponed" string="Abandon" />
                         <field name="state" widget="statusbar" states="draft,progress" statusbar_visible="draft,progress,postponed,awarded_first_session,failed,abandoned" />
                         <field name="state" widget="statusbar" states="postponed" statusbar_visible="draft,postponed,awarded_second_session,failed,abandoned" />

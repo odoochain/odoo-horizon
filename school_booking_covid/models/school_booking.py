@@ -42,31 +42,31 @@ class Event(models.Model):
     def to_draft(self):
         self.write({'state': 'draft'})
         
-    @api.one
-    @api.constrains('state')
-    def _change_name_from_state(self):
-        if not self.recurrency :
-            if self.state == 'draft':
-                name = self.name
-                if name.find('[') != -1:
-                    name = name[:-5]
-                self.name = '%s [NC] ' % name
-            elif self.state == 'open':
-                name = self.name
-                if name.find('[') != -1:
-                    name = name[:-5]
-                self.name = '%s [OK] ' % name
+    # @api.one
+    # @api.constrains('state')
+    # def _change_name_from_state(self):
+    #     if not self.recurrency :
+    #         if self.state == 'draft':
+    #             name = self.name
+    #             if name.find('[') != -1:
+    #                 name = name[:-5]
+    #             self.name = '%s [NC] ' % name
+    #         elif self.state == 'open':
+    #             name = self.name
+    #             if name.find('[') != -1:
+    #                 name = name[:-5]
+    #             self.name = '%s [OK] ' % name
                 
-                cr = self.env.cr
-                uid = self.env.uid
-                context = self.env.context
+    #             cr = self.env.cr
+    #             uid = self.env.uid
+    #             context = self.env.context
             
-                mail_to_ids = self.attendee_ids.mapped('id')
+    #             mail_to_ids = self.attendee_ids.mapped('id')
                     
-                if mail_to_ids:
-                    current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-                    if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
-                        self.pool['calendar.event'].message_post(cr, uid, self.id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
+    #             if mail_to_ids:
+    #                 current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+    #                 if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
+    #                     self.pool['calendar.event'].message_post(cr, uid, self.id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
 
     @api.one
     @api.constrains('room_id')
@@ -112,24 +112,31 @@ class Event(models.Model):
                 
                 dt = to_tz(fields.Datetime.from_string(self.start_datetime),utc_tz)
                 
-                if dt.minute != 30 :
+                if dt.minute != 0 and dt.minute != 30 :
                     raise ValidationError(_("Invalid booking, please use standard booking."))
-                
+                    
                 now = to_tz(datetime.now(),user_tz)
                 
                 start_time = fields.Datetime.from_string(self.start_datetime)
                
                 next_day = now + timedelta(days= 7-now.weekday() if now.weekday()>3 else 1)
                 
-                last_booking_day = now - timedelta(days=now.weekday()) + timedelta(days=6) # end of week
+                #last_booking_day = now - timedelta(days=now.weekday()) + timedelta(days=6) # end of week
+                # change suivant email Marie-Catherine Bach Mon, 1 Mar, 13:14
                 
-                if now.weekday > 3 :
-                    last_booking_day = last_booking_day + timedelta(days=7) # end of next week
+                # change suivant call du 05/05/21
+                last_booking_day = next_day + timedelta(days=2) # 2 following days
                 
-                if start_time.day <= next_day.day :
+                _logger.info('check at %s : %s < %s < %s' % (now, next_day, start_time, last_booking_day))
+                
+                # removed suivant call du 05/05/21
+                #if now.weekday > 3 :
+                #    last_booking_day = last_booking_day + timedelta(days=7) # end of next week
+                
+                if start_time <= next_day :
                     raise ValidationError(_("You must make your booking two days in advance."))
                 
-                if start_time.day > last_booking_day.day :
+                if start_time > last_booking_day :
                     raise ValidationError(_("Bookings are not yet open for this date."))
                 
                 if dt < (datetime.now() + timedelta(minutes=-30)):
@@ -141,7 +148,7 @@ class Event(models.Model):
                         ('user_id', '=', self.user_id.id), ('room_id','!=',False), ('categ_ids','in',student_event.id), ('start', '>=', fields.Datetime.to_string(event_day)), ('start', '<=', fields.Datetime.to_string(event_day + timedelta(days=1)))
                     ],['room_id','duration'],['room_id'])
                 for duration in duration_list:
-                    if duration['duration'] and duration['duration'] > 3:
+                    if duration['duration'] and duration['duration'] > 4:
                         raise ValidationError(_("You cannot book the room %s more than three hours") % (duration.get('room_id','')[1]))
                 
                 duration_list = self.env['calendar.event'].read_group([
@@ -152,5 +159,4 @@ class Event(models.Model):
                         raise ValidationError(_("You cannot book more than six hours per day - %s") % duration['start_datetime:day'])
                 
                 _logger.info('Check done')
-                    
-            
+                
