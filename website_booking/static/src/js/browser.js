@@ -52,7 +52,7 @@ var CalendarWidget = Widget.extend({
     renderElement: function() {
         this._super.apply(this, arguments);
         var self = this;
-        self.$calendar = this.$el;
+        self.$calendar = this.el;
         self.$calendar.fullCalendar(
 		    self.get_fc_init_options()
 		);
