@@ -96,7 +96,7 @@ class Event(models.Model):
         
                 # Prevent concurrent bookings
     
-                domain = [('room_id','=',rec.room_id.id), ('start', '<', rec.stop_datetime), ('stop', '>', rec.start_datetime)]
+                domain = [('room_id','=',rec.room_id.id), ('start', '<', rec.stop), ('stop', '>', rec.start)]
                 conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
                 if conflicts_count > 1:
                     raise ValidationError(_("Concurrent event detected - %s in %s") % (rec.start_datetime, rec.room_id.name))
