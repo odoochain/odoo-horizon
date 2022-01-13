@@ -177,7 +177,7 @@ class BookingController(http.Controller):
         _logger.info('Get all events')
         busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain)
         _logger.info('Filter events - results %s' % busy_rooms_ids)
-        busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start <= end).filtered(lambda r : r.stop >= start).mapped('room_id')
+        busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start <= dateutil.parser.parse(end)).filtered(lambda r : r.stop >= dateutil.parser.parse(start)).mapped('room_id')
         _logger.info('Filter done')
         return (all_rooms_ids - busy_rooms_ids).read(['name'])
         
