@@ -50,14 +50,15 @@ var CalendarWidget = Widget.extend({
         }
     },
     
-    renderElement: function() {
-        this._super.apply(this, arguments);
+    start: function () {
         var self = this;
-        self.$calendar = this.el;
+        return this._super.apply(arguments).then(function() {
+            self.$calendar = self.$el;
         
-        self.calendar = new FullCalendar.Calendar(self.$calendar, self.get_fc_init_options());
-    
-        self.calendar.render();
+            self.calendar = new FullCalendar.Calendar(self.$calendar, self.get_fc_init_options());
+        
+            self.calendar.render();
+        });
     },
     
     refetch_events: function() {
