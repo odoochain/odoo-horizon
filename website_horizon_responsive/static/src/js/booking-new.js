@@ -67,14 +67,14 @@ $(document).ready(function(){
 	$('#from_hour').timepicker({
         'timeFormat': 'H:i',
         'minTime': '8:00',
-        'maxTime': '19:30',
+        'maxTime': '21:30',
         'step': 60,
     });
     
     $('#to_hour').timepicker({
         'timeFormat': 'H:i',
         'minTime': '9:00',
-        'maxTime': '20:00',
+        'maxTime': '22:00',
         'step': 60,
         'showDuration': true,
     });
@@ -100,6 +100,8 @@ $(document).ready(function(){
         var toTime = $('#to_hour').timepicker('getTime');
         $('#to_hour').timepicker('option', 'minTime', fromTime);
         $('#to_hour').timepicker('setTime', moment(fromTime).add(moment.duration(1, 'hours')).toDate());
+        updateRoomList();
+        updateSendButton();
     });
     
     $('#to_hour').on('change', function() {
