@@ -50,6 +50,13 @@ var CalendarWidget = Widget.extend({
         }
     },
     
+    init: function (parent, value) {
+        this._super(parent);
+        console.log(this);
+        console.log(parent);
+        console.log(value);
+    },
+    
     start: function () {
         var self = this;
         return this._super.apply(arguments).then(function() {
