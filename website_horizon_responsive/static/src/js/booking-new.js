@@ -139,8 +139,8 @@ $(document).ready(function(){
                     method: "create",
                     args: [{
                         name: description,
-                        start: start.toISOString().replace('T',' '),
-                        stop: stop.toISOString().replace('T',' '),
+                        start: start.toISOString().replace('T',' ').replace('.000Z',''),
+                        stop: stop.toISOString().replace('T',' ').replace('.000Z',''),
                         room_id: room,
                         categ_ids: [[4, parseInt(event_type)]],
                     }],
