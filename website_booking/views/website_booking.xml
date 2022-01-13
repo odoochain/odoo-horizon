@@ -29,9 +29,12 @@
             <link type="text/css" rel="stylesheet" href="/website_booking/static/lib/materialize/css/materialize.css"  media="screen,projection"/>
                   
             <!--Import Fullcalendar css-->
-            <link rel="stylesheet" href="/web/static/src/css/base.css"/>
-            <link rel="stylesheet" href="/web/static/lib/fullcalendar/css/fullcalendar.css"/>
-            <link rel="stylesheet" href="/web_scheduler/static/lib/fullcalendar/scheduler.css" />
+            <!--<link rel="stylesheet" href="/web/static/src/css/base.css"/>-->
+            <link rel="stylesheet" href="/web/static/lib/fullcalendar/core/main.css" type="text/css"/>
+            <link rel="stylesheet" href="/web/static/lib/fullcalendar/daygrid/main.css" type="text/css">
+            <link rel="stylesheet" href="/web/static/lib/fullcalendar/timegrid/main.css" type="text/css">
+            <link rel="stylesheet" href="/web/static/lib/fullcalendar/list/main.css" type="text/css">
+            <link rel="stylesheet" href="/web_scheduler/static/lib/fullcalendar/scheduler.css" type="text/css"/>
             
             <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
             
@@ -41,7 +44,7 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"/>
             
             <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
-            <script type="text/javascript" src="/web/static/lib/fullcalendar/js/fullcalendar.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/libs/fullcalendar.js"></script>
             <script type="text/javascript" src="/web_scheduler/static/lib/fullcalendar/fr.js"></script>
             <script type="text/javascript" src="/web_scheduler/static/lib/fullcalendar/scheduler.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
