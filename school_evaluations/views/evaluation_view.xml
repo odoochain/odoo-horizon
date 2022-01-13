@@ -24,6 +24,7 @@
     
     
         <!-- Top menu item -->
+
         <menuitem name="Evaluations" id="menu_main_evaluation" web_icon="survey,static/description/icon.png" sequence="65" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
 
         <!-- Partner -->

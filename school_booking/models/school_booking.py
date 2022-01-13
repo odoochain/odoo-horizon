@@ -84,10 +84,20 @@ class Event(models.Model):
             if rec.room_id :
             
                 # Admin is king
-                
                 if self.env.uid == 1 :
                     return
-        
+
+                if now.hour >= 19 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != (now + timedelta(days=1)).date() :
+                    raise ValidationError(_("You can book only the next day (after 19h00)."))
+                
+                if dt < (datetime.now() + timedelta(minutes=-30)):
+                    raise ValidationError(_("You cannot book in the past."))
+                    
+                if dt.hour > 19 and dt.weekday() > 0 :
+                    raise ValidationError(_("You cannot book after 20:00 during the WE."))
+                
+                event_day = fields.Datetime.from_string(self.start_datetime).date()
+
                 # Get user timezone
                 
                 utc_tz = pytz.UTC
