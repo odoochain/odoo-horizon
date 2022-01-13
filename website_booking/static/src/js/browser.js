@@ -67,13 +67,6 @@ var CalendarWidget = Widget.extend({
         return def;
     },
     
-    start: function () {
-        var self = this;
-        return this._super.apply(arguments).then(function() {
-            
-        });
-    },
-    
     refetch_events: function() {
         this.calendar.refetchEvents();
     },
