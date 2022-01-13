@@ -657,13 +657,15 @@ var Calendar = CalendarWidget.extend({
     },
     
     start: function() {
-        this._super.apply(this, arguments);
-        this.init_state = this.getParent()._current_state;
-        if(this.init_state.date) {
-            this.$calendar.fullCalendar( 'gotoDate', moment(this.init_state.date));
-        } else {
-            this.$calendar.fullCalendar( 'gotoDate', moment());
-        }
+        var self = this;
+        return this._super.apply(arguments).then(function() {
+            self.init_state = this.getParent()._current_state;
+            if(self.init_state.date) {
+                self.calendar.gotoDate(moment(self.init_state.date));
+            } else {
+                self.calendar.gotoDate(moment());
+            }
+        });
     },
            
     fetch_resources : function(callback) {
