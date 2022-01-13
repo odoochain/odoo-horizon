@@ -1,7 +1,7 @@
 odoo.define('website_booking.browser', function (require) {
 "use strict";
 
-/* global moment, Materialize, $, location, odoo, gapi */
+/* global moment, Materialize, $, location, odoo, gapi, FullCalendar */
 
 var core = require('web.core');
 var ajax = require('web.ajax');
@@ -53,13 +53,14 @@ var CalendarWidget = Widget.extend({
         this._super.apply(this, arguments);
         var self = this;
         self.$calendar = this.el;
-        self.$calendar.fullCalendar(
-		    self.get_fc_init_options()
-		);
+        
+        self.calendar = new FullCalendar.Calendar(self.$calendar, self.get_fc_init_options());
+    
+        self.calendar.render();
     },
     
     refetch_events: function() {
-        this.$calendar.fullCalendar('refetchEvents');
+        this.calendar.refetchEvents();
     },
 
 });
