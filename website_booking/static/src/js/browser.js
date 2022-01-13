@@ -50,21 +50,27 @@ var CalendarWidget = Widget.extend({
         }
     },
     
-    init: function (parent, value) {
-        this._super(parent);
-        console.log(this);
-        console.log(parent);
-        console.log(value);
+    /**
+     * @override
+     */
+    start: function () {
+        var def = this._super.apply(this, arguments);
+
+        var self = this;
+
+        self.$calendar = self.$el;
+        
+        self.calendar = new FullCalendar.Calendar(self.$calendar, self.get_fc_init_options());
+    
+        self.calendar.render();
+
+        return def;
     },
     
     start: function () {
         var self = this;
         return this._super.apply(arguments).then(function() {
-            self.$calendar = self.$el;
-        
-            self.calendar = new FullCalendar.Calendar(self.$calendar, self.get_fc_init_options());
-        
-            self.calendar.render();
+            
         });
     },
     
