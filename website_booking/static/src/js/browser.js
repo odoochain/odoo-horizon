@@ -26,6 +26,7 @@ var CalendarWidget = Widget.extend({
                  center: 'title,today',
                  right:  'next'
              },
+            plugins: [ 'resourceTimeGrid' ],
             themeSystem : 'bootstrap3',
     		allDaySlot : false,
     		locale: moment.locale,
