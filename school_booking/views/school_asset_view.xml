@@ -20,8 +20,8 @@
 #
 ##############################################################################
 -->
-<openerp>
-  <data>
+<odoo>
+  
 
     <menuitem name="Assets" parent="menu_main_booking" id="menu_assets" sequence="900" />
     
@@ -46,7 +46,7 @@
       <field name="arch" type="xml">
         <form string="Building">
           <sheet>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/>
+            <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/>
             <div class="oe_title">
                 <h1>
                     <field name="name" default_focus="1" placeholder="Name"/>
@@ -88,10 +88,11 @@
       <field name="model">school.building</field>
       <field name="arch" type="xml">
         <search string="Search Building">
-          <field name="name" filter_domain="[('name','ilike',self)]" />
+          <field name="name" />
+          <!--<field name="name" filter_domain="[('name','ilike',self)]" />
           <group expand="1" string="Group By">
-            <filter string="Resource Type" context="{'group_by':['resource_type']}" />
-          </group>
+            <filter string="Resource Type" name="resource_type" context="{'group_by':'resource_type'}" />
+          </group>-->
         </search>
       </field>
     </record>
@@ -100,7 +101,7 @@
       <field name="name">Buildings</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.building</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form</field>
       <field name="search_view_id" ref="view_building_filter" />
       <field name="help" type="html">
@@ -160,7 +161,7 @@
                     <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                 </button>
             </div>
-            <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/>
+            <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/>
             <div class="oe_title">
                 <h1>
                     <field name="name" default_focus="1" placeholder="Name"/>
@@ -198,9 +199,6 @@
       <field name="arch" type="xml">
         <search string="Search Asset">
           <field name="name" filter_domain="[('name','ilike',self)]" />
-          <group expand="1" string="Group By">
-            <filter string="Resource Type" context="{'group_by':['resource_type']}" />
-          </group>
         </search>
       </field>
     </record>
@@ -209,7 +207,7 @@
       <field name="name">Assets</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.asset</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form</field>
       <field name="search_view_id" ref="view_asset_filter" />
       <field name="help" type="html">
@@ -289,7 +287,7 @@
       <field name="name">Asset Type</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.asset_type</field>
-      <field name="view_type">form</field>
+      
       <field name="view_mode">tree,form</field>
       <field name="search_view_id" ref="view_asset_type_filter" />
       <field name="help" type="html">
@@ -323,7 +321,7 @@
         <field name="arch" type="xml">
             <form string="Asset Categories">
                 <sheet>
-                    <field name="image_medium" widget='image' class="oe_avatar"/>
+                    <field name="image_medium" widget='image' class="oe_left oe_inline"/>
                     <div class="oe_left">
                         <group>
                             <field name="name"/>
@@ -352,7 +350,7 @@
         <field name="name">Asset Categories</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">school.asset.category</field>
-        <field name="view_type">form</field>
+        
         <field name="view_mode">tree,form</field>
         <field name="view_id" eval="False"/>
         <field name="help" type="html">
@@ -384,5 +382,5 @@
 
     <menuitem id="menu_asset_category" action="school_asset_category_action" parent="menu_assets" sequence="89" />
     
-  </data>
-</openerp>
+  
+</odoo>

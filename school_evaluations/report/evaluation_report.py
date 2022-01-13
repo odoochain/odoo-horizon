@@ -22,9 +22,9 @@ import logging
 import time
 import base64
 
-from openerp import api, fields, models, tools, _
-from openerp.exceptions import MissingError
-from openerp.tools.safe_eval import safe_eval
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import MissingError
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
     
     send_as_email = fields.Boolean(string="Send as email")
     
-    @api.multi
+    
     def print_report(self, data):
         self.ensure_one()
         data['year_id'] = self.year_id.id
@@ -132,7 +132,7 @@ class ReportEvaluationByTeacherWizard(models.TransientModel):
 class ReportEvaluationByTeacher(models.AbstractModel):
     _name = 'report.school_evaluations.report_evaluation_by_teacher_content'
     
-    @api.multi
+    
     def render_html(self, data):
         res_data = []
         current_year_id = self.env.user.current_year_id

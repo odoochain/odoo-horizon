@@ -28,10 +28,10 @@ import dateutil
 import dateutil.parser
 import dateutil.relativedelta
 
-from openerp import api, fields
-from openerp import http
-from openerp.http import request
-from openerp.addons.auth_oauth.controllers.main import OAuthLogin as Home
+from odoo import api, fields
+from odoo import http
+from odoo.http import request
+from odoo.addons.auth_oauth.controllers.main import OAuthLogin as Home
 
 _logger = logging.getLogger(__name__)
 
@@ -101,8 +101,8 @@ class BookingController(http.Controller):
         ]
         values = {
             'user': request.env.user,
-            'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True, 'tz':request.env.user.tz}).search(domain,event_fields,order='start asc'),
-            'bookings_next': request.env['calendar.event'].sudo().with_context({'virtual_id': True,'tz':request.env.user.tz}).search(domain_next,event_fields,order='start asc'),
+            'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True, 'tz':request.env.user.tz}).search(domain,order='start asc'),
+            'bookings_next': request.env['calendar.event'].sudo().with_context({'virtual_id': True,'tz':request.env.user.tz}).search(domain_next,order='start asc'),
         }
         return request.render('website_horizon_responsive.bookings', values)
         

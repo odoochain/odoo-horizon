@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 
-<openerp>
+<odoo>
   <data>
     <record id="view_calendar_event_form_covid" model="ir.ui.view">
       <field name="name">calendar.event.form.covid</field>
@@ -39,4 +39,4 @@
       </field>
     </record>
   </data>
-</openerp>
+</odoo>

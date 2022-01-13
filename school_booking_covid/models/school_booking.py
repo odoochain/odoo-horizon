@@ -22,8 +22,8 @@ import logging
 import pytz
 from datetime import datetime, date, time, timedelta
 
-from openerp import api, fields, models, _, tools
-from openerp.exceptions import UserError, ValidationError
+from odoo import api, fields, models, _, tools
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -34,52 +34,17 @@ class Event(models.Model):
     """ Model for School Event """
     _inherit = 'calendar.event'
     
-    @api.multi
     def confirm(self):
         self.write({'state': 'open'})
         
-    @api.multi
     def to_draft(self):
         self.write({'state': 'draft'})
-        
-    # @api.one
-    # @api.constrains('state')
-    # def _change_name_from_state(self):
-    #     if not self.recurrency :
-    #         if self.state == 'draft':
-    #             name = self.name
-    #             if name.find('[') != -1:
-    #                 name = name[:-5]
-    #             self.name = '%s [NC] ' % name
-    #         elif self.state == 'open':
-    #             name = self.name
-    #             if name.find('[') != -1:
-    #                 name = name[:-5]
-    #             self.name = '%s [OK] ' % name
-                
-    #             cr = self.env.cr
-    #             uid = self.env.uid
-    #             context = self.env.context
-            
-    #             mail_to_ids = self.attendee_ids.mapped('id')
-                    
-    #             if mail_to_ids:
-    #                 current_user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-    #                 if self.pool['calendar.attendee']._send_mail_to_attendees(cr, uid, mail_to_ids, template_xmlid='calendar_template_meeting_confirmation', email_from=current_user.email, context=context):
-    #                     self.pool['calendar.event'].message_post(cr, uid, self.id, body=_("A email has been send to specify that the booking is confirmed !"), subtype="calendar.subtype_invitation", context=context)
 
-    @api.one
     @api.constrains('room_id')
     def _check_room_quota(self):
-        
-        _logger.info('Check constraints _check_room_quota on record %s using COVID rules' % self.id)
-        if self.room_id :
-        
-            # Admin is king
-            
-            if self.env.uid == 1 :
-                return
-            
+        for rec in self :
+            _logger.info('Check constraints _check_room_quota on record %s using COVID rules' % self.id)
+           
             if self.recurrency :
                 return
             
@@ -126,16 +91,11 @@ class Event(models.Model):
                 
                 # change suivant call du 05/05/21
                 last_booking_day = next_day + timedelta(days=2) # 2 following days
-                
-                _logger.info('check at %s : %s < %s < %s' % (now, next_day, start_time, last_booking_day))
-                
+
                 # removed suivant call du 05/05/21
                 #if now.weekday > 3 :
                 #    last_booking_day = last_booking_day + timedelta(days=7) # end of next week
-                
-                if start_time <= next_day :
-                    raise ValidationError(_("You must make your booking two days in advance."))
-                
+
                 if start_time > last_booking_day :
                     raise ValidationError(_("Bookings are not yet open for this date."))
                 
@@ -150,13 +110,26 @@ class Event(models.Model):
                 for duration in duration_list:
                     if duration['duration'] and duration['duration'] > 4:
                         raise ValidationError(_("You cannot book the room %s more than three hours") % (duration.get('room_id','')[1]))
-                
-                duration_list = self.env['calendar.event'].read_group([
-                        ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('room_id','!=',False), ('start', '>=', fields.Datetime.to_string(event_day)), ('start', '<=', fields.Datetime.to_string(event_day + timedelta(days=1)))
-                    ],['start_datetime','duration'],['start_datetime:day'])
-                for duration in duration_list:
-                    if duration['duration'] and duration['duration'] > 6:
-                        raise ValidationError(_("You cannot book more than six hours per day - %s") % duration['start_datetime:day'])
-                
+
+                utc_tz = pytz.UTC
+                #user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
+                user_tz = pytz.timezone('Europe/Brussels')
+        
+                # Prevent concurrent bookings
+    
+                domain = [('room_id','=',rec.room_id.id), ('start', '<', rec.stop), ('stop', '>', rec.start)]
+                conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
+                if conflicts_count > 1:
+                    raise ValidationError(_("Concurrent event detected - %s in %s") % (rec.start, rec.room_id.name))
+        
+                # Constraint not for employees and teatchers
+        
+                if self.env.user.has_group('school_management.group_employee'):
+                    return
+        
+                if self.env.user.has_group('school_management.group_teacher'):
+                    return
+        
                 _logger.info('Check done')
                 
+

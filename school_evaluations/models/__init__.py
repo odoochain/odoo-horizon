@@ -18,4 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import evaluation
+from . import evaluation
+from . import res_config_settings

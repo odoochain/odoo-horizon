@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<openerp>
+<odoo>
   <data>
         <!-- Covid Followup Contact List View -->
         <record id="view_covid_followup_contact_list" model="ir.ui.view">
@@ -189,7 +189,7 @@
         </record>
         
         <!-- Top menu item -->
-        <menuitem name="COVID Followup" id="menu_covid_followup" icon="fa-book" web_icon="school_covid_followup,static/description/icon.png" sequence="61" groups="school_management.group_employee"/>
+        <menuitem name="COVID Followup" id="menu_covid_followup" web_icon="school_covid_followup,static/description/icon.png" sequence="61" groups="school_management.group_employee"/>
         
         <menuitem id="menu_covid_followup_contact_list" parent="school_covid_followup.menu_covid_followup" action="action_covid_followup_contact_list" sequence="10" />
         
@@ -220,4 +220,4 @@
         </record>-->
         
     </data>
-</openerp>
+</odoo>

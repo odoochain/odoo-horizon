@@ -248,7 +248,7 @@
                                     <tbody>
                                       <tr>
                                         <td>Code</td>
-                                        <td><span t-field="o.ue_id"/></td>
+                                        <td><span t-field="o.uid"/></td>
                                       </tr>
                                       <tr>
                                         <td>Cycle</td>

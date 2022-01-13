@@ -19,8 +19,8 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _, tools
-from openerp.exceptions import UserError, ValidationError
+from odoo import api, fields, models, _, tools
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -43,12 +43,12 @@ class Asset(models.Model):
     
     abandonned_date = fields.Date('Abandonned Date')
     
-    @api.multi
+    
     def set_to_draft(self, context):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'draft'})
     
-    @api.multi
+    
     def set_to_progress(self, context):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'progress'})
@@ -113,21 +113,21 @@ class AssetCategory(models.Model):
              "resized as a 64x64px image, with aspect ratio preserved. "
              "Use this field anywhere a small image is required.")
 
-    @api.one
     def _compute_is_leaf(self):
-        self.is_leaf = len(self.child_ids) == 0 
+        for rec in self:
+            rec.is_leaf = len(rec.child_ids) == 0 
         
     @api.model
     def create(self, vals):
         tools.image_resize_images(vals)
         return super(AssetCategory, self).create(vals)
 
-    @api.multi
+    
     def write(self, vals):
         tools.image_resize_images(vals)
         return super(AssetCategory, self).write(vals)
 
-    @api.multi
+    
     def name_get(self):
         def get_names(cat):
             res = []

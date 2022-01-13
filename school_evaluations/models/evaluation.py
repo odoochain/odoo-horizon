@@ -19,10 +19,10 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
-from openerp.exceptions import UserError, ValidationError
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError, ValidationError
 
-from openerp.addons import decimal_precision as dp
+from odoo.addons import decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
 
@@ -31,23 +31,19 @@ class CourseGroup(models.Model):
     _inherit = 'school.course_group'
     
     ## If set a course with an evaluation < 10 will make this course group not acquiered.
-    enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=False)
+    # enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=False)
     
-    @api.multi
     def valuate_course_group(self):
         self.ensure_one()
         program_id = self.env.context.get('program_id')
         _logger.info('Add cg %s to %s' % (self.id, program_id))
         if program_id :
             program_id = self.env['school.individual_program'].browse(program_id)[0]
-            courses = []
-            for course in self.course_ids:
-                courses.append((0,0,{'source_course_id': course.id, 'dispense' : True}))
             cg = program_id.valuated_course_group_ids.create({
                 'valuated_program_id' : program_id.id,
                 'source_course_group_id': self.id, 
                 'acquiered' : 'A',
-                'course_ids': courses,
+                'course_ids': self.course_ids.ids,
                 'state' : 'candidate',})
             program_id._get_total_acquiered_credits()
             return {
@@ -62,47 +58,6 @@ class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit='school.individual_program'
     
-    state = fields.Selection([
-            ('draft','Draft'),
-            ('progress','In Progress'),
-            ('awarded', 'Awarded'),
-            ('abandonned', 'Abandonned'),
-        ], string='Status', index=True, default='draft',copy=False,
-        help=" * The 'Draft' status is used when results are not confirmed yet.\n"
-             " * The 'In Progress' status is used during the cycle.\n"
-             " * The 'Awarded' status is used when the cycle is awarded.\n"
-             " * The 'Abandonned' status is used if a student leave the program.\n"
-             ,track_visibility='onchange')
-    
-    abandonned_date = fields.Date('Abandonned Date')
-    
-    @api.multi
-    def set_to_draft(self, context):
-        # TODO use a workflow to make sure only valid changes are used.
-        return self.write({'state': 'draft'})
-    
-    @api.multi
-    def set_to_progress(self, context):
-        # TODO use a workflow to make sure only valid changes are used.
-        return self.write({'state': 'progress'})
-    
-    @api.multi
-    def set_to_awarded(self, context, grade_year_id=None, grade=None, grade_comments=None):
-        # TODO use a workflow to make sure only valid changes are used.
-        if(grade):
-            self.write({'state': 'awarded',
-                           'grade' : grade,
-                           'grade_year_id' : grade_year_id,
-                           'grade_comments' : grade_comments,
-                           'graduation_date' : fields.Date.today(),
-            })
-        else:
-            self.write({'state': 'awarded',
-                        'grade_year_id' : grade_year_id,
-                        'graduation_date' : fields.Date.today(),
-            })
-        
-    @api.multi
     def set_to_abandonned(self, context):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'abandonned','abandonned_date':fields.Date.today()})
@@ -127,59 +82,50 @@ class IndividualProgram(models.Model):
     
     grade_comments = fields.Text(string="Grade Comments",track_visibility='onchange')
     
-    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
+    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     
-    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',track_visibility='onchange')
-    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', store=True, track_visibility='onchange')
+    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',track_visibility='onchange',store=True)
+    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', track_visibility='onchange',store=True)
 
-    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed", store=True,track_visibility='onchange')
+    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed",track_visibility='onchange',store=True)
 
     valuated_course_group_ids = fields.One2many('school.individual_course_group', 'valuated_program_id', string='Valuated Courses Groups', track_visibility='onchange')
 
     @api.depends('valuated_course_group_ids', 'required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
-    @api.one
     def _get_total_acquiered_credits(self):
-        _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % self.name)
-        total = sum(cg.total_credits for cg in self.valuated_course_group_ids) + sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in self.bloc_ids) or 0
-        total_current = sum(bloc_id.total_credits if bloc_id.state in ['progress','postponed'] else 0 for bloc_id in self.bloc_ids)
-        self.total_acquiered_credits = total + self.historical_bloc_1_credits + self.historical_bloc_2_credits
-        self.program_completed = self.required_credits > 0 and self.total_acquiered_credits >= self.required_credits
-        self.total_registered_credits = self.total_acquiered_credits + total_current
-        self.program_completed = self.required_credits > 0 and self.total_acquiered_credits >= self.required_credits
-    
-    @api.depends('valuated_course_group_ids')
-    def _onchange_valuated_course_group_ids(self):
-        for cg in self.valuated_course_group_ids :
-            cg.course_ids.write({
-                'dispense' : True
-            })
-            self._get_total_acquiered_credits()
-            
+        for rec in self:
+            _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % rec.name)
+            total = sum(cg.total_credits for cg in rec.valuated_course_group_ids) + sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in rec.bloc_ids) or 0
+            total_current = sum(bloc_id.total_credits if bloc_id.state in ['progress','postponed'] else 0 for bloc_id in rec.bloc_ids)
+            rec.total_acquiered_credits = total + rec.historical_bloc_1_credits + rec.historical_bloc_2_credits
+            rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
+            rec.total_registered_credits = rec.total_acquiered_credits + total_current
+            rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
+
     @api.depends('grade')
     def _onchange_grade(self):
         if self.grade:
             graduation_date = fields.Date.today()
 
     @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
-    @api.one
     def compute_evaluation(self):
-        total = 0
-        credit_count = 0
-        for bloc in self.bloc_ids:
-            if bloc.evaluation > 0 : # if all is granted do not count
-                total += bloc.evaluation * bloc.total_credits
-                credit_count += bloc.total_credits
-        if self.historical_bloc_1_eval > 0:
-            total += self.historical_bloc_1_eval * self.historical_bloc_1_credits
-            credit_count += self.historical_bloc_1_credits
-        if self.historical_bloc_2_eval > 0:
-            total += self.historical_bloc_2_eval * self.historical_bloc_2_credits
-            credit_count += self.historical_bloc_2_credits
-        if credit_count > 0:
-            self.evaluation = total/credit_count
+        for rec in self:
+            total = 0
+            credit_count = 0
+            for bloc in rec.bloc_ids:
+                if bloc.evaluation > 0 : # if all is granted do not count
+                    total += bloc.evaluation * bloc.total_credits
+                    credit_count += bloc.total_credits
+            if rec.historical_bloc_1_eval > 0:
+                total += rec.historical_bloc_1_eval * rec.historical_bloc_1_credits
+                credit_count += rec.historical_bloc_1_credits
+            if rec.historical_bloc_2_eval > 0:
+                total += rec.historical_bloc_2_eval * rec.historical_bloc_2_credits
+                credit_count += rec.historical_bloc_2_credits
+            if credit_count > 0:
+                rec.evaluation = total/credit_count
         
     @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
-    @api.multi
     def compute_evaluation_details(self):
         self.ensure_one();
         ret = [0,0,0,0,0,0]
@@ -193,21 +139,57 @@ class IndividualProgram(models.Model):
             'bloc_evaluations' : ret
         }
     
+    all_ind_course_group_ids = fields.One2many('school.individual_course_group', string='All Courses Groups',compute='_compute_ind_course_group_ids_eval')
     not_acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Not Acquiered Courses Groups',compute='_compute_ind_course_group_ids_eval')
     acquired_ind_course_group_ids = fields.One2many('school.individual_course_group', string='Acquiered Courses Groups',compute='_compute_ind_course_group_ids_eval')
     remaining_course_group_ids  = fields.One2many('school.course_group', string='Remaining Courses Groups',compute='_compute_ind_course_group_ids_eval')
     remaining_not_planned_course_group_ids  = fields.One2many('school.course_group', string='Remaining and Not Planned Courses Groups',compute='_compute_ind_course_group_ids_eval')
     
-    @api.one
     def _compute_ind_course_group_ids_eval(self):
-        self.not_acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
-        self.acquired_ind_course_group_ids = self.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A') + self.valuated_course_group_ids
-        self.remaining_course_group_ids = self.source_program_id.course_group_ids - self.acquired_ind_course_group_ids.mapped('source_course_group_id')
-        if len(self.bloc_ids) > 0 :
-            self.remaining_not_planned_course_group_ids = self.remaining_course_group_ids - self.bloc_ids[-1].course_group_ids.mapped('source_course_group_id')
-        else :
-            self.remaining_not_planned_course_group_ids = self.remaining_course_group_ids
+        for rec in self:
+            rec.all_ind_course_group_ids = rec.valuated_course_group_ids + rec.ind_course_group_ids
+            rec.not_acquired_ind_course_group_ids = rec.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'NA')
+            rec.acquired_ind_course_group_ids = rec.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A') + rec.valuated_course_group_ids
+            rec.remaining_course_group_ids = rec.source_program_id.course_group_ids - rec.acquired_ind_course_group_ids.mapped('source_course_group_id')
+            if len(rec.bloc_ids) > 0 :
+                rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids - rec.bloc_ids[-1].course_group_ids.mapped('source_course_group_id')
+            else :
+                rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
+                
+class IndividualCourseSummary(models.Model):
+    '''IndividualCourse Summary'''
+    _inherit = 'school.individual_course_summary'
     
+    def _compute_ind_course_group_ids(self):
+        super(IndividualCourseSummary, self)._compute_ind_course_group_ids()
+        for rec in self:
+            rec.ind_course_group_ids |= rec.program_id.valuated_course_group_ids.filtered(lambda item: item.source_course_group_id.id == rec.course_group_id.id)
+    
+    state = fields.Selection([
+            ('9_draft','Draft'),
+            ('7_failed', 'Failed'),
+            ('6_success', 'Success'),
+            ('5_progress','In Progress'),
+            ('2_candidate','Candidate'),
+            ('1_confirmed','Candidate'),
+            ('0_valuated', 'Valuated'),
+        ], compute="_compute_state")
+        
+    trials = fields.Integer(string="Trials",compute='_compute_state')
+        
+    final_result_disp = fields.Char(string='Final Result Display', compute='_compute_state')
+        
+    def _compute_state(self):
+        for rec in self:
+            all_rec = rec.ind_course_group_ids
+            rec.trials = len(all_rec)
+            if len(all_rec) > 0 :
+                rec.state = all_rec[-1].state
+                rec.final_result_disp = all_rec[-1].final_result_disp
+            else : 
+                rec.state = '9_draft'
+                rec.final_result_disp = ""
+                
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
@@ -234,18 +216,13 @@ class IndividualBloc(models.Model):
     total_acquiered_hours = fields.Integer(compute="compute_credits",string="Acquiered Hours",store=True)
     total_not_acquiered_credits = fields.Integer(compute='compute_credits', string='Not Acquiered Credits',store=True)
     total_not_acquiered_hours = fields.Integer(compute='compute_credits', string='Not Acquiered Hours',store=True)
-    total_dispensed_credits = fields.Integer(compute="compute_credits",string="Dispensed Credits",store=True)
-    total_dispensed_hours = fields.Integer(compute="compute_credits",string="Dispensed Hours",store=True)
-    total_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Not Dispensed Credits",store=True)
-    total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Not Dispensed Hours',store=True)
-    total_acquiered_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Acquiered Not Dispensed Credits",store=True)
-    
-    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
+
+    evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     decision = fields.Text(string="Decision",track_visibility='onchange')
     exclude_from_deliberation = fields.Boolean(string='Exclude from Deliberation', default=False)
     
-    first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
-    second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'))
+    first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
+    second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     
     @api.onchange('state')
     def _onchange_state(self):
@@ -253,61 +230,66 @@ class IndividualBloc(models.Model):
             self.course_group_ids.write({'state': 'draft'})
         elif self.state == 'progress' :
             self.course_group_ids.write({'state': 'progress'})
+        elif self.state == 'postponed' :
+            self.course_group_ids.write({'state': 'progress'})
         else :
             self.course_group_ids.write({'state': 'confirmed'})
     
-    @api.multi
+    
     def set_to_draft(self, context):
         # TODO use a workflow to make sure only valid changes are used.
         self.course_group_ids.write({'state': 'draft'})
         return self.write({'state': 'draft'})
     
-    @api.multi
+    
     def set_to_progress(self, context):
         self.course_group_ids.write({'state': 'progress'})
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'progress'})
     
-    @api.multi
     def set_to_postponed(self, decision=None, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         if isinstance(decision, dict):
             context = decision
             decision = None
+        self._deliberate_cg(self.course_group_ids)
         return self.write({'state': 'postponed','decision' : decision})
     
-    @api.multi
     def set_to_awarded_first_session(self, decision=None, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         if isinstance(decision, dict):
             context = decision
             decision = None
-        self.course_group_ids.write({'state': 'confirmed'})
+        self._deliberate_cg(self.course_group_ids)
         return self.write({'state': 'awarded_first_session','decision' : decision})
         
-    @api.multi
     def set_to_awarded_second_session(self, decision=None, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         if isinstance(decision, dict):
             context = decision
             decision = None
-        self.course_group_ids.write({'state': 'confirmed'})
+        self._deliberate_cg(self.course_group_ids)
         return self.write({'state': 'awarded_second_session','decision' : decision})
     
-    @api.multi
     def set_to_failed(self, decision=None, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         if isinstance(decision, dict):
             context = decision
             decision = None
-        self.course_group_ids.write({'state': 'confirmed'})
+        self._deliberate_cg(self.course_group_ids)
         return self.write({'state': 'failed','decision' : decision})
     
-    @api.multi
+    def _deliberate_cg(self, cgs):
+        for cg in cgs:
+            if cg.acquiered :
+                cg.write({'state': 'success'})
+            else :
+                cg.write({'state': 'failure'})
+        pass
+    
     def set_to_abandoned(self, decision=None, context=None):
         return self.write({'state': 'abandoned','decision' : None})
         
-    @api.multi
     def report_send(self):
         """ Open a window to compose an email, with the default template
             message loaded by default
@@ -335,49 +317,77 @@ class IndividualBloc(models.Model):
             'context': ctx,
         }
         
-    @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.dispense', 'course_group_ids.first_session_computed_result_bool', 'course_group_ids.is_ghost_cg')
-    @api.one
+    @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.first_session_computed_result_bool', 'course_group_ids.is_ghost_cg')
     def compute_credits(self):
-        self.total_acquiered_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
-        self.total_acquiered_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
-        self.total_not_acquiered_credits = self.total_credits - self.total_acquiered_credits
-        self.total_not_acquiered_hours = self.total_hours - self.total_acquiered_hours
-        
-        # WAS BEFORE May 2018
-        #self.total_dispensed_credits = sum([icg.total_dispensed_credits for icg in self.course_group_ids])
-        #self.total_dispensed_hours = sum([icg.total_dispensed_hours for icg in self.course_group_ids])
-        
-        self.total_dispensed_credits = sum([icg.total_credits for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
-        self.total_dispensed_hours = sum([icg.total_hours for icg in self.course_group_ids if icg.dispense and not icg.is_ghost_cg])
-        self.total_not_dispensed_credits = self.total_credits - self.total_dispensed_credits
-        self.total_not_dispensed_hours = self.total_hours - self.total_dispensed_hours
-        self.total_acquiered_not_dispensed_credits = self.total_acquiered_credits - self.total_dispensed_credits
-        
+        for rec in self:
+            if rec.state in ['progress','postponed'] :
+                rec.total_acquiered_credits = sum([icg.total_credits for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
+                rec.total_acquiered_hours = sum([icg.total_hours for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
+                rec.total_not_acquiered_credits = rec.total_credits - rec.total_acquiered_credits
+                rec.total_not_acquiered_hours = rec.total_hours - rec.total_acquiered_hours
+            else:
+                # Don't compute if draft or finished
+                pass
+
     @api.depends('course_group_ids.final_result','course_group_ids.total_weight','course_group_ids.acquiered', 'course_group_ids.is_ghost_cg')
-    @api.one
     def compute_evaluation(self):
-        total = 0
-        total_first = 0
-        total_second = 0
-        total_weight = 0
-        for icg in self.course_group_ids:
-            if icg.acquiered == 'A' and icg.total_weight > 0 and not icg.is_ghost_cg : # if total_weight == 0 means full dispense
-                total += icg.final_result * icg.total_weight
-                total_first += icg.first_session_result * icg.total_weight
-                total_second += icg.second_session_result * icg.total_weight
-                total_weight += icg.total_weight
-        if total_weight > 0 :
-            self.evaluation = total / total_weight
-            self.first_session_result = total_first / total_weight
-            self.second_session_result = total_second / total_weight
-        else:
-            _logger.debug('total_weight is 0 on Bloc %s' % self.name)
-            self.evaluation = None
+        for rec in self:
+            if rec.state in ['progress','postponed'] :
+                total = 0
+                total_first = 0
+                total_second = 0
+                total_weight = 0
+                for icg in rec.course_group_ids:
+                    if icg.acquiered == 'A' :
+                        total += icg.final_result * icg.total_weight
+                        total_first += icg.first_session_result * icg.total_weight
+                        total_second += icg.second_session_result * icg.total_weight
+                        total_weight += icg.total_weight
+                if total_weight > 0 :
+                    rec.evaluation = total / total_weight
+                    rec.first_session_result = total_first / total_weight
+                    rec.second_session_result = total_second / total_weight
+                else:
+                    _logger.debug('total_weight is 0 on Bloc %s' % rec.name)
+                    rec.evaluation = None
+            else:
+                # Don't compute if draft or finished
+                pass
         
-    
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _inherit = 'school.individual_course_group'
+    
+    state = fields.Selection([
+            ('9_draft','Draft'),
+            ('7_failed', 'Failed'),
+            ('6_success', 'Success'),
+            ('5_progress','In Progress'),
+            ('2_candidate','Candidate'),
+            ('1_confirmed','Candidate'),
+            ('0_valuated', 'Valuated'),
+        ], string='Status', index=True, default='9_draft',
+        track_visibility='onchange',
+        copy=False,
+        help=" * The 'Draft' status is used when course group is only plan.\n"
+             " * The 'In Progress' status is used when results are not confirmed yet.\n"
+             " * The 'Confirmed' status is when restults are confirmed.\n"
+             " * The 'Success' status is when delibration has confirmed success.\n"
+             " * The 'Failed' status is when delibration has confirmed failure.\n"
+             " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
+             " * The 'Valuated' status is used when the course group is confirmed for valuation.")
+        
+    def set_to_confirmed(self, context):
+        return self.write({'state': '1_confirmed'})
+        
+    def set_to_success(self, context):
+        return self.write({'state': '6_success'})
+        
+    def set_to_failed(self, context):
+        return self.write({'state': '7_failed'})
+        
+    def set_to_valuated(self, context):
+        return self.write({'state': '0_valuated'})
     
     valuated_program_id = fields.Many2one('school.individual_program', string="Program", ondelete='cascade', readonly=True)
     
@@ -386,18 +396,17 @@ class IndividualCourseGroup(models.Model):
         if self.bloc_id and self.valuated_program_id :
             raise UserError('A Course Group cannot be valuated in a program and in a bloc at the same time.')
     
-    @api.multi
+    # Actions
+
     def valuate_course_group(self):
         self.ensure_one()
         program_id = self.bloc_id.program_id
-        _logger.info('Add cg %s to %s' % (self.id, program_id))
         if program_id :
-            self.course_ids.write({'dispense' : True})
             self.write({
                 'bloc_id' : False,
                 'valuated_program_id' : program_id.id,
                 'acquiered' : 'A',
-                'state' : 'candidate',})
+                'state' : '2_candidate',})
             program_id._get_total_acquiered_credits()
             return {
                 'value' : {
@@ -407,109 +416,71 @@ class IndividualCourseGroup(models.Model):
                 },
             }
             
-    ## Compute dispensed hours and ECTS
-    
-    total_dispensed_credits = fields.Integer(compute="compute_credits",string="Dispensed Credits",store=True)
-    total_dispensed_hours = fields.Integer(compute="compute_credits",string="Dispensed Hours",store=True)
-    total_not_dispensed_credits = fields.Integer(compute="compute_credits",string="Not Dispensed Credits",store=True)
-    total_not_dispensed_hours = fields.Integer(compute='compute_credits', string='Not Dispensed Hours',store=True)
-    
-    @api.depends('course_ids.dispense')
-    @api.one
-    def compute_credits(self):
-        self.total_dispensed_credits = sum([ic.credits for ic in self.course_ids if ic.dispense])
-        self.total_dispensed_hours = sum([ic.hours for ic in self.course_ids if ic.dispense])
-        self.total_not_dispensed_credits = self.total_credits - self.total_dispensed_credits
-        self.total_not_dispensed_hours = self.total_hours - self.total_dispensed_hours
-        
-    # Actions
-    @api.one
     def set_deliberated_to_ten(self, session = 1, message=''):
-        if session == 1:
-            self.write({
-                'first_session_deliberated_result' : max(self.first_session_computed_result, 10),
-                'first_session_deliberated_result_bool' : True,
-                'first_session_note': message,
-                'state' : 'confirmed',
-            })
-        else:
-            self.write({
-                'second_session_deliberated_result' : max(self.second_session_computed_result, 10) if self.second_session_computed_result_bool else max(self.first_session_computed_result, 10),
-                'second_session_deliberated_result_bool' : True,
-                'second_session_note': message,
-                'state' : 'confirmed',
-            })
-    
-    state = fields.Selection([
-            ('draft','Draft'),
-            ('progress','In Progress'),
-            ('candidate','Candidate'),
-            ('confirmed', 'Confirmed'),
-        ], string='Status', index=True, readonly=True, default='draft',
-        track_visibility='onchange',
-        copy=False,
-        help=" * The 'Draft' status is used when course group is only plan.\n"
-             " * The 'In Progress' status is used when results are not confirmed yet.\n"
-             " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
-             " * The 'Confirmed' status is when restults are confirmed.")
-        
-    @api.multi
-    def set_to_confirmed(self, context):
-        return self.write({'state': 'confirmed'})
-    
-    ## If set a course with an evaluation < 10 will make this course group not acquiered.
-    
-    enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', related="source_course_group_id.enable_exclusion_bool", readonly=True)
+        for rec in self:
+            if session == 1:
+                rec.write({
+                    'first_session_deliberated_result' : max(rec.first_session_computed_result, 10),
+                    'first_session_deliberated_result_bool' : True,
+                    'first_session_note': message,
+                })
+            else:
+                rec.write({
+                    'second_session_deliberated_result' : max(rec.second_session_computed_result, 10) if rec.second_session_computed_result_bool else max(rec.first_session_computed_result, 10),
+                    'second_session_deliberated_result_bool' : True,
+                    'second_session_note': message,
+                })
     
     ## First Session ##
     
+    first_session_computed_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_average_results',string='First Session Computed Exception', store=True)
     first_session_computed_result = fields.Float(compute='compute_average_results', string='First Session Computed Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='First Session Computed Active', store=True)
-    first_session_computed_exclusion_result_bool= fields.Boolean(compute='compute_average_results', string='First Session Exclusion Result', store=True)
-    
+
     first_session_deliberated_result = fields.Char(string='First Session Deliberated Result',track_visibility='onchange')
     first_session_deliberated_result_bool= fields.Boolean(string='First Session Deliberated Active',track_visibility='onchange')
     
+    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception', store=True)
     first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_result_bool= fields.Boolean(compute='compute_first_session_results', string='First Session Active', store=True)
-    first_session_acquiered = fields.Selection(([('A', 'Acquired'),('NA', 'Not Acquired')]), compute='compute_first_session_acquiered', string='First Session Acquired Credits',default='NA',store=True,required=True,track_visibility='onchange')
+
     first_session_note = fields.Text(string='First Session Notes')
     
     ## Second Session ##
     
+    second_session_computed_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_average_results',string='Second Session Computed Exception', store=True)
     second_session_computed_result = fields.Float(compute='compute_average_results', string='Second Session Computed Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='Second Session Computed Active', store=True)
-    second_session_computed_exclusion_result_bool= fields.Boolean(compute='compute_average_results', string='Second Session Exclusion Result', store=True)
     
     second_session_deliberated_result = fields.Char(string='Second Session Deliberated Result', digits=(5, 2),track_visibility='onchange')
     second_session_deliberated_result_bool= fields.Boolean(string='Second Session Deliberated Active',track_visibility='onchange')
     
+    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_second_session_results',string='Second Session Exception', store=True)
     second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_result_bool= fields.Boolean(compute='compute_second_session_results', string='Second Session Active', store=True)
-    second_session_acquiered = fields.Selection(([('A', 'Acquired'),('NA', 'Not Acquired')]), compute='compute_second_session_acquiered',string='Second Session Acquired Credits',default='NA',store=True,required=True,track_visibility='onchange')
+    
     second_session_note = fields.Text(string='Second Session Notes')
     
     ## Final ##
     
-    dispense =  fields.Boolean(compute='compute_dispense', string='Valuation',default=False,track_visibility='onchange', store=True)
-    
-    final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True,digits=dp.get_precision('Evaluation'),track_visibility='onchange')
+    final_result_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_final_results',string='Final Exception', store=True, track_visibility='onchange')
+    final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True, digits=dp.get_precision('Evaluation'), track_visibility='onchange')
+    final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active', store=True)
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_results_disp')
-    final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active')
     
     acquiered = fields.Selection(([('A', 'Acquiered'),('NA', 'Not Acquiered')]), compute='compute_acquiered', string='Acquired Credits', store=True, track_visibility='onchange',default='NA')
     
     final_note = fields.Text(string='Final Notes')
     
-    @api.one
     def compute_results_disp(self):
-        if not self.final_result_bool:
-            self.final_result_disp = ""
-        if self.dispense:
-            self.final_result_disp = "Val"
-        else :
-            self.final_result_disp = "%.2f" % self.final_result
-    
+        for rec in self :
+            if not rec.final_result_bool:
+                rec.final_result_disp = ""
+            elif rec.final_result_exception :
+                rec.final_result_disp = rec.final_result_exception
+            else :
+                rec.final_result_disp = "%.2f" % rec.final_result
+        
     def _parse_result(self,input):
         f = float(input)
         if(f < 0 or f > 20):
@@ -517,345 +488,303 @@ class IndividualCourseGroup(models.Model):
         else:
             return f
     
-    ## override so that courses with dispense and no deferred results are excluded from computation
-    @api.depends('course_ids.hours','course_ids.credits','course_ids.c_weight')
-    @api.one
-    def _get_courses_total(self):
-        _logger.debug('Trigger "_get_courses_total" on Course Group %s' % self.name)
-        self.total_hours = sum(course.hours for course in self.course_ids)
-        self.total_credits = sum(course.credits for course in self.course_ids)
-        self.total_weight = sum(course.c_weight for course in self.course_ids)
-
-    @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.second_session_result_bool','course_ids.second_session_result','course_ids.c_weight','course_ids.weight')
-    @api.one
-    def compute_average_results(self):
-        _logger.debug('Trigger "compute_average_results" on Course Group %s' % self.name)
-        ## Compute Weighted Average
-        running_first_session_result = 0
-        running_second_session_result = 0
-        self.first_session_computed_result_bool = False
-        self.first_session_computed_exclusion_result_bool = False
-        self.second_session_computed_result_bool = False
-        self.second_session_computed_exclusion_result_bool = False
-        
-        for ic in self.course_ids:
-            # Compute First Session 
-            if ic.first_session_result_bool :
-                running_first_session_result += ic.first_session_result * ic.c_weight
-                self.first_session_computed_result_bool = True
-                if ic.first_session_result < 10 :
-                    self.first_session_computed_exclusion_result_bool = True
-            # Compute Second Session
-            if ic.second_session_result_bool :
+    @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.first_session_exception','course_ids.second_session_result_bool','course_ids.second_session_result','course_ids.second_session_exception','course_ids.weight')
+    def compute_average_results(self, force = False):
+        for rec in self.filtered(lambda r: force or r.state in ['7_failed','5_progress']) :
+            _logger.info('Trigger "compute_average_results" on Course Group %s' % rec.uid)
+            ## Compute Weighted Average
+            running_first_session_result = 0
+            running_second_session_result = 0
+            rec.first_session_computed_result_bool = False
+            rec.second_session_computed_result_bool = False
+            
+            for ic in rec.course_ids:
+                # Compute First Session 
+                if ic.first_session_result_bool :
+                    running_first_session_result += ic.first_session_result * ic.weight
+                    rec.first_session_computed_result_bool = True
+                # Compute Second Session
                 if ic.second_session_result_bool :
-                    running_second_session_result += ic.second_session_result * ic.c_weight
+                    if ic.second_session_result_bool :
+                        running_second_session_result += ic.second_session_result * ic.weight
+                    else :
+                        running_second_session_result += ic.first_session_result * ic.weight
+                    rec.second_session_computed_result_bool = True
+                    
+            if rec.first_session_computed_result_bool :
+                if rec.total_weight > 0:
+                    rec.first_session_computed_result = running_first_session_result / rec.total_weight
+            if rec.second_session_computed_result_bool :
+                if rec.total_weight > 0:
+                    rec.second_session_computed_result = running_second_session_result / rec.total_weight
+                    
+            for ic in rec.course_ids:
+                if ic.first_session_exception :
+                    rec.first_session_computed_result = 0
+                    rec.first_session_computed_exception = ic.first_session_exception
+                    rec.first_session_computed_result_bool = True
+                    break
+            
+            for ic in rec.course_ids:
+                if ic.second_session_exception :
+                    rec.second_session_computed_result = 0
+                    rec.second_session_computed_exception = ic.first_session_exception
+                    rec.second_session_computed_result_bool = True
+                    break 
+                    
+            rec.compute_first_session_results(force)
+            rec.compute_second_session_results(force)
+        
+    @api.depends('first_session_deliberated_result_bool','first_session_deliberated_result','first_session_computed_result_bool','first_session_computed_result','first_session_computed_exception')
+    def compute_first_session_results(self, force = False):
+        for rec in self.filtered(lambda r: force or r.state in ['7_failed','5_progress']) :
+            _logger.info('Trigger "compute_first_session_results" on Course Group %s' % rec.uid)
+            ## Compute Session Results
+            if rec.first_session_deliberated_result_bool :
+                try:
+                    f = rec._parse_result(rec.first_session_deliberated_result)
+                except ValueError:
+                    rec.write('first_session_deliberated_result', None)
+                    raise UserError(_('Cannot decode %s, please encode a Float eg "12.00".' % rec.first_session_deliberated_result))
+                if (f < rec.first_session_computed_result):
+                # TODO : take care of this - removed due to Cours artistiques B - Art dramatique - 2 - 2015-2016 - VALERIO Maddy 
+                    raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s in %s." % (rec.first_session_deliberated_result, rec.first_session_computed_result, rec.uid))
+                else:
+                    rec.first_session_exception = None
+                    rec.first_session_result = f
+                rec.first_session_result_bool = True
+            elif rec.first_session_computed_exception :
+                rec.first_session_exception = rec.first_session_computed_exception
+                rec.first_session_result = 0
+                rec.first_session_result_bool = True
+            elif rec.first_session_computed_result_bool :
+                rec.first_session_exception = None
+                rec.first_session_result = rec.first_session_computed_result
+                rec.first_session_result_bool = True
+            else :
+                rec.first_session_exception = None
+                rec.first_session_result = 0
+                rec.first_session_result_bool = False
+            rec.compute_final_results(force)
+
+
+    @api.depends('second_session_deliberated_result_bool','second_session_deliberated_result','second_session_computed_result_bool','second_session_computed_result','second_session_computed_exception')
+    def compute_second_session_results(self, force = False):
+        for rec in self.filtered(lambda r: force or r.state in ['7_failed','5_progress']) :
+            _logger.info('Trigger "compute_second_session_results" on Course Group %s' % rec.uid)
+            if rec.second_session_deliberated_result_bool :
+                try:
+                    f = rec._parse_result(rec.second_session_deliberated_result)
+                except ValueError:
+                    rec.write('second_session_deliberated_result', None)
+                    raise UserError(_('Cannot decode %s, please encode a Float eg "12.00".' % rec.second_session_deliberated_result))
+                if (f < rec.second_session_computed_result):
+                    raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s in %s." % (rec.second_session_deliberated_result, rec.second_session_computed_result, rec.uid))
+                else:
+                    rec.second_session_exception = None
+                    rec.second_session_result = f
+                rec.second_session_exception = None
+                rec.second_session_result_bool = True
+            elif rec.second_session_computed_exception :
+                rec.second_session_exception = rec.first_session_computed_exception
+                rec.second_session_result = 0
+                rec.second_session_result_bool = True
+            elif rec.second_session_computed_result_bool :
+                rec.second_session_exception = None
+                rec.second_session_result = rec.first_session_computed_result
+                rec.second_session_result_bool = True
+            else :
+                rec.second_session_exception = None
+                rec.second_session_result = 0
+                rec.second_session_result_bool = False
+            rec.compute_final_results(force)
+
+    @api.depends('second_session_result_bool','second_session_exception','second_session_result','first_session_result_bool','first_session_exception','first_session_result')
+    def compute_final_results(self, force = False):
+        for rec in self.filtered(lambda r: force or r.state in ['7_failed','5_progress']) :
+            _logger.info('Trigger "compute_final_results" on Course Group %s' % rec.uid)
+            ## Compute Final Results
+            if rec.second_session_result_bool :
+                if rec.second_session_exception :
+                    rec.final_result_exception = rec.second_session_exception
+                    rec.final_result = 0
+                    rec.final_result_bool = True
                 else :
-                    running_second_session_result += ic.first_session_result * ic.c_weight
-                self.second_session_computed_result_bool = True
-                if max(ic.first_session_result,ic.second_session_result) < 10 :
-                    self.second_session_computed_exclusion_result_bool = True
-                
-        if self.first_session_computed_result_bool :
-            if self.total_weight > 0:
-                self.first_session_computed_result = running_first_session_result / self.total_weight
-        if self.second_session_computed_result_bool :
-            if self.total_weight > 0:
-                self.second_session_computed_result = running_second_session_result / self.total_weight
-    
-    @api.depends('first_session_deliberated_result_bool','first_session_deliberated_result','first_session_computed_result_bool','first_session_computed_result')
-    @api.one
-    def compute_first_session_results(self):
-        _logger.debug('Trigger "compute_first_session_results" on Course Group %s' % self.name)
-        ## Compute Session Results
-        if self.first_session_deliberated_result_bool :
-            try:
-                f = self._parse_result(self.first_session_deliberated_result)
-            except ValueError:
-                self.write('first_session_deliberated_result', None)
-                raise UserError(_('Cannot decode %s, please encode a Float eg "12.00".' % self.first_session_deliberated_result))
-            #if (f < self.first_session_computed_result):
-            #    # TODO : take care of this - removed due to Cours artistiques B - Art dramatique - 2 - 2015-2016 - VALERIO Maddy 
-            #    # raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s." % (self.first_session_deliberated_result, self.first_session_computed_result))
-            self.first_session_result = f
-            #else:
-            #    self.first_session_result = f
-            self.first_session_result_bool = True
-        elif self.first_session_computed_result_bool :
-            self.first_session_result = self.first_session_computed_result
-            self.first_session_result_bool = True
-        else :
-            self.first_session_result = 0
-            self.first_session_result_bool = False
-    
-    @api.depends('first_session_result_bool','first_session_result','first_session_computed_exclusion_result_bool')
-    @api.one
-    def compute_first_session_acquiered(self):
-        _logger.debug('Trigger "compute_first_session_acquiered" on Course Group %s' % self.name)
-        self.first_session_acquiered = 'NA'
-        #if self.first_session_deliberated_result_bool:
-        #    self.first_session_acquiered = 'A'
-        #el
-        if self.enable_exclusion_bool :
-            if self.first_session_result >= 10 and (not self.first_session_computed_exclusion_result_bool or self.first_session_deliberated_result_bool):
-                self.first_session_acquiered = 'A'
-        else:
-            if self.first_session_result >= 10 : # cfr appel Ingisi 27-06 and (not self.first_session_computed_exclusion_result_bool or self.first_session_deliberated_result_bool):
-                self.first_session_acquiered = 'A'
-
-    @api.depends('second_session_deliberated_result_bool','second_session_deliberated_result','second_session_computed_result_bool','second_session_computed_result')
-    @api.one
-    def compute_second_session_results(self):
-        _logger.debug('Trigger "compute_second_session_results" on Course Group %s' % self.name)
-        if self.second_session_deliberated_result_bool :
-            try:
-                f = self._parse_result(self.second_session_deliberated_result)
-            except ValueError:
-                self.write('second_session_deliberated_result', None)
-                raise UserError(_('Cannot decode %s, please encode a Float eg "12.00".' % self.second_session_deliberated_result))
-            if (f < self.second_session_computed_result):
-                raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s." % (self.second_session_deliberated_result, self.second_session_computed_result))
-            else:
-                self.second_session_result = f
-            self.second_session_result_bool = True
-        elif self.second_session_computed_result_bool :
-            self.second_session_result = self.second_session_computed_result
-            self.second_session_result_bool = True
-        else :
-            self.second_session_result = 0
-            self.second_session_result_bool = False
-
-    @api.depends('second_session_result_bool','second_session_result','first_session_acquiered')
-    @api.one
-    def compute_second_session_acquiered(self):
-        _logger.debug('Trigger "compute_second_session_acquiered" on Course Group %s' % self.name)
-        self.second_session_acquiered = self.first_session_acquiered
-        if self.second_session_deliberated_result_bool:
-            self.second_session_acquiered = 'A'
-        elif self.enable_exclusion_bool :
-            if self.second_session_result >= 10 and (not self.second_session_computed_exclusion_result_bool or self.second_session_deliberated_result_bool):
-                self.second_session_acquiered = 'A'
-        else:    
-            if self.second_session_result >= 10 : # and (not self.second_session_computed_exclusion_result_bool or self.second_session_deliberated_result_bool):
-                self.second_session_acquiered = 'A'
-
-    @api.depends('first_session_result',
-                 'first_session_result_bool',
-                 'first_session_acquiered',
-                 'second_session_result',
-                 'second_session_result_bool',
-                 'second_session_acquiered')
-    @api.one
-    def compute_final_results(self):
-        _logger.debug('Trigger "compute_final_results" on Course Group %s' % self.name)
-        ## Compute Final Results
-        if self.second_session_result_bool :
-            self.final_result = self.second_session_result
-            self.final_result_bool = True
-        elif self.first_session_result_bool :
-            self.final_result = self.first_session_result
-            self.final_result_bool = True
-        else :
-            self.final_result_bool = False
-
-    @api.depends('course_ids.dispense')
-    @api.one
-    def compute_dispense(self):
-        # Check if Course Group is dispensed
-        all_dispensed = True
-        for ic in self.course_ids:
-            all_dispensed = all_dispensed and ic.dispense
-        if all_dispensed :
-            self.dispense = True
-            self.acquiered  = 'A'
-
-    @api.depends('dispense',
-                 'second_session_acquiered')
-    @api.one
-    def compute_acquiered(self):
-        if self.dispense:
-            self.acquiered  = 'A'
-        else :
-            self.acquiered = self.second_session_acquiered
-    
-class Course(models.Model):
-    '''Course'''
-    _inherit = 'school.course'
-    
-    type = fields.Selection(([('S', 'Simple'),('C', 'Complex')]), string='Type', default="S")
+                    rec.final_result_exception = None
+                    rec.final_result = rec.second_session_result
+                    rec.final_result_bool = True
+            elif rec.first_session_result_bool :
+                if rec.first_session_exception :
+                    rec.final_result_exception = rec.first_session_exception
+                    rec.final_result = 0
+                    rec.final_result_bool = True
+                else :
+                    rec.final_result_exception = None
+                    rec.final_result = rec.first_session_result
+                    rec.final_result_bool = True
+            else :
+                rec.final_result_exception = None
+                rec.final_result = 0
+                rec.final_result_bool = False
+            if rec.final_result >= 10 : 
+                rec.acquiered = 'A'
+            else :
+                rec.acquiered = 'NA'
 
 class IndividualCourse(models.Model):
     '''Individual Course'''
     _inherit = 'school.individual_course'
     
-    ## Type and weight for average computation (ie 0 for dispenses) ##
+    type = fields.Selection(([('S', 'Simple'),('C', 'Complex'),('D','Deferred')]),string='Type', readonly=True) # Kept for archiving purpose
     
-    type = fields.Selection(([('S', 'Simple'),('C', 'Complex'),('D','Deferred')]),compute='compute_type', string='Type', store=True, default="S")
-    c_weight =  fields.Float(compute='compute_weight', readonly=True, store=True)
-
-    ## Evaluation ##
+    ann_result= fields.Char(string='Annual Result',readonly=True) # Kept for archiving purpose
+    jan_result= fields.Char(string='January Result',readonly=True) # Kept for archiving purpose
+    jun_result= fields.Char(string='June Result',readonly=True) # Kept for archiving purpose
+    sept_result= fields.Char(string='September Result',readonly=True) # Kept for archiving purpose
     
-    ann_result= fields.Char(string='Annual Result',track_visibility='onchange')
-    jan_result= fields.Char(string='January Result',track_visibility='onchange')
-    jun_result= fields.Char(string='June Result',track_visibility='onchange')
-    sept_result= fields.Char(string='September Result',track_visibility='onchange')
+    open_partial_result = fields.Boolean(string='Partial Result',compute='open_evaluations')
+    open_final_result = fields.Boolean(string='Final Result',compute='open_evaluations')
+    open_second_result = fields.Boolean(string='Second Result',compute='open_evaluations')
+    
+    partial_result = fields.Char(string='Partial Result',track_visibility='onchange')
+    final_result = fields.Char(string='Final Result',track_visibility='onchange')
+    second_result = fields.Char(string='Second Result',track_visibility='onchange')
+    
+    is_annual = fields.Boolean(string="Is Annual", related='source_course_id.is_annual',readonly=True)
     
     ## First Session ##
     
-    first_session_result= fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
+    first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='First Session Exception', store=True)
+    first_session_result = fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
     first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
-    
-    first_session_result_disp = fields.Char(string='Final Result Display', compute='compute_first_session_result_disp')
 
-    @api.one
-    def compute_first_session_result_disp(self):
-        if not self.first_session_result_bool:
-            self.first_session_result_disp = ""
-        if self.dispense:
-            self.first_session_result_disp = "Disp"
-        else :
-            self.first_session_result_disp = "%.2f" % self.first_session_result
-    
     ## Second Session ##
     
-    second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
+    second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='Second Session Exception', store=True)
+    second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg', digits=dp.get_precision('Evaluation'))
     second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
 
-    second_session_result_disp = fields.Char(string='Final Result Display', compute='compute_second_session_result_disp')
+    is_danger = fields.Boolean(compute="compute_results", store=True)
 
-    @api.one
-    def compute_second_session_result_disp(self):
-        if not self.second_session_result_bool:
-            self.second_session_result_disp = ""
-        if self.dispense:
-            self.second_session_result_disp = "Disp"
+    def open_evaluations(self):
+        evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
+        evaluation_open_session = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_session', 'none')
+        
+        open_recs = self.filtered(lambda r: r.year_id.id == int(evaluation_open_year_id))
+        if evaluation_open_session == 'part' :
+            open_recs.open_partial_result = True
+            open_recs.open_final_result = False
+            open_recs.open_second_result = False
+        elif evaluation_open_session == 'fin' :
+            open_recs.open_partial_result = False
+            open_recs.open_final_result = True
+            open_recs.open_second_result = False
+        elif evaluation_open_session == 'sec' :
+            open_recs.open_partial_result = False
+            open_recs.open_final_result = False
+            open_recs.open_second_result = True
         else :
-            self.second_session_result_disp = "%.2f" % self.second_session_result
-
-    @api.model
-    def create(self, values):
-        if not(values.get('type', False)) and values.get('source_course_id', False):
-            course = self.env['school.course'].browse(values['source_course_id'])
-            values['type'] = course.type or 'S'
-        result = super(IndividualCourse, self).create(values)
-        return result
-    
-    @api.one
-    @api.depends('dispense','weight','jun_result')
-    def compute_weight(self):
-        _logger.debug('Trigger "compute_weight" on Course %s' % self.name)
-        if self.dispense and not self.jun_result:
-            self.c_weight = 0
-        else:
-            self.c_weight = self.weight
-    
-    @api.one
-    @api.depends('dispense', 'source_course_id.type')
-    def compute_type(self):
-        _logger.debug('Trigger "compute_type" on Course %s' % self.name)
-        if self.dispense :
-            self.type = 'D'
-        else:
-            self.type = self.source_course_id.type
+            open_recs.open_partial_result = False
+            open_recs.open_final_result = False
+            open_recs.open_second_result = False
             
-    def _parse_result(self,input):
-        f = float(input)
-        if(f < 0 or f > 20):
-            raise ValidationError("Evaluation shall be between 0 and 20")
-        else:
-            return f
-    
-    @api.depends('type','ann_result','jan_result','jun_result','sept_result')
-    @api.one
+        closed_recs = self.filtered(lambda r: r.year_id.id != int(evaluation_open_year_id))
+        closed_recs.open_partial_result = False
+        closed_recs.open_final_result = False
+        closed_recs.open_second_result = False
+            
+
+    @api.depends('partial_result','final_result','second_result')
     def compute_results(self):
-        _logger.debug('Trigger "compute_results" on Course %s' % self.name)
-        self.first_session_result_bool = False
-        self.second_session_result_bool = False
-        if self.type == 'D' :
-            if self.jun_result :
+        for rec in self.filtered(lambda r: r.course_group_id.state in ['7_failed','5_progress']) :
+            if rec.partial_result :
                 try:
-                    f = self._parse_result(self.jun_result)
-                    self.first_session_result = f
-                    self.first_session_result_bool = True
+                    if rec.partial_result == "NP":
+                        pass
+                    elif rec.partial_result == "AB":
+                        pass
+                    elif rec.partial_result == "TP":
+                        pass
+                    else :
+                        f = float(rec.partial_result)
+                        rec.partial_result = format(f,".2f")
+                        if(f < 0 or f > 20):
+                            raise ValidationError("Evaluation shall be between 0 and 20")
+                        else:
+                            pass
                 except ValueError:
-                    self.first_session_result = 0
-                    self.first_session_result_bool = False
-                    raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00".' % self.jun_result))
+                    raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.partial_result))
                     
-        if self.type in ['S','D']:
-            f = -1
-            if self.jan_result :
+            if rec.final_result :
                 try:
-                    f = self._parse_result(self.jan_result)
+                    if rec.final_result == "NP":
+                        rec.first_session_result = 0
+                        rec.first_session_exception = 'NP'
+                        rec.first_session_result_bool = True
+                        rec.is_danger = True
+                    elif rec.final_result == "AB":
+                        rec.first_session_result = 0
+                        rec.first_session_exception = 'AB'
+                        rec.first_session_result_bool = True
+                        rec.is_danger = True
+                    elif rec.final_result == "TP":
+                        rec.first_session_result = 0
+                        rec.first_session_exception = 'TP'
+                        rec.first_session_result_bool = True
+                        rec.is_danger = True
+                    else :
+                        f = float(rec.final_result)
+                        if(f < 0 or f > 20):
+                            raise ValidationError("Evaluation shall be between 0 and 20")
+                        else:
+                            rec.final_result = format(f,".2f")
+                            rec.first_session_result = f
+                            rec.first_session_exception = None
+                            rec.first_session_result_bool = True
+                            if f < 10 :
+                                rec.is_danger = True
+                            else:
+                                rec.is_danger = False
                 except ValueError:
-                    self.first_session_result = 0
-                    self.first_session_result_bool = False
-                    raise UserError(_('Cannot decode %s in January Result, please encode a Float eg "12.00".' % self.jan_result))
-            if self.jun_result :
+                    rec.first_session_result = 0
+                    rec.first_session_exception = None
+                    rec.first_session_result_bool = False
+                    raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.jun_result))
+
+            if rec.second_result :
                 try:
-                    f = self._parse_result(self.jun_result)
+                    if rec.second_result == "NP":
+                        rec.second_session_exception = 'NP'
+                        rec.second_session_result = 0
+                        rec.second_session_result_bool = True
+                        rec.is_danger = True
+                    elif rec.second_result == "AB":
+                        rec.second_session_exception = 'AB'
+                        rec.second_session_result = 0
+                        rec.second_session_result_bool = True
+                        rec.is_danger = True
+                    elif rec.second_result == "TP":
+                        rec.second_session_exception = 'TP'
+                        rec.second_session_result = 0
+                        rec.second_session_result_bool = True
+                        rec.is_danger = True
+                    else :
+                        f = float(rec.second_result)
+                        if(f < 0 or f > 20):
+                            raise ValidationError("Evaluation shall be between 0 and 20")
+                        else:
+                            rec.second_result = format(f,".2f")
+                            rec.second_session_result = f
+                            rec.second_session_exception = None
+                            rec.second_session_result_bool = True
+                            if f < 10 :
+                                rec.is_danger = True
+                            else:
+                                rec.is_danger = False
                 except ValueError:
-                    self.first_session_result = 0
-                    self.first_session_result_bool = False
-                    raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00".' % self.jun_result))
-            if f >= 0 :
-                self.first_session_result = f
-                self.first_session_result_bool = True
-            if self.sept_result :
-                try:
-                    f = self._parse_result(self.sept_result)
-                    self.second_session_result = f
-                    self.second_session_result_bool = True 
-                except ValueError:
-                    self.second_session_result = 0
-                    self.second_session_result_bool = False
-                    raise UserError(_('Cannot decode %s in September Result, please encode a Float eg "12.00".' % self.sept_result))
-        if self.type in ['C']:
-            ann = None
-            jan = None
-            if self.ann_result :
-                try:
-                    ann = self._parse_result(self.ann_result)
-                except ValueError:
-                    raise UserError(_('Cannot decode %s in January Result, please encode a Float eg "12.00".' % self.ann_result))
-            if self.jan_result :
-                try:
-                    jan = self._parse_result(self.jan_result)
-                except ValueError:
-                    raise UserError(_('Cannot decode %s in January Result, please encode a Float eg "12.00".' % self.jan_result))
-            if self.jun_result :
-                try:
-                    jun = self._parse_result(self.jun_result)
-                    if self.ann_result and self.jan_result :
-                        # ABSORBING RESULTS MAIL INGISI 06-2019
-                        if jan < 3 :
-                            self.first_session_result = ann * 0.5 + jan * 0.5
-                        elif jun < 3 :
-                            self.first_session_result = ann * 0.5 + jun * 0.5
-                        else :
-                            self.first_session_result = ann * 0.5 + (jan * 0.5 + jun * 0.5) * 0.5
-                        self.first_session_result_bool = True
-                    elif self.ann_result :
-                        self.first_session_result = ann * 0.5 + jun * 0.5
-                        self.first_session_result_bool = True
-                    else:
-                        self.first_session_result = 0
-                        self.first_session_result_bool = False
-                except ValueError:
-                    self.first_session_result = 0
-                    self.first_session_result_bool = False
-                    raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00".' % self.jun_result))
-            if self.sept_result :
-                try:
-                    sept = self._parse_result(self.sept_result)
-                    if self.ann_result :
-                        self.second_session_result = ann * 0.5 + sept * 0.5
-                        self.second_session_result_bool = True 
-                    else:
-                        self.first_session_result = 0
-                        self.first_session_result_bool = False
-                except ValueError:
-                    self.second_session_result = 0
-                    self.second_session_result_bool = False
-                    raise UserError(_('Cannot decode %s in September Result, please encode a Float eg "12.00".' % self.sept_result))
+                    rec.second_session_result = 0
+                    rec.second_session_exception = None
+                    rec.second_session_result_bool = False
+                    raise UserError(_('Cannot decode %s in September Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.sept_result))

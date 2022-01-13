@@ -27,12 +27,10 @@ import dateutil
 import dateutil.parser
 import dateutil.relativedelta
 
-from datetime import datetime, date, time, timedelta
-
-from openerp import api, fields
-from openerp import http
-from openerp.http import request
-from openerp.addons.auth_oauth.controllers.main import OAuthLogin as Home
+from odoo import api, fields
+from odoo import http
+from odoo.http import request
+from odoo.addons.auth_oauth.controllers.main import OAuthLogin as Home
 
 _logger = logging.getLogger(__name__)
 
@@ -50,7 +48,11 @@ class BookingController(http.Controller):
 
     @http.route('/booking', type='http', auth='public', website=True)
     def booking_browser(self, debug=False, **k):
-        return request.render('website_booking.index')
+        session_info = request.env['ir.http'].session_info()
+        context = {
+            'session_info': session_info,
+        }
+        return request.render('website_booking.index',qcontext=context)
     
     @http.route('/booking_mobile', type='http', auth='public', website=True)
     def booking_mobile_browser(self, debug=False, **k):
@@ -173,9 +175,9 @@ class BookingController(http.Controller):
         _logger.info('Get all rooms')
         all_rooms_ids = request.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
         _logger.info('Get all events')
-        busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,room_fields)
+        busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain)
         _logger.info('Filter events - results %s' % busy_rooms_ids)
-        busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start_datetime <= end).filtered(lambda r : r.stop_datetime >= start).mapped('room_id')
+        busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start <= end).filtered(lambda r : r.stop >= start).mapped('room_id')
         _logger.info('Filter done')
         return (all_rooms_ids - busy_rooms_ids).read(['name'])
         

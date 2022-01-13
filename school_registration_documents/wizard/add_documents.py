@@ -20,9 +20,9 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
-from openerp.exceptions import MissingError
-from openerp.tools.safe_eval import safe_eval
+from odoo import api, fields, models, _
+from odoo.exceptions import MissingError
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ class AddDocuments(models.TransientModel):
         res['document_type_ids'] = document_type_ids
         return res
         
-    @api.multi
+    
     def on_confirm_documents(self):
         self.ensure_one()
         for doc_type in self.document_type_ids:

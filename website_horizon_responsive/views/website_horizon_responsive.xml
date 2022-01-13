@@ -20,8 +20,8 @@
 #
 ##############################################################################
 -->
-<openerp>
-    <data>
+<odoo>
+    
         <template id="assets" name="website_horizon_responsive assets">
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
             <script type="text/javascript" src="/web/static/lib/jquery.ui/jquery-ui.js"></script>
@@ -36,7 +36,7 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem name="Horizon Responsive" id="menu_website_horizon_responsive" icon="fa-calendar" web_icon="hr_timesheet_sheet,static/description/icon.png" sequence="90" action="action_website_horizon_responsive" />
+        <menuitem name="Horizon Responsive" id="menu_website_horizon_responsive" web_icon="crm,static/description/icon.png" sequence="90" action="action_website_horizon_responsive" />
 
         <!-- Add program for student form view -->
         <record id="view_student_form_school_docs_responsive" model="ir.ui.view">
@@ -64,5 +64,4 @@
             </field>
         </record>
 
-    </data>
-</openerp>
+</odoo>

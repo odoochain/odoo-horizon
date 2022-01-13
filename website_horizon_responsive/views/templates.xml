@@ -20,8 +20,8 @@
 #
 ##############################################################################
 -->
-<openerp>
-    <data>
+<odoo>
+    
         <template id="layout_container" name="Horizon Responsive Layout Container">
             <html>
                 <head>
@@ -163,7 +163,7 @@
 	          </t>
         </template>
         
-        <template id="index" name="Horizon Responsive Index" page="True">
+        <template id="index" name="Horizon Responsive Index">
         	<t t-call="website_horizon_responsive.layout_container">
         	<body class="dashboard white-mod">
                 <div id="fb-root"></div>
@@ -275,7 +275,7 @@
 			</t>
         </template>
         
-        <template id="profile" name="Horizon Responsive Profile" page="True">
+        <template id="profile" name="Horizon Responsive Profile">
             <t t-call="website_horizon_responsive.layout_container">
                 <body class="dashboard">
 					<!-- main container of all the page elements -->
@@ -416,7 +416,7 @@
     		</t>
         </template>
         
-        <template id="blocs" name="Horizon Responsive Blocs" page="True">
+        <template id="blocs" name="Horizon Responsive Blocs">
             <t t-call="website_horizon_responsive.layout">
                 <div id="content" class="ml-lg-auto">
     				<div class="content-body">
@@ -452,7 +452,7 @@
 								<li class="d-flex flex-wrap align-items-start w-100" t-foreach="bloc.course_group_ids" t-as="course_group">
 									<ul class="ul-body-row d-flex list-unstyled mb-0">
 										<li>
-											<span class="d-block"><t t-esc="course_group.ue_id"/></span>
+											<span class="d-block"><t t-esc="course_group.uid"/></span>
 										</li>
 										<li>
 											<span class="d-block">
@@ -511,7 +511,7 @@
     		</t>
     	</template>
     	
-    	<template id="bookings" name="Horizon Responsive Bookings" page="True">
+    	<template id="bookings" name="Horizon Responsive Bookings">
             <t t-call="website_horizon_responsive.layout">
     			<div id="content" class="ml-lg-auto">
 					<div class="content-body">
@@ -548,7 +548,7 @@
 			</t>
     	</template>
     	
-    	<template id="booking_search" name="Horizon Responsive Bookings Search" page="True">
+    	<template id="booking_search" name="Horizon Responsive Bookings Search">
     		<t t-call="website_horizon_responsive.layout">
     			<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
     			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
@@ -588,7 +588,7 @@
     		</t>
     	</template>
     	
-    	<template id="booking_new" name="Horizon Responsive Bookings" page="True">
+    	<template id="booking_new" name="Horizon Responsive Bookings">
     		<t t-call="website_horizon_responsive.layout">
     			<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
     			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
@@ -649,7 +649,7 @@
     	
     	
     	<template id="login_layout" inherit_id="web.login_layout" name="Horizon Responsive Login">
-            <xpath expr="//div[@class='row']" position="replace">
+            <xpath expr="//div[hasclass('py-5')]" position="replace">
             <t t-set="body_classname" t-value="'home'"/>
             <t t-call="web.layout">
                 <t t-set="head">
@@ -755,7 +755,7 @@
             </xpath>
         </template>
         
-        <template id="documents" name="Horizon Responsive Documents" page="True">
+        <template id="documents" name="Horizon Responsive Documents">
             <t t-call="website_horizon_responsive.layout">
                 <div id="content" class="ml-lg-auto">
     				<div class="content-body">
@@ -776,5 +776,5 @@
     			</div>
     		</t>
     	</template>
-    </data>
-</openerp>
+    
+</odoo>

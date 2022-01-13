@@ -19,8 +19,8 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
-from openerp.exceptions import UserError, ValidationError
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -34,19 +34,13 @@ class CourseGroup(models.Model):
     co_requisit_ids = fields.One2many('school.corequisit', 'course_id', string='Corequisits')
     co_requisit_course_ids = fields.One2many('school.course_group', string='Corequisits', compute='_compute_co_requisit_ids')
 
-    @api.one
     def _compute_pre_requisit_ids(self):
-        ret_ids = []
-        for pre_requisit in self.pre_requisit_ids:
-            ret_ids.append(pre_requisit.course_id.id)
-        self.pre_requisit_course_ids = ret_ids
+        for rec in self:
+            rec.pre_requisit_course_ids = rec.pre_requisit_ids.mapped('course_id')
 
-    @api.one
     def _compute_co_requisit_ids(self):
-        ret_ids = []
-        for co_requisit in self.co_requisit_ids:
-            ret_ids.append(co_requisit.course_id.id)
-        self.co_requisit_ids = ret_ids
+        for rec in self:
+            rec.co_requisit_course_ids = rec.co_requisit_ids.mapped('course_id')
         
 class PreRequisit(models.Model):
     '''PreRequisit'''

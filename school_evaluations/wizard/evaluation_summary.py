@@ -20,14 +20,14 @@
 ##############################################################################
 import logging
 
-from openerp import api, fields, models, _
-from openerp.exceptions import UserError
-from openerp.tools.safe_eval import safe_eval
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+from odoo.tools.safe_eval import safe_eval
 
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from dateutil.relativedelta import relativedelta
 from datetime import datetime,date
-import openerp.addons.decimal_precision as dp
+import odoo.addons.base.models.decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
 
@@ -44,7 +44,7 @@ class EvaluationSummaryWizard(models.TransientModel):
             ('second','Second Session'),
             ], string="Session")
     
-    @api.multi
+    
     def generate_summary(self):
         self.ensure_one()
         data = {}
@@ -56,7 +56,7 @@ class EvaluationSummaryWizard(models.TransientModel):
 class ReportEvaluationSummary(models.AbstractModel):
     _name = 'report.school_evaluations.evaluation_summary_content'
 
-    @api.multi
+    
     def render_html(self, data):
         _logger.info('render_html')
         year_id = data['year_id']
