@@ -649,7 +649,7 @@ var Calendar = CalendarWidget.extend({
             events: self.fetch_events.bind(this),
     		resources: self.fetch_resources.bind(this),
     		viewRender: function(view,element){
-    		     self.trigger_up('switch_date', {'date' : self.$calendar.fullCalendar( 'getDate' )});
+    		     self.trigger_up('switch_date', {'date' : self.calendar.getDate()});
     		},
     		eventClick: function(calEvent, jsEvent, view) {
     		    var now = moment();
