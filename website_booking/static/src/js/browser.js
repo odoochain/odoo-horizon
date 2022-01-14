@@ -56,7 +56,7 @@ var CalendarWidget = Widget.extend({
         
         //this.calendar = new FullCalendar.Calendar(this.$el, this.get_fc_init_options());
     
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        var calendar = new FullCalendar.Calendar(this.$el, {
           plugins: [ 'dayGrid', 'timeGrid', 'list', 'bootstrap' ],
           timeZone: 'UTC',
           themeSystem: 'bootstrap',
