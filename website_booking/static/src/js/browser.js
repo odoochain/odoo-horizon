@@ -446,7 +446,7 @@ var NavigationCard = Widget.extend({
         "click .cat_button": function (event) {
             event.preventDefault();
             var self = this;
-            self.getParent().$('.navbar-card.active').removeClass('active');
+            self.parent.$('.navbar-card.active').removeClass('active');
             self.$(event.currentTarget).addClass('active');
             var category_id = self.$(event.currentTarget).data('category-id');
             if(self.to_parent) {
@@ -460,6 +460,7 @@ var NavigationCard = Widget.extend({
     init: function(parent, category, to_parent, is_active) {
         this._super(parent);
         this.category = category;
+        this.parent = parent;
         this.to_parent = to_parent;
         this.is_active = is_active;
     },
