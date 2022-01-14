@@ -31,6 +31,7 @@ var CalendarWidget = Widget.extend({
             locale: 'fr',
             height: 755,
             initialView: 'resourceTimeGridDay',
+            initialDate: moment(), 
             //minTime: "08:00:00",
     		//maxTime: "22:00:00",
             /*header : {
