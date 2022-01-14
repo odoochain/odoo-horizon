@@ -686,7 +686,7 @@ var Calendar = CalendarWidget.extend({
         });
     },
            
-    fetch_resources: function(fetchInfo, successCallback, failureCallback) { {
+    fetch_resources: function(fetchInfo, successCallback, failureCallback) {
         var self = this;
         self.ressources = [];
         
