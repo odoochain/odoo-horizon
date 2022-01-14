@@ -30,12 +30,14 @@
                   
             <!--Import Fullcalendar css-->
             <!--<link rel="stylesheet" href="/web/static/src/css/base.css"/>-->
-            <link rel="stylesheet" href="/web/static/lib/fullcalendar/core/main.css" type="text/css"/>
+            <!--<link rel="stylesheet" href="/web/static/lib/fullcalendar/core/main.css" type="text/css"/>
             <link rel="stylesheet" href="/web/static/lib/fullcalendar/daygrid/main.css" type="text/css"/>
             <link rel="stylesheet" href="/web/static/lib/fullcalendar/timegrid/main.css" type="text/css"/>
-            <link rel="stylesheet" href="/web/static/lib/fullcalendar/list/main.css" type="text/css"/>
+            <link rel="stylesheet" href="/web/static/lib/fullcalendar/list/main.css" type="text/css"/>-->
             
-            <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
+            <link href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.min.css" rel="stylesheet" type="text/css"/>
+            
+            <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" type="text/css"s/>
             
             <link rel="stylesheet" href="/website_booking/static/src/css/main.css"/>
             <link rel="stylesheet" href="/website_booking/static/src/css/fc-material.css"/>
@@ -43,13 +45,14 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"/>
             
             <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
-            <script type="text/javascript" src="/web/static/lib/fullcalendar/core/main.js"></script>
+            <!--<script type="text/javascript" src="/web/static/lib/fullcalendar/core/main.js"></script>
             <script type="text/javascript" src="/web/static/lib/fullcalendar/daygrid/main.js"></script>
             <script type="text/javascript" src="/web/static/lib/fullcalendar/timegrid/main.js"></script>
             <script type="text/javascript" src="/web/static/lib/fullcalendar/core/locales/fr.js"></script>
             <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-common/main.js'></script>
             <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-timegrid/main.js'></script>
-            <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-daygrid/main.js'></script>
+            <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-daygrid/main.js'></script>-->
+            <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.min.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/mdtimepicker/mdtimepicker.js"></script>
