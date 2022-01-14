@@ -6,7 +6,7 @@ odoo.define('website_booking.browser', function (require) {
 var core = require('web.core');
 var ajax = require('web.ajax');
 var rpc = require('web.rpc')
-var session = require('web.Session');
+var Session = require('web.Session');
 var Widget = require('web.Widget');
 var time = require('web.time');
 
