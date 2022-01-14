@@ -19,7 +19,7 @@ var CalendarWidget = Widget.extend({
     
     get_fc_init_options: function() {
         return {
-            plugins: [ 'momentPlugin', 'dayGrid', 'timeGrid', 'list', 'bootstrap' ],
+            plugins: [ 'momentPlugin', 'dayGrid', 'timeGrid', 'list', 'bootstrap', 'resourceTimeGrid' ],
             timeZone: 'UTC',
             themeSystem: 'bootstrap',
             header: {
