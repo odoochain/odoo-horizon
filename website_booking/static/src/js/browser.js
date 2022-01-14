@@ -658,7 +658,7 @@ var Calendar = CalendarWidget.extend({
     
     start: function() {
         var self = this;
-        return this._super.apply(arguments).then(function() {
+        return this._super.apply(this, arguments).then(function() {
             self.init_state = this.getParent()._current_state;
             if(self.init_state.date) {
                 self.calendar.gotoDate(moment(self.init_state.date));
