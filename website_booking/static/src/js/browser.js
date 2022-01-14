@@ -31,6 +31,7 @@ var CalendarWidget = Widget.extend({
             eventLimit: true, // allow "more" link when too many events
             locale: 'fr',
             height: 755,
+            defaultView: 'resourceTimeGridDay',
             /*header : {
                  left:   'prev',
                  center: 'title,today',
