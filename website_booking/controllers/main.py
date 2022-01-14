@@ -107,7 +107,7 @@ class BookingController(http.Controller):
     def booking_events(self, start, end, timezone=False, category_id=False, asset_id=False):
         start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
         end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
-        event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        event_fields = ['name','start','stop','allday','room_id','user_id','recurrency','categ_ids']
         if(category_id):
             domain = [
                 ('start', '<=', end),    
@@ -128,7 +128,7 @@ class BookingController(http.Controller):
     def booking_my_events(self, start, end, timezone=False):
         start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
         end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
-        event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        event_fields = ['name','start','stop','allday','room_id','user_id','recurrency','categ_ids']
         domain = [
             ('start', '<=', end),    
             ('stop', '>=', start),
@@ -141,7 +141,7 @@ class BookingController(http.Controller):
     def booking_search(self, start, end, query, timezone=False):
         start = fields.Datetime.to_string(dateutil.parser.parse(start)+dateutil.relativedelta.relativedelta(seconds=+1))
         end = fields.Datetime.to_string(dateutil.parser.parse(end)-dateutil.relativedelta.relativedelta(seconds=+1))
-        event_fields = ['name','start','stop','allday','room_id','user_id','final_date','recurrency','categ_ids']
+        event_fields = ['name','start','stop','allday','room_id','user_id','recurrency','categ_ids']
         domain = [
             ('start', '<=', end),    
             ('stop', '>=', start),
