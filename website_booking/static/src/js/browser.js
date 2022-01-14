@@ -68,19 +68,7 @@ var CalendarWidget = Widget.extend({
         
         //this.calendar = new FullCalendar.Calendar(this.$el, this.get_fc_init_options());
     
-        this.calendar = new FullCalendar.Calendar(this.el, {
-          plugins: [ 'dayGrid', 'timeGrid', 'list', 'bootstrap' ],
-          timeZone: 'UTC',
-          themeSystem: 'bootstrap',
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-          },
-          weekNumbers: true,
-          eventLimit: true, // allow "more" link when too many events
-          events: 'https://fullcalendar.io/demo-events.json'
-        });
+        this.calendar = new FullCalendar.Calendar(this.el, this.get_fc_init_options());
     
         this.calendar.render();
 
