@@ -39,7 +39,8 @@
                 
                 <t t-call-assets="web.assets_common" t-css="false"/>
                 
-                <t t-call-assets="web.assets_backend" t-css="false"/>
+                <!-- <t t-call-assets="web.assets_backend" t-css="false"/> -->
+                
                 <t t-call-assets="website_booking.assets"/>
                 <script type="text/javascript">
                     $(function() {
