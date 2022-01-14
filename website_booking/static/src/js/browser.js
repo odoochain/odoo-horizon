@@ -686,7 +686,7 @@ var Calendar = CalendarWidget.extend({
         });
     },
            
-    fetch_resources : function(callback) {
+    fetch_resources: function(fetchInfo, successCallback, failureCallback) { {
         var self = this;
         self.ressources = [];
         
@@ -703,7 +703,7 @@ var Calendar = CalendarWidget.extend({
                         'booking_policy' : asset.booking_policy,
                     });
                 });
-                callback(self.ressources);
+                successCallback(self.ressources);
                 self.trigger_up('switch_ressources', {'ressources' : self.ressources});
             }
         );
