@@ -117,10 +117,10 @@ var Schedule =  CalendarWidget.extend({
         // Ambuigus time moment are confusing for Odoo, needs UTC
         try {
             if(!start.hasTime()) {
-                start = moment(start.format())        
+                start = moment(start);    
             }
             if(!end.hasTime()) {
-                end = moment(end.format())        
+                end = moment(end);        
             }
         } catch(e) {}
         if(self.asset_id) {
@@ -129,14 +129,14 @@ var Schedule =  CalendarWidget.extend({
                 route: '/booking/events',
                 params: {
     	    		'asset_id':this.asset_id,
-    				'start' : start.format('YYYY-MM-DD HH:mm:ss'),
-    				'end' : end.format('YYYY-MM-DD HH:mm:ss'),
+    				'start' : start.toISOString().replace('T',' ').replace('.000Z',''),
+    				'end' : end.toISOString().replace('T',' ').replace('.000Z',''),
     	    	},
             }).then(events => {
                     events.forEach(function(evt) {
                         self.events.push({
-                            'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
-                            'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
+                            'start': moment.utc(evt.start).local().toISOString().replace('T',' ').replace('.000Z',''),
+                            'end': moment.utc(evt.stop).local().toISOString().replace('T',' ').replace('.000Z',''),
                             'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                             'allDay': evt.allday,
                             'id': evt.id,
@@ -725,8 +725,8 @@ var Calendar = CalendarWidget.extend({
             route: "/booking/events",
             params: {
     		    'category_id':self.category_id,
-				'start' : start.format('YYYY-MM-DD HH:mm:ss'),
-				'end' : end.format('YYYY-MM-DD HH:mm:ss'),
+				'start' : start.toISOString().replace('T',' ').replace('.000Z',''),
+				'end' : end.toISOString().replace('T',' ').replace('.000Z',''),
 	    	},
         }).then(events => {
 	    	    events.forEach(function(evt) {
@@ -747,8 +747,8 @@ var Calendar = CalendarWidget.extend({
     	    	        }
     	    	    } 
                     self.events.push({
-                        'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
-                        'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
+                        'start': moment.utc(evt.start).local().toISOString().replace('T',' ').replace('.000Z',''),
+                        'end': moment.utc(evt.stop).local().toISOString().replace('T',' ').replace('.000Z',''),
                         'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                         'allDay': evt.allday,
                         'id': evt.id,
