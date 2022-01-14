@@ -19,7 +19,19 @@ var CalendarWidget = Widget.extend({
     
     get_fc_init_options: function() {
         return {
-            header : {
+            plugins: [ 'dayGrid', 'timeGrid', 'list', 'bootstrap' ],
+            timeZone: 'UTC',
+            themeSystem: 'bootstrap',
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
+            weekNumbers: true,
+            eventLimit: true, // allow "more" link when too many events
+            locale: 'fr',
+            height: 755,
+            /*header : {
                  left:   'prev',
                  center: 'title,today',
                  right:  'next'
@@ -39,7 +51,7 @@ var CalendarWidget = Widget.extend({
     		maxTime: "22:00:00",
     		navLinks: true, // can click day/week names to navigate views
     		eventLimit: true, // allow "more" link when too many events
-    		refetchResourcesOnNavigate : false,
+    		refetchResourcesOnNavigate : false,*/
     		resourceRender: function(resourceObj, labelTds, bodyTds) {
     		    if(resourceObj.booking_policy === 'preserved' || resourceObj.booking_policy === 'out') {
     		        labelTds.css('background', '#cccccc');    
@@ -56,7 +68,19 @@ var CalendarWidget = Widget.extend({
         
         //this.calendar = new FullCalendar.Calendar(this.$el, this.get_fc_init_options());
     
-        this.calendar = new FullCalendar.Calendar(this.el, this.get_fc_init_options());
+        this.calendar = new FullCalendar.Calendar(this.el, {
+          plugins: [ 'dayGrid', 'timeGrid', 'list', 'bootstrap' ],
+          timeZone: 'UTC',
+          themeSystem: 'bootstrap',
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          },
+          weekNumbers: true,
+          eventLimit: true, // allow "more" link when too many events
+          events: 'https://fullcalendar.io/demo-events.json'
+        });
     
         this.calendar.render();
 
