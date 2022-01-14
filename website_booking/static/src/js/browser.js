@@ -655,16 +655,16 @@ var Calendar = CalendarWidget.extend({
     		    var now = moment();
     		    if(session.user.in_group_14 || session.uid == calEvent.user_id) {
     		        if (moment(calEvent.start) > now) {
-            		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
-                        dialog.appendTo(self.getParent().main_modal.empty());
-                        self.getParent().main_modal.modal('open');
+            		    var dialog = new NewBookingDialog(self.parent, {'event' : calEvent});
+                        dialog.appendTo(self.parent.main_modal.empty());
+                        self.parent.main_modal.modal('open');
     		        } else {
     		            Materialize.toast('You cannot edit booking in the past', 2000);
     		        }
     		    } else {
-    		        var details_dialog = new DetailsDialog(self.getParent(), {'event' : calEvent});
-    		        details_dialog.appendTo(self.getParent().details_modal.empty());
-    		        self.getParent().details_modal.modal('open');
+    		        var details_dialog = new DetailsDialog(self.parent, {'event' : calEvent});
+    		        details_dialog.appendTo(self.parent.details_modal.empty());
+    		        self.parent.details_modal.modal('open');
     		    }
             },
             header : {
@@ -675,10 +675,15 @@ var Calendar = CalendarWidget.extend({
         });
     },
     
+    init: function (parent, value) {
+        this._super(parent);
+        this.parent = parent;
+    },
+    
     start: function() {
         var self = this;
         return this._super.apply(this, arguments).then(function() {
-            self.init_state = this.getParent()._current_state;
+            self.init_state = this.parent._current_state;
             if(self.init_state.date) {
                 self.calendar.gotoDate(moment(self.init_state.date));
             } else {
