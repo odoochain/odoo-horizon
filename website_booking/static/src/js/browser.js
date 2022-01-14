@@ -24,8 +24,8 @@ var CalendarWidget = Widget.extend({
                  center: 'title,today',
                  right:  'next'
              },
-            plugins: [ 'resourceTimeGrid' ],
-            themeSystem : 'bootstrap3',
+            plugins: [ 'dayGrid', 'timeGrid', 'list', 'bootstrap', 'resourceTimeGrid' ],
+            themeSystem : 'bootstrap',
     		allDaySlot : false,
     		locale: moment.locale,
     		timezone: "local",
@@ -56,19 +56,7 @@ var CalendarWidget = Widget.extend({
         
         //this.calendar = new FullCalendar.Calendar(this.$el, this.get_fc_init_options());
     
-        this.calendar = new FullCalendar.Calendar(this.el, {
-          plugins: [ 'dayGrid', 'timeGrid', 'list', 'bootstrap' ],
-          timeZone: 'UTC',
-          themeSystem: 'bootstrap',
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-          },
-          weekNumbers: true,
-          eventLimit: true, // allow "more" link when too many events
-          events: 'https://fullcalendar.io/demo-events.json'
-        });
+        this.calendar = new FullCalendar.Calendar(this.el, this.get_fc_init_options());
     
         this.calendar.render();
 
@@ -790,7 +778,6 @@ var Toolbar = Widget.extend({
             }).then(providers => {
                 if(providers.length > 0) {
                     var provider = providers[0];
-                    var link = provider.auth_link
                     window.location.replace(provider.auth_link);
                 }
             });    
