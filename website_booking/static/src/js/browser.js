@@ -6,12 +6,10 @@ odoo.define('website_booking.browser', function (require) {
 var core = require('web.core');
 var ajax = require('web.ajax');
 var rpc = require('web.rpc')
-var session = require('web.session');
+var session = require('web.Session');
 var Widget = require('web.Widget');
 var time = require('web.time');
-var fieldutils = require('web.field_utils');
 
-var _t = core._t;
 var qweb = core.qweb;
 
 ajax.loadXML('/website_booking/static/src/xml/browser.xml', qweb);
@@ -115,8 +113,8 @@ var Schedule =  CalendarWidget.extend({
                 route: '/booking/events',
                 params: {
     	    		'asset_id':this.asset_id,
-    				'start' : fieldutils.format.datetime(start),
-    				'end' : fieldutils.format.datetime(end),
+    				'start' : start.format('YYYY-MM-DD HH:mm:ss'),
+    				'end' : end.format('YYYY-MM-DD HH:mm:ss'),
     	    	},
             }).then(events => {
                     events.forEach(function(evt) {
@@ -390,8 +388,8 @@ var NewBookingDialog = Widget.extend({
             rpc.query({
                 route: '/booking/rooms',
                 params: {
-        				'start' : fieldutils.format.datetime(start),
-        				'end' : fieldutils.format.datetime(stop),
+        				'start' : start.format('YYYY-MM-DD HH:mm:ss'),
+        				'end' : stop.format('YYYY-MM-DD HH:mm:ss'),
         				'self_id' : self.event ? self.event.id : '',
     	    	},
             }).then(rooms => {
@@ -709,8 +707,8 @@ var Calendar = CalendarWidget.extend({
             route: "/booking/events",
             params: {
     		    'category_id':self.category_id,
-				'start' : fieldutils.format.datetime(start),
-				'end' : fieldutils.format.datetime(end),
+				'start' : start.format('YYYY-MM-DD HH:mm:ss'),
+				'end' : end.format('YYYY-MM-DD HH:mm:ss'),
 	    	},
         }).then(events => {
 	    	    events.forEach(function(evt) {
