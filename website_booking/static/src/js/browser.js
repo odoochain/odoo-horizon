@@ -707,8 +707,10 @@ var Calendar = CalendarWidget.extend({
         );
     },
     
-    fetch_events: function(start, end, timezone, callback) {
+    fetch_events: function(fetchInfo, successCallback, failureCallback) {
         var self = this;
+        var start = fetchInfo.start;
+        var end = fetchInfo.end;
 		self.events = [];
 		// Ambuigus time moment are confusing for Odoo, needs UTC
         try {
@@ -757,7 +759,7 @@ var Calendar = CalendarWidget.extend({
                     });
                 });
                 //console.log([start, end, events])
-                callback(self.events);
+                successCallback(self.events);
             }
         );
     },
