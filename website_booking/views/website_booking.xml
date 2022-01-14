@@ -37,7 +37,7 @@
             
             <link href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.min.css" rel="stylesheet" type="text/css"/>
             
-            <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" type="text/css"s/>
+            <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" type="text/css"/>
             
             <link rel="stylesheet" href="/website_booking/static/src/css/main.css"/>
             <link rel="stylesheet" href="/website_booking/static/src/css/fc-material.css"/>
