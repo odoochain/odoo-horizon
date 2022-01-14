@@ -110,8 +110,10 @@ var Schedule =  CalendarWidget.extend({
         this.trigger_up('click_scheduler', {'date' : date, 'jsEvent' : jsEvent, 'view' : view});
     },
     
-    fetch_events: function(start, end, timezone, callback) {
+    fetch_events: function(fetchInfo, successCallback, failureCallback) {
         var self = this;
+        var start = fetchInfo.start;
+        var end = fetchInfo.end;
         // Ambuigus time moment are confusing for Odoo, needs UTC
         try {
             if(!start.hasTime()) {
@@ -145,7 +147,7 @@ var Schedule =  CalendarWidget.extend({
                         });
                     });
                     //console.log([start, end, events])
-                    callback(self.events);
+                    successCallback(self.events);
                 }
             );
         }
