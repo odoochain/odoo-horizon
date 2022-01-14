@@ -48,8 +48,8 @@
             <script type="text/javascript" src="/web/static/lib/fullcalendar/timegrid/main.js"></script>
             <script type="text/javascript" src="/web/static/lib/fullcalendar/core/locales/fr.js"></script>
             <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-common/main.js'></script>
-            <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-daygrid/main.js'></script>
             <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-timegrid/main.js'></script>
+            <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-daygrid/main.js'></script>
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/mdtimepicker/mdtimepicker.js"></script>
