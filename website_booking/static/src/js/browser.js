@@ -805,6 +805,7 @@ var Toolbar = Widget.extend({
         this._super.apply(this, arguments);
         var self = this;
         self.parent = parent;
+        var session = new Session(undefined, undefined, {use_cors: false});
         session.session_bind().then(function(){
             if (session.uid) {
                 self.is_logged = true;
