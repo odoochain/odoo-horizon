@@ -23,15 +23,18 @@ var CalendarWidget = Widget.extend({
             timeZone: 'UTC',
             themeSystem: 'bootstrap',
             header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                left:   'prev',
+                center: 'title,today',
+                right:  'next'
             },
             weekNumbers: true,
             eventLimit: true, // allow "more" link when too many events
             locale: 'fr',
             height: 755,
             defaultView: 'resourceTimeGridDay',
+            titleFormat: 'dddd D MMMM YYYY',
+            minTime: "08:00:00",
+    		maxTime: "22:00:00",
             /*header : {
                  left:   'prev',
                  center: 'title,today',
