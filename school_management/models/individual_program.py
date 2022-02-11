@@ -133,6 +133,9 @@ class IndividualProgram(models.Model):
             else:
                 rec.highest_level = 0
 
+    def get_all_tearchers(self):
+        return self.bloc_ids.course_group_ids.course_ids.teacher_id
+
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
     _name='school.individual_course_summary'
@@ -275,6 +278,9 @@ class IndividualBloc(models.Model):
             'view_type': 'form',
         }
 
+    def get_all_tearchers(self):
+        return self.course_group_ids.course_ids.teacher_id
+
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _name='school.individual_course_group'
@@ -336,6 +342,9 @@ class IndividualCourseGroup(models.Model):
             rec.total_hours = sum(course.hours for course in rec.course_ids)
             rec.total_credits = sum(course.credits for course in rec.course_ids)
             rec.total_weight = sum(course.weight for course in rec.course_ids)
+            
+    def get_all_tearchers(self):
+        return self.course_ids.teacher_id
             
     def action_open_source_form(self):
         self.ensure_one()

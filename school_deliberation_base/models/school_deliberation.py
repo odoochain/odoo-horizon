@@ -64,6 +64,8 @@ class Deliberation(models.Model):
     
     individual_bloc_count = fields.Integer(string='Blocs Count', compute="_compute_counts")
     
+    participants_ids = fields.Many2many('res.partner', 'school_deliberation_participants_rel', 'deliberation_id', 'partner_id', string='Particpants',domain=[('teacher','=',True)])
+    
     def _compute_counts(self):
         for rec in self:
             rec.individual_program_count = len(rec.individual_program_ids)
@@ -77,3 +79,10 @@ class Deliberation(models.Model):
 
     def archive(self):
         return self.write({'state': 'archived'})
+        
+    def action_populate_participants(self):
+        self.ensure_one()
+        self.participants_ids = self.bloc_ids[0].get_all_tearchers()
+        return True
+                    
+        
