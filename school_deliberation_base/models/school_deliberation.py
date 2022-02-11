@@ -82,7 +82,7 @@ class Deliberation(models.Model):
         
     def action_populate_participants(self):
         self.ensure_one()
-        self.participants_ids = self.bloc_ids[0].get_all_tearchers()
-        return True
+        return self.write({'participants_ids' : [(6, 0, self.bloc_ids[0].get_all_tearchers().ids)]})
+        
                     
         

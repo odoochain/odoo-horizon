@@ -82,6 +82,7 @@
             <button name="to_draft" type="object" states="active,archived" string="Set to Draft" />
             <button name="activate" type="object" states="draft" string="Activate Deliberation" class="oe_highlight" />
             <button name="archive" type="object" states="draft,active" string="Archive Deliberation" />
+            <button name="action_populate_participants" type="object" states="draft" string="Populate Participants" />
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
           <sheet>
