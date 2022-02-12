@@ -64,7 +64,9 @@ class Deliberation(models.Model):
     
     individual_bloc_count = fields.Integer(string='Blocs Count', compute="_compute_counts")
     
-    participants_ids = fields.Many2many('res.partner', 'school_deliberation_participants_rel', 'deliberation_id', 'partner_id', string='Particpants',domain=[('teacher','=',True)])
+    participant_ids = fields.Many2many('res.partner', 'school_deliberation_participants_rel', 'deliberation_id', 'partner_id', string='Particpants',domain=[('teacher','=',True)])
+    
+    excused_participant_ids = fields.Many2many('res.partner', 'school_deliberation_excused_part_rel', 'deliberation_id', 'partner_id', string='Excused Particpants',domain=[('teacher','=',True)])
     
     def _compute_counts(self):
         for rec in self:
