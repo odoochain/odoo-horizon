@@ -82,7 +82,12 @@ class Deliberation(models.Model):
         
     def action_populate_participants(self):
         self.ensure_one()
-        return self.write({'participants_ids' : [(6, 0, self.individual_bloc_ids[0].get_all_tearchers().ids)]})
+        all_teachers = self.env['res.partner']
+        for bloc in self.individual_bloc_ids :
+            all_teachers |= bloc.get_all_tearchers()
+        for program in self.individual_program_ids :
+            all_teachers |= program.get_all_tearchers()
+        return self.write({'participants_ids' : [(6, 0, all_teachers.ids)]})
         
                     
         
