@@ -102,7 +102,7 @@
             <group col="2">
               <field name="individual_program_ids" />
               <field name="individual_bloc_ids" />
-              <field name="participants_ids" widget="many2many_tags"/>
+              <field name="participant_ids" widget="many2many_tags"/>
               <field name="excused_participant_ids" widget="many2many_tags"/>
             </group>
           </sheet>
