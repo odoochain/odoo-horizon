@@ -355,10 +355,10 @@ var NewBookingDialog = Widget.extend({
             'step' : 60,
         });
         if(self.edit_mode) {
-            self.$('#from_hour').val(self.event.start.format('H:mm'));
+            self.$('#from_hour').val(moment(self.event.start).format('H:mm'));
             self.$('#from_hour').removeClass('invalid');
             self.$('#from_hour').addClass('valid');
-            self.$('#to_hour').val(self.event.end.format('H:mm'));
+            self.$('#to_hour').val(moment(self.event.end).format('H:mm'));
             self.$('#to_hour').removeClass('invalid');
             self.$('#to_hour').addClass('valid');
             self.$('#description').val(self.event.title);
