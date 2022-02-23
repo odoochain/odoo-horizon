@@ -35,7 +35,7 @@
             <link rel="stylesheet" href="/web/static/lib/fullcalendar/timegrid/main.css" type="text/css"/>
             <link rel="stylesheet" href="/web/static/lib/fullcalendar/list/main.css" type="text/css"/>-->
             
-            <link href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.css" rel="stylesheet" type="text/css"/>
+            <link href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.2/main.css" rel="stylesheet" type="text/css"/>
             
             <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" type="text/css"/>
             
@@ -57,15 +57,10 @@
             <script src='https://cdn.jsdelivr.net/npm/moment-timezone@0.5.31/builds/moment-timezone-with-data.js'></script>
             
             <!-- fullcalendar bundle -->
-            <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js'></script>
+            <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.2/main.js'></script>
             
             <!-- the connector. must go AFTER moment-timezone -->
             <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.5.0/main.global.js'></script>
-            
-            <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/resource-timegrid@5.10.1/main.js'></script>
-            
-            <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/resource-daygrid@5.10.1/main.js'></script>
-            
             
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
