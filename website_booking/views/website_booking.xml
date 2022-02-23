@@ -35,7 +35,7 @@
             <link rel="stylesheet" href="/web/static/lib/fullcalendar/timegrid/main.css" type="text/css"/>
             <link rel="stylesheet" href="/web/static/lib/fullcalendar/list/main.css" type="text/css"/>-->
             
-            <link href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.min.css" rel="stylesheet" type="text/css"/>
+            <link href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.css" rel="stylesheet" type="text/css"/>
             
             <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" type="text/css"/>
             
@@ -52,7 +52,7 @@
             <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-common/main.js'></script>
             <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-timegrid/main.js'></script>
             <script type="text/javascript" src='/web_scheduler/static/lib/fullcalendar/resource-daygrid/main.js'></script>-->
-            <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.1/main.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
             <script type="text/javascript" src="/website_booking/static/lib/mdtimepicker/mdtimepicker.js"></script>

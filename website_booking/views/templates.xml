@@ -38,20 +38,6 @@
                 </script>
                 
                 <t t-call-assets="web.assets_common" t-css="false"/>
-
-                <script type="text/javascript" src='/web/static/lib/fullcalendar/core/main.js'></script>
-                <script type="text/javascript" src='/web/static/lib/fullcalendar/interaction/main.js'></script>
-                <script type="text/javascript" src='/web/static/lib/fullcalendar/moment/main.js'></script>
-                <script type="text/javascript" src='/web/static/lib/fullcalendar/daygrid/main.js'></script>
-                <script type="text/javascript" src='/web/static/lib/fullcalendar/timegrid/main.js'></script>
-                <script type="text/javascript" src='/web/static/lib/fullcalendar/list/main.js'></script>
-                <script type="text/javascript" src="/web/static/lib/fullcalendar/moment/main.js"></script>
-                <script type="text/javascript" src="/web/static/lib/fullcalendar/moment-timezone/main.js"></script>
-                
-                <link href='/web/static/lib/fullcalendar/core/main.css' rel="stylesheet" type="text/css"/>
-                <link href='/web/static/lib/fullcalendar/daygrid/main.css' rel="stylesheet" type="text/css"/>
-                <link href='/web/static/lib/fullcalendar/timegrid/main.css' rel="stylesheet" type="text/css"/>
-                <link href='/web/static/lib/fullcalendar/list/main.css' rel="stylesheet" type="text/css"/>
                 
                 <!-- <t t-call-assets="web.assets_backend" t-css="false"/> -->
                 
