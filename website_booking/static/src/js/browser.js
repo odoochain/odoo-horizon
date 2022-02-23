@@ -120,10 +120,10 @@ var Schedule =  CalendarWidget.extend({
         // Ambuigus time moment are confusing for Odoo, needs UTC
         try {
             if(!start.hasTime()) {
-                start = moment(start);    
+                start = moment(start).toDate();    
             }
             if(!end.hasTime()) {
-                end = moment(end);        
+                end = moment(end).toDate();        
             }
         } catch(e) {}
         if(self.asset_id) {
