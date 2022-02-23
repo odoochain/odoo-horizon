@@ -40,7 +40,7 @@
                 <t t-call-assets="web.assets_common" t-css="false"/>
                 
                 <script type="text/javascript" src="/web/static/lib/fullcalendar/moment/main.js"></script>
-                <script type="text/javascript" src="/web/static/lib/fullcalendar/momentTimezone/main.js"></script>
+                <script type="text/javascript" src="/web/static/lib/fullcalendar/moment-timezone/main.js"></script>
                 
                 <!-- <t t-call-assets="web.assets_backend" t-css="false"/> -->
                 
