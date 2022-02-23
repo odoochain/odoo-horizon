@@ -21,7 +21,7 @@ var CalendarWidget = Widget.extend({
         return {
             timeZone: 'UTC',
             themeSystem: 'bootstrap',
-            plugins: [ 'momentPlugin', 'momentTimezonePlugin' ],
+            plugins: [ 'moment', 'momentTimezone' ],
             header: {
                 left:   'prev',
                 center: 'title,today',
