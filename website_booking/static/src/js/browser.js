@@ -775,17 +775,17 @@ var Calendar = CalendarWidget.extend({
     
     switch_category : function(category) {
         this.category_id = category.id;
-        this.$calendar.fullCalendar( 'refetchResources' );
+        this.calendar.refetchResources();
     },
     
     switch_resource : function(resource) {
         this.category_id = resource.id;
-        this.$calendar.fullCalendar( 'refetchResources' );
-        this.$calendar.fullCalendar( 'refetchEvents' );
+        this.calendar.refetchResources();
+        this.calendar.refetchEvents();
     },
     
     goto_date : function(d) {
-        this.$calendar.fullCalendar('gotoDate', d);
+        this.calendar.gotoDate(d);
     },
     
 });
