@@ -320,7 +320,7 @@ var NewBookingDialog = Widget.extend({
             this.edit_mode = true;
         } else {
             this.ressources = parent.cal.ressources;
-            this.date = parent.cal.$calendar.fullCalendar( 'getDate' );
+            this.date = parent.cal.calendar.getDate();
             this.edit_mode = false;
         }
     },
