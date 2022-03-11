@@ -220,7 +220,6 @@ var NewBookingDialog = Widget.extend({
                         model: 'calendar.event',
                         method: 'create',
                         args: [
-                            [self.event.id], 
                             {
                                 'name' : self.$('#description').val(),
                                 'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
