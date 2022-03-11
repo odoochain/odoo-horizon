@@ -368,7 +368,7 @@ var NewBookingDialog = Widget.extend({
             self.$('.delete-booking').show();
             self.hasChanged = false;
         } else {
-            self.$('#description').val(session.partner.name);
+            self.$('#description').val(self.parent.session.user.name);
         }
         Materialize.updateTextFields();
         self.hasChanged = false;
