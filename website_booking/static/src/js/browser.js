@@ -218,7 +218,7 @@ var NewBookingDialog = Widget.extend({
                     }).then(id => {
                         self.trigger_up('updateEvent', {'id': id});
                         self.parent.main_modal.modal('close');
-                    }).catch(error => {
+                    }, error => {
                         Materialize.toast(error.message.data.message, 4000)
                         self.parent.main_modal.modal('close');
                     });
@@ -238,7 +238,7 @@ var NewBookingDialog = Widget.extend({
                     }).then(id => {
                         self.trigger_up('newEvent', {'id': id});
                         self.parent.main_modal.modal('close');
-                    }).catch(error => {
+                    }, error => {
                         Materialize.toast(error.message.data.message, 4000)
                         self.parent.main_modal.modal('close');
                     });
