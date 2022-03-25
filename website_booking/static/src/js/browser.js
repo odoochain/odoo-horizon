@@ -176,6 +176,10 @@ var NewBookingDialog = Widget.extend({
     template: 'website_booking.new_booking_dialog',
     
     events: {
+        "click .cancel-modal" : function (event) {
+            var self = this;
+            self.parent.main_modal.modal('close');
+        },
         "click .request-booking": function (event) {
             var self = this;
             var fromTime = self.$('#from_hour').timepicker('getTime');
@@ -251,6 +255,7 @@ var NewBookingDialog = Widget.extend({
                 ]
             }).then(function () {
                 self.trigger_up('deleteEvent', self.event.id);
+                self.parent.main_modal.modal('close');
             });
         },
         "change .select-asset-id": function (event) {
