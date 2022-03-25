@@ -176,7 +176,7 @@ var NewBookingDialog = Widget.extend({
     template: 'website_booking.new_booking_dialog',
     
     events: {
-        "click ." : function (event) {
+        "click .cancel-modal" : function (event) {
             var self = this;
             self.parent.main_modal.modal('close');
         },
