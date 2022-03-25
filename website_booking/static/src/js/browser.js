@@ -215,9 +215,7 @@ var NewBookingDialog = Widget.extend({
                         self.trigger_up('updateEvent', {'id': id});
                         self.parent.main_modal.modal('hide');
                     }).catch(error => {
-                        if(error.data.exception_type == "validation_error"){
-                            Materialize.toast(error.data.arguments[0], 4000)
-                        }
+                        Materialize.toast(error.message.data.message, 4000)
                         self.parent.main_modal.modal('hide');
                     });
                 } else {
@@ -237,9 +235,7 @@ var NewBookingDialog = Widget.extend({
                         self.trigger_up('newEvent', {'id': id});
                         self.parent.main_modal.modal('hide');
                     }).catch(error => {
-                        if(error.data.exception_type == "validation_error"){
-                            Materialize.toast(error.data.arguments[0], 4000)
-                        }
+                        Materialize.toast(error.message.data.message, 4000)
                         self.parent.main_modal.modal('hide');
                     });
                 }
