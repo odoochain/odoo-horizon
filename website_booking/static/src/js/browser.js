@@ -19,7 +19,7 @@ var CalendarWidget = Widget.extend({
     
     get_fc_init_options: function() {
         return {
-            timeZone: 'UTC',
+            timeZone: 'local',
             themeSystem: 'bootstrap5',
             header: {
                 left:   'prev',
