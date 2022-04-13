@@ -13,7 +13,7 @@ odoo.define('deliberation.DeliberationView', function (require) {
         display_name: 'Deliberation',
         icon: 'fa-pagelines',
         cssLibs: [
-            '/deliberation/static/src/css/deliberation.css',
+            '/school_deliberation_base/static/src/css/deliberation.css',
         ],
         config: _.extend({},AbstractView.prototype.config, {
             Model: DeliberationModel,
