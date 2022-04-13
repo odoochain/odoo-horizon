@@ -109,6 +109,15 @@
         </form>
       </field>
     </record>
+    
+    <!-- Deliberation Custom View -->
+    <record model="ir.ui.view" id="deliberation_custom">
+        <field name="name">deliberation custom</field>
+        <field name="model">school.deliberation</field>
+        <field name="arch" type="xml">
+          <deliberation></deliberation>
+        </field>
+    </record>
   
     <record id="view_deliberation_filter" model="ir.ui.view">
       <field name="name">deliberation.select</field>
@@ -156,6 +165,12 @@
     <record id="action_deliberation_form_view2" model="ir.actions.act_window.view">
       <field name="sequence" eval="1" />
       <field name="view_mode">form</field>
+      <field name="view_id" ref="deliberation_form" />
+      <field name="act_window_id" ref="action_deliberation_form" />
+    </record>
+    <record id="action_deliberation_form_view3" model="ir.actions.act_window.view">
+      <field name="sequence" eval="2" />
+      <field name="view_mode">deliberation</field>
       <field name="view_id" ref="deliberation_form" />
       <field name="act_window_id" ref="action_deliberation_form" />
     </record>
