@@ -139,8 +139,8 @@ var Schedule =  CalendarWidget.extend({
             }).then(events => {
                     events.forEach(function(evt) {
                         self.events.push({
-                            'start': moment.utc(evt.start).local().toISOString().replace('T',' ').replace('.000Z',''),
-                            'end': moment.utc(evt.stop).local().toISOString().replace('T',' ').replace('.000Z',''),
+                            'start': moment.utc(evt.start).local().toISOString().replace('T',' ').replace('.000Z','').local(),
+                            'end': moment.utc(evt.stop).local().toISOString().replace('T',' ').replace('.000Z','').local(),
                             'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                             'allDay': evt.allday,
                             'id': evt.id,
@@ -766,8 +766,8 @@ var Calendar = CalendarWidget.extend({
     	    	        }
     	    	    } 
                     self.events.push({
-                        'start': moment.utc(evt.start).local().toISOString().replace('T',' ').replace('.000Z',''),
-                        'end': moment.utc(evt.stop).local().toISOString().replace('T',' ').replace('.000Z',''),
+                        'start': moment.utc(evt.start).local().toISOString().replace('T',' ').replace('.000Z','').local(),
+                        'end': moment.utc(evt.stop).local().toISOString().replace('T',' ').replace('.000Z','').local(),
                         'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                         'allDay': evt.allday,
                         'id': evt.id,
