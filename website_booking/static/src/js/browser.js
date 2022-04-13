@@ -78,7 +78,9 @@ var CalendarWidget = Widget.extend({
     },
     
     refetch_events: function() {
-        this.calendar.refetchEvents();
+        if(this.calendar) {
+            this.calendar.refetchEvents();
+        }
     },
 
 });
