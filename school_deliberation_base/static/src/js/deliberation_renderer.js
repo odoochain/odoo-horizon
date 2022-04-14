@@ -36,10 +36,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <span class="col-md-10" style="min-height:66px;">
                             <h1>${record.student_id.data.display_name} - Bachelier en musique : Guitare - 3</h1>
                         </span>
-                        <span class="col-md-10">
-                            <h2 style="margin-top: 0;"></h2>
-                        </span>
-                        <span class="refresh_button">
+                        <span class="col-md-2 refresh_button">
                             <button class="btn btn-default o_reload_bloc" type="button">
                                 <i class="fa fa-refresh fa-fw"></i>
                             </button>
