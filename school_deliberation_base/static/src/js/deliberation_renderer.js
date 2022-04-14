@@ -31,7 +31,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             $col1.append($img);
             $header.append($col1);
             var $col2 = $('<div>',{class : 'col-10'});
-            $col1.append(`<div class="row">
+            $col2.append(`
+                        <div class="row">
                         <span class="col-md-10" style="min-height:66px;">
                             <h2>${record.student_id.data.display_name} - Bachelier en musique : Guitare - 3</h2>
                         </span>
