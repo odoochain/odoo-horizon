@@ -23,6 +23,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         _renderHeader : function () {
             $('.o_d_main_container').append(
                 $('<div>').addClass('row').text('This is some text'),
+                "We are Here",
             );
             return $.when();
         },
