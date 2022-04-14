@@ -31,9 +31,9 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             $col1.append($img);
             $header.append($col1);
             var $col2 = $('<div>',{class : 'col-10'});
-            var template = `<div class="row">
+            $col1.append(`<div class="row">
                         <span class="col-md-10" style="min-height:66px;">
-                            <h2>${fullname} - Bachelier en musique : Guitare - 3</h2>
+                            <h2>${record.student_id.data.name} - Bachelier en musique : Guitare - 3</h2>
                         </span>
                         <span class="col-md-10">
                             <h2 style="margin-top: 0;"></h2>
@@ -43,8 +43,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                                 <i class="fa fa-refresh fa-fw"></i>
                             </button>
                         </span>
-                    </div>`;
-            $col1.append($.tmpl(template, {"fullname":record.student_id.data.name}));
+                    </div>`);
             $header.append($col2);
             return $header;
         },
