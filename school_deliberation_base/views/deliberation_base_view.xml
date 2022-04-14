@@ -116,9 +116,10 @@
         <field name="name">Deliberation Bloc</field>
         <field name="model">school.individual_bloc</field>
         <field name="arch" type="xml">
-          <field name="year_id" />
-          <field name="student_id" />
-          <deliberation></deliberation>
+          <deliberation class="o_deliberation_bloc">
+            <field name="year_id" />
+            <field name="student_id" />
+          </deliberation>
         </field>
     </record>
   
