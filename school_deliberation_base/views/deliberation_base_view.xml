@@ -83,7 +83,7 @@
             <button name="activate" type="object" states="draft" string="Activate Deliberation" class="oe_highlight" />
             <button name="archive" type="object" states="draft,active" string="Archive Deliberation" />
             <button name="action_populate_participants" type="object" states="draft" string="Populate Participants" />
-            <button name="action_deliberation_bloc_kanban" type="object" states="active" string="Deliberate Blocs" />
+            <button name="action_open_deliberation_bloc" type="object" states="active" string="Deliberate Blocs" />
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
           <sheet>
@@ -191,7 +191,7 @@
       </field>
     </record>
     
-    <!-- Deliberation Kanban View -->
+    <!-- Deliberation Blocs Kanban View -->
     <record model="ir.ui.view" id="deliberation_bloc_kanban_view">
       <field name="name">school.deliberation.bloc.kanban</field>
       <field name="model">school.individual_bloc</field>
@@ -220,24 +220,7 @@
         </kanban>
       </field>
     </record>
-  
-    <record id="action_deliberation_bloc_kanban" model="ir.actions.act_window">
-      <field name="name">Blocs Deliberation</field>
-      <field name="type">ir.actions.act_window</field>
-      <field name="res_model">school.individual_bloc</field>
-      <field name="view_mode">kanban</field>
-      <field name="domain">[('deliberation_ids','in',uid)]</field>
-      <field name="search_view_id" ref="view_deliberation_bloc_filter" />
-      <field name="help" type="html">
-        <p class="oe_view_nocontent_create">
-          No blocks in the current deliberation.
-        </p>
-        <p>
-          Odoo helps you easily track all activities related to a deliberation.
-        </p>
-      </field>
-    </record>
-  
+
     <!-- Top Menu item -->
   
     <menuitem id="menu_deliberation_tree" parent="school_evaluations.menu_main_evaluation" action="action_deliberation_form" sequence="60" />

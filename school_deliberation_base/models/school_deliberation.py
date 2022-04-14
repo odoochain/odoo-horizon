@@ -91,6 +91,17 @@ class Deliberation(models.Model):
             all_teachers |= program.get_all_tearchers()
         return self.write({'participants_ids' : [(6, 0, all_teachers.ids)]})
         
+    def action_open_deliberation_bloc(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Deliberate Blocs',
+            'res_model': 'school.individual_bloc',
+            'res_ids': self.individual_bloc_ids,
+            'view_mode': 'kaanban',
+            'view_id': 'school_deliberation_base.deliberation_bloc_kanban_view',
+        }
+        
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
