@@ -111,10 +111,10 @@
       </field>
     </record>
     
-    <!-- Deliberation Custom View -->
-    <record model="ir.ui.view" id="deliberation_custom">
-        <field name="name">deliberation custom</field>
-        <field name="model">school.deliberation</field>
+    <!-- Deliberation Bloc View -->
+    <record model="ir.ui.view" id="deliberation_bloc_view">
+        <field name="name">Deliberation Bloc</field>
+        <field name="model">school.individual_bloc</field>
         <field name="arch" type="xml">
           <field name="year_id" />
           <field name="student_id" />

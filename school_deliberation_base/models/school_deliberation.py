@@ -116,7 +116,7 @@ class IndividualBloc(models.Model):
             'res_model': 'school.individual_bloc',
             'res_id': self.id,
             'view_mode': 'deliberation',
-            'view_id': self.env.ref('school_deliberation_base.deliberation_custom').id,
+            'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_view').id,
         }
         
     def close_deliberate_bloc(self):
