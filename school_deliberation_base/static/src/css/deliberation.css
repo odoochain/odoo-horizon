@@ -1,4 +1,4 @@
-h1 {
+h1 .deliberation_title {
     font-size: 7em;
     display: flex;
     flex-direction: column;
