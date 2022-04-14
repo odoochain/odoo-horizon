@@ -1,4 +1,4 @@
-/* global odoo, _ */
+/* global odoo, _, $ */
 odoo.define('deliberation.DeliberationRenderer', function (require) {
     "use strict";
 
@@ -12,6 +12,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         _render: function () {
             this.$el.append(
                     $('<h1 class="o_d_title">').text('Hello World!'),
+                    $('<button>').text('Close').click(ev => this.trigger_up('close')),
             );
             return $.when();
         },

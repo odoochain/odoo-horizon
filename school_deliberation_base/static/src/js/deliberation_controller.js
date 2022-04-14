@@ -6,7 +6,10 @@ odoo.define('deliberation.DeliberationController', function (require) {
 
 
     var DeliberationController = AbstractController.extend({
-     
+        
+        custom_events: {
+            close: '_onClose'
+        },
 
         init: function (parent, model, renderer, params) {
             this.model = model;
@@ -16,6 +19,10 @@ odoo.define('deliberation.DeliberationController', function (require) {
 
         start: function () {
             return this._super();
+        },
+
+        _onClose: function (event) {
+            this.trigger_up("history_back");
         },
 
     });
