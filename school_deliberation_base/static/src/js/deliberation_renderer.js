@@ -20,6 +20,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         },
         
         _renderHeader : function () {
+            var record = this.model.get(ev.data.id, {raw: true});
+            console.log(record);
             var $header = $('<div>').addClass('row');
             var $img = $('<img>')
                 .addClass('img img-fluid img-thumbnail ml16')
