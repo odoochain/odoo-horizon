@@ -11,8 +11,18 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         }),
         _render: function () {
             this.$el.append(
-                    $('<h1 class="o_d_title">').text('Hello World!'),
-                    $('<button>').text('Close').click(ev => this.trigger_up('close')),
+                $('<div>').addClass('container o_d_main_container'),
+            );
+            this._renderHeader();
+            this.$el.append(
+                $('<button>').text('Close').click(ev => this.trigger_up('close')),
+            );
+            return $.when();
+        },
+        
+        _renderHeader : function () {
+            $('.o_d_main_container').append(
+                $('<div>').addClass('row').text('This is some text'),
             );
             return $.when();
         },
