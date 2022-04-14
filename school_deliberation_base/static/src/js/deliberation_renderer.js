@@ -22,11 +22,11 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         
         _renderHeader : function () {
             var record = this.state.data;
-            var $header = $('<div>',{class : 'row bloc_header'});
+            var $header = $('<div>',{class : 'row bloc_header mt-4'});
             var $col1 = $('<div>',{class : 'col-2'});
             var $img = $('<img>')
                 .addClass('img img-fluid img-thumbnail ml16')
-                .attr('src', this._getImageURL('res.partner','image_512',record.student_id.data.id,'student picture'))
+                .attr('src', this._getImageURL('res.partner','image_256',record.student_id.data.id,'student picture'))
                 .data('key', record.id);
             $col1.append($img);
             $header.append($col1);
@@ -34,7 +34,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             $col2.append(`
                         <div class="row">
                         <span class="col-md-10" style="min-height:66px;">
-                            <h2>${record.student_id.data.display_name} - Bachelier en musique : Guitare - 3</h2>
+                            <h1>${record.student_id.data.display_name} - Bachelier en musique : Guitare - 3</h1>
                         </span>
                         <span class="col-md-10">
                             <h2 style="margin-top: 0;"></h2>
