@@ -198,7 +198,7 @@
       <field name="arch" type="xml">
         <kanban class="o_deliberation_bloc_kanban">
           <field name="student_id"/>
-          <field name="year_id"/>
+          <field name="state"/>
           <templates>
             <t t-name="kanban-box">
               <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_deliberation_bloc_kanban">
@@ -208,7 +208,10 @@
                 <div class="o_kanban_card_header">
                   <div class="o_kanban_card_header_title">
                     <div class="o_primary">
-                      <field name="name"/> - <field name="year_id"/>
+                      <field name="name"/>
+                    </div>
+                    <div class="o_secondary">
+                      <field name="state"/>
                     </div>
                   </div>
                   <div class="container o_kanban_card_content o_visible">
