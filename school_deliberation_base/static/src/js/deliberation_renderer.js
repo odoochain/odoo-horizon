@@ -3,6 +3,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
     "use strict";
 
     var BasicRenderer = require('web.BasicRenderer');
+    var CharImageUrl = require('web.basic_fields').CharImageUrl;
     // var core = require('web.core');
     // var qweb = core.qweb;
 
@@ -20,14 +21,10 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         },
         
         _renderHeader : function () {
+            var record = this.state.data;
             var $header = $('<div>').addClass('row');
-            var $img = $('<img>')
-                .addClass('img img-fluid img-thumbnail ml16')
-                //.toggleClass('btn-info', val.view_id[0] === value)
-                //.attr('src', val.image)
-                //.data('key', val.view_id[0])
-                ;
-            $header.append($img);
+            var imageField = new CharImageUrl('image_1920', record.student_id);
+            imageField.renderTo($header);
             return $header;
         },
         
