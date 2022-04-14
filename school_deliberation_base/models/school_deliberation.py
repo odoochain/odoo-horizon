@@ -110,7 +110,6 @@ class IndividualBloc(models.Model):
     deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_bloc_rel', 'bloc_id', 'deliberation_id', string='Deliberations', readonly=True)
     
     def action_deliberate_bloc(self):
-        self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
             'name': self.name,
@@ -119,3 +118,6 @@ class IndividualBloc(models.Model):
             'view_mode': 'deliberation',
             'view_id': self.env.ref('school_deliberation_base.deliberation_custom').id,
         }
+        
+    def close_deliberate_bloc(self):
+        return {'type': 'ir.actions.client', 'tag': 'history_back'}
