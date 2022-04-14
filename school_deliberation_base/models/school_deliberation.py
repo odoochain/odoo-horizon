@@ -91,5 +91,9 @@ class Deliberation(models.Model):
             all_teachers |= program.get_all_tearchers()
         return self.write({'participants_ids' : [(6, 0, all_teachers.ids)]})
         
-                    
-        
+class IndividualBloc(models.Model):
+    '''Individual Bloc'''
+    _inherit = 'school.individual_bloc'
+    
+    deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_bloc_rel', 'bloc_id', 'deliberation_id', string='Deliberations', readonly=True)
+    

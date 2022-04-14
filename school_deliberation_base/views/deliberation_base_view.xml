@@ -168,11 +168,60 @@
       <field name="view_id" ref="deliberation_form" />
       <field name="act_window_id" ref="action_deliberation_form" />
     </record>
-    <record id="action_deliberation_form_view3" model="ir.actions.act_window.view">
+    <!--<record id="action_deliberation_form_view3" model="ir.actions.act_window.view">
       <field name="sequence" eval="2" />
       <field name="view_mode">deliberation</field>
-      <field name="view_id" ref="deliberation_form" />
+      <field name="view_id" ref="deliberation_custom" />
       <field name="act_window_id" ref="action_deliberation_form" />
+    </record>-->
+  
+    <!-- Blocs deliberation -->
+    
+    <!-- Deliberation Kanban View -->
+    <record model="ir.ui.view" id="deliberation_bloc_kanban_view">
+      <field name="name">school.deliberation.bloc.kanban</field>
+      <field name="model">school.individual_bloc</field>
+      <field name="arch" type="xml">
+        <kanban class="o_deliberation_bloc_kanban">
+          <field name="student_id"/>
+          <field name="year_id"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_global_click o_deliberation_bloc_kanban">
+                <div class="o_kanban_card_header">
+                  <div class="o_kanban_card_header_title">
+                    <div class="o_primary">
+                      <field name="name"/> - <field name="year_id"/>
+                    </div>
+                  </div>
+                  <div class="container o_kanban_card_content o_visible">
+                    <div class="row">
+                      This is a test
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+  
+    <record id="action_deliberation_bloc_kanban" model="ir.actions.act_window">
+      <field name="name">Blocs Deliberation</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">school.individual_bloc</field>
+      <field name="view_mode">kanban</field>
+      <field name="context">{"search_default_current":1}</field>
+      <field name="search_view_id" ref="view_deliberation_bloc_filter" />
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          No blocks in the current deliberation.
+        </p>
+        <p>
+          Odoo helps you easily track all activities related to a deliberation.
+        </p>
+      </field>
     </record>
   
     <!-- Top Menu item -->
