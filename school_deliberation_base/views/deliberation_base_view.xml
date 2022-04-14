@@ -225,8 +225,7 @@
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.individual_bloc</field>
       <field name="view_mode">kanban</field>
-      <field name="context">{"search_default_current":1}</field>
-      <field name="domain">[('stage', '=', 'confirmed_cur'),('manager_new.id','=',uid)]</field>
+      <field name="domain">[('deliberation_ids','in',uid)]</field>
       <field name="search_view_id" ref="view_deliberation_bloc_filter" />
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
