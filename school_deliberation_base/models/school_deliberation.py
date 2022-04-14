@@ -99,7 +99,7 @@ class Deliberation(models.Model):
             'res_model': 'school.individual_bloc',
             'res_ids': self.individual_bloc_ids,
             'view_mode': 'kaanban',
-            'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view'),
+            'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,
         }
         
 class IndividualBloc(models.Model):
