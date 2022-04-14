@@ -25,7 +25,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var $header = $('<div>').addClass('row');
             var $img = $('<img>')
                 .addClass('img img-fluid img-thumbnail ml16')
-                .attr('src', this._getImageURL('res.partner','image_128',record.id,'student picture'))
+                .attr('src', this._getImageURL('res.partner','image_128',record.student_id.id,'student picture'))
                 .data('key', record.id);
             $header.append($img);
             return $header;
