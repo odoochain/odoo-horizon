@@ -22,14 +22,30 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         
         _renderHeader : function () {
             var record = this.state.data;
-            var $header = $('<div>',{class : 'row'});
-            var $col1 = $('<div>',{class : 'col'});
+            var $header = $('<div>',{class : 'row bloc_header'});
+            var $col1 = $('<div>',{class : 'col-2'});
             var $img = $('<img>')
                 .addClass('img img-fluid img-thumbnail ml16')
                 .attr('src', this._getImageURL('res.partner','image_512',record.student_id.data.id,'student picture'))
                 .data('key', record.id);
             $col1.append($img);
             $header.append($col1);
+            var $col2 = $('<div>',{class : 'col-10'});
+            var template = `<div class="row">
+                        <span class="col-md-10" style="min-height:66px;">
+                            <h2>${fullname} - Bachelier en musique : Guitare - 3</h2>
+                        </span>
+                        <span class="col-md-10">
+                            <h2 style="margin-top: 0;"></h2>
+                        </span>
+                        <span class="refresh_button">
+                            <button class="btn btn-default o_reload_bloc" type="button">
+                                <i class="fa fa-refresh fa-fw"></i>
+                            </button>
+                        </span>
+                    </div>`;
+            $col1.append($.tmpl(template, {"fullname":record.student_id.data.name}));
+            $header.append($col2);
             return $header;
         },
         
