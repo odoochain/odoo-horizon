@@ -11,7 +11,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         }),
         _render: function () {
             this.$el.append(
-                    $('<h1 class="deliberation_title">').text('Hello World!'),
+                    $('<h1 class="o_d_title">').text('Hello World!'),
             );
             return $.when();
         },
