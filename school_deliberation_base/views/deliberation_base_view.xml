@@ -119,7 +119,7 @@
           <deliberation class="o_deliberation_bloc">
             <field name="year_id" />
             <field name="student_id" />
-            <field name="student_id.image_1920" />
+            <field name="image" />
           </deliberation>
         </field>
     </record>
