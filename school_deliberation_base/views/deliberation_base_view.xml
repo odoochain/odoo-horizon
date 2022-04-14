@@ -217,7 +217,7 @@
                           </div>
                       </div>
                       <div class="o_kanban_record_bottom">
-                          <button class="btn btn-primary" >Deliberate</button>
+                          <button class="btn btn-primary" type="object" name="action_deliberate_bloc">Deliberate</button>
                       </div>
                   </div>
               </div>

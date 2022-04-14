@@ -109,3 +109,12 @@ class IndividualBloc(models.Model):
     
     deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_bloc_rel', 'bloc_id', 'deliberation_id', string='Deliberations', readonly=True)
     
+    def action_deliberate_bloc(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': self.name,
+            'res_model': 'school.individual_bloc',
+            'res_id': self.id,
+            'view_mode': 'deliberation',
+        }
