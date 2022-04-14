@@ -177,6 +177,19 @@
   
     <!-- Blocs deliberation -->
     
+    <record id="view_deliberation_bloc_filter" model="ir.ui.view">
+      <field name="name">deliberation.select</field>
+      <field name="model">school.individual_bloc</field>
+      <field name="arch" type="xml">
+        <search string="Search Blocs">
+          <field name="name" filter_domain="[('name', 'ilike',self)]" />
+          <searchpanel>
+            <field name="state" icon="fa-users" enable_counters="1" />
+          </searchpanel>
+        </search>
+      </field>
+    </record>
+    
     <!-- Deliberation Kanban View -->
     <record model="ir.ui.view" id="deliberation_bloc_kanban_view">
       <field name="name">school.deliberation.bloc.kanban</field>
@@ -213,6 +226,7 @@
       <field name="res_model">school.individual_bloc</field>
       <field name="view_mode">kanban</field>
       <field name="context">{"search_default_current":1}</field>
+      <field name="domain">[('stage', '=', 'confirmed_cur'),('manager_new.id','=',uid)]</field>
       <field name="search_view_id" ref="view_deliberation_bloc_filter" />
       <field name="help" type="html">
         <p class="oe_view_nocontent_create">
