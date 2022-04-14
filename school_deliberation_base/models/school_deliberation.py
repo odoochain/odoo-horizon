@@ -97,7 +97,7 @@ class Deliberation(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Deliberate Blocs',
             'res_model': 'school.individual_bloc',
-            'domain': [(self.id, 'in', 'deliberation_ids')],
+            'domain': [('deliberation_ids', 'in', self.id )],
             'view_mode': 'kanban',
             'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,
         }
