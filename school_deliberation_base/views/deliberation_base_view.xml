@@ -198,6 +198,7 @@
       <field name="model">school.individual_bloc</field>
       <field name="arch" type="xml">
         <kanban class="o_deliberation_bloc_kanban">
+          <field name="name"/>
           <field name="student_id"/>
           <field name="state"/>
           <templates>
