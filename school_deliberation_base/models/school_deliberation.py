@@ -98,7 +98,7 @@ class Deliberation(models.Model):
             'name': 'Deliberate Blocs',
             'res_model': 'school.individual_bloc',
             'domain': [(self.id, 'in', 'deliberation_ids')],
-            'view_mode': 'kaanban',
+            'view_mode': 'kanban',
             'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,
         }
         
