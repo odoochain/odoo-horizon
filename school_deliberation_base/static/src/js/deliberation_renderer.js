@@ -24,6 +24,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var record = this.state.data;
             var $header = $('<div>').addClass('row');
             var imageField = new CharImageUrl(this, 'image', this.state);
+            imageField.appendTo($header);
             return $header;
         },
         
