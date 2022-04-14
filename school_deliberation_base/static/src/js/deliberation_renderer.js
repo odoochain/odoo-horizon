@@ -20,14 +20,13 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         },
         
         _renderHeader : function () {
-            var record = this.model.get(ev.data.id, {raw: true});
-            console.log(record);
             var $header = $('<div>').addClass('row');
             var $img = $('<img>')
                 .addClass('img img-fluid img-thumbnail ml16')
-                .toggleClass('btn-info', val.view_id[0] === value)
-                .attr('src', val.image)
-                .data('key', val.view_id[0]);
+                //.toggleClass('btn-info', val.view_id[0] === value)
+                //.attr('src', val.image)
+                //.data('key', val.view_id[0])
+                ;
             $header.append($img);
             return $header;
         },
