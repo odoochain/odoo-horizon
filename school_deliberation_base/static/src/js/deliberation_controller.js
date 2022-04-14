@@ -2,10 +2,10 @@
 odoo.define('deliberation.DeliberationController', function (require) {
     "use strict";
 
-    var AbstractController = require('web.AbstractController');
+    var BasicController = require('web.BasicController');
 
 
-    var DeliberationController = AbstractController.extend({
+    var DeliberationController = BasicController.extend({
         
         custom_events: {
             close: '_onClose'

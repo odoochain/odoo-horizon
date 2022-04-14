@@ -2,9 +2,9 @@
 odoo.define('deliberation.DeliberationModel', function (require) {
     "use strict";
 
-    var AbstractModel = require('web.BasicModel');
+    var BasicModel = require('web.BasicModel');
 
-    var DeliberationModel = AbstractModel.extend({
+    var DeliberationModel = BasicModel.extend({
       
     });
     return DeliberationModel;

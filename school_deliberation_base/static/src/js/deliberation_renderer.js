@@ -2,12 +2,12 @@
 odoo.define('deliberation.DeliberationRenderer', function (require) {
     "use strict";
 
-    var AbstractRenderer = require('web.BasicRenderer');
+    var BasicRenderer = require('web.BasicRenderer');
     // var core = require('web.core');
     // var qweb = core.qweb;
 
-    var DeliberationRenderer = AbstractRenderer.extend({
-        events: _.extend({}, AbstractRenderer.prototype.events, {
+    var DeliberationRenderer = BasicRenderer.extend({
+        events: _.extend({}, BasicRenderer.prototype.events, {
         }),
         _render: function () {
             this.$el.append(
