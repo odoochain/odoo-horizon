@@ -99,6 +99,7 @@ class Deliberation(models.Model):
             'res_model': 'school.individual_bloc',
             'domain': [('deliberation_ids', 'in', self.id )],
             'view_mode': 'kanban',
+            'search_view_id' : self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,
             'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,
         }
         
