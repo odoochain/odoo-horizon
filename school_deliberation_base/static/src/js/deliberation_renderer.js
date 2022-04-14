@@ -3,7 +3,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
     "use strict";
 
     var BasicRenderer = require('web.BasicRenderer');
-    var CharImageUrl = require('web.basic_fields').CharImageUrl;
+    var utils = require('web.utils');
     // var core = require('web.core');
     // var qweb = core.qweb;
 
@@ -23,9 +23,44 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         _renderHeader : function () {
             var record = this.state.data;
             var $header = $('<div>').addClass('row');
-            var imageField = new CharImageUrl(this, 'image', this.state);
-            imageField.appendTo($header);
+            var $img = $('<img>')
+                .addClass('img img-fluid img-thumbnail ml16')
+                .attr('src', this._getImageURL('res.partner','image_1920',record.id,'student picture'))
+                .data('key', record.id);
+            $header.append($img);
             return $header;
+        },
+        
+        /**
+         * @private -- FROM KANBAN SOURCE COPYRIGHT ODOO
+         * @param {string} model the name of the model
+         * @param {string} field the name of the field
+         * @param {integer} id the id of the resource
+         * @param {string} placeholder
+         * @returns {string} the url of the image
+         */
+        _getImageURL: function (model, field, id, placeholder) {
+            id = (_.isArray(id) ? id[0] : id) || null;
+            var isCurrentRecord = this.modelName === model && (this.recordData.id === id || (!this.recordData.id && !id));
+            var url;
+            if (isCurrentRecord && this.record[field] && this.record[field].raw_value && !utils.is_bin_size(this.record[field].raw_value)) {
+                // Use magic-word technique for detecting image type
+                url = 'data:image/' + this.file_type_magic_word[this.record[field].raw_value[0]] + ';base64,' + this.record[field].raw_value;
+            } else if (placeholder && (!model || !field || !id || (isCurrentRecord && this.record[field] && !this.record[field].raw_value))) {
+                url = placeholder;
+            } else {
+                var session = this.getSession();
+                var params = {
+                    model: model,
+                    field: field,
+                    id: id
+                };
+                if (isCurrentRecord) {
+                    params.unique = this.record.__last_update && this.record.__last_update.value.replace(/[^0-9]/g, '');
+                }
+                url = session.url('/web/image', params);
+            }
+            return url;
         },
         
     });
