@@ -11,7 +11,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         }),
         _render: function () {
             this.$el.append(
-                $('<div>').addClass('container o_d_main_container').append(
+                $('<div>').addClass('container-fluid o_d_main_container').append(
                     this._renderHeader(),
                 ),
                 $('<button>').text('Close').click(ev => this.trigger_up('close')),
