@@ -116,6 +116,8 @@
         <field name="name">deliberation custom</field>
         <field name="model">school.deliberation</field>
         <field name="arch" type="xml">
+          <field name="year_id" />
+          <field name="student_id" />
           <deliberation/>
         </field>
     </record>
