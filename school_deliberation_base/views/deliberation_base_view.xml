@@ -186,6 +186,7 @@
           <field name="name" filter_domain="[('name', 'ilike',self)]" />
           <searchpanel>
             <field name="state" icon="fa-users" enable_counters="1" />
+            <field name="source_bloc_speciality_id" icon="fa-briefcase" enable_counters="1" />
           </searchpanel>
         </search>
       </field>
