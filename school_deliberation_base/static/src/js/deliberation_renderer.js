@@ -33,7 +33,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var $col2 = $('<div>',{class : 'col-10'});
             $col1.append(`<div class="row">
                         <span class="col-md-10" style="min-height:66px;">
-                            <h2>${record.student_id.data.name} - Bachelier en musique : Guitare - 3</h2>
+                            <h2>${record.student_id.data.display_name} - Bachelier en musique : Guitare - 3</h2>
                         </span>
                         <span class="col-md-10">
                             <h2 style="margin-top: 0;"></h2>
