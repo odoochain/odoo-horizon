@@ -202,25 +202,23 @@
           <field name="state"/>
           <templates>
             <t t-name="kanban-box">
-              <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_deliberation_bloc_kanban">
-                <!-- Medium students's picture -->
-                <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_medium', record.student_id.raw_value)})" role="img"/>
-
-                <div class="o_kanban_card_header">
-                  <div class="o_kanban_card_header_title">
-                    <div class="o_primary">
-                      <field name="name"/>
-                    </div>
-                    <div class="o_secondary">
-                      <field name="state"/>
-                    </div>
+              <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_deliberation_bloc_kanban o_kanban_record" style="width:500px;">
+                  <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_medium', record.student_id.raw_value)})" role="img"/>
+                  <div class="oe_kanban_details ml8">
+                      <div class="o_kanban_record_top">
+                          <div class="o_kanban_record_headings">
+                              <strong class="o_kanban_record_title">
+                                  <div>
+                                      <strong><span t-esc="record.name.value"/></strong>
+                                  </div>
+                              </strong>
+                              <span class="o_kanban_record_subtitle"><span t-esc="record.state.value"/></span>
+                          </div>
+                      </div>
+                      <div class="o_kanban_record_bottom">
+                          <button class="btn btn-primary" >Deliberate</button>
+                      </div>
                   </div>
-                  <div class="container o_kanban_card_content o_visible">
-                    <div class="row">
-                      This is a test
-                    </div>
-                  </div>
-                </div>
               </div>
             </t>
           </templates>
