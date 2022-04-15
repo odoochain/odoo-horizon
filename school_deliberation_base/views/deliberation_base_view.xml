@@ -119,6 +119,8 @@
           <deliberation class="o_deliberation_bloc">
             <field name="year_id" />
             <field name="student_id" />
+            <field name="source_bloc_title" />
+            <field name="source_bloc_level" />
           </deliberation>
         </field>
     </record>
