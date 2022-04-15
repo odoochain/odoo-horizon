@@ -24,10 +24,11 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var record = this.state.data;
             var $header = $('<div>',{class : 'row bloc_header mt-4'});
             var $col1 = $('<div>',{class : 'col-2'});
-            var $img = $('<img>')
-                .addClass('img img-fluid img-thumbnail ml16')
-                .attr('src', this._getImageURL('res.partner','image_256',record.student_id.data.id,'student picture'))
-                .data('key', record.id);
+            var $img = $('<img>',{ 
+                'class' : 'img img-fluid img-thumbnail ml16',
+                'src' : this._getImageURL('res.partner','image_256',record.student_id.data.id,'student picture'),
+                'style' : 'min-height: 256px;',
+            });
             $col1.append($img);
             $header.append($col1);
             var $col2 = $('<div>',{class : 'col-10'});
