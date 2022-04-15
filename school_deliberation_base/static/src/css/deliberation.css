@@ -1,10 +1,3 @@
-h1.o_d_title {
-    font-size: 7em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 50px;
-    color:red;
+.o_d_main_container {
+    font-size: 200%;
 }
