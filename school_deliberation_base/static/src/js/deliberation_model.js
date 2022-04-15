@@ -5,7 +5,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
     var BasicModel = require('web.BasicModel');
 
     var DeliberationModel = BasicModel.extend({
-        
+
         /**
          * @private
          * @param {Object} record

@@ -124,11 +124,19 @@
             <field name="total_acquiered_credits" />
             <field name="total_credits" />
             <field name="program_id">
-              <form>
+              <tree>
                 <field name="total_registered_credits"/>
                 <field name="total_acquiered_credits"/>
                 <field name="required_credits"/>
-              </form>  
+              </tree>
+            </field>
+            <field name="course_groups">
+              <tree>
+                <field name="title"/>
+                <field name="total_credits"/>
+                <field name="total_hours"/>
+                <field name="teacher_id"/>
+              </tree>
             </field>
           </deliberation>
         </field>
