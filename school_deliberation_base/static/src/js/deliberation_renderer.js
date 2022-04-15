@@ -48,6 +48,17 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
                         </span>
                     </div>
+                    <div class="row vertical-align" style="margin-bottom: 10px;">
+                        <div class="col-md-2">
+                            <button class="btn btn_credits" type="button">
+                                PAE<br/><span class="score_value">${record.total_acquiered_credits-record.total_dispensed_credits}/${record.total_credits-record.total_dispensed_credits}</span>
+                            </button>
+                        </div>
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
             `);
             $header.append($col2);
             return $header;
