@@ -51,7 +51,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     <div class="row vertical-align" style="margin-bottom: 10px;">
                         <div class="col-md-2">
                             <button class="btn btn_credits" type="button">
-                                PAE<br/><span class="score_value">${record.total_acquiered_credits-record.total_dispensed_credits}/${record.total_credits-record.total_dispensed_credits}</span>
+                                PAE<br/><span class="score_value">${record.total_acquiered_credits}/${record.total_credits}</span>
                             </button>
                         </div>
                         <div class="col-md-8">

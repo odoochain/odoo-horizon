@@ -121,6 +121,8 @@
             <field name="student_id" />
             <field name="source_bloc_title" />
             <field name="source_bloc_level" />
+            <field name="total_acquiered_credits" />
+            <field name="total_credits" />
           </deliberation>
         </field>
     </record>
