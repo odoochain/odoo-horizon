@@ -130,7 +130,7 @@
                 <field name="required_credits"/>
               </tree>
             </field>
-            <field name="course_groups">
+            <field name="course_group_ids">
               <tree>
                 <field name="title"/>
                 <field name="total_credits"/>
