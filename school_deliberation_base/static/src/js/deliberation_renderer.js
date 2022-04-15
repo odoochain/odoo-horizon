@@ -65,57 +65,20 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         </div>
                     </div>
             `);
+            var program_total = Math.max(program.required_credits,program.total_registered_credits);
             switch (record.source_bloc_level) {
                 case 1 :
                     $col2.append(`
                     <div class="row vertical-align">
                         <div class="progress" style="width:100%;">
-                            <div class="progress-bar progress-bar-info" style="width:${program.total_acquiered_credits)/Math.max(program.required_credits,program.total_registered_credits)*100}%">
+                            <div class="progress-bar progress-bar-info" style="width:${program.total_acquiered_credits/program_total*100}%">
                                 ${program.total_acquiered_credits}
                             </div>
-                            <div class="progress-bar progress-bar-success" t-att-style="'width:'+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
+                            <div class="progress-bar progress-bar-success" style="width:${record.total_acquiered_credits/program_total*100}%">
                                 ${record.total_acquiered_credits}
                             </div>
-                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+${record.total_credits-widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
-                                <span t-esc="${record.total_credits-widget.bloc.total_acquiered_credits)"/>
-                            </div>
-                            </t>
-                        </div>
-                    </div>
-                    `);
-                case 2 :
-                case 3 :
-                    $col2.append(`
-                    <div class="row vertical-align">
-                        <div class="progress" style="width:100%;">
-                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+${record.total_dispensed_credits+widget.program.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
-                                <span t-esc='${record.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
-                            </div>
-                            <t t-if="${record.state != 'awarded_first_session') and ${record.state != 'awarded_second_session')">
-                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
-                                <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
-                            </div>
-                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+${record.total_credits-widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
-                                <span t-esc="${record.total_credits-widget.bloc.total_acquiered_credits)"/>
-                            </div>
-                            </t>
-                        </div>
-                    </div>
-                    `);
-                case 4 :
-                case 5 :
-                    $col2.append(`
-                    <div class="row vertical-align">
-                        <div class="progress" style="width:100%;">
-                            <div class="progress-bar progress-bar-info" t-att-style="'width: '+${record.total_dispensed_credits+widget.program.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
-                                <span t-esc='${record.total_dispensed_credits+widget.program.total_acquiered_credits)'/>
-                            </div>
-                            <t t-if="${record.state != 'awarded_first_session') and ${record.state != 'awarded_second_session')">
-                            <div class="progress-bar progress-bar-success" t-att-style="'width: '+(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
-                                <span t-esc='(-widget.bloc.total_dispensed_credits+widget.bloc.total_acquiered_credits)'/>
-                            </div>
-                            <div t-if="widget.bloc.total_credits-widget.bloc.total_acquiered_credits > 0" class="progress-bar progress-bar-warning" t-att-style="'width: '+${record.total_credits-widget.bloc.total_acquiered_credits)/Math.max(widget.program.required_credits,widget.program.total_registered_credits)*100+'%'">
-                                <span t-esc="${record.total_credits-widget.bloc.total_acquiered_credits)"/>
+                            <div class="progress-bar progress-bar-warning" style="width:${(record.total_credits-record.total_acquiered_credits)/program_total*100}%">
+                                ${record.total_credits-record.total_acquiered_credits}
                             </div>
                             </t>
                         </div>
