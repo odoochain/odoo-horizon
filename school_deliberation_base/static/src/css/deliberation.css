@@ -1,0 +1,12 @@
+.score_value {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.btn_credits {
+    color: #ffffff;
+    background-color: #00c853;
+    border-color: #00c853;
+    padding: 0;
+    width: 100%;
+}
