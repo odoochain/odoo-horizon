@@ -123,7 +123,13 @@
             <field name="source_bloc_level" />
             <field name="total_acquiered_credits" />
             <field name="total_credits" />
-            <field name="program_id" />
+            <field name="program_id">
+              <tree>
+                <field name="total_registered_credits"/>
+                <field name="total_acquiered_credits"/>
+                <field name="required_credits"/>
+              </tree>  
+            </field>
           </deliberation>
         </field>
     </record>

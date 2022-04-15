@@ -9,8 +9,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
 
     var DeliberationRenderer = BasicRenderer.extend({
         
-        specialData: "_fetchProgram",
-        
         events: _.extend({}, BasicRenderer.prototype.events, {
         }),
         
