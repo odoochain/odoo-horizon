@@ -33,16 +33,22 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             $header.append($col1);
             var $col2 = $('<div>',{class : 'col-10'});
             $col2.append(`
-                        <div class="row">
-                        <span class="col-md-10" style="min-height:66px;">
-                            <h1 class="display-2">${record.student_id.data.display_name} - - ${record.source_bloc_title} - ${record.source_bloc_level}</h1>
+                    <div class="row">
+                        <span class="col-md-10">
+                            <h1 class="display-4">${record.student_id.data.display_name}</h1>
                         </span>
                         <span class="col-md-2 refresh_button">
                             <button class="btn btn-default o_reload_bloc" type="button">
-                                <i class="fa fa-refresh fa-fw"></i>
+                                <i class="fa fa-refresh fa-fw fa-2x"></i>
                             </button>
                         </span>
-                    </div>`);
+                    </div>
+                    <div class="row">
+                        <span class="col">
+                            <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
+                        </span>
+                    </div>
+            `);
             $header.append($col2);
             return $header;
         },
