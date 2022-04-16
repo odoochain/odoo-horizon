@@ -65,11 +65,11 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             `);
             var program_total = Math.max(program.required_credits,program.total_registered_credits);
             switch (record.source_bloc_level) {
-                case 1 :
-                case 2 :
-                case 3 :
-                case 4 :
-                case 5 :
+                case '1' :
+                case '2' :
+                case '3' :
+                case '4' :
+                case '5' :
                     $col2.append(`
                     <div class="row vertical-align">
                         <div class="progress" style="width:100%;">
