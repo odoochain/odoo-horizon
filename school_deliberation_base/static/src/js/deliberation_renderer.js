@@ -24,7 +24,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         
         _renderHeader : function () {
             var record = this.state.data;
-            var program = this.specialData;
+            var program = this.state.programValue;
             var $header = $('<div>',{class : 'row bloc_header mt-4'});
             var $col1 = $('<div>',{class : 'col-2'});
             var $img = $('<img>',{ 
