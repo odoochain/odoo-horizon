@@ -47,30 +47,18 @@ odoo.define('deliberation.DeliberationModel', function (require) {
          */
         _loadProgram: function (super_def) {
             var self = this;
-            return Promise.all([super_def.then(function(results) {
+            return new Promise((resolve, reject) => {
+                super_def.then(function(results) {
                 var localID = results;
                 self._rpc({
-                    model: "school.individual_program", 
-                    method: "read", 
-                    args: [[self.localData[self.localData[localID].data.program_id].data.id]],
-                }).then(function(result){
-                    self.dashboardValues[localID] = result;
-                    return localID;
-                })})]);
-        },
-
-        /**
-         * @private
-         * @returns {Promise}
-         */
-        _fetchProgram: function () {
-            var self = this;
-            return this._rpc({
-                model: "school.individual_program", 
-                method: "read", 
-                args: [[this.localData[this.localData['school.individual_bloc_1'].data.program_id].data.id]],
-            }).then(result => { 
-                self.state.program = result;
+                        model: "school.individual_program", 
+                        method: "read", 
+                        args: [[self.localData[self.localData[localID].data.program_id].data.id]],
+                    }).then(function(result){
+                        self.dashboardValues[localID] = result;
+                        resolve(localID);
+                    });
+                });
             });
         },
           
