@@ -47,7 +47,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
          */
         _loadProgram: function (super_def) {
             var self = this;
-            return super_def.then(function(results) {
+            return Promise.all([super_def.then(function(results) {
                 var localID = results;
                 self._rpc({
                     model: "school.individual_program", 
@@ -56,9 +56,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                 }).then(function(result){
                     self.dashboardValues[localID] = result;
                     return localID;
-                })
-                
-            });
+                })})]);
         },
 
         /**
