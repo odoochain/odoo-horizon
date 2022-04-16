@@ -47,16 +47,17 @@ odoo.define('deliberation.DeliberationModel', function (require) {
          */
         _loadProgram: function (super_def) {
             var self = this;
-            var dashboard_def = this._rpc({
-                model: "school.individual_program", 
-                method: "read", 
-                args: [[self.localData[self.localData['school.individual_bloc_1'].data.program_id].data.id]],
-            });
-            return Promise.all([super_def, dashboard_def]).then(function(results) {
+            return super_def.then(function(results) {
                 var id = results[0];
-                var dashboardValues = results[1];
-                self.dashboardValues[id] = dashboardValues;
-                return id;
+                this._rpc({
+                    model: "school.individual_program", 
+                    method: "read", 
+                    args: [[self.localData[self.localData['school.individual_bloc_1'].data.program_id].data.id]],
+                }).then(function(result){
+                    self.dashboardValues[id] = result;
+                    return id;
+                })
+                
             });
         },
 
