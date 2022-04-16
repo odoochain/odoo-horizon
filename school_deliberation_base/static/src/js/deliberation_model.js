@@ -20,7 +20,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
         __get: function (localID) {
             var result = this._super.apply(this, arguments);
             if (_.isObject(result)) {
-                result.programValues = this.programValues[localID];
+                result.programValue = this.programValues[localID];
             }
             return result;
         },
