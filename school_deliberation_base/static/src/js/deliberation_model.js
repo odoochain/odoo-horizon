@@ -7,32 +7,56 @@ odoo.define('deliberation.DeliberationModel', function (require) {
     var DeliberationModel = BasicModel.extend({
 
         /**
-         * Applies the forecast logic to the domain and context if needed before the read_group.
-         * After the read_group, checks the end date of the last displayed group in order to be able to
-         * add the next group with the ForecastColumnQuickCreate widget
-         *
-         * @private
          * @override
          */
-        async __load(params) {
-            var self = this;
-            return this._super(...arguments).then(function () {
-                self._fetchProgram()
-            });
+        init: function () {
+            this.programValues = {};
+            this._super.apply(this, arguments);
         },
-        
+    
         /**
-         * Applies the forecast logic to the domain and context if needed before the read_group.
-         * After the read_group, checks the end date of the last displayed group in order to be able to
-         * add the next group with the ForecastColumnQuickCreate widget
-         *
-         * @private
          * @override
          */
-        async __reload(id, params) {
+        __get: function (localID) {
+            var result = this._super.apply(this, arguments);
+            if (_.isObject(result)) {
+                result.programValues = this.programValues[localID];
+            }
+            return result;
+        },
+
+        /**
+         * @override
+         * @returns {Promise}
+         */
+        __load: function () {
+            return this._loadProgram(this._super.apply(this, arguments));
+        },
+        /**
+         * @override
+         * @returns {Promise}
+         */
+        __reload: function () {
+            return this._loadProgram(this._super.apply(this, arguments));
+        },
+    
+        /**
+         * @private
+         * @param {Promise} super_def a promise that resolves with a dataPoint id
+         * @returns {Promise -> string} resolves to the dataPoint id
+         */
+        _loadProgram: function (super_def) {
             var self = this;
-            return this._super(...arguments).then(function () {
-                self._fetchProgram()
+            var dashboard_def = this._rpc({
+                model: "school.individual_program", 
+                method: "read", 
+                args: [[self.localData[self.localData['school.individual_bloc_1'].data.program_id].data.id]],
+            });
+            return Promise.all([super_def, dashboard_def]).then(function(results) {
+                var id = results[0];
+                var dashboardValues = results[1];
+                self.dashboardValues[id] = dashboardValues;
+                return id;
             });
         },
 
