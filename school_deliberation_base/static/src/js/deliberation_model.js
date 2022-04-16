@@ -45,7 +45,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
             return this._rpc({
                 model: "school.individual_program", 
                 method: "read", 
-                args: [[this.state.data.program_id.res_id]]
+                args: [[this.localData[this.localData['school.individual_bloc_1'].data.program_id].data.id]],
             }).then(result => { 
                 self.state.program = result;
             });
