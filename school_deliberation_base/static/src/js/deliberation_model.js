@@ -49,7 +49,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
             var self = this;
             return super_def.then(function(results) {
                 var id = results[0];
-                this._rpc({
+                self._rpc({
                     model: "school.individual_program", 
                     method: "read", 
                     args: [[self.localData[self.localData['school.individual_bloc_1'].data.program_id].data.id]],
