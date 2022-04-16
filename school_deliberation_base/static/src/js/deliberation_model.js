@@ -55,7 +55,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                         method: "read", 
                         args: [[self.localData[self.localData[localID].data.program_id].data.id]],
                     }).then(function(result){
-                        self.dashboardValues[localID] = result;
+                        self.programValues[localID] = result;
                         resolve(localID);
                     });
                 });
