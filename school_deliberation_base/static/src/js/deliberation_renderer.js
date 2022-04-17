@@ -110,7 +110,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     <col style="width:75px">
                     <col style="width:20px">
                 </colgroup>
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th class="text-center">#</th>
                         <th>Intitulé</th>
