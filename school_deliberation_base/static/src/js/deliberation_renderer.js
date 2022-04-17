@@ -101,8 +101,11 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var $col1 = $('<div>',{class : 'col-2'});
             $content.append($col1);
             var $col2 = $('<div>',{class : 'col-10'});
-            $col2.append(`
-            <table class="table table-condensed table-bordered result_table" style="font-size:180%;">
+            var $table = $('<table>', {
+                'class' : 'table table-condensed table-bordered result_table',
+                'style' : 'font-size:180%;');
+            $table.append(`
+            <table class="" style="">
                 <colgroup>
                     <col style="width:20px">
                     <col style="width:500">
@@ -120,13 +123,11 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <th>Acq</th>
                         <th></th>
                     </tr>
-                </thead>
-                <tbody id="bloc_content_body">
-                </tbody>
-            </table>`);
+                </thead>`);
+            var $tbody = $('<tbody>');
             for(var i =0; i < record.course_group_ids.data.length; i++) {
                 var course_group = record.course_group_ids.data[i];
-                $('#bloc_content_body').append(`<tr class="course_group">
+                $tbody.append(`<tr class="course_group">
                     <th class="text-center" scope="row">
                         ${i}
                     </th>
@@ -146,6 +147,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     </td>
                 </tr>`);
             }
+            $table.append($tbody);
+            $col2.append($table);
             $content.append($col2);
             return $content;
         },  
