@@ -51,14 +51,14 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
                         </span>
                     </div>
-                    <div class="row vertical-align" style="margin-bottom: 10px;">
+                    <div class="row d-flex align-items-center" style="margin-bottom: 10px;">
                         <div class="col-md-2">
                             <button class="btn btn_credits" type="button">
                                 PAE<br/><span class="score_value">${record.total_acquiered_credits}/${record.total_credits}</span>
                             </button>
                         </div>
                         <div class="col-md-8">
-                            <div role="alert" class="alert alert-danger">N'a pas validé tous les crédits ECTS de son PAE et est ajourné(e).</div>
+                            <div role="alert" class="alert alert-danger" style="margin-bottom: 0px;">N'a pas validé tous les crédits ECTS de son PAE et est ajourné(e).</div>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-lg btn-danger bloc_postpone">Ajourné</button>
