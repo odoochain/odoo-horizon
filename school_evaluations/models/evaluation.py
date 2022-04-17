@@ -227,13 +227,13 @@ class IndividualBloc(models.Model):
     @api.onchange('state')
     def _onchange_state(self):
         if self.state == 'draft' :
-            self.course_group_ids.write({'state': 'draft'})
+            self.course_group_ids.write({'state': '9_draft'})
         elif self.state == 'progress' :
-            self.course_group_ids.write({'state': 'progress'})
-        elif self.state == 'postponed' :
-            self.course_group_ids.write({'state': 'progress'})
-        else :
-            self.course_group_ids.write({'state': 'confirmed'})
+            self.course_group_ids.write({'state': '5_progress'})
+        #elif self.state == 'postponed' :
+        #    self.course_group_ids.write({'state': '5_progress'})
+        #else :
+        #    self.course_group_ids.write({'state': 'confirmed'})
     
     
     def set_to_draft(self, context):
@@ -282,9 +282,9 @@ class IndividualBloc(models.Model):
     def _deliberate_cg(self, cgs):
         for cg in cgs:
             if cg.acquiered :
-                cg.write({'state': 'success'})
+                cg.write({'state': '6_success'})
             else :
-                cg.write({'state': 'failure'})
+                cg.write({'state': '7_failed'})
         pass
     
     def set_to_abandoned(self, decision=None, context=None):
