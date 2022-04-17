@@ -96,6 +96,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         },
         
         _renderContent : function () {$
+            var record = this.state.data;
             var $content = $('<div>',{class : 'row bloc_content mt-4'});
             var $col1 = $('<div>',{class : 'col-2'});
             $content.append($col1);
@@ -120,7 +121,29 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>`);
+            <tbody>`);
+            for(var i =0; i < record.course_group_ids.data.length; i++) {
+                var course_group = record.course_group_ids.data[i];
+                $col2.append(`<tr class="course_group">
+                    <th class="text-center" scope="row">
+                        ${i}
+                    </th>
+                    <td>
+                        ${course_group.title}
+                    </td>
+                    <td style=" text-align: right;">
+                    </td>
+                    <td style=" text-align: right;">
+                        ${course_group.total_credits}
+                    </td>
+                    <td>
+                        <span class="label label-warning btn o_set_delib" data-course-group-id="29654">NoAcq</span>
+                    </td>
+                    <td>
+                        <i aria-hidden="true" class="fa fa-search o_school_edit_icg" role="button" data-cg-id="29654"></i>
+                    </td>
+                </tr>`);
+            }
             $col2.append(`
                 </tbody>
             </table>`);
