@@ -76,7 +76,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                 case '5' :
                     $col2.append(`
                     <div class="row vertical-align justify-content-center">
-                        <div class="progress col-10">
+                        <div class="progress col-10" style="height: 40px;">
                             <div class="progress-bar bg-info" style="width:${program.total_acquiered_credits/program_total*100}%">
                                 ${program.total_acquiered_credits}
                             </div>
