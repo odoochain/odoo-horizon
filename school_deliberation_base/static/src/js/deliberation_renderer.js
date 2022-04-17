@@ -121,10 +121,12 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <th></th>
                     </tr>
                 </thead>
-            <tbody>`);
+                <tbody id="bloc_content_body">
+                </tbody>
+            </table>`);
             for(var i =0; i < record.course_group_ids.data.length; i++) {
                 var course_group = record.course_group_ids.data[i];
-                $col2.append(`<tr class="course_group">
+                $('#bloc_content_body').append(`<tr class="course_group">
                     <th class="text-center" scope="row">
                         ${i}
                     </th>
@@ -144,9 +146,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     </td>
                 </tr>`);
             }
-            $col2.append(`
-                </tbody>
-            </table>`);
             $content.append($col2);
             return $content;
         },  
