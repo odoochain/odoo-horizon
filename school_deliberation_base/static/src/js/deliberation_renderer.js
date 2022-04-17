@@ -105,7 +105,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                 'class' : 'table table-condensed table-bordered result_table',
                 'style' : 'font-size:180%;'});
             $table.append(`
-            <table class="" style="">
                 <colgroup>
                     <col style="width:20px">
                     <col style="width:500">
