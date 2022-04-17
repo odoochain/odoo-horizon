@@ -103,7 +103,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var $col2 = $('<div>',{class : 'col-10'});
             var $table = $('<table>', {
                 'class' : 'table table-condensed table-bordered result_table',
-                'style' : 'font-size:180%;');
+                'style' : 'font-size:180%;'});
             $table.append(`
             <table class="" style="">
                 <colgroup>
