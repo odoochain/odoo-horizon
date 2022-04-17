@@ -128,15 +128,15 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                 var course_group = record.course_group_ids.data[i];
                 $tbody.append(`<tr class="course_group">
                     <th class="text-center" scope="row">
-                        ${i}
+                        ${i+1}
                     </th>
                     <td>
-                        ${course_group.title}
+                        ${course_group.data.title}
                     </td>
                     <td style=" text-align: right;">
                     </td>
                     <td style=" text-align: right;">
-                        ${course_group.total_credits}
+                        ${course_group.data.total_credits}
                     </td>
                     <td>
                         <span class="label label-warning btn o_set_delib" data-course-group-id="29654">NoAcq</span>
