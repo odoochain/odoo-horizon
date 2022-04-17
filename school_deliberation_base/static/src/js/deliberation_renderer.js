@@ -16,6 +16,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             this.$el.append(
                 $('<div>').addClass('container-fluid o_d_main_container').append(
                     this._renderHeader(),
+                    this._renderContent(),
+                    this._renderFooter(),
                 ),
                 $('<button>').text('Close').click(ev => this.trigger_up('close')),
             );
@@ -91,6 +93,42 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             }
             $header.append($col2);
             return $header;
+        },
+        
+        _renderContent : function () {$
+            var $content = $('<div>',{class : 'row bloc_content mt-4'});
+            var $col1 = $('<div>',{class : 'col-2'});
+            $content.append($col1);
+            var $col2 = $('<div>',{class : 'col-10'});
+            $col2.append(`
+            <table class="table table-condensed table-bordered result_table" style="font-size:180%;">
+                <colgroup>
+                    <col style="width:20px">
+                    <col style="width:500">
+                    <col style="width:50px">
+                    <col style="width:50px">
+                    <col style="width:75px">
+                    <col style="width:20px">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th>Intitulé</th>
+                        <th>Rés</th>
+                        <th>Cre</th>
+                        <th>Acq</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>`);
+            $col2.append(`
+                </tbody>
+            </table>`);
+            $content.append($col2);
+            return $content;
+        },  
+            
+        _renderFooter : function () {
         },
         
         /**
