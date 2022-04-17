@@ -58,6 +58,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             </button>
                         </div>
                         <div class="col-md-8">
+                            <div role="alert" class="alert alert-danger">N'a pas validé tous les crédits ECTS de son PAE et est ajourné(e).</div>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-lg btn-danger bloc_postpone">Ajourné</button>
