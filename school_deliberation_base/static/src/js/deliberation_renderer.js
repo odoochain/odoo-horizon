@@ -145,6 +145,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <i aria-hidden="true" class="fa fa-search o_school_edit_icg" role="button" data-cg-id="29654"></i>
                     </td>
                 </tr>`);
+                
             }
             $table.append($tbody);
             $col2.append($table);

@@ -136,6 +136,15 @@
                 <field name="total_credits"/>
                 <field name="total_hours"/>
                 <field name="teacher_id"/>
+                <field name="final_result_disp"/>
+                <field name="acquiered"/>
+                <field name="course_ids">
+                  <tree>
+                    <field name="title"/>
+                    <field name="teacher_id"/>
+                    <field name="final_result"/>
+                  </tree>
+                </field>
               </tree>
             </field>
           </deliberation>
