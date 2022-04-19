@@ -99,6 +99,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var record = this.state.data;
             var $content = $('<div>',{class : 'row bloc_content mt-4'});
             var $col1 = $('<div>',{class : 'col-2'});
+            $col1.append(this._renderSideContent());
             $content.append($col1);
             var $col2 = $('<div>',{class : 'col-10'});
             var $table = $('<table>', {
@@ -151,7 +152,11 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             $col2.append($table);
             $content.append($col2);
             return $content;
-        },  
+        },
+        
+        _renderSideContent : function () {
+            
+        },
             
         _renderFooter : function () {
         },
