@@ -68,7 +68,12 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                             }).then(function(result){
                                 var courseValues = {}
                                 _.each(result, function (course) {
-                                    courseValues[course.course_group_id[0]] |= course;
+                                    if(courseValues[course.course_group_id[0]]) {
+                                        courseValues[course.course_group_id[0]].push([course]);
+                                    } else {
+                                        courseValues[course.course_group_id[0]] = [course];
+                                    }
+                                    
                                 });
                                 self.courseValues[localID] = courseValues;
                                 resolve(localID);
