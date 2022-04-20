@@ -69,7 +69,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                                 var courseValues = {}
                                 _.each(result, function (course) {
                                     if(courseValues[course.course_group_id[0]]) {
-                                        courseValues[course.course_group_id[0]].push([course]);
+                                        courseValues[course.course_group_id[0]].push(course);
                                     } else {
                                         courseValues[course.course_group_id[0]] = [course];
                                     }
