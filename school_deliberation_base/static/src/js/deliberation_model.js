@@ -66,16 +66,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                                 domain: [['bloc_id', '=', self.localData[localID].data.id]],
                                 fields: ['course_group_id','title','teacher_id','final_result'],
                             }).then(function(result){
-                                var courseValues = {}
-                                _.each(result, function (course) {
-                                    if(courseValues[course.course_group_id[0]]) {
-                                        courseValues[course.course_group_id[0]].push(course);
-                                    } else {
-                                        courseValues[course.course_group_id[0]] = [course];
-                                    }
-                                    
-                                });
-                                self.courseValues[localID] = courseValues;
+                                self.courseValues[localID] = result;
                                 resolve(localID);
                             });
                         });
