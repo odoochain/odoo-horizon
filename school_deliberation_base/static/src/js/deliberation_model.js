@@ -64,7 +64,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                                 model: "school.individual_course",
                                 method: "search_read", 
                                 domain: [['bloc_id', '=', self.localData[localID].data.id]],
-                                fields: ['title','teacher_id','final_result_disp'],
+                                fields: ['title','teacher_id','final_result'],
                                 group_by: 'course_group_id',
                             }).then(function(result){
                                 self.courseValues[localID] = result;
