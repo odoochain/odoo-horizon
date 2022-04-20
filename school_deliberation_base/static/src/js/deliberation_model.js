@@ -11,6 +11,7 @@ odoo.define('deliberation.DeliberationModel', function (require) {
          */
         init: function () {
             this.programValues = {};
+            this.courseValues = {};
             this._super.apply(this, arguments);
         },
     
