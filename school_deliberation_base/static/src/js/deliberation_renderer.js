@@ -68,29 +68,22 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     </div>
             `);
             var program_total = Math.max(program.required_credits,program.total_registered_credits);
-            switch (record.source_bloc_level) {
-                case '1' :
-                case '2' :
-                case '3' :
-                case '4' :
-                case '5' :
-                    $col2.append(`
-                    <div class="row vertical-align justify-content-center">
-                        <div class="progress col-10" style="height: 40px;">
-                            <div class="progress-bar bg-info" style="width:${program.total_acquiered_credits/program_total*100}%">
-                                ${program.total_acquiered_credits}
-                            </div>
-                            <div class="progress-bar bg-success" style="width:${record.total_acquiered_credits/program_total*100}%">
-                                ${record.total_acquiered_credits}
-                            </div>
-                            <div class="progress-bar bg-warning" style="width:${(record.total_credits-record.total_acquiered_credits)/program_total*100}%">
-                                ${record.total_credits-record.total_acquiered_credits}
-                            </div>
-                            </t>
-                        </div>
+            $col2.append(`
+            <div class="row vertical-align justify-content-center">
+                <div class="progress col-10" style="height: 40px;">
+                    <div class="progress-bar bg-info" style="width:${program.total_acquiered_credits/program_total*100}%">
+                        ${program.total_acquiered_credits}
                     </div>
-                    `);
-            }
+                    <div class="progress-bar bg-success" style="width:${record.total_acquiered_credits/program_total*100}%">
+                        ${record.total_acquiered_credits}
+                    </div>
+                    <div class="progress-bar bg-warning" style="width:${(record.total_credits-record.total_acquiered_credits)/program_total*100}%">
+                        ${record.total_credits-record.total_acquiered_credits}
+                    </div>
+                    </t>
+                </div>
+            </div>
+            `);
             $header.append($col2);
             return $header;
         },
@@ -146,7 +139,10 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <i aria-hidden="true" class="fa fa-search o_school_edit_icg" role="button" data-cg-id="29654"></i>
                     </td>
                 </tr>`);
-                
+                for(var j = 0; j < course_group.course_ids.data[j]; j++) {
+                     var course = course_group.course_ids.data[j];
+                     console.log(course);
+                }
             }
             $table.append($tbody);
             $col2.append($table);
