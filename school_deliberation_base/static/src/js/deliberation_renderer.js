@@ -139,8 +139,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <i aria-hidden="true" class="fa fa-search o_school_edit_icg" role="button" data-cg-id="29654"></i>
                     </td>
                 </tr>`);
-                for(var j = 0; j < course_group.course_ids.data[j]; j++) {
-                     var course = course_group.course_ids.data[j];
+                for(var j = 0; j < course_group.data.course_ids.data[j]; j++) {
+                     var course = course_group.data.course_ids.data[j];
                      console.log(course);
                 }
             }
