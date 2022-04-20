@@ -62,8 +62,9 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                         self.programValues[localID] = result[0];
                         self._rpc({
                                 model: "school.individual_course",
-                                method: "search_read", 
+                                method: "read_group", 
                                 domain: [['bloc_id', '=', self.localData[localID].data.id]],
+                                groupby: 'course_group_id',
                             }).then(function(result){
                                 self.courseValues[localID] = result;
                                 resolve(localID);
