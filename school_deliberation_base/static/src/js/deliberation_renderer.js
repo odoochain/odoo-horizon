@@ -140,8 +140,21 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     </td>
                 </tr>`);
                 for(var j = 0; j < course_group.data.course_ids.data.length; j++) {
-                     var course = course_group.data.course_ids.data[j];
-                     course = this.state.courseValues;
+                    var course = course_group.data.course_ids.data[j];
+                    course = this.state.courseValues.find(r => r.id = course.data.id);
+                    $tbody.append(`
+                    <tr style="font-style: italic;font-size:80%;">
+                        <th class="text-center" scope="row"></th>
+                        <td>
+                            ${course.title} <i class="oe_fade"> - ${course.teacher_id ? course.teacher_id.name : ''}</i>
+                        </td>
+                        <td style=" text-align: right;">
+                            <font color="blue">${course.final_result}</font>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>`);
                 }
             }
             $table.append($tbody);
