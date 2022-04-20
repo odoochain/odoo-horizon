@@ -22,6 +22,9 @@ odoo.define('deliberation.DeliberationModel', function (require) {
             if (this.programValues[localID]) {
                 result.programValue = this.programValues[localID];
             }
+            if (this.courseValues[localID]) {
+                result.courseValues = this.courseValues[localID];
+            }
             return result;
         },
 
@@ -56,8 +59,15 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                         args: [[self.localData[self.localData[localID].data.program_id].data.id]],
                     }).then(function(result){
                         self.programValues[localID] = result[0];
-                        resolve(localID);
-                    });
+                        self._rpc({
+                                model: "school.individual_course",
+                                method: "search_read", 
+                                domain: [['program_id', '=', self.localData[self.localData[localID].data.program_id].data.id]],
+                            }).then(function(result){
+                                self.courseValues[localID] = result;
+                                resolve(localID);
+                            });
+                        });
                 });
             });
         },
