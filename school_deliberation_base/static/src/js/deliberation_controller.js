@@ -22,9 +22,11 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
 
         _onClose: function (event) {
+            event.stopPropagation();
             return this._rpc({
                 model:'school.individual_bloc',
                 method:'close_deliberate_bloc',
+                args: [ ],
             });
         },
 
