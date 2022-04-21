@@ -142,7 +142,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                 for(var j = 0; j < course_group.data.course_ids.data.length; j++) {
                     var course = course_group.data.course_ids.data[j];
                     console.log(course);
-                    course = this.state.courseValues.find(r => r.id = course.data.id);
+                    course = this.state.courseValues.find(r => r.id == course.data.id);
                     console.log(course);
                     $tbody.append(`
                     <tr style="font-style: italic;font-size:80%;">
