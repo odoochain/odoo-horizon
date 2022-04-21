@@ -144,7 +144,7 @@
                 <!--<field name="responsible_id"/>-->
                 <field name="total_hours" />
                 <field name="total_credits" />
-                <field name="source_course_group_id"/>
+                <field name="course_group_id"/>
                 <templates>
                     <t t-name="kanban-box">
                           <div style="position: relative;width:100%;" t-attf-class="horizon_cgs">

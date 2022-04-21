@@ -156,8 +156,6 @@ class IndividualCourseSummary(models.Model):
     sequence = fields.Integer(string="Sequence",related="course_group_id.sequence")
     level = fields.Integer(string="Level",related="course_group_id.level")
     
-    source_course_group_id = fields.Many2one('school.course_group', string="Source Courses Group",related="course_group_id.source_course_group_id")
-    
     ind_course_group_ids = fields.One2many('school.individual_course_group', string='Courses Groups', compute="_compute_ind_course_group_ids")
     
     def _compute_ind_course_group_ids(self):
