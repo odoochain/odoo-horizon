@@ -34,10 +34,9 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     'type': 'ir.actions.act_window',
                     'name': 'Deliberate Blocs',
                     'res_model': 'school.individual_bloc',
-                    'domain': [('deliberation_ids', 'in', self.initialState.context.deliberation_id)],
+                    'domain': [['deliberation_ids', 'in', self.initialState.context.deliberation_id]],
                     'view_mode': 'kanban',
                     'views': [[data[1], 'kanban']],
-                    'search_view_id' : 22,
                  });
             });
         },
