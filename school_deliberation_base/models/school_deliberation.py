@@ -89,7 +89,7 @@ class Deliberation(models.Model):
             all_responsibles |= bloc.get_all_responsibles()
         for program in self.individual_program_ids :
             all_responsibles |= program.get_all_responsibles()
-        return self.write({'participants_ids' : [(6, 0, all_responsibles.ids)]})
+        return self.write({'participant_ids' : [(6, 0, all_responsibles.ids)]})
         
     def action_open_deliberation_bloc(self):
         self.ensure_one()
