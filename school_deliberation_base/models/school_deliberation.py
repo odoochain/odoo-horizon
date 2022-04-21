@@ -84,12 +84,12 @@ class Deliberation(models.Model):
         
     def action_populate_participants(self):
         self.ensure_one()
-        all_teachers = self.env['res.partner']
+        all_responsibles = self.env['res.partner']
         for bloc in self.individual_bloc_ids :
-            all_teachers |= bloc.get_all_tearchers()
+            all_responsibles |= bloc.get_all_responsibles()
         for program in self.individual_program_ids :
-            all_teachers |= program.get_all_tearchers()
-        return self.write({'participants_ids' : [(6, 0, all_teachers.ids)]})
+            all_responsibles |= program.get_all_responsibles()
+        return self.write({'participants_ids' : [(6, 0, all_responsibles.ids)]})
         
     def action_open_deliberation_bloc(self):
         self.ensure_one()
@@ -110,7 +110,7 @@ class IndividualBloc(models.Model):
     
     deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_bloc_rel', 'bloc_id', 'deliberation_id', string='Deliberations', readonly=True)
     
-    all_responsible_ids = fields.Many2many('res.partner', compute='_compute_all_teacher_ids')
+    all_responsible_ids = fields.Many2many('res.partner', compute='get_all_responsibles')
     
     def action_deliberate_bloc(self):
         return {
@@ -132,7 +132,3 @@ class IndividualBloc(models.Model):
             'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,),
             'views': [[self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban']],
         }
-        
-    @api.depends('course_group_ids.responsible_id')
-    def _compute_all_teacher_ids(self):
-        return rec.course_group_ids.mapped('responsible_id')
