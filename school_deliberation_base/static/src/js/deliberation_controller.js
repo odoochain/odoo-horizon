@@ -26,7 +26,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
             return this._rpc({
                 model:'school.individual_bloc',
                 method:'close_deliberate_bloc',
-                args: [ ],
+                args: [ '' ],
             });
         },
 
