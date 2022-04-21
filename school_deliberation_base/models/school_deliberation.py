@@ -121,4 +121,13 @@ class IndividualBloc(models.Model):
         }
         
     def close_deliberate_bloc(self):
-        return {'type': 'ir.actions.client', 'tag': 'history_back'}
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Deliberate Blocs',
+            'res_model': 'school.individual_bloc',
+            'domain': [('deliberation_ids', 'in', self._context.get('deliberation_id') )],
+            'view_mode': 'kanban',
+            'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,),
+            'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,
+        }
