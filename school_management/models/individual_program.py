@@ -135,6 +135,9 @@ class IndividualProgram(models.Model):
 
     def get_all_tearchers(self):
         return self.bloc_ids.course_group_ids.course_ids.teacher_id
+        
+    def get_all_responsibles(self):
+        return self.bloc_ids.course_group_ids.source_course_group_responsible_id
 
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
@@ -280,6 +283,9 @@ class IndividualBloc(models.Model):
 
     def get_all_tearchers(self):
         return self.course_group_ids.course_ids.teacher_id
+        
+    def get_all_responsibles(self):
+        return self.course_group_ids.source_course_group_responsible_id
 
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
@@ -303,8 +309,8 @@ class IndividualCourseGroup(models.Model):
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict")
-    
     source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
+    source_course_group_responsible_id = fields.Many2one('res.partner', related='source_course_group_id.responsible_id', string="Source Course Group Responsible")
     
     bloc_id = fields.Many2one('school.individual_bloc', string="Bloc", ondelete='cascade', readonly=True)
 
