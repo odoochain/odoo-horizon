@@ -27,6 +27,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 model:'school.individual_bloc',
                 method:'close_deliberate_bloc',
                 args: [ '' ],
+                context: this.initialState.context,
             });
         },
 
