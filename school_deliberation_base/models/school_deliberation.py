@@ -121,7 +121,6 @@ class IndividualBloc(models.Model):
         }
         
     def close_deliberate_bloc(self):
-        self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
             'name': 'Deliberate Blocs',
