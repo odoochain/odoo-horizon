@@ -128,5 +128,5 @@ class IndividualBloc(models.Model):
             'domain': [('deliberation_ids', 'in', self._context.get('deliberation_id') )],
             'view_mode': 'kanban',
             'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,),
-            'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,
+            'views': [self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban'],
         }
