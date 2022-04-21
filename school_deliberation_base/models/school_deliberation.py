@@ -110,6 +110,8 @@ class IndividualBloc(models.Model):
     
     deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_bloc_rel', 'bloc_id', 'deliberation_id', string='Deliberations', readonly=True)
     
+    all_responsible_ids = fields.Many2many('res.partner', compute='_compute_all_teacher_ids')
+    
     def action_deliberate_bloc(self):
         return {
             'type': 'ir.actions.act_window',
@@ -130,3 +132,7 @@ class IndividualBloc(models.Model):
             'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,),
             'views': [[self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban']],
         }
+        
+    @api.depends('course_group_ids.responsible_id')
+    def _compute_all_teacher_ids(self):
+        return rec.course_group_ids.mapped('responsible_id')
