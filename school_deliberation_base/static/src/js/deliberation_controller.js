@@ -27,7 +27,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 // Get view id
                 model:'ir.model.data',
                 method:'xmlid_to_res_model_res_id',
-                args: ['school_deliberation_base.deliberation_bloc_kanban_view'], // View id goes here
+                args: ['school_deliberation_base.deliberation_bloc_kanban_view','school_deliberation_base.view_deliberation_bloc_filter'],
             }).then(function(data){                
                 // Open view
                 self.do_action({
