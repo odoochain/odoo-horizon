@@ -8,7 +8,8 @@ odoo.define('deliberation.DeliberationController', function (require) {
     var DeliberationController = BasicController.extend({
         
         custom_events: {
-            close: '_onClose'
+            close: '_onClose',
+            deliberate_course_group: '_onDeliberateCourseGroup',
         },
 
         init: function (parent, model, renderer, params) {
@@ -32,6 +33,11 @@ odoo.define('deliberation.DeliberationController', function (require) {
             }).then(result => {
                 self.do_action(result);
             })
+        },
+        
+        _onDeliberateCourseGroup: function (event, context) {
+            event.stopPropagation();
+            console.log("Deliberate CG "+context['id']);
         },
 
     });

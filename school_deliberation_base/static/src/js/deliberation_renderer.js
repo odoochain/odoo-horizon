@@ -179,7 +179,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         //--------------------------------------------------------------------------
             
         _onActionDeliberate : function (event) {
-            console.log("Deliberate CG "+event.target.attributes['data-id'].value);
             this.trigger_up('deliberate_course_group', { id: event.target.attributes['data-id'].value });
         },
         
