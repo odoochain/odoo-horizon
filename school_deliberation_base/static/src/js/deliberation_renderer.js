@@ -113,6 +113,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     <col style="width:500">
                     <col style="width:50px">
                     <col style="width:50px">
+                    <col style="width:75px">
                 </colgroup>
                 <thead class="thead-light">
                     <tr>
@@ -140,9 +141,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     </td>
                     <td class="text-center">
                         <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-primary'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
-                    </td>
-                    <td>
-                        <i aria-hidden="true" class="fa fa-search o_school_edit_icg" role="button" data-cg-id="29654"></i>
                     </td>
                 </tr>`);
                 for(var j = 0; j < course_group.data.course_ids.data.length; j++) {
