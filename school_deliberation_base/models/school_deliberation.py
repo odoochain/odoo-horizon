@@ -146,6 +146,8 @@ class CourseGroupDeliberation(models.Model):
     
     course_group_id = fields.Many2one('school.individual_course_group', required=True)
     
+    course_ids = fields.One2many('school.individual_course', related='course_group_id.course_ids', string='Courses')
+    
     comments = fields.Char(string='Comments')
 
     is_deliberated_to_acquiered = fields.Boolean(string='Is deliberated to acquiered')
