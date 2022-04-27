@@ -85,6 +85,15 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             </div>
             `);
             $header.append($col2);
+            var $resp_list = $('<div>',{class : 'row'});
+            var $col1 = $('<div>',{class : 'col-10'});
+            for(var i =0; i < record.all_responsible_ids.data.length; i++) {
+                var resp = record.all_responsible_ids.data[i];
+                
+            }
+            <span class="badge rounded-pill bg-primary">Primary</span>
+            $resp_list.append($col1);
+            $header.append($resp_list);
             return $header;
         },
         
