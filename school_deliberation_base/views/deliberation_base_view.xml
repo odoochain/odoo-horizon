@@ -271,11 +271,12 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Course Group Deliberation">
-          <group col="4">
+          <group col="2">
             <field name="deliberation_id" readonly="1"/>
             <field name="course_group_id" readonly="1"/>
           </group>
-          <group col="4">
+          <group col="2">
+            <field name="is_deliberated_to_acquiered"/>
             <field name="comments" widget="html"/>
           </group>
         </form>
