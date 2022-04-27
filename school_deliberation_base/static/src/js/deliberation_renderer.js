@@ -134,12 +134,12 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     <td>
                         ${course_group.data.title}${course_group.data.source_course_group_responsible_id ? ' - ' + course_group.data.source_course_group_responsible_id.data.display_name : ''}
                     </td>
-                    <td style=" text-align: right;">
+                    <td class="text-right">
                     </td>
-                    <td style=" text-align: right;">
+                    <td class="text-right">
                         ${course_group.data.total_credits}
                     </td>
-                    <td>
+                    <td class="text-center">
                         <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-primary'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
                     </td>
                     <td>
