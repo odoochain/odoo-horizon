@@ -41,7 +41,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
             this.do_action({
                 type: 'ir.actions.act_window',
                 name: 'Deliberate Course Group',
-                target: 'inline',
+                target: 'new',
                 res_model:  'school.course_group_deliberation',
                 views: [[false, 'form']],
             });
