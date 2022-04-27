@@ -113,7 +113,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     <col style="width:500">
                     <col style="width:50px">
                     <col style="width:50px">
-                    <col style="width:75px">
                 </colgroup>
                 <thead class="thead-light">
                     <tr>
