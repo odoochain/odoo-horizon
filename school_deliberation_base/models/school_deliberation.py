@@ -148,8 +148,8 @@ class CourseGroupDeliberation(models.Model):
     
     comments = fields.Char(string='Comments')
     
-    def _on_confirm(self):
+    def on_confirm(self):
         pass
     
-    def _on_cancel(self):
+    def on_cancel(self):
         pass
