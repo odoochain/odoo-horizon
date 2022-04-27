@@ -208,7 +208,7 @@ var NewBookingDialog = Widget.extend({
                         model: 'calendar.event',
                         method: 'write',
                         args: [
-                            [self.event.id], 
+                            [parseInt(self.event.id)], 
                             {
                                 'name' : self.$('#description').val(),
                                 'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
@@ -253,7 +253,7 @@ var NewBookingDialog = Widget.extend({
                 model: 'calendar.event',
                 method: 'unlink',
                 args: [
-                    self.event.id
+                    parseInt(self.event.id)
                 ]
             }).then(function () {
                 self.trigger_up('deleteEvent', self.event.id);
@@ -418,7 +418,7 @@ var NewBookingDialog = Widget.extend({
                 params: {
         				'start' : start.format('YYYY-MM-DD HH:mm:ss'),
         				'end' : stop.format('YYYY-MM-DD HH:mm:ss'),
-        				'self_id' : self.event ? self.event.id : '',
+        				'self_id' : self.event ? parseInt(self.event.id) : '',
     	    	},
             }).then(rooms => {
                 var roomSelect = self.$('select.select-asset-id').empty().html(' ');
