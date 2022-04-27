@@ -127,7 +127,7 @@
               <tree>
                 <field name="name"/>
               </tree>
-            </fields>
+            </field>
             <field name="program_id">
               <tree>
                 <field name="total_registered_credits"/>
