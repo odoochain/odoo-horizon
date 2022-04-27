@@ -114,7 +114,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     <col style="width:50px">
                     <col style="width:50px">
                     <col style="width:75px">
-                    <col style="width:20px">
                 </colgroup>
                 <thead class="thead-light">
                     <tr>
@@ -123,7 +122,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <th>Rés</th>
                         <th>Cre</th>
                         <th>Acq</th>
-                        <th></th>
                     </tr>
                 </thead>`);
             var $tbody = $('<tbody>');
@@ -142,7 +140,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         ${course_group.data.total_credits}
                     </td>
                     <td>
-                        <span class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-primary'}">${course_group.data.acquiered}</span>
+                        <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-primary'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
                     </td>
                     <td>
                         <i aria-hidden="true" class="fa fa-search o_school_edit_icg" role="button" data-cg-id="29654"></i>
@@ -162,7 +160,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <td style=" text-align: right;">
                             <font color="blue">${course.final_result ? course.final_result : ''}</font>
                         </td>
-                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>`);
