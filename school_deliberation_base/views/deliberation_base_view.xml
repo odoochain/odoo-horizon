@@ -139,8 +139,8 @@
                 <field name="teacher_id"/>
                 <field name="final_result_disp"/>
                 <field name="acquiered"/>
+                <field name="responsible_id"/>
                 <field name="course_ids">
-                <field name="responsible_id">
                   <tree>
                     <field name="title"/>
                     <field name="teacher_id"/>
