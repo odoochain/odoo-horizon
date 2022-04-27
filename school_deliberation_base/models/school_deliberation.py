@@ -109,9 +109,7 @@ class IndividualBloc(models.Model):
     _inherit = 'school.individual_bloc'
     
     deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_bloc_rel', 'bloc_id', 'deliberation_id', string='Deliberations', readonly=True)
-    
-    all_responsible_ids = fields.Many2many('res.partner', compute='get_all_responsibles')
-    
+
     def action_deliberate_bloc(self):
         return {
             'type': 'ir.actions.act_window',
