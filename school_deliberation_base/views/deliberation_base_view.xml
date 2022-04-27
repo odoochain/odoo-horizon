@@ -277,17 +277,6 @@
           <group col="4">
             <field name="comments" widget="html"/>
           </group>
-          <footer>
-            <button type="button"
-                class="btn btn-primary o_form_button_save" title="Save record" accesskey="s">
-                Save
-            </button>
-            or
-            <button type="button"
-                    class="btn btn-secondary o_form_button_cancel" title="Discard record" accesskey="j">
-                Discard
-            </button>
-          </footer>
         </form>
       </field>
     </record>

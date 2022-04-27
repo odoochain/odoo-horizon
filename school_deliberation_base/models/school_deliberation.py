@@ -147,9 +147,3 @@ class CourseGroupDeliberation(models.Model):
     course_group_id = fields.Many2one('school.individual_course_group', required=True)
     
     comments = fields.Char(string='Comments')
-    
-    def on_confirm(self):
-        pass
-    
-    def on_cancel(self):
-        pass
