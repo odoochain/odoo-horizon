@@ -274,6 +274,12 @@
           <group col="2">
             <field name="deliberation_id" invisible="1"/>
             <field name="course_group_id" readonly="1"/>
+            <field name="course_ids">
+              <tree>
+                <field name="name"/>
+                <field name="final_result_disp"/>
+              </tree>
+            </field>
           </group>
           <group col="2">
             <field name="is_deliberated_to_acquiered"/>
