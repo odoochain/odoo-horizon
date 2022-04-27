@@ -892,7 +892,7 @@ var Browser = Widget.extend({
         
         "click #goto-date-button": function (event) {
             var self = this;
-            this.cal.goto_date(moment(this.$('#datepicker').val(),'DD/MM/YYYY').toDate());
+            this.cal.goto_date(moment(this.$('#datepicker').val()).toDate());
         },
         
     },
@@ -934,7 +934,6 @@ var Browser = Widget.extend({
         this.cal = new Calendar(this);
         this.cal.appendTo(this.$(".calendar"));
         this.cal.tb = this.tb;
-        this.$('.datepicker').datepicker($.datepicker.regional[ "fr" ]);
         this.$('.collapsible').collapsible();
     },
     
