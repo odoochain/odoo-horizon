@@ -278,9 +278,15 @@
             <field name="comments" widget="html"/>
           </group>
           <footer>
-              <button name="on_confirm" string="Confirm" type="object" default_focus="1" class="oe_highlight"/>
-              or
-              <button name="on_cancel" string="Cancel" type="object" class="oe_link"/>
+            <button type="button"
+                class="btn btn-primary o_form_button_save" title="Save record" accesskey="s">
+                Save
+            </button>
+            or
+            <button type="button"
+                    class="btn btn-secondary o_form_button_cancel" title="Discard record" accesskey="j">
+                Discard
+            </button>
           </footer>
         </form>
       </field>
