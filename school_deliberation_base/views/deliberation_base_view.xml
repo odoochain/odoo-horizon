@@ -277,6 +277,7 @@
             <field name="course_ids">
               <tree>
                 <field name="name"/>
+                <field name="teacher_id"/>
                 <field name="final_result_disp"/>
               </tree>
             </field>
