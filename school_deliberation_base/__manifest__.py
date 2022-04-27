@@ -30,6 +30,7 @@
     'data': [
         'views/assets.xml',
         'views/deliberation_base_view.xml',
+        'security/ir.model.access.csv',
     ],
     'demo_xml': [],
     'description': '''
