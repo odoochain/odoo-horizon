@@ -1,4 +1,4 @@
-/* global odoo, _ */
+/* global odoo, _, _t */
 odoo.define('deliberation.DeliberationController', function (require) {
     "use strict";
 
@@ -32,12 +32,19 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 context: this.initialState.context,
             }).then(result => {
                 self.do_action(result);
-            })
+            });
         },
         
         _onDeliberateCourseGroup: function (event) {
             event.stopPropagation();
             console.log("Deliberate CG "+event.data['id']);
+            this.do_action({
+                type: 'ir.actions.act_window',
+                name: _t('Deliberate Course Group'),
+                target: 'inline',
+                res_model:  'school.course_group_deliberation',
+                views: [[false, 'form']],
+            });
         },
 
     });

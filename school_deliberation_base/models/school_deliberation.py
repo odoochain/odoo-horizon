@@ -136,3 +136,14 @@ class IndividualBloc(models.Model):
             'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,),
             'views': [[self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban']],
         }
+        
+class CourseGroupDeliberation(models.Model):
+    '''Deliberation'''
+    _name = 'school.course_group_deliberation'
+    _description = 'Manage deliberation of a course group'
+    
+    deliberation_id = fields.Many2one('school.deliberation', required=True)
+    
+    course_group_id = fields.Many2one('school.individual_course_group', required=True)
+    
+    comments = fields.Char(string='Comments')
