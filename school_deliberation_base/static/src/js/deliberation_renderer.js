@@ -142,7 +142,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         ${course_group.data.total_credits}
                     </td>
                     <td>
-                        <span class="label ${course_group.data.acquiered == 'Acuiered' ? 'label-warning' : ''}">${course_group.data.acquiered}</span>
+                        <span class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-primary'}">${course_group.data.acquiered}</span>
                     </td>
                     <td>
                         <i aria-hidden="true" class="fa fa-search o_school_edit_icg" role="button" data-cg-id="29654"></i>
