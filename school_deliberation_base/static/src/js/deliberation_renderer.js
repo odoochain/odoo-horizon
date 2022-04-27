@@ -84,8 +84,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                 </div>
             </div>
             `);
-            var $resp_list = $('<h1>',{class : 'row justify-content-center'});
-            var $list = $('<div>',{class : 'col-8'});
+            var $resp_list = $('<h2>',{class : 'row justify-content-center'});
+            var $list = $('<div>',{class : 'col-10'});
             for(var i =0; i < record.all_responsible_ids.data.length; i++) {
                 var resp = record.all_responsible_ids.data[i];
                 var $span = $('<span>',{class : 'badge rounded-pill bg-primary'}).append(resp.data.name);
@@ -103,7 +103,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var $col1 = $('<div>',{class : 'col-2'});
             $col1.append(this._renderSideContent());
             $content.append($col1);
-            var $col2 = $('<div>',{class : 'col-10'});
+            var $col2 = $('<div>',{class : 'col-9'});
             var $table = $('<table>', {
                 'class' : 'table table-condensed table-bordered result_table',
                 'style' : 'font-size:180%;'});
