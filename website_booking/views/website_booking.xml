@@ -40,7 +40,7 @@
             
             <link href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.2/main.css" rel="stylesheet" type="text/css"/>
             
-            <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" type="text/css"/>
+            <!-- <link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" type="text/css"/> -->
             
             <link rel="stylesheet" href="/website_booking/static/src/css/main.css"/>
             <link rel="stylesheet" href="/website_booking/static/src/css/fc-material.css"/>
@@ -66,7 +66,7 @@
             <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.5.0/main.global.js'></script>
             
             <script type="text/javascript" src="/website_booking/static/lib/materialize/js/materialize.js"></script>
-            <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
+            <!-- <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script> -->
             <script type="text/javascript" src="/website_booking/static/lib/mdtimepicker/mdtimepicker.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser.js"></script>
             <script type="text/javascript" src="/website_booking/static/src/js/browser_mobile.js"></script>
