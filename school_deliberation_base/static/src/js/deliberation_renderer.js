@@ -10,6 +10,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
     var DeliberationRenderer = BasicRenderer.extend({
         
         events: _.extend({}, BasicRenderer.prototype.events, {
+            'click .action_deliberate' : '_onActionDeliberate'
         }),
         
         _render: function () {
@@ -140,14 +141,12 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         ${course_group.data.total_credits}
                     </td>
                     <td class="text-center">
-                        <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-primary'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
+                        <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-primary'} action_deliberate" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
                     </td>
                 </tr>`);
                 for(var j = 0; j < course_group.data.course_ids.data.length; j++) {
                     var course = course_group.data.course_ids.data[j];
-                    console.log(course);
                     course = this.state.courseValues.find(r => r.id == course.data.id);
-                    console.log(course);
                     $tbody.append(`
                     <tr style="font-style: italic;font-size:80%;">
                         <th class="text-center" scope="row"></th>
@@ -174,6 +173,19 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             
         _renderFooter : function () {
         },
+
+        //--------------------------------------------------------------------------
+        // Handlers
+        //--------------------------------------------------------------------------
+            
+        _onActionDeliberate : function (event) {
+            console.log("Deliberate");
+            console.log(event);;
+        },
+        
+        //--------------------------------------------------------------------------
+        // Utilities
+        //--------------------------------------------------------------------------
         
         /**
          * @private -- FROM KANBAN SOURCE COPYRIGHT ODOO
