@@ -46,7 +46,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 res_model:  'school.course_group_deliberation',
                 context: {
                     default_course_id: event.data['id'],
-                    default_deliberation_id: this._context.get('deliberation_id'),
+                    default_deliberation_id: this.initialState.context['deliberation_id'],
                 },
                 views: [[false, 'form']],
             });
