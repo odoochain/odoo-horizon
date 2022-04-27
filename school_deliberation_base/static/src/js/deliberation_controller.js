@@ -4,7 +4,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
 
     var BasicController = require('web.BasicController');
     var viewRegistry = require('web.view_registry');
-
+    
     var DeliberationController = BasicController.extend({
         
         custom_events: {
@@ -40,7 +40,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
             console.log("Deliberate CG "+event.data['id']);
             this.do_action({
                 type: 'ir.actions.act_window',
-                name: _t('Deliberate Course Group'),
+                name: 'Deliberate Course Group',
                 target: 'inline',
                 res_model:  'school.course_group_deliberation',
                 views: [[false, 'form']],
