@@ -139,7 +139,7 @@
                 <field name="teacher_id"/>
                 <field name="final_result_disp"/>
                 <field name="acquiered"/>
-                <field name="responsible_id"/>
+                <field name="source_course_group_responsible_id"/>
                 <field name="course_ids">
                   <tree>
                     <field name="title"/>
