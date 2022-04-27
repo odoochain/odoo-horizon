@@ -125,7 +125,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         ${i+1}
                     </th>
                     <td>
-                        ${course_group.data.title}${course_group.source_course_group_responsible_id ? ' - ' + course_group.source_course_group_responsible_id[1] : ''}
+                        ${course_group.data.title}${course_group.data.source_course_group_responsible_id ? ' - ' + course_group.data.source_course_group_responsible_id[1] : ''}
                     </td>
                     <td style=" text-align: right;">
                     </td>
