@@ -35,9 +35,9 @@ odoo.define('deliberation.DeliberationController', function (require) {
             })
         },
         
-        _onDeliberateCourseGroup: function (event, context) {
+        _onDeliberateCourseGroup: function (event) {
             event.stopPropagation();
-            console.log("Deliberate CG "+context['id']);
+            console.log("Deliberate CG "+event.data['id']);
         },
 
     });
