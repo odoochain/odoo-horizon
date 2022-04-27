@@ -278,7 +278,9 @@
               <tree>
                 <field name="name"/>
                 <field name="teacher_id"/>
-                <field name="final_result_disp"/>
+                <field name="partial_result"/>
+                <field name="final_result"/>
+                <field name="second_result"/>
               </tree>
             </field>
           </group>
