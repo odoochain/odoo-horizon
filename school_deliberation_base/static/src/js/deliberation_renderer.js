@@ -53,7 +53,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
                         </span>
                     </div>
-                    <div class="row d-flex align-items-center" style="margin-bottom: 10px;">
+                    <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
                         <div class="col-md-2">
                             <button class="btn btn_credits" type="button">
                                 PAE<br/><span class="score_value">${record.total_acquiered_credits}/${record.total_credits}</span>
@@ -69,7 +69,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             `);
             var program_total = Math.max(program.required_credits,program.total_registered_credits);
             $col2.append(`
-            <div class="row vertical-align justify-content-center">
+            <div class="row vertical-align justify-content-center" style="margin-bottom: 15px;">
                 <div class="progress col-10" style="height: 40px;">
                     <div class="progress-bar bg-info" style="width:${program.total_acquiered_credits/program_total*100}%">
                         ${program.total_acquiered_credits}
