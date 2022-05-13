@@ -143,17 +143,27 @@ class IndividualBloc(models.Model):
             ['deliberation_id','=',self._context['deliberation_id']],
             ['course_group_id','=',self._context['default_course_group_id']]
         ])
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Deliberate Course Group',
-            'target': 'new',
-            'flags': { 'action_buttons': True, 'headless': True },
-            'res_model':  'school.course_group_deliberation',
-            'res_id': course_group_deliberation ? course_group_deliberation[0] : False,
-            'context': self._context,
-            'views': [[False, 'form']],
-        }
-        
+        if course_group_deliberation :
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Deliberate Course Group',
+                'target': 'new',
+                'flags': { 'action_buttons': True, 'headless': True },
+                'res_model':  'school.course_group_deliberation',
+                'res_id': course_group_deliberation[0],
+                'context': self._context,
+                'views': [[False, 'form']],
+            }
+        else :
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Deliberate Course Group',
+                'target': 'new',
+                'flags': { 'action_buttons': True, 'headless': True },
+                'res_model':  'school.course_group_deliberation',
+                'context': self._context,
+                'views': [[False, 'form']],
+            }
 class CourseGroupDeliberation(models.Model):
     '''Deliberation'''
     _name = 'school.course_group_deliberation'
