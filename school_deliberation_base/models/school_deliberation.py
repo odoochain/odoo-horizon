@@ -150,7 +150,7 @@ class IndividualBloc(models.Model):
                 'target': 'new',
                 'flags': { 'action_buttons': True, 'headless': True },
                 'res_model':  'school.course_group_deliberation',
-                'res_id': course_group_deliberation[0],
+                'res_id': course_group_deliberation_ids[0],
                 'context': self._context,
                 'views': [[False, 'form']],
             }
