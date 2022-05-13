@@ -137,6 +137,17 @@ class IndividualBloc(models.Model):
             'views': [[self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban']],
         }
         
+    def action_deliberate_course_group(self):
+        return {
+            type: 'ir.actions.act_window',
+            name: 'Deliberate Course Group',
+            target: 'new',
+            flags: { action_buttons: true, headless: true },
+            res_model:  'school.course_group_deliberation',
+            context: self._context,
+            views: [[false, 'form']],
+        }
+        
 class CourseGroupDeliberation(models.Model):
     '''Deliberation'''
     _name = 'school.course_group_deliberation'

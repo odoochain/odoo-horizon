@@ -37,8 +37,21 @@ odoo.define('deliberation.DeliberationController', function (require) {
         
         _onDeliberateCourseGroup: function (event) {
             event.stopPropagation();
+            var self = this;
             console.log("Deliberate CG "+event.data['id']);
-            this.do_action({
+            this._rpc({
+                model:'school.individual_bloc',
+                method:'action_deliberate_course_group',
+                args: [ [self.id] ],
+                context: {...self.initialState.context,...{
+                    default_course_group_id: parseInt(event.data['id']),
+                    default_deliberation_id: parseInt(this.initialState.context['deliberation_id']),
+                }},
+            }).then(result => {
+                self.do_action(result);
+            });
+            
+            /*this.do_action({
                 type: 'ir.actions.act_window',
                 name: 'Deliberate Course Group',
                 target: 'new',
@@ -49,7 +62,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     default_deliberation_id: parseInt(this.initialState.context['deliberation_id']),
                 },
                 views: [[false, 'form']],
-            });
+            });*/
         },
 
     });
