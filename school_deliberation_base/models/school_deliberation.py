@@ -139,13 +139,13 @@ class IndividualBloc(models.Model):
         
     def action_deliberate_course_group(self):
         return {
-            type: 'ir.actions.act_window',
-            name: 'Deliberate Course Group',
-            target: 'new',
-            flags: { action_buttons: true, headless: true },
-            res_model:  'school.course_group_deliberation',
-            context: self._context,
-            views: [[false, 'form']],
+            'type': 'ir.actions.act_window',
+            'name': 'Deliberate Course Group',
+            'target': 'new',
+            'flags': { action_buttons: true, headless: true },
+            'res_model':  'school.course_group_deliberation',
+            'context': self._context,
+            'views': [[false, 'form']],
         }
         
 class CourseGroupDeliberation(models.Model):
