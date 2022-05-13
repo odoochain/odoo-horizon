@@ -138,10 +138,11 @@ class IndividualBloc(models.Model):
         }
         
     def action_deliberate_course_group(self):
+        self.ensure_one()
         course_group_deliberation_ids = self['school.course_group_deliberation'].search([
             ['deliberation_id','=',self._context['deliberation_id']],
             ['course_group_id','=',self._context['default_course_group_id']]
-        ]);
+        ])
         return {
             'type': 'ir.actions.act_window',
             'name': 'Deliberate Course Group',
