@@ -143,7 +143,7 @@ class IndividualBloc(models.Model):
             ['deliberation_id','=',self._context['deliberation_id']],
             ['course_group_id','=',self._context['default_course_group_id']]
         ])
-        if course_group_deliberation :
+        if course_group_deliberation_ids :
             return {
                 'type': 'ir.actions.act_window',
                 'name': 'Deliberate Course Group',
