@@ -138,12 +138,17 @@ class IndividualBloc(models.Model):
         }
         
     def action_deliberate_course_group(self):
+        course_group_deliberation_ids = self['school.course_group_deliberation'].search([
+            ['deliberation_id','=',self._context['deliberation_id']],
+            ['course_group_id','=',self._context['default_course_group_id']]
+        ]);
         return {
             'type': 'ir.actions.act_window',
             'name': 'Deliberate Course Group',
             'target': 'new',
             'flags': { 'action_buttons': True, 'headless': True },
             'res_model':  'school.course_group_deliberation',
+            'res_id': course_group_deliberation ? course_group_deliberation[0] : False,
             'context': self._context,
             'views': [[False, 'form']],
         }
