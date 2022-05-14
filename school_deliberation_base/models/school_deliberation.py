@@ -180,7 +180,7 @@ class CourseGroupDeliberation(models.Model):
 
     is_deliberated_to_acquiered = fields.Boolean(string='Is deliberated to acquiered')
     
-    participant_ids = fields.Many2many('res.partner', related='deliberation_id.participant_ids', string='Particpants')
+    participant_ids = fields.Many2many('res.partner', related='course_group_id.bloc_id.all_responsible_ids', string='Particpants')
     
     image = fields.Binary('Image', attachment=True, related='course_group_id.image')
     
