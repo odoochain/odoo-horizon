@@ -271,9 +271,28 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Course Group Deliberation">
+          <div class="container">
+            <div class="row">
+              <div class="h-100 d-inline-block" style="width: 150px;">
+                <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
+              </div>
+              <div class="col-8">
+                <h2>
+                 <field name="name"/>
+                </h2>
+                <h3 class="o_row row no-gutters d-flex">
+                    <div class="col">
+                      <label for="student_name" invisible="1"/>
+                      <small class="oe_grey" ><field name="student_name"/></small>
+                    </div>
+                </h3>
+              </div>
+            </div>
+          </div>
           <group col="2">
             <field name="deliberation_id" invisible="1"/>
             <field name="course_group_id" readonly="1"/>
+            <field name="participant_ids" widget="many2many_tags"/>
             <field name="course_ids">
               <tree>
                 <field name="name"/>

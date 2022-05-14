@@ -164,6 +164,7 @@ class IndividualBloc(models.Model):
                 'context': self._context,
                 'views': [[False, 'form']],
             }
+            
 class CourseGroupDeliberation(models.Model):
     '''Deliberation'''
     _name = 'school.course_group_deliberation'
@@ -178,3 +179,11 @@ class CourseGroupDeliberation(models.Model):
     comments = fields.Char(string='Comments')
 
     is_deliberated_to_acquiered = fields.Boolean(string='Is deliberated to acquiered')
+    
+    participant_ids = fields.Many2many('res.partner', related='deliberation_id.participant_ids', string='Particpants')
+    
+    image = fields.Binary('Image', attachment=True, related='course_group_id.image')
+    
+    final_result_disp = fields.Char(string='Final Result Display', related='course_group_id.final_result_disp')
+    
+    student_name = fields.Char(string='Student', related='course_group_id.student_id.name')
