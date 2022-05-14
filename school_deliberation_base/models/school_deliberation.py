@@ -184,6 +184,8 @@ class CourseGroupDeliberation(models.Model):
     
     image = fields.Binary('Image', attachment=True, related='course_group_id.image')
     
+    name = fields.Char(string='Name', related='course_group_id.name')
+    
     final_result_disp = fields.Char(string='Final Result Display', related='course_group_id.final_result_disp')
     
     student_name = fields.Char(string='Student', related='course_group_id.student_id.name')
