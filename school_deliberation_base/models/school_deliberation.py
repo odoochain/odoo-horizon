@@ -182,7 +182,7 @@ class CourseGroupDeliberation(models.Model):
     
     participant_ids = fields.Many2many('res.partner', related='course_group_id.bloc_id.all_responsible_ids', string='Particpants')
     
-    image = fields.Binary('Image', attachment=True, related='course_group_id.image')
+    image = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image')
     
     name = fields.Char(string='Name', related='course_group_id.name')
     
