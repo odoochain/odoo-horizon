@@ -272,13 +272,6 @@
       <field name="arch" type="xml">
         <form string="Course Group Deliberation">
           <sheet>
-            <div name="button_box" class="oe_button_box">
-              <button class="oe_stat_button"
-                      icon="fa-bars"
-                      string="Result">
-                <field name="final_result_disp" widget="statinfo" string="Result"/>
-              </button>
-            </div>
             <div class="container">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
@@ -295,6 +288,9 @@
                       </div>
                   </h3>
                 </div>
+                <div class="col-2">
+                  <field name="final_result_disp"/>
+                </div>  
               </div>
             </div>
             <group col="2">
