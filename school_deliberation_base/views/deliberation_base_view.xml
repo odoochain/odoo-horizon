@@ -290,7 +290,7 @@
                 </div>
                 <div class="col-2">
                   <button class="btn btn_credits" type="button">
-                    <field name="final_result_disp"/>
+                    <h1><field name="final_result_disp"/></h1>
                   </button>
                 </div>  
               </div>
