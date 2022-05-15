@@ -136,6 +136,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         ${course_group.data.title}${course_group.data.source_course_group_responsible_id ? ' - ' + course_group.data.source_course_group_responsible_id.data.display_name : ''}
                     </td>
                     <td class="text-right">
+                        ${course_group.data.final_result_disp}
                     </td>
                     <td class="text-right">
                         ${course_group.data.total_credits}
