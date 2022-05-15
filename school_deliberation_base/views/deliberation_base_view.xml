@@ -287,6 +287,19 @@
                         <small class="oe_grey" ><field name="student_name"/></small>
                       </div>
                   </h3>
+                  <group col="2">
+                    <field name="deliberation_id" invisible="1"/>
+                    <field name="participant_ids" widget="many2many_tags"/>
+                    <field name="course_ids">
+                      <tree>
+                        <field name="name"/>
+                        <field name="teacher_id"/>
+                        <field name="partial_result" string="PR"/>
+                        <field name="final_result" string="FR"/>
+                        <field name="second_result" string="SR"/>
+                      </tree>
+                    </field>
+                  </group>
                 </div>
                 <div class="col-2">
                   <button class="btn btn_credits" type="button">
@@ -295,19 +308,6 @@
                 </div>  
               </div>
             </div>
-            <group col="2">
-              <field name="deliberation_id" invisible="1"/>
-              <field name="participant_ids" widget="many2many_tags"/>
-              <field name="course_ids">
-                <tree>
-                  <field name="name"/>
-                  <field name="teacher_id"/>
-                  <field name="partial_result" string="PR"/>
-                  <field name="final_result" string="FR"/>
-                  <field name="second_result" string="SR"/>
-                </tree>
-              </field>
-            </group>
             <group col="2">
               <field name="is_deliberated_to_acquiered"/>
               <field name="comments" widget="html"/>
