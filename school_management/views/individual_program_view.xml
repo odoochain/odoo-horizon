@@ -488,12 +488,12 @@
                 </div>
                 <div class="col-8">
                   <h2>
-                   <field name="course_group_id" class="oe_inline"/>
+                    <field name="name"/>
                   </h2>
                   <h3 class="o_row row no-gutters d-flex">
                       <div class="col">
-                        <label for="course_group_id" invisible="1"/>
-                        <small class="oe_grey" ><field name="course_group_id"/></small>
+                        <label for="uid" invisible="1"/>
+                        <small class="oe_grey" ><field name="uid"/></small>
                       </div>
                   </h3>
                 </div>
