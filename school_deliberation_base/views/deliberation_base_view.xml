@@ -303,7 +303,7 @@
                   </group>
                 </div>
                 <div class="col-2">
-                  <button class="btn btn_credits" type="button">
+                  <button class="btn btn_credits" type="button" name="result_details">
                     <h1><field name="final_result_disp"/></h1>
                   </button>
                 </div>  
