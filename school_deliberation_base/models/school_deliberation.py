@@ -194,3 +194,6 @@ class CourseGroupDeliberation(models.Model):
     
     student_name = fields.Char(string='Student', related='course_group_id.student_id.name')
     
+    @api.onchange('is_deliberated_to_acquiered')
+    def _onchange_is_deliberated_to_acquiered(self):
+        self.course_group_id.set_deliberated_to_ten(session=1)
