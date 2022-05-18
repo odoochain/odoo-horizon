@@ -197,3 +197,6 @@ class CourseGroupDeliberation(models.Model):
     @api.onchange('is_deliberated_to_acquiered')
     def _onchange_is_deliberated_to_acquiered(self):
         self.course_group_id.set_deliberated_to_ten(session=1)
+        return {
+            'value': {'final_result_disp': '10'}
+        }
