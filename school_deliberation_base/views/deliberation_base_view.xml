@@ -314,10 +314,10 @@
               <field name="comments" widget="html"/>
             </group>
           </sheet>
-          <footer>
-            <button name="action_save_and_close" type="object" string="Save" class="oe_highlight pull-left"/>
+          <!--<footer>
+            <button name="save" type="object" string="Save" class="oe_highlight pull-left" close="1"/>
             <button special="cancel" string="Cancel" class="pull-right"/>
-          </footer>
+          </footer>-->
         </form>
       </field>
     </record>
