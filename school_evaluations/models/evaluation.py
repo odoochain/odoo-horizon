@@ -218,8 +218,7 @@ class IndividualBloc(models.Model):
     total_not_acquiered_hours = fields.Integer(compute='compute_credits', string='Not Acquiered Hours',store=True)
 
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
-    decision = fields.Text(string="Decision",track_visibility='onchange')
-    exclude_from_deliberation = fields.Boolean(string='Exclude from Deliberation', default=False)
+    decision = fields.Text(compute='compute_credits', string="Decision",track_visibility='onchange', store=True)
     
     first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
@@ -325,6 +324,17 @@ class IndividualBloc(models.Model):
                 rec.total_acquiered_hours = sum([icg.total_hours for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
                 rec.total_not_acquiered_credits = rec.total_credits - rec.total_acquiered_credits
                 rec.total_not_acquiered_hours = rec.total_hours - rec.total_acquiered_hours
+                if rec.level == '1A1C' :
+                    if rec.total_acquiered_credits == 60 :
+                        rec.decision = 'A validé 60 ECTS et est autorisé(e) à poursuivre son parcours sans restriction.'
+                    elif rec.total_acquiered_credits < 45 and rec.total_acquiered_credits >= 30 :
+                        rec.decision = 'A validé au moins de 30 ECTS mais moins de 45. Peut compléter son programme ou non avec accord du jury.'
+                    elif rec.total_acquiered_credits < 45 :
+                        rec.decision = 'A validé moins de 30 ECTS. N’a pas rempli les conditions de réussite de son programme.'
+                    else
+                        rec.decision = 'A validé au moins 45 ECTS et est autorisé à poursuivre son parcours tout en représentant les UE non validées.'
+                else :
+                    rec.decision = 'Cycle en cours.'
             else:
                 # Don't compute if draft or finished
                 pass
