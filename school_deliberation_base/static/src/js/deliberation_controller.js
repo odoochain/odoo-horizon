@@ -20,7 +20,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
 
         start: function () {
-            core.bus.on('clear_cache', this, this._onClearCache);
+            core.bus.on('', this, this._onClearCache);
             return this._super();
         },
 
