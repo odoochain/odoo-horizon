@@ -4,7 +4,6 @@ odoo.define('deliberation.DeliberationController', function (require) {
 
     var BasicController = require('web.BasicController');
     var viewRegistry = require('web.view_registry');
-    var core = require('web.core');
     
     var DeliberationController = BasicController.extend({
         
@@ -23,7 +22,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
             return this._super();
         },
 
-        _onClearCache: function (event) {
+        _onCloseDeliberateCourseGroup: function (event) {
             console.log(event);
         },
 
@@ -53,8 +52,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     default_deliberation_id: parseInt(self.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
-                core.bus.on('push_state', self, self._onClearCache.bind(self));
-                self.do_action(result);
+                self.do_action(result, { 'on_close' : self._onCloseDeliberateCourseGroup });
             });
             
             /*this.do_action({
