@@ -48,7 +48,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     default_deliberation_id: parseInt(this.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
-                self.do_action(result);
+                self.do_action(result).then(result => { console.log(result) });
             });
             
             /*this.do_action({

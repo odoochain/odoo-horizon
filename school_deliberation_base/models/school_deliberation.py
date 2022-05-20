@@ -148,7 +148,7 @@ class IndividualBloc(models.Model):
                 'type': 'ir.actions.act_window',
                 'name': 'Deliberate Course Group',
                 'target': 'new',
-                'flags': { 'action_buttons': True, 'headless': True, 'options': {'size' : 'extra-large'} },
+                'flags': { 'action_buttons': True, 'headless': True },
                 'res_model':  'school.course_group_deliberation',
                 'res_id': course_group_deliberation_ids[0].id,
                 'context': self._context,
@@ -159,7 +159,7 @@ class IndividualBloc(models.Model):
                 'type': 'ir.actions.act_window',
                 'name': 'Deliberate Course Group',
                 'target': 'new',
-                'flags': { 'action_buttons': True, 'headless': True, 'options': {'size' : 'extra-large'} },
+                'flags': { 'action_buttons': True, 'headless': True },
                 'res_model':  'school.course_group_deliberation',
                 'context': self._context,
                 'views': [[False, 'form']],
@@ -196,7 +196,8 @@ class CourseGroupDeliberation(models.Model):
     
     @api.onchange('is_deliberated_to_acquiered')
     def _onchange_is_deliberated_to_acquiered(self):
-        self.course_group_id.set_deliberated_to_ten(session=1)
-        return {
-            'value': {'final_result_disp': '10'}
-        }
+        if self.is_deliberated_to_acquiered :
+            self.course_group_id.set_deliberated_to_ten(session=1)
+            return {
+                'value': {'final_result_disp': '10'}
+            }
