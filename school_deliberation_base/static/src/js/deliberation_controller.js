@@ -53,7 +53,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     default_deliberation_id: parseInt(self.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
-                core.bus.on('field_changed', self, self._onClearCache.bind(self));
+                core.bus.on('push_state', self, self._onClearCache.bind(self));
                 self.do_action(result);
             });
             
