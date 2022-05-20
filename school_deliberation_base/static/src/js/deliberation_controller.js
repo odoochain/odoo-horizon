@@ -36,7 +36,6 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 args: [ '' ],
                 context: this.initialState.context,
             }).then(result => {
-                core.bus.on('closed', this, this._onClearCache);
                 self.do_action(result);
             });
         },
@@ -54,6 +53,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     default_deliberation_id: parseInt(this.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
+                core.bus.on('closed', this, this._onClearCache);
                 self.do_action(result);
             });
             
