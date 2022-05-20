@@ -35,7 +35,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 args: [ '' ],
                 context: this.initialState.context,
             }).then(result => {
-                self.do_action(result).bind(self);
+                self.do_action(result);
             });
         },
         
@@ -52,7 +52,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     default_deliberation_id: parseInt(self.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
-                self.do_action(result, { 'on_close' : self._onCloseDeliberateCourseGroup });
+                self.do_action(result, { 'on_close' : self._onCloseDeliberateCourseGroup.bind(self) });
             });
             
             /*this.do_action({
