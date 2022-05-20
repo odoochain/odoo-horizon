@@ -20,7 +20,12 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
 
         start: function () {
+            core.bus.on('clear_cache', this, this._onClearCache);
             return this._super();
+        },
+
+        _onClearCache: function (event) {
+            console.log(event);
         },
 
         _onClose: function (event) {
@@ -32,7 +37,6 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 args: [ '' ],
                 context: this.initialState.context,
             }).then(result => {
-                console.log(core.bus);
                 self.do_action(result);
             });
         },
