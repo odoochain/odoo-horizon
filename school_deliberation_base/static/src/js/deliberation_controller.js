@@ -50,10 +50,10 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 args: [ [self.id] ],
                 context: {...self.initialState.context,...{
                     default_course_group_id: parseInt(event.data['id']),
-                    default_deliberation_id: parseInt(this.initialState.context['deliberation_id']),
+                    default_deliberation_id: parseInt(self.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
-                core.bus.on('closed', this, this._onClearCache);
+                core.bus.on('close_dialogs', self, self._onClearCache.bind(self));
                 self.do_action(result);
             });
             
