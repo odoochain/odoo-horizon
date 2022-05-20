@@ -23,7 +23,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
 
         _onCloseDeliberateCourseGroup: function (event) {
-            console.log(event);
+            this.reload();
         },
 
         _onClose: function (event) {
