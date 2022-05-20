@@ -318,6 +318,16 @@
             <button name="save" type="object" string="Save" class="oe_highlight pull-left" close="1"/>
             <button special="cancel" string="Cancel" class="pull-right"/>
           </footer>-->
+          <footer>
+            <button type="button"
+                class="btn btn-primary o_form_button_save" title="Save record" accesskey="s" close="1">
+                Save
+            </button>
+            <button type="button"
+                    class="btn btn-secondary o_form_button_cancel" title="Discard record" accesskey="j" close="1">
+                Discard
+            </button>
+          </footer>
         </form>
       </field>
     </record>
