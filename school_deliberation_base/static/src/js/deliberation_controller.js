@@ -35,7 +35,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 args: [ '' ],
                 context: this.initialState.context,
             }).then(result => {
-                self.do_action(result);
+                self.do_action(result).bind(self);
             });
         },
         
