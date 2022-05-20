@@ -179,6 +179,30 @@ class IndividualBloc(models.Model):
     
     year_id = fields.Many2one('school.year', string='Year')
     
+    level = fields.Selection(
+        [
+            ('Agregation','AG'),
+            ('Master 2', 'DC2C'),
+            ('Master 1', '1A2C'),
+            ('Bac 3','DC1C'),
+            ('Bac 2','>45'),
+            ('Bac 1','1A1C'),
+            ('Jeune talent', 'JT'),
+            ('Elève libre', 'EL'),
+        ], string='Level', index=True, default='1A1C',
+        track_visibility='onchange',
+        copy=False,
+        help=
+        " * Agregation: Agregation.\n"
+        " * Master 2:DC2C (Derniers crédits de deuxième cycle).\n"
+        " * Master 1:1A2C (Premiers année de deuxième cycle).\n"
+        " * Bac 3:DC1C (Derniers crédits de premier cycle).\n"
+        " * Bac 2:>45 (Poursuite d'études).\n"
+        " * Jeune talent:Jeune talent.\n"
+        " * Bac 1:1A1C (Première année de premier cycle).\n"
+        " * Elève libre:Elève libre.\n"
+    )
+    
     is_final_bloc = fields.Boolean(string='Is final bloc')
     
     student_id = fields.Many2one(related='program_id.student_id', string='Student', domain="[('student', '=', '1')]", readonly=True, store=True)
