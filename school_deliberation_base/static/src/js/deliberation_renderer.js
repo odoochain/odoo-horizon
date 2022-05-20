@@ -14,6 +14,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         }),
         
         _render: function () {
+            this.$el.empty();
             this.$el.append(
                 $('<div>').addClass('container-fluid o_d_main_container').append(
                     this._renderHeader(),
