@@ -4,6 +4,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
 
     var BasicController = require('web.BasicController');
     var viewRegistry = require('web.view_registry');
+    var core = require('web.core');
     
     var DeliberationController = BasicController.extend({
         
@@ -31,6 +32,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 args: [ '' ],
                 context: this.initialState.context,
             }).then(result => {
+                console.log(core.bus);
                 self.do_action(result);
             });
         },
@@ -48,7 +50,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     default_deliberation_id: parseInt(this.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
-                self.do_action(result).then(result => { console.log(result) });
+                self.do_action(result);
             });
             
             /*this.do_action({
