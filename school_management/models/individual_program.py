@@ -181,14 +181,14 @@ class IndividualBloc(models.Model):
     
     level = fields.Selection(
         [
-            ('Agregation','AG'),
-            ('Master 2', 'DC2C'),
-            ('Master 1', '1A2C'),
-            ('Bac 3','DC1C'),
-            ('Bac 2','>45'),
-            ('Bac 1','1A1C'),
-            ('Jeune talent', 'JT'),
-            ('Elève libre', 'EL'),
+            ('AG','Agregation'),
+            ('DC2C','Master 2'),
+            ('1A2C','Master 1'),
+            ('DC1C','Bac 3'),
+            ('>45','Bac 2'),
+            ('1A1C','Bac 1'),
+            ('JT','Jeune talent'),
+            ('EL','Elève libre'),
         ], string='Level', index=True, default='1A1C',
         track_visibility='onchange',
         copy=False,
