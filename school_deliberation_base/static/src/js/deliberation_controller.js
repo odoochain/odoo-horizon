@@ -20,7 +20,6 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
 
         start: function () {
-            core.bus.on('switch_view', this, this._onClearCache);
             return this._super();
         },
 
@@ -37,6 +36,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                 args: [ '' ],
                 context: this.initialState.context,
             }).then(result => {
+                core.bus.on('closed', this, this._onClearCache);
                 self.do_action(result);
             });
         },
