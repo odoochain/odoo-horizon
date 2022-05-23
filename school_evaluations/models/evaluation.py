@@ -669,6 +669,8 @@ class IndividualCourse(models.Model):
     first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
 
+    first_session_result_disp = fields.Char(string='First Session Result Display', compute='compute_session_result_disp')
+
     ## Second Session ##
     
     second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='Second Session Exception', store=True)
@@ -676,7 +678,20 @@ class IndividualCourse(models.Model):
     second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
 
+    second_session_result_disp = fields.Char(string='Second Session Result Display', compute='compute_session_result_disp')
+
     is_danger = fields.Boolean(compute="compute_results", store=True)
+
+    def compute_session_result_disp(self):
+        for rec in records :
+            if not self.first_session_result_bool:
+                self.first_session_result_disp = ""
+            else :
+                self.first_session_result_disp = "%.2f" % self.first_session_result
+            if not self.second_session_result_bool:
+                self.second_session_result_disp = ""
+            else :
+                self.second_session_result_disp = "%.2f" % self.second_session_result
 
     def open_evaluations(self):
         evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
