@@ -684,14 +684,14 @@ class IndividualCourse(models.Model):
 
     def compute_session_result_disp(self):
         for rec in self :
-            if not self.first_session_result_bool:
-                self.first_session_result_disp = ""
+            if not rec.first_session_result_bool:
+                rec.first_session_result_disp = ""
             else :
-                self.first_session_result_disp = "%.2f" % self.first_session_result
-            if not self.second_session_result_bool:
-                self.second_session_result_disp = ""
+                rec.first_session_result_disp = "%.2f" % rec.first_session_result
+            if not rec.second_session_result_bool:
+                rec.second_session_result_disp = ""
             else :
-                self.second_session_result_disp = "%.2f" % self.second_session_result
+                rec.second_session_result_disp = "%.2f" % rec.second_session_result
 
     def open_evaluations(self):
         evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
