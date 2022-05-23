@@ -683,7 +683,7 @@ class IndividualCourse(models.Model):
     is_danger = fields.Boolean(compute="compute_results", store=True)
 
     def compute_session_result_disp(self):
-        for rec in records :
+        for rec in self :
             if not self.first_session_result_bool:
                 self.first_session_result_disp = ""
             else :
