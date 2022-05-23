@@ -69,7 +69,7 @@
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-foreach="docs" t-as="o">
-                <t t-call="report.external_layout">
+                <t t-call="web.external_layout">
                 <div class="page">
                     <div class="container" style="margin-left:60px;margin-right:60px;">
                         <div class="row" style="margin-bottom:30px;">
@@ -170,7 +170,7 @@
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-foreach="docs" t-as="o">
-                <t t-call="report.external_layout">
+                <t t-call="web.external_layout">
                 <div class="page">
                     <div class="container" style="margin-left:60px;margin-right:60px;">
                         <div class="row" style="margin-bottom:30px;">
@@ -267,7 +267,7 @@
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-foreach="docs" t-as="o">
-                <t t-call="report.external_layout">
+                <t t-call="web.external_layout">
                 <div class="page">
                     <div class="container">
                         <div class="row">
@@ -397,7 +397,7 @@
         <t t-call="report.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
-            <t t-call="report.external_layout">
+            <t t-call="web.external_layout">
                 <div class="page">
                     <div class="container" style="margin-left:60px;margin-right:60px;">
                         <div class="row mb32">
@@ -462,7 +462,7 @@
         <t t-call="report.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
-            <t t-call="report.external_layout">
+            <t t-call="web.external_layout">
                 <div class="page">
                     <div class="container" style="margin-left:60px;margin-right:60px;">
                         <div class="row">
@@ -613,7 +613,7 @@
         <t t-call="report.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
-            <t t-call="report.external_layout">
+            <t t-call="web.external_layout">
                 <div class="page">
                     <t t-foreach="docs" t-as="o">
                     <div class="container" style="page-break-before:always;">
@@ -973,7 +973,7 @@
             <t t-set="data_report_margin_top" t-value="55" />
             <t t-set="data_report_header_spacing" t-value="45" />
             <t t-foreach="data" t-as="item">
-                <t t-call="report.external_layout">
+                <t t-call="web.external_layout">
                 <t t-set="input_counter" t-value="1"/>
                 <div class="page">
                         <t t-set="teacher" t-value="item['teacher_id']" />
