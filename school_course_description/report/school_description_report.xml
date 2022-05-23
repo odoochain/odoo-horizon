@@ -38,7 +38,7 @@
     />
 
     <template id="report_course_documentation_no_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
             <div class="page">
@@ -53,7 +53,7 @@
     </template>
     
     <template id="report_course_documentation_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
             <t t-foreach="docs" t-as="desc">
@@ -207,7 +207,7 @@
     />
     
     <template id="report_course_group_documentation_no_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
             <div class="page">
@@ -222,7 +222,7 @@
     </template>
     
     <template id="report_course_group_documentation_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
             <t t-foreach="docs" t-as="o">

@@ -65,7 +65,7 @@
     </record>
 
     <template id="report_success_certificate_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-foreach="docs" t-as="o">
@@ -166,7 +166,7 @@
     </record>
 
     <template id="report_success_certificate_prog_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-foreach="docs" t-as="o">
@@ -263,7 +263,7 @@
     </record>
 
     <template id="report_evaluation_for_student_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-foreach="docs" t-as="o">
@@ -394,7 +394,7 @@
     </record>
 
     <template id="report_deliberation_annexe_program">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-call="web.external_layout">
@@ -459,7 +459,7 @@
     </record>
 
     <template id="report_deliberation_annexe_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-call="web.external_layout">
@@ -610,7 +610,7 @@
     </record>
 
     <template id="report_individual_bloc_definition_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="40"/>
             <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-call="web.external_layout">
@@ -969,7 +969,7 @@
     <!--  Add wizard -->
 
     <template id="report_evaluation_by_teacher_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="55" />
             <t t-set="data_report_header_spacing" t-value="45" />
             <t t-foreach="data" t-as="item">
