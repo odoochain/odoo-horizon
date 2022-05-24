@@ -43,7 +43,7 @@
         <section>
             <div class="row">
                 <div class="col-md-2"><font color="grey">DOMAINE</font></div>
-                <div class="col-md-10"><t t-esc="program.domain_id.name" /></div>
+                <div class="col-md-10"><t t-esc="program.domain" /></div>
             </div>
             <div class="row">
                 <div class="col-md-2"><font color="grey">CYCLE</font></div>
@@ -51,11 +51,11 @@
             </div>
             <div class="row">
                 <div class="col-md-2"><font color="grey">SECTION</font></div>
-                <div class="col-md-10"><t t-esc="program.section_id.name" /></div>
+                <div class="col-md-10"><t t-esc="program.speciality_id.section_id.name" /></div>
             </div>
             <div class="row">
                 <div class="col-md-2"><font color="grey">ORIENTATION</font></div>
-                <div class="col-md-10"><t t-esc="program.track_id.name" /></div>
+                <div class="col-md-10"><t t-esc="program.speciality_id.track_id.name" /></div>
             </div>
             <div class="row">
                 <div class="col-md-2"><font color="grey">SPÉCIALITÉ</font></div>
