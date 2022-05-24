@@ -160,7 +160,7 @@
     </template>
 
     <template id="report_program_details_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="45" />
             <t t-set="data_report_header_spacing" t-value="40" />
             <t t-foreach="docs" t-as="program">
@@ -269,7 +269,7 @@
     </template>
 
     <template id="report_individual_bloc_content">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="45" />
             <t t-set="data_report_header_spacing" t-value="40" />
             <t t-foreach="docs" t-as="bloc">
