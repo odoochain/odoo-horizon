@@ -468,7 +468,7 @@
 											<span class="d-block"><t t-esc="course_group.total_hours"/></span>
 										</li>
 										<li class="d-none d-md-block">
-											<span class="d-block"><t t-esc="course_group.weight"/></span>
+											<span class="d-block"><!--<t t-esc="course_group.weight"/>--></span>
 										</li>
                                         <li t-if="display_results == '1'">
                                             <span class="d-block"><t t-if="display_results" t-esc="course_group.final_result"/></span>
