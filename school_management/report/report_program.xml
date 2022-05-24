@@ -121,7 +121,7 @@
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
                     <tr class="oe_school_course_group">
                         <td><t t-esc="course_group.uid"/></td>
-                        <td><t t-esc="course_group.title"/><br/><i style="color:grey;"><t t-esc="course_group.teacher_id.name"/></i></td>
+                        <td><t t-esc="course_group.title"/><br/><i style="color:grey;"><t t-esc="course_group.responsible_id.name"/></i></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
                         <td></td>
