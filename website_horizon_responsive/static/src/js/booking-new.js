@@ -130,7 +130,7 @@ $(document).ready(function(){
             type: "POST",
             dataType: "json",
             contentType: 'application/json',
-            url: '/web/dataset/call_kw/calendar.event/create',
+            url: '/xmlrpc/2/object',
             data: JSON.stringify({
                 jsonrpc: "2.0",
                 method: "call",

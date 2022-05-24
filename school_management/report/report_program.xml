@@ -206,7 +206,7 @@
     </record>
 
     <template id="school_bloc" name="Bloc">
-        <div class="col-md-12">
+        <div class="col-md-12" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')">
             <h2>Programme annuel de l'étudiant</h2>
             <table class="table table-condensed oe_school_program_table">
                 <colgroup>
