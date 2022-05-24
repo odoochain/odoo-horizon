@@ -75,9 +75,9 @@
                     <caption>A la fin du cycle, l’étudiant doit être capable :</caption>
                     <col width='50px'/>
                     <col width="100%"/><t t-set="comp_cnt" t-value="0"/>
-                    <tr t-foreach="program.competency_ids" t-as="comp"><t t-set="comp_cnt" t-value="comp_cnt+1"/>
+                    <!--<tr t-foreach="program.competency_ids" t-as="comp"><t t-set="comp_cnt" t-value="comp_cnt+1"/>
                         <th scope="row"><bold><t t-esc="comp_cnt"/></bold></th><td><t t-esc="comp.description"/></td>
-                    </tr>
+                    </tr>-->
                 </table>
             </div>
             <hr/>
