@@ -63,7 +63,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             </button>
                         </div>
                         <div class="col-md-8">
-                            <div class="alert ${record.total_acquiered_credits < record.total_credits ? 'alert-danger' : 'alert-success'}" role="alert" style="font-size: larger;">${record.decision}</div>
+                            <div class="alert ${record.total_acquiered_credits < record.total_credits ? 'alert-danger' : 'alert-success'} mb-0" role="alert" style="font-size: larger;">${record.decision}</div>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-lg ${record.total_acquiered_credits < record.total_credits ? 'btn-danger bloc_postpone' : 'bloc_award'} ">${record.total_acquiered_credits < record.total_credits ? 'Ajourné' : 'Réussi'}</button>
@@ -135,7 +135,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         ${i+1}
                     </th>
                     <td>
-                        ${course_group.data.title}${course_group.data.source_course_group_responsible_id ? ' - ' + course_group.data.source_course_group_responsible_id.data.display_name : ''}
+                        ${course_group.data.title}${course_group.data.source_course_group_responsible_id ? ' <span class="text-muted">- ' + course_group.data.source_course_group_responsible_id.data.display_name : ''}</span>
                     </td>
                     <td class="text-right">
                         ${course_group.data.final_result_disp}

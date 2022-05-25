@@ -497,6 +497,14 @@ class IndividualCourseGroup(models.Model):
             raise ValidationError("Evaluation shall be between 0 and 20")
         else:
             return f
+            
+    @api.onchange('first_session_deliberated_result_bool')
+    def _onchange_first_session_deliberated_result_bool(self):
+        self.first_session_deliberated_result = False
+        
+    @api.onchange('second_session_deliberated_result_bool')
+    def _onchange_second_session_deliberated_result_bool(self):
+        self.second_session_deliberated_result = False
     
     @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.first_session_exception','course_ids.second_session_result_bool','course_ids.second_session_result','course_ids.second_session_exception','course_ids.weight')
     def compute_average_results(self, force = False):
