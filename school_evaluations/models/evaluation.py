@@ -564,7 +564,7 @@ class IndividualCourseGroup(models.Model):
                 except ValueError:
                     rec.write('first_session_deliberated_result', None)
                     raise UserError(_('Cannot decode %s, please encode a Float eg "12.00".' % rec.first_session_deliberated_result))
-                if (f < rec.first_session_computed_result):
+                if (f and f < rec.first_session_computed_result):
                 # TODO : take care of this - removed due to Cours artistiques B - Art dramatique - 2 - 2015-2016 - VALERIO Maddy 
                     raise ValidationError("Deliberated result must be above computed result, i.e. %s > %s in %s." % (rec.first_session_deliberated_result, rec.first_session_computed_result, rec.uid))
                 else:
