@@ -10,6 +10,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
         custom_events: {
             close: '_onClose',
             deliberate_course_group: '_onDeliberateCourseGroup',
+            reload_bloc: '_onReloadBloc',
         },
 
         init: function (parent, model, renderer, params) {
@@ -22,7 +23,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
             return this._super();
         },
 
-        _onCloseDeliberateCourseGroup: function (event) {
+        _onReloadBloc: function (event) {
             this.reload();
         },
 
@@ -52,7 +53,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     default_deliberation_id: parseInt(self.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
-                self.do_action(result, { 'on_close' : self._onCloseDeliberateCourseGroup.bind(self) });
+                self.do_action(result, { 'on_close' : self._onReloadBloc.bind(self) });
             });
             
             /*this.do_action({

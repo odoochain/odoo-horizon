@@ -10,7 +10,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
     var DeliberationRenderer = BasicRenderer.extend({
         
         events: _.extend({}, BasicRenderer.prototype.events, {
-            'click .action_deliberate' : '_onActionDeliberate'
+            'click .action_deliberate' : '_onActionDeliberate',
+            'click .o_reload_bloc' : '_onReloadBloc',
         }),
         
         _render: function () {
@@ -62,7 +63,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             </button>
                         </div>
                         <div class="col-md-8">
-                            <div class="alert ${record.total_acquiered_credits < record.total_credits ? 'alert-danger' : 'alert-success'}" role="alert">${record.decision}</div>
+                            <div class="alert ${record.total_acquiered_credits < record.total_credits ? 'alert-danger' : 'alert-success'}" role="alert" style="font-size: larger;">${record.decision}</div>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-lg ${record.total_acquiered_credits < record.total_credits ? 'btn-danger bloc_postpone' : 'bloc_award'} ">${record.total_acquiered_credits < record.total_credits ? 'Ajourné' : 'Réussi'}</button>
@@ -182,6 +183,10 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             
         _onActionDeliberate : function (event) {
             this.trigger_up('deliberate_course_group', { id: event.target.attributes['data-id'].value });
+        },
+        
+        _onReloadBloc : function (event) {
+            this.trigger_up('reload_bloc');
         },
         
         //--------------------------------------------------------------------------
