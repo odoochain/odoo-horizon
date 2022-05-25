@@ -326,7 +326,7 @@ class IndividualCourseGroup(models.Model):
     
     year_id = fields.Many2one(related="bloc_id.year_id", string='Year', store=True)
     student_id = fields.Many2one(related="bloc_id.student_id", string='Student', store=True, domain=[('student', '=', True)])
-    teacher_id = fields.Many2one('res.partner', string='Teacher', store=True, domain=[('teacher', '=', True)])
+    responsible_id = fields.Many2one('res.partner', related="source_course_group_id.responsible_id")
     
     image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
