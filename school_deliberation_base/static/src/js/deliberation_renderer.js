@@ -144,7 +144,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         ${course_group.data.total_credits}
                     </td>
                     <td class="text-center">
-                        <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning action_deliberate' : 'bg-primary'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
+                        <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning action_deliberate' : 'bg-success action_deliberate'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
                     </td>
                 </tr>`);
                 for(var j = 0; j < course_group.data.course_ids.data.length; j++) {
