@@ -325,7 +325,7 @@
                         <field name="first_session_computed_result" widget="statinfo" string="Result" />
                         <field name="first_session_computed_result_bool" string="Result Bool" groups="base.group_configuration"/>
                         <field name="first_session_deliberated_result_bool" string="Deliberated" />
-                        <field name="first_session_deliberated_result" attrs="{'readonly':[('first_session_deliberated_result_bool','==',False)]}" string="Deliberated Result" />
+                        <field name="first_session_deliberated_result" attrs="{'visible':[('first_session_deliberated_result_bool','==',False)]}" string="Deliberated Result" />
                         <field name="first_session_result" widget="statinfo" string="Session Result" />
                         <field name="first_session_result_bool" string="Session Result Bool" groups="base.group_configuration"/>
                         <field name="first_session_result_bool" invisible="1" />
@@ -335,7 +335,7 @@
                         <field name="second_session_computed_result" widget="statinfo" string="Result" />
                         <field name="second_session_computed_result_bool" string="Result Bool" groups="base.group_configuration"/>
                         <field name="second_session_deliberated_result_bool" string="Deliberated" />
-                        <field name="second_session_deliberated_result" attrs="{'readonly':[('second_session_deliberated_result_bool','==',False)]}" string="Deliberated Result" />
+                        <field name="second_session_deliberated_result" attrs="{'visible':[('second_session_deliberated_result_bool','==',False)]}" string="Deliberated Result" />
                         <field name="second_session_result" widget="statinfo" string="Session Result" />
                         <field name="second_session_result_bool" string="Session Result Bool" groups="base.group_configuration"/>
                         <field name="second_session_result_bool" invisible="1" />
