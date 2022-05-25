@@ -319,7 +319,7 @@
                     <field name="first_session_result" string="S1" />
                     <field name="second_session_result" string="S2" />
                 </xpath>
-                <xpath expr="//field[@name='total_credits']" position="after">
+                <xpath expr="//field[@name='total_credits']//ancestor::group" position="after">
                     <group col="2" colspan="2" string="First Session">
                         <field name="first_session_computed_result_bool" invisible="1" />
                         <field name="first_session_computed_result" widget="statinfo" string="Result" />

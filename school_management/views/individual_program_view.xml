@@ -505,8 +505,6 @@
             <group col="2">
               <field name="source_course_group_id" />
               <field name="responsible_id" />
-            </group>
-            <group col="4" attrs="{'invisible': [('source_course_group_id','=',False)]}">
               <!--<field name="weight" />-->
               <field name="total_weight" />
               <field name="total_hours" />

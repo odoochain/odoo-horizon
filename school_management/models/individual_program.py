@@ -352,8 +352,8 @@ class IndividualCourseGroup(models.Model):
     
     is_ghost_cg = fields.Boolean(string='Is Ghost Course Group', default=False)
     
-    total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
-    total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)
+    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits', store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours', store=True)
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight', store=True)
     
     @api.onchange('source_course_group_id')
