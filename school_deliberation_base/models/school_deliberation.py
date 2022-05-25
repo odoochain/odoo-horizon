@@ -197,10 +197,15 @@ class CourseGroupDeliberation(models.Model):
     @api.onchange('is_deliberated_to_acquiered')
     def _onchange_is_deliberated_to_acquiered(self):
         if self.is_deliberated_to_acquiered :
-            self.course_group_id.set_deliberated_to_ten(session=self.deliberation_id.session == 'first' ? 1 : 2)
+            if self.deliberation_id.session == 'first' :
+                self.course_group_id.set_deliberated_to_ten(session=1)
+            else :
+                self.course_group_id.set_deliberated_to_ten(session=2)
             return {
                 'value': {'final_result_disp': '10'}
             }
         else :
             self.course_group_id.first_session_deliberated_result_bool = False
+            self.course_group_id.first_session_deliberated_result = False
             self.course_group_id.first_session_deliberated_result_bool = False
+            self.course_group_id.first_session_deliberated_result = False
