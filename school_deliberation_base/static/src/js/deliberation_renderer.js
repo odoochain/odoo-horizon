@@ -62,7 +62,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             </button>
                         </div>
                         <div class="col-md-8">
-                            <div role="alert" class="alert" style="margin-bottom: 0px;">${record.decision}</div>
+                            <div class="alert ${record.total_acquiered_credits < record.total_credits ? 'alert-danger' : 'alert-success'}" role="alert">${record.decision}</div>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-lg ${record.total_acquiered_credits < record.total_credits ? 'btn-danger bloc_postpone' : 'bloc_award'} ">${record.total_acquiered_credits < record.total_credits ? 'Ajourné' : 'Réussi'}</button>
