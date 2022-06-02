@@ -18,7 +18,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
             
             this.getParent().state.res_ids
             
-            if (this.$(".o_deliberation_bloc_kanban").length) {
+            if (this.$el.hasClass('o_deliberation_bloc_kanban')) {
                 var self = this;
                 console.log("Deliberate Bloc "+this.id);
                 this._rpc({
