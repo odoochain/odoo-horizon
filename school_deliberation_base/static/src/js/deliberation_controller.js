@@ -15,8 +15,24 @@ odoo.define('deliberation.DeliberationController', function (require) {
          */
         _openRecord() {
             console.log(this);
-            if (this.modelName === 'fleet.vehicle.model.brand' && this.$(".oe_kanban_fleet_model").length) {
-                this.$('.oe_kanban_fleet_model').first().click();
+            
+            this.getParent().state.res_ids
+            
+            if (this.$(".o_deliberation_bloc_kanban").length) {
+                var self = this;
+                console.log("Deliberate Bloc "+this.id);
+                this._rpc({
+                    model:'school.individual_bloc',
+                    method:'action_deliberate_bloc',
+                    args: [ [this.id] ],
+                    context: {...self.initialState.context,...{
+                        active_ids : this.getParent().state.res_ids,
+                    }},
+                }).then(result => {
+                    self.do_action(result);
+                });
+                
+                
             } else {
                 this._super.apply(this, arguments);
             }
