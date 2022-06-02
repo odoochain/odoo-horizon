@@ -122,7 +122,7 @@ class IndividualBloc(models.Model):
             'name': self.name,
             'res_model': 'school.individual_bloc',
             'res_id': self.id,
-            'res_ids' : self._context.get('active_ids')],
+            'res_ids' : self._context.get('active_ids'),
             'view_mode': 'deliberation',
             'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_view').id,
         }
