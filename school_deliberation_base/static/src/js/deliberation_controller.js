@@ -5,6 +5,24 @@ odoo.define('deliberation.DeliberationController', function (require) {
     var BasicController = require('web.BasicController');
     var viewRegistry = require('web.view_registry');
     
+    const KanbanRecord = require('web.KanbanRecord');
+
+    KanbanRecord.include({
+
+        /**
+         * @override
+         * @private
+         */
+        _openRecord() {
+            console.log(this);
+            if (this.modelName === 'fleet.vehicle.model.brand' && this.$(".oe_kanban_fleet_model").length) {
+                this.$('.oe_kanban_fleet_model').first().click();
+            } else {
+                this._super.apply(this, arguments);
+            }
+        },
+    });
+    
     var DeliberationController = BasicController.extend({
         
         custom_events: {
