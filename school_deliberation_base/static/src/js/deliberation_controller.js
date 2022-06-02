@@ -25,7 +25,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
                     model:'school.individual_bloc',
                     method:'action_deliberate_bloc',
                     args: [ [this.id] ],
-                    context: {...self.initialState.context,...{
+                    context: {...this.state.context,...{
                         active_ids : this.getParent().state.res_ids,
                     }},
                 }).then(result => {
