@@ -23,6 +23,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     this._renderFooter(),
                 ),
                 $('<button>').text('Close').click(ev => this.trigger_up('close')),
+                $('<button>').addClass('deliberation_next_button').text('Next').click(ev => this.trigger_up('deliberate_next_bloc')),
+                $('<button>').addClass('deliberation_previous_button').text('Previous').click(ev => this.trigger_up('deliberate_previous_bloc')),
             );
             return $.when();
         },

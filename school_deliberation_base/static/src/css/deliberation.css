@@ -16,3 +16,15 @@
     font-size: 30px;
     line-height: 40px;
 }
+
+.deliberation_next_button {
+	position:fixed;
+  	bottom:10px;
+  	right:10px;
+}
+
+.deliberation_previous_button {
+    position:fixed;
+  	bottom:10px;
+  	left:10px;
+}
