@@ -253,9 +253,6 @@
                               <span class="o_kanban_record_subtitle"><span t-esc="record.state.value"/></span>
                           </div>
                       </div>
-                      <div class="o_kanban_record_bottom">
-                          <button class="btn btn-primary" type="object" name="action_deliberate_bloc">Deliberate</button>
-                      </div>
                   </div>
               </div>
             </t>

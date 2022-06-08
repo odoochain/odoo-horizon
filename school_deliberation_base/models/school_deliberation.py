@@ -115,18 +115,7 @@ class IndividualBloc(models.Model):
     def _compute_all_responsibles(self):
         for rec in self:
             rec.all_responsible_ids = rec.get_all_responsibles()
-            
-    def action_deliberate_bloc(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': self.name,
-            'res_model': 'school.individual_bloc',
-            'res_id': self.id,
-            'res_ids' : self._context.get('active_ids'),
-            'view_mode': 'deliberation',
-            'view_id': self.env.ref('school_deliberation_base.deliberation_bloc_view').id,
-        }
-        
+
     def close_deliberate_bloc(self):
         return {
             'type': 'ir.actions.act_window',
