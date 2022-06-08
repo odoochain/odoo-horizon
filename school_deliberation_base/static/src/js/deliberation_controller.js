@@ -56,6 +56,8 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
 
         start: function () {
+            this.current_index = 0;
+            this.max_index = 10;
             return this._super();
         },
 
