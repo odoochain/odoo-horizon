@@ -4,8 +4,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
 
     var BasicRenderer = require('web.BasicRenderer');
     var utils = require('web.utils');
-    
-    var Pager = require('web.Pager');
+
     // var core = require('web.core');
     // var qweb = core.qweb;
 
@@ -43,10 +42,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             });
             $col1.append($img);
             $header.append($col1);
-            
-            const pager = new Pager();
-            pager.mount($header);
-            
             var $col2 = $('<div>',{class : 'col-10'});
             $col2.append(`
                     <div class="row">
