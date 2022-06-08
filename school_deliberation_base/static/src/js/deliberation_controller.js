@@ -64,16 +64,12 @@ odoo.define('deliberation.DeliberationController', function (require) {
             console.log(this);
         },
 
-        _onClose: function (event) {
+        _onClose: function (ev) {
             event.stopPropagation();
-            var self = this;
-            this._rpc({
-                model:'school.individual_bloc',
-                method:'close_deliberate_bloc',
-                args: [ '' ],
-                context: this.initialState.context,
-            }).then(result => {
-                self.do_action(result);
+            this.trigger_up('switch_view', {
+                    view_type: 'kanban',
+                    mode: ev.data.mode || 'readonly',
+                    model: this.modelName,
             });
         },
         
