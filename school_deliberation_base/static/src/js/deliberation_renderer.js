@@ -44,7 +44,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             $col1.append($img);
             $header.append($col1);
             
-            const pager = new Pager(this);
+            const pager = new Pager();
             pager.mount($header);
             
             var $col2 = $('<div>',{class : 'col-10'});
