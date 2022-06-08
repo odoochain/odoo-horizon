@@ -13,24 +13,17 @@ odoo.define('deliberation.DeliberationController', function (require) {
          * @override
          * @private
          */
-        _onOpenRecord() {
-            console.log(this);
-            
-            if (this.$el.hasClass('o_deliberation_bloc_kanban')) {
-                var self = this;
-                console.log("Deliberate Bloc "+this.id);
-                this._rpc({
-                    model:'school.individual_bloc',
-                    method:'action_deliberate_bloc',
-                    args: [ [this.id] ],
-                    context: {...this.state.context,...{
-                        active_ids : this.getParent().state.res_ids,
-                    }},
-                }).then(result => {
-                    self.do_action(result);
+        _onOpenRecord(ev) {
+            if (this.actionViews[1].type == 'deliberation') {
+                console.log("Deliberate Bloc "+ev.data.id);
+                ev.stopPropagation();
+                var record = this.model.get(ev.data.id, {raw: true});
+                this.trigger_up('switch_view', {
+                    view_type: 'deliberation',
+                    res_id: record.res_id,
+                    mode: ev.data.mode || 'readonly',
+                    model: this.modelName,
                 });
-                
-                
             } else {
                 this._super.apply(this, arguments);
             }
