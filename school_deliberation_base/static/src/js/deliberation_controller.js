@@ -45,8 +45,8 @@ odoo.define('deliberation.DeliberationController', function (require) {
             close: '_onClose',
             deliberate_course_group: '_onDeliberateCourseGroup',
             reload_bloc: '_onReloadBloc',
-            deliberate_next_bloc: '_OnNextBloc',
-            deliberate_previous_bloc: '_OnPreviousBloc',
+            deliberate_next_bloc: '_onNextBloc',
+            deliberate_previous_bloc: '_onPreviousBloc',
         },
 
         init: function (parent, model, renderer, params) {
