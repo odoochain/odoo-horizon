@@ -8,6 +8,7 @@ odoo.define('deliberation.DeliberationView', function (require) {
     var DeliberationModel = require('deliberation.DeliberationModel');
     var DeliberationRenderer = require('deliberation.DeliberationRenderer');
 
+    var Pager = require('web.Pager');
 
     var DeliberationView = BasicView.extend({
         display_name: 'Deliberation',
@@ -21,7 +22,7 @@ odoo.define('deliberation.DeliberationView', function (require) {
             Renderer: DeliberationRenderer,
         }),
         viewType: 'deliberation',
-        withControlPanel: true,
+        withControlPanel: false,
         groupable: false,
         init: function () {
             this._super.apply(this, arguments);
