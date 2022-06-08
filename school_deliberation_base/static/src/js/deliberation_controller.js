@@ -16,8 +16,6 @@ odoo.define('deliberation.DeliberationController', function (require) {
         _onOpenRecord() {
             console.log(this);
             
-            this.getParent().state.res_ids
-            
             if (this.$el.hasClass('o_deliberation_bloc_kanban')) {
                 var self = this;
                 console.log("Deliberate Bloc "+this.id);
