@@ -21,7 +21,7 @@ odoo.define('deliberation.DeliberationView', function (require) {
             Renderer: DeliberationRenderer,
         }),
         viewType: 'deliberation',
-        withControlPanel: false,
+        withControlPanel: true,
         groupable: false,
         init: function () {
             this._super.apply(this, arguments);
