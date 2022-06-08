@@ -69,7 +69,8 @@ odoo.define('deliberation.DeliberationController', function (require) {
         
         _onNextBloc: function (event) {
             event.stopPropagation();
-            if (this.currentMinimum > 0) {
+            console.log(this);
+            if (this.currentMinimum < 10) {
                 const reloadParams = {
                     limit: 1,
                     offset: ++this.currentMinimum,
