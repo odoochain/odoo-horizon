@@ -5,15 +5,15 @@ odoo.define('deliberation.DeliberationController', function (require) {
     var BasicController = require('web.BasicController');
     var viewRegistry = require('web.view_registry');
     
-    const KanbanRecord = require('web.KanbanRecord');
+    const KanbanController = require('web.KanbanController');
 
-    KanbanRecord.include({
+    KanbanController.include({
 
         /**
          * @override
          * @private
          */
-        _openRecord() {
+        _onOpenRecord() {
             console.log(this);
             
             this.getParent().state.res_ids
