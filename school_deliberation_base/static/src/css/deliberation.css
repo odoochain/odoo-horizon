@@ -19,12 +19,12 @@
 
 .deliberation_next_button {
 	position:fixed;
-  	bottom:10px;
-  	right:10px;
+  	bottom:20px;
+  	right:20px;
 }
 
 .deliberation_previous_button {
     position:fixed;
-  	bottom:10px;
-  	left:10px;
+  	bottom:20px;
+  	left:20px;
 }
