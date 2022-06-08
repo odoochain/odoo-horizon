@@ -47,7 +47,6 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
 
         start: function () {
-            this.currentMinimum = 0;
             return this._super();
         },
 
@@ -56,11 +55,12 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
         
         _onPreviousBloc: function (event) {
-            console.log(this);
-            if (this.currentMinimum > 0) {
+            event.stopPropagation();
+            var currentIndex = this.initialState.res_ids.indexOf(this.initialState.res_id);
+            if( currentIndex > 0) {
                 const reloadParams = {
                     limit: 1,
-                    offset: --this.currentMinimum,
+                    offset: --currentIndex,
                 };
                 this.reload(reloadParams);
                 this.trigger_up('scrollTo', { top: 0 });
@@ -69,11 +69,11 @@ odoo.define('deliberation.DeliberationController', function (require) {
         
         _onNextBloc: function (event) {
             event.stopPropagation();
-            console.log(this);
-            if (this.currentMinimum < 10) {
+            var currentIndex = this.initialState.res_ids.indexOf(this.initialState.res_id);
+            if( currentIndex < this.initialState.res_ids.length - 1) {
                 const reloadParams = {
                     limit: 1,
-                    offset: ++this.currentMinimum,
+                    offset: ++currentIndex,
                 };
                 this.reload(reloadParams);
                 this.trigger_up('scrollTo', { top: 0 });
