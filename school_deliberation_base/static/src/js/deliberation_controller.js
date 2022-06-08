@@ -66,11 +66,11 @@ odoo.define('deliberation.DeliberationController', function (require) {
 
         _onClose: function (ev) {
             event.stopPropagation();
-            ev.data.controllerID = this.controllerID;
             this.trigger_up('switch_view', {
                     view_type: 'kanban',
                     mode: ev.data.mode || 'readonly',
                     model: this.modelName,
+                    controllerID: this.controllerID,
             });
         },
         
