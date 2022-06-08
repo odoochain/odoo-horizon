@@ -5,7 +5,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
     var BasicRenderer = require('web.BasicRenderer');
     var utils = require('web.utils');
     
-    var Pager = require('web.Pager'):
+    var Pager = require('web.Pager');
     // var core = require('web.core');
     // var qweb = core.qweb;
 
