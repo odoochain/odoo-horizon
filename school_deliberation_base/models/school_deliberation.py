@@ -54,7 +54,7 @@ class Deliberation(models.Model):
     
     name = fields.Char(required=True, string="Title")
     
-    secretary_id = fields.Many2one('res.partner', required=True, domain=[('teacher','=',True)])
+    secretary_id = fields.Many2one('res.partner', required=True, domain=[('employee','=',True)])
     
     individual_program_ids = fields.Many2many('school.individual_program', 'school_deliberation_program_rel', 'deliberation_id', 'program_id', string='Programs',domain=[('state','=','progress')])
     
@@ -66,7 +66,12 @@ class Deliberation(models.Model):
     
     participant_ids = fields.Many2many('res.partner', 'school_deliberation_participants_rel', 'deliberation_id', 'partner_id', string='Particpants',domain=[('teacher','=',True)])
     
-    excused_participant_ids = fields.Many2many('res.partner', 'school_deliberation_excused_part_rel', 'deliberation_id', 'partner_id', string='Excused Particpants',domain=[('teacher','=',True)])
+    excused_participant_ids = fields.Many2many('res.partner', 'school_deliberation_excused_part_rel', 'deliberation_id', 'partner_id', string='Excused Particpants', readonly=1)
+    
+    @api.onchange('participant_ids')
+    def _on_update_participant_ids(self):
+        for rec in self:
+            rec.excused_participant_ids = rec.get_all_responsibles() - rec.participant_ids
     
     def _compute_counts(self):
         for rec in self:
@@ -84,13 +89,16 @@ class Deliberation(models.Model):
         
     def action_populate_participants(self):
         self.ensure_one()
+        return self.write({'participant_ids' : [(6, 0, self._compute_all_responsibles().ids)]})
+        
+    def _compute_all_responsibles(self):
         all_responsibles = self.env['res.partner']
         for bloc in self.individual_bloc_ids :
             all_responsibles |= bloc.get_all_responsibles()
         for program in self.individual_program_ids :
             all_responsibles |= program.get_all_responsibles()
-        return self.write({'participant_ids' : [(6, 0, all_responsibles.ids)]})
-        
+        return all_responsibles
+    
     def action_open_deliberation_bloc(self):
         self.ensure_one()
         return {
