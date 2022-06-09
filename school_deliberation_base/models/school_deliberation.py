@@ -71,7 +71,7 @@ class Deliberation(models.Model):
     @api.onchange('participant_ids')
     def _on_update_participant_ids(self):
         for rec in self:
-            rec.excused_participant_ids = rec.get_all_responsibles() - rec.participant_ids
+            rec.excused_participant_ids = rec._compute_all_responsibles() - rec.participant_ids
     
     def _compute_counts(self):
         for rec in self:
