@@ -104,7 +104,7 @@
               <field name="individual_bloc_ids" attrs="{'readonly': [('state', '!=', 'to_draft')]}"/>
               <field name="individual_program_ids" attrs="{'readonly': [('state', '!=', 'to_draft')]}"/>
               <field name="participant_ids" widget="many2many_tags"/>
-              <field name="excused_participant_ids" widget="many2many_tags"/>
+              <field name="excused_participant_ids" widget="many2many_tags" domain="[('id', 'in', participant_ids)]"/>
             </group>
           </sheet>
         </form>
