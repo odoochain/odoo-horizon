@@ -64,14 +64,14 @@ class Deliberation(models.Model):
     
     individual_bloc_count = fields.Integer(string='Blocs Count', compute="_compute_counts")
     
-    participant_ids = fields.Many2many('res.partner', 'school_deliberation_participants_rel', 'deliberation_id', 'partner_id', string='Particpants',domain=[('teacher','=',True)])
+    participant_ids = fields.Many2many('res.partner', 'school_deliberation_participants_rel', 'deliberation_id', 'partner_id', string='Particpants', readonly=1)
     
-    excused_participant_ids = fields.Many2many('res.partner', 'school_deliberation_excused_part_rel', 'deliberation_id', 'partner_id', string='Excused Particpants', readonly=1)
+    excused_participant_ids = fields.Many2many('res.partner', 'school_deliberation_excused_part_rel', 'deliberation_id', 'partner_id', string='Excused Particpants',domain=[('teacher','=',True)])
     
-    @api.onchange('participant_ids')
+    @api.onchange('excused_participant_ids')
     def _on_update_participant_ids(self):
         for rec in self:
-            rec.excused_participant_ids = rec._compute_all_responsibles() - rec.participant_ids
+            rec.participant_ids = rec._compute_all_responsibles() - rec.excused_participant_ids
     
     def _compute_counts(self):
         for rec in self:
