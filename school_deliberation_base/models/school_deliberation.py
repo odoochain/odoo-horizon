@@ -66,7 +66,7 @@ class Deliberation(models.Model):
     
     participant_ids = fields.Many2many('res.partner', 'school_deliberation_participants_rel', 'deliberation_id', 'partner_id', string='Particpants', readonly=1)
     
-    excused_participant_ids = fields.Many2many('res.partner', 'school_deliberation_excused_part_rel', 'deliberation_id', 'partner_id', string='Excused Particpants',domain=[('teacher','=',True)])
+    excused_participant_ids = fields.Many2many('res.partner', 'school_deliberation_excused_part_rel', 'deliberation_id', 'partner_id', string='Excused Particpants',domain=[('teacher','in',self.participant_ids)])
     
     @api.onchange('excused_participant_ids')
     def _on_update_participant_ids(self):
