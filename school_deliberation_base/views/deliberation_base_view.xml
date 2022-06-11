@@ -93,16 +93,16 @@
               </h1>
             </div>
             <group col="4">
-              <field name="year_id" attrs="{'readonly': [('state', '!=', 'to_draft')]}"/>
-              <field name="session" attrs="{'readonly': [('state', '!=', 'to_draft')]}"/>
-              <field name="date" attrs="{'readonly': [('state', '!=', 'to_draft')]}"/>
-              <field name="secretary_id" attrs="{'readonly': [('state', '!=', 'to_draft')]}"/>
+              <field name="year_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+              <field name="session" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+              <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+              <field name="secretary_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
               <field name="individual_program_count" />
               <field name="individual_bloc_count" />
             </group>
             <group col="2">
-              <field name="individual_bloc_ids" attrs="{'readonly': [('state', '!=', 'to_draft')]}"/>
-              <field name="individual_program_ids" attrs="{'readonly': [('state', '!=', 'to_draft')]}"/>
+              <field name="individual_bloc_ids" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+              <field name="individual_program_ids" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
               <field name="participant_ids" widget="many2many_tags"/>
               <field name="excused_participant_ids" widget="many2many_tags" domain="[('id', 'in', participant_ids)]"/>
             </group>
