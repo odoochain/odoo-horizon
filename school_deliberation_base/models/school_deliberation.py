@@ -71,7 +71,7 @@ class Deliberation(models.Model):
     @api.onchange('individual_bloc_ids')
     def _on_update_individual_bloc_ids(self):
         for rec in self:
-            rec.individual_program_ids = rec.individual_bloc_ids.search([('is_final_bloc','=',True)]).mapped('program_id')
+            rec.individual_program_ids = rec.individual_bloc_ids.filtered(lambda rec : rec.is_final_bloc).mapped('program_id')
     
     @api.onchange('excused_participant_ids')
     def _on_update_participant_ids(self):
