@@ -478,7 +478,7 @@ class IndividualCourseGroup(models.Model):
     final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active', store=True)
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_results_disp')
     
-    acquiered = fields.Selection(([('A', 'Acquiered'),('NA', 'Not Acquiered')]), compute='compute_acquiered', string='Acquired Credits', store=True, track_visibility='onchange',default='NA')
+    acquiered = fields.Selection(([('A', 'Acquiered'),('NA', 'Not Acquiered')]), compute='compute_final_results', string='Acquired Credits', store=True, track_visibility='onchange',default='NA')
     
     final_note = fields.Text(string='Final Notes')
     
