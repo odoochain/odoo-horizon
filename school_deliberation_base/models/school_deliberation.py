@@ -68,10 +68,13 @@ class Deliberation(models.Model):
     
     excused_participant_ids = fields.Many2many('res.partner', 'school_deliberation_excused_part_rel', 'deliberation_id', 'partner_id', string='Excused Particpants')
     
+    @api.onchange('individual_bloc_ids')
+    def _on_update_individual_bloc_ids(self):
+        for rec in self:
+            rec.individual_program_ids = rec.individual_bloc_ids.search([('is_final_bloc','=',True)]).mapped('program_id')
+    
     @api.onchange('excused_participant_ids')
     def _on_update_participant_ids(self):
-        for rec in self:
-            rec.participant_ids = rec.participant_ids - rec.excused_participant_ids
     
     def _compute_counts(self):
         for rec in self:
