@@ -13,6 +13,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         events: _.extend({}, BasicRenderer.prototype.events, {
             'click .action_deliberate' : '_onActionDeliberate',
             'click .o_reload_bloc' : '_onReloadBloc',
+            'click .bloc_postpone' : '_onPostponeBloc',
+            'click .bloc_award' : '_onAwardBloc',
         }),
         
         _render: function () {
@@ -190,6 +192,14 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         
         _onReloadBloc : function (event) {
             this.trigger_up('reload_bloc');
+        },
+        
+        _onPostponeBloc : function (event) {
+            this.trigger_up('postpone_bloc');
+        },
+        
+        _onAwardBloc : function (event) {
+            this.trigger_up('award_bloc');
         },
         
         //--------------------------------------------------------------------------

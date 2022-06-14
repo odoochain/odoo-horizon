@@ -38,6 +38,8 @@ odoo.define('deliberation.DeliberationController', function (require) {
             reload_bloc: '_onReloadBloc',
             deliberate_next_bloc: '_onNextBloc',
             deliberate_previous_bloc: '_onPreviousBloc',
+            postpone_bloc : '_onPostponeBloc',
+            award_bloc : '_onAwardBloc',
         },
 
         init: function (parent, model, renderer, params) {
@@ -50,7 +52,23 @@ odoo.define('deliberation.DeliberationController', function (require) {
             return this._super();
         },
 
+        _onPostponeBloc: function (event) {
+            this._onNextBloc(event);
+        },
+
+        _onAwardBloc: function (event) {
+            var self = this;
+            self._rpc.query({
+                model: 'school.individual_bloc',
+                method: self.school_session == 1 ? "set_to_awarded_first_session" : "set_to_awarded_second_session",
+                args: [self.datarecord.id,self.bloc_result.message],
+            }).then(function(result) {
+                this._onNextBloc(event);
+            });
+        },
+        
         _onReloadBloc: function (event) {
+            
             this.reload();
         },
         

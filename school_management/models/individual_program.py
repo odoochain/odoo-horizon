@@ -81,9 +81,9 @@ class IndividualProgram(models.Model):
     student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", required=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    image = fields.Binary('Image', attachment=True, related='student_id.image')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
     source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict", readonly=True, states={'draft': [('readonly', False)]}, domain="[('year_id', '=', year_id)]")
     
@@ -233,9 +233,9 @@ class IndividualBloc(models.Model):
                 bloc.source_bloc_section_id = bloc.program_id.section_id
                 bloc.source_bloc_track_id = bloc.program_id.track_id
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    image = fields.Binary('Image', attachment=True, related='student_id.image')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', track_visibility='onchange')
     
@@ -328,9 +328,9 @@ class IndividualCourseGroup(models.Model):
     student_id = fields.Many2one(related="bloc_id.student_id", string='Student', store=True, domain=[('student', '=', True)])
     responsible_id = fields.Many2one('res.partner', related="source_course_group_id.responsible_id")
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    image = fields.Binary('Image', attachment=True, related='student_id.image')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
     source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict")
     source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
@@ -422,9 +422,9 @@ class IndividualCourse(models.Model):
             if len(old_course) == 1 and old_course.teacher_id:
                 rec.teacher_id = old_course.teacher_id
 
-    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    image = fields.Binary('Image', attachment=True, related='student_id.image')
+    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
+    image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
 
     url_ref = fields.Char(related="source_course_id.url_ref", readonly=True)
 

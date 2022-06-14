@@ -325,11 +325,11 @@ class IndividualBloc(models.Model):
                 rec.total_not_acquiered_credits = rec.total_credits - rec.total_acquiered_credits
                 rec.total_not_acquiered_hours = rec.total_hours - rec.total_acquiered_hours
                 if rec.level == '1A1C' :
-                    if rec.total_acquiered_credits == 60 :
-                        rec.decision = 'A validé 60 ECTS et est autorisé(e) à poursuivre son parcours sans restriction.'
+                    if rec.total_acquiered_credits == rec.total_credits :
+                        rec.decision = 'A validé tous les ECTS et est autorisé(e) à poursuivre son parcours sans restriction.'
                     elif rec.total_acquiered_credits < 45 and rec.total_acquiered_credits >= 30 :
                         rec.decision = 'A validé au moins de 30 ECTS mais moins de 45. Peut compléter son programme ou non avec accord du jury.'
-                    elif rec.total_acquiered_credits < 45 :
+                    elif rec.total_acquiered_credits < 30 :
                         rec.decision = 'A validé moins de 30 ECTS. N’a pas rempli les conditions de réussite de son programme.'
                     else :
                         rec.decision = 'A validé au moins 45 ECTS et est autorisé à poursuivre son parcours tout en représentant les UE non validées.'
