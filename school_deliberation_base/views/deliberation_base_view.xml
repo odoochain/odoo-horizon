@@ -125,6 +125,7 @@
             <field name="total_credits" />
             <field name="decision" />
             <field name="all_responsible_ids">
+            <field name="state" />
               <tree>
                 <field name="name"/>
               </tree>
