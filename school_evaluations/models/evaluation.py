@@ -238,12 +238,14 @@ class IndividualBloc(models.Model):
     def set_to_draft(self, context=None):
         # TODO use a workflow to make sure only valid changes are used.
         self.course_group_ids.write({'state': '9_draft'})
+        self.course_group_ids.compute_average_results()
         return self.write({'state': 'draft'})
     
     
     def set_to_progress(self, context=None):
-        self.course_group_ids.write({'state': '5_progress'})
         # TODO use a workflow to make sure only valid changes are used.
+        self.course_group_ids.write({'state': '5_progress'})
+        self.course_group_ids.compute_average_results()
         return self.write({'state': 'progress'})
     
     def set_to_postponed(self, decision=None, context=None):
