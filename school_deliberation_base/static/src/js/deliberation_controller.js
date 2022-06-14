@@ -60,8 +60,8 @@ odoo.define('deliberation.DeliberationController', function (require) {
             var self = this;
             self._rpc.query({
                 model: 'school.individual_bloc',
-                method: self.school_session == 1 ? "set_to_awarded_first_session" : "set_to_awarded_second_session",
-                args: [self.datarecord.id,self.bloc_result.message],
+                method: this.renderer.state.context.session == 'first' ? "set_to_awarded_first_session" : "set_to_awarded_second_session",
+                args: [self.renderer.state.res_id, self.renderer.state.data.decision],
             }).then(function(result) {
                 this._onNextBloc(event);
             });

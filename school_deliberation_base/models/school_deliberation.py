@@ -114,7 +114,7 @@ class Deliberation(models.Model):
             'view_mode': 'kanban,deliberation',
             'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,),
             'views': [[self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban'],[self.env.ref('school_deliberation_base.deliberation_bloc_view').id,'deliberation']],
-            'context': {'deliberation_id':self.id},
+            'context': {'deliberation_id':self.id, 'session':self.session},
         }
         
 class IndividualBloc(models.Model):
