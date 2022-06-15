@@ -135,6 +135,8 @@ class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit = 'school.individual_program'
     
+    deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_program_rel', 'program_id', 'deliberation_id', string='Deliberations', readonly=True)
+    
     all_responsible_ids = fields.Many2many('res.partner', compute='_compute_all_responsibles')
     
     def _compute_all_responsibles(self):
