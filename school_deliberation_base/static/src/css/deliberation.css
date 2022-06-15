@@ -11,6 +11,11 @@
     width: 100%;
 }
 
+.progress {
+    padding-right: 0;
+    padding-left: 0;
+}
+
 .progress-bar {
     height: 100%;
     font-size: 30px;

@@ -76,13 +76,19 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
 
         _onAwardBloc: function (event) {
+            event.stopPropagation();
             var self = this;
-            self._rpc({
-                model: 'school.individual_bloc',
-                method: this.renderer.state.context.session == 'first' ? "set_to_awarded_first_session" : "set_to_awarded_second_session",
-                args: [self.renderer.state.res_id, self.renderer.state.data.decision],
-            }).then(function(result) {
-                self._onNextBloc(event);
+            console.log("Deliberate CG "+event.data['id']);
+            this._rpc({
+                model:'school.individual_bloc',
+                method:'action_deliberate_bloc',
+                args: [ [self.id] ],
+                context: {...self.initialState.context,...{
+                    default_bloc_id: parseInt(event.data['id']),
+                    default_deliberation_id: parseInt(self.initialState.context['deliberation_id']),
+                }},
+            }).then(result => {
+                self.do_action(result, { 'on_close' : self._onNextBloc.bind(self) });
             });
         },
         

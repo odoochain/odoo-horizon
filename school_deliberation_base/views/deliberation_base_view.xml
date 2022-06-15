@@ -261,6 +261,51 @@
         </kanban>
       </field>
     </record>
+    
+    <!-- Deliberation Bloc Form View -->
+    <record model="ir.ui.view" id="bloc_deliberation_form">
+      <field name="name">school.bloc_deliberation.view</field>
+      <field name="model">school.bloc_deliberation</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Bloc Deliberation">
+          <sheet>
+            <div class="container h_deliberation_dialog">
+              <div class="row">
+                <div class="h-100 d-inline-block" style="width: 150px;">
+                  <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
+                </div>
+                <div class="col-8">
+                  <h2>
+                   <field name="name"/>
+                  </h2>
+                  <h3 class="o_row row no-gutters d-flex">
+                      <div class="col">
+                        <label for="student_name" invisible="1"/>
+                        <small class="oe_grey" ><field name="student_name"/></small>
+                      </div>
+                  </h3>
+                </div>
+                <div class="col-2">
+                  <button class="btn btn_credits" type="button" name="evaluation">
+                    <h1><field name="evaluation"/></h1>
+                  </button>
+                </div>  
+              </div>
+              <div class="row">
+                <div class="alert mb-0" role="alert" style="font-size: larger;"><field name="devision"/></div>
+              </div>
+            </div>
+            <group col="2">
+              <field name="deliberation_id" invisible="1"/>
+              <field name="bloc_id" invisible="1"/>
+              <field name="private_comments" widget="html"/>
+              <field name="public_comments" widget="html"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
 
     <!-- Deliberation Form View -->
     <record model="ir.ui.view" id="course_group_deliberation_form">
@@ -312,10 +357,6 @@
               <field name="comments" widget="html"/>
             </group>
           </sheet>
-          <!--<footer>
-            <button name="save" type="object" string="Save" class="oe_highlight pull-left" close="1"/>
-            <button special="cancel" string="Cancel" class="pull-right"/>
-          </footer>-->
         </form>
       </field>
     </record>

@@ -140,6 +140,35 @@ class IndividualBloc(models.Model):
             'views': [[self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban']],
         }
         
+        
+    def action_deliberate_bloc(self):
+        self.ensure_one()
+        bloc_deliberation_ids = self.env['school.bloc_deliberation'].search([
+            ['deliberation_id','=',self._context['deliberation_id']],
+            ['bloc_id','=',self.id]
+        ])
+        if bloc_deliberation_ids :
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Deliberate Bloc',
+                'target': 'new',
+                'flags': { 'action_buttons': True, 'headless': True },
+                'res_model':  'school.bloc_deliberation',
+                'res_id': bloc_deliberation_ids[0].id,
+                'context': self._context,
+                'views': [[False, 'form']],
+            }
+        else :
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Deliberate Bloc',
+                'target': 'new',
+                'flags': { 'action_buttons': True, 'headless': True },
+                'res_model':  'school.bloc_deliberation',
+                'context': self._context,
+                'views': [[False, 'form']],
+            }
+        
     def action_deliberate_course_group(self):
         self.ensure_one()
         course_group_deliberation_ids = self.env['school.course_group_deliberation'].search([
@@ -167,9 +196,36 @@ class IndividualBloc(models.Model):
                 'context': self._context,
                 'views': [[False, 'form']],
             }
-            
+
+class BlocDeliberation(models.Model):
+    '''Bloc Deliberation'''
+    _name = 'school.bloc_deliberation'
+    _description = 'Manage deliberation of a bloc'
+    
+    deliberation_id = fields.Many2one('school.deliberation', required=True)
+    
+    bloc_id = fields.Many2one('school.individual_bloc', required=True)
+    
+    image = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image')
+    
+    image_medium = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_medium')
+    
+    image_small = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_small')
+    
+    name = fields.Char(string='Name', related='bloc_id.title')
+    
+    evaluation = fields.Char(string='Final Result Display', related='bloc_id.evaluation')
+    
+    decision = fields.Char(string='Final Result Display', related='bloc_id.decision')
+    
+    student_name = fields.Char(string='Student', related='course_group_id.student_id.name')
+    
+    public_comments = fields.Char(string='Public Comments')
+    
+    private_comments = fields.Char(string='Private Comments')
+    
 class CourseGroupDeliberation(models.Model):
-    '''Deliberation'''
+    '''Course Group Deliberation'''
     _name = 'school.course_group_deliberation'
     _description = 'Manage deliberation of a course group'
     
