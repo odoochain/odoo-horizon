@@ -62,7 +62,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     </div>
             `);
             
-            if(this.state.res_model=='school.individual_bloc') {
+            if(this.state.model=='school.individual_bloc') {
                 $col2.append(`
                         <div class="row">
                             <span class="col">
