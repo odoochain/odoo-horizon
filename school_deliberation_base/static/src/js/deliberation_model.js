@@ -53,24 +53,25 @@ odoo.define('deliberation.DeliberationModel', function (require) {
             var self = this;
             return new Promise((resolve, reject) => {
                 super_def.then(function(results) {
-                var localID = results;
-                self._rpc({
-                        model: "school.individual_program", 
-                        method: "read", 
-                        args: [[self.localData[self.localData[localID].data.program_id].data.id]],
-                    }).then(function(result){
-                        self.programValues[localID] = result[0];
-                        self._rpc({
-                                model: "school.individual_course",
-                                method: "search_read", 
-                                domain: [['bloc_id', '=', self.localData[localID].data.id]],
-                                fields: ['course_group_id','title','teacher_id','final_result'],
-                            }).then(function(result){
-                                self.courseValues[localID] = result;
-                                resolve(localID);
+                if (self.loadParams.modelName == 'school.individual_bloc') {
+                    var localID = results;
+                    self._rpc({
+                            model: "school.individual_program", 
+                            method: "read", 
+                            args: [[self.localData[self.localData[localID].data.program_id].data.id]],
+                        }).then(function(result){
+                            self.programValues[localID] = result[0];
+                            self._rpc({
+                                    model: "school.individual_course",
+                                    method: "search_read", 
+                                    domain: [['bloc_id', '=', self.localData[localID].data.id]],
+                                    fields: ['course_group_id','title','teacher_id','final_result'],
+                                }).then(function(result){
+                                    self.courseValues[localID] = result;
+                                    resolve(localID);
+                                });
                             });
-                        });
-                });
+                }});
             });
         },
           
