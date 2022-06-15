@@ -15,7 +15,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
          */
         _onOpenRecord(ev) {
             if (this.actionViews.length > 1 && this.actionViews[1].type == 'deliberation') {
-                console.log("Deliberate Bloc "+ev.data.id);
+                console.log("Deliberate "+ this.modelName + " " + ev.data.id);
                 ev.stopPropagation();
                 var record = this.model.get(ev.data.id, {raw: true});
                 this.trigger_up('switch_view', {
