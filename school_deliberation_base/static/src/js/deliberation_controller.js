@@ -78,13 +78,13 @@ odoo.define('deliberation.DeliberationController', function (require) {
         _onAwardBloc: function (event) {
             event.stopPropagation();
             var self = this;
-            console.log("Deliberate CG "+event.data['id']);
+            console.log("Deliberate Bloc "+self.renderer.state.res_id);
             this._rpc({
                 model:'school.individual_bloc',
                 method:'action_deliberate_bloc',
                 args: [ [self.id] ],
                 context: {...self.initialState.context,...{
-                    default_bloc_id: parseInt(event.data['id']),
+                    default_bloc_id: parseInt(self.renderer.state.res_id),
                     default_deliberation_id: parseInt(self.initialState.context['deliberation_id']),
                 }},
             }).then(result => {
