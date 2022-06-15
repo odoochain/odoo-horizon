@@ -93,12 +93,13 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
         
         _onReloadBloc: function (event) {
-            
             this.reload();
         },
         
         _onPreviousBloc: function (event) {
-            event.stopPropagation();
+            if(event) {
+                event.stopPropagation();
+            }
             var currentIndex = this.renderer.state.res_ids.indexOf(this.renderer.state.res_id);
             if( currentIndex > 0) {
                 const reloadParams = {
@@ -111,7 +112,9 @@ odoo.define('deliberation.DeliberationController', function (require) {
         },
         
         _onNextBloc: function (event) {
-            event.stopPropagation();
+            if(event) {
+                event.stopPropagation();
+            }
             var currentIndex = this.renderer.state.res_ids.indexOf(this.renderer.state.res_id);
             if( currentIndex < this.renderer.state.res_ids.length - 1) {
                 const reloadParams = {
