@@ -144,8 +144,8 @@ class IndividualBloc(models.Model):
     def action_deliberate_bloc(self):
         self.ensure_one()
         bloc_deliberation_ids = self.env['school.bloc_deliberation'].search([
-            ['deliberation_id','=',self._context['deliberation_id']],
-            ['bloc_id','=',self.id]
+            ['deliberation_id','=',self._context['default_deliberation_id']],
+            ['bloc_id','=',self._context['default_bloc_id']]
         ])
         if bloc_deliberation_ids :
             return {
