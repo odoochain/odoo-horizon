@@ -295,15 +295,13 @@
               <div class="row">
                 <div class="alert mb-0" role="alert" style="font-size: larger;"><field name="decision"/></div>
               </div>
+              <div class="row">
+                <button name="set_to_postponed" type="object" states="progress" string="Postponed" class="oe_highlight" />
+                <button name="set_to_awarded_first_session" type="object" states="progress" string="Awarded" class="oe_highlight" />
+                <button name="set_to_failed" type="object" states="postponed" string="Failed" class="oe_highlight" />
+                <button name="set_to_awarded_second_session" type="object" states="postponed" string="Awarded" class="oe_highlight" />
+              </div>
             </div>
-            <t t-if="deliberation_id.session == 'first'">
-              <button name="set_to_postponed" type="object" string="Postponed" class="oe_highlight" />
-              <button name="set_to_awarded_first_session" type="object" string="Awarded" class="oe_highlight" />
-            </t>
-            <t t-if="deliberation_id.session != 'first'">
-              <button name="set_to_failed" type="object" string="Failed" class="oe_highlight" />
-              <button name="set_to_awarded_second_session" type="object" string="Awarded" class="oe_highlight" />
-            </t>
             <group col="2">
               <field name="deliberation_id" invisible="1"/>
               <field name="bloc_id" invisible="1"/>
