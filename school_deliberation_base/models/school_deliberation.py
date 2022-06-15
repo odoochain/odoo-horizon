@@ -216,6 +216,10 @@ class BlocDeliberation(models.Model):
     
     evaluation = fields.Float(string='Evaluation', related='bloc_id.evaluation')
     
+    total_acquiered_credits = fields.Integer(string='Total Acquiered Credits', related='bloc_id.total_acquiered_credits')
+    
+    total_not_acquiered_credits = fields.Integer(string='Total Not Acquiered Credits', related='bloc_id.total_not_acquiered_credits')
+    
     decision = fields.Text(string='Decision', related='bloc_id.decision')
     
     student_name = fields.Char(string='Student', related='bloc_id.student_id.name')

@@ -299,6 +299,8 @@
             <group col="2">
               <field name="deliberation_id" invisible="1"/>
               <field name="bloc_id" invisible="1"/>
+              <field name="total_acquiered_credits"/>
+              <field name="total_not_acquiered_credits"/>
               <field name="private_comments" widget="html"/>
               <field name="public_comments" widget="html"/>
             </group>
