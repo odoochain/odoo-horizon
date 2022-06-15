@@ -299,9 +299,17 @@
             <group col="2">
               <field name="deliberation_id" invisible="1"/>
               <field name="bloc_id" invisible="1"/>
+              <field name="state" invisible="1"/>
+              <t t-if="deliberation_id.session == 'first'">
+                <button name="set_to_postponed" type="object" string="Postponed" class="oe_highlight" />
+                <button name="set_to_awarded" type="object" string="Awarded" class="oe_highlight" />
+              </t>
+              <t t-else="">
+                <button name="set_to_failed" type="object" string="Failed" class="oe_highlight" />
+                <button name="set_to_awarded" type="object" string="Awarded" class="oe_highlight" />
+              </t>
               <field name="total_acquiered_credits"/>
               <field name="total_not_acquiered_credits"/>
-              <field name="state"/>
               <field name="private_comments" widget="html"/>
               <field name="public_comments" widget="html"/>
             </group>

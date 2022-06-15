@@ -230,6 +230,34 @@ class BlocDeliberation(models.Model):
     
     private_comments = fields.Char(string='Private Comments')
     
+    def set_to_postponed(self):
+        self.ensure_one()
+        self.bloc_id.set_to_postponed(decision=self.decision)
+        return {'value':{
+                'state': self.state
+                }}
+    
+    def set_to_awarded_first_session(self):
+        self.ensure_one()
+        self.bloc_id.set_to_awarded_first_session(decision=self.decision)
+        return {'value':{
+                'state': self.state
+                }}
+        
+    def set_to_awarded_second_session(self):
+        self.ensure_one()
+        self.bloc_id.set_to_awarded_second_session(decision=self.decision)
+        return {'value':{
+                'state': self.state
+                }}
+                
+    def set_to_failed(self):
+        self.ensure_one()
+        self.bloc_id.set_to_failed(decision=self.decision)
+        return {'value':{
+                'state': self.state
+                }}
+                
 class CourseGroupDeliberation(models.Model):
     '''Course Group Deliberation'''
     _name = 'school.course_group_deliberation'
