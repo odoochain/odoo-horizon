@@ -212,7 +212,7 @@ class BlocDeliberation(models.Model):
     
     image_small = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_small')
     
-    name = fields.Char(string='Name', related='bloc_id.title')
+    name = fields.Char(string='Name', related='bloc_id.name')
     
     evaluation = fields.Char(string='Final Result Display', related='bloc_id.evaluation')
     
