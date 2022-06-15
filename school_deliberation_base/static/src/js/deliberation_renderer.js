@@ -13,8 +13,10 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         events: _.extend({}, BasicRenderer.prototype.events, {
             'click .action_deliberate' : '_onActionDeliberate',
             'click .o_reload_bloc' : '_onReloadBloc',
+            'click .bloc_fail' : '_onFailBloc',
             'click .bloc_postpone' : '_onPostponeBloc',
             'click .bloc_award' : '_onAwardBloc',
+            'click .deliberation_close_button' : '_onClose',
         }),
         
         _render: function () {
@@ -25,9 +27,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     this._renderContent(),
                     this._renderFooter(),
                 ),
-                $('<button>').text('Close').click(ev => this.trigger_up('close')),
-                $('<button>').addClass('deliberation_next_button').text('Next').click(ev => this.trigger_up('deliberate_next_bloc')),
-                $('<button>').addClass('deliberation_previous_button').text('Previous').click(ev => this.trigger_up('deliberate_previous_bloc')),
+                $('<button>').addClass('deliberation_next_button btn btn-lg').text('Next').click(ev => this.trigger_up('deliberate_next_bloc')),
+                $('<button>').addClass('deliberation_previous_button btn btn-lg').text('Previous').click(ev => this.trigger_up('deliberate_previous_bloc')),
             );
             return $.when();
         },
@@ -53,6 +54,9 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <span class="col-md-2 refresh_button">
                             <button class="btn btn-default o_reload_bloc" type="button">
                                 <i class="fa fa-refresh fa-fw fa-2x"></i>
+                            </button>
+                            <button class="btn btn-default deliberation_close_button" type="button">
+                                <i class="fa fa-window-close fa-fw fa-2x"></i>
                             </button>
                         </span>
                     </div>
@@ -190,8 +194,16 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             this.trigger_up('deliberate_course_group', { id: event.target.attributes['data-id'].value });
         },
         
+        _onClose : function (event) {
+            this.trigger_up('close');
+        },
+        
         _onReloadBloc : function (event) {
             this.trigger_up('reload_bloc');
+        },
+        
+        _onFailBloc : function (event) {
+            this.trigger_up('fail_bloc');
         },
         
         _onPostponeBloc : function (event) {
