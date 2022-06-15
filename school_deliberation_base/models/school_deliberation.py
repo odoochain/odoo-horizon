@@ -216,7 +216,7 @@ class BlocDeliberation(models.Model):
     
     evaluation = fields.Float(string='Evaluation', related='bloc_id.evaluation')
     
-    decision = fields.Char(string='Final Result Display', related='bloc_id.decision')
+    decision = fields.Text(string='Decision', related='bloc_id.decision')
     
     student_name = fields.Char(string='Student', related='course_group_id.student_id.name')
     
