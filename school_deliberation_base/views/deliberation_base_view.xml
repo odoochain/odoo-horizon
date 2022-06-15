@@ -84,6 +84,7 @@
             <button name="archive" type="object" states="draft,active" string="Archive Deliberation" />
             <button name="action_populate_participants" type="object" states="draft" string="Populate Participants" />
             <button name="action_open_deliberation_bloc" type="object" states="active" string="Deliberate Blocs" />
+            <button name="action_open_deliberation_program" type="object" states="active" string="Deliberate Programs" />
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
           <sheet>
