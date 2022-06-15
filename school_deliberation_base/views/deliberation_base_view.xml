@@ -112,6 +112,66 @@
       </field>
     </record>
     
+    <!-- Deliberation Program View -->
+    <record model="ir.ui.view" id="deliberation_program_view">
+        <field name="name">Deliberation Program</field>
+        <field name="model">school.individual_program</field>
+        <field name="arch" type="xml">
+          <deliberation class="o_deliberation_program">
+            <field name="student_id" />
+            <field name="total_acquiered_credits" />
+            <field name="total_credits" />
+            <field name="decision" />
+            <field name="state" />
+            <field name="all_responsible_ids">
+              <tree>
+                <field name="name"/>
+              </tree>
+            </field>
+            <field name="program_id">
+              <tree>
+                <field name="total_registered_credits"/>
+                <field name="total_acquiered_credits"/>
+              </tree>
+            </field>
+            <field name="valuated_course_group_ids">
+              <tree>
+                <field name="title"/>
+                <field name="total_credits"/>
+                <field name="total_hours"/>
+                <field name="responsible_id"/>
+                <field name="final_result_disp"/>
+                <field name="acquiered"/>
+                <field name="course_ids">
+                  <tree>
+                    <field name="title"/>
+                    <field name="teacher_id"/>
+                    <field name="final_result"/>
+                  </tree>
+                </field>
+              </tree>
+            </field>
+            <field name="all_ind_course_group_ids">
+              <tree>
+                <field name="title"/>
+                <field name="total_credits"/>
+                <field name="total_hours"/>
+                <field name="responsible_id"/>
+                <field name="final_result_disp"/>
+                <field name="acquiered"/>
+                <field name="course_ids">
+                  <tree>
+                    <field name="title"/>
+                    <field name="teacher_id"/>
+                    <field name="final_result"/>
+                  </tree>
+                </field>
+              </tree>
+            </field>
+          </deliberation>
+        </field>
+    </record>
+    
     <!-- Deliberation Bloc View -->
     <record model="ir.ui.view" id="deliberation_bloc_view">
         <field name="name">Deliberation Bloc</field>
@@ -125,8 +185,8 @@
             <field name="total_acquiered_credits" />
             <field name="total_credits" />
             <field name="decision" />
-            <field name="all_responsible_ids">
             <field name="state" />
+            <field name="all_responsible_ids">
               <tree>
                 <field name="name"/>
               </tree>
@@ -228,6 +288,51 @@
             <field name="source_bloc_speciality_id" icon="fa-briefcase" enable_counters="1" />
           </searchpanel>
         </search>
+      </field>
+    </record>
+    
+    <record id="view_deliberation_program_filter" model="ir.ui.view">
+      <field name="name">deliberation.select.program</field>
+      <field name="model">school.individual_program</field>
+      <field name="arch" type="xml">
+        <search string="Search Programs">
+          <field name="name" filter_domain="[('name', 'ilike',self)]" />
+          <searchpanel>
+            <field name="state" icon="fa-users" enable_counters="1" />
+          </searchpanel>
+        </search>
+      </field>
+    </record>
+    
+    <!-- Deliberation Programs Kanban View -->
+    <record model="ir.ui.view" id="deliberation_program_kanban_view">
+      <field name="name">school.deliberation.program.kanban</field>
+      <field name="model">school.individual_program</field>
+      <field name="arch" type="xml">
+        <kanban class="o_deliberation_program_kanban">
+          <field name="name"/>
+          <field name="student_id"/>
+          <field name="state"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_deliberation_bloc_kanban o_kanban_record" style="width:500px;">
+                  <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_medium', record.student_id.raw_value)})" role="img"/>
+                  <div class="oe_kanban_details ml8">
+                      <div class="o_kanban_record_top">
+                          <div class="o_kanban_record_headings">
+                              <strong class="o_kanban_record_title">
+                                  <div>
+                                      <strong><span t-esc="record.name.value"/></strong>
+                                  </div>
+                              </strong>
+                              <span class="o_kanban_record_subtitle"><span t-esc="record.state.value"/></span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
       </field>
     </record>
     
