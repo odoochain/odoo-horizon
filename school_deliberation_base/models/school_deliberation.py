@@ -218,7 +218,7 @@ class BlocDeliberation(models.Model):
     
     decision = fields.Text(string='Decision', related='bloc_id.decision')
     
-    student_name = fields.Char(string='Student', related='course_group_id.student_id.name')
+    student_name = fields.Char(string='Student', related='bloc_id.student_id.name')
     
     public_comments = fields.Char(string='Public Comments')
     
