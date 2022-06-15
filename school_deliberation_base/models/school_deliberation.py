@@ -220,7 +220,7 @@ class BlocDeliberation(models.Model):
     
     total_not_acquiered_credits = fields.Integer(string='Total Not Acquiered Credits', related='bloc_id.total_not_acquiered_credits')
     
-    state = fields.Integer(string='State', related='bloc_id.state')
+    state = fields.Selection(string='State', related='bloc_id.state')
     
     decision = fields.Text(string='Decision', related='bloc_id.decision')
     
