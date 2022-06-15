@@ -214,7 +214,7 @@ class BlocDeliberation(models.Model):
     
     name = fields.Char(string='Name', related='bloc_id.name')
     
-    evaluation = fields.Char(string='Final Result Display', related='bloc_id.evaluation')
+    evaluation = fields.Float(string='Evaluation', related='bloc_id.evaluation')
     
     decision = fields.Char(string='Final Result Display', related='bloc_id.decision')
     
