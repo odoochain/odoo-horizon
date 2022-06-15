@@ -159,7 +159,7 @@ msgstr "Décision"
 #. module: school_deliberation_base
 #: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_form
 msgid "Deliberate Blocs"
-msgstr "Délibérer les blocs"
+msgstr "Délibérer les PAEs"
 
 #. module: school_deliberation_base
 #: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__deliberation_id

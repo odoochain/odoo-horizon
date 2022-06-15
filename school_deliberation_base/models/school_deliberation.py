@@ -117,6 +117,19 @@ class Deliberation(models.Model):
             'context': {'deliberation_id':self.id, 'session':self.session},
         }
         
+    def action_open_deliberation_program(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Deliberate Programs',
+            'res_model': 'school.individual_program',
+            'domain': [('deliberation_ids', 'in', self.id )],
+            'view_mode': 'kanban,deliberation',
+            'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_program_filter').id,),
+            'views': [[self.env.ref('school_deliberation_base.deliberation_program_kanban_view').id,'kanban'],[self.env.ref('school_deliberation_base.deliberation_program_view').id,'deliberation']],
+            'context': {'deliberation_id':self.id, 'session':self.session},
+        }
+        
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'

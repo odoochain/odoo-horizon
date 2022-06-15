@@ -60,42 +60,47 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             </button>
                         </span>
                     </div>
-                    <div class="row">
-                        <span class="col">
-                            <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
-                        </span>
-                    </div>
-                    <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
-                        <div class="col-md-2">
-                            <button class="btn btn_credits" type="button">
-                                PAE<br/><span class="score_value">${record.total_acquiered_credits}/${record.total_credits}</span>
-                            </button>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="alert ${record.total_acquiered_credits < record.total_credits ? 'alert-danger' : 'alert-success'} mb-0" role="alert" style="font-size: larger;">${record.decision}</div>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-lg ${record.total_acquiered_credits < record.total_credits ? 'btn-danger bloc_postpone' : 'bloc_award'} ">${record.total_acquiered_credits < record.total_credits ? 'Ajourné' : 'Réussi'}</button>
-                        </div>
-                    </div>
             `);
-            var program_total = Math.max(program.required_credits,program.total_registered_credits);
-            $col2.append(`
-            <div class="row vertical-align justify-content-center" style="margin-bottom: 15px;">
-                <div class="progress col-10" style="height: 40px;">
-                    <div class="progress-bar bg-info" style="width:${program.total_acquiered_credits/program_total*100}%">
-                        ${program.total_acquiered_credits}
+            
+            if(this.state.res_model=='school.individual_bloc') {
+                $col2.append(`
+                        <div class="row">
+                            <span class="col">
+                                <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
+                            </span>
+                        </div>
+                        <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
+                            <div class="col-md-2">
+                                <button class="btn btn_credits" type="button">
+                                    PAE<br/><span class="score_value">${record.total_acquiered_credits}/${record.total_credits}</span>
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="alert ${record.total_acquiered_credits < record.total_credits ? 'alert-danger' : 'alert-success'} mb-0" role="alert" style="font-size: larger;">${record.decision}</div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-lg ${record.total_acquiered_credits < record.total_credits ? 'btn-danger bloc_postpone' : 'bloc_award'} ">${record.total_acquiered_credits < record.total_credits ? 'Ajourné' : 'Réussi'}</button>
+                            </div>
+                        </div>
+                `);
+                var program_total = Math.max(program.required_credits,program.total_registered_credits);
+                $col2.append(`
+                <div class="row vertical-align justify-content-center" style="margin-bottom: 15px;">
+                    <div class="progress col-10" style="height: 40px;">
+                        <div class="progress-bar bg-info" style="width:${program.total_acquiered_credits/program_total*100}%">
+                            ${program.total_acquiered_credits}
+                        </div>
+                        <div class="progress-bar bg-success" style="width:${record.total_acquiered_credits/program_total*100}%">
+                            ${record.total_acquiered_credits}
+                        </div>
+                        <div class="progress-bar bg-warning" style="width:${(record.total_credits-record.total_acquiered_credits)/program_total*100}%">
+                            ${record.total_credits-record.total_acquiered_credits}
+                        </div>
+                        </t>
                     </div>
-                    <div class="progress-bar bg-success" style="width:${record.total_acquiered_credits/program_total*100}%">
-                        ${record.total_acquiered_credits}
-                    </div>
-                    <div class="progress-bar bg-warning" style="width:${(record.total_credits-record.total_acquiered_credits)/program_total*100}%">
-                        ${record.total_credits-record.total_acquiered_credits}
-                    </div>
-                    </t>
                 </div>
-            </div>
-            `);
+                `);
+            }
             var $resp_list = $('<h2>',{class : 'row justify-content-center'});
             var $list = $('<div>',{class : 'col-10'});
             for(var i =0; i < record.all_responsible_ids.data.length; i++) {
