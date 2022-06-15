@@ -67,6 +67,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <div class="row">
                             <span class="col">
                                 <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
+                                <h4>${record.uid}</h4>
                             </span>
                         </div>
                         <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
@@ -149,7 +150,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         ${i+1}
                     </th>
                     <td>
-                        ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span>
+                        ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span><small>${record.uid}</small>
                     </td>
                     <td class="text-right">
                         ${course_group.data.final_result_disp}
