@@ -121,8 +121,9 @@
             <field name="student_id" />
             <field name="total_registered_credits"/>
             <field name="total_acquiered_credits"/>
-            <field name="required_credits"/>
-            <field name="decision" />
+            <field name="required_credits" />
+            <field name="grade_comments" />
+            <field name="grade" />
             <field name="state" />
             <field name="all_responsible_ids">
               <tree>

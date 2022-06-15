@@ -129,7 +129,18 @@ class Deliberation(models.Model):
             'views': [[self.env.ref('school_deliberation_base.deliberation_program_kanban_view').id,'kanban'],[self.env.ref('school_deliberation_base.deliberation_program_view').id,'deliberation']],
             'context': {'deliberation_id':self.id, 'session':self.session},
         }
+
         
+class IndividualProgram(models.Model):
+    '''Individual Program'''
+    _inherit = 'school.individual_program'
+    
+    all_responsible_ids = fields.Many2many('res.partner', compute='_compute_all_responsibles')
+    
+    def _compute_all_responsibles(self):
+        for rec in self:
+            rec.all_responsible_ids = rec.get_all_responsibles()
+ 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
