@@ -38,9 +38,9 @@ odoo.define('deliberation.DeliberationController', function (require) {
             reload_bloc: '_onReloadBloc',
             deliberate_next_bloc: '_onNextBloc',
             deliberate_previous_bloc: '_onPreviousBloc',
-            fail_bloc : '_onFailBloc',
-            postpone_bloc : '_onPostponeBloc',
-            award_bloc : '_onAwardBloc',
+            fail_bloc : '_onDeliberateBloc',
+            postpone_bloc : '_onDeliberateBloc',
+            award_bloc : '_onDeliberateBloc',
         },
 
         init: function (parent, model, renderer, params) {
@@ -53,29 +53,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
             return this._super();
         },
 
-        _onFailBloc: function (event) {
-            var self = this;
-            self._rpc({
-                model: 'school.individual_bloc',
-                method: "set_to_failed",
-                args: [self.renderer.state.res_id, self.renderer.state.data.decision],
-            }).then(function(result) {
-                self._onNextBloc(event);
-            });
-        },
-    
-        _onPostponeBloc: function (event) {
-            var self = this;
-            self._rpc({
-                model: 'school.individual_bloc',
-                method: "set_to_postponed",
-                args: [self.renderer.state.res_id, self.renderer.state.data.decision],
-            }).then(function(result) {
-                self._onNextBloc(event);
-            });
-        },
-
-        _onAwardBloc: function (event) {
+        _onDeliberateBloc: function (event) {
             event.stopPropagation();
             var self = this;
             console.log("Deliberate Bloc "+self.renderer.state.res_id);
