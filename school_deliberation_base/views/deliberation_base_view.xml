@@ -293,7 +293,7 @@
                 </div>  
               </div>
               <div class="row">
-                <div class="alert mb-0" role="alert" style="font-size: larger;"><field name="devision"/></div>
+                <div class="alert mb-0" role="alert" style="font-size: larger;"><field name="decision"/></div>
               </div>
             </div>
             <group col="2">
