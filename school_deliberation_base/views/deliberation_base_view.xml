@@ -119,19 +119,14 @@
         <field name="arch" type="xml">
           <deliberation class="o_deliberation_program">
             <field name="student_id" />
-            <field name="total_acquiered_credits" />
-            <field name="total_credits" />
+            <field name="total_registered_credits"/>
+            <field name="total_acquiered_credits"/>
+            <field name="required_credits"/>
             <field name="decision" />
             <field name="state" />
             <field name="all_responsible_ids">
               <tree>
                 <field name="name"/>
-              </tree>
-            </field>
-            <field name="program_id">
-              <tree>
-                <field name="total_registered_credits"/>
-                <field name="total_acquiered_credits"/>
               </tree>
             </field>
             <field name="valuated_course_group_ids">
