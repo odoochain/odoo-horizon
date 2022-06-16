@@ -180,6 +180,27 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         </tr>`);
                     }
                 }
+            } else {
+                for(var i =0; i < record.all_ind_course_group_ids.data.length; i++) {
+                    var course_group = record.course_group_ids.data[i];
+                    $tbody.append(`<tr class="course_group">
+                        <th class="text-center" scope="row">
+                            ${i+1}
+                        </th>
+                        <td>
+                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span><small>${record.uid}</small>
+                        </td>
+                        <td class="text-right">
+                            ${course_group.data.final_result_disp}
+                        </td>
+                        <td class="text-right">
+                            ${course_group.data.total_credits}
+                        </td>
+                        <td class="text-center">
+                            <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning action_deliberate' : 'bg-success action_deliberate'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
+                        </td>
+                    </tr>`);
+                }
             }
             $table.append($tbody);
             $col2.append($table);
