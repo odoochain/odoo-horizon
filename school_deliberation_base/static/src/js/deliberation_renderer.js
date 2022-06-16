@@ -151,7 +151,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             ${i+1}
                         </th>
                         <td>
-                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span><small>${record.uid}</small>
+                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''} <span class="text-muted" style="font-size: 40%;">(${record.uid})</span>
                         </td>
                         <td class="text-right">
                             ${course_group.data.final_result_disp}
@@ -188,7 +188,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             ${i+1}
                         </th>
                         <td>
-                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span> (<small>${record.uid}</small>)
+                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span> <span class="text-muted" style="font-size: 40%;">(${record.uid})</span>
                         </td>
                         <td class="text-right">
                             ${course_group.data.final_result_disp}
