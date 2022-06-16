@@ -143,40 +143,42 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     </tr>
                 </thead>`);
             var $tbody = $('<tbody>');
-            for(var i =0; i < record.course_group_ids.data.length; i++) {
-                var course_group = record.course_group_ids.data[i];
-                $tbody.append(`<tr class="course_group">
-                    <th class="text-center" scope="row">
-                        ${i+1}
-                    </th>
-                    <td>
-                        ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span><small>${record.uid}</small>
-                    </td>
-                    <td class="text-right">
-                        ${course_group.data.final_result_disp}
-                    </td>
-                    <td class="text-right">
-                        ${course_group.data.total_credits}
-                    </td>
-                    <td class="text-center">
-                        <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning action_deliberate' : 'bg-success action_deliberate'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
-                    </td>
-                </tr>`);
-                for(var j = 0; j < course_group.data.course_ids.data.length; j++) {
-                    var course = course_group.data.course_ids.data[j];
-                    course = this.state.courseValues.find(r => r.id == course.data.id);
-                    $tbody.append(`
-                    <tr style="font-style: italic;font-size:80%;">
-                        <th class="text-center" scope="row"></th>
+            if(this.state.model=='school.individual_bloc') {
+                for(var i =0; i < record.course_group_ids.data.length; i++) {
+                    var course_group = record.course_group_ids.data[i];
+                    $tbody.append(`<tr class="course_group">
+                        <th class="text-center" scope="row">
+                            ${i+1}
+                        </th>
                         <td>
-                            ${course.title} <small class="text-muted">${course.teacher_id ? ' - ' + course.teacher_id[1] : ''}</small>
+                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span><small>${record.uid}</small>
                         </td>
-                        <td style=" text-align: right;">
-                            <font color="blue">${course.final_result ? course.final_result : ''}</font>
+                        <td class="text-right">
+                            ${course_group.data.final_result_disp}
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td class="text-right">
+                            ${course_group.data.total_credits}
+                        </td>
+                        <td class="text-center">
+                            <h1 class="badge rounded-pill ${course_group.data.acquiered == 'NA' ? 'bg-warning action_deliberate' : 'bg-success action_deliberate'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.acquiered}</h1>
+                        </td>
                     </tr>`);
+                    for(var j = 0; j < course_group.data.course_ids.data.length; j++) {
+                        var course = course_group.data.course_ids.data[j];
+                        course = this.state.courseValues.find(r => r.id == course.data.id);
+                        $tbody.append(`
+                        <tr style="font-style: italic;font-size:80%;">
+                            <th class="text-center" scope="row"></th>
+                            <td>
+                                ${course.title} <small class="text-muted">${course.teacher_id ? ' - ' + course.teacher_id[1] : ''}</small>
+                            </td>
+                            <td style=" text-align: right;">
+                                <font color="blue">${course.final_result ? course.final_result : ''}</font>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>`);
+                    }
                 }
             }
             $table.append($tbody);
