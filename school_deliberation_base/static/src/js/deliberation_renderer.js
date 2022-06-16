@@ -66,6 +66,19 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             <span class="text-muted">(${record.uid})</span>
                         </span>
                     </div>
+                    <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
+                        <div class="col-md-2">
+                            <button class="btn btn_credits" type="button">
+                                Evaluation<br/><span class="score_value">${record.evaluation}</span>
+                            </button>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="alert-success mb-0" role="alert" style="font-size: larger;">${record.grade_comments}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-lg program_award'} ">${record.grade}</button>
+                        </div>
+                    </div>
             `);
             
             if(this.state.model=='school.individual_bloc') {
