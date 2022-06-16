@@ -181,8 +181,8 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     }
                 }
             } else {
-                for(var i =0; i < record.all_ind_course_group_ids.data.length; i++) {
-                    var course_group = record.all_ind_course_group_ids.data[i];
+                for(var i =0; i < record.acquired_ind_course_group_ids.data.length; i++) {
+                    var course_group = record.acquired_ind_course_group_ids.data[i];
                     $tbody.append(`<tr class="course_group">
                         <th class="text-center" scope="row">
                             ${i+1}

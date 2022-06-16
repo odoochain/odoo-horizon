@@ -151,7 +151,7 @@
                 </field>
               </tree>
             </field>
-            <field name="all_ind_course_group_ids">
+            <field name="acquired_ind_course_group_ids">
               <tree>
                 <field name="title"/>
                 <field name="total_credits"/>
