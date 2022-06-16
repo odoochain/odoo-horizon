@@ -188,7 +188,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             ${i+1}
                         </th>
                         <td>
-                            ${course_group.data.yead_id} - ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span> <span class="text-muted" style="font-size: 60%;">(${course_group.data.uid})</span>
+                            ${course_group.data.year_id.data.display_name} - ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span> <span class="text-muted" style="font-size: 60%;">(${course_group.data.uid})</span>
                         </td>
                         <td class="text-right">
                             ${course_group.data.final_result_disp}
