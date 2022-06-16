@@ -138,7 +138,7 @@
                 <field name="total_hours"/>
                 <field name="responsible_id"/>
                 <field name="final_result_disp"/>
-            <field name="uid" />
+                <field name="uid" />
                 <field name="acquiered"/>
                 <field name="course_ids">
                   <tree>
