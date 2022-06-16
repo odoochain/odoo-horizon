@@ -50,7 +50,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     <div class="row">
                         <span class="col-md-10">
                             <h1 class="display-4">${record.student_id.data.display_name}</h1>
-                            <span class="text-muted" style="font-size: 60%;">(${record.uid})</span>
+                            <span class="text-muted">(${record.uid})</span>
                         </span>
                         <span class="col-md-2 refresh_button">
                             <button class="btn btn-default o_reload_bloc" type="button">
@@ -68,7 +68,6 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <div class="row">
                             <span class="col">
                                 <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
-                                <h4>${record.uid}</h4>
                             </span>
                         </div>
                         <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
