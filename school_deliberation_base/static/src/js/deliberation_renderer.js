@@ -50,6 +50,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     <div class="row">
                         <span class="col-md-10">
                             <h1 class="display-4">${record.student_id.data.display_name}</h1>
+                            <span class="text-muted" style="font-size: 60%;">(${record.uid})</span>
                         </span>
                         <span class="col-md-2 refresh_button">
                             <button class="btn btn-default o_reload_bloc" type="button">
@@ -151,7 +152,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             ${i+1}
                         </th>
                         <td>
-                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''} <span class="text-muted" style="font-size: 40%;">(${record.uid})</span>
+                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''} <span class="text-muted" style="font-size: 60%;">(${course_group.uid})</span>
                         </td>
                         <td class="text-right">
                             ${course_group.data.final_result_disp}
@@ -188,7 +189,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             ${i+1}
                         </th>
                         <td>
-                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span> <span class="text-muted" style="font-size: 40%;">(${record.uid})</span>
+                            ${course_group.data.title}${course_group.data.responsible_id ? ' <span class="text-muted">- ' + course_group.data.responsible_id.data.display_name : ''}</span> <span class="text-muted" style="font-size: 60%;">(${course_group.uid})</span>
                         </td>
                         <td class="text-right">
                             ${course_group.data.final_result_disp}
