@@ -138,11 +138,13 @@
                 <field name="total_hours"/>
                 <field name="responsible_id"/>
                 <field name="final_result_disp"/>
+            <field name="uid" />
                 <field name="acquiered"/>
                 <field name="course_ids">
                   <tree>
                     <field name="title"/>
                     <field name="teacher_id"/>
+                    <field name="uid" />
                     <field name="final_result"/>
                   </tree>
                 </field>
@@ -155,11 +157,13 @@
                 <field name="total_hours"/>
                 <field name="responsible_id"/>
                 <field name="final_result_disp"/>
+                <field name="uid" />
                 <field name="acquiered"/>
                 <field name="course_ids">
                   <tree>
                     <field name="title"/>
                     <field name="teacher_id"/>
+                    <field name="uid" />
                     <field name="final_result"/>
                   </tree>
                 </field>
@@ -191,6 +195,7 @@
             </field>
             <field name="program_id">
               <tree>
+                <field name="uid" />
                 <field name="total_registered_credits"/>
                 <field name="total_acquiered_credits"/>
                 <field name="required_credits"/>
@@ -199,6 +204,7 @@
             <field name="course_group_ids">
               <tree>
                 <field name="title"/>
+                <field name="uid" />
                 <field name="total_credits"/>
                 <field name="total_hours"/>
                 <field name="responsible_id"/>
@@ -207,6 +213,7 @@
                 <field name="course_ids">
                   <tree>
                     <field name="title"/>
+                    <field name="uid" />
                     <field name="teacher_id"/>
                     <field name="final_result"/>
                   </tree>
