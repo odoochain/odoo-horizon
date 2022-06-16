@@ -139,6 +139,7 @@
                 <field name="responsible_id"/>
                 <field name="final_result_disp"/>
                 <field name="uid" />
+                <field name="year_id" />
                 <field name="acquiered"/>
                 <field name="course_ids">
                   <tree>
@@ -155,6 +156,7 @@
                 <field name="title"/>
                 <field name="total_credits"/>
                 <field name="total_hours"/>
+                <field name="year_id" />
                 <field name="responsible_id"/>
                 <field name="final_result_disp"/>
                 <field name="uid" />
