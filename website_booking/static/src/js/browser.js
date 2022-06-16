@@ -5,16 +5,12 @@ odoo.define('website_booking.browser', function (require) {
 
 var core = require('web.core');
 var ajax = require('web.ajax');
-var data = require('web.data');
-var session = require('web.session');
+var session = require('web.Session');
 var Widget = require('web.Widget');
-var Dialog = require("web.Dialog");
 var time = require('web.time');
-var framework = require('web.framework');
 
 var Model = require("web.Model");
 
-var _t = core._t;
 var qweb = core.qweb;
 
 ajax.loadXML('/website_booking/static/src/xml/browser.xml', qweb);
@@ -55,7 +51,7 @@ var CalendarWidget = Widget.extend({
     renderElement: function() {
         this._super.apply(this, arguments);
         var self = this;
-        self.$calendar = this.$el;
+        self.$calendar = this.el;
         self.$calendar.fullCalendar(
 		    self.get_fc_init_options()
 		);
