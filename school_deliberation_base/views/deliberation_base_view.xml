@@ -123,6 +123,7 @@
             <field name="total_acquiered_credits"/>
             <field name="required_credits" />
             <field name="grade_comments" />
+            <field name="uid" />
             <field name="grade" />
             <field name="state" />
             <field name="all_responsible_ids">
@@ -178,6 +179,7 @@
             <field name="student_id" />
             <field name="source_bloc_title" />
             <field name="source_bloc_level" />
+            <field name="uid" />
             <field name="total_acquiered_credits" />
             <field name="total_credits" />
             <field name="decision" />
