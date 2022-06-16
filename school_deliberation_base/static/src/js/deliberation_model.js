@@ -71,6 +71,8 @@ odoo.define('deliberation.DeliberationModel', function (require) {
                                     resolve(localID);
                                 });
                             });
+                } else {
+                    resolve(localID);
                 }});
             });
         },

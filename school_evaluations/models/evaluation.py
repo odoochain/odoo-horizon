@@ -606,7 +606,7 @@ class IndividualCourseGroup(models.Model):
                 rec.second_session_exception = None
                 rec.second_session_result_bool = True
             elif rec.second_session_computed_exception :
-                rec.second_session_exception = rec.first_session_computed_exception
+                rec.second_session_exception = rec.second_session_computed_exception
                 rec.second_session_result = 0
                 rec.second_session_result_bool = True
             elif rec.second_session_computed_result_bool :

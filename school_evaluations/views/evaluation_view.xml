@@ -316,8 +316,8 @@
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='source_course_id']" position="before">
-                    <field name="first_session_result" string="S1" />
-                    <field name="second_session_result" string="S2" />
+                    <field name="final_result" string="S1" />
+                    <field name="second_result" string="S2" />
                 </xpath>
                 <xpath expr="//field[@name='total_credits']//ancestor::group" position="after">
                     <group col="4">
