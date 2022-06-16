@@ -123,6 +123,7 @@
             <field name="total_acquiered_credits"/>
             <field name="required_credits" />
             <field name="grade_comments" />
+            <field name="source_program_id" />
             <field name="uid" />
             <field name="grade" />
             <field name="state" />

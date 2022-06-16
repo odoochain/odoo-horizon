@@ -61,6 +61,11 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             </button>
                         </span>
                     </div>
+                    <div class="row">
+                        <span class="col-md-12">
+                            <h1 class="display-4">${record.source_program_id.data.display_name}</h1>
+                        </span>
+                    </div>
             `);
             
             if(this.state.model=='school.individual_bloc') {
