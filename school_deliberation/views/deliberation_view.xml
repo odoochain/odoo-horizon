@@ -43,6 +43,6 @@
             <field name="res_model">school.bloc</field>
         </record>
     
-        <menuitem id="menu_school_deliberation" name="Deliberation" action="action_school_deliberation" web_icon="school_deliberation,static/description/icon.png" sequence="70" />
+        <menuitem id="menu_school_deliberation" name="Deliberation" action="action_school_deliberation" web_icon="school_deliberation_base,static/description/icon.png" sequence="70" />
 
 </odoo>
