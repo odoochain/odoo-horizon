@@ -86,8 +86,16 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             if(this.state.model=='school.individual_bloc') {
                 $col2.append(`
                         <div class="row">
-                            <span class="col">
+                            <span class="col-md-10">
                                 <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
+                            </span>
+                            <span class="col-md-2 refresh_button">
+                                <button class="btn btn-default o_reload_bloc" type="button">
+                                    <i class="fa fa-refresh fa-fw fa-2x"></i>
+                                </button>
+                                <button class="btn btn-default deliberation_close_button" type="button">
+                                    <i class="fa fa-window-close fa-fw fa-2x"></i>
+                                </button>
                             </span>
                         </div>
                         <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
