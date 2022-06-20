@@ -46,40 +46,42 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             $col1.append($img);
             $header.append($col1);
             var $col2 = $('<div>',{class : 'col-10'});
-            $col2.append(`
-                    <div class="row">
-                        <span class="col-md-10">
-                            <h1 class="display-4">${record.student_id.data.display_name}</h1>
-                        </span>
-                        <span class="col-md-2 refresh_button">
-                            <button class="btn btn-default o_reload_bloc" type="button">
-                                <i class="fa fa-refresh fa-fw fa-2x"></i>
-                            </button>
-                            <button class="btn btn-default deliberation_close_button" type="button">
-                                <i class="fa fa-window-close fa-fw fa-2x"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="row">
-                        <span class="col-md-12">
-                            <h1 class="display-4">${record.source_program_id.data.display_name}</h1>
-                            <span class="text-muted">(${record.uid})</span>
-                        </span>
-                    </div>
-                    <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
-                        <div class="col-md-2">
-                            <button class="btn btn_credits" type="button">
-                                Evaluation<br/><span class="score_value">${record.evaluation}</span>
-                            </button>
+            if(this.state.model=='school.individual_program') {
+                $col2.append(`
+                        <div class="row">
+                            <span class="col-md-10">
+                                <h1 class="display-4">${record.student_id.data.display_name}</h1>
+                            </span>
+                            <span class="col-md-2 refresh_button">
+                                <button class="btn btn-default o_reload_bloc" type="button">
+                                    <i class="fa fa-refresh fa-fw fa-2x"></i>
+                                </button>
+                                <button class="btn btn-default deliberation_close_button" type="button">
+                                    <i class="fa fa-window-close fa-fw fa-2x"></i>
+                                </button>
+                            </span>
                         </div>
-                        <div class="col-md-8">
-                            <div class="alert-success mb-0" role="alert" style="font-size: larger;">${record.grade_comments}</div>
+                        <div class="row">
+                            <span class="col-md-12">
+                                <h1 class="display-4">${record.source_program_id.data.display_name}</h1>
+                                <span class="text-muted">(${record.uid})</span>
+                            </span>
                         </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-lg program_award'} ">${record.grade}</button>
+                        <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
+                            <div class="col-md-2">
+                                <button class="btn btn_credits" type="button">
+                                    Evaluation<br/><span class="score_value">${record.evaluation}</span>
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="alert-success mb-0" role="alert" style="font-size: larger;">${record.grade_comments}</div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-lg program_award'} ">${record.grade}</button>
+                            </div>
                         </div>
-                    </div>
-            `);
+                `);
+            }
             
             if(this.state.model=='school.individual_bloc') {
                 $col2.append(`

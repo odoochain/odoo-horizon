@@ -102,11 +102,6 @@ class IndividualProgram(models.Model):
             rec.total_registered_credits = rec.total_acquiered_credits + total_current
             rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
 
-    @api.depends('grade')
-    def _onchange_grade(self):
-        if self.grade:
-            graduation_date = fields.Date.today()
-
     @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     def compute_evaluation(self):
         for rec in self:
@@ -155,6 +150,9 @@ class IndividualProgram(models.Model):
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids - rec.bloc_ids[-1].course_group_ids.mapped('source_course_group_id')
             else :
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
+                
+                
+    def 
                 
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''

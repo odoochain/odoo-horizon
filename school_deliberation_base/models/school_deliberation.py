@@ -222,6 +222,30 @@ class IndividualBloc(models.Model):
                 'context': self._context,
                 'views': [[False, 'form']],
             }
+            
+class ProgramDeliberation(models.Model):
+    '''Program Deliberation'''
+    _name = 'school.program_deliberation'
+    _description = 'Manage deliberation of a program'
+    
+    deliberation_id = fields.Many2one('school.deliberation', required=True)
+    
+    program_id = fields.Many2one('school.individual_program', required=True)
+    
+    image = fields.Binary('Image', attachment=True, related='program_id.student_id.image')
+    
+    image_medium = fields.Binary('Image', attachment=True, related='program_id.student_id.image_medium')
+    
+    image_small = fields.Binary('Image', attachment=True, related='program_id.student_id.image_small')
+    
+    name = fields.Char(string='Name', related='program_id.name')
+    
+    evaluation = fields.Float(string='Evaluation', related='program_id.evaluation')
+    
+    grade = fields.Float(string='Evaluation', related='program_id.evaluation')
+    
+    grade_comments = fields.Float(string='Evaluation', related='program_id.evaluation')
+    
 
 class BlocDeliberation(models.Model):
     '''Bloc Deliberation'''
