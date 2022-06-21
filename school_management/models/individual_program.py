@@ -137,7 +137,11 @@ class IndividualProgram(models.Model):
         return self.bloc_ids.course_group_ids.course_ids.teacher_id
         
     def get_all_responsibles(self):
-        return self.bloc_ids.course_group_ids.source_course_group_responsible_id
+        ret = self.env['res.partner']
+        for rec in self:
+            for bloc in rec.bloc_ids:
+                ret |= bloc_ids.get_all_responsibles()
+        return ret
 
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
