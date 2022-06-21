@@ -67,20 +67,28 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                                 <span class="text-muted">(${record.uid})</span>
                             </span>
                         </div>
-                        <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
-                            <div class="col-md-2">
-                                <button class="btn btn_credits" type="button">
-                                    Evaluation<br/><span class="score_value">${record.evaluation}</span>
-                                </button>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="alert-success mb-0" role="alert" style="font-size: larger;">${record.grade_comments}</div>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-lg program_award'} ">${record.grade}</button>
-                            </div>
+                `);
+                var $div = $('<div>',{class:"row d-flex align-items-center",style:"margin-bottom: 15px;"});
+                $div.append(`
+                        <div class="col-md-2">
+                            <button class="btn btn_credits" type="button">
+                                Evaluation<br/><span class="score_value">${record.evaluation}</span>
+                            </button>
                         </div>
                 `);
+                var $list = $('<h2>',{class : 'col-md-8'});
+                for(var i =0; i < record.all_responsible_ids.data.length; i++) {
+                    var resp = record.all_responsible_ids.data[i];
+                    var $span = $('<span>',{class : 'badge rounded-pill bg-primary'}).append(resp.data.name);
+                    $list.append($span);
+                }
+                $div.append($list);
+                $div.append(`
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-lg program_award'} ">Award Program</button>
+                        </div>
+                `);
+                $col2.append($div);
             }
             
             if(this.state.model=='school.individual_bloc') {
@@ -129,16 +137,16 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                     </div>
                 </div>
                 `);
+                var $resp_list = $('<h2>',{class : 'row justify-content-center'});
+                var $list = $('<div>',{class : 'col-10'});
+                for(var i =0; i < record.all_responsible_ids.data.length; i++) {
+                    var resp = record.all_responsible_ids.data[i];
+                    var $span = $('<span>',{class : 'badge rounded-pill bg-primary'}).append(resp.data.name);
+                    $list.append($span);
+                }
+                $resp_list.append($list);
+                $col2.append($resp_list);
             }
-            var $resp_list = $('<h2>',{class : 'row justify-content-center'});
-            var $list = $('<div>',{class : 'col-10'});
-            for(var i =0; i < record.all_responsible_ids.data.length; i++) {
-                var resp = record.all_responsible_ids.data[i];
-                var $span = $('<span>',{class : 'badge rounded-pill bg-primary'}).append(resp.data.name);
-                $list.append($span);
-            }
-            $resp_list.append($list);
-            $col2.append($resp_list);
             $header.append($col2);
             return $header;
         },
