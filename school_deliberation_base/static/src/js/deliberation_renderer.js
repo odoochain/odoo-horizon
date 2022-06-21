@@ -16,6 +16,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             'click .bloc_fail' : '_onFailBloc',
             'click .bloc_postpone' : '_onPostponeBloc',
             'click .bloc_award' : '_onAwardBloc',
+            'click .program_award' : '_onAwardProgram',
             'click .deliberation_close_button' : '_onClose',
         }),
         
@@ -85,7 +86,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                 $div.append($list);
                 $div.append(`
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-lg program_award'} ">Award Program</button>
+                            <button type="button" class="btn btn-lg program_award'} ">Délibérer</button>
                         </div>
                 `);
                 $col2.append($div);
@@ -277,6 +278,10 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
         
         _onAwardBloc : function (event) {
             this.trigger_up('award_bloc');
+        },
+        
+        _onAwardProgram : function (event) {
+            this.trigger_up('award_program');
         },
         
         //--------------------------------------------------------------------------
