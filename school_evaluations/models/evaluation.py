@@ -150,6 +150,10 @@ class IndividualProgram(models.Model):
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids - rec.bloc_ids[-1].course_group_ids.mapped('source_course_group_id')
             else :
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
+    
+    ## Override    
+    def get_all_responsibles(self):
+        return self.bloc_ids.course_group_ids.source_course_group_responsible_id | self.valuated_course_group_ids.source_course_group_responsible_id
                 
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
