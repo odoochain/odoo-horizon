@@ -149,7 +149,7 @@ class IndividualProgram(models.Model):
             ['deliberation_id','=',self._context['default_deliberation_id']],
             ['program_id','=',self._context['default_program_id']]
         ])
-        if bloc_deliberation_ids :
+        if program_deliberation_ids :
             return {
                 'type': 'ir.actions.act_window',
                 'name': 'Deliberate Program',
