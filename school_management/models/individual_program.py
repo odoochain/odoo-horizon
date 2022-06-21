@@ -140,7 +140,7 @@ class IndividualProgram(models.Model):
         ret = self.env['res.partner']
         for rec in self:
             for bloc in rec.bloc_ids:
-                ret |= bloc_ids.get_all_responsibles()
+                ret |= bloc.get_all_responsibles()
         return ret
 
 class IndividualCourseSummary(models.Model):
