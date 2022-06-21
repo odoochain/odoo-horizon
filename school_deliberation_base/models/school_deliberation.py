@@ -142,6 +142,34 @@ class IndividualProgram(models.Model):
     def _compute_all_responsibles(self):
         for rec in self:
             rec.all_responsible_ids = rec.get_all_responsibles()
+    
+    def action_deliberate_program(self):
+        self.ensure_one()
+        program_deliberation_ids = self.env['school.program_deliberation'].search([
+            ['deliberation_id','=',self._context['default_deliberation_id']],
+            ['program_id','=',self._context['default_program_id']]
+        ])
+        if bloc_deliberation_ids :
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Deliberate Program',
+                'target': 'new',
+                'flags': { 'action_buttons': True, 'headless': True },
+                'res_model':  'school.program_deliberation',
+                'res_id': program_deliberation_ids[0].id,
+                'context': self._context,
+                'views': [[False, 'form']],
+            }
+        else :
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Deliberate Program',
+                'target': 'new',
+                'flags': { 'action_buttons': True, 'headless': True },
+                'res_model':  'school.program_deliberation',
+                'context': self._context,
+                'views': [[False, 'form']],
+            }
  
 class IndividualBloc(models.Model):
     '''Individual Bloc'''

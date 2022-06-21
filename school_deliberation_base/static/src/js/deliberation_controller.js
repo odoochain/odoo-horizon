@@ -41,6 +41,7 @@ odoo.define('deliberation.DeliberationController', function (require) {
             fail_bloc : '_onDeliberateBloc',
             postpone_bloc : '_onDeliberateBloc',
             award_bloc : '_onDeliberateBloc',
+            award_program : '_onDeliberateProgram',
         },
 
         init: function (parent, model, renderer, params) {
@@ -52,6 +53,23 @@ odoo.define('deliberation.DeliberationController', function (require) {
         start: function () {
             return this._super();
         },
+
+        _onDeliberateProgram: function (event) {
+            event.stopPropagation();
+            var self = this;
+            console.log("Deliberate Program "+self.renderer.state.res_id);
+            this._rpc({
+                model:'school.individual_program',
+                method:'action_deliberate_program',
+                args: [ [self.id] ],
+                context: {...self.initialState.context,...{
+                    default_program_id: parseInt(self.renderer.state.res_id),
+                    default_deliberation_id: parseInt(self.initialState.context['deliberation_id']),
+                }},
+            }).then(result => {
+                self.do_action(result, { 'on_close' : self._onNextBloc.bind(self) });
+            });
+        }, 
 
         _onDeliberateBloc: function (event) {
             event.stopPropagation();
