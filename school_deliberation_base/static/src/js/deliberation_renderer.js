@@ -86,7 +86,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                 $div.append($list);
                 $div.append(`
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-lg program_award'} ">Délibérer</button>
+                            <button type="button" class="btn btn-lg program_award">Délibérer</button>
                         </div>
                 `);
                 $col2.append($div);
