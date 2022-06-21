@@ -233,7 +233,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                             ${course_group.data.total_credits}
                         </td>
                         <td class="text-center">
-                            <h1 class="badge rounded-pill ${${course_group.data.year_id.data ? : course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-success' : 'bg-info'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.year_id.data ? course_group.data.acquiered : 'V'}</h1>
+                            <h1 class="badge rounded-pill ${course_group.data.year_id.data ? course_group.data.acquiered == 'NA' ? 'bg-warning' : 'bg-success' : 'bg-info'}" style="font-size: 100%;" data-id="${course_group.data.id}">${course_group.data.year_id.data ? course_group.data.acquiered : 'V'}</h1>
                         </td>
                     </tr>`);
                 }
