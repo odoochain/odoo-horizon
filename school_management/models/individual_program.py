@@ -224,14 +224,14 @@ class IndividualBloc(models.Model):
         for bloc in self:
             if bloc.source_bloc_id.speciality_id :
                 bloc.source_bloc_speciality_id = bloc.source_bloc_id.speciality_id
-                bloc.source_bloc_domain_id = bloc.source_bloc_id.domain_id
-                bloc.source_bloc_section_id = bloc.source_bloc_id.section_id
-                bloc.source_bloc_track_id = bloc.source_bloc_id.track_id
+                bloc.source_bloc_domain_id = bloc.source_bloc_id.speciality_id.domain_id
+                bloc.source_bloc_section_id = bloc.source_bloc_id.speciality_id.section_id
+                bloc.source_bloc_track_id = bloc.source_bloc_id.speciality_id.track_id
             elif bloc.program_id.speciality_id :
                 bloc.source_bloc_speciality_id = bloc.program_id.speciality_id
-                bloc.source_bloc_domain_id = bloc.program_id.domain_id
-                bloc.source_bloc_section_id = bloc.program_id.section_id
-                bloc.source_bloc_track_id = bloc.program_id.track_id
+                bloc.source_bloc_domain_id = bloc.program_id.speciality_id.domain_id
+                bloc.source_bloc_section_id = bloc.program_id.speciality_id.section_id
+                bloc.source_bloc_track_id = bloc.program_id.speciality_id.track_id
     
     image = fields.Binary('Image', attachment=True, related='student_id.image')
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
