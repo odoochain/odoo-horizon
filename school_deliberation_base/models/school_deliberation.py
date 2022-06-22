@@ -260,6 +260,8 @@ class ProgramDeliberation(models.Model):
     
     program_id = fields.Many2one('school.individual_program', required=True)
     
+    student_name = fields.Char(string='Student', related='program_id.student_id.name')
+    
     image = fields.Binary('Image', attachment=True, related='program_id.student_id.image')
     
     image_medium = fields.Binary('Image', attachment=True, related='program_id.student_id.image_medium')
