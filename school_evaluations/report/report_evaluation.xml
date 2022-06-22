@@ -513,7 +513,7 @@
                                   <t t-esc="course_group.acquiered"/>
                               </td>
                             </tr>
-                            <t t-foreach="course_group" t-as="course">
+                            <t t-foreach="course_group.course_ids" t-as="course">
                             <tr class="course" style="font-style: italic;font-weight: lighter;">
                               <td>
                                   <t t-esc="course.uid"/>
