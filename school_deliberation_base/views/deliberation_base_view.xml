@@ -350,10 +350,10 @@
                   </h3>
                 </div>
                 <div class="col-2">
-                  <button class="btn btn_credits mb2" type="button" name="evaluation">
+                  <button class="btn btn_credits mb-2" type="button" name="evaluation">
                     Evaluation<br/><span class="score_value"><field name="evaluation" class="oe_inline"/></span>
                   </button><br/>
-                  <button class="btn btn_credits bg_info" type="button" name="ects">
+                  <button class="btn bg-info" type="button" name="ects">
                     ECTS<br/><span class="score_value"><field name="total_acquiered_credits" class="oe_inline"/></span>
                   </button>
                 </div>  
