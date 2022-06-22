@@ -286,7 +286,7 @@ class ProgramDeliberation(models.Model):
     
     grade_default_comments = fields.Selection([
             ('com1','Pertinence et singularité du travail artistique'),
-            ('com2,'Qualité particulière du travail artistique'),
+            ('com2','Qualité particulière du travail artistique'),
             ('com3','Participation active et régulière aux activités d’enseignement'),
             ('com4','Caractère accidentel des échecs'),
             ('com5','Echecs limités en qualité et quantité'),
