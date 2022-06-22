@@ -706,9 +706,9 @@ class IndividualCourse(models.Model):
                 rec.second_session_result_disp = "%.2f" % rec.second_session_result
                 
             if rec.second_session_result_bool :
-                rec.final_results_disp = rec.second_session_result_disp
+                rec.final_result_disp = rec.second_session_result_disp
             else :
-                rec.final_results_disp = rec.first_session_result_disp
+                rec.final_result_disp = rec.first_session_result_disp
 
     def open_evaluations(self):
         evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
