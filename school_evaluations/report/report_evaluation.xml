@@ -522,16 +522,15 @@
                                   <t t-esc="course.title"/>
                               </td>
                               <td>
-                                  <t t-esc="course.total_hours"/>
+                                  <t t-esc="course.hours"/>
                               </td>
                               <td>
-                                  <t t-esc="course.total_credits"/>
+                                  <t t-esc="course.credits"/>
                               </td>
                               <td>
                                   <t t-esc="course.final_result_disp"/>
                               </td>
                               <td>
-                                  <t t-esc="course_group.acquiered"/>
                               </td>
                             </tr>
                             </t>

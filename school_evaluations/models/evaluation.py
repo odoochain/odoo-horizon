@@ -685,18 +685,30 @@ class IndividualCourse(models.Model):
 
     second_session_result_disp = fields.Char(string='Second Session Result Display', compute='compute_session_result_disp')
 
+    final_result_disp = fields.Char(string='Final Result Display', compute='compute_session_result_disp')
+
     is_danger = fields.Boolean(compute="compute_results", store=True)
 
     def compute_session_result_disp(self):
         for rec in self :
             if not rec.first_session_result_bool:
                 rec.first_session_result_disp = ""
+            elif rec.first_session_exception :
+                rec.first_session_result_disp = rec.first_session_exception
             else :
                 rec.first_session_result_disp = "%.2f" % rec.first_session_result
+                
             if not rec.second_session_result_bool:
                 rec.second_session_result_disp = ""
+            elif rec.second_session_exception :
+                rec.second_session_result_disp = rec.second_session_exception
             else :
                 rec.second_session_result_disp = "%.2f" % rec.second_session_result
+                
+            if rec.second_session_result_bool :
+                rec.final_results_disp = rec.second_session_result_disp
+            else :
+                rec.final_results_disp = rec.first_session_result_disp
 
     def open_evaluations(self):
         evaluation_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.evaluation_open_year_id', '0')
