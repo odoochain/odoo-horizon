@@ -492,7 +492,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <t t-foreach="o.acquired_ind_course_group_ids" t-as="course_group">
+                          <t t-foreach="o.course_group_ids" t-as="course_group">
                             <tr class="course_group">
                               <td>
                                   <t t-esc="course_group.uid"/>
