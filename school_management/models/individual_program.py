@@ -64,7 +64,7 @@ class IndividualProgram(models.Model):
         if(grade):
             self.write({'state': 'awarded',
                            'grade' : grade,
-                           'grade_year_id' : grade_year_id,
+                           'grade_year_id' : grade_year_id or self.env.user.current_year_id,
                            'grade_comments' : grade_comments,
                            'graduation_date' : fields.Date.today(),
             })

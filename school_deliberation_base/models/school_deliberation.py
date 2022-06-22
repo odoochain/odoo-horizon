@@ -301,14 +301,20 @@ class ProgramDeliberation(models.Model):
             self.grade_comments = dict(self.fields_get(allfields=['grade_default_comments'])['grade_default_comments']['selection'])[self.grade_default_comments]
             self.grade_default_comments = False
     
-    def write(self):
-        self.ensure_one()
-        self.program_id.set_to_awarded()
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'act_window_close',
-        }
+    @api.model
+    def create(self, vals):
+        self._update_create_write_vals(vals)
+        return super().create(vals)
 
+    def write(self, vals):
+        self._update_create_write_vals(vals)
+        return super().write(vals)
+    
+    def _update_create_write_vals(self, vals):
+        if 'grade' in vals:
+            if vals['grade']:
+                self.program_id.set_to_awarded(grade=self.grade, grade_comments=self.grade_comments)
+        
 class BlocDeliberation(models.Model):
     '''Bloc Deliberation'''
     _name = 'school.bloc_deliberation'
