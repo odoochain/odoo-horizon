@@ -364,10 +364,8 @@
             </div>
             <group col="2">
               <field name="deliberation_id" invisible="1"/>
-              <field name="bloc_id" invisible="1"/>
-              <field name="state"/>
+              <field name="program_id" invisible="1"/>
               <field name="total_acquiered_credits"/>
-              <field name="total_not_acquiered_credits"/>
               <field name="grade_comments"/>
             </group>
           </sheet>

@@ -270,6 +270,8 @@ class ProgramDeliberation(models.Model):
     
     name = fields.Char(string='Name', related='program_id.name')
     
+    total_acquiered_credits = fields.Integer(string='Total Acquiered Credits', related='program_id.total_acquiered_credits')
+    
     evaluation = fields.Float(string='Evaluation', related='program_id.evaluation')
     
     grade = fields.Float(string='Evaluation', related='program_id.evaluation')
