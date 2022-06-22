@@ -414,7 +414,6 @@
                               <th>Heures</th>
                               <th>ECTS</th>
                               <th>Résultat final</th>
-                              <th>ECTS acquis</th>
                               <th>Réussi en</th>
                           </tr>
                       </thead>
@@ -435,9 +434,6 @@
                               </td>
                               <td>
                                   <t t-esc="course_group.final_result_disp"/>
-                              </td>
-                              <td>
-                                  <t t-esc="course_group.total_credits"/>
                               </td>
                               <td>
                                   <t t-esc="course_group.bloc_id.year_id.name"/>
@@ -480,8 +476,8 @@
                   <h2>Rapport de délibération du programme annuel de l'étudiant</h2>
                   <h2><t t-esc="o.student_id.name"/></h2>
                   <h4><t t-esc="o.uid"/> - <t t-esc="o.source_bloc_id.name"/></h4>
-                  <h5>Crédits du cycle obtenus (<t t-esc="o.total_acquiered_credits"/> / <t t-esc="o.source_program_id.total_credits"/>)</h5>
-                  <h5>Grade obtenu : <t t-esc="o.grade"/></h5>
+                  <h5>Crédits du PAE obtenus (<t t-esc="o.total_acquiered_credits"/> / <t t-esc="o.total_credits"/>)</h5>
+                  <h5>Décision du jury : <t t-esc="o.decision"/></h5>
                 </div>
                 <div class="container"> 
                   <table class="table table-sm">
@@ -492,8 +488,7 @@
                               <th>Heures</th>
                               <th>ECTS</th>
                               <th>Résultat final</th>
-                              <th>ECTS acquis</th>
-                              <th>Réussi en</th>
+                              <th>Acquis</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -515,12 +510,31 @@
                                   <t t-esc="course_group.final_result_disp"/>
                               </td>
                               <td>
-                                  <t t-esc="course_group.total_credits"/>
-                              </td>
-                              <td>
-                                  <t t-esc="course_group.bloc_id.year_id.name"/>
+                                  <t t-esc="course_group.acquiered"/>
                               </td>
                             </tr>
+                            <t t-foreach="course_group" t-as="course">
+                            <tr class="course" style="font-style: italic;font-weight: lighter;">
+                              <td>
+                                  <t t-esc="course.uid"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course.title"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course.total_hours"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course.total_credits"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course.final_result_disp"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course_group.acquiered"/>
+                              </td>
+                            </tr>
+                            </t>
                           </t>
                       </tbody>
                   </table>
