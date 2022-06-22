@@ -351,7 +351,10 @@
                 </div>
                 <div class="col-2">
                   <button class="btn btn_credits" type="button" name="evaluation">
-                    <h1><field name="evaluation"/></h1>
+                    <h1><field name="evaluation" class="oe_inline"/></h1>
+                  </button><br/>
+                  <button class="btn btn_credits" type="button" name="ects">
+                    <h1><field name="total_acquiered_credits" class="oe_inline"/></h1>
                   </button>
                 </div>  
               </div>
@@ -365,7 +368,6 @@
             <group col="2">
               <field name="deliberation_id" invisible="1"/>
               <field name="program_id" invisible="1"/>
-              <field name="total_acquiered_credits"/>
               <field name="grade_comments"/>
             </group>
           </sheet>
