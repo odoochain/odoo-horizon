@@ -401,7 +401,7 @@
                 <div class="container"> 
                   <h2>Rapport de délibération de cycle</h2>
                   <h2><t t-esc="o.student_id.name"/></h2>
-                  <h4>CYCLE-<t t-esc="o.id"/> - <t t-esc="o.source_program_id.name"/></h4>
+                  <h4><t t-esc="o.uid"/> - <t t-esc="o.source_program_id.name"/></h4>
                   <h5>Crédits du cycle obtenus (<t t-esc="o.total_acquiered_credits"/> / <t t-esc="o.source_program_id.total_credits"/>)</h5>
                   <h5>Grade obtenu : <t t-esc="o.grade"/></h5>
                 </div>
@@ -473,137 +473,67 @@
 
     <template id="report_deliberation_annexe_content">
         <t t-call="web.html_container">
-            <t t-set="data_report_margin_top" t-value="40"/>
-            <t t-set="data_report_header_spacing" t-value="35"/>
             <t t-call="web.external_layout">
-                <div class="page">
-                    <div class="container" style="margin-left:60px;margin-right:60px;">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <h3>PROCÈS VERBAL DE DÉLIBÉRATION</h3>
-                                <h3>Conservatoire royal de Liège<br/>Boulevard Piercot, 29, 4000 LIÈGE</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <t t-foreach="docs" t-as="o">
-                    <div class="container" style="page-break-before:always;">
-                        <div class="row">
-                            <div class="col-xs-8 col-xs-offset-1">
-                                <h4>Fiche de résultats - <t t-esc="o.name"/></h4>    
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8 col-xs-offset-1">
-                                <h4><t t-esc="o.source_bloc_name"/></h4>    
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-10 col-xs-offset-1">
-                                <!-- Table -->
-                                <table class="table table-condensed table-bordered result_table">
-                                    <colgroup>
-                                        <col style="width:300px"/>
-                                        <col style="width:75px"/>
-                                        <col style="width:60px"/>
-                                        <col style="width:90px"/>
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>Intitulé du cours</th>
-                                            <th>Résultats</th>
-                                            <th>ECTS</th>
-                                            <th>Acquis</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <t t-foreach="o.course_group_ids" t-as="course_group">
-                                            <tr class="course_group">
-                                                <td>
-                                                    <t t-esc="course_group.title"/>
-                                                </td>
-                                                <td style=" text-align: right;">
-                                                    <t t-if="course_group.first_session_deliberated_result_bool or course_group.second_session_deliberated_result_bool">
-                                                        E
-                                                    </t>
-                                                    <t t-if="course_group.final_result_bool and not(course_group.first_session_deliberated_result_bool) and not(course_group.second_session_deliberated_result_bool)">
-                                                        <t t-esc="course_group.final_result_disp"/>
-                                                    </t>
-                                                </td>
-                                                <td style=" text-align: right;">
-                                                    <t t-esc="course_group.total_credits"/>
-                                                </td>
-                                                <td>
-                                                    <span class="label label-success" t-if="course_group.acquiered == 'A'">Acq</span>
-                                                    <span class="label label-warning btn o_set_delib" t-if="course_group.acquiered == 'NA'" t-att-data-course-group-id="course_group.id">NoAcq</span>
-                                                </td>
-                                            </tr>
-                                            <t t-foreach="course_group.course_ids" t-as="course">
-                                                <tr style="font-style: italic;font-size:80%;">
-                                                    <td>
-                                                        <t t-esc="course.title"/> - <t t-esc="course.level"/> <i t-if="course.teacher_id" class="oe_fade"> - <t t-esc="course.teacher_id.name"/></i></td>
-                                                    <td style=" text-align: right;">
-                                                        <t t-if="course_group.final_result_bool and not(course_group.first_session_deliberated_result_bool) and not(course_group.second_session_deliberated_result_bool)">
-                                                        <t t-if="course.second_session_result_bool">
-                                                            <t t-esc="course.second_session_result_disp"/>
-                                                        </t>
-                                                        <t t-if="course.second_session_result_bool == False">
-                                                            <t t-esc="course.first_session_result_disp"/>
-                                                        </t>
-                                                        </t>
-                                                    </td>
-                                                    <td/>
-                                                    <td/>
-                                                </tr>
-                                            </t>
-                                        </t>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-10 col-xs-offset-1">
-                                <h4>A acquis ou valorisé <t t-esc="o.total_acquiered_credits"/> crédits ECTS. <t t-if="o.total_credits == o.total_acquiered_credits">A réussi l'ensemble de son PAE.</t></h4>
-                            </div>
-                        </div>
-                        <!--<div class="row">
-                            <div class="col-xs-10 col-xs-offset-1">
-                                <h4><t t-esc="o.decision"/>
-                                <t t-if="o.program_id.grade">
-                                    <span t-field="o.program_id.grade"/>
-                                </t>
-                                <t t-if="o.program_id.grade_comments">
-                                    au motif <span t-field="o.program_id.grade_comments"/>
-                                </t></h4>
-                            </div>
-                        </div>-->
-                    </div>
-                    </t>
-                    <div class="container" style="margin-left:60px;margin-right:60px;page-break-before:always;">
-                        <div class="row" style="margin-top:60px;">
-                            <div class="col-xs-10">
-                                Remarques : 
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:150px;">
-                            <div class="col-xs-6">
-                                Le/La Président-e du jury
-                            </div>
-                            <div class="col-xs-6">
-                                Le/La Secrétaire du jury
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:120px;">
-                            <div class="col-xs-6">
-                                Les Membres du jury
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:200px;">
-                            <div class="col-xs-9">
-                                Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
-                            </div>
+              <t t-foreach="docs" t-as="o">
+              <div class="page">
+                <div class="container"> 
+                  <h2>Rapport de délibération du programme annuel de l'étudiant</h2>
+                  <h2><t t-esc="o.student_id.name"/></h2>
+                  <h4><t t-esc="o.uid"/> - <t t-esc="o.source_bloc_id.name"/></h4>
+                  <h5>Crédits du cycle obtenus (<t t-esc="o.total_acquiered_credits"/> / <t t-esc="o.source_program_id.total_credits"/>)</h5>
+                  <h5>Grade obtenu : <t t-esc="o.grade"/></h5>
+                </div>
+                <div class="container"> 
+                  <table class="table table-sm">
+                      <thead>
+                          <tr>
+                              <th>UE Id</th>
+                              <th>Nom</th>
+                              <th>Heures</th>
+                              <th>ECTS</th>
+                              <th>Résultat final</th>
+                              <th>ECTS acquis</th>
+                              <th>Réussi en</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <t t-foreach="o.acquired_ind_course_group_ids" t-as="course_group">
+                            <tr class="course_group">
+                              <td>
+                                  <t t-esc="course_group.uid"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course_group.title"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course_group.total_hours"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course_group.total_credits"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course_group.final_result_disp"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course_group.total_credits"/>
+                              </td>
+                              <td>
+                                  <t t-esc="course_group.bloc_id.year_id.name"/>
+                              </td>
+                            </tr>
+                          </t>
+                      </tbody>
+                  </table>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
                         </div>
                     </div>
                 </div>
+              </div>
+              </t>
             </t>
         </t>
     </template>
