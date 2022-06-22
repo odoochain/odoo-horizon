@@ -369,6 +369,7 @@
               <field name="deliberation_id" invisible="1"/>
               <field name="program_id" invisible="1"/>
               <field name="grade_comments"/>
+              <field name="grade_default_comments"/>
             </group>
           </sheet>
         </form>
