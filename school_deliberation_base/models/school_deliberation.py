@@ -303,12 +303,14 @@ class ProgramDeliberation(models.Model):
     
     @api.model
     def create(self, vals):
+        ret = super().create(vals)
         self._update_create_write_vals(vals)
-        return super().create(vals)
+        return ret
 
     def write(self, vals):
+        ret = super().write(vals)
         self._update_create_write_vals(vals)
-        return super().write(vals)
+        return ret
     
     def _update_create_write_vals(self, vals):
         if 'grade' in vals:
