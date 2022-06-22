@@ -299,6 +299,7 @@ class ProgramDeliberation(models.Model):
     def onchange_grade_default_comments(self):
         if self.grade_default_comments:
             self.grade_comments = dict(self.fields_get(allfields=['grade_default_comments'])['grade_default_comments']['selection'])[self.grade_default_comments]
+            self.grade_default_comments = False
     
     def set_to_awarded(self):
         self.ensure_one()
