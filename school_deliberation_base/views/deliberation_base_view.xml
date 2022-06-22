@@ -361,9 +361,6 @@
               <div class="row">
                 <div class="col-12" style="font-size: larger;"><group col="2"><field name="grade"/></group></div>
               </div>
-              <div class="row">
-                <button name="set_to_awarded" type="object" string="Awarded" class="oe_highlight" />
-              </div>
             </div>
             <group col="2">
               <field name="deliberation_id" invisible="1"/>
@@ -371,6 +368,11 @@
               <field name="grade_comments"/>
               <field name="grade_default_comments"/>
             </group>
+            <div class="container h_deliberation_dialog">
+              <div class="row">
+                <button name="set_to_awarded" type="object" string="Awarded" class="oe_highlight" />
+              </div>
+            </div>
           </sheet>
         </form>
       </field>
