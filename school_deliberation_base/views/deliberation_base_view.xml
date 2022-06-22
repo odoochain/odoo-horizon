@@ -353,7 +353,7 @@
                   <button class="btn btn_credits mb-2" type="button" name="evaluation">
                     Evaluation<br/><span class="score_value"><field name="evaluation" class="oe_inline"/></span>
                   </button><br/>
-                  <button class="btn bg-info" type="button" name="ects">
+                  <button class="btn btn_credits bg-info" type="button" name="ects">
                     ECTS<br/><span class="score_value"><field name="total_acquiered_credits" class="oe_inline"/></span>
                   </button>
                 </div>  
