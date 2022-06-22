@@ -301,15 +301,9 @@ class ProgramDeliberation(models.Model):
             self.grade_comments = dict(self.fields_get(allfields=['grade_default_comments'])['grade_default_comments']['selection'])[self.grade_default_comments]
             self.grade_default_comments = False
     
-    def set_to_awarded(self):
+    def write(self):
         self.ensure_one()
         self.program_id.set_to_awarded()
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'act_window_close',
-        }
-        
-    def cancel_button(self):
         return {
             'type': 'ir.actions.client',
             'tag': 'act_window_close',

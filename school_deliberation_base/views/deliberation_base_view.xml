@@ -368,8 +368,8 @@
               <field name="grade_default_comments"/>
             </group>
             <footer>
-                <button name="set_to_awarded" type="object" string="Awarded" class="oe_highlight" special="save" data-hotkey="s"/>
-                <button name="cancel_button" string="Discard" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                <button string="Award" special="save" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
             </footer>
           </sheet>
         </form>
