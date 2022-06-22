@@ -362,14 +362,14 @@
             <group col="2">
               <field name="deliberation_id" invisible="1"/>
               <field name="program_id" invisible="1"/>
-              <field name="grade"/>
+              <field name="grade" attrs="{'readonly': [('state', '!=', 'awarded')]}"/>
               <separator />
-              <field name="grade_comments"/>
-              <field name="grade_default_comments"/>
+              <field name="grade_comments" attrs="{'readonly': [('state', '!=', 'awarded')]}"/>
+              <field name="grade_default_comments" attrs="{'readonly': [('state', '!=', 'awarded')]}"/>
             </group>
             <footer>
-                <button string="Award" special="save" class="btn-primary" close="1"/>
-                <button string="Cancel" class="btn-secondary" special="cancel" close="1"/>
+                <button string="Award" special="save" states="awarded" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
             </footer>
           </sheet>
         </form>

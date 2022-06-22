@@ -274,6 +274,8 @@ class ProgramDeliberation(models.Model):
     
     evaluation = fields.Float(string='Evaluation', related='program_id.evaluation')
     
+    state = fields.Selection(String="State", related='program_id.state')
+    
     grade = fields.Selection([
             ('without','Without Grade'),
             ('satisfaction','Satisfaction'),
