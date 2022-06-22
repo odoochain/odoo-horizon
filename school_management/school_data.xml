@@ -86,7 +86,7 @@
         <field name="company_id"></field>
     </record>
     
-    <record id="sequence_school_program" model="ir.sequence">
+    <record id="sequence_school_individual_program" model="ir.sequence">
         <field name="name">School Individual Program Sequence</field>
         <field name="code">school.individual_program</field>
         <field name="prefix">CIE-</field>
@@ -96,7 +96,7 @@
         <field name="company_id"></field>
     </record>
     
-    <record id="sequence_school_bloc" model="ir.sequence">
+    <record id="sequence_school_individual_bloc" model="ir.sequence">
         <field name="name">School Individual Bloc Sequence</field>
         <field name="code">school.individual_bloc</field>
         <field name="prefix">PAE-</field>
@@ -106,7 +106,7 @@
         <field name="company_id"></field>
     </record>
     
-    <record id="sequence_school_course_group" model="ir.sequence">
+    <record id="sequence_school_individual_course_group" model="ir.sequence">
         <field name="name">School Individual Course Group Sequence</field>
         <field name="code">school.individual_course_group</field>
         <field name="prefix">UEI-</field>
@@ -116,7 +116,7 @@
         <field name="company_id"></field>
     </record>
     
-    <record id="sequence_school_course" model="ir.sequence">
+    <record id="sequence_school_individual_course" model="ir.sequence">
         <field name="name">School Individual Course Sequence</field>
         <field name="code">school.individual_course</field>
         <field name="prefix">AAI-</field>
