@@ -274,9 +274,30 @@ class ProgramDeliberation(models.Model):
     
     evaluation = fields.Float(string='Evaluation', related='program_id.evaluation')
     
-    grade = fields.Selection(string='Evaluation', related='program_id.grade')
+    grade = fields.Selection([
+            ('without','Without Grade'),
+            ('satisfaction','Satisfaction'),
+            ('distinction','Distinction'),
+            ('second_class', 'Second Class Honor'),
+            ('first_class', 'First Class Honor'),
+        ],string="Grade")
     
-    grade_comments = fields.Text(string='Evaluation', related='program_id.grade_comments')
+    grade_comments = fields.Text(string="Grade Comments")
+    
+    grade_default_comments = fields.Selection([
+            ('com1','Pertinence et singularité du travail artistique'),
+            ('com2,'Qualité particulière du travail artistique'),
+            ('com3','Participation active et régulière aux activités d’enseignement'),
+            ('com4','Caractère accidentel des échecs'),
+            ('com5','Echecs limités en qualité et quantité'),
+            ('com6','Pourcentage global et importance relative des échecs'),
+            ('com7','Progrès réalisés d’une session à l’autre'),
+            ('com8','La réussite des activités de remédiation'),
+        ],string="Default Commments")
+    
+    @api.onchange('grade_default_comments')
+    def onchange_grade_default_comments(self):
+        self.grade_comments = dict(self.fields_get(allfields=['grade_default_comments'])['grade_default_comments']['selection'])[self.grade_default_comments]
     
     def set_to_awarded(self):
         self.ensure_one()
