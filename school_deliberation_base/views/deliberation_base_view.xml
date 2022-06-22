@@ -364,9 +364,8 @@
               <field name="deliberation_id" invisible="1"/>
               <field name="program_id" invisible="1"/>
               <field name="grade" attrs="{'readonly': [('state', '!=', 'progress')]}"/>
-              <separator />
               <field name="grade_comments" attrs="{'readonly': [('state', '!=', 'progress')]}"/>
-              <field name="grade_default_comments" attrs="{'readonly': [('state', '!=', 'progress')]}"/>
+              <field name="grade_default_comments" attrs="{'invisible': [('state', '!=', 'progress')]}"/>
             </group>
             <footer>
                 <button string="Award" special="save" states="progress" class="btn-primary"/>
