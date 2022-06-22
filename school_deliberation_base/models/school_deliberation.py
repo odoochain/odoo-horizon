@@ -274,9 +274,9 @@ class ProgramDeliberation(models.Model):
     
     evaluation = fields.Float(string='Evaluation', related='program_id.evaluation')
     
-    grade = fields.Float(string='Evaluation', related='program_id.evaluation')
+    grade = fields.Float(string='Evaluation', related='program_id.grade')
     
-    grade_comments = fields.Float(string='Evaluation', related='program_id.evaluation')
+    grade_comments = fields.Float(string='Evaluation', related='program_id.grade_comments')
     
     def set_to_awarded(self):
         self.ensure_one()
