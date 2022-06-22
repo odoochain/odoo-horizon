@@ -304,6 +304,11 @@ class ProgramDeliberation(models.Model):
     def set_to_awarded(self):
         self.ensure_one()
         self.program_id.set_to_awarded()
+        self.save()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'act_window_close',
+        }
 
 class BlocDeliberation(models.Model):
     '''Bloc Deliberation'''
