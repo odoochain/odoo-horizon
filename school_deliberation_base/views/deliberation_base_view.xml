@@ -367,10 +367,6 @@
               <field name="grade_comments"/>
               <field name="grade_default_comments"/>
             </group>
-            <footer>
-                <button string="Award" special="save" class="btn-primary"/>
-                <button string="Cancel" class="btn-secondary" special="cancel"/>
-            </footer>
           </sheet>
         </form>
       </field>
