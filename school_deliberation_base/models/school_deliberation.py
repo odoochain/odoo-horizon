@@ -276,7 +276,7 @@ class ProgramDeliberation(models.Model):
     
     grade = fields.Selection(string='Evaluation', related='program_id.grade')
     
-    grade_comments = fields.Char(string='Evaluation', related='program_id.grade_comments')
+    grade_comments = fields.Text(string='Evaluation', related='program_id.grade_comments')
     
     def set_to_awarded(self):
         self.ensure_one()
