@@ -367,10 +367,6 @@
               <field name="grade_comments" attrs="{'readonly': [('state', '!=', 'progress')]}"/>
               <field name="grade_default_comments" attrs="{'invisible': [('state', '!=', 'progress')]}"/>
             </group>
-            <footer>
-                <button string="Award" special="save" states="progress" class="btn-primary"/>
-                <button string="Cancel" class="btn-secondary" special="cancel"/>
-            </footer>
           </sheet>
         </form>
       </field>
