@@ -360,6 +360,7 @@
               </div>
             </div>
             <group col="2">
+              <field name="state"/>
               <field name="deliberation_id" invisible="1"/>
               <field name="program_id" invisible="1"/>
               <field name="grade" attrs="{'readonly': [('state', '!=', 'awarded')]}"/>
