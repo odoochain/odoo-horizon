@@ -70,7 +70,7 @@ class IndividualProgram(models.Model):
             })
         else:
             self.write({'state': 'awarded',
-                        'grade_year_id' : grade_year_id,
+                        'grade_year_id' : grade_year_id or self.env.user.current_year_id,
                         'graduation_date' : fields.Date.today(),
             })
 

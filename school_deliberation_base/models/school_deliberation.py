@@ -276,6 +276,9 @@ class ProgramDeliberation(models.Model):
     
     grade_comments = fields.Float(string='Evaluation', related='program_id.evaluation')
     
+    def set_to_awarded(self):
+        self.ensure_one()
+        self.program_id.set_to_awarded()
 
 class BlocDeliberation(models.Model):
     '''Bloc Deliberation'''
