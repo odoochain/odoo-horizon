@@ -359,10 +359,7 @@
                 <div class="col-12" style="font-size: larger;"><group col="2"><field name="grade"/></group></div>
               </div>
               <div class="row">
-                <button name="set_to_postponed" type="object" states="progress" string="Postponed" class="oe_highlight mr-4" />
-                <button name="set_to_awarded_first_session" type="object" states="progress" string="Awarded" class="oe_highlight" />
-                <button name="set_to_failed" type="object" states="postponed" string="Failed" class="oe_highlight mr-4" />
-                <button name="set_to_awarded_second_session" type="object" states="postponed" string="Awarded" class="oe_highlight" />
+                <button name="set_to_awarded" type="object" states="progress" string="Awarded" class="oe_highlight" />
               </div>
             </div>
             <group col="2">
@@ -444,7 +441,10 @@
                 <div class="alert mb-0" role="alert" style="font-size: larger;"><field name="decision"/></div>
               </div>
               <div class="row">
-                <button name="set_to_awarded" type="object" states="progress" string="Awarded" class="oe_highlight" />
+                <button name="set_to_postponed" type="object" states="progress" string="Postponed" class="oe_highlight mr-4" />
+                <button name="set_to_awarded_first_session" type="object" states="progress" string="Awarded" class="oe_highlight" />
+                <button name="set_to_failed" type="object" states="postponed" string="Failed" class="oe_highlight mr-4" />
+                <button name="set_to_awarded_second_session" type="object" states="postponed" string="Awarded" class="oe_highlight" />
               </div>
             </div>
             <group col="2">
