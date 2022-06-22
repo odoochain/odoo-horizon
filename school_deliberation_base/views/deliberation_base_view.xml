@@ -325,6 +325,59 @@
       </field>
     </record>
     
+    <!-- Deliberation Programs Form View -->
+    <record model="ir.ui.view" id="program_deliberation_form">
+      <field name="name">school.program_deliberation.view</field>
+      <field name="model">school.program_deliberation</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Program Deliberation">
+          <sheet>
+            <div class="container h_deliberation_dialog">
+              <div class="row">
+                <div class="h-100 d-inline-block" style="width: 150px;">
+                  <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
+                </div>
+                <div class="col-8">
+                  <h2>
+                   <field name="name"/>
+                  </h2>
+                  <h3 class="o_row row no-gutters d-flex">
+                      <div class="col">
+                        <label for="student_name" invisible="1"/>
+                        <small class="oe_grey" ><field name="student_name"/></small>
+                      </div>
+                  </h3>
+                </div>
+                <div class="col-2">
+                  <button class="btn btn_credits" type="button" name="evaluation">
+                    <h1><field name="evaluation"/></h1>
+                  </button>
+                </div>  
+              </div>
+              <div class="row">
+                <div class="col-12" style="font-size: larger;"><group col="2"><field name="grade"/></group></div>
+              </div>
+              <div class="row">
+                <button name="set_to_postponed" type="object" states="progress" string="Postponed" class="oe_highlight mr-4" />
+                <button name="set_to_awarded_first_session" type="object" states="progress" string="Awarded" class="oe_highlight" />
+                <button name="set_to_failed" type="object" states="postponed" string="Failed" class="oe_highlight mr-4" />
+                <button name="set_to_awarded_second_session" type="object" states="postponed" string="Awarded" class="oe_highlight" />
+              </div>
+            </div>
+            <group col="2">
+              <field name="deliberation_id" invisible="1"/>
+              <field name="bloc_id" invisible="1"/>
+              <field name="state"/>
+              <field name="total_acquiered_credits"/>
+              <field name="total_not_acquiered_credits"/>
+              <field name="grade_comments"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    
     <!-- Deliberation Blocs Kanban View -->
     <record model="ir.ui.view" id="deliberation_bloc_kanban_view">
       <field name="name">school.deliberation.bloc.kanban</field>
@@ -475,5 +528,26 @@
     <!-- Top Menu item -->
   
     <menuitem id="menu_deliberation_tree" parent="school_evaluations.menu_main_evaluation" action="action_deliberation_form" sequence="60" />
+    
+    
+    <!-- Specific filters -->
+    
+    <record id="view_individual_bloc_filter_delib" model="ir.ui.view">
+        <field name="name">individual_bloc.select.delib</field>
+        <field name="model">school.individual_bloc</field>
+        <field name="inherit_id" ref="school_management.view_individual_bloc_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="before">
+                <separator/>
+                <filter name="no_first_delib" string="Has First Delib" domain='[["deliberation_ids.session","=","first"]]' />
+                <filter name="no_second_delib" string="Has Second Delib" domain='[["deliberation_ids.session","=","second"]]' />
+                <filter name="no_third_delib" string="Has Third Delib" domain='[["deliberation_ids.session","=","third"]]' />
+                <filter name="no_first_delib" string="No First Delib" domain='["|",["deliberation_ids","=",False],["deliberation_ids.session","!=","first"]]' />
+                <filter name="no_second_delib" string="No Second Delib" domain='["|",["deliberation_ids","=",False],["deliberation_ids.session","!=","second"]]' />
+                <filter name="no_third_delib" string="No Third Delib" domain='["|",["deliberation_ids","=",False],["deliberation_ids.session","!=","third"]]' />
+            </xpath>
+        </field>
+    </record>
+    
   </data>
 </odoo>
