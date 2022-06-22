@@ -304,7 +304,12 @@ class ProgramDeliberation(models.Model):
     def set_to_awarded(self):
         self.ensure_one()
         self.program_id.set_to_awarded()
-        self.save()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'act_window_close',
+        }
+        
+    def cancel_button(self):
         return {
             'type': 'ir.actions.client',
             'tag': 'act_window_close',

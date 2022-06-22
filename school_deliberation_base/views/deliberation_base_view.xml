@@ -372,6 +372,10 @@
                 <button name="set_to_awarded" type="object" string="Awarded" class="oe_highlight" />
               </div>
             </div>
+            <footer>
+                <button name="set_to_awarded" type="object" string="Awarded" class="oe_highlight" />
+                <button name="cancel_button" string="Discard" class="btn-secondary" special="cancel" data-hotkey="z"/>
+            </footer>
           </sheet>
         </form>
       </field>
