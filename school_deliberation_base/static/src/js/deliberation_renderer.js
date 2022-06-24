@@ -96,6 +96,9 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                 $col2.append(`
                         <div class="row">
                             <span class="col-md-10">
+                                <h1 class="display-4">${record.student_id.data.display_name}</h1>
+                            </span>
+                            <span class="col-md-10">
                                 <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
                             </span>
                             <span class="col-md-2 refresh_button">
