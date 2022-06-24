@@ -276,11 +276,24 @@ class IndividualBloc(models.Model):
         return self.write({'state': 'failed','decision' : decision})
     
     def _deliberate_cg(self, cgs):
-        for cg in cgs:
-            if cg.acquiered == 'A' :
-                cg.write({'state': '6_success'})
-            else :
-                cg.write({'state': '7_failed'})
+        if self.state == 'draft':
+            cgs.write({'state': '9_draft'})
+        elif self.state == 'progress':
+            cgs.write({'state': '5_progress'})
+        elif self.state == 'postponed':
+            for cg in cgs:
+                if cg.acquiered == 'A' :
+                    cg.write({'state': '6_success'})
+                else :
+                    cg.write({'state': '5_progress'})
+        elif self.state == 'abandoned':
+            cgs.write({'state': '7_failed'})
+        else :
+            for cg in cgs:
+                if cg.acquiered == 'A' :
+                    cg.write({'state': '6_success'})
+                else :
+                    cg.write({'state': '7_failed'})
     
     def set_to_abandoned(self, decision=None, context=None):
         return self.write({'state': 'abandoned','decision' : None})
