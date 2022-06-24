@@ -384,22 +384,22 @@ class IndividualCourseGroup(models.Model):
              " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
              " * The 'Valuated' status is used when the course group is confirmed for valuation.")
      
-    def set_to_draft(self, context):
+    def set_to_draft(self, context=None):
         return self.write({'state': '9_draft'})
 
-    def set_to_progress(self, context):
+    def set_to_progress(self, context=None):
         return self.write({'state': '5_progress'})
         
-    def set_to_confirmed(self, context):
+    def set_to_confirmed(self, context=None):
         return self.write({'state': '1_confirmed'})
         
-    def set_to_success(self, context):
+    def set_to_success(self, context=None):
         return self.write({'state': '6_success'})
         
-    def set_to_failed(self, context):
+    def set_to_failed(self, context=None):
         return self.write({'state': '7_failed'})
         
-    def set_to_valuated(self, context):
+    def set_to_valuated(self, context=None):
         return self.write({'state': '0_valuated'})
     
     valuated_program_id = fields.Many2one('school.individual_program', string="Program", ondelete='cascade', readonly=True)
