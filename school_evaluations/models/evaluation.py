@@ -383,6 +383,12 @@ class IndividualCourseGroup(models.Model):
              " * The 'Failed' status is when delibration has confirmed failure.\n"
              " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
              " * The 'Valuated' status is used when the course group is confirmed for valuation.")
+     
+    def set_to_draft(self, context):
+        return self.write({'state': '9_draft'})
+
+    def set_to_progress(self, context):
+        return self.write({'state': '5_progress'})
         
     def set_to_confirmed(self, context):
         return self.write({'state': '1_confirmed'})

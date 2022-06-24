@@ -310,6 +310,9 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="before">
                     <header>
+                        <button name="set_to_progress" type="object" states="9_draft" string="Progress" class="oe_highlight" />
+                        <button name="set_to_success" type="object" states="5_progress" string="Success" class="oe_highlight" />
+                        <button name="set_to_draft" type="object" states="5_progress,6_success,7_failed,2_candidate,1_confirmed,0_valuated" string="Reset to Draft" />
                         <button name="set_to_confirmed" type="object" states="2_candidate" string="Confirm valuation" class="oe_highlight" />
                         <button name="set_to_valuated" type="object" states="1_confirmed" string="Valuate" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="9_draft,7_failed,6_success,5_progress,2_candidate,1_confirmed,0_valuated" />

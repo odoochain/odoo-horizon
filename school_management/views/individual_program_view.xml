@@ -474,11 +474,6 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Course Group">
-          <!--<header>
-    		            <button name="transfert_confirm" states="draft" string="Validate" class="oe_highlight" groups="account.group_account_invoice"/>
-    		            <button name="transfert_cancel" states="draft,confirmed" string="Cancel Transfert" groups="account.group_account_invoice"/>
-    		            <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,paid"/>
-    		        </header>-->
           <sheet>
             <widget name="web_ribbon" text="Unité" bg_color="bg-primary"/>
             <div class="container">
@@ -506,6 +501,7 @@
               <field name="source_course_group_id" />
               <field name="responsible_id" />
               <!--<field name="weight" />-->
+              <field name="bloc_id" />
               <field name="total_weight" />
               <field name="total_hours" />
               <field name="total_credits" />
