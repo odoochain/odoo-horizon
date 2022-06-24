@@ -549,7 +549,7 @@ class IndividualCourseGroup(models.Model):
             for ic in rec.course_ids:
                 if ic.second_session_exception :
                     rec.second_session_computed_result = 0
-                    rec.second_session_computed_exception = ic.first_session_exception
+                    rec.second_session_computed_exception = ic.second_session_exception
                     rec.second_session_computed_result_bool = True
                     break 
                     
