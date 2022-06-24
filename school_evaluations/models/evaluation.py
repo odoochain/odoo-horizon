@@ -580,10 +580,12 @@ class IndividualCourseGroup(models.Model):
                 rec.first_session_result_bool = True
             elif rec.first_session_computed_result_bool :
                 rec.first_session_exception = None
+                rec.first_session_computed_exception = None
                 rec.first_session_result = rec.first_session_computed_result
                 rec.first_session_result_bool = True
             else :
                 rec.first_session_exception = None
+                rec.first_session_computed_exception = None
                 rec.first_session_result = 0
                 rec.first_session_result_bool = False
             rec.compute_final_results(force)
@@ -612,10 +614,12 @@ class IndividualCourseGroup(models.Model):
                 rec.second_session_result_bool = True
             elif rec.second_session_computed_result_bool :
                 rec.second_session_exception = None
+                rec.second_session_computed_exception = None
                 rec.second_session_result = rec.first_session_computed_result
                 rec.second_session_result_bool = True
             else :
                 rec.second_session_exception = None
+                rec.second_session_computed_exception = None
                 rec.second_session_result = 0
                 rec.second_session_result_bool = False
             rec.compute_final_results(force)
