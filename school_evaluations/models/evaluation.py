@@ -277,7 +277,7 @@ class IndividualBloc(models.Model):
     
     def _deliberate_cg(self, cgs):
         for cg in cgs:
-            if cg.acquiered :
+            if cg.acquiered == 'A' :
                 cg.write({'state': '6_success'})
             else :
                 cg.write({'state': '7_failed'})
