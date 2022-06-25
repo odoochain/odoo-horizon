@@ -61,3 +61,19 @@
 .deliberation_bloc_abandoned {
     border-left : 10px solid black !important;
 }
+
+.deliberation_program_awarded {
+    border-left : 10px solid #28a745 !important;
+}
+
+.deliberation_program_progress {
+    border-left : 10px solid #ffc107 !important;
+}
+
+.deliberation_program_draft {
+    border-left : 10px solid grey !important;
+}
+
+.deliberation_program_abandoned {
+    border-left : 10px solid black !important;
+}
