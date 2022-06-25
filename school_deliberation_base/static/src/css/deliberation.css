@@ -33,3 +33,31 @@
   	bottom:20px;
   	left:20px;
 }
+
+.deliberation_bloc_awarded_first_session {
+    border-left : 10px solid #28a745 !important;
+}
+
+.deliberation_bloc_awarded_second_session {
+    border-left : 10px solid #28a745 !important;
+}
+
+.deliberation_bloc_progress {
+    border-left : 10px solid #ffc107 !important;
+}
+
+.deliberation_bloc_failed {
+    border-left : 10px solid red !important;
+}
+
+.deliberation_bloc_postponed {
+    border-left : 10px solid blue !important;
+}
+
+.deliberation_bloc_draft {
+    border-left : 10px solid grey !important;
+}
+
+.deliberation_bloc_abandoned {
+    border-left : 10px solid black !important;
+}

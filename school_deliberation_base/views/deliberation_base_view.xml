@@ -42,7 +42,7 @@
           <field name="secretary_id"/>
           <templates>
             <t t-name="kanban-box">
-              <div class="oe_kanban_global_click o_deliberation_kanban">
+              <div t-attf-class="'oe_kanban_global_click o_deliberation_kanban deliberation_bloc_{{record.state.raw_value}}'">
                 <div class="o_kanban_card_header">
                   <div class="o_kanban_card_header_title">
                     <div class="o_primary">
