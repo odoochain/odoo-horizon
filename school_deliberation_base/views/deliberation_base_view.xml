@@ -383,7 +383,7 @@
           <field name="state"/>
           <templates>
             <t t-name="kanban-box">
-              <div t-attf-class="'deliberation_bloc_{{record.state.raw_value}} oe_kanban_global_click o_kanban_record_has_image_fill o_deliberation_bloc_kanban o_kanban_record'" style="width:500px;">
+              <div t-attf-class="deliberation_bloc_{{record.state.raw_value}} oe_kanban_global_click o_kanban_record_has_image_fill o_deliberation_bloc_kanban o_kanban_record" style="width:500px;">
                   <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_medium', record.student_id.raw_value)})" role="img"/>
                   <div class="oe_kanban_details ml8">
                       <div class="o_kanban_record_top">
