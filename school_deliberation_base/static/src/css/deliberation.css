@@ -51,7 +51,7 @@
 }
 
 .deliberation_bloc_postponed {
-    border-left : 10px solid brown !important;
+    border-left : 10px solid #FF6833 !important;
 }
 
 .deliberation_bloc_draft {
