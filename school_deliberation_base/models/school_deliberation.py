@@ -189,7 +189,7 @@ class IndividualBloc(models.Model):
                 for c in cg.course_ids:
                     if c.first_session_result_bool == False:
                         count = count + 1
-            rec.missing_eval_count = count
+            rec.missing_eval_first_count = count
     
     def _compute_missing_eval_second_count(self):
         for rec in self:
@@ -198,7 +198,7 @@ class IndividualBloc(models.Model):
                 for c in cg.course_ids:
                     if c.second_session_result_bool == False:
                         count = count + 1
-            rec.missing_eval_count = count
+            rec.missing_eval_second_count = count
     
     def _compute_all_responsibles(self):
         for rec in self:
