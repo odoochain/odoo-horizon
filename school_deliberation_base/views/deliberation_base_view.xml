@@ -301,6 +301,7 @@
         <kanban class="o_deliberation_program_kanban">
           <field name="name"/>
           <field name="student_id"/>
+          <field name="uid"/>
           <field name="state"/>
           <templates>
             <t t-name="kanban-box">
