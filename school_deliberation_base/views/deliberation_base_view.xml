@@ -311,10 +311,15 @@
                           <div class="o_kanban_record_headings">
                               <strong class="o_kanban_record_title">
                                   <div>
-                                      <strong><span t-esc="record.name.value"/></strong>
+                                      <strong><span t-esc="record.uid.value"/></strong>
                                   </div>
                               </strong>
+                              <span class="text-muted" t-esc="record.state.value"/>
                               <span class="o_kanban_record_subtitle"><span t-esc="record.state.value"/></span>
+                              <span t-if="record.missing_eval_first_count.value &gt; 0" class="translate-middle badge rounded-pill bg-danger">
+                                <t t-esc="record.missing_eval_first_count.value"/>
+                                <span class="visually-hidden">évaluation(s) manquante(s)</span>
+                              </span>
                           </div>
                       </div>
                   </div>
