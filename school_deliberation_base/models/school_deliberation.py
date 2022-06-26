@@ -185,7 +185,7 @@ class IndividualBloc(models.Model):
     def _compute_missing_eval_first_count(self):
         for rec in self:
             count = 0
-            for cg in rec.course_group_ids.filtered(lambda r: force or r.state in ['5_progress']) :
+            for cg in rec.course_group_ids.filtered(lambda r: r.state in ['5_progress']) :
                 for c in cg.course_ids:
                     if c.first_session_result_bool == False:
                         count = count + 1
@@ -194,7 +194,7 @@ class IndividualBloc(models.Model):
     def _compute_missing_eval_second_count(self):
         for rec in self:
             count = 0
-            for cg in rec.course_group_ids.filtered(lambda r: force or r.state in ['5_progress']) :
+            for cg in rec.course_group_ids.filtered(lambda r: r.state in ['5_progress']) :
                 for c in cg.course_ids:
                     if c.second_session_result_bool == False:
                         count = count + 1
