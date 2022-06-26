@@ -97,6 +97,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                         <div class="row">
                             <span class="col-md-10">
                                 <h1 class="display-4">${record.student_id.data.display_name}</h1>
+                                <span class="text-muted">(${record.uid})</span>
                             </span>
                             <span class="col-md-10">
                                 <h1 class="display-5">${record.source_bloc_title} - ${record.source_bloc_level}</h1>
