@@ -327,18 +327,17 @@ class ProgramDeliberation(models.Model):
     @api.model
     def create(self, vals):
         ret = super().create(vals)
-        self._update_create_write_vals(vals)
+        self._update_create_write_vals()
         return ret
 
+    @api.model
     def write(self, vals):
         ret = super().write(vals)
-        self._update_create_write_vals(vals)
+        self._update_create_write_vals()
         return ret
     
-    def _update_create_write_vals(self, vals):
-        if 'grade' in vals:
-            if vals['grade']:
-                self.program_id.set_to_awarded(grade=self.grade, grade_comments=self.grade_comments)
+    def _update_create_write_vals(self):
+        self.program_id.set_to_awarded(grade=self.grade, grade_comments=self.grade_comments)
         
 class BlocDeliberation(models.Model):
     '''Bloc Deliberation'''
