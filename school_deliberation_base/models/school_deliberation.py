@@ -330,7 +330,6 @@ class ProgramDeliberation(models.Model):
         self._update_create_write_vals()
         return ret
 
-    @api.model
     def write(self, vals):
         ret = super().write(vals)
         self._update_create_write_vals()
