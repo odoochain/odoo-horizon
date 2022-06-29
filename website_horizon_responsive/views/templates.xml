@@ -755,6 +755,14 @@
             </xpath>
         </template>
         
+        <template id="website_menuitem" inherit_id="website.layout" name="header menu">
+		       <xpath expr="//li[@id='o_logout']" position="before">
+		          <li>
+		               <a href="/responsive" role="menuitem">Horizon Responsive</a>
+		          </li>
+		       </xpath>
+		</template>
+        
         <template id="documents" name="Horizon Responsive Documents">
             <t t-call="website_horizon_responsive.layout">
                 <div id="content" class="ml-lg-auto">
