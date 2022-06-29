@@ -471,7 +471,7 @@
 											<span class="d-block"><!--<t t-esc="course_group.weight"/>--></span>
 										</li>
                                         <li t-if="display_results">
-                                            <span class="d-block"><t t-if="display_results" t-esc="course_group.final_result"/></span>
+                                            <span class="d-block"><t t-if="display_results" t-esc="course_group.final_result_disp"/></span>
                                         </li>
 									</ul>
 									<a class="opener" href="#">
