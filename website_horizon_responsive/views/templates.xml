@@ -755,8 +755,8 @@
             </xpath>
         </template>
         
-        <template id="website_menuitem" inherit_id="website.layout" name="header menu">
-		       <xpath expr="//li[@id='o_logout']" position="before">
+        <template id="website_horizon_responsive_menuitem" inherit_id="portal.user_dropdown" name="header menu">
+		       <xpath expr="//div[@id='o_logout_divider']" position="before">
 		          <li>
 		               <a href="/responsive" role="menuitem">Horizon Responsive</a>
 		          </li>
