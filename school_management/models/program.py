@@ -47,7 +47,7 @@ class uid_mixin(models.AbstractModel):
     @api.model
     def create(self, vals):
         # take UID from sequence if not provided at creation time
-        rec = super(uid_mixin, self.create(vals))
+        rec = super(BusinessTrip, self).create(vals)
         if not rec.uid :
             rec.uid = self.env['ir.sequence'].next_by_code(self._name)
 
