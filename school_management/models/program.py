@@ -42,7 +42,14 @@ class open_form_mixin(models.AbstractModel):
 class uid_mixin(models.AbstractModel):
     _name = "school.uid.mixin"
     
-    uid = fields.Char(string="UID",copy=False,readonly=True,default=lambda self: self.env['ir.sequence'].next_by_code(self._name))
+    uid = fields.Char(string="UID",copy=False)
+    
+    @api.model
+    def create(self, vals):
+        # take UID from sequence if not provided at creation time
+        rec = super(uid_mixin, self.create(vals)
+        if not rec.uid :
+            rec.uid = self.env['ir.sequence'].next_by_code(self._name)
 
 class Program(models.Model):
     '''Program'''
