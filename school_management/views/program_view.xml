@@ -685,6 +685,7 @@
               <field name="ares_code"/>
               <field name="graca_code"/>
               <field name="habilitation_code"/>
+              <field name="cycle_required_credits"/>
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
