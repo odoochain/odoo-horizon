@@ -90,7 +90,7 @@ class Program(models.Model):
     
     domain = fields.Selection([
             ('musique','Musique'),
-            ('theatre', 'Théatre')
+            ('theatre', 'Théâtre et arts de la parole')
         ], string='Domaine')
     
     year_id = fields.Many2one('school.year', required=True, string="Year")
@@ -102,6 +102,8 @@ class Program(models.Model):
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
     
     program_code = fields.Char(required=True, string='Program Code', size=10)
+    
+    ares_code = fields.Char(required=True, string='ARES Code', size=10)
     
     graca_code = fields.Char(required=True, string='GRACA Code', size=10)
     
