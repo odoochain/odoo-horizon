@@ -50,6 +50,7 @@ class uid_mixin(models.AbstractModel):
         rec = super(uid_mixin, self).create(vals)
         if not rec.uid :
             rec.uid = self.env['ir.sequence'].next_by_code(self._name)
+        return rec
 
 class Program(models.Model):
     '''Program'''
