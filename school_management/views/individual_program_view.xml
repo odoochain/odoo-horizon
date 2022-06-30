@@ -323,7 +323,7 @@
                   <h3 class="o_row row no-gutters d-flex">
                       <div class="col">
                         <label for="uid" class="oe_edit_only"/>
-                        <small class="oe_grey" ><field name="uid"/></small>
+                        <small class="oe_grey" ><field name="uid" readonly="1"/></small>
                       </div>
                   </h3>
                 </div>
@@ -488,7 +488,7 @@
                   <h3 class="o_row row no-gutters d-flex">
                       <div class="col">
                         <label for="uid" invisible="1"/>
-                        <small class="oe_grey" ><field name="uid"/></small>
+                        <small class="oe_grey" ><field name="uid" readonly="1"/></small>
                       </div>
                   </h3>
                 </div>
@@ -634,7 +634,7 @@
                   <h3 class="o_row row no-gutters d-flex">
                       <div class="col">
                         <label for="uid" invisible="1"/>
-                        <small class="oe_grey" ><field name="uid"/></small>
+                        <small class="oe_grey" ><field name="uid" readonly="1"/></small>
                       </div>
                   </h3>
                   <div class="oe_button_box" name="button_box">
