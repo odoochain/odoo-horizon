@@ -359,7 +359,12 @@ class Cycle(models.Model):
             ('long','Long'),
             ('short', 'Short'),
         ], string='Type')
+    certification_profile = fields.Selection([
+            ('master','Master'),
+            ('bachelor', 'Bachelor'),
+        ], string='Certification Profile')
     grade = fields.Char(required=True, string='Grade', size=60)
+    grade_code = fields.Char(required=True, string='Grade Code', size=10)
 
 class Domain(models.Model):
     '''Domain'''
