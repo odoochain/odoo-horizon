@@ -457,6 +457,7 @@
         <tree string="Blocs">
           <field name="uid" />
           <field name="name" />
+          <field name="bloc_group" />
           <field name="total_hours" />
           <field name="total_credits" />
         </tree>
@@ -483,6 +484,7 @@
               <field name="title" colspan="4"/>
               <field name="sequence" />
               <field name="level" />
+              <field name="bloc_group" />
               <field name="total_hours" />
               <field name="total_credits" />
               <field name="program_id" />

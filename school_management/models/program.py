@@ -187,6 +187,8 @@ class Bloc(models.Model):
     domain = fields.Selection(related='program_id.domain', string='Domain',store=True)   
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
  
+    bloc_group = fields.Char(string='Bloc Group', size=10)
+ 
     total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits',store=True)
     total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours',store=True)
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight',store=True)
