@@ -323,7 +323,6 @@
               <field name="course_group_id" />
               <field name="responsible_id" />
               <!--<field name="weight" />-->
-              <field name="total_weight" />
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
@@ -333,7 +332,6 @@
                 <field name="name" />
                 <field name="total_hours" />
                 <field name="total_credits" />
-                <field name="total_weight" />
                 <field name="source_course_id" invisible="1"/>
               </tree>
             </field>
