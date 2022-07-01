@@ -185,6 +185,15 @@ class IndividualCourseSummary(models.Model):
                 rec.state = '9_draft'
                 rec.final_result_disp = ""
                 
+    def action_valuate_course_group(self):
+        for rec in self :
+            valuated_cg = self.env['school.individual_course_group'].create({
+                'program_id' : rec.program_id,
+                'source_course_group_id' : rec.course_group_id,
+                'state' : '2_candidate'
+            })
+            rec.program_id.valuated_course_group_ids |= valuated_cg
+                
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'

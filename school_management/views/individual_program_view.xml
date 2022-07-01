@@ -289,6 +289,59 @@
       <field name="act_window_id" ref="act_program_2_course" />
     </record>
     
+    <!-- Course Group Summary Form View -->
+    <record model="ir.ui.view" id="individual_course_summary_form">
+      <field name="name">school.individual_course_summary.view</field>
+      <field name="model">school.individual_course_summary</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Course Summary">
+          <sheet>
+            <widget name="web_ribbon" text="Unité" bg_color="bg-primary"/>
+            <div class="container">
+              <div class="row">
+                <div class="h-100 d-inline-block" style="width: 150px;">
+                  <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
+                </div>
+                <div class="col-8">
+                  <h2>
+                    <field name="name"/>
+                  </h2>
+                  <h3 class="o_row row no-gutters d-flex">
+                      <div class="col">
+                        <label for="uid" invisible="1"/>
+                        <small class="oe_grey" ><field name="uid" readonly="1"/></small>
+                      </div>
+                  </h3>
+                </div>
+              </div>
+            </div>
+                <!--<h3 class="oe_fade">
+                 <field name="bloc_id" options='{"no_open":True}'/>
+                </h3>-->
+            <group col="2">
+              <field name="course_group_id" />
+              <field name="responsible_id" />
+              <!--<field name="weight" />-->
+              <field name="total_weight" />
+              <field name="total_hours" />
+              <field name="total_credits" />
+            </group>
+            <separator string="Course Group" colspan="4"/>
+            <field name="ind_course_group_ids" colspan="4">
+              <tree string="Course Groups">
+                <field name="name" />
+                <field name="total_hours" />
+                <field name="total_credits" />
+                <field name="total_weight" />
+                <field name="source_course_id" invisible="1"/>
+              </tree>
+            </field>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    
     
     <!-- Individual Bloc Form View -->
     <record model="ir.ui.view" id="individual_bloc_form">
@@ -467,7 +520,7 @@
       </field>
     </record>
 
-      <!-- Course Group Form View -->
+    <!-- Course Group Form View -->
     <record model="ir.ui.view" id="individual_course_group_form">
       <field name="name">school.individual_course_group.view</field>
       <field name="model">school.individual_course_group</field>
