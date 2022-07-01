@@ -211,8 +211,7 @@
                 </xpath>
                 <xpath expr="//field[@name='ind_course_group_ids']/tree/field[@name='total_credits']" position="after">
                     <field name="acquiered" string="Acq"/>
-                    <field name="first_session_result_disp" string="S1"/>
-                    <field name="second_session_result_disp" string="S2"/>
+                    <field name="final_result_disp" string="Res"/>
                     <field name="state"/>
                 </xpath>
             </field>
