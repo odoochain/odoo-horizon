@@ -198,7 +198,7 @@
         </record>
         
         <!-- Add evaluation to Individual Course Group Summary form view -->
-        <record id="individual_course_group_eval_form" model="ir.ui.view">
+        <record id="individual_course_summary_eval_form" model="ir.ui.view">
             <field name="name">school.individual_course_summary.eval.view</field>
             <field name="model">school.individual_course_summary</field>
             <field name="inherit_id" ref="school_management.individual_course_summary_form" />
