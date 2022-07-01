@@ -147,6 +147,8 @@ class IndividualCourseSummary(models.Model):
     program_id = fields.Many2one('school.individual_program', string='Individual Program')
     
     image = fields.Binary('Image', attachment=True, related='program_id.student_id.image')
+    image_medium = fields.Binary('Image', attachment=True, related='program_id.student_id.image_medium')
+    image_small = fields.Binary('Image', attachment=True, related='program_id.student_id.image_small')
     
     course_group_id = fields.Many2one('school.course_group', string='Course Group')
     
