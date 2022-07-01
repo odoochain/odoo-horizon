@@ -147,31 +147,30 @@
                 <field name="course_group_id"/>
                 <templates>
                     <t t-name="kanban-box">
-                          <div style="position: relative;width:100%;" t-attf-class="horizon_cgs">
-                              <div class="o_kanban_record_top">
-                                <div class="row o_kanban_record_headings">
-                                  <div class="col-12 col-md-2">
-                                    <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
-                                  </div>
-                                  <div class="col-12 col-md-10">
-                                    <div class="row m-2">
-                                      <h5><field name="name"/><br/></h5>
-                                      <!--<i><field name="responsible_id"/></i>-->
-                                    </div>
-                                    <div class="row m-2">
-                                      <div class="col-3"><b><field name="total_credits"/> ECTS</b></div>
-                                      <div class="col-3"><field name="total_hours"/> Heures</div>
-                                      <div class="col-6">
-                                        <a type="object" name="action_open_source_form"><i class="fa fa-book mr-2"></i>UE Source</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-12 col-md-3 horizon_cgs_evals">
-                                  </div>
-                                </div>
+                      <div style="position: relative;width:100%;" t-attf-class="horizon_cgs">
+                        <div class="o_kanban_card_header">
+                          <div class="container o_kanban_card_header_title mb16">
+                            <div class="row">
+                              <div class="col-8">
+                                <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
+                                <span class="h5 ml16"><field name="name"/></span>
                               </div>
+                            </div>
                           </div>
-                      </t>
+                        </div>
+                        <div class="container o_kanban_card_content">
+                          <div class="row">
+                            <div class="col-3"><b><field name="total_credits"/> ECTS</b></div>
+                            <div class="col-3"><field name="total_hours"/> Heures</div>
+                            <div class="col-6">
+                              <a type="object" name="action_open_source_form"><i class="fa fa-book mr-2"/>UE Source</a>
+                            </div>
+                          </div>
+                          <div class="row horizon_cgs_evals">
+                          </div>
+                        </div>
+                      </div>
+                    </t>
                 </templates>
               </kanban>
               </field>
