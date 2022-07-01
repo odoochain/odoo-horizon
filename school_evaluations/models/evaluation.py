@@ -193,6 +193,15 @@ class IndividualCourseSummary(models.Model):
                 'state' : '2_candidate'
             })
             rec.program_id.valuated_course_group_ids |= valuated_cg
+        return {
+              'type': 'ir.actions.act_view_reload',
+        } 
+                
+    def action_delete_course_group(self):
+        self.unlink()
+        return {
+              'type': 'ir.actions.act_view_reload',
+        }
                 
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
