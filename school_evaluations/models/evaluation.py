@@ -188,8 +188,8 @@ class IndividualCourseSummary(models.Model):
     def action_valuate_course_group(self):
         for rec in self :
             valuated_cg = self.env['school.individual_course_group'].create({
-                'valuated_program_id' : rec.program_id,
-                'source_course_group_id' : rec.course_group_id,
+                'valuated_program_id' : rec.program_id.id,
+                'source_course_group_id' : rec.course_group_id.id,
                 'state' : '2_candidate'
             })
             rec.program_id.valuated_course_group_ids |= valuated_cg
