@@ -329,6 +329,8 @@
             <separator string="Course Group" colspan="4"/>
             <field name="ind_course_group_ids" colspan="4">
               <tree string="Course Groups">
+                <field name="uid" />
+                <field name="year_id" />
                 <field name="name" />
                 <field name="total_hours" />
                 <field name="total_credits" />

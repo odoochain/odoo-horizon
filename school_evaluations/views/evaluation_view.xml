@@ -196,7 +196,28 @@
                 </xpath>
             </field>
         </record>
-
+        
+        <!-- Add evaluation to Individual Course Group Summary form view -->
+        <record id="individual_course_group_eval_form" model="ir.ui.view">
+            <field name="name">school.individual_course_summary.eval.view</field>
+            <field name="model">school.individual_course_summary</field>
+            <field name="inherit_id" ref="school_management.individual_course_summary_form" />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="valuatue_course_group" type="object" string="Valuate Course Group" class="oe_highlight" />
+                    </header>
+                </xpath>
+                <xpath expr="//field[@name='ind_course_group_ids']/tree/field[@name='total_credits']" position="after">
+                    <field name="aqcuiered"/>
+                    <field name="first_session_result_disp" string="S1"/>
+                    <field name="second_session_result_disp" string="S2"/>
+                    <field name="state"/>
+                </xpath>
+            </field>
+        </record>
+        
         <!-- Add evaluation to Individual Bloc form view -->
         <record id="individual_bloc_eval_form" model="ir.ui.view">
             <field name="name">school.individual_bloc.eval.view</field>
