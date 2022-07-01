@@ -332,7 +332,6 @@
                 <field name="name" />
                 <field name="total_hours" />
                 <field name="total_credits" />
-                <field name="source_course_id" invisible="1"/>
               </tree>
             </field>
           </sheet>
