@@ -206,7 +206,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="before">
                     <header>
-                        <button name="action_valuate_course_group" type="object" string="Valuate Course Group" class="oe_highlight" />
+                        <button name="action_valuate_course_group" type="object" string="Valuate Course Group" class="oe_highlight" states="9_draft"/>
                     </header>
                 </xpath>
                 <xpath expr="//field[@name='ind_course_group_ids']/tree/field[@name='total_credits']" position="after">
