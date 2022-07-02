@@ -184,8 +184,32 @@ class IndividualCourseSummary(models.Model):
             else : 
                 rec.state = '9_draft'
                 rec.final_result_disp = ""
+    
+    def action_confirma_valuate_course_group(self):
+        for rec in self :
+            valuated_cg = self.env['school.individual_course_group'].search([
+                ['valuated_program_id','=',rec.program_id.id],
+                ['source_course_group_id','=',rec.course_group_id.id]
+            ]).write({
+                'state' : '0_valuated'
+            })
+        return {
+            'type': 'ir.actions.act_view_reload',
+        }
+    
+    def action_confirm_valuate_course_group(self):
+        for rec in self :
+            valuated_cg = self.env['school.individual_course_group'].search([
+                ['valuated_program_id','=',rec.program_id.id],
+                ['source_course_group_id','=',rec.course_group_id.id]
+            ]).write({
+                'state' : '1_confirmed'
+            })
+        return {
+            'type': 'ir.actions.act_view_reload',
+        } 
                 
-    def action_valuate_course_group(self):
+    def action_candidate_valuate_course_group(self):
         for rec in self :
             valuated_cg = self.env['school.individual_course_group'].create({
                 'valuated_program_id' : rec.program_id.id,
