@@ -383,14 +383,14 @@
             </div>
             <group col="4">
               <field name="program_id" colspan="4"/>
-              <field name="year_id"/>
+              <field name="year_id" colspan="4"/>
               <field name="is_final_bloc" />
               <field name="is_light_bloc" />
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
-            <field name="course_group_ids" widget="many2many_kanban">
-              <kanban quick_create="false" create="false" delete="false" group_create="false" class="o_kanban_mobile">
+            <field name="course_group_ids" widget="many2many_kanban" context="{'default_bloc_id' : self.id}">
+              <kanban quick_create="false" create="true" delete="true" group_create="false" class="o_kanban_mobile">
                 <field name="uid"/>
                 <field name="name" />
                 <!--<field name="responsible_id"/>-->
@@ -409,6 +409,7 @@
                                   <div class="col-12 col-md-10">
                                     <div class="row m-2">
                                       <h5><field name="name"/><br/></h5>
+                                      <a t-if="! read_only_mode" class="oe_highlight btn btn-primary" type="delete" style="position: absolute; right: 20px; padding: 4px; diplay: inline-block">X</a>
                                       <!--<i><field name="responsible_id"/></i>-->
                                     </div>
                                     <div class="row m-2 horizon_cgs_evals">
