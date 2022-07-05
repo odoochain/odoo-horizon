@@ -209,6 +209,8 @@ class IndividualBloc(models.Model):
     
     is_final_bloc = fields.Boolean(string='Is final bloc')
     
+    is_light_bloc = fields.Boolean(string='Is a light bloc')
+    
     student_id = fields.Many2one(related='program_id.student_id', string='Student', domain="[('student', '=', '1')]", readonly=True, store=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
