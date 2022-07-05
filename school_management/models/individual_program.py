@@ -338,16 +338,10 @@ class IndividualCourseGroup(models.Model):
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
-    # Override
     def _domain_source_course_group_id(self):
-        if self.env.context.get('default_bloc_id') :
-            bloc_id = self.env['school.individual_bloc'].browse(self.env.context.get('default_bloc_id'))
-            cgs = self.env['school.individual_course_summary'].search([('id','in',bloc_id.program_id.course_group_summaries.ids),('state','in','9_draft','7_failed')])
-            return [('id','in',cgs.course_group_id.ids)]
-        else:
-            return []
+        return ['this','=','that']
     
-    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=_domain_source_course_group_id)
+    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=lambda self: self._domain_source_course_group_id())
     source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
     source_course_group_responsible_id = fields.Many2one('res.partner', related='source_course_group_id.responsible_id', string="Source Course Group Responsible")
     
