@@ -456,14 +456,6 @@ class IndividualCourseGroup(models.Model):
     def set_to_valuated(self, context=None):
         return self.write({'state': '0_valuated'})
         
-    # Override
-    def _domain_source_course_group_id(self):
-        if self.env.context.get('default_bloc_id') :
-            bloc_id = self.env['school.individual_bloc'].browse(self.env.context.get('default_bloc_id'))
-            return [('id','in',bloc_id.program_id.course_group_summaries.filter([('state','in','9_draft','7_failed')]).course_group_id.ids)]
-        else:
-            return []
-    
     valuated_program_id = fields.Many2one('school.individual_program', string="Program", ondelete='cascade', readonly=True)
     
     @api.constrains('bloc_id','valuated_program_id')
