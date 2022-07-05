@@ -339,7 +339,7 @@ class IndividualCourseGroup(models.Model):
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
     def _domain_source_course_group_id(self):
-        return ['this','=','that']
+        return []
     
     source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=lambda self: self._domain_source_course_group_id())
     source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
