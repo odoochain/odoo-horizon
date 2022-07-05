@@ -339,11 +339,7 @@ class IndividualCourseGroup(models.Model):
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
     def _domain_source_course_group_id(self):
-        if self.env.context.get('default_bloc_id') :
-            bloc_id = self.env['school.individual_bloc'].browse(self.env.context.get('default_bloc_id'))
-            return [('id','in',bloc_id.program_id.course_group_summaries.course_group_id.ids)]
-        else:
-            return []
+        return []
     
     source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=_domain_source_course_group_id)
     source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
