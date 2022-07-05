@@ -338,7 +338,7 @@ class IndividualCourseGroup(models.Model):
     image_medium = fields.Binary('Image', attachment=True, related='student_id.image_medium')
     image_small = fields.Binary('Image', attachment=True, related='student_id.image_small')
     
-    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=lambda self : [('id','in',self.bloc_id.program_id.course_group_summaries.course_id)])
+    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=lambda self : [('id','in',self.bloc_id.program_id.course_group_summaries.course_group_id.id)])
     source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
     source_course_group_responsible_id = fields.Many2one('res.partner', related='source_course_group_id.responsible_id', string="Source Course Group Responsible")
     
