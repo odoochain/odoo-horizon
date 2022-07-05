@@ -341,7 +341,7 @@ class IndividualCourseGroup(models.Model):
     def _domain_source_course_group_id(self):
         if self.env.context.get('default_bloc_id') :
             bloc_id = self.env['school.individual_bloc'].browse(self.env.context.get('default_bloc_id'))
-            return [('id','in',bloc_id.program_id.course_group_summaries.course_id)]
+            return [('id','in',bloc_id.program_id.course_group_summaries.course_group_id)]
         else:
             return []
     
