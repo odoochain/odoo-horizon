@@ -161,6 +161,7 @@ class IndividualCourseSummary(models.Model):
             rec.ind_course_group_ids |= rec.program_id.valuated_course_group_ids.filtered(lambda item: item.source_course_group_id.id == rec.course_group_id.id)
     
     state = fields.Selection([
+            ('10_irregular','Irregular'),
             ('9_draft','Draft'),
             ('7_failed', 'Failed'),
             ('6_success', 'Success'),
@@ -232,6 +233,7 @@ class IndividualBloc(models.Model):
     _inherit = 'school.individual_bloc'
 
     state = fields.Selection([
+            ('irregular','Irregular'),
             ('draft','Draft'),
             ('progress','In Progress'),
             ('postponed', 'Postponed'),
@@ -266,6 +268,8 @@ class IndividualBloc(models.Model):
             self.course_group_ids.write({'state': '9_draft'})
         elif self.state == 'progress' :
             self.course_group_ids.write({'state': '5_progress'})
+        elif self.state == 'irregular' :
+            self.course_group_ids.write({'state': '10_irregular'})
         #elif self.state == 'postponed' :
         #    self.course_group_ids.write({'state': '5_progress'})
         #else :
@@ -420,6 +424,7 @@ class IndividualCourseGroup(models.Model):
     _inherit = 'school.individual_course_group'
     
     state = fields.Selection([
+            ('10_irregular','Irregular'),
             ('9_draft','Draft'),
             ('7_failed', 'Failed'),
             ('6_success', 'Success'),
@@ -431,6 +436,7 @@ class IndividualCourseGroup(models.Model):
         track_visibility='onchange',
         copy=False,
         help=" * The 'Draft' status is used when course group is only plan.\n"
+             " * The 'Irregular' status is used when course group is in an irregular program.\n"
              " * The 'In Progress' status is used when results are not confirmed yet.\n"
              " * The 'Confirmed' status is when restults are confirmed.\n"
              " * The 'Success' status is when delibration has confirmed success.\n"

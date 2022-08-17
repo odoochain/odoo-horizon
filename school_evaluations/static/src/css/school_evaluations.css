@@ -26,6 +26,10 @@
     border-left : 10px solid grey !important;
 }
 
+.horizon_cgs_10_irregular {
+    border-left : 10px solid black !important;
+}
+
 .horizon_eval_cell {
     border-left : 1px solid lightgrey !important;
     border-right : 1px solid lightgrey !important;

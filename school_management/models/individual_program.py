@@ -40,11 +40,13 @@ class IndividualProgram(models.Model):
             ('progress','In Progress'),
             ('awarded', 'Awarded'),
             ('abandonned', 'Abandonned'),
+            ('irregular', 'Irregular'),
         ], string='Status', index=True, default='draft',copy=False,
         help=" * The 'Draft' status is used when results are not confirmed yet.\n"
              " * The 'In Progress' status is used during the cycle.\n"
              " * The 'Awarded' status is used when the cycle is awarded.\n"
              " * The 'Abandonned' status is used if a student leave the program.\n"
+             " * The 'Irregular' status is used if a student is in an irreular administrative state.\n"
              ,track_visibility='onchange')
     
     abandonned_date = fields.Date('Abandonned Date')
@@ -73,6 +75,10 @@ class IndividualProgram(models.Model):
                         'grade_year_id' : grade_year_id or self.env.user.current_year_id,
                         'graduation_date' : fields.Date.today(),
             })
+            
+    def set_to_irregular(self):
+        # TODO use a workflow to make sure only valid changes are used.
+        return self.write({'state': 'irregular'})
 
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
