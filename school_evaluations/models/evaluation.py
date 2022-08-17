@@ -61,6 +61,11 @@ class IndividualProgram(models.Model):
     def set_to_abandonned(self, context):
         # TODO use a workflow to make sure only valid changes are used.
         return self.write({'state': 'abandonned','abandonned_date':fields.Date.today()})
+        
+    @api.onchange('state')
+    def _onchange_state(self):
+        if self.state == 'irregular' :
+            self.bloc_ids.write({'state': 'irregular'})
     
     historical_bloc_1_eval = fields.Float(string="Hist Bloc 1 Eval",track_visibility='onchange',digits=dp.get_precision('Evaluation'))
     historical_bloc_1_credits = fields.Integer(string="Hist Bloc 1 ECTS",track_visibility='onchange')
