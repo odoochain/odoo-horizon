@@ -119,7 +119,7 @@
               <field name="level" />
               <field name="period" />
               <field name="mandatory" />
-              <field name="cg_grouping" />
+              <field name="cg_grouping" create="0"/>
               <field name="total_hours" />
               <field name="total_credits" />
               <field name="total_weight" />

@@ -500,7 +500,7 @@
             <group col="2">
               <field name="deliberation_id" invisible="1"/>
               <field name="course_group_id" invisible="1"/>
-              <field name="participant_ids" widget="many2many_tags"/>
+              <field name="participant_ids" widget="many2many_tags" readonly="1" />
               <field name="course_ids">
                 <tree>
                   <field name="name"/>
