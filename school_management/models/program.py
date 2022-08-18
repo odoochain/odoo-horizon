@@ -229,6 +229,8 @@ class CourseGroup(models.Model):
     
     period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period')
     
+    cg_grouping = fields.Many2one('school.course_group_group',string='Group', copy=True)
+    
     mandatory = fields.Boolean(string='Mandatory', default=True)
     
     description = fields.Text(string='Description')
@@ -301,6 +303,18 @@ class CourseGroup(models.Model):
         if name :
                 args = ['|'] + (args or []) + [('uid', 'ilike', name)]
         return super(CourseGroup, self).name_search(name=name, args=args, operator=operator, limit=limit)
+        
+class CourseGroupGroup(models.Model):
+    '''Courses Group Group'''
+    _name = 'school.course_group_group'
+    _description = 'Courses Group Group'
+    _order = 'sequence'
+
+    sequence = fields.Integer(string='Sequence')
+    
+    active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
+    
+    name = fields.Char(required=True, string='Name')
         
 class Course(models.Model):
     '''Course'''
