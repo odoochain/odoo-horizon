@@ -693,7 +693,7 @@ class IndividualCourseGroup(models.Model):
             elif rec.second_session_computed_result_bool :
                 rec.second_session_exception = None
                 rec.second_session_computed_exception = None
-                rec.second_session_result = rec.first_session_computed_result
+                rec.second_session_result = rec.second_session_computed_result
                 rec.second_session_result_bool = True
             else :
                 rec.second_session_exception = None
