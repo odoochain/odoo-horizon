@@ -227,7 +227,9 @@ class CourseGroup(models.Model):
   
     level = fields.Integer(string='Level')
     
-    period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period')
+    period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period', readonly=True) # For backup only
+    
+    quadri = fields.Selection([('Q1&Q2','Q1&Q2'),('Q1','Q1'),('Q2','Q2')],string='Quadri', compute='_compute_quadri', store=True)
     
     cg_grouping = fields.Many2one('school.course_group_group',string='Group', copy=True)
     
@@ -240,6 +242,15 @@ class CourseGroup(models.Model):
     default_responsible_id = fields.Many2one('res.partner',compute="compute_default_responsible_id")
     
     course_ids = fields.One2many('school.course', 'course_group_id', domain=['|',('active','=',False),('active','=',True)], string='Courses', copy=True, ondelete="cascade")
+
+    @api.depends('course_ids.quadri')
+    def _compute_quadri(self):
+        for rec in self:
+            vals = list(set(rec.course_ids.mapped('quadri')))
+            if len(vals) == 1 :
+                rec.quadri = vals[0]
+            else:
+                rec.quadri = 'Q1&Q2'
 
     @api.depends('course_ids.teacher_ids')
     def compute_default_responsible_id(self):
@@ -342,7 +353,7 @@ class Course(models.Model):
     course_organization = fields.Selection([('col','Collectif'),('semi','Semi-Collectif'),('ind','Individual')],string='Organization')
     course_type = fields.Selection([('A','Artistic'),('G','General'),('T','Technic')],string='Type')
     
-    period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period')
+    quadri = fields.Selection([('Q1&Q2','Q1&Q2'),('Q1','Q1'),('Q2','Q2')],string='Quadri')
     
     hours = fields.Integer(string = 'Hours')
     credits = fields.Integer(string = 'Credits')
