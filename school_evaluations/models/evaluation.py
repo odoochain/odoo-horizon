@@ -591,7 +591,9 @@ class IndividualCourseGroup(models.Model):
             running_first_session_result = 0
             running_second_session_result = 0
             rec.first_session_computed_result_bool = False
+            rec.first_session_computed_result = 0
             rec.second_session_computed_result_bool = False
+            rec.second_session_computed_result = 0
             
             for ic in rec.course_ids:
                 # Compute First Session 
