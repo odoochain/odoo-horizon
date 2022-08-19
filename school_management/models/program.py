@@ -339,6 +339,9 @@ class Course(models.Model):
     
     level = fields.Integer(related='course_group_id.level',string='Level', readonly=True)
     
+    course_organization = fields.Selection([('col','Collectif'),('semi','Semi-Collectif'),('ind','Individual')],string='Organization')
+    course_type = fields.Selection([('A','Artistic'),('G','General'),('T','Technic')],string='Type')
+    
     hours = fields.Integer(string = 'Hours')
     credits = fields.Integer(string = 'Credits')
     weight =  fields.Float(string = 'Weight',digits=(6,2))
