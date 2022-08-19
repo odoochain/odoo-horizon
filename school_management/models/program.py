@@ -342,6 +342,8 @@ class Course(models.Model):
     course_organization = fields.Selection([('col','Collectif'),('semi','Semi-Collectif'),('ind','Individual')],string='Organization')
     course_type = fields.Selection([('A','Artistic'),('G','General'),('T','Technic')],string='Type')
     
+    period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period')
+    
     hours = fields.Integer(string = 'Hours')
     credits = fields.Integer(string = 'Credits')
     weight =  fields.Float(string = 'Weight',digits=(6,2))
