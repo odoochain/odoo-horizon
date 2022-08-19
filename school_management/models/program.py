@@ -243,7 +243,7 @@ class CourseGroup(models.Model):
     
     course_ids = fields.One2many('school.course', 'course_group_id', domain=['|',('active','=',False),('active','=',True)], string='Courses', copy=True, ondelete="cascade")
 
-    @api.depends('course_ids.quadri')
+    @api.depends('course_ids','course_ids.quadri')
     def _compute_quadri(self):
         for rec in self:
             vals = list(set(rec.course_ids.mapped('quadri')))
