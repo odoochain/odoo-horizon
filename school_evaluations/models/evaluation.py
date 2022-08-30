@@ -831,6 +831,12 @@ class IndividualCourse(models.Model):
     @api.depends('partial_result','final_result','second_result')
     def compute_results(self):
         for rec in self : #.filtered(lambda r: r.course_group_id.state in ['7_failed','5_progress']) :
+            rec.first_session_result = 0
+            rec.first_session_result_bool = False
+            rec.first_session_exception = False
+            rec.second_session_result = 0
+            rec.second_session_result_bool = False
+            rec.second_session_exception = False
             if rec.partial_result :
                 try:
                     if rec.partial_result == "NP":
