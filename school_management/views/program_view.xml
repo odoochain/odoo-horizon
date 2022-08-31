@@ -48,11 +48,11 @@
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
-                      <div class="col-xs-6 o_kanban_primary_left">
+                      <div class="col-6 o_kanban_primary_left">
                         <b>Credits : </b>
                         <field name="total_credits" />
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-6">
                         <b>Hours : </b>
                         <field name="total_hours" />
                       </div>
@@ -232,15 +232,15 @@
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
-                      <div class="col-xs-4 o_kanban_primary_left">
+                      <div class="col-4 o_kanban_primary_left">
                         <b>Credits : </b>
                         <field name="credits" />
                       </div>
-                      <div class="col-xs-4 o_kanban_primary_right">
+                      <div class="col-4 o_kanban_primary_right">
                         <b>Hours : </b>
                         <field name="hours" />
                       </div>
-                      <div class="col-xs-4 o_kanban_primary_right">
+                      <div class="col-4 o_kanban_primary_right">
                         <b>Weight : </b>
                         <field name="weight" />
                       </div>
@@ -434,11 +434,11 @@
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
-                      <div class="col-xs-6 o_kanban_primary_left">
+                      <div class="col-6 o_kanban_primary_left">
                         <b>Credits : </b>
                         <field name="total_credits" />
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-6">
                         <b>Hours : </b>
                         <field name="total_hours" />
                       </div>
@@ -626,11 +626,11 @@
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
-                      <div class="col-xs-6 o_kanban_primary_left">
+                      <div class="col-6 o_kanban_primary_left">
                         <b>Credits : </b>
                         <field name="total_credits" />
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-6">
                         <b>Hours : </b>
                         <field name="total_hours" />
                       </div>
