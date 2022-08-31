@@ -550,7 +550,7 @@
           </field>
         </record>
 
-        <menuitem id="menu_individual_course_form" parent="menu_main_evaluation" action="action_individual_course_form" sequence="20" groups="school_evaluations.group_evaluations"/>
+        <menuitem id="menu_individual_course_form" parent="menu_main_evaluation" action="action_individual_course_form" sequence="15" groups="school_evaluations.group_evaluations"/>
         
         <menuitem id="menu_individual_course_form_teacher" parent="menu_main_evaluation" action="action_individual_course_form_teacher" sequence="40" groups="school_management.group_teacher"/>
         
