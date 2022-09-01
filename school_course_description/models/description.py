@@ -41,7 +41,7 @@ class CourseDocumentation(models.Model):
              " * The 'Published' status is when a program is published and available for use.\n"
              " * The 'Archived' status is used when a program is obsolete and not publihed anymore.")
     
-    course_id = fields.Many2one('school.course', string='Course', required=True)
+    course_id = fields.Many2one('school.course', string='Course')
     
     course_ids = fields.Many2many('school.course', 'school_doc_course_rel', 'doc_id', 'course_id', string='All Courses')
     
