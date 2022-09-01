@@ -79,6 +79,8 @@ class CourseDocumentation(models.Model):
         return self.write({'state': 'archived'})
 
     author_id = fields.Many2one('res.users', string='Author')
+    
+    partner_id = fields.Many2one('res.partner', related="author_id.partner_id", store=True)
 
     staff_ids = fields.Many2many('res.partner', 'school_desc_res_partner_rel', 'desc_id', 'res_partner_id', string='Teachers', domain=[('teacher', '=', 1)])
     credits = fields.Integer(related='course_id.credits', 
