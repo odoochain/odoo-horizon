@@ -504,28 +504,39 @@
                 <field name="total_credits" />
                 <templates>
                     <t t-name="kanban-box">
-                          <div style="position: relative;width:100%;">
-                              <div class="o_kanban_record_top">
-                                <div class="row o_kanban_record_headings">
-                                  <div class="col-12 col-md-2">
-                                    <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
-                                  </div>
-                                  <div class="col-12 col-md-7">
-                                    <field name="name"/><br/>
-                                    <i><field name="responsible_id"/></i>
-                                  </div>
-                                  
-                                  <div class="col-2">
-                                    Heures : <field name="total_hours"/>
-                                    <br/>
-                                    ECTS : <field name="total_credits"/>
-                                  </div>
-                                  <div class="col-1">
-                                    <a class="oe_edit_only fa fa-trash" type="delete"></a>
-                                  </div>
+                        <t t-js="ctx">
+                          
+                          ctx['new_group'] = ctx['record'].cg_grouping.raw_value != this.horizon_group;
+                          this.horizon_group = ctx['record'].cg_grouping.raw_value
+                          
+                        </t>
+                        <t t-if="new_group">
+                          <div>
+                            <h3><field name="cg_grouping"/></h3>
+                          </div>
+                        </t>
+                        <div style="position: relative;width:100%">
+                            <div class="o_kanban_record_top">
+                              <div class="row o_kanban_record_headings">
+                                <div class="col-12 col-md-2">
+                                  <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
+                                </div>
+                                <div class="col-12 col-md-7">
+                                  <field name="name"/><br/>
+                                  <i><field name="responsible_id"/></i>
+                                </div>
+                                
+                                <div class="col-2">
+                                  Heures : <field name="total_hours"/>
+                                  <br/>
+                                  ECTS : <field name="total_credits"/>
+                                </div>
+                                <div class="col-1">
+                                  <a class="oe_edit_only fa fa-trash" type="delete"/>
                                 </div>
                               </div>
-                          </div>
+                            </div>
+                        </div>
                       </t>
                 </templates>
               </kanban>
