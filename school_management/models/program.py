@@ -233,6 +233,8 @@ class CourseGroup(models.Model):
     
     cg_grouping = fields.Many2one('school.course_group_group',string='Group', copy=True)
     
+    cg_grouping_sequence = fields.Integer('Group Sequence',related="cg_grouping.sequence")
+    
     mandatory = fields.Boolean(string='Mandatory', default=True)
     
     description = fields.Text(string='Description')
