@@ -25,7 +25,7 @@
     
         <!-- Top menu item -->
 
-        <menuitem name="Evaluations" id="menu_main_evaluation" web_icon="survey,static/description/icon.png" sequence="65" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
+        <menuitem name="Evaluations" id="menu_main_evaluation" web_icon="survey,static/description/icon.png" sequence="15" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
 
         <!-- Partner -->
         <record id="view_partners_form_school_eval" model="ir.ui.view">
@@ -554,6 +554,4 @@
         
         <menuitem id="menu_individual_course_form_teacher" parent="menu_main_evaluation" action="action_individual_course_form_teacher" sequence="40" groups="school_management.group_teacher"/>
         
-        <menuitem name="Evaluations" id="menu_main_evaluation" web_icon="survey,static/description/icon.png" sequence="65" groups="school_evaluations.group_evaluations,school_management.group_teacher"/>
-
 </odoo>

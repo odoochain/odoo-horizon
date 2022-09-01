@@ -24,7 +24,7 @@
   
     
     <!-- Top menu item -->
-    <menuitem name="Individuals Programs" id="menu_individual_bloc" web_icon="hr_recruitment,static/description/icon.png" sequence="62" groups="school_management.group_registration"/>
+    <menuitem name="Individuals Programs" id="menu_individual_bloc" web_icon="hr_recruitment,static/description/icon.png" sequence="12" groups="school_management.group_registration"/>
 
     <!--
     
