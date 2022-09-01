@@ -173,6 +173,42 @@
         
         <menuitem id="menu_track_list" parent="menu_admin_program" action="action_track_list" sequence="40" />
         
+        <!-- Course Group Group List View -->
+        <record id="view_course_group_group_list" model="ir.ui.view">
+            <field name="name">school.course_group_group.tree</field>
+            <field name="model">school.course_group_group</field>
+            <field eval="8" name="priority" />
+            <field name="arch" type="xml">
+                <tree string="Groups">
+                    <field name="sequence" widget="handle" />
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_course_group_group_list" model="ir.actions.act_window">
+            <field name="name">Tracks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.course_group_group</field>
+            
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_course_group_group_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_course_group_group_list" />
+            <field name="act_window_id" ref="action_course_group_group_list" />
+        </record>
+        
+        <record id="action_course_group_group_form_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5" />
+            <field name="view_mode">form</field>
+            <field name="act_window_id" ref="action_course_group_group_list" />
+        </record>
+        
+        <menuitem id="menu_course_group_group_list" parent="menu_admin_program" action="action_course_group_group_list" sequence="50" />
+        
         <!-- Domain List View 
         <record id="view_domain_list" model="ir.ui.view">
             <field name="name">school.domain.tree</field>
