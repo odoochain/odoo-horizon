@@ -368,7 +368,7 @@ class Course(models.Model):
     is_annual = fields.Boolean(string="Is Annual", default=False)
     has_second_session = fields.Boolean(string="Has a second session", default=True)
     
-    bloc_ids = fields.Many2many('school.bloc',related="course_id.bloc_ids")
+    bloc_ids = fields.Many2many('school.bloc',related="course_group_id.bloc_ids")
     
     @api.depends('title','level')
     def compute_name(self):
