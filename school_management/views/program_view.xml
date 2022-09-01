@@ -265,8 +265,7 @@
           <field name="name" />
           <field name="hours" />
           <field name="credits" />
-          <field name="weight" />
-          <field name="has_second_session" />
+          <field name="bloc_ids" widget="many2many_tags"/>
         </tree>
       </field>
     </record>
