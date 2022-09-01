@@ -117,7 +117,7 @@ class Partner(models.Model):
     
     student_program_ids = fields.One2many('school.individual_program', 'student_id', string='Programs')
     student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
-
+    
     # Secondary adress
 
     secondary_street = fields.Char('Street')
@@ -162,6 +162,8 @@ class Partner(models.Model):
             year_ids.append(current_year_id.next.id)
         return [('student_bloc_ids.year_id','in',year_ids)]
         
+    student_current_block_name = fields.Char('Current Bloc', compute='_get_student_current_block_name')
+        
     student_current_course_ids = fields.One2many('school.individual_course', compute='_get_student_current_individual_course_ids', string='Courses')
     student_course_ids = fields.One2many('school.individual_course', 'student_id', string='Courses', domain="[('year_id', '=', self.env.user.current_year_id.id)]")
     
@@ -170,6 +172,11 @@ class Partner(models.Model):
     
     teacher_curriculum_vitae = fields.Html('Curriculum Vitae')
     
+    def _get_student_current_block_name(self):
+        for rec in self:
+            blocs = self.env['school.individual_bloc'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', rec.id]])
+            rec.student_current_block_name = ','.join(blocs.mapped('source_bloc_id.name'))
+            
     def _get_teacher_current_individual_course_ids(self):
         for rec in self:
             rec.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', rec.id]])
