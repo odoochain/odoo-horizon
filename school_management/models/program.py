@@ -174,21 +174,21 @@ class Bloc(models.Model):
                 if course_group.type == 'ORI1':
                     if not has_ori1:
                         has_ori1 = True
-                        total_hours += course_group.total_hours
-                        total_credits += course_group.total_credits
-                        total_weight += course_group.total_weight
+                        total_hours += 60
+                        total_credits += 10
+                        total_weight += 10
                 elif course_group.type == 'ORI2':
                     if not has_ori2:
                         has_ori2 = True
-                        total_hours += course_group.total_hours
-                        total_credits += course_group.total_credits
-                        total_weight += course_group.total_weight
+                        total_hours += 30
+                        total_credits += 4
+                        total_weight += 4
                 elif course_group.type == 'CHOIX':
                     if not has_choix:
                         has_choix = True
-                        total_hours += course_group.total_hours
-                        total_credits += course_group.total_credits
-                        total_weight += course_group.total_weight
+                        total_hours += 60
+                        total_credits += 6
+                        total_weight += 6
                 else :
                     total_hours += course_group.total_hours
                     total_credits += course_group.total_credits
