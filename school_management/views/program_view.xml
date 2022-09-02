@@ -505,11 +505,12 @@
             
             
             <field name="course_group_ids" widget="many2many_kanban" class="o_kanban_mobile">
-              <kanban quick_create="false" create="true" delete="true">
+              <kanban quick_create="false" create="true" delete="true" default_order="cg_grouping_sequence">
                 <field name="uid"/>
                 <field name="name" />
                 <field name="total_hours" />
                 <field name="total_credits" />
+                <field name="cg_grouping_sequence" />
                 <templates>
                     <t t-name="kanban-box">
                         <t t-js="ctx">
