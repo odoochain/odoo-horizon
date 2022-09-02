@@ -577,7 +577,7 @@
                     <t t-foreach="bloc.course_group_ids" t-as="course_group">
                     <tr class="oe_school_course_group" style="font-weight: 600;">
                         <td style="font-size: x-small;"><t t-esc="course_group.ue_id"/></td>
-                        <td><a t-esc="course_group.title" t-att-href="'/course_group/%s' % course_group.id" target="_self" style="cursor: pointer;"/><br/><i style="color:grey;"><t t-esc="course_group.teacher_id.name"/></i></td>
+                        <td><a t-esc="course_group.title" t-att-href="'/course_group/%s' % course_group.id" target="_self" style="cursor: pointer;"/><br/><i style="color:grey;"><t t-esc="course_group.responsible_id.name"/></i></td>
                         <td class="text-center"><t t-esc="course_group.total_hours"/></td>
                         <td class="text-center"><t t-esc="course_group.total_credits"/></td>
                         <td></td>
@@ -640,7 +640,7 @@
                 	<div class="entry-content">
                         <p><strong>Code d'unité</strong> – <span t-field="course_group.ue_id"/></p>
                         <p><strong>Cycle</strong> – <!--<span t-field="course_group.grade"/>--></p>
-                        <p><strong>Enseignant</strong> – <span t-field="course_group.teacher_id"/></p>
+                        <p><strong>Enseignant</strong> – <span t-field="course_group.responsible_id"/></p>
                         <p><strong>Période</strong> – <span t-field="course_group.period"/></p>
                         <p><strong>ECTS</strong> – <span t-field="course_group.total_credits"/></p>
                         <p><strong>Heures</strong> – <span t-field="course_group.total_hours"/></p>
