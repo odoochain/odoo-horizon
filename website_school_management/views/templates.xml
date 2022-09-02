@@ -499,7 +499,7 @@
         <section>
             <div class="row">
                 <div class="col-md-2"><font color="grey">DOMAINE</font></div>
-                <div class="col-md-10"><t t-esc="program.domain_id.name" /></div>
+                <div class="col-md-10"><t t-esc="program.domain" /></div>
             </div>
             <div class="row">
                 <div class="col-md-2"><font color="grey">CYCLE</font></div>
