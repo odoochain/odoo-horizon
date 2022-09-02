@@ -17,6 +17,7 @@ school_indcg_summary_teacher,school_indcg_summary_teacher,model_school_individua
 school_course_group_teacher,school_course_group_teacher,model_school_course_group,group_teacher,1,0,0,0
 school_course_group_group_teacher,school_course_group_group_teacher,model_school_course_group_group,group_teacher,1,0,0,0
 school_course_teacher,school_course_teacher,model_school_course,group_teacher,1,0,0,0
+school_bloc_teacher,school_bloc_teacher,model_school_bloc,group_teacher,1,0,0,0
 school_section_teacher,school_section_teacher,model_school_section,group_teacher,1,0,0,0
 school_track_teacher,school_track_teacher,model_school_track,group_teacher,1,0,0,0
 school_speciality_teacher,school_speciality_teacher,model_school_speciality,group_teacher,1,0,0,0

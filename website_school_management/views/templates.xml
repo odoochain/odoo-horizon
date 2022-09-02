@@ -580,7 +580,14 @@
                     </tr> 
                 </thead>
                 <tbody>
-                    <t t-foreach="bloc.course_group_ids" t-as="course_group">
+                    <t t-set="group" t-value=""/>
+                    <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">
+                    <t t-if="course_group.cg_grouping.id != group">
+                        <tr>
+                            <td colspan="7"><t t-esc="course_group.cg_grouping.name"/></td>
+                        </tr>
+                    </t>
+                    <t t-set="group" t-value="course_group.cg_grouping.id"/>
                     <tr class="oe_school_course_group" style="font-weight: 600;">
                         <td style="font-size: x-small;"><t t-esc="course_group.ue_id"/></td>
                         <td><a t-esc="course_group.title" t-att-href="'/course_group/%s' % course_group.id" target="_self" style="cursor: pointer;"/><br/><i style="color:grey;"><t t-esc="course_group.responsible_id.name"/></i></td>
