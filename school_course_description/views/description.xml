@@ -71,7 +71,7 @@
                           </h3>
                         </div>
                         <group>
-                          <field name="course_ids" class="oe_inline" domain="[('uid','ilike','AA-1'),('teacher_ids','in',[partner_id])]">
+                          <field name="course_ids" class="oe_inline" domain="[('uid','ilike','AA-1'),('teacher_ids','in',[partner_id])]" >
                             <tree>
                               <field name="uid"/>
                               <field name="name"/>

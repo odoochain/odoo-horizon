@@ -231,6 +231,8 @@ class CourseGroup(models.Model):
     
     quadri = fields.Selection([('Q1&Q2','Q1&Q2'),('Q1','Q1'),('Q2','Q2')],string='Quadri', compute='_compute_quadri', store=True)
     
+    type = fields.Selection([('CHOIX','CHOIX'),('ORI1','ORI1'),('ORI2','ORI2'),('OBLIGATOIRE','OBLIGATOIRE')],string='Type')
+    
     cg_grouping = fields.Many2one('school.course_group_group',string='Group', copy=True)
     
     cg_grouping_sequence = fields.Integer('Group Sequence',related="cg_grouping.sequence")
