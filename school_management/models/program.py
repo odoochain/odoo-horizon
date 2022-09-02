@@ -167,10 +167,32 @@ class Bloc(models.Model):
             total_hours = 0.0
             total_credits = 0.0
             total_weight = 0.0
+            has_ori1 = False
+            has_ori2 = False
+            has_choix = False
             for course_group in rec.course_group_ids:
-                total_hours += course_group.total_hours
-                total_credits += course_group.total_credits
-                total_weight += course_group.total_weight
+                if course_group.type == 'ORI1':
+                    if not has_ori1:
+                        has_ori1 = True
+                        total_hours += course_group.total_hours
+                        total_credits += course_group.total_credits
+                        total_weight += course_group.total_weight
+                elif course_group.type == 'ORI2':
+                    if not has_ori2:
+                        has_ori2 = True
+                        total_hours += course_group.total_hours
+                        total_credits += course_group.total_credits
+                        total_weight += course_group.total_weight
+                elif course_group.type == 'CHOIX':
+                    if not has_choix:
+                        has_choix = True
+                        total_hours += course_group.total_hours
+                        total_credits += course_group.total_credits
+                        total_weight += course_group.total_weight
+                else :
+                    total_hours += course_group.total_hours
+                    total_credits += course_group.total_credits
+                    total_weight += course_group.total_weight
             rec.total_hours = total_hours
             rec.total_credits = total_credits
             rec.total_weight = total_weight
