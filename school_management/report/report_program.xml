@@ -297,7 +297,7 @@
                           </tr>
                         </table>
                         <div class="row" style="margin-top:20px;margin-bottom:120px;">
-                            <div class="col-xs-9 col-xs-offset-1">
+                            <div class="col-9 col-offset-1">
                                 Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
                             </div>
                         </div>
