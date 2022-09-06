@@ -46,7 +46,7 @@
     background-color: #28a745 !important;
     border-color: #28a745 !important;
     padding: 10px !important;
-    width: 80% !important;
+    width: 110px !important;
 }
 
 .horizon_btn_eval_5_progress {
@@ -54,7 +54,7 @@
     background-color: #ffc107 !important;
     border-color: #ffc107 !important;
     padding: 10px !important;
-    width: 80% !important;
+    width: 110px !important;
 }
 
 .horizon_btn_eval_7_failed {
@@ -62,7 +62,7 @@
     background-color: red !important;
     border-color: red !important;
     padding: 10px !important;
-    width: 80% !important;
+    width: 110px !important;
 }
 
 .horizon_btn_eval_1_confirmed {
@@ -70,7 +70,7 @@
     background-color: #00BFFF !important;
     border-color: #00BFFF !important;
     padding: 10px !important;
-    width: 80% !important;
+    width: 110px !important;
 }
 
 .horizon_btn_eval_0_valuated {
@@ -78,7 +78,7 @@
     background-color: blue !important;
     border-color: blue !important;
     padding: 10px !important;
-    width: 80% !important;
+    width: 110px !important;
 }
 
 .horizon_btn_eval_2_candidate {
@@ -86,7 +86,7 @@
     background-color: #ADD8E6 !important;
     border-color: #ADD8E6 !important;
     padding: 10px !important;
-    width: 80% !important;
+    width: 110px !important;
 }
 
 .horizon_btn_eval_9_draft {
@@ -94,7 +94,7 @@
     background-color: grey !important;
     border-color: grey !important;
     padding: 10px !important;
-    width: 80% !important;
+    width: 110px !important;
 }
 
 .horizon_btn_eval_10_irregular {
@@ -102,5 +102,5 @@
     background-color: black !important;
     border-color: black !important;
     padding: 10px !important;
-    width: 80% !important;
+    width: 110px !important;
 }
