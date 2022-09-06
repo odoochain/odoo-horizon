@@ -40,3 +40,67 @@
 .o_readonly_modifier.horizon_eval_cell {
     background-color: #eeeeee !important;
 }
+
+.horizon_btn_eval_6_success {
+    color: #ffffff;
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 10px;
+    width: 80%;
+}
+
+.horizon_btn_eval_5_progress {
+    color: #ffffff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    padding: 10px;
+    width: 80%;
+}
+
+.horizon_btn_eval_7_failed {
+    color: #ffffff;
+    background-color: red;
+    border-color: red;
+    padding: 10px;
+    width: 80%;
+}
+
+.horizon_btn_eval_1_confirmed {
+    color: #ffffff;
+    background-color: #00BFFF;
+    border-color: #00BFFF;
+    padding: 10px;
+    width: 80%;
+}
+
+.horizon_btn_eval_0_valuated {
+    color: #ffffff;
+    background-color: blue;
+    border-color: blue;
+    padding: 10px;
+    width: 80%;
+}
+
+.horizon_btn_eval_2_candidate {
+    color: #ffffff;
+    background-color: #ADD8E6;
+    border-color: #ADD8E6;
+    padding: 10px;
+    width: 80%;
+}
+
+.horizon_btn_eval_9_draft {
+    color: #ffffff;
+    background-color: grey;
+    border-color: grey;
+    padding: 10px;
+    width: 80%;
+}
+
+.horizon_btn_eval_10_irregular {
+    color: #ffffff;
+    background-color: black;
+    border-color: black;
+    padding: 10px;
+    width: 80%;
+}

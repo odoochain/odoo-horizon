@@ -270,11 +270,11 @@
                 <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="attributes">
                     <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
                 </xpath>
-                <xpath expr="//div[contains(@class, 'horizon_cgs_evals')]" position="after">
+                <xpath expr="//div[contains(@class, 'horizon_cgs_evals')]" position="inside">
                     <div class="row m-2">
-                        <div class="col-12 col-md-3" t-if="first_session_result_bool">Première session : <field name="first_session_result"/></div>
-                        <div class="col-12 col-md-3" t-if="second_session_result_bool">Seconde session : <field name="second_session_result"/></div>
-                        <div class="col-12 col-md-3" t-if="final_result_bool">Résultat final: <field name="final_result_disp"/></div>
+                        <button t-attf-class="btn horizon_btn_eval_{{record.state.raw_value}}" type="button" name="res_button" style="padding:10px;">
+                          <h1><field name="final_result_disp"/></h1>
+                        </button>
                     </div>
                 </xpath>
             </field>

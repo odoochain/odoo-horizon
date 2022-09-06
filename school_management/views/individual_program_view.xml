@@ -406,20 +406,21 @@
                                   <div class="col-12 col-md-2">
                                     <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
                                   </div>
-                                  <div class="col-12 col-md-10">
+                                  <div class="col-12 col-md-7">
                                     <div class="row m-2">
                                       <h5><field name="name"/><br/></h5>
                                       <a t-if="! read_only_mode" class="oe_highlight btn btn-primary" type="delete" style="position: absolute; right: 20px; padding: 4px; diplay: inline-block">X</a>
                                       <!--<i><field name="responsible_id"/></i>-->
                                     </div>
-                                    <div class="row m-2 horizon_cgs_evals">
-                                      <div class="col-12 col-md-3"><b><field name="total_credits"/> ECTS</b></div>
-                                      <div class="col-12 col-md-3"><field name="total_hours"/> Heures</div>
-                                      <div class="col-12 col-md-6">
+                                    <div class="row m-2">
+                                      <div class="col-12 col-md-4"><b><field name="total_credits"/> ECTS</b></div>
+                                      <div class="col-12 col-md-4"><field name="total_hours"/> Heures</div>
+                                      <div class="col-12 col-md-4">
                                         <a type="object" name="action_open_source_form"><i class="fa fa-book mr-2"></i>UE Source (<field name="source_course_group_uid"/>)</a>
                                       </div>
                                     </div>
                                   </div>
+                                  <div class="col-12 col-md-3 horizon_cgs_evals"></div>
                                 </div>
                               </div>
                           </div>
