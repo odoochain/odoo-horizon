@@ -207,7 +207,7 @@
     </record>
 
     <template id="school_bloc" name="Bloc">
-        <div class="article col-md-12" data-oe-model="school_bloc" t-att-data-oe-id="bloc.id">
+        <div class="col-12" data-oe-model="school_bloc" t-att-data-oe-id="bloc.id">
             <h2>Programme annuel de l'étudiant</h2>
             <table class="table table-condensed oe_school_program_table">
                 <colgroup>
@@ -273,9 +273,9 @@
             <t t-set="data_report_margin_top" t-value="45" />
             <t t-set="data_report_header_spacing" t-value="40" />
             <t t-foreach="docs" t-as="bloc">
-            <t t-set="o" t-value="program"/> 
+            <t t-set="o" t-value="bloc"/> 
             <t t-call="web.external_layout">
-                <div class="page article" data-oe-model="school_bloc" t-att-data-oe-id="bloc.id">
+                <div class="page" t-att-data-oe-model="bloc._name" t-att-data-oe-id="bloc.id">
                     <i style="color:blue;">PAE-<t t-esc="bloc.id"/></i>
                     
                     <h3><t t-esc="bloc.name"/></h3>
