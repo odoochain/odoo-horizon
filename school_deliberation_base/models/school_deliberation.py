@@ -285,9 +285,9 @@ class ProgramDeliberation(models.Model):
     
     image = fields.Binary('Image', attachment=True, related='program_id.student_id.image')
     
-    image_medium = fields.Binary('Image', attachment=True, related='program_id.student_id.image_medium')
+    image_128 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_128')
     
-    image_small = fields.Binary('Image', attachment=True, related='program_id.student_id.image_small')
+    image_64 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_64')
     
     name = fields.Char(string='Name', related='program_id.name')
     

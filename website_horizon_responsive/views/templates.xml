@@ -127,10 +127,10 @@
 	            							<a href="#">
 	            								<!-- picturefill: full manual control -->
 	            								<picture>
-	            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
-	            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
-	            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)"/>
-	            									<img t-att-src="'/web/image/res.users/%s/image_small' % (user.id)" alt="image description" width="62" height="62"/>
+	            									<source t-att-srcset="'/web/image/res.users/%s/image_64, /web/image/res.users/%s/image_128 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
+	            									<source t-att-srcset="'/web/image/res.users/%s/image_64, /web/image/res.users/%s/image_128 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
+	            									<source t-att-srcset="'/web/image/res.users/%s/image_64, /web/image/res.users/%s/image_128 2x' % (user.id,user.id)"/>
+	            									<img t-att-src="'/web/image/res.users/%s/image_64' % (user.id)" alt="image description" width="62" height="62"/>
 	            								</picture>
 	            							</a>
 	            						</figure>
@@ -215,10 +215,10 @@
             							<a href="#">
             								<!-- picturefill: full manual control -->
             								<picture>
-            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
-            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
-            									<source t-att-srcset="'/web/image/res.users/%s/image_small, /web/image/res.users/%s/image_medium 2x' % (user.id,user.id)"/>
-            									<img t-att-src="'/web/image/res.users/%s/image_small' % (user.id)" alt="image description" width="62" height="62"/>
+            									<source t-att-srcset="'/web/image/res.users/%s/image_64, /web/image/res.users/%s/image_128 2x' % (user.id,user.id)" media="(max-width: 767px)"/>
+            									<source t-att-srcset="'/web/image/res.users/%s/image_64, /web/image/res.users/%s/image_128 2x' % (user.id,user.id)" media="(max-width: 1024px)"/>
+            									<source t-att-srcset="'/web/image/res.users/%s/image_64, /web/image/res.users/%s/image_128 2x' % (user.id,user.id)"/>
+            									<img t-att-src="'/web/image/res.users/%s/image_64' % (user.id)" alt="image description" width="62" height="62"/>
             								</picture>
             							</a>
             						</figure>

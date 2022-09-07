@@ -38,7 +38,7 @@
                     </button>
                 </xpath>
                 <xpath expr="//field[contains(@name, 'image_1920')]" position="replace">
-                    <field name="image_1920" widget="image" class="oe_left oe_inline" style="max-width:128px;max_height:128px;" options="{&quot;preview_image&quot;: &quot;image_medium&quot;}"/>
+                    <field name="image_1920" widget="image" class="oe_left oe_inline" style="max-width:128px;max_height:128px;margin: 15px;" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
                 </xpath>
                 <xpath expr="//div[contains(@class, 'oe_title')]/following-sibling::group" position="replace">
                 </xpath>
