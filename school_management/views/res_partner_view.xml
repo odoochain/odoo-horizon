@@ -67,9 +67,10 @@
                         </div>
                         <div class="col-md-3">
                             <div name="button_box" class="oe_button_box">
-                                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                                </button>
+                                <button string="Archive"
+                                    class="oe_stat_button"
+                                    icon="fa-archive" name="toggle_active" type="action"
+                                    groups="school.employee"/>
                             </div>         
                         </div>
                     </div>
