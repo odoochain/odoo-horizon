@@ -29,6 +29,8 @@ class AddBlocWizard(models.TransientModel):
     _name = "school.add_bloc_wizard"
     _description = "Add Bloc Wizard"
     
+    individual_program_id = fields.Many2one('school.individual_program', string="Target Program")
+    
     source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc")
     
     def on_confirm(self):

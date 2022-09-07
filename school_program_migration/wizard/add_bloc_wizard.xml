@@ -45,7 +45,7 @@
             <field name="name">Add Bloc Wizard</field>
             <field name="res_model">school.add_bloc_wizard</field>
             <field name="type">ir.actions.act_window</field>
-            
+            <field name="context">{'default_individual_program_id': [active_id]}</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="add_bloc_wizard_form"/>
             <field name="target">new</field>
