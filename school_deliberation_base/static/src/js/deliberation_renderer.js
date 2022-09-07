@@ -41,7 +41,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
             var $col1 = $('<div>',{class : 'col-2'});
             var $img = $('<img>',{ 
                 'class' : 'img img-fluid img-thumbnail ml16',
-                'src' : this._getImageURL('res.partner','image_512',record.student_id.data.id,'student picture'),
+                'src' : this._getImageURL('res.partner','image_128',record.student_id.data.id,'student picture'),
                 'style' : 'min-height: 256px;',
             });
             $col1.append($img);
