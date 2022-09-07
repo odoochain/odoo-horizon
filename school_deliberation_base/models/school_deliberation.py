@@ -287,8 +287,6 @@ class ProgramDeliberation(models.Model):
     
     image_128 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_128')
     
-    image_64 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_64')
-    
     name = fields.Char(string='Name', related='program_id.name')
     
     total_acquiered_credits = fields.Integer(string='Total Acquiered Credits', related='program_id.total_acquiered_credits')
