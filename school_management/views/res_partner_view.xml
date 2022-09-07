@@ -67,6 +67,7 @@
             				</group>
             			</div>
             			<field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': ['|',('is_company','=', True),('student','=',True)]}"/>
+            			<field name="active" invisible="1"/>
                     </div>
                 </xpath>
                 <xpath expr="//notebook" position="replace">
