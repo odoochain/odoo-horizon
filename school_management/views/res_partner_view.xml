@@ -29,6 +29,7 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field eval="18" name="priority" />
             <field name="arch" type="xml">
+                
                 <xpath expr="//div[contains(@class, 'oe_title')]" position="replace">
                     <div class="oe_title">
                         <h1>
@@ -153,7 +154,7 @@
                             <field name="parent_id" invisible="1"/>
                             <field name="type" attrs="{'invisible': [('parent_id','=', False)]}" groups="base.group_no_one"/>
                             <div class="row" groups="school_management.group_employee">
-                                <div class="col-md-3 mb16">
+                                <div class="col-3 mb16">
                                     <label for="street" string="Main Address"/>
                                     <div class="o_address_format">
                                         <div class="oe_edit_only">
@@ -167,7 +168,7 @@
                                         <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb16 ">
+                                <div class="col-3 mb16 ">
                                     <label for="secondary_street" string="Alternative Address"/>
                                     <div class="o_address_format">
                                         <field name="secondary_street" placeholder="Street..." class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
@@ -178,7 +179,7 @@
                                         <field name="secondary_country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb16">
+                                <div class="col-6 mb16">
                                     <group col="2">
                                         <field name='email_personnel' />
                                         <field name="phone" widget="phone"/>
