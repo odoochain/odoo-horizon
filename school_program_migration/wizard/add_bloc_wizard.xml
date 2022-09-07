@@ -32,7 +32,7 @@
                 <sheet>
                     <group>
                         <field name="individual_program_id" readonly="1"/>
-                        <field name="source_bloc_id"/>
+                        <field name="source_bloc_id" domain="[('year_id','=',year_id)]"/>
                         <field name="year_id"/>
                     </group>
                     <footer>
