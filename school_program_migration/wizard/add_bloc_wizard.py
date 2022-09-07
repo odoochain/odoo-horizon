@@ -37,6 +37,12 @@ class AddBlocWizard(models.TransientModel):
     
     def on_confirm(self):
         self.ensure_one()
+        summaries = self.env['school.individual_course_summary']
+        for cg in self.source_bloc_id.course_group_ids:
+            course_group_summary = self.env['school.individual_course_summary'].create({
+                'program_id' : self.individual_program_id.id,
+                'course_group_id' : cg.id,
+            })
         return {'warning': {
             'title' : 'Add Bloc Wizard completed',
             'message' : 'Program have been updated with all UE from %s.' % (self.source_bloc_id.title),
