@@ -161,7 +161,7 @@ class Bloc(models.Model):
     _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     _order = 'program_id,sequence'
     
-    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight','course_group_ids.type')
+    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight')
     def _get_courses_total(self):
         for rec in self :
             total_hours = 0.0
