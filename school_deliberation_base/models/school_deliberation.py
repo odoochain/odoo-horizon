@@ -283,7 +283,7 @@ class ProgramDeliberation(models.Model):
     
     student_name = fields.Char(string='Student', related='program_id.student_id.name')
     
-    image = fields.Binary('Image', attachment=True, related='program_id.student_id.image')
+    image_1920 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_1920')
     
     image_128 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_128')
     
@@ -345,11 +345,9 @@ class BlocDeliberation(models.Model):
     
     bloc_id = fields.Many2one('school.individual_bloc', required=True)
     
-    image = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image')
+    image_1920 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_1920')
     
-    image_medium = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_medium')
-    
-    image_small = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_small')
+    image_128 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_128')
     
     name = fields.Char(string='Name', related='bloc_id.name')
     
@@ -414,11 +412,9 @@ class CourseGroupDeliberation(models.Model):
     
     participant_ids = fields.Many2many('res.partner', related='course_group_id.bloc_id.all_responsible_ids', string='Particpants')
     
-    image = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image')
+    image_1920 = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image_1920')
     
-    image_medium = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image_medium')
-    
-    image_small = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image_small')
+    image_128 = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image_128')
     
     name = fields.Char(string='Name', related='course_group_id.title')
     

@@ -393,7 +393,7 @@ return Widget.extend({
         self.student_image = session.url('/web/image', {
             model: 'res.partner',
             id: self.bloc.student_id[0],
-            field: 'image_medium',
+            field: 'image_128',
             unique: (self.datarecord.__last_update || '').replace(/[^0-9]/g, '')
         });
         
