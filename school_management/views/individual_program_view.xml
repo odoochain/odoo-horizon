@@ -58,7 +58,7 @@
             <div class="container" style="margin-left:0px;">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
-                  <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
+                  <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}"/>
                 </div>
                 <div class="col-8">
                   <h2>
@@ -534,7 +534,7 @@
             <div class="container">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
-                  <field name="image" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
+                  <field name="image_1920" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
                 </div>
                 <div class="col-8">
                   <h2>
