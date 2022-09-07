@@ -28,6 +28,7 @@
     'depends': ['school_evaluations'],
     'init_xml': [],
     'data': [
+        'wizard/add_bloc_wizard.xml',
     ],
     'demo_xml': [],
     'description': '''
