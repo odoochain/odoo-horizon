@@ -34,6 +34,7 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-archive">
+                        Archiver
                     </button>
                 </xpath>
                 <xpath expr="//field[contains(@name, 'image_1920')]" position="replace">
