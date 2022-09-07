@@ -52,6 +52,8 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="add_bloc_wizard_form"/>
             <field name="target">new</field>
+            <field name="binding_model_id" ref="school.individual_program"/>
+            <field name="binding_view_types">form</field>
         </record>
         
 </odoo>
