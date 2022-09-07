@@ -33,7 +33,7 @@ class AddBlocWizard(models.TransientModel):
     
     year_id = fields.Many2one('school.year', string='Year')
     
-    source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc", domain="[('year_id', '=', self.env.user.current_year_id.id)]")
+    source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc")
     
     def on_confirm(self):
         self.ensure_one()
