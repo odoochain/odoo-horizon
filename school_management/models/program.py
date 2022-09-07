@@ -378,6 +378,7 @@ class Course(models.Model):
             else:
                 course.name = course.title
 
+    responsible_id = fields.Many2one('res.partner',related='course_group_id.responsible_id', store=True)
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]") # TODO RENAME RELATION TABLE
     
     @api.onchange('hours','credits')
