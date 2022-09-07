@@ -271,7 +271,7 @@
                     <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
                 </xpath>
                 <xpath expr="//div[contains(@class, 'horizon_cgs_evals')]" position="inside">
-                    <div class="row m-2">
+                    <div class="row m-2" t-if="record.final_result_bool.raw_value">
                         <button t-attf-class="btn horizon_btn_eval_{{record.state.raw_value}}" type="button" name="res_button" style="padding:10px;">
                           <h1><field name="final_result_disp"/></h1>
                         </button>

@@ -167,32 +167,10 @@ class Bloc(models.Model):
             total_hours = 0.0
             total_credits = 0.0
             total_weight = 0.0
-            has_ori1 = False
-            has_ori2 = False
-            has_choix = False
             for course_group in rec.course_group_ids:
-                if course_group.type == 'ORI1':
-                    if not has_ori1:
-                        has_ori1 = True
-                        total_hours += 60
-                        total_credits += 10
-                        total_weight += 10
-                elif course_group.type == 'ORI2':
-                    if not has_ori2:
-                        has_ori2 = True
-                        total_hours += 30
-                        total_credits += 4
-                        total_weight += 4
-                elif course_group.type == 'CHOIX':
-                    if not has_choix:
-                        has_choix = True
-                        total_hours += 60
-                        total_credits += 6
-                        total_weight += 6
-                else :
-                    total_hours += course_group.total_hours
-                    total_credits += course_group.total_credits
-                    total_weight += course_group.total_weight
+                total_hours += course_group.total_hours
+                total_credits += course_group.total_credits
+                total_weight += course_group.total_weight
             rec.total_hours = total_hours
             rec.total_credits = total_credits
             rec.total_weight = total_weight
@@ -252,8 +230,6 @@ class CourseGroup(models.Model):
     period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period', readonly=True) # For backup only
     
     quadri = fields.Selection([('Q1&Q2','Q1&Q2'),('Q1','Q1'),('Q2','Q2')],string='Quadri', compute='_compute_quadri', store=True)
-    
-    type = fields.Selection([('CHOIX','CHOIX'),('ORI1','ORI1'),('ORI2','ORI2'),('OBLIGATOIRE','OBLIGATOIRE')],string='Type')
     
     cg_grouping = fields.Many2one('school.course_group_group',string='Group', copy=True)
     
