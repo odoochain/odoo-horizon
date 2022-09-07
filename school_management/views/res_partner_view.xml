@@ -29,7 +29,9 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field eval="18" name="priority" />
             <field name="arch" type="xml">
-                
+                <xpath expr="//field[contains(@name, 'image_1920')]" position="replace">
+                    <field name="image_1920" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;}"/>
+                </xpath>
                 <xpath expr="//div[contains(@class, 'oe_title')]" position="replace">
                     <div class="oe_title">
                         <h1>
