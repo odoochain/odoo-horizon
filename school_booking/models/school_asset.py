@@ -28,7 +28,7 @@ class Asset(models.Model):
     '''School Asset'''
     _name = 'school.asset'
     _description = 'School Asset'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread','image.mixin',]
     _order = 'sequence'
     
     booking_policy = fields.Selection([
@@ -70,19 +70,7 @@ class Asset(models.Model):
     linked_to_room = fields.Boolean(related='asset_type_id.linked_to_room', default=False)
     is_room = fields.Boolean(related='asset_type_id.is_room', store=True)
     room_id = fields.Many2one('school.asset', string='Linked Room', domain="[('is_room','=',True)]")
-    
-    # image: all image fields are base64 encoded and PIL-supported
-    image = fields.Binary("Photo", attachment=True,
-        help="This field holds the image used as photo for the employee, limited to 1024x1024px.")
-    image_medium = fields.Binary("Medium-sized photo", attachment=True,
-        help="Medium-sized photo of the employee. It is automatically "
-             "resized as a 128x128px image, with aspect ratio preserved. "
-             "Use this field in form views or some kanban views.")
-    image_small = fields.Binary("Small-sized photo", attachment=True,
-        help="Small-sized photo of the employee. It is automatically "
-             "resized as a 64x64px image, with aspect ratio preserved. "
-             "Use this field anywhere a small image is required.")
-
+             
 class AssetCategory(models.Model):
     _name = "school.asset.category"
     _description = "Asset Category"
