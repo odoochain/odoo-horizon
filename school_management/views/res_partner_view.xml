@@ -69,7 +69,7 @@
                             <div name="button_box" class="oe_button_box">
                                 <button string="Archive"
                                     class="oe_stat_button"
-                                    icon="fa-archive" name="toggle_active" type="action"
+                                    icon="fa-archive" name="%(toggle_active)d" type="action"
                                     groups="school.employee"/>
                             </div>         
                         </div>
