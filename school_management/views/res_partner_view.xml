@@ -31,48 +31,35 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="replace">
                 <sheet>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div style="margin: 0 auto">
-                                <field name="image_1920" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;}"/>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="oe_title">
-                                <h1>
-                                    <field name="name" default_focus="1" placeholder="Nom" attrs="{
-                                        'readonly': [('is_company', '=', False)],
-                                        'required': [('is_company', '=', True)]
-                                    }" on_change="1" modifiers="{'readonly': [['is_company', '=', false]], 'required': [['is_company', '=', true]]}" class="oe_inline"/> <field name='initials' placeholder="I.,J.,F." class="oe_inline"/>
-                                </h1>
-                                <span class="oe_fade">
-                                      Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
-                                </span>
-                                <group>
-                                    <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
-                                    <field name="user_ids" invisible="1"/>
-                                    <field name="email" widget="email" attrs="{'required': [('user_ids','!=', [])]}" placeholder="Email"/>
-                                </group>
-                                <div class="oe_edit_only">
-                    		        <group attrs="{'invisible': [('is_company', '=', True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
-                    				    <field name='student' />
-                                        <field name='teacher' />
-                                        <field name='employee' />
-                                        <field name="lastname" attrs="{'required': [('firstname', '=', False),('type','=','contact'),('is_company', '=', False)]}" on_change="1" modifiers="{'required': [['firstname', '=', false], ['type', '=', 'contact'], ['is_company', '=', false]]}"/>
-                    					<field name="firstname" attrs="{'required': [('lastname', '=', False),('type','=','contact'),('is_company', '=', False)]}" on_change="1" modifiers="{'required': [['lastname', '=', false], ['type', '=', 'contact'], ['is_company', '=', false]]}"/>
-                    				</group>
-                    			</div>
-                    			<field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': ['|',('is_company','=', True),('student','=',True)]}"/>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div name="button_box" class="oe_button_box">
-                                <button string="Archive"
-                                    class="oe_stat_button"
-                                    icon="fa-archive" name="toggle_active" type="object"
-                                    groups="school.employee"/>
-                            </div>         
-                        </div>
+                    <div class="oe_button_box" name="button_box"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="image_1920" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_medium&quot;}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Nom" attrs="{
+                                'readonly': [('is_company', '=', False)],
+                                'required': [('is_company', '=', True)]
+                            }" on_change="1" modifiers="{'readonly': [['is_company', '=', false]], 'required': [['is_company', '=', true]]}" class="oe_inline"/> <field name='initials' placeholder="I.,J.,F." class="oe_inline"/>
+                        </h1>
+                        <span class="oe_fade">
+                              Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
+                        </span>
+                        <group>
+                            <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
+                            <field name="user_ids" invisible="1"/>
+                            <field name="email" widget="email" attrs="{'required': [('user_ids','!=', [])]}" placeholder="Email"/>
+                        </group>
+                        <div class="oe_edit_only">
+            		        <group attrs="{'invisible': [('is_company', '=', True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
+            				    <field name='student' />
+                                <field name='teacher' />
+                                <field name='employee' />
+                                <field name="lastname" attrs="{'required': [('firstname', '=', False),('type','=','contact'),('is_company', '=', False)]}" on_change="1" modifiers="{'required': [['firstname', '=', false], ['type', '=', 'contact'], ['is_company', '=', false]]}"/>
+            					<field name="firstname" attrs="{'required': [('lastname', '=', False),('type','=','contact'),('is_company', '=', False)]}" on_change="1" modifiers="{'required': [['lastname', '=', false], ['type', '=', 'contact'], ['is_company', '=', false]]}"/>
+            				</group>
+            			</div>
+            			<field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': ['|',('is_company','=', True),('student','=',True)]}"/>
+                        <field name="active" invisible="1"/>
                     </div>
                     <notebook colspan="4">
                         <page name="cycles_page" string="Cycles" autofocus="autofocus" attrs="{'invisible': [('is_company','=',True)]}" modifiers="{'invisible': [['is_company', '=', true]]}">
