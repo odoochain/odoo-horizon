@@ -327,7 +327,7 @@ class IndividualCourseGroup(models.Model):
     image_1920 = fields.Binary('Image', compute="_compute_related_info", store=True)
     image_128 = fields.Binary('Image', compute="_compute_related_info", store=True)
     
-    @api.depends('bloc_id.year_id','bloc_id.student_id','bloc_id.student_id.image_1920')
+    @api.depends('bloc_id.year_id','bloc_id.student_id')
     def _compute_related_info(self):
         for rec in self:
             rec.year_id = rec.bloc_id.year_id
