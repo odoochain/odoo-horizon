@@ -30,6 +30,27 @@ class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
     
+    def action_open_form(self):
+        self.ensure_one()
+        for cg in self.individual_course_group.ids :
+            if cg.state in ['2_candidate','1_confirmed','0_valuated']:
+                valuation_followup = self.env['school.valuation_followup'].search([('individual_course_group_id','=',cg.id)])
+                if valuation_followup :
+                    return {
+                        'type': 'ir.actions.act_window',
+                        'name': _(valuation_followup.name),
+                        'res_model': valuation_followup._name,
+                        'res_id': valuation_followup.id,
+                        'view_mode': 'form',
+                    }
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _(self.name),
+            'res_model': self._name,
+            'res_id': self.id,
+            'view_mode': 'form',
+        }
+    
     def action_reject_course_group(self):
         for rec in self :
             for cg in rec.individual_course_group.ids :
