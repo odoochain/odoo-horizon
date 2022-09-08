@@ -65,6 +65,11 @@ class ValuationFollwup(models.Model):
     
     responsible_id = fields.Many2one('res.partner', related='individual_course_group_id.responsible_id', string="Responsible")
     
+    responsible_decision = fields.Selection([
+            ('accept','Accepted'),
+            ('reject','Rejected')
+    ], string="Responsible Decision", default="reject", tracking=True)
+
     state = fields.Selection([
             ('10_irregular','Irregular'),
             ('9_draft','Draft'),
