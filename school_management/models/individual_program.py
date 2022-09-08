@@ -320,21 +320,11 @@ class IndividualCourseGroup(models.Model):
     
     sequence = fields.Integer(related="source_course_group_id.sequence", readonly=True, store=True)
     
+    year_id = fields.Many2one(related="bloc_id.year_id", string='Year', store=True)
     responsible_id = fields.Many2one('res.partner', related="source_course_group_id.responsible_id")
     
-    year_id = fields.Many2one(compute="_compute_related_info", string='Year', store=True)
-    student_id = fields.Many2one(compute="_compute_related_info", string='Student', store=True, domain=[('student', '=', True)])
-    image_1920 = fields.Binary('Image', compute="_compute_related_info", store=True)
-    image_128 = fields.Binary('Image', compute="_compute_related_info", store=True)
-    
-    @api.depends('bloc_id.year_id','bloc_id.student_id')
-    def _compute_related_info(self):
-        for rec in self:
-            rec.year_id = rec.bloc_id.year_id
-            rec.student_id = rec.bloc_id.student_id
-            rec.image_1920 = rec.bloc_id.student_id.image_1920
-            rec.image_128 = rec.bloc_id.student_id.image_128
-    
+    image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     def _domain_source_course_group_id(self):
         return []
