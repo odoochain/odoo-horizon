@@ -78,3 +78,15 @@ class ValuationFollwup(models.Model):
     responsible_comments = fields.Text(string="Responsible Comments")
     
     attachment_ids = fields.Many2many('ir.attachment','valuations_ir_attachment_rel', 'valuation_id','ir_attachment_id', 'Attachments')
+    
+    def action_confirm_valuate_course_group(self):
+        for rec in self :
+            rec.individual_course_group_id.write({
+                'state' : '1_confirmed'
+            }) 
+            
+    def action_valuate_course_group(self):
+        for rec in self :
+            rec.individual_course_group_id.write({
+                'state' : '0_valuated'
+            }) 
