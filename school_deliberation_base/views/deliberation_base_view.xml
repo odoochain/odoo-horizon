@@ -201,6 +201,7 @@
                     <field name="uid" />
                     <field name="teacher_id"/>
                     <field name="final_result"/>
+                    <field name="final_result_disp"/>
                   </tree>
                 </field>
               </tree>
