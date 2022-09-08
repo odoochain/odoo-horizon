@@ -32,7 +32,7 @@ class IndividualCourseSummary(models.Model):
     
     def action_open_form(self):
         self.ensure_one()
-        for cg in self.individual_course_group.ids :
+        for cg in self.ind_course_group_ids :
             if cg.state in ['2_candidate','1_confirmed','0_valuated']:
                 valuation_followup = self.env['school.valuation_followup'].search([('individual_course_group_id','=',cg.id)])
                 if valuation_followup :
