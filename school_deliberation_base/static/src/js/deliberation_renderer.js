@@ -214,7 +214,7 @@ odoo.define('deliberation.DeliberationRenderer', function (require) {
                                 ${course.title} <small class="text-muted">${course.teacher_id ? ' - ' + course.teacher_id[1] : ''}</small>
                             </td>
                             <td style=" text-align: right;">
-                                <font color="blue">${course.final_result ? course.final_result : ''}</font>
+                                <font color="blue">${course.final_result_disp ? course.final_result_disp : ''}</font>
                             </td>
                             <td></td>
                             <td></td>
