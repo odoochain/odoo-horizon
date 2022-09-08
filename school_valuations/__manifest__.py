@@ -28,9 +28,9 @@
     'depends': ['school_evaluations'],
     'init_xml': [],
     'data': [
-        'views/configuration_view.xml',
-        'views/school_valuations_view.xml',
-        #'security/ir.model.access.csv',
+        'valuations_data.xml',
+        'views/valuations_view.xml',
+        'security/ir.model.access.csv',
     ],
     'demo_xml': [],
     'description': '''
