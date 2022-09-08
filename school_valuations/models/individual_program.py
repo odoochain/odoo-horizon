@@ -71,13 +71,13 @@ class ValuationFollwup(models.Model):
             ('2_candidate','Candidate'),
             ('1_confirmed','Candidate'),
             ('0_valuated', 'Valuated'),
-        ], string='Status', related="individual_course_group_id.state")
+        ], string='Status', related="individual_course_group_id.state", tracking=True)
     
-    administration_comments = fields.Text(string="Administration Comments")
+    administration_comments = fields.Text(string="Administration Comments", tracking=True)
     
-    responsible_comments = fields.Text(string="Responsible Comments")
+    responsible_comments = fields.Text(string="Responsible Comments", tracking=True)
     
-    attachment_ids = fields.Many2many('ir.attachment','valuations_ir_attachment_rel', 'valuation_id','ir_attachment_id', 'Attachments')
+    attachment_ids = fields.Many2many('ir.attachment','valuations_ir_attachment_rel', 'valuation_id','ir_attachment_id', 'Attachments', tracking=True)
     
     def action_confirm_valuate_course_group(self):
         for rec in self :
