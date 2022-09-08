@@ -37,6 +37,7 @@ class IndividualCourseSummary(models.Model):
                 ['valuated_program_id','=',rec.program_id.id],
                 ['source_course_group_id','=',rec.course_group_id.id]
             ])
+            _logger.info('Create Valuation Followup for %s' % valuated_cg.id)
             self.env['school.valuation_followup'].create({
                 'individual_course_group_id' : valuated_cg.id
             })
