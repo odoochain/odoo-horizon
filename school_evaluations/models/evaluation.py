@@ -450,30 +450,21 @@ class IndividualCourseGroup(models.Model):
         
     valuated_program_id = fields.Many2one('school.individual_program', string="Program", ondelete='cascade', readonly=True)
     
+    student_id = fields.Many2one(string='Student', store=True, compute='_compute_student_id')
+    
+    def _compute_student_id(self):
+        for rec in self:
+            if rec.valuated_program_id :
+                rec.student_id = rec.valuated_program_id.student_id
+            else :
+                rec.student_id = rec.bloc_id.student_id
+    
     @api.constrains('bloc_id','valuated_program_id')
     def _check_bloc_id_constrains(self):
         if self.bloc_id and self.valuated_program_id :
             raise UserError('A Course Group cannot be valuated in a program and in a bloc at the same time.')
     
     # Actions
-
-    def valuate_course_group(self):
-        self.ensure_one()
-        program_id = self.bloc_id.program_id
-        if program_id :
-            self.write({
-                'bloc_id' : False,
-                'valuated_program_id' : program_id.id,
-                'acquiered' : 'A',
-                'state' : '2_candidate',})
-            program_id._get_total_acquiered_credits()
-            return {
-                'value' : {
-                    'total_acquiered_credits' : program_id.total_acquiered_credits,
-                    'total_registered_credits' : program_id.total_registered_credits,
-                    'valuated_course_group_ids' : (6, 0, program_id.valuated_course_group_ids.ids)
-                },
-            }
             
     def set_deliberated_to_ten(self, session = 1, message=''):
         for rec in self:
