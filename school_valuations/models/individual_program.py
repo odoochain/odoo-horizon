@@ -60,6 +60,9 @@ class ValuationFollwup(models.Model):
     
     student_id = fields.Many2one('res.partner', related='individual_course_group_id.valuated_program_id.student_id', string="Student")
     
+    image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    
     responsible_id = fields.Many2one('res.partner', related='individual_course_group_id.responsible_id', string="Responsible")
     
     state = fields.Selection([
