@@ -25,34 +25,6 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.addons import decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
-
-class CourseGroup(models.Model):
-    '''Course Group'''
-    _inherit = 'school.course_group'
-    
-    ## If set a course with an evaluation < 10 will make this course group not acquiered.
-    # enable_exclusion_bool = fields.Boolean(string='Enable exclusion evaluation', default=False)
-    
-    def valuate_course_group(self):
-        self.ensure_one()
-        program_id = self.env.context.get('program_id')
-        _logger.info('Add cg %s to %s' % (self.id, program_id))
-        if program_id :
-            program_id = self.env['school.individual_program'].browse(program_id)[0]
-            cg = program_id.valuated_course_group_ids.create({
-                'valuated_program_id' : program_id.id,
-                'source_course_group_id': self.id, 
-                'acquiered' : 'A',
-                'course_ids': self.course_ids.ids,
-                'state' : 'candidate',})
-            program_id._get_total_acquiered_credits()
-            return {
-                'value' : {
-                    'total_acquiered_credits' : program_id.total_acquiered_credits,
-                    'total_registered_credits' : program_id.total_registered_credits,
-                    'valuated_course_group_ids' : (6, 0, program_id.valuated_course_group_ids.ids)
-                },
-            }
     
 class IndividualProgram(models.Model):
     '''Individual Program'''

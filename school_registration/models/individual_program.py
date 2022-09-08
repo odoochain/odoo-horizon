@@ -39,9 +39,8 @@ class IndividualProgram(models.Model):
                 cg = new_pae.course_group_ids.create({'bloc_id': new_pae.id,'source_course_group_id': group.id, 'acquiered' : 'NA'})
                 courses = []
                 for course in group.course_ids:
-                    _logger.info('assign course : ' + course.name)
+                    _logger.info('Assign course : ' + course.name)
                     courses.append((0,0,{'source_course_id': course.id}))
-                _logger.info(courses)
                 cg.write({'course_ids': courses})
             else :
                  _logger.info('Skip course groups : ' + group.uid + ' - ' +group.name)
@@ -50,7 +49,6 @@ class IndividualProgram(models.Model):
     def register_pae(self):
         self.ensure_one()
         context = dict(self._context or {})
-        _logger.info(context)
         if not self.source_program_id:
             raise UserError(_("Pas de cycle théorique défini, impossible de proposer un PAE."))
         
