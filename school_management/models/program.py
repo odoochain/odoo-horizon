@@ -74,7 +74,7 @@ class Program(models.Model):
             ('published', 'Published'),
             ('archived', 'Archived'),
         ], string='Status', index=True, readonly=True, default='draft',
-        #track_visibility='onchange', TODO : is this useful for this case ?
+        #tracking=True, TODO : is this useful for this case ?
         copy=False,
         help=" * The 'Draft' status is used when a new program is created and not published yet.\n"
              " * The 'Published' status is when a program is published and available for use.\n"

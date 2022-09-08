@@ -47,7 +47,7 @@ class IndividualProgram(models.Model):
              " * The 'Awarded' status is used when the cycle is awarded.\n"
              " * The 'Abandonned' status is used if a student leave the program.\n"
              " * The 'Irregular' status is used if a student is in an irreular administrative state.\n"
-             ,track_visibility='onchange')
+             ,tracking=True)
     
     abandonned_date = fields.Date('Abandonned Date')
     
@@ -199,7 +199,7 @@ class IndividualBloc(models.Model):
             ('JT','Jeune talent'),
             ('EL','Elève libre'),
         ], string='Level', index=True, default='1A1C',
-        track_visibility='onchange',
+        tracking=True,
         copy=False,
         help=
         " * Agregation: Agregation.\n"
@@ -247,7 +247,7 @@ class IndividualBloc(models.Model):
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
-    course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', track_visibility='onchange')
+    course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', tracking=True)
     
     total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)
@@ -346,7 +346,7 @@ class IndividualCourseGroup(models.Model):
     source_bloc_track_id = fields.Many2one(related='bloc_id.source_bloc_track_id', string='Track', readonly=True, store=True)
     source_bloc_cycle_id = fields.Many2one(related='bloc_id.source_bloc_cycle_id', string='Cycle', readonly=True, store=True)
 
-    course_ids = fields.One2many('school.individual_course', 'course_group_id', string='Courses',track_visibility='onchange')
+    course_ids = fields.One2many('school.individual_course', 'course_group_id', string='Courses',tracking=True)
     
     is_ghost_cg = fields.Boolean(string='Is Ghost Course Group', default=False)
     

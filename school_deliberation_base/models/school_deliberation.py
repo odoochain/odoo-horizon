@@ -37,7 +37,7 @@ class Deliberation(models.Model):
             ('active', 'Active'),
             ('archived', 'Archived'),
         ], string='Status', index=True, readonly=True, default='draft',
-        #track_visibility='onchange', TODO : is this useful for this case ?
+        #tracking=True, TODO : is this useful for this case ?
         copy=False,
         help=" * The 'Draft' status is used when a new deliberation is created and not running yet.\n"
              " * The 'Active' status is when a deliberation is ready to be processed.\n"

@@ -37,7 +37,7 @@ class SchoolTeacherDesignation(models.Model):
             ('active', 'Active'),
             ('canceled', 'Canceled'),
         ], string='Status', index=True, readonly=True, default='draft',
-        track_visibility='onchange',
+        tracking=True,
         copy=False,
         help=" * The 'Draft' status is used when a designation is not validated yet.\n"
              " * The 'Active' status is when a designation is currently active.\n"

@@ -39,11 +39,11 @@ class IndividualProgram(models.Model):
         if self.state == 'irregular' :
             self.bloc_ids.write({'state': 'irregular'})
     
-    historical_bloc_1_eval = fields.Float(string="Hist Bloc 1 Eval",track_visibility='onchange',digits=dp.get_precision('Evaluation'))
-    historical_bloc_1_credits = fields.Integer(string="Hist Bloc 1 ECTS",track_visibility='onchange')
+    historical_bloc_1_eval = fields.Float(string="Hist Bloc 1 Eval",tracking=True,digits=dp.get_precision('Evaluation'))
+    historical_bloc_1_credits = fields.Integer(string="Hist Bloc 1 ECTS",tracking=True)
     
-    historical_bloc_2_eval = fields.Float(string="Hist Bloc 2 Eval",track_visibility='onchange',digits=dp.get_precision('Evaluation'))
-    historical_bloc_2_credits = fields.Integer(string="Hist Bloc 2 ECTS",track_visibility='onchange')
+    historical_bloc_2_eval = fields.Float(string="Hist Bloc 2 Eval",tracking=True,digits=dp.get_precision('Evaluation'))
+    historical_bloc_2_credits = fields.Integer(string="Hist Bloc 2 ECTS",tracking=True)
     
     grade = fields.Selection([
             ('without','Without Grade'),
@@ -51,22 +51,22 @@ class IndividualProgram(models.Model):
             ('distinction','Distinction'),
             ('second_class', 'Second Class Honor'),
             ('first_class', 'First Class Honor'),
-        ],string="Grade",track_visibility='onchange')
+        ],string="Grade",tracking=True)
     
-    grade_year_id = fields.Many2one('school.year', string="Graduation year",track_visibility='onchange')
+    grade_year_id = fields.Many2one('school.year', string="Graduation year",tracking=True)
     
-    graduation_date = fields.Date(string="Graduation Date",track_visibility='onchange')
+    graduation_date = fields.Date(string="Graduation Date",tracking=True)
     
-    grade_comments = fields.Text(string="Grade Comments",track_visibility='onchange')
+    grade_comments = fields.Text(string="Grade Comments",tracking=True)
     
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     
-    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',track_visibility='onchange',store=True)
-    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', track_visibility='onchange',store=True)
+    total_registered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Registered Credits',tracking=True,store=True)
+    total_acquiered_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Acquiered Credits', tracking=True,store=True)
 
-    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed",track_visibility='onchange',store=True)
+    program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed",tracking=True,store=True)
 
-    valuated_course_group_ids = fields.One2many('school.individual_course_group', 'valuated_program_id', string='Valuated Courses Groups', track_visibility='onchange')
+    valuated_course_group_ids = fields.One2many('school.individual_course_group', 'valuated_program_id', string='Valuated Courses Groups', tracking=True)
 
     @api.depends('valuated_course_group_ids', 'required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     def _get_total_acquiered_credits(self):
@@ -226,7 +226,7 @@ class IndividualBloc(models.Model):
              " * The 'Awarded' status is used when the bloc is awarded in either first or second session.\n"
              " * The 'Failed' status is used when the bloc is definitively considered as failed.\n"
              " * The 'Abandoned' status is when the student abandoned his bloc.\n"
-             ,track_visibility='onchange')
+             ,tracking=True)
     
     total_acquiered_credits = fields.Integer(compute="compute_credits",string="Acquiered Credits",store=True)
     total_acquiered_hours = fields.Integer(compute="compute_credits",string="Acquiered Hours",store=True)
@@ -234,7 +234,7 @@ class IndividualBloc(models.Model):
     total_not_acquiered_hours = fields.Integer(compute='compute_credits', string='Not Acquiered Hours',store=True)
 
     evaluation = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
-    decision = fields.Text(compute='compute_credits', string="Decision",track_visibility='onchange', store=True)
+    decision = fields.Text(compute='compute_credits', string="Decision",tracking=True, store=True)
     
     first_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
     second_session_result = fields.Float(string="Evaluation",compute="compute_evaluation",digits=dp.get_precision('Evaluation'),store=True)
@@ -410,7 +410,7 @@ class IndividualCourseGroup(models.Model):
             ('1_confirmed','Candidate'),
             ('0_valuated', 'Valuated'),
         ], string='Status', index=True, default='9_draft',
-        track_visibility='onchange',
+        tracking=True,
         copy=False,
         help=" * The 'Draft' status is used when course group is only plan.\n"
              " * The 'Irregular' status is used when course group is in an irregular program.\n"
@@ -488,8 +488,8 @@ class IndividualCourseGroup(models.Model):
     first_session_computed_result = fields.Float(compute='compute_average_results', string='First Session Computed Result', store=True, digits=dp.get_precision('Evaluation'))
     first_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='First Session Computed Active', store=True)
 
-    first_session_deliberated_result = fields.Char(string='First Session Deliberated Result',track_visibility='onchange')
-    first_session_deliberated_result_bool= fields.Boolean(string='First Session Deliberated Active',track_visibility='onchange')
+    first_session_deliberated_result = fields.Char(string='First Session Deliberated Result',tracking=True)
+    first_session_deliberated_result_bool= fields.Boolean(string='First Session Deliberated Active',tracking=True)
     
     first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_first_session_results',string='First Session Exception', store=True)
     first_session_result= fields.Float(compute='compute_first_session_results', string='First Session Result', store=True, digits=dp.get_precision('Evaluation'))
@@ -503,8 +503,8 @@ class IndividualCourseGroup(models.Model):
     second_session_computed_result = fields.Float(compute='compute_average_results', string='Second Session Computed Result', store=True,digits=dp.get_precision('Evaluation'))
     second_session_computed_result_bool= fields.Boolean(compute='compute_average_results', string='Second Session Computed Active', store=True)
     
-    second_session_deliberated_result = fields.Char(string='Second Session Deliberated Result', digits=(5, 2),track_visibility='onchange')
-    second_session_deliberated_result_bool= fields.Boolean(string='Second Session Deliberated Active',track_visibility='onchange')
+    second_session_deliberated_result = fields.Char(string='Second Session Deliberated Result', digits=(5, 2),tracking=True)
+    second_session_deliberated_result_bool= fields.Boolean(string='Second Session Deliberated Active',tracking=True)
     
     second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_second_session_results',string='Second Session Exception', store=True)
     second_session_result= fields.Float(compute='compute_second_session_results', string='Second Session Result', store=True,digits=dp.get_precision('Evaluation'))
@@ -514,12 +514,12 @@ class IndividualCourseGroup(models.Model):
     
     ## Final ##
     
-    final_result_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_final_results',string='Final Exception', store=True, track_visibility='onchange')
-    final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True, digits=dp.get_precision('Evaluation'), track_visibility='onchange')
+    final_result_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_final_results',string='Final Exception', store=True, tracking=True)
+    final_result = fields.Float(compute='compute_final_results', string='Final Result', store=True, digits=dp.get_precision('Evaluation'), tracking=True)
     final_result_bool = fields.Boolean(compute='compute_final_results', string='Final Active', store=True)
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_results_disp')
     
-    acquiered = fields.Selection(([('A', 'Acquiered'),('NA', 'Not Acquiered')]), compute='compute_final_results', string='Acquired Credits', store=True, track_visibility='onchange',default='NA')
+    acquiered = fields.Selection(([('A', 'Acquiered'),('NA', 'Not Acquiered')]), compute='compute_final_results', string='Acquired Credits', store=True, tracking=True,default='NA')
     
     final_note = fields.Text(string='Final Notes')
     
@@ -715,9 +715,9 @@ class IndividualCourse(models.Model):
     open_final_result = fields.Boolean(string='Final Result',compute='open_evaluations')
     open_second_result = fields.Boolean(string='Second Result',compute='open_evaluations')
     
-    partial_result = fields.Char(string='Partial Result',track_visibility='onchange')
-    final_result = fields.Char(string='Final Result',track_visibility='onchange')
-    second_result = fields.Char(string='Second Result',track_visibility='onchange')
+    partial_result = fields.Char(string='Partial Result',tracking=True)
+    final_result = fields.Char(string='Final Result',tracking=True)
+    second_result = fields.Char(string='Second Result',tracking=True)
     
     is_annual = fields.Boolean(string="Is Annual", related='source_course_id.is_annual',readonly=True)
     

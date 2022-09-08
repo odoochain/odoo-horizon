@@ -39,7 +39,7 @@ class Asset(models.Model):
         help=" * The 'Available' available to all users.\n"
              " * The 'Preserved' only employee can book.\n"
              " * The 'Out' no one can book.\n"
-             ,track_visibility='onchange')
+             ,tracking=True)
     
     abandonned_date = fields.Date('Abandonned Date')
     

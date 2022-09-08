@@ -41,7 +41,7 @@ _logger = logging.getLogger(__name__)
 #     '''Individual Course'''
 #     _inherit = ['school.individual_course']
 
-#     is_dispense_approved = fields.Boolean(string="Is Dispense Approved", default=False, track_visibility='onchange')
+#     is_dispense_approved = fields.Boolean(string="Is Dispense Approved", default=False, tracking=True)
 #     dispense_approval_comment = fields.Text(string="Dispense Approval Comment")
     
 #     dispense_char = fields.Char(string="Is Dispensed Text", compute="_compute_char", store=True)
