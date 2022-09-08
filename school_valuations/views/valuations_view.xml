@@ -159,4 +159,6 @@
       <field name="act_window_id" ref="action_valuation_form" />
     </record>
     
+    <menuitem id="menu_valuation_form" parent="school_management.menu_individual_bloc" action="action_valuation_form" sequence="100" />
+    
 </odoo>
