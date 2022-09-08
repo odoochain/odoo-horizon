@@ -98,3 +98,9 @@ class ValuationFollwup(models.Model):
             rec.individual_course_group_id.write({
                 'state' : '0_valuated'
             }) 
+            
+    def action_reject_course_group(self):
+        for rec in self :
+            rec.individual_course_group_id.write({
+                'state' : '3_rejected'
+            }) 

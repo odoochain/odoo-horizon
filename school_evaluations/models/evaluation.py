@@ -143,6 +143,7 @@ class IndividualCourseSummary(models.Model):
             ('7_failed', 'Failed'),
             ('6_success', 'Success'),
             ('5_progress','In Progress'),
+            ('3_rejected','Rejected'),
             ('2_candidate','Candidate'),
             ('1_confirmed','Candidate'),
             ('0_valuated', 'Valuated'),
@@ -406,6 +407,7 @@ class IndividualCourseGroup(models.Model):
             ('7_failed', 'Failed'),
             ('6_success', 'Success'),
             ('5_progress','In Progress'),
+            ('3_rejected','Rejected'),
             ('2_candidate','Candidate'),
             ('1_confirmed','Candidate'),
             ('0_valuated', 'Valuated'),
@@ -418,6 +420,7 @@ class IndividualCourseGroup(models.Model):
              " * The 'Confirmed' status is when restults are confirmed.\n"
              " * The 'Success' status is when delibration has confirmed success.\n"
              " * The 'Failed' status is when delibration has confirmed failure.\n"
+             " * The 'Rejected' status is used when the course group is rejected for valuation.\n"
              " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
              " * The 'Valuated' status is used when the course group is confirmed for valuation.")
      
