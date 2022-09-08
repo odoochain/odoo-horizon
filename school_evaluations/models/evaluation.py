@@ -452,6 +452,7 @@ class IndividualCourseGroup(models.Model):
     
     student_id = fields.Many2one(string='Student', store=True, compute='_compute_student_id')
     
+    @api.depends('valuated_program_id','bloc_id')
     def _compute_student_id(self):
         for rec in self:
             if rec.valuated_program_id :
