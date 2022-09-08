@@ -30,18 +30,21 @@ class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
     
+    
     def action_candidate_valuate_course_group(self):
-        ret = super(IndividualCourseSummary, self).action_valuate_course_group()
         for rec in self :
-            valuated_cg = self.env['school.individual_course_group'].search([
-                ['valuated_program_id','=',rec.program_id.id],
-                ['source_course_group_id','=',rec.course_group_id.id]
-            ])
-            _logger.info('Create Valuation Followup for %s' % valuated_cg.id)
+            valuated_cg = self.env['school.individual_course_group'].create({
+                'valuated_program_id' : rec.program_id.id,
+                'source_course_group_id' : rec.course_group_id.id,
+                'state' : '2_candidate'
+            })
+            rec.program_id.valuated_course_group_ids |= valuated_cg
             self.env['school.valuation_followup'].create({
                 'individual_course_group_id' : valuated_cg.id
             })
-        return ret
+        return {
+            'type': 'ir.actions.act_view_reload',
+        }
     
 class ValuationFollwup(models.Model):
     '''Valuation Follow Up'''
