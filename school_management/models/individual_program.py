@@ -321,7 +321,14 @@ class IndividualCourseGroup(models.Model):
     sequence = fields.Integer(related="source_course_group_id.sequence", readonly=True, store=True)
     
     year_id = fields.Many2one(related="bloc_id.year_id", string='Year', store=True)
-    student_id = fields.Many2one(related="bloc_id.student_id", string='Student', store=True, domain=[('student', '=', True)])
+    
+    student_id = fields.Many2one(string='Student', store=True, compute='_compute_student_id')
+    
+    @api.depends('bloc_id.student_id')
+    def _compute_student_id(self):
+        for rec in self:
+            rec.student_id = rec.bloc_id.student_id
+    
     responsible_id = fields.Many2one('res.partner', related="source_course_group_id.responsible_id")
     
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
