@@ -205,11 +205,6 @@
             <field name="inherit_id" ref="school_management.individual_course_summary_form" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//sheet" position="before">
-                    <header>
-                        <button name="action_valuate_course_group" type="object" string="Valuate Course Group" class="oe_highlight" states="9_draft"/>
-                    </header>
-                </xpath>
                 <xpath expr="//field[@name='ind_course_group_ids']/tree/field[@name='total_credits']" position="after">
                     <field name="acquiered" string="Acq"/>
                     <field name="final_result_disp" string="Res"/>
