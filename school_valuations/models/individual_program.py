@@ -30,13 +30,22 @@ class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
     
+    def action_reject_course_group(self):
+        for rec in self :
+            for cg in rec.individual_course_group.ids :
+                if cg.state in ['2_candidate','1_confirmed']:
+                    cg.write({'state','3_rejected'})
+        return {
+            'type': 'ir.actions.act_view_reload',
+        }
     
     def action_candidate_valuate_course_group(self):
         for rec in self :
             valuated_cg = self.env['school.individual_course_group'].create({
                 'valuated_program_id' : rec.program_id.id,
                 'source_course_group_id' : rec.course_group_id.id,
-                'state' : '2_candidate'
+                'state' : '2_candidate',
+                'year_id' : self.env.user.current_year_id
             })
             rec.program_id.valuated_course_group_ids |= valuated_cg
             self.env['school.valuation_followup'].create({
@@ -76,6 +85,7 @@ class ValuationFollwup(models.Model):
             ('7_failed', 'Failed'),
             ('6_success', 'Success'),
             ('5_progress','In Progress'),
+            ('3_rejected','Rejected'),
             ('2_candidate','Candidate'),
             ('1_confirmed','Candidate'),
             ('0_valuated', 'Valuated'),
