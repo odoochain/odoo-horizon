@@ -58,7 +58,7 @@ class ValuationFollwup(models.Model):
     
     title = fields.Char(related="individual_course_group_id.title", string="Title")
     
-    student_id = fields.Many2one('res.partner', related='individual_course_group_id.student_id', string="Student")
+    student_id = fields.Many2one('res.partner', related='individual_course_group_id.valuated_program_id.student_id', string="Student")
     
     responsible_id = fields.Many2one('res.partner', related='individual_course_group_id.responsible_id', string="Responsible")
     
