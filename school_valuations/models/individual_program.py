@@ -45,7 +45,7 @@ class IndividualCourseSummary(models.Model):
                 'valuated_program_id' : rec.program_id.id,
                 'source_course_group_id' : rec.course_group_id.id,
                 'state' : '2_candidate',
-                'year_id' : self.env.user.current_year_id
+                'year_id' : self.env.user.current_year_id.id
             })
             rec.program_id.valuated_course_group_ids |= valuated_cg
             self.env['school.valuation_followup'].create({
