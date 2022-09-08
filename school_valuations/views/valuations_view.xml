@@ -118,7 +118,7 @@
       <field name="arch" type="xml">
         <search string="Search Valuation">
           <field name="uid" filter_domain="[( 'uid', 'ilike', self)]"/>
-          <field name="name" filter_domain="[( 'name', 'ilike', self)]" />
+          <field name="title" filter_domain="[( 'title', 'ilike', self)]" />
         </search>
       </field>
     </record>
