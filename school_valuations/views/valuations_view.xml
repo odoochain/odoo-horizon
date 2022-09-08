@@ -85,7 +85,7 @@
         <form string="Valuation">
           <header>
 	            <button name="action_confirm_valuate_course_group" type="object" states="2_candidate" string="Confirm valuation" class="oe_highlight" />
-              <button name="set_to_valuated" type="object" states="1_confirmed" string="Valuate" class="oe_highlight" />
+              <button name="action_valuate_course_group" type="object" states="1_confirmed" string="Valuate" class="oe_highlight" />
               <field name="state" widget="statusbar" statusbar_visible="2_candidate,1_confirmed,0_valuated" />
 	        </header>
           <sheet>
