@@ -29,6 +29,8 @@ class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit='school.individual_program'
     
+    student_signature = fields.Binary(string="Student Signature", attachment=True)
+    
     def _assign_cg(self, new_pae):
         cg_ids = []
         for group in new_pae.source_bloc_id.course_group_ids:
