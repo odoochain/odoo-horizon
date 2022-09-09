@@ -39,16 +39,14 @@
         <field name="partner_to">${object.responsible_id.id}</field>
         <field name="model_id" ref="model_school_valuation_followup"/>
         <field name="auto_delete" eval="False"/>
-        <field name="report_template" ref="report_individual_bloc"/>
-        <field name="report_name">Individual Bloc Details</field>
-        <field name="lang">${object.student_id.lang}</field>
+        <field name="lang">${object.responsible_id.lang}</field>
         <field name="body_html"><![CDATA[
             <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-                <p>Hello ${object.student_id.name},</p>
+                <p>Bonjour ${object.responsible_id.name},</p>
                 <br/>
-                <p>Your Individual Bloc details is attached to this email. </p>
+                <p>L'étudiant ${object.student_id.name} a demadné la valorisation de l'unité ${object.name} dont vous êtes le responsable</p>
                 <br/>
-                <p>If you have any question, do not hesitate to contact us.</p>
+                <p>Merci de vous connecter à Horizon pour analyser la demande et prendre position : .</p>
                 <br/>
             </div>
         ]]></field>
