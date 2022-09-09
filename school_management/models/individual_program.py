@@ -216,7 +216,7 @@ class IndividualBloc(models.Model):
     
     is_light_bloc = fields.Boolean(string='Is a light bloc')
     
-    tag_ids = fields.Many2many('school.individual_bloc.tag', 'school_asset_tag_rel', 'asset_id', 'tag_id', string='Tags', copy=False)
+    tag_ids = fields.Many2many('school.individual_bloc.tag', 'school_individual_bloc_tag_rel', 'individual_bloc_id', 'tag_id', string='Tags', copy=False)
     
     student_id = fields.Many2one(related='program_id.student_id', string='Student', domain="[('student', '=', '1')]", readonly=True, store=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
