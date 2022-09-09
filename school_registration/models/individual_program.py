@@ -25,6 +25,12 @@ from odoo.exceptions import UserError, AccessError
 
 _logger = logging.getLogger(__name__)
 
+class IndividualBloc(models.Model):
+    '''Individual Bloc'''
+    _inherit='school.individual_bloc'
+    
+    student_signature = fields.Binary(string="Student Signature", attachment=True)
+
 class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit='school.individual_program'
