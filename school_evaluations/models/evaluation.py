@@ -560,13 +560,19 @@ class IndividualCourseGroup(models.Model):
             rec.second_session_computed_result_bool = False
             rec.second_session_computed_result = 0
             
+            shall_compute_second_session = False
+            
+            for ic in rec.course_ids:
+                if ic.second_session_result_bool :
+                    shall_compute_second_session = True
+            
             for ic in rec.course_ids:
                 # Compute First Session 
                 if ic.first_session_result_bool :
                     running_first_session_result += ic.first_session_result * ic.weight
                     rec.first_session_computed_result_bool = True
-                # Compute Second Session
-                if ic.second_session_result_bool :
+                # Compute Second Session if required
+                if shall_compute_second_session :
                     if ic.second_session_result_bool :
                         running_second_session_result += ic.second_session_result * ic.weight
                     else :
