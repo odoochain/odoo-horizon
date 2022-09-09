@@ -216,6 +216,8 @@ class IndividualBloc(models.Model):
     
     is_light_bloc = fields.Boolean(string='Is a light bloc')
     
+    tag_ids = fields.Many2many('school.individual_bloc.tag', 'school_asset_tag_rel', 'asset_id', 'tag_id', string='Tags', copy=False)
+    
     student_id = fields.Many2one(related='program_id.student_id', string='Student', domain="[('student', '=', '1')]", readonly=True, store=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
@@ -306,6 +308,16 @@ class IndividualBloc(models.Model):
         
     def get_all_responsibles(self):
         return self.course_group_ids.source_course_group_responsible_id
+
+class IndividualBlocTag(models.Model):
+    _name = 'school.individual_bloc.tag'
+    _description = 'Individual Bloc Tags'
+    name = fields.Char(string='Asset Tag', index=True, required=True)
+    color = fields.Integer('Color Index')
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Tag name already exists !"),
+    ]
 
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''

@@ -378,6 +378,11 @@
                         <small class="oe_grey" ><field name="uid" readonly="1"/></small>
                       </div>
                   </h3>
+                  <div class="o_row row no-gutters d-flex">
+                      <div class="col">
+                        <field name="tag_ids" widget="many2many_tags"/>
+                      </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -638,7 +643,6 @@
       <field name="act_window_id" ref="action_individual_course_group_form" />
     </record>
 
-    <menuitem id="menu_individual_course_group_form" parent="menu_individual_bloc" action="action_individual_course_group_form" sequence="60" />
 
     <!--
     
