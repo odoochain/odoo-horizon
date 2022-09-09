@@ -146,7 +146,7 @@
           <field name="name" filter_domain="[( 'name', 'ilike', self)]" />
           <field name="responsible_id" string="Responsible" />
           <field name="student_id" string="Student" />
-          <filter name="my_val" string="Mes valorisations" domain="[('responsible_id','=',uid)]"/>
+          <filter name="my_val" string="Mes valorisations" domain="[('responsible_id','=',uid)('state','!=','0_valuated')]"/>
         </search>
       </field>
     </record>
