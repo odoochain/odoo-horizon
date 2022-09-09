@@ -378,15 +378,11 @@
                         <small class="oe_grey" ><field name="uid" readonly="1"/></small>
                       </div>
                   </h3>
-                  <div class="o_row row no-gutters d-flex">
-                      <div class="col">
-                        <field name="tag_ids" widget="many2many_tags"/>
-                      </div>
-                  </div>
                 </div>
               </div>
             </div>
             <group col="4">
+              <field name="tag_ids" widget="many2many_tags" colspan="4"/>
               <field name="program_id" colspan="4"/>
               <field name="year_id" colspan="4"/>
               <field name="is_final_bloc" />
