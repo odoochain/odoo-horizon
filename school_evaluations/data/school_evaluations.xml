@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<odoo>
+<odoo noupdate="1">
     <data>
         <record id="group_evaluations" model="res.groups">
             <field name="name">Gestion des évaluations</field>
