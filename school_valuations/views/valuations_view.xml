@@ -123,9 +123,6 @@
               </div>
               <div class="panel-body">
                 <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
-              </div>
-              <div class="panel-body">
-                <div style="font-size:x-small;background-color: #eeeeee;font-style: italic;padding:10px;">
                   <p>Vous pouvez écrire ici vos remarques et commentaires à propose de cette valorisation.</p>
                 </div>
                 <field name="responsible_comments" widget="html" attrs="{'readonly':[('state','!=','2_candidate')]}"/>
