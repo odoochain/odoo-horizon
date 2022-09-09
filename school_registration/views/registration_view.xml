@@ -48,6 +48,11 @@
                     <button string="Register PAE" type="object" name="register_pae" class="oe_highlight" context="{'default_program_id': active_id, 'default_student_id': student_id}" 
                                 groups="school_management.group_employee" attrs="{'invisible': [('state','!=','progress')]}"/>
             </xpath>
+            <xpath expr="//div[@id="paes"]" position="before">
+                <group>
+                    <field name="student_signature" widget="signature" />
+                </group>
+            </xpath>
         </field>
     </record>
     
