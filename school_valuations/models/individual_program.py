@@ -136,7 +136,7 @@ class ValuationFollwup(models.Model):
                 'context': {
                     'default_composition_mode': 'mass_mail' if len(self.ids) > 1 else 'comment',
                     'default_res_id': self.ids[0],
-                    'default_model': 'sale.order',
+                    'default_model': 'school.valuation_followup',
                     'default_use_template': bool(template_id),
                     'default_template_id': template_id,
                     'website_sale_send_recovery_email': True,
