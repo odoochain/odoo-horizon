@@ -123,6 +123,26 @@ class ValuationFollwup(models.Model):
             rec.individual_course_group_id.write({
                 'state' : '1_confirmed'
             }) 
+            composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form').id
+
+            template_id = self.env.ref('school_valuations.email_template_valuation_teacher').id
+    
+            return {
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'res_model': 'mail.compose.message',
+                'view_id': composer_form_view_id,
+                'target': 'new',
+                'context': {
+                    'default_composition_mode': 'mass_mail' if len(self.ids) > 1 else 'comment',
+                    'default_res_id': self.ids[0],
+                    'default_model': 'sale.order',
+                    'default_use_template': bool(template_id),
+                    'default_template_id': template_id,
+                    'website_sale_send_recovery_email': True,
+                    'active_ids': self.ids,
+                },
+            }
             
     def action_valuate_course_group(self):
         for rec in self :
