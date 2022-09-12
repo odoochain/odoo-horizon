@@ -352,7 +352,7 @@ class IndividualBloc(models.Model):
     @api.depends('course_group_ids.total_credits','course_group_ids.total_hours','course_group_ids.acquiered','course_group_ids.first_session_computed_result_bool', 'course_group_ids.is_ghost_cg')
     def compute_credits(self):
         for rec in self:
-            if rec.state in ['progress','postponed'] :
+            if rec.state in ['progress','postponed','awarded_first_session','awarded_second_session'] :
                 rec.total_acquiered_credits = sum([icg.total_credits for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
                 rec.total_acquiered_hours = sum([icg.total_hours for icg in rec.course_group_ids if icg.acquiered == 'A' and not icg.is_ghost_cg])
                 rec.total_not_acquiered_credits = rec.total_credits - rec.total_acquiered_credits
