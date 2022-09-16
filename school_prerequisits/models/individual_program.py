@@ -38,6 +38,7 @@ class IndividualBloc(models.Model):
             scg = cg.source_course_group_id
             # Check pre-requisits
             for prereq in scg.pre_requisit_course_ids:
+                _logger.info('PreRequisit %s match for %s in %s' % (prereq.id, scg.id, cg.id))
                 icg_acq = self.env['school.individual_course_group'].search([('student_id','=',self.student_id.id),('source_course_group_id','=',prereq.id),('acquiered','=',True)])
                 if len(icg_acq) == 0 :
                     res = {'warning': {
