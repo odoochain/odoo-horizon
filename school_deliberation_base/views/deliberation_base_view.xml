@@ -340,7 +340,7 @@
             <div class="container h_deliberation_dialog">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
-                  <field name="image_1920" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
+                  <field name="image_1920" readonly="1" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
                 </div>
                 <div class="col-8">
                   <h2>
@@ -431,7 +431,7 @@
             <div class="container h_deliberation_dialog">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
-                  <field name="image_1920" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
+                  <field name="image_1920" readonly="1" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
                 </div>
                 <div class="col-8">
                   <h2>
@@ -485,7 +485,7 @@
             <div class="container h_deliberation_dialog">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
-                  <field name="image_1920" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
+                  <field name="image_1920" readonly="1" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
                 </div>
                 <div class="col-8">
                   <h2>

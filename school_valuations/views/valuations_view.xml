@@ -90,7 +90,7 @@
               <field name="state" widget="statusbar" statusbar_visible="2_candidate,1_confirmed,0_valuated" />
 	        </header>
           <sheet>
-            <field name="image_1920" widget="image" class="oe_left oe_inline" style="max-width:128px;max_height:128px;margin: 15px;" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
+            <field name="image_1920" readonly="1" widget="image" class="oe_left oe_inline" style="max-width:128px;max_height:128px;margin: 15px;" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
             <div class="oe_title">
               <h1>
                <field name="title"/>
