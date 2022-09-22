@@ -128,16 +128,16 @@ class IndividualProgram(models.Model):
         
     bloc_ids = fields.One2many('school.individual_bloc', 'program_id', string='Individual Blocs')
     
-    highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
+    #highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
 
-    @api.depends('bloc_ids.source_bloc_level')
-    def _compute_highest_level(self):
-        for rec in self:
-            levels = rec.bloc_ids.mapped('source_bloc_level')
-            if levels:
-                rec.highest_level = max(levels)
-            else:
-                rec.highest_level = 0
+    #@api.depends('bloc_ids.source_bloc_level')
+    #def _compute_highest_level(self):
+    #    for rec in self:
+    #        levels = rec.bloc_ids.mapped('source_bloc_level')
+    #        if levels:
+    #            rec.highest_level = max(levels)
+    #        else:
+    #            rec.highest_level = 0
 
     def get_all_tearchers(self):
         return self.bloc_ids.course_group_ids.course_ids.teacher_id
@@ -212,9 +212,9 @@ class IndividualBloc(models.Model):
         " * Elève libre:Elève libre.\n"
     )
     
-    is_final_bloc = fields.Boolean(string='Is final bloc')
+    is_final_bloc = fields.Boolean(string='Is final bloc',tracking=True)
     
-    is_light_bloc = fields.Boolean(string='Is a light bloc')
+    is_light_bloc = fields.Boolean(string='Is a light bloc',tracking=True)
     
     tag_ids = fields.Many2many('school.individual_bloc.tag', 'school_individual_bloc_tag_rel', 'individual_bloc_id', 'tag_id', string='Tags', copy=False)
     
