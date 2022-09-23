@@ -80,7 +80,7 @@ class Event(models.Model):
     def _check_room_quota(self):
         for rec in self:
         
-            _logger.info('Check constraints _check_room_quota on record %s' % self.id)
+            _logger.info('Check constraints _check_room_quota on record %s' % rec.id)
             if rec.room_id :
             
                 # Admin is king
