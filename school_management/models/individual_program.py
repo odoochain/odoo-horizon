@@ -232,6 +232,19 @@ class IndividualBloc(models.Model):
     source_bloc_track_id = fields.Many2one('school.track',compute='compute_speciality', string='Track', readonly=True, store=True)
     source_bloc_cycle_id = fields.Many2one('school.cycle',compute='compute_speciality', string='Cycle', readonly=True, store=True)
     
+    @api.onchange('source_bloc_id')
+    def onchange_source_bloc_id(self):
+        self.ensure_one()
+        self.course_group_ids.unlink()
+        for group in self.source_bloc_id.course_group_ids:
+            _logger.info('Assign course groups : ' + group.uid + ' - ' +group.name)
+            cg = self.course_group_ids.create({'bloc_id': self.id,'source_course_group_id': group.id, 'acquiered' : 'NA'})
+            courses = []
+            for course in group.course_ids:
+                _logger.info('Assign course : ' + course.name)
+                courses.append((0,0,{'source_course_id': course.id}))
+            cg.write({'course_ids': courses})
+    
     @api.depends('source_bloc_id.speciality_id','program_id.speciality_id')
     def compute_speciality(self):
         for bloc in self:
@@ -285,7 +298,6 @@ class IndividualBloc(models.Model):
           
     course_count = fields.Integer(compute='_compute_course_count', string="Course")
 
-    
     def _compute_course_count(self):
         for bloc in self:
             bloc.course_count = self.env['school.individual_course'].search_count([('bloc_id', '=', bloc.id)])
