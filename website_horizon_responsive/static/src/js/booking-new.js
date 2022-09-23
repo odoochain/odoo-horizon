@@ -130,7 +130,7 @@ $(document).ready(function(){
             type: "POST",
             dataType: "json",
             contentType: 'application/json',
-            url: '/xmlrpc/2/object',
+            url: '/jsonrpc',
             data: JSON.stringify({
                 jsonrpc: "2.0",
                 method: "call",
