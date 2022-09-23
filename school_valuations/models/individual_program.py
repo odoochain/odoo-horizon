@@ -91,9 +91,18 @@ class ValuationFollwup(models.Model):
     student_id = fields.Many2one('res.partner', related='individual_course_group_id.valuated_program_id.student_id', string="Student")
     
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_512= fields.Binary('Image', attachment=True, related='student_id.image_512')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     responsible_id = fields.Many2one('res.partner', related='individual_course_group_id.responsible_id', string="Responsible")
+    
+    responsible_uid = fields.Many2one('res.user', compute='_compute_responsible_uid', store=True)
+    
+    @api.depends('responsible_id')
+    def _compute_responsible_uid(self):
+        for rec in self:
+            user_id = self.env['res.user'].search([['partner_id','=',self.responsible_id]])
+            rec.responsible_uid = user_id
     
     responsible_decision = fields.Selection([
             ('accept','Accepted'),
