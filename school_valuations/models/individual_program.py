@@ -96,12 +96,12 @@ class ValuationFollwup(models.Model):
     
     responsible_id = fields.Many2one('res.partner', related='individual_course_group_id.responsible_id', string="Responsible")
     
-    responsible_uid = fields.Many2one('res.user', compute='_compute_responsible_uid', store=True)
+    responsible_uid = fields.Many2one('res.users', compute='_compute_responsible_uid', store=True)
     
     @api.depends('responsible_id')
     def _compute_responsible_uid(self):
         for rec in self:
-            user_id = self.env['res.user'].search([['partner_id','=',self.responsible_id]])
+            user_id = self.env['res.users'].search([['partner_id','=',self.responsible_id]])
             rec.responsible_uid = user_id
     
     responsible_decision = fields.Selection([
