@@ -540,8 +540,8 @@
 							</li>
 						</ul>
 						<div>
-							<a class="btn btn-danger" href="/responsive/booking_new">Réserver une salle</a>
-							<a class="btn btn-danger" href="/responsive/booking_search">Rechercher</a>
+							<a class="btn btn-danger" href="/responsive/booking_new" style="margin: 10px;">Réserver une salle</a>
+							<a class="btn btn-danger" href="/responsive/booking_search" style="margin: 10px;">Rechercher</a>
 						</div>
 					</div>
 				</div>
