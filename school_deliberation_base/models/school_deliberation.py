@@ -284,7 +284,7 @@ class ProgramDeliberation(models.Model):
     student_name = fields.Char(string='Student', related='program_id.student_id.name')
     
     image_1920 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_1920')
-    
+    image_512 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_512')
     image_128 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_128')
     
     name = fields.Char(string='Name', related='program_id.name')
@@ -346,7 +346,7 @@ class BlocDeliberation(models.Model):
     bloc_id = fields.Many2one('school.individual_bloc', required=True)
     
     image_1920 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_1920')
-    
+    image_512 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_512')
     image_128 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_128')
     
     name = fields.Char(string='Name', related='bloc_id.name')
