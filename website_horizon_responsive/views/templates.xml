@@ -39,7 +39,17 @@
                 	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
                 	<!-- include custom JavaScript -->
                 	<script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
-                    <t t-call-assets="website_horizon_responsive.assets"/>
+                  <t t-call-assets="web.assets_common" t-css="false"/>
+                  <script type="text/javascript">
+                      odoo.define('web.csrf', function (require) {
+                          var token = "<t t-esc="request.csrf_token(None)"/>";
+                          require('web.core').csrf_token = token;
+                          require('qweb').default_dict.csrf_token = token;
+                      });
+                      odoo.db_info = '<t t-raw="db_info"/>';
+                  </script>
+                  <t t-call-assets="web.assets_backend" t-css="false"/>
+                  <t t-call-assets="website_horizon_responsive.assets"/>
                 </head>
                 <t t-raw="0"/>
             </html>
