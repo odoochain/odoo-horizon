@@ -532,7 +532,7 @@
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
 							<li t-foreach="bookings" t-as="book">
 								<div class="d-flex justify-content-between">
-									<span class="pr-3"><span t-field="book.start" t-options="{'time_only': 'true', 'format': 'short'}"/><span class="mx-1">›</span>  <span t-field="book.stop" t-options="{'time_only': 'true', 'format': 'short'}"/></span>
+									<span class="pr-3"><span t-field="book.start" t-options='{"widget": "datetime", "time_only": True, "hide_seconds": True}'/><span class="mx-1">›</span>  <span t-field="book.stop" t-options='{"widget": "datetime", "time_only": True, "hide_seconds": True}'/></span>
 									<span><t t-esc="book.room_id.name"/></span>
 									<a t-att-href="'/responsive/delete/%s' % book.id"><i class="fa fa-trash d-inline-block"></i></a>
 								</div>
@@ -543,7 +543,7 @@
 						<ul class="booking-list list-unstyled mb-5 mb-lg-6 pb-2">
 							<li t-foreach="bookings_next" t-as="book">
 								<div class="d-flex justify-content-between">
-									<span class="pr-3"><span t-field="book.start" t-options="{'time_only': 'true', 'format': 'short'}"/><span class="mx-1">›</span>  <span t-field="book.stop" t-options="{'time_only': 'true', 'format': 'short'}"/></span>
+									<span class="pr-3"><span t-field="book.start" t-options='{"widget": "datetime", "time_only": True, "hide_seconds": True}'/><span class="mx-1">›</span>  <span t-field="book.stop" t-options='{"widget": "datetime", "time_only": True, "hide_seconds": True}'/></span>
 									<span><t t-esc="book.room_id.name"/></span>
 									<a t-att-href="'/responsive/delete/%s' % book.id"><i class="fa fa-trash d-inline-block"></i></a>
 								</div>
