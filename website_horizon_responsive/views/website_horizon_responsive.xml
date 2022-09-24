@@ -23,6 +23,15 @@
 <odoo>
     
         <template id="assets" name="website_horizon_responsive assets">
+            <!-- include google fonts -->
+        	<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet"/>
+        	<!-- include the site stylesheet -->
+        	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/bootstrap.css"/>
+        	<link rel="stylesheet" href="/web/static/lib/fontawesome/css/font-awesome.css"/>
+        	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+        	<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css"/>
+        	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
+        	
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
             <script type="text/javascript" src="/web/static/lib/jquery.ui/jquery-ui.js"></script>
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.browser.js"></script>

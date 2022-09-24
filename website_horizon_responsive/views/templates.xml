@@ -49,6 +49,7 @@
                       odoo.db_info = '<t t-raw="db_info"/>';
                   </script>
                   <t t-call-assets="web.assets_backend" t-css="false"/>-->
+                  <t t-call-assets="website_horizon_responsive.assets"/>
                 </head>
                 <t t-raw="0"/>
             </html>
