@@ -48,8 +48,8 @@
                       });
                       odoo.db_info = '<t t-raw="db_info"/>';
                   </script>
-                  <t t-call-assets="web.assets_backend" t-css="false"/>
-                  <!--<t t-call-assets="website_horizon_responsive.assets"/>-->
+                  <!--<t t-call-assets="web.assets_backend" t-css="false"/>
+                  <t t-call-assets="website_horizon_responsive.assets"/>-->
             			<script type="module" src="/website_horizon_responsive/static/src/js/main.js"></script>
                 </head>
                 <t t-raw="0"/>
