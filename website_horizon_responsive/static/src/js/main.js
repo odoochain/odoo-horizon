@@ -1,5 +1,5 @@
 import { App } from "./app";
-import { utils } from "@odoo/owl";
+import { utils } from "owl";
 
 (async () => {
   const app = new App();
