@@ -130,13 +130,11 @@ $(document).ready(function(){
             type: "POST",
             dataType: "json",
             contentType: 'application/json',
-            url: '/jsonrpc',
+            url: '/web/dataset/call_kw/calendar.event/create',
             data: JSON.stringify({
                 jsonrpc: "2.0",
                 method: "call",
                 params: {
-                    model: "calendar.event",
-                    method: "create",
                     args: [{
                         name: description,
                         start: start.toISOString().replace('T',' ').replace('.000Z',''),
