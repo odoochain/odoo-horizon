@@ -33,6 +33,11 @@ var CalendarWidget = Widget.extend({
             initialView: 'resourceTimeGridDay',
             slotMinTime: "08:00:00",
     		slotMaxTime: "22:00:00",
+    		titleFormat: { // will produce something like "Tuesday, September 18, 2018"
+                month: 'numeric',
+                day: 'numeric',
+                weekday: 'long'
+            },
             /*header : {
                  left:   'prev',
                  center: 'title,today',
