@@ -1,13 +1,5 @@
 /* global $, moment, date_today, date_tomorrow */
 
-odoo.define('module.A', function (require) {
-    "use strict";
-
-    const ajax = require('web.ajax');
-    
-});
-
-
 $(document).ready(function(){
     
     function updateSendButton() {

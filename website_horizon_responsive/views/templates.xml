@@ -39,7 +39,7 @@
                 	<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css"/>
                 	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
                 	<!-- include custom JavaScript -->
-                  <t t-call-assets="web.assets_common" t-css="false"/>
+                  <!--<t t-call-assets="web.assets_common" t-css="false"/>
                   <script type="text/javascript">
                       odoo.define('web.csrf', function (require) {
                           var token = "<t t-esc="request.csrf_token(None)"/>";
@@ -48,10 +48,7 @@
                       });
                       odoo.db_info = '<t t-raw="db_info"/>';
                   </script>
-                  <t t-call-assets="web.assets_backend" t-css="false"/>
-                  <!--<t t-call-assets="website_horizon_responsive.assets"/>-->
-                  <script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
-            			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"/>
+                  <t t-call-assets="web.assets_backend" t-css="false"/>-->
                 </head>
                 <t t-raw="0"/>
             </html>
@@ -562,8 +559,8 @@
     	
     	<template id="booking_search" name="Horizon Responsive Bookings Search">
     		<t t-call="website_horizon_responsive.layout">
-    			<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
-    			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
+    			
+    			<script type="text/javascript" src="/website_horizon_responsive/static/src/js/booking-search.js" defer=""></script>
     			
     			<div id="content" class="ml-lg-auto">
 					<div class="content-body">
@@ -585,7 +582,6 @@
 									<div class="form-group mr-4 ml-md-auto ml-lg-0">
 										<input id="query" type="text" data-length="30" class="form-control no-appearance time-select input-lg input-font-lg"/>
 									</div>
-									<script type="text/javascript" src="/website_horizon_responsive/static/src/js/booking-search.js"></script>
 								</div>
 							</div>
 							<div class="form-group pt-3">
@@ -602,13 +598,12 @@
     	
     	<template id="booking_new" name="Horizon Responsive Bookings">
     		<t t-call="website_horizon_responsive.layout">
-    			<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css" />
-    			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"></script>
     			
     			<script type="text/javascript">
     				var date_today = moment('<t t-esc="today"/>');
     				var date_tomorrow = moment('<t t-esc="tomorrow"/>');
     			</script>
+    			<script type="text/javascript" src="/website_horizon_responsive/static/src/js/booking-new.js" defer=""></script>
     			
     			<div id="content" class="ml-lg-auto">
 					<div class="content-body">
