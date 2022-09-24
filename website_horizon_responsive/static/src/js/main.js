@@ -1,4 +1,5 @@
-import { App } from "./App.js";
+/** @odoo-module **/
+import { App } from "./App";
 
 const { utils } = owl;
 

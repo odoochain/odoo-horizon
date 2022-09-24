@@ -1,5 +1,4 @@
 /** @odoo-module **/
-
 const { Component, tags, hooks } = owl;
 
 import {
