@@ -135,6 +135,8 @@ $(document).ready(function(){
                 jsonrpc: "2.0",
                 method: "call",
                 params: {
+                    model: "calendar.event",
+                    method: "create",
                     args: [{
                         name: description,
                         start: start.toISOString().replace('T',' ').replace('.000Z',''),
