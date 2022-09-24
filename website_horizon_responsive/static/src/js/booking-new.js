@@ -113,7 +113,8 @@ $(document).ready(function(){
         updateSendButton();
     });
     
-    $('#request-booking').on('click',function() {
+    $('#request-booking').on('click',function(event) {
+        event.preventDefault();
         var fromTime = $('#from_hour').timepicker('getTime');
         var toTime = $('#to_hour').timepicker('getTime');
         var start = date_today.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
