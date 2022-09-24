@@ -36,9 +36,9 @@
                 	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/bootstrap.css"/>
                 	<link rel="stylesheet" href="/web/static/lib/fontawesome/css/font-awesome.css"/>
                 	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+                	<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css"/>
                 	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
                 	<!-- include custom JavaScript -->
-                	<script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
                   <t t-call-assets="web.assets_common" t-css="false"/>
                   <script type="text/javascript">
                       odoo.define('web.csrf', function (require) {
@@ -48,9 +48,10 @@
                       });
                       odoo.db_info = '<t t-raw="db_info"/>';
                   </script>
-                  <!--<t t-call-assets="web.assets_backend" t-css="false"/>
-                  <t t-call-assets="website_horizon_responsive.assets"/>-->
-            			<script type="module" src="/website_horizon_responsive/static/src/js/main.js"></script>
+                  <t t-call-assets="web.assets_backend" t-css="false"/>
+                  <!--<t t-call-assets="website_horizon_responsive.assets"/>-->
+                  <script src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
+            			<script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"/>
                 </head>
                 <t t-raw="0"/>
             </html>
