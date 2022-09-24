@@ -34,7 +34,7 @@ var CalendarWidget = Widget.extend({
             slotMinTime: "08:00:00",
     		slotMaxTime: "22:00:00",
     		titleFormat: { // will produce something like "Tuesday, September 18, 2018"
-                month: 'numeric',
+                month: 'long',
                 day: 'numeric',
                 weekday: 'long'
             },
