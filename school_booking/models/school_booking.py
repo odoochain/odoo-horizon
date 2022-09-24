@@ -96,11 +96,11 @@ class Event(models.Model):
         
                 # Prevent concurrent bookings
     
-                #domain = [('room_id','=',rec.room_id.id), ('start', '<', rec.stop), ('stop', '>', rec.start)]
-                #conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
-                #if conflicts_count > 1:
-                #    data = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain)
-                #    raise ValidationError(_("Concurrent event detected - %s events - %s in %s") % (data, rec.start, rec.room_id.name))
+                domain = [('room_id','=',rec.room_id.id), ('start', '<', rec.stop), ('stop', '>', rec.start)]
+                conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
+                if conflicts_count > 1:
+                    data = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain)
+                    raise ValidationError(_("Concurrent event detected - %s events - %s in %s") % (data, rec.start, rec.room_id.name))
         
                 # Constraint not for employees and teatchers
         
