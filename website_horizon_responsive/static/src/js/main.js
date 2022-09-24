@@ -1,5 +1,6 @@
 import { App } from "./app";
-import { utils } from "owl";
+
+const { utils } = owl;
 
 (async () => {
   const app = new App();
