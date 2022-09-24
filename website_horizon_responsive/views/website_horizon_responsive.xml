@@ -27,6 +27,7 @@
             <script type="text/javascript" src="/web/static/lib/jquery.ui/jquery-ui.js"></script>
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.browser.js"></script>
             <script type="text/javascript" src="/web/static/lib/moment/moment.js"></script>
+            <script type="text/javascript" src="/website_horizon_responsive/static/src/js/main.js"></script>
         </template>
         
         <record id="action_website_horizon_responsive" model="ir.actions.act_url">
