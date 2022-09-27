@@ -64,7 +64,7 @@ class ProgramApprouval(models.Model):
     
     individual_bloc_count = fields.Integer(string='Blocs Count', compute="_compute_counts")
     
-    participant_ids = fields.Many2many('res.partner', 'school_deliberation_participants_rel', 'deliberation_id', 'partner_id', string='Particpants')
+    participant_ids = fields.Many2many('res.partner', 'school_approuval_participants_rel', 'approuval_id', 'partner_id', string='Particpants')
     
     @api.onchange('individual_bloc_ids')
     def _on_update_individual_bloc_ids(self):
