@@ -91,7 +91,7 @@ class ProgramApprouval(models.Model):
             'view_mode': 'kanban', #,approuval',
             'search_view_id' : (self.env.ref('school_program_approval.view_approuve_valuations_filter').id,),
             'views': [[self.env.ref('school_program_approval.approuve_valuations_kanban_view').id,'kanban']], #,[self.env.ref('school_program_approval.deliberation_bloc_view').id,'deliberation']],
-            'context': {'approuval_id':self.id, 'session':self.session},
+            'context': {'approuval_id':self.id},
         }
         
     # def action_open_deliberation_bloc(self):
