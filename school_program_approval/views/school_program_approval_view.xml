@@ -81,8 +81,8 @@
             <button name="to_draft" type="object" states="active,archived" string="Set to Draft" />
             <button name="activate" type="object" states="draft" string="Activate Approuval" class="oe_highlight" />
             <button name="archive" type="object" states="draft,active" string="Archive Approuval" />
-            <!--<button name="action_open_program_approuval_bloc" type="object" states="active" string="Deliberate Blocs" />
-            <button name="action_open_program_approuval_program" type="object" states="active" string="Deliberate Programs" />-->
+            <!--<button name="action_open_program_approuval_bloc" type="object" states="active" string="Deliberate Blocs" />-->
+            <button name="action_open_approuve_valuations" type="object" states="active" string="Approuve Valuations" />
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
           <sheet>
