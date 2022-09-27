@@ -55,7 +55,7 @@ class ProgramApprouval(models.Model):
     
     valuation_followup_count = fields.Integer(string='Valuations Count', compute="_compute_counts")
     
-    individual_bloc_ids = fields.Many2many('school.individual_bloc', 'school_approuval_bloc_rel', 'approuval_id', 'bloc_id', string='Blocs')
+    individual_bloc_ids = fields.Many2many('school.individual_bloc', 'school_approuval_bloc_rel', 'approuval_id', 'bloc_id', string='Blocs', domain="[('year_id', '=?', year_id)]")
     
     individual_bloc_count = fields.Integer(string='Blocs Count', compute="_compute_counts")
     
