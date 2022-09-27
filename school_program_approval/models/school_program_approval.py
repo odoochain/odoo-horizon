@@ -81,6 +81,19 @@ class ProgramApprouval(models.Model):
     def archive(self):
         return self.write({'state': 'archived'})
         
+    def action_open_approuve_valuations(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Approuve Valuations',
+            'res_model': 'school.valuation_followup',
+            'domain': [('deliberation_ids', 'in', self.id )],
+            'view_mode': 'kanban', #,approuval',
+            'search_view_id' : (self.env.ref('school_program_approval.view_approuve_valuations_filter').id,),
+            'views': [[self.env.ref('school_program_approval.approuve_valuations_kanban_view').id,'kanban']], #,[self.env.ref('school_program_approval.deliberation_bloc_view').id,'deliberation']],
+            'context': {'approuval_id':self.id, 'session':self.session},
+        }
+        
     # def action_open_deliberation_bloc(self):
     #     self.ensure_one()
     #     return {
@@ -94,11 +107,11 @@ class ProgramApprouval(models.Model):
     #         'context': {'deliberation_id':self.id, 'session':self.session},
     #     }
         
-# class IndividualProgram(models.Model):
-#     '''Individual Program'''
-#     _inherit = 'school.individual_program'
+class ValuationFollwup(models.Model):
+    '''Valuation Follwup'''
+    _inherit = 'school.valuation_followup'
     
-#     deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_program_rel', 'program_id', 'deliberation_id', string='Deliberations', readonly=True)
+    approuval_ids = fields.Many2many('school.program_approuval', 'school_valuation_approuval_rel', 'valuation_id', 'approuval_id', string='Approuvals', readonly=True)
     
 #     all_responsible_ids = fields.Many2many('res.partner', compute='_compute_all_responsibles')
     
