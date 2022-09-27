@@ -45,11 +45,6 @@ class ProgramApprouval(models.Model):
         
     year_id = fields.Many2one('school.year', required=True, string="Year")
     
-    session = fields.Selection(
-        ([('first','First'),('sec','Second'),('third','Third')]),
-        string='Session',
-        required=True)
-    
     date = fields.Date(required=True, string="Date")
     
     name = fields.Char(required=True, string="Title")
