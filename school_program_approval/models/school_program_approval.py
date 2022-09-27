@@ -65,7 +65,7 @@ class ProgramApprouval(models.Model):
     def _on_update_individual_bloc_ids(self):
         for rec in self:
             all_program_ids = rec.individual_bloc_ids.mapped('program_id');
-            rec.valuation_followup_ids = self.env['school.valuation_followup'].search([['program_id','in',all_program_ids.ids]])
+            rec.valuation_followup_ids = self.env['school.valuation_followup'].search([['individual_program_id','in',all_program_ids.ids]])
     
     def _compute_counts(self):
         for rec in self:
