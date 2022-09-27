@@ -87,7 +87,7 @@ class ProgramApprouval(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Approuve Valuations',
             'res_model': 'school.valuation_followup',
-            'domain': [('deliberation_ids', 'in', self.id )],
+            'domain': [('approuval_ids', 'in', self.id )],
             'view_mode': 'kanban', #,approuval',
             'search_view_id' : (self.env.ref('school_program_approval.view_approuve_valuations_filter').id,),
             'views': [[self.env.ref('school_program_approval.approuve_valuations_kanban_view').id,'kanban']], #,[self.env.ref('school_program_approval.deliberation_bloc_view').id,'deliberation']],
