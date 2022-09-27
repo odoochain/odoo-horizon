@@ -121,7 +121,7 @@ class ValuationFollwup(models.Model):
             ('2_candidate','Candidate'),
             ('1_confirmed','Candidate'),
             ('0_valuated', 'Valuated'),
-        ], string='Status', related="individual_course_group_id.state", tracking=True)
+        ], string='Status', related="individual_course_group_id.state", tracking=True, store=True)
     
     administration_comments = fields.Text(string="Administration Comments", tracking=True)
     
