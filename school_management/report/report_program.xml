@@ -21,17 +21,10 @@
 ##############################################################################
 -->
 <odoo>
-    
+
     <!-- report -->
-    <report 
-        id="report_program"
-        model="school.program"
-        string="Program"
-        report_type="qweb-pdf"
-        name="school_management.report_program_details_content"
-        file="school_management.report_program_details_content"
-        />
-        
+    <report id="report_program" model="school.program" string="Program" report_type="qweb-pdf" name="school_management.report_program_details_content" file="school_management.report_program_details_content" />
+
     <template id="website_program_details_content" name="Program Details Content">
         
         <section class="row">
@@ -92,7 +85,7 @@
         </section>
         <hr/>
     </template>
-    
+
     <template id="website_school_bloc" name="Bloc">
         <div class="col-md-12">
             <table class="table table-condensed oe_school_program_table">
@@ -174,27 +167,21 @@
         </t>
     </template>
 
-    <report 
-        id="report_individual_bloc"
-        model="school.individual_bloc"
-        string="Individual Bloc Description"
-        report_type="qweb-pdf"
-        name="school_management.report_individual_bloc_content"
-        file="school_management.report_individual_bloc_content"
-        />
+    <report id="report_individual_bloc" model="school.individual_bloc" string="Individual Bloc Description" report_type="qweb-pdf" name="school_management.report_individual_bloc_content" file="school_management.report_individual_bloc_content" />
 
     <!--Email template -->
     <record id="email_template_report_individual_bloc" model="mail.template">
-            <field name="name">Individual Bloc - Send by Email</field>
-            <field name="email_to">${(object.student_id.email and '%s &lt;%s&gt;' % (object.student_id.name, object.student_id.email) or '')|safe}</field>
-            <field name="subject">Individual Bloc</field>
-            <field name="partner_to">${object.student_id.id}</field>
-            <field name="model_id" ref="model_school_individual_bloc"/>
-            <field name="auto_delete" eval="True"/>
-            <field name="report_template" ref="report_individual_bloc"/>
-            <field name="report_name">Individual Bloc Details</field>
-            <field name="lang">${object.student_id.lang}</field>
-            <field name="body_html"><![CDATA[
+        <field name="name">Individual Bloc - Send by Email</field>
+        <field name="email_to">${(object.student_id.email and '%s &lt;%s&gt;' % (object.student_id.name, object.student_id.email) or '')|safe}</field>
+        <field name="subject">Individual Bloc</field>
+        <field name="partner_to">${object.student_id.id}</field>
+        <field name="model_id" ref="model_school_individual_bloc" />
+        <field name="auto_delete" eval="True" />
+        <field name="report_template" ref="report_individual_bloc" />
+        <field name="report_name">Individual Bloc Details</field>
+        <field name="lang">${object.student_id.lang}</field>
+        <field name="body_html">
+            <![CDATA[
                 <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
                     <p>Hello ${object.student_id.name},</p>
                     <br/>
@@ -203,7 +190,8 @@
                     <p>If you have any question, do not hesitate to contact us.</p>
                     <br/>
                 </div>
-            ]]></field>
+            ]]>
+        </field>
     </record>
 
     <template id="school_bloc" name="Bloc">
@@ -308,16 +296,9 @@
             </t>
         </t>
     </template>
-    
-    <report id="report_attendance_for_student" 
-            model="school.individual_bloc" 
-            string="Attendance Report for Student" 
-            report_type="qweb-pdf" 
-            name="school_management.report_attendance_for_student_content" 
-            file="school_management.report_attendance_for_student_content"
-            attachment_use="True"
-            attachment="object.name+'-ATT-'+time.strftime('%d-%m-%Y')+'.pdf'"
-    />
+
+    <report id="report_attendance_for_student" model="school.individual_bloc" string="Attendance Report for Student" report_type="qweb-pdf" name="school_management.report_attendance_for_student_content" file="school_management.report_attendance_for_student_content"
+        attachment_use="True" attachment="object.name+'-ATT-'+time.strftime('%d-%m-%Y')+'.pdf'" />
 
 
     <template id="report_attendance_for_student_content">
@@ -325,57 +306,57 @@
             <t t-set="data_report_margin_top" t-value="45" />
             <t t-set="data_report_header_spacing" t-value="40" />
             <t t-foreach="docs" t-as="o">
-            <t t-call="web.external_layout">
-                <div class="page" style="padding: 120px;">
-                    <section class="text-center">
-                        <h2>ATTENDANCE REPORT</h2><
-                        <h2>ACADEMIC YEAR <span t-field="o.year_id"/></h2>
-                    </section>
-                    <hr/>
-                    <section class="col-10 col-offset-1" style="margin-top:150px;">
-                            Je soussigné, Nathanaël HARCQ, Directeur du CONSERVATOIRE ROYAL DE LIEGE certifie par la présente que
-                    </section>
-                    <section style="margin-top:40px;">
-                        <div class="col-9 col-offset-2">
-                            <b><span t-field="o.student_id.name"/>, né<t t-if="o.student_id.gender == 'female'">e</t> le <span t-field="o.student_id.birthdate_date"/> à <span t-field="o.student_id.birthplace"/></b>
-                        </div>
-                    </section>
-                    <section style="margin-top:40px;">
-                        <div class="col-10 col-offset-1">
-                            est régulièrement inscrit<t t-if="o.student_id.gender == 'female'">e</t> aux cours du jour de l'Enseignement Supérieur Artistique de type
-                            <span t-field="o.source_bloc_cycle_id.type"/> pour l'année <span t-field="o.year_id"/>.
-                            <p  style="margin-top:10px;">
-                                Les cours sont donnés du 15 septembre au 30 juin.
-                            </p>
-                        </div>
-                    </section>
-                    <section style="margin-top:20px;">
-                        <div class="col-10 col-offset-1">
-                            <u>Cours suivis dans la nouvelle structure:</u>
-                        </div>
-                    </section>
-                    <section style="margin-top:20px;">
-                        <div class="col-8 col-offset-2">
-                            <b><span t-field="o.source_bloc_cycle_id"/> - <span t-field="o.source_bloc_id.level"/> du domaine <span t-field="o.source_bloc_domain_id"/>, section <span t-field="o.source_bloc_section_id"/>, option <span t-field="o.source_bloc_track_id"/>, spécialité <span t-field="o.source_bloc_speciality_id"/>.</b>
-                        </div>
-                    </section>
-                    <section style="margin-top:50px;">
-                        <div class="col-10 col-offset-1">
-                            La présente attestation est délivrée pour renseignements administratifs.
-                        </div>
-                    </section>
-                    <section style="margin-top:120px;">
-                        <div class="col-4 col-offset-7">
-                            LIEGE, le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y')"/>
-                        </div>
-                    </section>
-                    <section style="margin-top:120px;">
-                        <div class="col-4 col-offset-7">
-                            Le Directeur,<br/>
-                            Nathanaël HARCQ
-                        </div>
-                    </section>
-                </div>
+                <t t-call="web.external_layout">
+                    <div class="page" style="padding: 120px;">
+                        <section class="text-center">
+                            <h2>ATTENDANCE REPORT</h2><
+                            <h2>ACADEMIC YEAR <span t-field="o.year_id"/></h2>
+                        </section>
+                        <hr/>
+                        <section class="col-10 col-offset-1" style="margin-top:150px;">
+                                Je soussigné, Nathanaël HARCQ, Directeur du CONSERVATOIRE ROYAL DE LIEGE certifie par la présente que
+                        </section>
+                        <section style="margin-top:40px;">
+                            <div class="col-9 col-offset-2">
+                                <b><span t-field="o.student_id.name"/>, né<t t-if="o.student_id.gender == 'female'">e</t> le <span t-field="o.student_id.birthdate_date"/> à <span t-field="o.student_id.birthplace"/></b>
+                            </div>
+                        </section>
+                        <section style="margin-top:40px;">
+                            <div class="col-10 col-offset-1">
+                                est régulièrement inscrit<t t-if="o.student_id.gender == 'female'">e</t> aux cours du jour de l'Enseignement Supérieur Artistique de type
+                                <span t-field="o.source_bloc_cycle_id.type"/> pour l'année <span t-field="o.year_id"/>.
+                                <p  style="margin-top:10px;">
+                                    Les cours sont donnés du 15 septembre au 30 juin.
+                                </p>
+                            </div>
+                        </section>
+                        <section style="margin-top:20px;">
+                            <div class="col-10 col-offset-1">
+                                <u>Cours suivis dans la nouvelle structure:</u>
+                            </div>
+                        </section>
+                        <section style="margin-top:20px;">
+                            <div class="col-8 col-offset-2">
+                                <b><span t-field="o.source_bloc_cycle_id"/> - <span t-field="o.source_bloc_id.level"/> du domaine <span t-field="o.source_bloc_domain_id"/>, section <span t-field="o.source_bloc_section_id"/>, option <span t-field="o.source_bloc_track_id"/>, spécialité <span t-field="o.source_bloc_speciality_id"/>.</b>
+                            </div>
+                        </section>
+                        <section style="margin-top:50px;">
+                            <div class="col-10 col-offset-1">
+                                La présente attestation est délivrée pour renseignements administratifs.
+                            </div>
+                        </section>
+                        <section style="margin-top:120px;">
+                            <div class="col-4 col-offset-7">
+                                LIEGE, le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y')"/>
+                            </div>
+                        </section>
+                        <section style="margin-top:120px;">
+                            <div class="col-4 col-offset-7">
+                                Le Directeur,<br/>
+                                Nathanaël HARCQ
+                            </div>
+                        </section>
+                    </div>
                 </t>
             </t>
         </t>
