@@ -303,17 +303,16 @@
 
     <template id="report_attendance_for_student_content">
         <t t-call="web.html_container">
-            <t t-set="data_report_margin_top" t-value="45" />
-            <t t-set="data_report_header_spacing" t-value="40" />
+            <t t-set="data_report_margin_top" t-value="30" />
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
-                    <div class="page" style="padding: 120px;">
+                    <div class="page" style="padding-left: 50px;padding-right: 50px;">
                         <section class="text-center">
                             <h2>ATTENDANCE REPORT</h2>
-                            <h2>ACADEMIC YEAR <span t-field="o.year_id"/></h2>
+                            <h2>ACADEMIC YEAR <span style="color:#495057;" t-field="o.year_id"/></h2>
                         </section>
                         <hr/>
-                        <section class="col-10 col-offset-1" style="margin-top:150px;">
+                        <section class="col-10 col-offset-1" style="margin-top:80px;">
                                 Je soussigné, Nathanaël HARCQ, Directeur du CONSERVATOIRE ROYAL DE LIEGE certifie par la présente que
                         </section>
                         <section style="margin-top:40px;">
@@ -325,7 +324,7 @@
                             <div class="col-10 col-offset-1">
                                 est régulièrement inscrit<t t-if="o.student_id.gender == 'female'">e</t> aux cours du jour de l'Enseignement Supérieur Artistique de type
                                 <span t-field="o.source_bloc_cycle_id.type"/> pour l'année <span t-field="o.year_id"/>.
-                                <p  style="margin-top:10px;">
+                                <p style="margin-top:10px;">
                                     Les cours sont donnés du 15 septembre au 30 juin.
                                 </p>
                             </div>
@@ -345,12 +344,12 @@
                                 La présente attestation est délivrée pour renseignements administratifs.
                             </div>
                         </section>
-                        <section style="margin-top:120px;">
+                        <section style="margin-top:80px;">
                             <div class="col-4 col-offset-7">
                                 LIEGE, le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y')"/>
                             </div>
                         </section>
-                        <section style="margin-top:120px;">
+                        <section style="margin-top:80px;">
                             <div class="col-4 col-offset-7">
                                 Le Directeur,<br/>
                                 Nathanaël HARCQ
