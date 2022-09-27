@@ -90,7 +90,6 @@ class ProgramApprouval(models.Model):
             'domain': [('approuval_ids', 'in', self.id )],
             'view_mode': 'kanban, form',
             'search_view_id' : (self.env.ref('school_program_approval.view_approuve_valuations_filter').id,),
-            'views': [[self.env.ref('school_program_approval.approuve_valuations_kanban_view').id,'kanban'], [self.env.ref('school_valuations.valuation_form').id,'form']],
             'context': {'approuval_id':self.id},
         }
         

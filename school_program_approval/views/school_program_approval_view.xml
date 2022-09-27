@@ -313,7 +313,7 @@
                                       <strong><span t-esc="record.name.value"/></strong>
                                   </div>
                               </strong>
-                              <span class="text-muted" t-esc="record.responsible_id.value"/>
+                              <span t-esc="record.student_id.value"/> - <span t-esc="record.responsible_id.value"/>
                               <span class="o_kanban_record_subtitle"><span t-esc="record.state.value"/></span>
                           </div>
                       </div>
