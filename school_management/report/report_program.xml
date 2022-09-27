@@ -326,10 +326,10 @@
             <t t-set="data_report_header_spacing" t-value="40" />
             <t t-foreach="docs" t-as="o">
             <t t-call="web.external_layout">
-                <div class="page">
-                    <section class="row">
-                        <div class="col-md-4"><h2>ATTENDANCE REPORT</h2></div>
-                        <div class="col-md-6"><h2>ACADEMIC YEAR <span t-field="o.year_id"/></h2></div>
+                <div class="page" style="padding: 120px;">
+                    <section class="text-center">
+                        <h2>ATTENDANCE REPORT</h2><
+                        <h2>ACADEMIC YEAR <span t-field="o.year_id"/></h2>
                     </section>
                     <hr/>
                     <section class="col-10 col-offset-1" style="margin-top:150px;">
