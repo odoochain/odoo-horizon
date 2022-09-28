@@ -150,7 +150,12 @@ $(document).ready(function(){
                 id: Math.floor(Math.random()*100000000),
             }),
             success: function( result ) {
-                window.location.href = "/responsive/bookings";
+                if(result.error) {
+                    $('#horizon-error').empty().html(result.error.data.message);
+                    $('#horizon-error').toggle();
+                } else {
+                    window.location.href = "/responsive/bookings";
+                }
             },    
         });
     });
