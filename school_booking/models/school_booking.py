@@ -98,7 +98,7 @@ class Event(models.Model):
                 if dt < (datetime.now() + timedelta(minutes=-30)):
                     raise ValidationError(_("You cannot book in the past."))
         
-                event_day = fields.Datetime.from_string(self.start_datetime).date()
+                event_day = fields.Datetime.from_string(rec.start).date()
         
                 # Prevent concurrent bookings
     
@@ -106,20 +106,6 @@ class Event(models.Model):
                 conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
                 if conflicts_count > 1:
                     raise ValidationError(_("Concurrent event detected - %s in %s") % (rec.start, rec.room_id.name))
-        
-                # Constraint not for employees and teatchers
-        
-                if self.env.user.has_group('school_management.group_employee'):
-                    return
-        
-                if self.env.user.has_group('school_management.group_teacher'):
-                    return
-        
-                if now.hour >= 19 and fields.Datetime.from_string(self.start_datetime).date() != now.date() and fields.Datetime.from_string(self.start_datetime).date() != (now + timedelta(days=1)).date() :
-                    raise ValidationError(_("You can book only the next day (after 19h00)."))
-                
-                if dt.hour > 19 and dt.weekday() > 0 :
-                    raise ValidationError(_("You cannot book after 20:00 during the WE."))
                 
                 # Prevent concurrent bookings
     
