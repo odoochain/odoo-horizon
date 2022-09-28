@@ -199,13 +199,13 @@
             <table class="table table-sm oe_school_program_table">
                 <colgroup>
                     <col style="width:150px"/>
-                    <col style="width:65%"/>
+                    <col style="width:55%"/>
                     <col style="width:60px"/>
                     <col style="width:60px"/>
                     <col style="width:60px"/>
                     <col style="width:100px"/>
                 </colgroup>
-                <thead>
+                <thead style="display: table-row-group;">
                     <tr>
                         <th>Code UE</th> 
                         <th>Unités d’enseignement</th> 
@@ -230,7 +230,7 @@
                             <t t-if="course_group.acquiered == 'A'">Valid.</t>
                         </td>
                     </tr>
-                    <tr t-foreach="course_group.course_ids" t-as="course" >
+                    <tr t-foreach="course_group.course_ids" t-as="course" class="font-italic">
                         <td></td>
                         <td t-if="course.url_ref"><a t-esc="course.title" t-att-href="course.url_ref" target="new"/></td>
                         <td t-if="not course.url_ref"><t t-esc="course.title"/></td>
