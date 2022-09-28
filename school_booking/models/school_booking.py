@@ -87,16 +87,16 @@ class Event(models.Model):
                 if self.env.uid == 1 :
                     return
                 
-                dt = to_tz(fields.Datetime.from_string(rec.start),utc_tz)
-                
-                if dt < (datetime.now() + timedelta(minutes=-30)):
-                    raise ValidationError(_("You cannot book in the past."))
-                    
                 # Get user timezone
                 
                 utc_tz = pytz.UTC
                 #user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
                 user_tz = pytz.timezone('Europe/Brussels')
+        
+                dt = to_tz(fields.Datetime.from_string(rec.start),utc_tz)
+                
+                if dt < (datetime.now() + timedelta(minutes=-30)):
+                    raise ValidationError(_("You cannot book in the past."))
         
                 event_day = fields.Datetime.from_string(self.start_datetime).date()
         
