@@ -82,21 +82,21 @@ class ValuationFollwup(models.Model):
     _description='Valuation Followup'
     _inherit = ['mail.thread','school.uid.mixin']
     
-    individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group', required=True)
+    individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group', required=True, store=True)
     
-    individual_program_id = fields.Many2one('school.individual_program', string='Individual Program', related="individual_course_group_id.valuated_program_id")
+    individual_program_id = fields.Many2one('school.individual_program', string='Individual Program', related="individual_course_group_id.valuated_program_id", store=True)
     
-    name = fields.Char(related="individual_course_group_id.name", string="Name")
+    name = fields.Char(related="individual_course_group_id.name", string="Name", store=True)
     
-    title = fields.Char(related="individual_course_group_id.title", string="Title")
+    title = fields.Char(related="individual_course_group_id.title", string="Title", store=True)
     
-    student_id = fields.Many2one('res.partner', related='individual_course_group_id.valuated_program_id.student_id', string="Student")
+    student_id = fields.Many2one('res.partner', related='individual_course_group_id.valuated_program_id.student_id', string="Student", store=True)
     
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_512= fields.Binary('Image', attachment=True, related='student_id.image_512')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
-    responsible_id = fields.Many2one('res.partner', related='individual_course_group_id.responsible_id', string="Responsible")
+    responsible_id = fields.Many2one('res.partner', related='individual_course_group_id.responsible_id', string="Responsible", store=True)
     
     responsible_uid = fields.Many2one('res.users', compute='_compute_responsible_uid', store=True)
     
