@@ -18,7 +18,26 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-from . import school_program_approval
-from . import ir_action
-from . import ir_ui_view
+{
+    'name': 'School program approuval',
+    'version': '14.0.0.0.1',
+    'license': 'AGPL-3',
+    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'website': '',
+    'category': 'School Management',
+    'depends': ['school_valuations'],
+    'init_xml': [],
+    'data': [
+        'views/assets.xml',
+        'views/school_program_approuval_view.xml',
+        'security/ir.model.access.csv',
+    ],
+    'demo_xml': [],
+    'description': '''
+        This modules add deliberation management for a school.
+    ''',
+    'qweb': ['static/src/xml/*.xml'],
+    'active': False,
+    'installable': True,
+    'application': True,
+}
