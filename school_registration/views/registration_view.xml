@@ -29,7 +29,7 @@
         <field name="inherit_id" ref="school_management.individual_bloc_form" />
         <field eval="30" name="priority" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='course_group_ids']" position="before">
+            <xpath expr="//field[@name='course_group_ids']" position="after">
                 <group>
                     <field name="student_signature" widget="signature" />
                 </group>
@@ -48,7 +48,7 @@
                     <button string="Register PAE" type="object" name="register_pae" class="oe_highlight" context="{'default_program_id': active_id, 'default_student_id': student_id}" 
                                 groups="school_management.group_employee" attrs="{'invisible': [('state','!=','progress')]}"/>
             </xpath>
-            <xpath expr="//div[@id='paes']" position="before">
+            <xpath expr="//div[@id='paes']" position="after">
                 <group>
                     <field name="student_signature" widget="signature" />
                 </group>
