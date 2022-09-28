@@ -285,7 +285,8 @@
         <search string="Search Programs">
           <field name="name" filter_domain="[('name', 'ilike',self)]" />
           <searchpanel>
-            <field name="state" icon="fa-users" enable_counters="1" />
+            <field name="state" icon="fa-bars" enable_counters="1" />
+            <field name="student_id" icon="fa-users" enable_counters="1" />
           </searchpanel>
         </search>
       </field>
