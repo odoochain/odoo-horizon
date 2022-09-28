@@ -262,10 +262,10 @@
       <field name="act_window_id" ref="action_program_approuval_form" />
     </record>-->
   
-    <!-- Blocs deliberation 
+    <!-- Blocs deliberation -->
     
-    <record id="view_deliberation_bloc_filter" model="ir.ui.view">
-      <field name="name">deliberation.select</field>
+    <record id="view_approuve_blocs_filter" model="ir.ui.view">
+      <field name="name">approuve_blocs.select</field>
       <field name="model">school.individual_bloc</field>
       <field name="arch" type="xml">
         <search string="Search Blocs">
@@ -276,7 +276,7 @@
           </searchpanel>
         </search>
       </field>
-    </record>-->
+    </record>
     
     <record id="view_approuve_valuations_filter" model="ir.ui.view">
       <field name="name">approuve.select.valuations</field>
