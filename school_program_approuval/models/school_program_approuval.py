@@ -94,24 +94,30 @@ class ProgramApprouval(models.Model):
             'context': {'approuval_id':self.id},
         }
         
-    # def action_open_deliberation_bloc(self):
-    #     self.ensure_one()
-    #     return {
-    #         'type': 'ir.actions.act_window',
-    #         'name': 'Deliberate Blocs',
-    #         'res_model': 'school.individual_bloc',
-    #         'domain': [('deliberation_ids', 'in', self.id )],
-    #         'view_mode': 'kanban,deliberation',
-    #         'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,),
-    #         'views': [[self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban'],[self.env.ref('school_deliberation_base.deliberation_bloc_view').id,'deliberation']],
-    #         'context': {'deliberation_id':self.id, 'session':self.session},
-    #     }
+    def action_open_approuve_bloc(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Approuve Blocs',
+            'res_model': 'school.individual_bloc',
+            'domain': [('approuval_ids', 'in', self.id )],
+            'view_mode': 'kanban,form',
+            'search_view_id' : (self.env.ref('school_program_approuval.view_approuve_blocs_filter').id,),
+            'views': [[self.env.ref('school_program_approuval.approuve_blocs_kanban_view').id,'kanban'], [self.env.ref('school_management.individual_bloc_form').id,'form']],
+            'context': {'approuval_id':self.id},
+        }
         
 class ValuationFollwup(models.Model):
     '''Valuation Follwup'''
     _inherit = 'school.valuation_followup'
     
     approuval_ids = fields.Many2many('school.program_approuval', 'school_valuation_approuval_rel', 'valuation_id', 'approuval_id', string='Approuvals', readonly=True)
+    
+class IndividualBloc(models.Model):
+    '''Individual Bloc'''
+    _inherit = 'school.individual_bloc'
+    
+    approuval_ids = fields.Many2many('school.program_approuval', 'school_approuval_bloc_rel', 'bloc_id', 'approuval_id', string='Approuvals', readonly=True)
     
 #     all_responsible_ids = fields.Many2many('res.partner', compute='_compute_all_responsibles')
     
