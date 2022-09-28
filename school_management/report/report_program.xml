@@ -195,8 +195,7 @@
     </record>
 
     <template id="school_bloc" name="Bloc">
-        <div class="col-12" data-oe-model="school_bloc" t-att-data-oe-id="bloc.id">
-            <h2>Programme annuel de l'étudiant</h2>
+        <div class="table-responsive" data-oe-model="school_bloc" t-att-data-oe-id="bloc.id">
             <table class="table table-sm oe_school_program_table">
                 <colgroup>
                     <col style="width:150px"/>
@@ -263,7 +262,7 @@
             <t t-foreach="docs" t-as="bloc">
             <t t-set="o" t-value="bloc"/> 
             <t t-call="web.external_layout">
-                <div class="page" t-att-data-oe-model="bloc._name" t-att-data-oe-id="bloc.id" style="margin: 1cm 2cm;">
+                <div class="page" t-att-data-oe-model="bloc._name" t-att-data-oe-id="bloc.id" style="margin: 1cm 0cm;">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title"><t t-esc="bloc.name"/></h4>
