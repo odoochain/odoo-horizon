@@ -650,7 +650,7 @@
 								<button type="button" id="request-booking" class="btn btn-danger" disabled="">Envoyer ma demande</button>
 							</div>
 						</form>
-          	<div id="horizon-error" class="btn btn-warning btn-block p-2 font-weight-bold" hidden="1"/>
+          	<div id="horizon-error" class="btn btn-warning btn-block p-2 font-weight-bold" style="display: none;"/>
 					</div>
 				</div>
     		</t>
