@@ -119,7 +119,7 @@ class ValuationFollwup(models.Model):
             ('5_progress','In Progress'),
             ('3_rejected','Rejected'),
             ('2_candidate','Candidate'),
-            ('1_confirmed','Candidate'),
+            ('1_confirmed','Confirmed'),
             ('0_valuated', 'Valuated'),
         ], string='Status', related="individual_course_group_id.state", tracking=True, store=True)
     
