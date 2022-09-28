@@ -86,7 +86,9 @@ class Event(models.Model):
                 # Admin is king
                 if self.env.uid == 1 :
                     return
-
+                
+                dt = to_tz(fields.Datetime.from_string(rec.start),utc_tz)
+                
                 if dt < (datetime.now() + timedelta(minutes=-30)):
                     raise ValidationError(_("You cannot book in the past."))
                     
@@ -140,8 +142,6 @@ class Event(models.Model):
                 student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_student_event_type')
                 
                 if student_event in rec.categ_ids:
-                    
-                    dt = to_tz(fields.Datetime.from_string(rec.start),utc_tz)
                     
                     if dt.minute != 0 and dt.minute != 30 :
                         raise ValidationError(_("Invalid booking, please use standard booking."))
