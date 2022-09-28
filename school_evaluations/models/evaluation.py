@@ -409,7 +409,7 @@ class IndividualCourseGroup(models.Model):
             ('5_progress','In Progress'),
             ('3_rejected','Rejected'),
             ('2_candidate','Candidate'),
-            ('1_confirmed','Candidate'),
+            ('1_confirmed','Confirmed'),
             ('0_valuated', 'Valuated'),
         ], string='Status', index=True, default='9_draft',
         tracking=True,
@@ -422,6 +422,7 @@ class IndividualCourseGroup(models.Model):
              " * The 'Failed' status is when delibration has confirmed failure.\n"
              " * The 'Rejected' status is used when the course group is rejected for valuation.\n"
              " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
+             " * The 'Confirmed' status is used when the course group is confirmed for valuation.\n"
              " * The 'Valuated' status is used when the course group is confirmed for valuation.")
      
     def set_to_draft(self, context=None):
