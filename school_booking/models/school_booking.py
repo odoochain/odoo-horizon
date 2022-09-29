@@ -63,7 +63,7 @@ class Event(models.Model):
     """ Model for School Event """
     _inherit = 'calendar.event'
 
-    room_id = fields.Many2one('school.asset', string='Room', copy=False)
+    room_id = fields.Many2one('school.asset', string='Room', copy=True)
     asset_ids = fields.Many2many('school.asset', 'event_assets_ref','event_id','asset_id', string='Assets')
     
     main_categ_id = fields.Many2one('calendar.event.type', compute='_get_main_categ_id')
