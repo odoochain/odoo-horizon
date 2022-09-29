@@ -38,7 +38,6 @@ $(document).ready(function(){
                 id: Math.floor(Math.random()*100000000),
               }),
               success: function( result ) {
-                console.log(result);
                 $('#room').empty().html(' ');
                 $('#room').append(
                   $("<option></option>")

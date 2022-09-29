@@ -173,7 +173,7 @@ class BookingController(http.Controller):
                 ('id', '!=', self_id),
             ]
         _logger.info('Get all rooms')
-        all_rooms_ids = request.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
+        all_rooms_ids = request.env['school.asset'].search( [['asset_type_id.is_room','=',True],['booking_policy','=','available']] )
         _logger.info('Get all events')
         busy_rooms_ids = request.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain)
         _logger.info('Filter events - results %s' % busy_rooms_ids)
