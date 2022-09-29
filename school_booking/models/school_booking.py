@@ -62,14 +62,15 @@ class SchoolLeave(models.Model):
 class Event(models.Model):
     """ Model for School Event """
     _inherit = 'calendar.event'
-    
-    group_id = fields.Many2one('school.student_group', string='Group', ondelete='restrict')
-    yearly_booking_id = fields.Many2one('school.yearly_booking', string='Group', ondelete='restrict')
-    
+
     room_id = fields.Many2one('school.asset', string='Room', copy=False)
     asset_ids = fields.Many2many('school.asset', 'event_assets_ref','event_id','asset_id', string='Assets')
     
     main_categ_id = fields.Many2one('calendar.event.type', compute='_get_main_categ_id')
+    
+    @api.model
+    def _get_public_fields(self):
+        return super(Event, self)._get_public_fields() | {'room_id', 'asset_ids'}
     
     def _get_main_categ_id(self):
         for rec in self:
