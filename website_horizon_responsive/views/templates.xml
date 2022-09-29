@@ -12,7 +12,6 @@
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
@@ -452,7 +451,7 @@
 								<li class="d-none d-md-block">
 									<span class="d-block">pondération</span>
 								</li>
-                                <li class="" t-if="display_results">
+                                <li class="" t-if="display_results == 'True'">
                                     <span class="d-block">évaluation</span>
                                 </li>
 							</ul>
@@ -480,8 +479,8 @@
 										<li class="d-none d-md-block">
 											<span class="d-block"><!--<t t-esc="course_group.weight"/>--></span>
 										</li>
-                                        <li t-if="display_results">
-                                            <span class="d-block"><t t-if="display_results" t-esc="course_group.final_result_disp"/></span>
+                                        <li t-if="display_results == 'True'">
+                                            <span class="d-block"><t t-if="display_results == 'True'" t-esc="course_group.final_result_disp"/></span>
                                         </li>
 									</ul>
 									<a class="opener" href="#">
@@ -506,10 +505,10 @@
 											<li class="d-none d-md-block">
 												<span class="d-block"><t t-esc="course.weight"/></span>
 											</li>
-											<li t-if="display_results">
+											<li t-if="display_results == 'True'">
 												<span class="d-block" t-if="not course.first_session_result and not course.second_session_result">-</span>
-												<span class="d-block" t-if="course.first_session_result and not course.second_session_result"><t t-if="display_results" t-esc="course.first_session_result_disp"/></span>
-												<span class="d-block" t-if="course.second_session_result"><t t-if="display_results" t-esc="course.second_session_result_disp"/></span>
+												<span class="d-block" t-if="course.first_session_result and not course.second_session_result"><t t-if="display_results == 'True'" t-esc="course.first_session_result_disp"/></span>
+												<span class="d-block" t-if="course.second_session_result"><t t-if="display_results == 'True'" t-esc="course.second_session_result_disp"/></span>
 											</li>
 										</ul>
 									</div>
@@ -650,7 +649,7 @@
 								<button type="button" id="request-booking" class="btn btn-danger" disabled="">Envoyer ma demande</button>
 							</div>
 						</form>
-          	<div id="horizon-error" class="btn btn-warning btn-block p-2 font-weight-bold" style="display: none;"/>
+          	<div id="horizon-error" class="btn btn-warning btn-block p-2 font-weight-bold" style="display: nonep;"/>
 					</div>
 				</div>
     		</t>
