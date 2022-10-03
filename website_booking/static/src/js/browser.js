@@ -764,9 +764,10 @@ var Calendar = CalendarWidget.extend({
     	    	            if(evt.categ_ids.includes(8)) {
         	    	            color = '#e65100';
         	    	        } else {
-        	    	            if (session.uid == evt.user_id[0]) {
+        	    	            /*if (session.uid == evt.user_id[0]) {
         	    	                color = '#ffc107';
-        	    	            }
+        	    	            }*/
+        	    	            color = '#ffc107';
         	    	        }
     	    	        }
     	    	    } 
