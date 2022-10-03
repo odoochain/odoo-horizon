@@ -735,7 +735,6 @@ var Calendar = CalendarWidget.extend({
         var self = this;
         var start = fetchInfo.start;
         var end = fetchInfo.end;
-		self.events = [];
 		// Ambuigus time moment are confusing for Odoo, needs UTC
         try {
             if(!start.hasTime()) {
@@ -753,6 +752,7 @@ var Calendar = CalendarWidget.extend({
 				'end' : end.toISOString().replace('T',' ').replace('.000Z',''),
 	    	},
         }).then(events => {
+                self.events = [];
 	    	    events.forEach(function(evt) {
                     var color = '#ff4355';
     	    	    if (evt.categ_ids.includes(9)) {
