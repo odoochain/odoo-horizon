@@ -551,7 +551,7 @@
 						<div>
 							<a class="btn btn-danger" href="/responsive/booking_new" style="margin: 10px;">Réserver une salle</a>
 							<a class="btn btn-danger" href="/responsive/booking_search" style="margin: 10px;">Rechercher</a>
-							<a class="btn btn-danger" href="/booking#category_id=16" style="margin: 10px;">Planning des réservations</a>
+							<a class="btn btn-danger" href="/booking#category_id=16" style="margin: 10px;" target="_blank">Planning des réservations</a>
 						</div>
 					</div>
 				</div>
