@@ -85,7 +85,7 @@ class Event(models.Model):
             if rec.room_id :
             
                 # Admin is king
-                if self.env.uid == 1 :
+                if self.env.uid == 1176 :
                     return
                 
                 # Get user timezone
