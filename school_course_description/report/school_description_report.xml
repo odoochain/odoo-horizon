@@ -256,7 +256,7 @@
                                       </tr>
                                       <tr>
                                         <td>Teacher</td>
-                                        <td><span t-field="o.teacher_id"/></td>
+                                        <td><span t-field="o.responsible_id"/></td>
                                       </tr>
                                       <tr>
                                         <td>Period</td>
