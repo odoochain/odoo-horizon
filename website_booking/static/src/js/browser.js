@@ -138,8 +138,8 @@ var Schedule =  CalendarWidget.extend({
                 route: '/booking/events',
                 params: {
     	    		'asset_id':this.asset_id,
-    				'start' : time.datetime_to_str(start),
-    				'end' : time.datetime_to_str(end),
+    				'start' : time.datetime_to_str(start.toDate()),
+    				'end' : time.datetime_to_str(end.toDate()),
     	    	},
             }).then(events => {
                     events.forEach(function(evt) {
@@ -748,8 +748,8 @@ var Calendar = CalendarWidget.extend({
             route: "/booking/events",
             params: {
     		    'category_id':self.category_id,
-				'start' : time.datetime_to_str(start),
-				'end' : time.datetime_to_str(end),
+				'start' : time.datetime_to_str(start.toDate()),
+				'end' : time.datetime_to_str(end.toDate()),
 	    	},
         }).then(events => {
                 self.events = [];

@@ -153,8 +153,8 @@ $(document).ready(function(){
                     method: "create",
                     args: [{
                         name: description,
-                        start: datetime_to_str(start),
-                        stop: datetime_to_str(stop),
+                        start: datetime_to_str(start.toDate()),
+                        stop: datetime_to_str(stop.toDate()),
                         room_id: room,
                         categ_ids: [[4, parseInt(event_type)]],
                     }],
