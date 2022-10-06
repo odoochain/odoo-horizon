@@ -100,13 +100,6 @@ class Event(models.Model):
                     raise ValidationError(_("You cannot book in the past."))
         
                 event_day = fields.Datetime.from_string(rec.start).date()
-        
-                # Prevent concurrent bookings
-    
-                domain = [('room_id','=',rec.room_id.id), ('start', '<', rec.stop), ('stop', '>', rec.start)]
-                conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
-                if conflicts_count > 1:
-                    raise ValidationError(_("Concurrent event detected - %s in %s") % (rec.start, rec.room_id.name))
                 
                 # Prevent concurrent bookings
     
@@ -131,7 +124,7 @@ class Event(models.Model):
                 if student_event in rec.categ_ids:
                     
                     if dt.minute != 0 and dt.minute != 30 :
-                        raise ValidationError(_("Invalid booking, please use standard booking."))
+                        raise ValidationError(_("Invalid booking, please use standard time for booking."))
                     
                     now = to_tz(datetime.now(),user_tz)
                     

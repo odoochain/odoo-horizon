@@ -2,6 +2,20 @@
 
 $(document).ready(function(){
     
+    function lpad(str, size) {
+        str = "" + str;
+        return new Array(size - str.length + 1).join('0') + str;
+    }
+    
+    function datetime_to_str (obj) {
+        if (!obj) {
+            return false;
+        }
+        return lpad(obj.getUTCFullYear(),4) + "-" + lpad(obj.getUTCMonth() + 1,2) + "-"
+             + lpad(obj.getUTCDate(),2) + " " + lpad(obj.getUTCHours(),2) + ":"
+             + lpad(obj.getUTCMinutes(),2) + ":" + lpad(obj.getUTCSeconds(),2);
+    }
+    
     function updateSendButton() {
         if($('#room').val() > 0) {
             $('#request-booking').removeAttr( 'disabled' );
@@ -139,8 +153,8 @@ $(document).ready(function(){
                     method: "create",
                     args: [{
                         name: description,
-                        start: start.toISOString().replace('T',' ').replace('.000Z',''),
-                        stop: stop.toISOString().replace('T',' ').replace('.000Z',''),
+                        start: datetime_to_str(start),
+                        stop: datetime_to_str(stop),
                         room_id: room,
                         categ_ids: [[4, parseInt(event_type)]],
                     }],
