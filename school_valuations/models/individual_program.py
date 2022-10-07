@@ -33,7 +33,7 @@ class IndividualCourseSummary(models.Model):
     def action_open_form(self):
         self.ensure_one()
         for cg in self.ind_course_group_ids :
-            if cg.state in ['2_candidate','1_confirmed','0_valuated']:
+            if cg.state in ['2_candidate','1_1_checked','1_confirmed','0_valuated']:
                 valuation_followup = self.env['school.valuation_followup'].search([('individual_course_group_id','=',cg.id)])
                 if valuation_followup :
                     return {
@@ -54,7 +54,7 @@ class IndividualCourseSummary(models.Model):
     def action_reject_course_group(self):
         for rec in self :
             for cg in rec.individual_course_group.ids :
-                if cg.state in ['2_candidate','1_confirmed']:
+                if cg.state in ['2_candidate','1_confirmed','1_1_checked']:
                     cg.write({'state','3_rejected'})
         return {
             'type': 'ir.actions.act_view_reload',
@@ -119,6 +119,7 @@ class ValuationFollwup(models.Model):
             ('5_progress','In Progress'),
             ('3_rejected','Rejected'),
             ('2_candidate','Candidate'),
+            ('1_1_checked','Checked'),
             ('1_confirmed','Confirmed'),
             ('0_valuated', 'Valuated'),
         ], string='Status', related="individual_course_group_id.state", tracking=True, store=True)
@@ -165,6 +166,12 @@ class ValuationFollwup(models.Model):
         for rec in self :
             rec.individual_course_group_id.write({
                 'state' : '0_valuated'
+            }) 
+    
+    def action_check_course_group(self):
+        for rec in self :
+            rec.individual_course_group_id.write({
+                'state' : '1_1_checked'
             }) 
             
     def action_reject_course_group(self):

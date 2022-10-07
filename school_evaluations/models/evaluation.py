@@ -145,7 +145,8 @@ class IndividualCourseSummary(models.Model):
             ('5_progress','In Progress'),
             ('3_rejected','Rejected'),
             ('2_candidate','Candidate'),
-            ('1_confirmed','Candidate'),
+            ('1_1_checked','Checked'),
+            ('1_confirmed','Confirmed'),
             ('0_valuated', 'Valuated'),
         ], compute="_compute_state")
         
@@ -409,6 +410,7 @@ class IndividualCourseGroup(models.Model):
             ('5_progress','In Progress'),
             ('3_rejected','Rejected'),
             ('2_candidate','Candidate'),
+            ('1_1_checked','Checked'),
             ('1_confirmed','Confirmed'),
             ('0_valuated', 'Valuated'),
         ], string='Status', index=True, default='9_draft',

@@ -14,6 +14,10 @@
     border-left : 10px solid #00BFFF !important;
 }
 
+.horizon_cgs_1_1_checked {
+    border-left : 10px solid #0095FF !important;
+}
+
 .horizon_cgs_0_valuated {
     border-left : 10px solid blue !important;
 }
@@ -68,6 +72,14 @@
 .horizon_btn_eval_1_confirmed {
     color: #ffffff !important;
     background-color: #00BFFF !important;
+    border-color: #00BFFF !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_1_1_checked {
+    color: #ffffff !important;
+    background-color: #0095FF !important;
     border-color: #00BFFF !important;
     padding: 10px !important;
     width: 110px !important;
