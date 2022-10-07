@@ -88,7 +88,7 @@
 	            <button name="action_confirm_valuate_course_group" type="object" states="2_candidate" string="Confirm valuation" class="oe_highlight" />
               <button name="action_check_course_group" type="object" states="1_confirmed" string="Check" class="oe_highlight" />
               <button name="action_valuate_course_group" type="object" states="1_1_checked" string="Valuate" class="oe_highlight" />
-              <field name="state" widget="statusbar" statusbar_visible="2_candidate,1_1_checked,1_confirmed,0_valuated" />
+              <field name="state" widget="statusbar" statusbar_visible="2_candidate,1_confirmed,1_1_checked,0_valuated" />
 	        </header>
           <sheet>
             <field name="image_1920" readonly="1" widget="image" class="oe_left oe_inline" style="max-width:128px;max_height:128px;margin: 15px;" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
