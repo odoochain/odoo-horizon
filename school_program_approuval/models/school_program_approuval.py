@@ -119,303 +119,41 @@ class IndividualBloc(models.Model):
     
     approuval_ids = fields.Many2many('school.program_approuval', 'school_approuval_bloc_rel', 'bloc_id', 'approuval_id', string='Approuvals', readonly=True)
     
-#     all_responsible_ids = fields.Many2many('res.partner', compute='_compute_all_responsibles')
+    def action_add_comment_approuve_bloc(self):
+        self.ensure_one()
+        comments = self.env['school.bloc_approuval'].search([['approuval_id','=',self._context.get('approuval_id')],['bloc_id','=',self.id]])
+        if comments :
+            pass
+        else :
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Approuve Blocs',
+                'res_model': 'school.individual_bloc',
+                'domain': [('approuval_ids', 'in', self.id )],
+                'view_mode': 'form',
+                'search_view_id' : (self.env.ref('school_program_approuval.view_approuve_blocs_filter').id,),
+                'views': [[self.env.ref('school_program_approuval.bloc_approuval_form').id,'form']],
+                'context': {'approuval_id':self.id},
+            }
     
-#     def _compute_all_responsibles(self):
-#         for rec in self:
-#             rec.all_responsible_ids = rec.get_all_responsibles()
+class BlocApprouval(models.Model):
+    '''Program Deliberation'''
+    _name = 'school.bloc_approuval'
+    _description = 'Manage approuval of a bloc'
     
-#     def action_deliberate_program(self):
-#         self.ensure_one()
-#         program_deliberation_ids = self.env['school.program_deliberation'].search([
-#             ['deliberation_id','=',self._context['default_deliberation_id']],
-#             ['program_id','=',self._context['default_program_id']]
-#         ])
-#         if program_deliberation_ids :
-#             return {
-#                 'type': 'ir.actions.act_window',
-#                 'name': 'Deliberate Program',
-#                 'target': 'new',
-#                 'flags': { 'action_buttons': False, 'headless': True },
-#                 'res_model':  'school.program_deliberation',
-#                 'res_id': program_deliberation_ids[0].id,
-#                 'context': self._context,
-#                 'views': [[False, 'form']],
-#             }
-#         else :
-#             return {
-#                 'type': 'ir.actions.act_window',
-#                 'name': 'Deliberate Program',
-#                 'target': 'new',
-#                 'flags': { 'action_buttons': False, 'headless': True },
-#                 'res_model':  'school.program_deliberation',
-#                 'context': self._context,
-#                 'views': [[False, 'form']],
-#             }
- 
-# class IndividualBloc(models.Model):
-#     '''Individual Bloc'''
-#     _inherit = 'school.individual_bloc'
+    approuval_id = fields.Many2one('school.program_approuval', required=True)
     
-#     deliberation_ids = fields.Many2many('school.deliberation', 'school_deliberation_bloc_rel', 'bloc_id', 'deliberation_id', string='Deliberations', readonly=True)
+    bloc_id = fields.Many2one('school.individual_bloc', required=True)
     
-#     all_responsible_ids = fields.Many2many('res.partner', compute='_compute_all_responsibles')
+    image_1920 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_1920')
     
-#     missing_eval_first_count = fields.Integer(string="Has Missing Evaluations", compute="_compute_missing_eval_first_count")
-#     missing_eval_second_count = fields.Integer(string="Has Missing Evaluations", compute="_compute_missing_eval_second_count")
+    image_128 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_128')
     
-#     def _compute_missing_eval_first_count(self):
-#         for rec in self:
-#             count = 0
-#             for cg in rec.course_group_ids.filtered(lambda r: r.state in ['5_progress']) :
-#                 for c in cg.course_ids:
-#                     if c.first_session_result_bool == False:
-#                         count = count + 1
-#             rec.missing_eval_first_count = count
+    name = fields.Char(string='Name', related='bloc_id.name')
     
-#     def _compute_missing_eval_second_count(self):
-#         for rec in self:
-#             count = 0
-#             for cg in rec.course_group_ids.filtered(lambda r: r.state in ['5_progress']) :
-#                 for c in cg.course_ids:
-#                     if c.second_session_result_bool == False:
-#                         count = count + 1
-#             rec.missing_eval_second_count = count
+    student_name = fields.Char(string='Student', related='bloc_id.student_id.name')
     
-#     def _compute_all_responsibles(self):
-#         for rec in self:
-#             rec.all_responsible_ids = rec.get_all_responsibles()
-
-#     def close_deliberate_bloc(self):
-#         return {
-#             'type': 'ir.actions.act_window',
-#             'name': 'Deliberate Blocs',
-#             'res_model': 'school.individual_bloc',
-#             'domain': [('deliberation_ids', 'in', self._context.get('deliberation_id') )],
-#             'view_mode': 'kanban',
-#             'search_view_id' : (self.env.ref('school_deliberation_base.view_deliberation_bloc_filter').id,),
-#             'views': [[self.env.ref('school_deliberation_base.deliberation_bloc_kanban_view').id,'kanban']],
-#         }
-        
-        
-#     def action_deliberate_bloc(self):
-#         self.ensure_one()
-#         bloc_deliberation_ids = self.env['school.bloc_deliberation'].search([
-#             ['deliberation_id','=',self._context['default_deliberation_id']],
-#             ['bloc_id','=',self._context['default_bloc_id']]
-#         ])
-#         if bloc_deliberation_ids :
-#             return {
-#                 'type': 'ir.actions.act_window',
-#                 'name': 'Deliberate Bloc',
-#                 'target': 'new',
-#                 'flags': { 'action_buttons': True, 'headless': True },
-#                 'res_model':  'school.bloc_deliberation',
-#                 'res_id': bloc_deliberation_ids[0].id,
-#                 'context': self._context,
-#                 'views': [[False, 'form']],
-#             }
-#         else :
-#             return {
-#                 'type': 'ir.actions.act_window',
-#                 'name': 'Deliberate Bloc',
-#                 'target': 'new',
-#                 'flags': { 'action_buttons': True, 'headless': True },
-#                 'res_model':  'school.bloc_deliberation',
-#                 'context': self._context,
-#                 'views': [[False, 'form']],
-#             }
-        
-#     def action_deliberate_course_group(self):
-#         self.ensure_one()
-#         course_group_deliberation_ids = self.env['school.course_group_deliberation'].search([
-#             ['deliberation_id','=',self._context['deliberation_id']],
-#             ['course_group_id','=',self._context['default_course_group_id']]
-#         ])
-#         if course_group_deliberation_ids :
-#             return {
-#                 'type': 'ir.actions.act_window',
-#                 'name': 'Deliberate Course Group',
-#                 'target': 'new',
-#                 'flags': { 'action_buttons': True, 'headless': True },
-#                 'res_model':  'school.course_group_deliberation',
-#                 'res_id': course_group_deliberation_ids[0].id,
-#                 'context': self._context,
-#                 'views': [[False, 'form']],
-#             }
-#         else :
-#             return {
-#                 'type': 'ir.actions.act_window',
-#                 'name': 'Deliberate Course Group',
-#                 'target': 'new',
-#                 'flags': { 'action_buttons': True, 'headless': True },
-#                 'res_model':  'school.course_group_deliberation',
-#                 'context': self._context,
-#                 'views': [[False, 'form']],
-#             }
-            
-# class ProgramDeliberation(models.Model):
-#     '''Program Deliberation'''
-#     _name = 'school.program_deliberation'
-#     _description = 'Manage deliberation of a program'
+    public_comments = fields.Char(string='Public Comments')
     
-#     deliberation_id = fields.Many2one('school.deliberation', required=True)
+    private_comments = fields.Char(string='Private Comments')
     
-#     program_id = fields.Many2one('school.individual_program', required=True)
-    
-#     student_name = fields.Char(string='Student', related='program_id.student_id.name')
-    
-#     image_1920 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_1920')
-#     image_512 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_512')
-#     image_128 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_128')
-    
-#     name = fields.Char(string='Name', related='program_id.name')
-    
-#     total_acquiered_credits = fields.Integer(string='Total Acquiered Credits', related='program_id.total_acquiered_credits')
-    
-#     evaluation = fields.Float(string='Evaluation', related='program_id.evaluation')
-    
-#     state = fields.Selection(String="State", related='program_id.state')
-    
-#     grade = fields.Selection([
-#             ('without','Without Grade'),
-#             ('satisfaction','Satisfaction'),
-#             ('distinction','Distinction'),
-#             ('second_class', 'Second Class Honor'),
-#             ('first_class', 'First Class Honor'),
-#         ],string="Grade")
-    
-#     grade_comments = fields.Text(string="Grade Comments")
-    
-#     grade_default_comments = fields.Selection([
-#             ('com1','Pertinence et singularité du travail artistique'),
-#             ('com2','Qualité particulière du travail artistique'),
-#             ('com3','Participation active et régulière aux activités d’enseignement'),
-#             ('com4','Caractère accidentel des échecs'),
-#             ('com5','Echecs limités en qualité et quantité'),
-#             ('com6','Pourcentage global et importance relative des échecs'),
-#             ('com7','Progrès réalisés d’une session à l’autre'),
-#             ('com8','La réussite des activités de remédiation'),
-#         ],string="Default Commments")
-    
-#     @api.onchange('grade_default_comments')
-#     def onchange_grade_default_comments(self):
-#         if self.grade_default_comments:
-#             self.grade_comments = dict(self.fields_get(allfields=['grade_default_comments'])['grade_default_comments']['selection'])[self.grade_default_comments]
-#             self.grade_default_comments = False
-    
-#     @api.model
-#     def create(self, vals):
-#         ret = super().create(vals)
-#         self._update_create_write_vals()
-#         return ret
-
-#     def write(self, vals):
-#         ret = super().write(vals)
-#         self._update_create_write_vals()
-#         return ret
-    
-#     def _update_create_write_vals(self):
-#         self.program_id.set_to_awarded(grade=self.grade, grade_comments=self.grade_comments)
-        
-# class BlocDeliberation(models.Model):
-#     '''Bloc Deliberation'''
-#     _name = 'school.bloc_deliberation'
-#     _description = 'Manage deliberation of a bloc'
-    
-#     deliberation_id = fields.Many2one('school.deliberation', required=True)
-    
-#     bloc_id = fields.Many2one('school.individual_bloc', required=True)
-    
-#     image_1920 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_1920')
-    
-#     image_128 = fields.Binary('Image', attachment=True, related='bloc_id.student_id.image_128')
-    
-#     name = fields.Char(string='Name', related='bloc_id.name')
-    
-#     evaluation = fields.Float(string='Evaluation', related='bloc_id.evaluation')
-    
-#     total_acquiered_credits = fields.Integer(string='Total Acquiered Credits', related='bloc_id.total_acquiered_credits')
-    
-#     total_not_acquiered_credits = fields.Integer(string='Total Not Acquiered Credits', related='bloc_id.total_not_acquiered_credits')
-    
-#     state = fields.Selection(string='State', related='bloc_id.state')
-    
-#     decision = fields.Text(string='Decision', related='bloc_id.decision')
-    
-#     student_name = fields.Char(string='Student', related='bloc_id.student_id.name')
-    
-#     public_comments = fields.Char(string='Public Comments')
-    
-#     private_comments = fields.Char(string='Private Comments')
-    
-#     def set_to_postponed(self):
-#         self.ensure_one()
-#         self.bloc_id.set_to_postponed(decision=self.decision)
-#         return {'value':{
-#                 'state': self.state
-#                 }}
-    
-#     def set_to_awarded_first_session(self):
-#         self.ensure_one()
-#         self.bloc_id.set_to_awarded_first_session(decision=self.decision)
-#         return {'value':{
-#                 'state': self.state
-#                 }}
-        
-#     def set_to_awarded_second_session(self):
-#         self.ensure_one()
-#         self.bloc_id.set_to_awarded_second_session(decision=self.decision)
-#         return {'value':{
-#                 'state': self.state
-#                 }}
-                
-#     def set_to_failed(self):
-#         self.ensure_one()
-#         self.bloc_id.set_to_failed(decision=self.decision)
-#         return {'value':{
-#                 'state': self.state
-#                 }}
-                
-# class CourseGroupDeliberation(models.Model):
-#     '''Course Group Deliberation'''
-#     _name = 'school.course_group_deliberation'
-#     _description = 'Manage deliberation of a course group'
-    
-#     deliberation_id = fields.Many2one('school.deliberation', required=True)
-    
-#     course_group_id = fields.Many2one('school.individual_course_group', required=True)
-    
-#     course_ids = fields.One2many('school.individual_course', related='course_group_id.course_ids', string='Courses')
-    
-#     comments = fields.Char(string='Comments')
-
-#     is_deliberated_to_acquiered = fields.Boolean(string='Is deliberated to acquiered')
-    
-#     participant_ids = fields.Many2many('res.partner', related='course_group_id.bloc_id.all_responsible_ids', string='Particpants')
-    
-#     image_1920 = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image_1920')
-#     image_512 = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image_512')
-#     image_128 = fields.Binary('Image', attachment=True, related='course_group_id.student_id.image_128')
-    
-#     name = fields.Char(string='Name', related='course_group_id.title')
-    
-#     final_result_disp = fields.Char(string='Final Result Display', related='course_group_id.final_result_disp')
-    
-#     student_name = fields.Char(string='Student', related='course_group_id.student_id.name')
-    
-#     @api.onchange('is_deliberated_to_acquiered')
-#     def _onchange_is_deliberated_to_acquiered(self):
-#         if self.is_deliberated_to_acquiered :
-#             if self.deliberation_id.session == 'first' :
-#                 self.course_group_id.set_deliberated_to_ten(session=1)
-#             else :
-#                 self.course_group_id.set_deliberated_to_ten(session=2)
-#             return {
-#                 'value': {'final_result_disp': '10'}
-#             }
-#         else :
-#             self.course_group_id.first_session_deliberated_result_bool = False
-#             self.course_group_id.first_session_deliberated_result = False
-#             self.course_group_id.first_session_deliberated_result_bool = False
-#             self.course_group_id.first_session_deliberated_result = False

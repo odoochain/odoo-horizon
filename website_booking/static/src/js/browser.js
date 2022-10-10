@@ -733,8 +733,8 @@ var Calendar = CalendarWidget.extend({
     
     fetch_events: function(fetchInfo, successCallback, failureCallback) {
         var self = this;
-        var start = fetchInfo.start;
-        var end = fetchInfo.end;
+        var start = moment(fetchInfo.start);
+        var end = moment(fetchInfo.end);
 		// Ambuigus time moment are confusing for Odoo, needs UTC
         try {
             if(!start.hasTime()) {
