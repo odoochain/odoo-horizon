@@ -22,6 +22,8 @@ import logging
 import pytz
 from datetime import datetime, date, time, timedelta
 
+import threading
+
 from odoo import api, fields, models, _, tools
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
@@ -68,6 +70,8 @@ class Event(models.Model):
     
     main_categ_id = fields.Many2one('calendar.event.type', compute='_get_main_categ_id')
     
+    _lock = threading.RLock()
+    
     @api.model
     def _get_public_fields(self):
         return super(Event, self)._get_public_fields() | {'room_id', 'asset_ids'}
@@ -82,85 +86,87 @@ class Event(models.Model):
         for rec in self:
         
             _logger.info('Check constraints _check_room_quota on record %s' % rec.id)
-            if rec.room_id :
             
-                # Admin is king
-                if self.env.uid == 1779 :
-                    return
+            with self._lock:
+                if rec.room_id :
                 
-                # Get user timezone
-                
-                utc_tz = pytz.UTC
-                #user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
-                user_tz = pytz.timezone('Europe/Brussels')
-        
-                dt = to_tz(fields.Datetime.from_string(rec.start),utc_tz)
-                
-                if dt < (datetime.now() + timedelta(minutes=-30)):
-                    raise ValidationError(_("You cannot book in the past."))
-        
-                event_day = fields.Datetime.from_string(rec.start).date()
-                
-                # Prevent concurrent bookings
-    
-                domain = [('room_id','=',rec.room_id.id), ('start', '<', rec.stop), ('stop', '>', rec.start)]
-                conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
-                if conflicts_count > 1:
-                    data = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain)
-                    raise ValidationError(_("Concurrent event detected - %s events - %s in %s") % (data, rec.start, rec.room_id.name))
-        
-                # Constraint not for employees and teatchers
-        
-                if self.env.user.has_group('school_management.group_employee'):
-                    return
-        
-                if self.env.user.has_group('school_management.group_teacher'):
-                    return
-        
-                # Constraint on student events
-                
-                student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_student_event_type')
-                
-                if student_event in rec.categ_ids:
+                    # Admin is king
+                    if self.env.uid == 1779 :
+                        return
                     
-                    if dt.minute != 0 and dt.minute != 30 :
-                        raise ValidationError(_("Invalid booking, please use standard time for booking."))
+                    # Get user timezone
                     
-                    now = to_tz(datetime.now(),user_tz)
-                    
-                    if now.hour < 19 and fields.Datetime.from_string(rec.start).date() != now.date() :
-                        raise ValidationError(_("You cannot book for the next day before 19h00."))
-                    
-                    if now.hour >= 19 and fields.Datetime.from_string(rec.start).date() != now.date() and fields.Datetime.from_string(rec.start).date() != (now + timedelta(days=1)).date() :
-                        raise ValidationError(_("You can book only the next day (after 19h00)."))
+                    utc_tz = pytz.UTC
+                    #user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'Europe/Brussels')
+                    user_tz = pytz.timezone('Europe/Brussels')
+            
+                    dt = to_tz(fields.Datetime.from_string(rec.start),utc_tz)
                     
                     if dt < (datetime.now() + timedelta(minutes=-30)):
                         raise ValidationError(_("You cannot book in the past."))
-                    
+            
                     event_day = fields.Datetime.from_string(rec.start).date()
                     
-                    duration_list = self.env['calendar.event'].read_group([
-                            ('user_id', '=', rec.user_id.id), ('room_id','!=',False), ('categ_ids','in',student_event.id), ('start', '>=', fields.Datetime.to_string(event_day)), ('start', '<=', fields.Datetime.to_string(event_day + timedelta(days=1)))
-                        ],['room_id','duration'],['room_id'])
-                    for duration in duration_list:
-                        if duration['duration'] and duration['duration'] > 2:
-                            raise ValidationError(_("You cannot book the room %s more than two hours per day") % (duration.get('room_id','')[1]))
+                    # Prevent concurrent bookings
+        
+                    domain = [('room_id','=',rec.room_id.id), ('start', '<', rec.stop), ('stop', '>', rec.start)]
+                    conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
+                    if conflicts_count > 1:
+                        data = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain)
+                        raise ValidationError(_("Concurrent event detected - %s events - %s in %s") % (data, rec.start, rec.room_id.name))
+            
+                    # Constraint not for employees and teatchers
+            
+                    if self.env.user.has_group('school_management.group_employee'):
+                        return
+            
+                    if self.env.user.has_group('school_management.group_teacher'):
+                        return
+            
+                    # Constraint on student events
                     
-                    duration_list = self.env['calendar.event'].read_group([
-                            ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('room_id','!=',False), ('start', '>=', fields.Datetime.to_string(event_day)), ('start', '<=', fields.Datetime.to_string(event_day + timedelta(days=1)))
-                        ],['start','duration'],['start:day'])
-                    for duration in duration_list:
-                        if duration['duration'] and duration['duration'] > 6:
-                            raise ValidationError(_("You cannot book more than six hours per day - %s") % duration['start:day'])
+                    student_event = self.env['ir.model.data'].xmlid_to_object('school_booking.school_student_event_type')
                     
-                    duration_list = self.env['calendar.event'].read_group([
-                            ('user_id', '=', rec.user_id.id), ('start', '>', fields.Datetime.now()), ('room_id','!=',False), ('categ_ids','in',student_event.id), ('start', '>=', fields.Datetime.to_string(event_day)), ('start', '<=', fields.Datetime.to_string(event_day + timedelta(days=1)))
-                        ],['start','duration'],['start:day'])
-                    for duration in duration_list:
-                        if duration['duration'] > 4:
-                            raise ValidationError(_("You cannot book more than four hours in advance per day - %s") % duration['start:day'])
-                            
-                    _logger.info('Check done')
+                    if student_event in rec.categ_ids:
+                        
+                        if dt.minute != 0 and dt.minute != 30 :
+                            raise ValidationError(_("Invalid booking, please use standard time for booking."))
+                        
+                        now = to_tz(datetime.now(),user_tz)
+                        
+                        if now.hour < 19 and fields.Datetime.from_string(rec.start).date() != now.date() :
+                            raise ValidationError(_("You cannot book for the next day before 19h00."))
+                        
+                        if now.hour >= 19 and fields.Datetime.from_string(rec.start).date() != now.date() and fields.Datetime.from_string(rec.start).date() != (now + timedelta(days=1)).date() :
+                            raise ValidationError(_("You can book only the next day (after 19h00)."))
+                        
+                        if dt < (datetime.now() + timedelta(minutes=-30)):
+                            raise ValidationError(_("You cannot book in the past."))
+                        
+                        event_day = fields.Datetime.from_string(rec.start).date()
+                        
+                        duration_list = self.env['calendar.event'].read_group([
+                                ('user_id', '=', rec.user_id.id), ('room_id','!=',False), ('categ_ids','in',student_event.id), ('start', '>=', fields.Datetime.to_string(event_day)), ('start', '<=', fields.Datetime.to_string(event_day + timedelta(days=1)))
+                            ],['room_id','duration'],['room_id'])
+                        for duration in duration_list:
+                            if duration['duration'] and duration['duration'] > 2:
+                                raise ValidationError(_("You cannot book the room %s more than two hours per day") % (duration.get('room_id','')[1]))
+                        
+                        duration_list = self.env['calendar.event'].read_group([
+                                ('user_id', '=', self.user_id.id), ('categ_ids','in',student_event.id), ('room_id','!=',False), ('start', '>=', fields.Datetime.to_string(event_day)), ('start', '<=', fields.Datetime.to_string(event_day + timedelta(days=1)))
+                            ],['start','duration'],['start:day'])
+                        for duration in duration_list:
+                            if duration['duration'] and duration['duration'] > 6:
+                                raise ValidationError(_("You cannot book more than six hours per day - %s") % duration['start:day'])
+                        
+                        duration_list = self.env['calendar.event'].read_group([
+                                ('user_id', '=', rec.user_id.id), ('start', '>', fields.Datetime.now()), ('room_id','!=',False), ('categ_ids','in',student_event.id), ('start', '>=', fields.Datetime.to_string(event_day)), ('start', '<=', fields.Datetime.to_string(event_day + timedelta(days=1)))
+                            ],['start','duration'],['start:day'])
+                        for duration in duration_list:
+                            if duration['duration'] > 4:
+                                raise ValidationError(_("You cannot book more than four hours in advance per day - %s") % duration['start:day'])
+                                
+                        _logger.info('Check done')
                         
     @api.model
     def archive_old_events(self, *args, **kwargs):
