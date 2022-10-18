@@ -30,6 +30,8 @@ from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
+_calendar_event_lock = threading.Lock()
+
 def to_tz(datetime, tz):
     return pytz.UTC.localize(datetime.replace(tzinfo=None), is_dst=False).astimezone(tz).replace(tzinfo=None)
 
@@ -70,8 +72,6 @@ class Event(models.Model):
     
     main_categ_id = fields.Many2one('calendar.event.type', compute='_get_main_categ_id')
     
-    _lock = threading.RLock()
-    
     @api.model
     def _get_public_fields(self):
         return super(Event, self)._get_public_fields() | {'room_id', 'asset_ids'}
@@ -87,7 +87,7 @@ class Event(models.Model):
         
             _logger.info('Check constraints _check_room_quota on record %s' % rec.id)
             
-            with self._lock:
+            with self._calendar_event_lock:
                 if rec.room_id :
                 
                     # Admin is king
