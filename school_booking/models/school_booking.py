@@ -87,7 +87,7 @@ class Event(models.Model):
         
             _logger.info('Check constraints _check_room_quota on record %s' % rec.id)
             
-            with self._calendar_event_lock:
+            with _calendar_event_lock:
                 if rec.room_id :
                 
                     # Admin is king
