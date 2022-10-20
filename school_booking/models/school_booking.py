@@ -87,7 +87,7 @@ class Event(models.Model):
     def _check_room_quota(self):
         for rec in self:
         
-            _logger.info('Check constraints _check_room_quota on record %s' % rec.id)
+            _logger.info('Check constraints _check_room_quota for %s on record %s' % (self.env.uid, rec.id))
             
             with _calendar_event_lock:
                 if rec.room_id :
@@ -117,7 +117,7 @@ class Event(models.Model):
                     _logger.info('Check Concurrent for %s : %s' % (self.env.uid, domain))
                     if conflicts_count > 1:
                         data = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain)
-                        raise ValidationError(_("Concurrent event detected %s in %s") % (rec.start, rec.room_id.name))
+                        raise ValidationError(_("Concurrent event detected for %s : %s in %s") % (self.env.uid, rec.start, rec.room_id.name))
             
                     # Constraint not for employees and teatchers
             
@@ -170,7 +170,7 @@ class Event(models.Model):
                             if duration['duration'] > 4:
                                 raise ValidationError(_("You cannot book more than four hours in advance per day - %s") % duration['start:day'])
                                 
-                        _logger.info('Check done')
+                        _logger.info('Check done for %s' % self.env.uid)
                         
     @api.model
     def archive_old_events(self, *args, **kwargs):
