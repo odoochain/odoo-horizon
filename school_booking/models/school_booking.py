@@ -114,6 +114,7 @@ class Event(models.Model):
         
                     domain = [('room_id','=',int(rec.room_id.id)), ('start', '<', fields.Datetime.to_string(rec.stop)), ('stop', '>', fields.Datetime.to_string(rec.start))]
                     conflicts_count = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_count(domain)
+                    _logger.info('Check Concurrent %s' % domain)
                     if conflicts_count > 1:
                         data = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search_read(domain)
                         raise ValidationError(_("Concurrent event detected %s in %s") % (rec.start, rec.room_id.name))
