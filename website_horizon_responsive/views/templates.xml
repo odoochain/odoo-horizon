@@ -203,9 +203,11 @@
             								<img src="/website_horizon_responsive/static/src/img/logo-horizontal.svg" alt="Conservatoire royal de Liège"/>
             							</a>
             						</li>
-            						<li t-if="user.employee or user.teacher or user.id == 1779">
+            						<t t-if="user.has_group('school_management.group_teacher') or user.has_group('school_management.group_employee')">
+									<li class="d-none d-lg-inline-block">
             							<a href="/web">Horizon 2.0</a>
             						</li>
+            						</t>
             						<li class="ml-auto ml-lg-0">
             							<a href="/web/session/logout">
             								<i class="icon icon-power"></i>
@@ -320,9 +322,11 @@
 												<img src="/website_horizon_responsive/static/src/img/logo-horizontal-white.svg" alt="Conservatoire royal de Liège"/>
 											</a>
 										</li>
-										<li class="d-none d-lg-inline-block" t-if="user.employee or user.teacher or user.id == 1779">
-											<a href="/web">Horizon 2.0</a>
-										</li>
+										<t t-if="user.has_group('school_management.group_teacher') or user.has_group('school_management.group_employee')">
+										<li class="d-none d-lg-inline-block">
+	            							<a href="/web">Horizon 2.0</a>
+	            						</li>
+	            						</t>
 										<li class="ml-auto ml-lg-0">
 											<a href="/web/session/logout">
 												<i class="icon icon-power"></i>
