@@ -155,7 +155,7 @@ $(document).ready(function(){
                         name: description,
                         start: datetime_to_str(start.toDate()),
                         stop: datetime_to_str(stop.toDate()),
-                        room_id: room,
+                        room_id: parseInt(room),
                         categ_ids: [[4, parseInt(event_type)]],
                     }],
                     kwargs: {}
