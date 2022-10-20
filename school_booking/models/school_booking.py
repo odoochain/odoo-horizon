@@ -22,7 +22,7 @@ import logging
 import pytz
 from datetime import datetime, date, time, timedelta
 
-import threading
+from filelock import FileLock
 
 from odoo import api, fields, models, _, tools
 from odoo.exceptions import UserError, ValidationError
@@ -30,7 +30,7 @@ from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
-_calendar_event_lock = threading.Lock()
+_calendar_event_lock = FileLock("/tmp/_calendar_event_lock.lock")
 
 def to_tz(datetime, tz):
     return pytz.UTC.localize(datetime.replace(tzinfo=None), is_dst=False).astimezone(tz).replace(tzinfo=None)
