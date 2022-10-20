@@ -80,6 +80,8 @@ class Event(models.Model):
         for rec in self:
             if rec.categ_ids:
                 rec.main_categ_id = rec.categ_ids[0]
+            else:
+                rec.main_categ_id = False
     
     @api.constrains('room_id')
     def _check_room_quota(self):
