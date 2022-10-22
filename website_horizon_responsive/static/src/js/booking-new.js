@@ -179,7 +179,7 @@ $(document).ready(function(){
                     $('#horizon-error').empty().html(result.error.data.message);
                     $('#horizon-error').toggle();
                 } else {
-                    toastr["success"]("Your booking for " + start.locale('fr').format('ddd DD at HH:MI') + " is successfull.",{
+                    toastr.options = {
                         "closeButton": false,
                         "debug": false,
                         "newestOnTop": false,
@@ -189,7 +189,7 @@ $(document).ready(function(){
                         "onclick": null,
                         "showDuration": "300",
                         "hideDuration": "1000",
-                        "timeOut": "2500",
+                        "timeOut": "2000",
                         "extendedTimeOut": "1000",
                         "showEasing": "swing",
                         "hideEasing": "linear",
@@ -197,8 +197,9 @@ $(document).ready(function(){
                         "hideMethod": "fadeOut",
                         "onHidden": function () {
                             window.location.href = "/responsive/bookings";
-                         }
-                      });
+                        }
+                    };
+                    toastr["success"]("Your booking for " + start.locale('fr').format('ddd DD at HH:MI') + " is successfull.");
                 }
             },    
         });
