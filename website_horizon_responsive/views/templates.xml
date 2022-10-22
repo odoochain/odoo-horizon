@@ -670,9 +670,12 @@
 										  $("#selected_date").on("change", function() {
                           this.setAttribute(
                               "data-date",
-                              moment(this.value, "YYYY-MM-DD")
+                              moment(this.value, "YYYY-MM-DD").locale('fr')
                               .format( this.getAttribute("data-date-format") )
-                          )
+                          );
+                          this.setAttribute(
+                          		"value",
+                          		this.value);
                       }).trigger("change")
 										</script>
 									</div>
