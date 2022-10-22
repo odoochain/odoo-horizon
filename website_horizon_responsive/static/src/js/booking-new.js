@@ -31,10 +31,16 @@ $(document).ready(function(){
         if (fromTime < toTime) {
             var start = date_today.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
             var stop = date_today.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-            var day = $('#day').attr('value');
-            if( day == 1 ) {
-                start = date_tomorrow.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-                stop = date_tomorrow.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var selected_day = $('#selected_day').attr('value');
+            if( selected_day == 0 ) {
+                var day = $('#day').attr('value');
+                if( day == 1 ) {
+                    start = date_tomorrow.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                    stop = date_tomorrow.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                }
+            } else {
+                start = moment(selected_day).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                stop = moment(selected_day).set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
             }
             $.ajax({
               type: "POST",
@@ -132,10 +138,16 @@ $(document).ready(function(){
         var toTime = $('#to_hour').timepicker('getTime');
         var start = date_today.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
         var stop = date_today.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-        var day = $('#day').attr('value');
-        if( day == 1 ) {
-            start = date_tomorrow.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-            stop = date_tomorrow.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var selected_day = $('#selected_day').attr('value');
+        if( selected_day == 0 ) {
+            var day = $('#day').attr('value');
+            if( day == 1 ) {
+                start = date_tomorrow.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                stop = date_tomorrow.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            }
+        } else {
+            start = moment(selected_day).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            stop = moment(selected_day).set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
         }
         var room = $('#room').val();
         var description  = $('#description').val();
