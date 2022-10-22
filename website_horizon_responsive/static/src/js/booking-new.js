@@ -1,4 +1,4 @@
-/* global $, moment, date_today, date_tomorrow */
+/* global $, moment, date_today, date_tomorrow, toastr */
 
 $(document).ready(function(){
     
@@ -179,7 +179,26 @@ $(document).ready(function(){
                     $('#horizon-error').empty().html(result.error.data.message);
                     $('#horizon-error').toggle();
                 } else {
-                    window.location.href = "/responsive/bookings";
+                    toastr["success"]("Your booking for " + start.locale('fr').format('ddd DD at HH:MI') + " is successfull.",{
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut",
+                        onHidden: function () {
+                            window.location.href = "/responsive/bookings";
+                         }
+                      });
                 }
             },    
         });

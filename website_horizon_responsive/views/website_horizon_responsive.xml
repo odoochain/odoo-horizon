@@ -30,6 +30,7 @@
         	<link rel="stylesheet" href="/web/static/lib/fontawesome/css/font-awesome.css"/>
         	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
         	<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css"/>
+        	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/toastr.css"/>
         	<link rel="stylesheet" href="/website_horizon_responsive/static/src/css/main.css"/>
         	
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
@@ -37,6 +38,7 @@
             <script type="text/javascript" src="/web/static/lib/jquery/jquery.browser.js"></script>
             <script type="text/javascript" src="/web/static/lib/moment/moment.js"></script>
             <script type="text/javascript" src="/web/static/lib/moment/locale/fr.js"></script>
+            <script type="text/javascript" src="/website_horizon_responsive/static/src/js/toastr.js"></script>
             <script type="text/javascript" src="/website_horizon_responsive/static/src/js/main-template.js" defer=""></script>
             <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"/>
         </template>
