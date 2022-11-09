@@ -38,7 +38,7 @@ class AddDocuments(models.TransientModel):
     def default_get(self, fields):
         res = super(AddDocuments, self).default_get(fields)
         document_type_ids = self.env['school.official_document_type'].search([('default_add','=',True)]).mapped('id')
-        res['document_type_ids'] = document_type_ids
+        res['document_type_ids'] = [6, _, document_type_ids]
         return res
         
     
