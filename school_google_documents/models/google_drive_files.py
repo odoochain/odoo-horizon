@@ -25,7 +25,6 @@ from datetime import date
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
-from odoo.addons.school_google_documents.utils.google_drive_service import GoogleDriveService
 
 _logger = logging.getLogger(__name__)
 
