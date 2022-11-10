@@ -21,7 +21,7 @@ class google_drive_folder_mixin(models.AbstractModel):
         })
         for rec in self:
             _logger.info(gdf_id)
-            rec.google_drive_files = [[4,_,gdf_id.id]]
+            rec.google_drive_files = [[6,_,gdf_id.ids]]
 
     google_drive_files = fields.Many2many('school.google_drive_file',string="Google Drive Files", compute=_compute_google_drive_files)
 
