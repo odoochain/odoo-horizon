@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+school_google_drive_file.group_base,school_google_drive_file.group_base,model_school_google_drive_file,base.group,1,1,1,1
