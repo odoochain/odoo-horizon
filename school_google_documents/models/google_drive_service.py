@@ -12,8 +12,6 @@ class google_drive_folder_mixin(models.AbstractModel):
     
     google_drive_folder_id = fields.Char(string="Google Drive Folder Id",copy=False)
 
-    google_drive_files = fields.Many2many(string="Google Drive Files", compute=_compute_google_drive_files)
-
     def _compute_google_drive_files(self):
         gdf_id = self.env['school.google_drive_file'].create({
             'name' : 'test_file.txt',
@@ -23,6 +21,8 @@ class google_drive_folder_mixin(models.AbstractModel):
         })
         for rec in self:
             self.google_drive_files = [[4,_,gdf_id]]
+
+    google_drive_files = fields.Many2many(string="Google Drive Files", compute=_compute_google_drive_files)
 
 class GoogleDriveFile(models.TransientModel):
     _name = "school.google_drive_file"
