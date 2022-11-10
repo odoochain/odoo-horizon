@@ -20,6 +20,7 @@
 ##############################################################################
 
 import logging
+import json
 
 from datetime import date
 
@@ -66,7 +67,6 @@ class GoogleService(models.AbstractModel):
     
     @api.model
     def get_files_from_folder_id(self, folderId):
-        
         try :
             status, response, ask_time = self._do_request('/drive/v3/files',{
                 'q' : '%s in parents' % folderId,
@@ -80,3 +80,23 @@ class GoogleService(models.AbstractModel):
                 "status": "need_auth",
                 "url": url
             }    
+    
+    @api.model
+    def _get_drive_scope(self):
+        return 'https://www.googleapis.com/auth/drive.readonly'
+    
+    @api.model
+    def _google_authentication_url(self, from_url='http://www.odoo.com'):
+        state = {
+            'd': self.google_service.env.cr.dbname,
+            's': 'drive',
+            'f': from_url
+        }
+        return self.google_service._get_authorize_uri(
+            'drive',
+            self._get_drive_scope(),
+            self.google_service.get_base_url() + '/google_account/authentication',
+            state=json.dumps(state),
+            approval_prompt='force',
+            access_type='offline'
+        )
