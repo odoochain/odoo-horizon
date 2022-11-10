@@ -66,7 +66,7 @@ class GoogleService(models.AbstractModel):
     
     @api.model
     def get_files_from_folder_id(self, folderId):
-        status, response, ask_time = self._do_request('drive/v3/files',{
+        status, response, ask_time = self._do_request('/drive/v3/files',{
             'q' : '%s in parents' % folderId,
         })
         _logger.info(status)
