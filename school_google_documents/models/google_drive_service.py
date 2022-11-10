@@ -20,7 +20,8 @@ class google_drive_folder_mixin(models.AbstractModel):
             'mimetype' : 'text/plain'
         })
         for rec in self:
-            rec.google_drive_files = [[4,_,gdf_id]]
+            _logger.info(gdf_id)
+            rec.google_drive_files = [[4,_,gdf_id.id]]
 
     google_drive_files = fields.Many2many('product.template',string="Google Drive Files", compute=_compute_google_drive_files)
 
