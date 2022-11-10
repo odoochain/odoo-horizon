@@ -64,7 +64,6 @@
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="official_document_list" string="Official Documents" attrs="{'invisible': [('student','=',False)]}" >
                         <button string="Add documents" type="action" name="%(action_document_add_wizard)d" class="oe_highlight" context="{'default_student_id': active_id}" groups="school_management.group_employee"/>
-                        <field name="google_drive_folder" widget="url"/>
                         <field name="official_document_ids">
                             <tree string="Official Documents">
                                 <field name="name" />
