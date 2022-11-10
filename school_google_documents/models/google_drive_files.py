@@ -88,11 +88,11 @@ class GoogleService(models.AbstractModel):
     @api.model
     def _google_authentication_url(self, from_url='http://www.odoo.com'):
         state = {
-            'd': self.google_service.env.cr.dbname,
+            'd': self.env.cr.dbname,
             's': 'drive',
             'f': from_url
         }
-        return self.google_service._get_authorize_uri(
+        return self._get_authorize_uri(
             'drive',
             self._get_drive_scope(),
             self.google_service.get_base_url() + '/google_account/authentication',
