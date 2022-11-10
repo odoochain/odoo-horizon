@@ -46,7 +46,6 @@ class google_drive_folder_mixin(models.AbstractModel):
                 'mimetype' : 'text/plain'
             })
 
-            _logger.info(gdf_id)
             rec.google_drive_files = [[6,_,gdf_id.ids]]
 
     google_drive_files = fields.Many2many('school.google_drive_file',string="Google Drive Files", compute=_compute_google_drive_files)
@@ -67,7 +66,7 @@ class GoogleService(models.AbstractModel):
     
     @api.model
     def get_files_from_folder_id(self, folderId):
-        status, response, ask_time = self._do_request('https://www.googleapis.com/drive/v3/files',{
+        status, response, ask_time = self._do_request('drive/v3/files',{
             'q' : '%s in parents' % folderId,
         })
         _logger.info(status)
