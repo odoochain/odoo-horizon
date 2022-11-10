@@ -93,10 +93,6 @@ class GoogleService(models.AbstractModel):
             'f': from_url
         }
         return self._get_authorize_uri(
-            'drive',
-            self._get_drive_scope(),
-            self.env.user.get_base_url() + '/google_account/authentication',
-            state=json.dumps(state),
-            approval_prompt='force',
-            access_type='offline'
+            self.env.user.get_base_url(),
+            'drive'
         )
