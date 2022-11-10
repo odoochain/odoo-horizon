@@ -29,6 +29,9 @@
             <field name="inherit_id" ref="school_management.view_partners_form_school" />
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='email']" position="after">
+                    <field name="google_drive_folder_id"/>
+                </xpath>
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="google_document_list" string="Google Documents" attrs="{'invisible': [('student','=',False)]}" >
                         <field name="google_drive_files">
