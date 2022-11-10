@@ -36,9 +36,18 @@ class google_drive_folder_mixin(models.AbstractModel):
 
     def _compute_google_drive_files(self):
         
+        google_service = self.env['google.service']
+        
         for rec in self:
-            if rec.google_drive_folder_id :
-                self.env['google.service'].get_files_from_folder_id(rec.google_drive_folder_id)
+            try :
+                if rec.google_drive_folder_id :
+                    google_service.get_files_from_folder_id(rec.google_drive_folder_id)
+            except:
+                url = google_service.google_authentication_url()
+                return {
+                    "status": "need_auth",
+                    "url": url
+                }    
         
             gdf_id = self.env['school.google_drive_file'].create({
                 'name' : 'test_file.txt',
@@ -67,26 +76,21 @@ class GoogleService(models.AbstractModel):
     
     @api.model
     def get_files_from_folder_id(self, folderId):
-        try :
+        
             status, response, ask_time = self._do_request('/drive/v3/files',{
                 'q' : '%s in parents' % folderId,
             })
             _logger.info(status)
             _logger.info(response)
             _logger.info(ask_time)
-        except:
-            url = self._google_authentication_url()
-            return {
-                "status": "need_auth",
-                "url": url
-            }    
+        
     
     @api.model
     def _get_drive_scope(self):
         return 'https://www.googleapis.com/auth/drive.readonly'
     
     @api.model
-    def _google_authentication_url(self, from_url='http://www.odoo.com'):
+    def google_authentication_url(self, from_url='http://www.odoo.com'):
         state = {
             'd': self.env.cr.dbname,
             's': 'drive',
