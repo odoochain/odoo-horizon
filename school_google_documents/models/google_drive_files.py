@@ -66,9 +66,17 @@ class GoogleService(models.AbstractModel):
     
     @api.model
     def get_files_from_folder_id(self, folderId):
-        status, response, ask_time = self._do_request('/drive/v3/files',{
-            'q' : '%s in parents' % folderId,
-        })
-        _logger.info(status)
-        _logger.info(response)
-        _logger.info(ask_time)
+        
+        try :
+            status, response, ask_time = self._do_request('/drive/v3/files',{
+                'q' : '%s in parents' % folderId,
+            })
+            _logger.info(status)
+            _logger.info(response)
+            _logger.info(ask_time)
+        except:
+            url = self._google_authentication_url()
+            return {
+                "status": "need_auth",
+                "url": url
+            }    
