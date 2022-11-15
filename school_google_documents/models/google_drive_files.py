@@ -91,9 +91,8 @@ class GoogleService(models.AbstractModel):
             base_url = self.env.user.get_base_url()
             self.drive_access_token,  self.drive_refresh_token,  self.drive_ttl = self._get_google_tokens(
                 self.env['ir.config_parameter'].sudo().get_param('google_drive_auth_code'),
-                'drive',
-                redirect_uri=f'{base_url}/google_account/authentication'
-            )
+                'drive'
+                )
             
             self.drive_token_validity = fields.Datetime.now() + timedelta(seconds=self.drive_ttl) if self.drive_ttl else False
         
@@ -102,7 +101,7 @@ class GoogleService(models.AbstractModel):
             _logger.info(self.drive_ttl)
             
         elif self.drive_token_validity and self.drive_token_validity >= (fields.Datetime.now() + timedelta(minutes=1)) :
-            self._refresh_google_drive_token()
+            self.generate_refresh_token('drive', self.drive_access_token)
         
         return self.drive_access_token
 
