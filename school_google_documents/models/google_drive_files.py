@@ -33,17 +33,21 @@ class google_drive_folder_mixin(models.AbstractModel):
     _name = "school.google_drive_folder.mixin"
     
     google_drive_folder_id = fields.Char(string="Google Drive Folder Id",copy=False)
+    
+    def _compute_google_drive_connected(self):
+        
+        
+    google_drive_connected = fields.Boolean(string="Is Google Drive Connected", compute=_compute_google_drive_connected)
 
     def _compute_google_drive_files(self):
-        
         google_service = self.env['google.service']
-        
         for rec in self:
             try :
                 if rec.google_drive_folder_id :
                     google_service.get_files_from_folder_id(rec.google_drive_folder_id)
             except:
                 url = google_service.google_authentication_url()
+                rec.google_drive_files = False
                 return {
                     "status": "need_auth",
                     "url": url
@@ -74,9 +78,80 @@ class GoogleDriveFile(models.TransientModel):
 class GoogleService(models.AbstractModel):
     _inherit='google.service'
     
+    drive_access_token = fields.Char('Drive Access Token', copy=False)
+    drive_refresh_token = fields.Char('Drive Refresh Token', copy=False)
+    drive_ttl = fields.Number('Drive Token TTL', copy=False)
+    drive_token_validity = fields.Datetime('Token Validity', copy=False)
+    
+    @api.model
+    def is_google_drive_connected(self):
+        
+        if self.google_calendar_account_id.calendar_rtoken and not self.google_calendar_account_id._is_google_calendar_valid():
+            self.sudo().google_calendar_account_id._refresh_google_calendar_token()
+        return self.google_calendar_account_id.calendar_token
+        
+        if not self.drive_refresh_token :
+            base_url = self.env.user.get_base_url()
+            self.drive_access_token,  self.drive_refresh_token,  self.drive_ttl = self._get_google_tokens(
+                self.env['ir.config_parameter'].sudo().get_param('google_drive_auth_code'),
+                'drive',
+                redirect_uri=f'{base_url}/google_account/authentication'
+            )
+            
+            self.drive_token_validity = fields.Datetime.now() + timedelta(seconds=self.drive_ttl) if self.drive_ttl else False
+        
+            _logger.info(self.drive_access_token)
+            _logger.info(self.drive_refresh_token)
+            _logger.info(self.drive_ttl)
+            
+        elif self.drive_token_validity and self.drive_token_validity >= (fields.Datetime.now() + timedelta(minutes=1)) :
+            
+            self.
+           
+    @api.model 
+    def _refresh_google_drive_token(self):
+        # LUL TODO similar code exists in google_drive. Should be factorized in google_account
+        get_param = self.env['ir.config_parameter'].sudo().get_param
+        client_id = get_param('google_drive_client_id')
+        client_secret = get_param('google_drive_client_secret')
+
+        if not client_id or not client_secret:
+            raise UserError(_("The account for the Google Drive service is not configured."))
+
+        headers = {"content-type": "application/x-www-form-urlencoded"}
+        data = {
+            'refresh_token': self.drive_refresh_token,
+            'client_id': client_id,
+            'client_secret': client_secret,
+            'grant_type': 'refresh_token',
+        }
+
+        try:
+            _dummy, response, _dummy = self.env['google.service']._do_request(GOOGLE_TOKEN_ENDPOINT, params=data, headers=headers, method='POST', preuri='')
+            ttl = response.get('expires_in')
+            self.write({
+                'drive_access_token': response.get('access_token'),
+                'drive_token_validity': fields.Datetime.now() + timedelta(seconds=ttl),
+            })
+        except requests.HTTPError as error:
+            if error.response.status_code in (400, 401):  # invalid grant or invalid client
+                # Delete refresh token and make sure it's commited
+                self.env.cr.rollback()
+                self.write({
+                    'drive_access_token': False,
+                    'drive_refresh_token': False,
+                    'drive_ttl': False,
+                    'drive_token_validity': False,
+                })
+                self.env.cr.commit()
+            error_key = error.response.json().get("error", "nc")
+            error_msg = _("An error occurred while generating the token. Your authorization code may be invalid or has already expired [%s]. "
+                          "You should check your Client ID and secret on the Google APIs plateform or try to stop and restart your drive synchronisation.",
+                          error_key)
+            raise UserError(error_msg)
+    
     @api.model
     def get_files_from_folder_id(self, folderId):
-        
             status, response, ask_time = self._do_request('/drive/v3/files',{
                 'q' : '%s in parents' % folderId,
             })
@@ -89,14 +164,3 @@ class GoogleService(models.AbstractModel):
     def _get_drive_scope(self):
         return 'https://www.googleapis.com/auth/drive.readonly'
     
-    @api.model
-    def google_authentication_url(self, from_url='http://www.odoo.com'):
-        state = {
-            'd': self.env.cr.dbname,
-            's': 'drive',
-            'f': from_url
-        }
-        return self._get_authorize_uri(
-            self.env.user.get_base_url(),
-            'drive'
-        )
