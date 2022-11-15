@@ -74,13 +74,17 @@ class GoogleDriveFile(models.TransientModel):
     
     name = fields.Char('Name')
     description = fields.Text('Description')
-    
-    type = fields.Selection([('url', 'URL')],string='Type', required=True, default='url',help="All the time URL in this case.")
     url = fields.Char('Url')
-    
     mimetype = fields.Char('Mime Type', readonly=True)
     
-class GoogleService(models.AbstractModel):
+class Company(models.Model):
+    name = 'res.company'
+    _inherit = 'res.company'
+    
+    google_drive_id = fields.Many2one('school.google.service', copy=False)
+    
+class GoogleService(models.Model):
+    name = 'school.google.service'
     _inherit='google.service'
     
     drive_access_token = fields.Char('Drive Access Token', copy=False)

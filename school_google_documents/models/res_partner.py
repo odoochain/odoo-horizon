@@ -32,15 +32,3 @@ class Partner(models.Model):
     '''Partner'''
     _name = 'res.partner'
     _inherit = ['res.partner', 'school.google_drive_folder.mixin']
-
-class Users(models.Model):
-    '''Users'''
-    _name = 'res.users'
-    _inherit = ['res.users']
-    
-    def _set_auth_tokens(self, access_token, refresh_token, ttl):
-        google_service = self.env['google.service']
-        google_service.drive_access_token = access_token
-        google_service.drive_refresh_token = refresh_token
-        google_service.drive_ttl = ttl
-        google_service.drive_token_validity = fields.Datetime.now() + timedelta(seconds=ttl) if ttl else False
