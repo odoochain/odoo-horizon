@@ -34,9 +34,9 @@
                 </xpath>
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="google_document_list" string="Google Documents" attrs="{'invisible': [('student','=',False)]}" >
+                        <field name="google_drive_connected" />
                         <field name="google_drive_files">
                             <tree string="Google Documents">
-                                <field name="google_drive_connected" />
                                 <field name="name" />
                                 <field name="description" />
                                 <field name="url" widget="url" />
