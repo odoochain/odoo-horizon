@@ -22,7 +22,7 @@
 import logging
 import json
 
-from datetime import date
+from datetime import date, timedelta
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
@@ -35,7 +35,7 @@ class google_drive_folder_mixin(models.AbstractModel):
     google_drive_folder_id = fields.Char(string="Google Drive Folder Id",copy=False)
     
     def _compute_google_drive_connected(self):
-        
+        self.env['google.service'].is_google_drive_connected()
         
     google_drive_connected = fields.Boolean(string="Is Google Drive Connected", compute=_compute_google_drive_connected)
 
@@ -86,10 +86,6 @@ class GoogleService(models.AbstractModel):
     @api.model
     def is_google_drive_connected(self):
         
-        if self.google_calendar_account_id.calendar_rtoken and not self.google_calendar_account_id._is_google_calendar_valid():
-            self.sudo().google_calendar_account_id._refresh_google_calendar_token()
-        return self.google_calendar_account_id.calendar_token
-        
         if not self.drive_refresh_token :
             base_url = self.env.user.get_base_url()
             self.drive_access_token,  self.drive_refresh_token,  self.drive_ttl = self._get_google_tokens(
@@ -105,9 +101,10 @@ class GoogleService(models.AbstractModel):
             _logger.info(self.drive_ttl)
             
         elif self.drive_token_validity and self.drive_token_validity >= (fields.Datetime.now() + timedelta(minutes=1)) :
-            
-            self.
-           
+            self._refresh_google_drive_token()
+        
+        return self.drive_access_token
+
     @api.model 
     def _refresh_google_drive_token(self):
         # LUL TODO similar code exists in google_drive. Should be factorized in google_account
