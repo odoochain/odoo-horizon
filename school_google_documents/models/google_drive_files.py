@@ -65,6 +65,10 @@ class google_drive_folder_mixin(models.AbstractModel):
 
     google_drive_files = fields.Many2many('school.google_drive_file',string="Google Drive Files", compute=_compute_google_drive_files)
 
+    def action_authorize_google_drive(self):
+        google_service = self.env['google.service']
+        google_service.drive_access_token, google_service.drive_refresh_token, google_service.drive_ttl = google_service._get_google_tokens()
+
 class GoogleDriveFile(models.TransientModel):
     _name = "school.google_drive_file"
     
