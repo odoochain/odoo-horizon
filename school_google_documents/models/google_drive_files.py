@@ -67,7 +67,7 @@ class google_drive_folder_mixin(models.AbstractModel):
 
     def action_authorize_google_drive(self):
         google_service = self.env['google.service']
-        google_service.drive_access_token, google_service.drive_refresh_token, google_service.drive_ttl = google_service._get_google_tokens()
+        return google_service._get_authorize_uri('https://horizon.student-crlg.be','drive','https://www.googleapis.com/auth/drive.readonly')
 
 class GoogleDriveFile(models.TransientModel):
     _name = "school.google_drive_file"
