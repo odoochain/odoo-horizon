@@ -46,7 +46,7 @@ class google_drive_folder_mixin(models.AbstractModel):
         google_service = self.env['google.service']
         for rec in self:
             try :
-                if rec.google_drive_folder_id :
+                if google_service.is_google_drive_connected() and rec.google_drive_folder_id :
                     google_service.get_files_from_folder_id(rec.google_drive_folder_id)
             except:
                 pass
