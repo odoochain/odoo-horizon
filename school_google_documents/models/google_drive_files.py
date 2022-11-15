@@ -37,11 +37,6 @@ class google_drive_folder_mixin(models.AbstractModel):
     
     google_drive_folder_id = fields.Char(string="Google Drive Folder Id",copy=False)
     
-    def _compute_google_drive_connected(self):
-        self.env['google.service'].is_google_drive_connected()
-        
-    google_drive_connected = fields.Boolean(string="Is Google Drive Connected", compute=_compute_google_drive_connected)
-
     def _compute_google_drive_files(self):
         google_service = self.env['google.service']
         for rec in self:
