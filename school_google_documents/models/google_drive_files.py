@@ -102,50 +102,8 @@ class GoogleService(models.AbstractModel):
             
         elif self.drive_token_validity and self.drive_token_validity >= (fields.Datetime.now() + timedelta(minutes=1)) :
             self.generate_refresh_token('drive', self.drive_access_token)
-        
+            
         return self.drive_access_token
-
-    @api.model 
-    def _refresh_google_drive_token(self):
-        # LUL TODO similar code exists in google_drive. Should be factorized in google_account
-        get_param = self.env['ir.config_parameter'].sudo().get_param
-        client_id = get_param('google_drive_client_id')
-        client_secret = get_param('google_drive_client_secret')
-
-        if not client_id or not client_secret:
-            raise UserError(_("The account for the Google Drive service is not configured."))
-
-        headers = {"content-type": "application/x-www-form-urlencoded"}
-        data = {
-            'refresh_token': self.drive_refresh_token,
-            'client_id': client_id,
-            'client_secret': client_secret,
-            'grant_type': 'refresh_token',
-        }
-
-        try:
-            _dummy, response, _dummy = self.env['google.service']._do_request(GOOGLE_TOKEN_ENDPOINT, params=data, headers=headers, method='POST', preuri='')
-            ttl = response.get('expires_in')
-            self.write({
-                'drive_access_token': response.get('access_token'),
-                'drive_token_validity': fields.Datetime.now() + timedelta(seconds=ttl),
-            })
-        except requests.HTTPError as error:
-            if error.response.status_code in (400, 401):  # invalid grant or invalid client
-                # Delete refresh token and make sure it's commited
-                self.env.cr.rollback()
-                self.write({
-                    'drive_access_token': False,
-                    'drive_refresh_token': False,
-                    'drive_ttl': False,
-                    'drive_token_validity': False,
-                })
-                self.env.cr.commit()
-            error_key = error.response.json().get("error", "nc")
-            error_msg = _("An error occurred while generating the token. Your authorization code may be invalid or has already expired [%s]. "
-                          "You should check your Client ID and secret on the Google APIs plateform or try to stop and restart your drive synchronisation.",
-                          error_key)
-            raise UserError(error_msg)
     
     @api.model
     def get_files_from_folder_id(self, folderId):
