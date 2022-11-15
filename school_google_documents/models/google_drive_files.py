@@ -86,6 +86,7 @@ class Company(models.Model):
 class GoogleService(models.Model):
     name = 'school.google.service'
     
+    drive_auth_code = fields.Char('Drive Access Token', copy=False)
     drive_access_token = fields.Char('Drive Access Token', copy=False)
     drive_refresh_token = fields.Char('Drive Refresh Token', copy=False)
     drive_ttl = fields.Float('Drive Token TTL', copy=False)
