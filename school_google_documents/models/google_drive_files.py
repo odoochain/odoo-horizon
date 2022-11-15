@@ -85,7 +85,6 @@ class Company(models.Model):
     
 class GoogleService(models.Model):
     name = 'school.google.service'
-    _inherit='google.service'
     
     drive_access_token = fields.Char('Drive Access Token', copy=False)
     drive_refresh_token = fields.Char('Drive Refresh Token', copy=False)
