@@ -21,11 +21,14 @@
 
 import logging
 import json
+import requests
 
 from datetime import date, timedelta
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+
+from odoo.addons.google_account.models.google_service import GOOGLE_TOKEN_ENDPOINT
 
 _logger = logging.getLogger(__name__)
 
@@ -46,12 +49,7 @@ class google_drive_folder_mixin(models.AbstractModel):
                 if rec.google_drive_folder_id :
                     google_service.get_files_from_folder_id(rec.google_drive_folder_id)
             except:
-                url = google_service.google_authentication_url()
-                rec.google_drive_files = False
-                return {
-                    "status": "need_auth",
-                    "url": url
-                }    
+                pass
         
             gdf_id = self.env['school.google_drive_file'].create({
                 'name' : 'test_file.txt',
