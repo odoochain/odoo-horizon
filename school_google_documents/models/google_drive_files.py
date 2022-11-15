@@ -80,7 +80,7 @@ class GoogleService(models.AbstractModel):
     
     drive_access_token = fields.Char('Drive Access Token', copy=False)
     drive_refresh_token = fields.Char('Drive Refresh Token', copy=False)
-    drive_ttl = fields.Number('Drive Token TTL', copy=False)
+    drive_ttl = fields.Float('Drive Token TTL', copy=False)
     drive_token_validity = fields.Datetime('Token Validity', copy=False)
     
     @api.model
