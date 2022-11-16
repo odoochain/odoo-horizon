@@ -81,7 +81,7 @@ class Users(models.Model):
     def SELF_READABLE_FIELDS(self):
         return super().SELF_READABLE_FIELDS + ['current_year_id']
     
-    current_year_id = fields.Many2one('school.year', string="Current Year", default="1")
+    current_year_id = fields.Many2one('school.year', string="Current Year")
 
 class Partner(models.Model):
     '''Partner'''
