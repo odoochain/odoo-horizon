@@ -78,7 +78,6 @@ class GoogleDriveFile(models.TransientModel):
     mimetype = fields.Char('Mime Type', readonly=True)
     
 class Company(models.Model):
-    name = 'res.company'
     _inherit = 'res.company'
     
     google_drive_id = fields.Many2one('school.google.service', 'Google Drive Service', copy=False)
