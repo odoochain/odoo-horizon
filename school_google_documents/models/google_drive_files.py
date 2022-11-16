@@ -83,7 +83,7 @@ class Company(models.Model):
     google_drive_id = fields.Many2one('school.google.service', 'Google Drive Service', copy=False)
     
 class GoogleService(models.Model):
-    name = 'school.google.service'
+    _name = 'school.google.service'
     
     drive_auth_code = fields.Char('Drive Access Token', copy=False)
     drive_access_token = fields.Char('Drive Access Token', copy=False)
