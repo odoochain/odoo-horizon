@@ -60,7 +60,7 @@ class CourseDocumentation(models.Model):
     @api.onchange('course_id')
     def _onchange_course_id(self):
         self.write({
-            'course_ids' : [(4,self.course_id)]
+            'course_ids' : [(4,self.course_id.id)]
         })
     
     
