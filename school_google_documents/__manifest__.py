@@ -19,13 +19,13 @@
 #
 ##############################################################################
 {
-    'name': 'School google documents',
+    'name': 'Google documents mixin',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest.lu (Jerome Sonnet)',
     'website': '',
-    'category': 'School Management',
-    'depends': ['school_management','google_account'],
+    'category': 'Documents',
+    'depends': ['google_account'],
     'init_xml': [],
     'data': [
         #'views/configuration_view.xml',
