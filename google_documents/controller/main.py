@@ -31,12 +31,11 @@ import dateutil.relativedelta
 from odoo import api, fields
 from odoo import http
 from odoo.http import request
-from odoo.addons.auth_oauth.controllers.main import OAuthLogin as Home
 
 _logger = logging.getLogger(__name__)
 
-class GoogleServiceController(Home):
+class GoogleServiceController(http.Controller):
     
     @http.route('/google_documents/authorize', type='http', auth='user')
-    def google_drice_service_authorize(self, redirect=None, *args, **kw):
+    def google_drice_service_authorize(self, state, code, scope, redirect=None, *args, **kw):
         _logger.info('Authorize response : %s' % request)
