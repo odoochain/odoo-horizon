@@ -119,13 +119,32 @@ class GoogleDriveService(models.Model):
             include_granted_scopes='true',
             state=self.id)
         
-        _logger.info('STATE : %s' % state)
-        
         return {
               'type'     : 'ir.actions.act_url',
               'url'      : authorization_url,
               'target'   : 'self'
         }
+        
+    def action_refresh_token(self):
+        
+        flow = google_auth_oauthlib.flow.Flow.from_client_config(
+            client_config=json.loads(self.drive_client_config_json),
+            scopes=self._get_drive_scope())
+            
+        flow.redirect_uri = self._get_redirect_uri()
+        
+        flow.fetch_token(code=self.drive_auth_code)
+        
+        # Store the credentials in the session.
+        # ACTION ITEM for developers:
+        #     Store user's access and refresh tokens in your data store if
+        #     incorporating this code into your real app.
+        credentials = flow.credentials
+        
+        self.drive_access_token = credentials.token
+        self.drive_refresh_token = credentials.refresh_token
+        self.drive_ttl = credentials.expires_in
+        self.drive_token_validity = fields.Datetime.now() + timedelta(seconds=self.drive_ttl) if self.drive_ttl else False
     
     def is_google_drive_connected(self):
         self.ensure_one()
@@ -134,21 +153,13 @@ class GoogleDriveService(models.Model):
             raise UserError('Google Drive Not Connected - please contact your administrator.')
         
         if not self.drive_refresh_token :
-            base_url = self.env.user.get_base_url()
-            self.drive_access_token,  self.drive_refresh_token,  self.drive_ttl = self._get_google_tokens(
-                self.env['ir.config_parameter'].sudo().get_param('google_drive_auth_code'),
-                'drive'
-                )
-            
-            self.drive_token_validity = fields.Datetime.now() + timedelta(seconds=self.drive_ttl) if self.drive_ttl else False
-        
-            _logger.info(self.drive_access_token)
-            _logger.info(self.drive_refresh_token)
-            _logger.info(self.drive_ttl)
-            
+            self.action_refresh_token()
         elif self.drive_token_validity and self.drive_token_validity >= (fields.Datetime.now() + timedelta(minutes=1)) :
-            self.generate_refresh_token('drive', self.drive_access_token)
-            
+            self.action_refresh_token()
+        
+        _logger.info(self.drive_access_token)
+        _logger.info(self.drive_refresh_token)
+        _logger.info(self.drive_ttl)
         return self.drive_access_token
     
     def get_files_from_folder_id(self, folderId):

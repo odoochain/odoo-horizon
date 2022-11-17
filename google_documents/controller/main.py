@@ -37,8 +37,13 @@ _logger = logging.getLogger(__name__)
 class GoogleServiceController(http.Controller):
     
     @http.route('/google_documents/authorize', type='http', auth='user')
-    def google_drice_service_authorize(self, state, code, scope, redirect=None, *args, **kw):
+    def google_drive_service_authorize(self, state, code, scope, redirect=None, *args, **kw):
         _logger.info('Authorize response : %s %s %s' % (state, code, scope))
         drive_service = request.env['google.drive.service'].browse(state)
         drive_service.drive_auth_code = code
         return werkzeug.utils.redirect('/web#view_type=form&model=google.drive.service&id=%s' % state)
+        
+    @http.route('/google_documents/refresh_token', type='http', auth='user')
+    def google_drive_service_refresh_token(self, redirect=None, *args, **kw):
+        _logger.info('Refresh Token response : %s' % (request))
+        return 'done'
