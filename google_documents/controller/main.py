@@ -41,12 +41,4 @@ class GoogleServiceController(http.Controller):
         _logger.info('Authorize response : %s %s %s' % (state, code, scope))
         drive_service = request.env['google.drive.service'].browse(state)
         drive_service.drive_auth_code = code
-        return {
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'google.drive.service',
-            'res_id': state,
-            'target': 'self',
-        }
-    
+        return werkzeug.utils.redirect('/web#view_type=form&model=google.drive.service&id=%s' % state)
