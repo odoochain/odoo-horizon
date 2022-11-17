@@ -37,16 +37,16 @@ _logger = logging.getLogger(__name__)
 class GoogleServiceController(http.Controller):
     
     @http.route('/google_documents/authorize', type='http', auth='user')
-    def google_drice_service_authorize(self, google_drive_service_id, code, scope, redirect=None, *args, **kw):
-        _logger.info('Authorize response : %s %s %s' % (google_drive_service_id, code, scope))
-        drive_service = self['google.drive.service'].browse(google_drive_service_id)
+    def google_drice_service_authorize(self, state, code, scope, redirect=None, *args, **kw):
+        _logger.info('Authorize response : %s %s %s' % (state, code, scope))
+        drive_service = self['google.drive.service'].browse(state)
         drive_service.drive_auth_code = code
         return {
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'google.drive.service',
-            'res_id': google_drive_service_id,
+            'res_id': state,
             'target': 'self',
         }
     
