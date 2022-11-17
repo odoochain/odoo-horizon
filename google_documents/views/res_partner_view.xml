@@ -79,7 +79,7 @@
                 			<field name="drive_token_validity" modifiers="{}" id="drive_token_validity"/>
                 			<separator modifiers="{}"/>
                 		</group>
-                		<button name="%(action_connect_to_drive)d" icon="fa-search-plus" string="Connect" type="action" target="new"/>
+                		<button class="btn btn-primary float-end" name="action_connect_to_drive" icon="fa-search-plus" string="Connect" type="object">Connect</button>
                     </sheet>
                 </form>
             </field>
