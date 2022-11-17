@@ -28,7 +28,8 @@ from datetime import date, timedelta
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
-from odoo.addons.google_account.models.google_service import GOOGLE_TOKEN_ENDPOINT
+import google.oauth2.credentials
+import google_auth_oauthlib.flow
 
 _logger = logging.getLogger(__name__)
 
@@ -82,14 +83,46 @@ class Company(models.Model):
 class GoogleDriveService(models.Model):
     _name = 'google.drive.service'
     
+    drive_client_config_json = fields.Text('Drive Client Config JSON', copy=False)
+    
     drive_auth_code = fields.Char('Drive Auth Code', copy=False)
     drive_access_token = fields.Char('Drive Access Token', copy=False)
     drive_refresh_token = fields.Char('Drive Refresh Token', copy=False)
     drive_ttl = fields.Float('Drive Token TTL', copy=False)
     drive_token_validity = fields.Datetime('Token Validity', copy=False)
     
-    @api.model
     def is_google_drive_connected(self):
+        self.ensure_one()
+        
+        if not self.drive_auth_code:
+            # Use the client_secret.json file to identify the application requesting
+            # authorization. The client ID (from that file) and access scopes are required.
+            flow = google_auth_oauthlib.flow.Flow.from_client_config(
+                client_config=json.loads(self.drive_client_config_json),
+                scopes=self._get_drive_scope())
+            
+            # Indicate where the API server will redirect the user after the user completes
+            # the authorization flow. The redirect URI is required. The value must exactly
+            # match one of the authorized redirect URIs for the OAuth 2.0 client, which you
+            # configured in the API Console. If this value doesn't match an authorized URI,
+            # you will get a 'redirect_uri_mismatch' error.
+            flow.redirect_uri = self._get_redirect_uri()
+            
+            # Generate URL for request to Google's OAuth 2.0 server.
+            # Use kwargs to set optional request parameters.
+            authorization_url, state = flow.authorization_url(
+                # Enable offline access so that you can refresh an access token without
+                # re-prompting the user for permission. Recommended for web server apps.
+                access_type='offline',
+                # Enable incremental authorization. Recommended as a best practice.
+                include_granted_scopes='true')
+            
+            _logger.info('STATE : %s' % state)
+            
+            return {
+                  'type'     : 'ir.actions.act_url',
+                  'url'      : authorization_url
+            }
         
         if not self.drive_refresh_token :
             base_url = self.env.user.get_base_url()
@@ -118,5 +151,8 @@ class GoogleDriveService(models.Model):
             _logger.info(ask_time)
             
     def _get_drive_scope(self):
-        return 'https://www.googleapis.com/auth/drive.readonly'
+        return ['https://www.googleapis.com/auth/drive.readonly']
+        
+    def _get_redirect_uri(self):
+        return '%s/google_documents/authorize' % self.env.user.get_base_url()
     
