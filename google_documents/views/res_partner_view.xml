@@ -29,7 +29,7 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="priority">100</field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='tags']" position="before">
+                <xpath expr="//field[@name='category_id']" position="before">
                     <field name="google_drive_folder_id"/>
                 </xpath>
                 <xpath expr="//notebook[last()]" position="inside">
