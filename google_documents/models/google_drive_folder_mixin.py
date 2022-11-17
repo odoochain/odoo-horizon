@@ -78,18 +78,20 @@ class GoogleDriveFile(models.TransientModel):
 class Company(models.Model):
     _inherit = 'res.company'
     
-    google_drive_id = fields.Many2one('google.drive.service', 'Google Drive Service', copy=False)
+    google_drive_id = fields.Many2one('google.drive.service', 'Google Drive Service')
     
 class GoogleDriveService(models.Model):
     _name = 'google.drive.service'
     
-    drive_client_config_json = fields.Text('Drive Client Config JSON', copy=False)
+    name = fields.Char('name')
     
-    drive_auth_code = fields.Char('Drive Auth Code', copy=False)
-    drive_access_token = fields.Char('Drive Access Token', copy=False)
-    drive_refresh_token = fields.Char('Drive Refresh Token', copy=False)
-    drive_ttl = fields.Float('Drive Token TTL', copy=False)
-    drive_token_validity = fields.Datetime('Token Validity', copy=False)
+    drive_client_config_json = fields.Text('Drive Client Config JSON')
+    
+    drive_auth_code = fields.Char('Drive Auth Code')
+    drive_access_token = fields.Char('Drive Access Token')
+    drive_refresh_token = fields.Char('Drive Refresh Token')
+    drive_ttl = fields.Float('Drive Token TTL')
+    drive_token_validity = fields.Datetime('Token Validity')
     
     def is_google_drive_connected(self):
         self.ensure_one()
