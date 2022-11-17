@@ -58,4 +58,29 @@
                 </xpath>
             </field>
         </record>
+        
+        <!-- Individual Program Form View -->
+        <record model="ir.ui.view" id="google_drive_service">
+            <field name="name">google.drive.service.view</field>
+            <field name="model">google.drive.service</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Google Drive Service">
+                <sheet>
+                    <group col="4" modifiers="{}">
+            			<field name="name" modifiers="{}" id="name"/>
+            			<newline modifiers="{}"/>
+            			<field name="drive_client_config_json" colspan="4" modifiers="{}" id="drive_client_config_json"/>
+            			<newline modifiers="{}"/>
+            			<field name="drive_auth_code" modifiers="{}" id="drive_auth_code"/>
+            			<field name="drive_access_token" modifiers="{}" id="drive_access_token"/>
+            			<field name="drive_refresh_token" modifiers="{}" id="drive_refresh_token"/>
+            			<field name="drive_ttl" modifiers="{}" id="drive_ttl"/>
+            			<field name="drive_token_validity" modifiers="{}" id="drive_token_validity"/>
+            			<separator modifiers="{}"/>
+            		</group>
+            		<button name="%(action_connect_to_drive)d" icon="fa-search-plus" string="Connect" type="action" target="new"/>
+                </sheet>
+            </form>
+        </record>
 </odoo>
