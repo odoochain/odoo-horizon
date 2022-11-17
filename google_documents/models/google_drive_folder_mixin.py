@@ -123,7 +123,8 @@ class GoogleDriveService(models.Model):
         
         return {
               'type'     : 'ir.actions.act_url',
-              'url'      : authorization_url
+              'url'      : authorization_url,
+              'target'   : 'self'
         }
     
     def is_google_drive_connected(self):
