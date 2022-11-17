@@ -39,7 +39,7 @@ class GoogleServiceController(http.Controller):
     @http.route('/google_documents/authorize', type='http', auth='user')
     def google_drice_service_authorize(self, state, code, scope, redirect=None, *args, **kw):
         _logger.info('Authorize response : %s %s %s' % (state, code, scope))
-        drive_service = self['google.drive.service'].browse(state)
+        drive_service = self.env['google.drive.service'].browse(state)
         drive_service.drive_auth_code = code
         return {
             'type': 'ir.actions.act_window',
