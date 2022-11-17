@@ -133,7 +133,9 @@ class GoogleDriveService(models.Model):
             
         flow.redirect_uri = self._get_redirect_uri()
         
+        _logger.info('FETCH TOKEN using %s ' % self.drive_auth_code)
         flow.fetch_token(code=self.drive_auth_code)
+        _logger.info('GOT TOKENS %s' % flow.credentials)
         
         # Store the credentials in the session.
         # ACTION ITEM for developers:
