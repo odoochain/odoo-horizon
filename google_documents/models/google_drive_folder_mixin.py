@@ -116,7 +116,8 @@ class GoogleDriveService(models.Model):
             # re-prompting the user for permission. Recommended for web server apps.
             access_type='offline',
             # Enable incremental authorization. Recommended as a best practice.
-            include_granted_scopes='true')
+            include_granted_scopes='true',
+            state=self.id)
         
         _logger.info('STATE : %s' % state)
         
