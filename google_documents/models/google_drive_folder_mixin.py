@@ -131,7 +131,7 @@ class GoogleDriveService(models.Model):
             
             log = logging.getLogger()
             
-            log.set_level(logging.DEBUG)
+            log.setLevel(logging.DEBUG)
             
             flow.fetch_token(code=self.drive_auth_code)
             
