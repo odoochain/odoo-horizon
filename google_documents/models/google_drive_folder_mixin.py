@@ -129,9 +129,7 @@ class GoogleDriveService(models.Model):
                 scopes=self._get_drive_scope())
             
             flow.redirect_uri = self._get_redirect_uri()
-            flow.setApprovalPrompt("force")
-            flow.setAccessType("offline")
-            
+
             log = logging.getLogger()
             
             log.setLevel(logging.DEBUG)
