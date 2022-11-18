@@ -135,18 +135,12 @@ class GoogleDriveService(models.Model):
 
         drive = googleapiclient.discovery.build(
         API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
-        
-        _logger.info('HERE')
-        
         files = drive.files().list(q="'%s' in parents" % folderId,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,description,mimeType)').execute()
-        
         _logger.info('FILES : %s ' % files)
-        
         gdf_models = self.env['google_drive_file']
-        
         gdf_ids = self.env['google_drive_file']
-        
         for file in files['files'] :
+            _logger.info('FILE : %s ' % file)
             gdf_ids |= gdf_models.create({
                     'name' : file['name'],
                     'description' : file['description'],
