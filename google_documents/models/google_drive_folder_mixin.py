@@ -138,7 +138,7 @@ class GoogleDriveService(models.Model):
         
         _logger.info('HERE')
         
-        files = drive.files().list(q="'%s' in parents" % folderId,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,createdTime,modifiedTime,size,mimetype)').execute()
+        files = drive.files().list(q="'%s' in parents" % folderId,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,description,mimetype)').execute()
         
         _logger.info('FILES : %s ' % files)
         
@@ -149,7 +149,7 @@ class GoogleDriveService(models.Model):
         for file in files['files'] :
             gdf_ids |= gdf_models.create({
                     'name' : file['name'],
-                    'description' : 'Fichier Test',
+                    'description' : file['description'],
                     'url' : file['id'],
                     'mimetype' : file['mimetype']
                 })
