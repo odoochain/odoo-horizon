@@ -138,7 +138,7 @@ class GoogleDriveService(models.Model):
         
         _logger.info('HERE')
         
-        files = drive.files().list(q="'%s' in parents" % folderId,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,description,mimetype)').execute()
+        files = drive.files().list(q="'%s' in parents" % folderId,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,description,mimeType)').execute()
         
         _logger.info('FILES : %s ' % files)
         
