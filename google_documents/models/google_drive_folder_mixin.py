@@ -122,18 +122,18 @@ class GoogleDriveService(models.Model):
         
     def action_refresh_token(self):
         self.ensure_one()
-        if not self.drive_credentials :
+        if not self.drive_credentials_json :
             flow = google_auth_oauthlib.flow.Flow.from_client_config(
                 client_config=json.loads(self.drive_client_config_json),
                 scopes=self._get_drive_scope())
             
             flow.redirect_uri = self._get_redirect_uri()
             flow.fetch_token(code=self.drive_auth_code)
-            self.drive_credentials = flow.credentials.to_json()
+            self.drive_credentials_json = flow.credentials.to_json()
         else :
             cred = google.oauth2.credentials.Credentials.from_authorized_user_info(json.loads(self.drive_credentials), self._get_drive_scope())
             cred.refresh(None)
-            self.drive_credentials = cred.to_json()
+            self.drive_credentials_json = cred.to_json()
         
 
     def is_google_drive_connected(self):
