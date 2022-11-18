@@ -132,7 +132,7 @@ class GoogleDriveService(models.Model):
         drive = googleapiclient.discovery.build(
         API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
 
-        file_dict = dict()
+        all_file_list = []
         folder_queue = [folderId]
         gdf_models = self.env['google_drive_file']
         gdf_ids = self.env['google_drive_file']
@@ -145,13 +145,13 @@ class GoogleDriveService(models.Model):
                 if file1['mimeType'] == 'application/vnd.google-apps.folder':
                     folder_queue.append(file1['id'])
                 else :
-                    gdf_ids |= gdf_models.create({
+                    all_file_list.append({
                         'name' : file1['name'],
                         'googe_drive_id' : file1['id'],
                         'mimeType' : file1['mimeType'],
                         'url' : file1['webViewLink']
                     })
-        return gdf_ids
+        return gdf_models.create(all_file_list)
             
     def _get_drive_scope(self):
         return ['https://www.googleapis.com/auth/drive.readonly']
