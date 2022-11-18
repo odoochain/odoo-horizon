@@ -131,19 +131,25 @@ class GoogleDriveService(models.Model):
 
         drive = googleapiclient.discovery.build(
         API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
-        files = drive.files().list(q="'%s' in parents" % folderId,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
-        _logger.info('FILES : %s ' % files)
+
+        file_dict = dict()
+        folder_queue = [folderId]
         gdf_models = self.env['google_drive_file']
         gdf_ids = self.env['google_drive_file']
-        for file in files['files'] :
-            _logger.info('FILE : %s ' % file)
-            gdf_ids |= gdf_models.create({
-                    'name' : file['name'],
-                    'googe_drive_id' : file['id'],
-                    'mimeType' : file['mimeType'],
-                    'url' : file['webViewLink']
-                })
-
+        while len(folder_queue) != 0:
+            current_folder_id = folder_queue.pop(0)
+            file_list = drive.files().list(q=f"'{current_folder_id}' in parents and trashed=false",supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
+    
+            for file1 in file_list:
+                if file1['mimeType'] == 'application/vnd.google-apps.folder':
+                    folder_queue.append(file1['id'])
+                else :
+                    gdf_ids |= gdf_models.create({
+                        'name' : file1['name'],
+                        'googe_drive_id' : file1['id'],
+                        'mimeType' : file1['mimeType'],
+                        'url' : file1['webViewLink']
+                    })
         return gdf_ids
             
     def _get_drive_scope(self):
