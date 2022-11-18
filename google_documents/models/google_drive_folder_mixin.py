@@ -88,14 +88,10 @@ class GoogleDriveService(models.Model):
     drive_client_config_json = fields.Text('Drive Client Config JSON')
     
     drive_auth_code = fields.Char('Drive Auth Code')
-    drive_access_token = fields.Char('Drive Access Token')
-    drive_refresh_token = fields.Char('Drive Refresh Token')
-    drive_ttl = fields.Float('Drive Token TTL')
-    drive_token_validity = fields.Datetime('Token Validity')
+    drive_credentials = fields.Char('Drive Access Credentials')
     
     def action_connect_to_drive(self):
         self.ensure_one()
-        
         # Use the client_secret.json file to identify the application requesting
         # authorization. The client ID (from that file) and access scopes are required.
         flow = google_auth_oauthlib.flow.Flow.from_client_config(
@@ -126,31 +122,23 @@ class GoogleDriveService(models.Model):
         }
         
     def action_refresh_token(self):
-        
-        flow = google_auth_oauthlib.flow.Flow.from_client_config(
-            client_config=json.loads(self.drive_client_config_json),
-            scopes=self._get_drive_scope())
+        self.ensure_one()
+        if not self.drive_credentials :
+            flow = google_auth_oauthlib.flow.Flow.from_client_config(
+                client_config=json.loads(self.drive_client_config_json),
+                scopes=self._get_drive_scope())
             
-        flow.redirect_uri = self._get_redirect_uri()
+            flow.redirect_uri = self._get_redirect_uri()
+            flow.fetch_token(code=self.drive_auth_code)
+            self.drive_credentials = flow.credentials.to_json()
+        else :
+            cred = google.oauth2.credentials.Credentials.from_authorized_user_info(json.loads(self.drive_credentials), self._get_drive_scope())
+            cred.refresh(None)
+            self.drive_credentials = cred.to_json()
         
-        _logger.info('FETCH TOKEN using %s ' % self.drive_auth_code)
-        flow.fetch_token(code=self.drive_auth_code)
-        _logger.info('GOT TOKENS %s' % flow.credentials)
-        
-        # Store the credentials in the session.
-        # ACTION ITEM for developers:
-        #     Store user's access and refresh tokens in your data store if
-        #     incorporating this code into your real app.
-        credentials = flow.credentials
-        
-        self.drive_access_token = credentials.token
-        self.drive_refresh_token = credentials.refresh_token
-        self.drive_ttl = credentials.expires_in
-        self.drive_token_validity = fields.Datetime.now() + timedelta(seconds=self.drive_ttl) if self.drive_ttl else False
-    
+
     def is_google_drive_connected(self):
         self.ensure_one()
-        
         if not self.drive_auth_code:
             raise UserError('Google Drive Not Connected - please contact your administrator.')
         
@@ -177,4 +165,3 @@ class GoogleDriveService(models.Model):
         
     def _get_redirect_uri(self):
         return '%s/google_documents/authorize' % self.env.user.get_base_url()
-    
