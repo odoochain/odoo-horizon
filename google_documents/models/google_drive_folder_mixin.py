@@ -74,7 +74,7 @@ class Company(models.Model):
     
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 API_SERVICE_NAME = 'drive'
-API_VERSION = 'v2'
+API_VERSION = 'v3'
     
 class GoogleDriveService(models.Model):
     _name = 'google.drive.service'
