@@ -38,7 +38,7 @@
                         <field name="google_drive_files">
                             <tree string="Google Documents">
                                 <field name="name" />
-                                <field name="description" />
+                                <field name="mimeType" />
                                 <field name="url" widget="url" />
                             </tree>
                         </field>
