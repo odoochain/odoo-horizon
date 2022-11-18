@@ -137,7 +137,7 @@ class GoogleDriveService(models.Model):
         
         files = drive.files().children().list(folderId=folderId).execute()
         
-        _logger.info(files)
+        _logger.info('FILES : %s ' % files)
         
         gdf_models = self.env['google_drive_file']
         
