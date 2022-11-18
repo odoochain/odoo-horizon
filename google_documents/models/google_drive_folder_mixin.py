@@ -128,7 +128,15 @@ class GoogleDriveService(models.Model):
                 scopes=self._get_drive_scope())
             
             flow.redirect_uri = self._get_redirect_uri()
+            
+            log = logging.getLogger()
+            
+            log.set_level(logging.DEBUG)
+            
             flow.fetch_token(code=self.drive_auth_code)
+            
+            log.set_level(logging.INFO)
+            
             credentials = flow.credentials
             cred = {
                 'token': credentials.token,
