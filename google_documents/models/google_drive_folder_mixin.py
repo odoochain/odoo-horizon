@@ -141,6 +141,7 @@ class GoogleDriveService(models.Model):
             file_list = drive.files().list(q=f"'{current_folder_id}' in parents and trashed=false",supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
     
             for file1 in file_list:
+                _logger.info(file1)
                 if file1['mimeType'] == 'application/vnd.google-apps.folder':
                     folder_queue.append(file1['id'])
                 else :
