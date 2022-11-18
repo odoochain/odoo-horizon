@@ -140,7 +140,7 @@ class GoogleDriveService(models.Model):
             gdf_ids |= gdf_models.create({
                     'name' : file['name'],
                     'googe_drive_id' : file['id'],
-                    'mimeType' : file['mimetype'],
+                    'mimeType' : file['mimeType'],
                     'url' : file['webViewLink']
                 })
 
