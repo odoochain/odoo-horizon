@@ -133,7 +133,7 @@ class GoogleDriveService(models.Model):
         else :
             cred = google.oauth2.credentials.Credentials.from_authorized_user_info(json.loads(self.drive_credentials_json), self._get_drive_scope())
             cred.refresh(None)
-            self.drive_credentials_json = cred.to_json()
+            self.drive_credentials_json = json.dumps(cred.__dict__)
         
 
     def is_google_drive_connected(self):
