@@ -131,7 +131,7 @@ class GoogleDriveService(models.Model):
             flow.fetch_token(code=self.drive_auth_code)
             self.drive_credentials_json = flow.credentials.to_json()
         else :
-            cred = google.oauth2.credentials.Credentials.from_authorized_user_info(json.loads(self.drive_credentials), self._get_drive_scope())
+            cred = google.oauth2.credentials.Credentials.from_authorized_user_info(json.loads(self.drive_credentials_json), self._get_drive_scope())
             cred.refresh(None)
             self.drive_credentials_json = cred.to_json()
         
