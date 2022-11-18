@@ -59,9 +59,9 @@ class GoogleDriveFile(models.TransientModel):
     _name = "google_drive_file"
     
     name = fields.Char('Name')
-    description = fields.Text('Description')
     url = fields.Char('Url')
-    mimetype = fields.Char('Mime Type', readonly=True)
+    mimeType = fields.Char('Mime Type')
+    googe_drive_id = fields.Char('Google Drive Id')
     
 class Company(models.Model):
     _inherit = 'res.company'
@@ -131,7 +131,7 @@ class GoogleDriveService(models.Model):
 
         drive = googleapiclient.discovery.build(
         API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
-        files = drive.files().list(q="'%s' in parents" % folderId,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,description,mimeType)').execute()
+        files = drive.files().list(q="'%s' in parents" % folderId,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
         _logger.info('FILES : %s ' % files)
         gdf_models = self.env['google_drive_file']
         gdf_ids = self.env['google_drive_file']
@@ -139,9 +139,9 @@ class GoogleDriveService(models.Model):
             _logger.info('FILE : %s ' % file)
             gdf_ids |= gdf_models.create({
                     'name' : file['name'],
-                    'description' : file['description'],
-                    'url' : file['id'],
-                    'mimetype' : file['mimetype']
+                    'googe_drive_id' : file['id'],
+                    'mimeType' : file['mimetype'],
+                    'url' : file['webViewLink']
                 })
 
         return gdf_ids
