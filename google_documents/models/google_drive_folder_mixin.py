@@ -53,7 +53,8 @@ class GoogleDriveFolderMixin(models.AbstractModel):
                     rec.google_drive_files = [[6,_,gdf_ids.ids]]
                 else :
                     rec.google_drive_files = False
-            except :
+            except as e :
+                _logger.info(e)
                 rec.google_drive_files = False
 
     google_drive_files = fields.Many2many('google_drive_file',string="Google Drive Files", compute=_compute_google_drive_files)
