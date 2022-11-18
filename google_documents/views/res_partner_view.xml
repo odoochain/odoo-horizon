@@ -70,16 +70,12 @@
                         <group col="4" modifiers="{}">
                 			<field name="name" modifiers="{}" id="name"/>
                 			<newline modifiers="{}"/>
+                			<field name="drive_auth_code" colspan="4" modifiers="{}" id="drive_auth_code"/>
                 			<field name="drive_client_config_json" colspan="4" modifiers="{}" id="drive_client_config_json"/>
-                			<newline modifiers="{}"/>
-                			<field name="drive_auth_code" modifiers="{}" id="drive_auth_code"/>
-                			<field name="drive_access_token" modifiers="{}" id="drive_access_token"/>
-                			<field name="drive_refresh_token" modifiers="{}" id="drive_refresh_token"/>
-                			<field name="drive_ttl" modifiers="{}" id="drive_ttl"/>
-                			<field name="drive_token_validity" modifiers="{}" id="drive_token_validity"/>
-                			<separator modifiers="{}"/>
+                			<field name="drive_credentials_json" colspan="4" modifiers="{}" id="drive_credentials_json"/>
                 		</group>
-                		<button class="btn btn-primary float-end" name="action_connect_to_drive" icon="fa-search-plus" string="Connect" type="object" />
+                		<button class="btn btn-primary float-end" name="action_connect_to_drive" icon="fa-plug" string="Connect" type="object" />
+                		<button class="btn btn-primary float-end" name="action_refresh_token" icon="fa-refresh" string="Refresh" type="object" />
                     </sheet>
                 </form>
             </field>

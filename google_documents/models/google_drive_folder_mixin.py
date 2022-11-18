@@ -85,10 +85,9 @@ class GoogleDriveService(models.Model):
     
     name = fields.Char('name')
     
-    drive_client_config_json = fields.Text('Drive Client Config JSON')
-    
     drive_auth_code = fields.Char('Drive Auth Code')
-    drive_credentials = fields.Char('Drive Access Credentials')
+    drive_client_config_json = fields.Text('Drive Client Config JSON')
+    drive_credentials_json = fields.Text('Drive Access Credentials')
     
     def action_connect_to_drive(self):
         self.ensure_one()
