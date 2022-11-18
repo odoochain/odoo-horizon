@@ -135,7 +135,7 @@ class GoogleDriveService(models.Model):
             
             flow.fetch_token(code=self.drive_auth_code)
             
-            log.set_level(logging.INFO)
+            log.setLevel(logging.INFO)
             
             credentials = flow.credentials
             cred = {
