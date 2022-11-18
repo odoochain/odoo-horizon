@@ -129,7 +129,16 @@ class GoogleDriveService(models.Model):
             
             flow.redirect_uri = self._get_redirect_uri()
             flow.fetch_token(code=self.drive_auth_code)
-            self.drive_credentials_json = json.dumps(flow.credentials.to_json())
+            credentials = flow.credentials
+            cred = {
+                'token': credentials.token,
+                'refresh_token': credentials.refresh_token,
+                'token_uri': credentials.token_uri,
+                'client_id': credentials.client_id,
+                'client_secret': credentials.client_secret,
+                'scopes': credentials.scopes
+            }
+            self.drive_credentials_json = json.dumps(cred)
         else :
             cred = self._json_to_cred(self.drive_credentials_json)
             cred.refresh(None)
@@ -164,15 +173,3 @@ class GoogleDriveService(models.Model):
         
     def _get_redirect_uri(self):
         return '%s/google_documents/authorize' % self.env.user.get_base_url()
-        
-    def _json_to_cred(self, json_to_pass):
-        cred_json = json.loads(json_to_pass)
-        creds = google.oauth2.credentials.Credentials(
-            cred_json['token'],
-            refresh_token=cred_json['refresh_token'],
-            id_token=cred_json['id_token'],
-            token_uri=cred_json['token_uri'],
-            client_id=cred_json['client_id'],
-            client_secret=cred_json['client_secret']
-        )
-        return creds 
