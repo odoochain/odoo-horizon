@@ -30,6 +30,7 @@ from odoo.exceptions import UserError
 
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
+import googleapiclient.discovery
 
 _logger = logging.getLogger(__name__)
 
@@ -44,28 +45,18 @@ class GoogleDriveFolderMixin(models.AbstractModel):
     google_drive_connected = fields.Boolean(string="Is Google Drive Connected", compute=_compute_google_drive_connected)
 
     def _compute_google_drive_files(self):
-        google_service = self.env['google.service']
+        google_service = self.env.company.google_drive_id
         for rec in self:
             try :
                 if google_service.is_google_drive_connected() and rec.google_drive_folder_id :
-                    google_service.get_files_from_folder_id(rec.google_drive_folder_id)
-            except:
-                pass
-        
-            gdf_id = self.env['google_drive_file'].create({
-                'name' : 'test_file.txt',
-                'description' : 'Fichier Test',
-                'url' : 'https://test.com/test_files.txt',
-                'mimetype' : 'text/plain'
-            })
-
-            rec.google_drive_files = [[6,_,gdf_id.ids]]
+                    gdf_ids = google_service.get_files_from_folder_id(rec.google_drive_folder_id)
+                    rec.google_drive_files = [[6,_,gdf_ids.ids]]
+                else :
+                    rec.google_drive_files = False
+            except :
+                rec.google_drive_files = False
 
     google_drive_files = fields.Many2many('google_drive_file',string="Google Drive Files", compute=_compute_google_drive_files)
-
-    def action_authorize_google_drive(self):
-        google_service = self.env['google.service']
-        return google_service._get_authorize_uri('https://horizon.student-crlg.be','drive','https://www.googleapis.com/auth/drive.readonly')
 
 class GoogleDriveFile(models.TransientModel):
     _name = "google_drive_file"
@@ -79,6 +70,10 @@ class Company(models.Model):
     _inherit = 'res.company'
     
     google_drive_id = fields.Many2one('google.drive.service', 'Google Drive Service')
+    
+SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+API_SERVICE_NAME = 'drive'
+API_VERSION = 'v2'
     
 class GoogleDriveService(models.Model):
     _name = 'google.drive.service'
@@ -95,7 +90,7 @@ class GoogleDriveService(models.Model):
         # authorization. The client ID (from that file) and access scopes are required.
         flow = google_auth_oauthlib.flow.Flow.from_client_config(
             client_config=json.loads(self.drive_client_config_json),
-            scopes=self._get_drive_scope())
+            scopes=SCOPES)
         
         # Indicate where the API server will redirect the user after the user completes
         # the authorization flow. The redirect URI is required. The value must exactly
@@ -130,34 +125,31 @@ class GoogleDriveService(models.Model):
             flow.redirect_uri = self._get_redirect_uri()
             flow.fetch_token(code=self.drive_auth_code)
             self.drive_credentials_json = json.dumps(flow.credentials.to_json())
-        else :
-            cred = self._json_to_cred(self.drive_credentials_json)
-            cred.refresh(None)
-            self.drive_credentials_json = json.dumps(cred.to_json())
-        
 
     def is_google_drive_connected(self):
         self.ensure_one()
-        if not self.drive_auth_code:
-            raise UserError('Google Drive Not Connected - please contact your administrator.')
-        
-        if not self.drive_refresh_token :
-            self.action_refresh_token()
-        elif self.drive_token_validity and self.drive_token_validity >= (fields.Datetime.now() + timedelta(minutes=1)) :
-            self.action_refresh_token()
-        
-        _logger.info(self.drive_access_token)
-        _logger.info(self.drive_refresh_token)
-        _logger.info(self.drive_ttl)
-        return self.drive_access_token
+        return self.drive_credentials_json
     
     def get_files_from_folder_id(self, folderId):
-            status, response, ask_time = self._do_request('/drive/v3/files',{
-                'q' : '%s in parents' % folderId,
-            })
-            _logger.info(status)
-            _logger.info(response)
-            _logger.info(ask_time)
+
+        drive = googleapiclient.discovery.build(
+        API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
+        
+        files = drive.files().list().execute()
+        
+        gdf_models = self.env['google_drive_file']
+        
+        gdf_ids = self.env['google_drive_file']
+        
+        for file in files['files'] :
+            gdf_ids |= gdf_models.create({
+                    'name' : file['name'],
+                    'description' : 'Fichier Test',
+                    'url' : file['id'],
+                    'mimetype' : file['mimetype']
+                })
+
+        return gdf_ids
             
     def _get_drive_scope(self):
         return ['https://www.googleapis.com/auth/drive.readonly']
@@ -165,8 +157,8 @@ class GoogleDriveService(models.Model):
     def _get_redirect_uri(self):
         return '%s/google_documents/authorize' % self.env.user.get_base_url()
         
-    def _json_to_cred(self, json_to_pass):
-        cred_json = json.loads(json_to_pass)
+    def _get_credential(self):
+        cred_json = json.loads(self.drive_credentials_json)
         creds = google.oauth2.credentials.Credentials(
             cred_json['token'],
             refresh_token=cred_json['refresh_token'],
