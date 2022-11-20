@@ -34,6 +34,10 @@ import googleapiclient.discovery
 
 _logger = logging.getLogger(__name__)
 
+SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+API_SERVICE_NAME = 'drive'
+API_VERSION = 'v3'
+
 class GoogleDriveFolderMixin(models.AbstractModel):
     _name = "google_drive_folder.mixin"
     
@@ -44,7 +48,7 @@ class GoogleDriveFolderMixin(models.AbstractModel):
         
     google_drive_connected = fields.Boolean(string="Is Google Drive Connected", compute=_compute_google_drive_connected)
 
-    def _compute_google_drive_files(self):
+    def _refresh_google_drive_files(self):
         google_service = self.env.company.google_drive_id
         for rec in self:
             if google_service.is_google_drive_connected() and rec.google_drive_folder_id :
@@ -53,10 +57,13 @@ class GoogleDriveFolderMixin(models.AbstractModel):
             else :
                 rec.google_drive_files = False
 
-    google_drive_files = fields.Many2many('google_drive_file',string="Google Drive Files", compute=_compute_google_drive_files)
+    google_drive_files = fields.One2many('google_drive_file', 'res_id', string="Google Drive Files")
 
-class GoogleDriveFile(models.TransientModel):
+class GoogleDriveFile(models.Model):
     _name = "google_drive_file"
+    
+    model = fields.Char('Related Record Model')
+    res_id = fields.Many2oneReference('Related Record ID', model_field='model')
     
     name = fields.Char('Name')
     url = fields.Char('Url')
@@ -67,10 +74,6 @@ class Company(models.Model):
     _inherit = 'res.company'
     
     google_drive_id = fields.Many2one('google.drive.service', 'Google Drive Service')
-    
-SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
-API_SERVICE_NAME = 'drive'
-API_VERSION = 'v3'
     
 class GoogleDriveService(models.Model):
     _name = 'google.drive.service'
@@ -139,9 +142,7 @@ class GoogleDriveService(models.Model):
         while len(folder_queue) != 0:
             current_folder_id = folder_queue.pop(0)
             file_list = drive.files().list(q=f"'{current_folder_id}' in parents and trashed=false",supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
-    
             for file1 in file_list['files']:
-                _logger.info(file1)
                 if file1['mimeType'] == 'application/vnd.google-apps.folder':
                     folder_queue.append(file1['id'])
                 else :
