@@ -34,7 +34,7 @@
                 </xpath>
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="google_document_list" string="Google Documents" attrs="{'invisible': [('google_drive_folder_id','=',False)]}" >
-                        <button class="btn btn-primary float-end" name="_refresh_google_drive_files" icon="fa-refresh" string="Refresh" type="object" />
+                        <button class="btn btn-primary float-end" name="action_refresh_google_drive_files" icon="fa-refresh" string="Refresh" type="object" />
                         <field name="google_drive_files">
                             <tree string="Google Documents">
                                 <field name="name" />

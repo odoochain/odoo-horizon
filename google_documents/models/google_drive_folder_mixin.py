@@ -48,7 +48,7 @@ class GoogleDriveFolderMixin(models.AbstractModel):
         
     google_drive_connected = fields.Boolean(string="Is Google Drive Connected", compute=_compute_google_drive_connected)
 
-    def _refresh_google_drive_files(self):
+    def action_refresh_google_drive_files(self):
         google_service = self.env.company.google_drive_id
         for rec in self:
             if google_service.is_google_drive_connected() and rec.google_drive_folder_id :
