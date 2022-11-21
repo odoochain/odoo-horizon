@@ -172,7 +172,7 @@ class GoogleDriveService(models.Model):
         return '%s/google_documents/authorize' % self.env.user.get_base_url()
         
     def _get_credential(self):
-        credential_json = self.drive_credentials_json
+        credential_json = json.loads(self.drive_credentials_json)
         if credential_json is None:
             return None
         credential = google.oauth2.credentials.Credentials.from_authorized_user_info(credential_json)
