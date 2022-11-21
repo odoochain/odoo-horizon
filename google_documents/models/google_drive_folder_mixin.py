@@ -173,7 +173,7 @@ class GoogleDriveService(models.Model):
         
     def _get_credential(self):
         cred_json = json.loads(self.drive_credentials_json)
-        _logger.info(cred_json[1])
+        cred_json = json.loads(cred_json)
         creds = google.oauth2.credentials.Credentials(
             cred_json['token'],
             refresh_token=cred_json['refresh_token'],
