@@ -129,7 +129,15 @@ class GoogleDriveService(models.Model):
                 client_config=json.loads(self.drive_client_config_json),
                 scopes=SCOPES)
             flow.redirect_uri = self._get_redirect_uri()
+            
+            import logging
+            logger = logging.getLogger()
+            logger.setLevel(logging.DEBUG)
+            
             flow.fetch_token(code=self.drive_auth_code)
+            
+            logger.setLevel(logging.INFO)
+            
             self.drive_credentials_json = json.dumps(flow.credentials.to_json())
 
     def is_google_drive_connected(self):
