@@ -54,6 +54,9 @@ class GoogleDriveFolderMixin(models.AbstractModel):
             if google_service.is_google_drive_connected() and rec.google_drive_folder_id :
                 gdf_ids = google_service.get_files_from_folder_id(rec.google_drive_folder_id)
                 rec.google_drive_files = [[6,_,gdf_ids.ids]]
+                rec.google_drive_files.write({
+                    'res_model' : rec._name
+                })
             else :
                 rec.google_drive_files = False
 
