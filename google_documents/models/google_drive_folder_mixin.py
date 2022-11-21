@@ -127,7 +127,7 @@ class GoogleDriveService(models.Model):
         if not self.drive_credentials_json :
             flow = google_auth_oauthlib.flow.Flow.from_client_config(
                 client_config=json.loads(self.drive_client_config_json),
-                scopes=SCOPES)
+                scopes=None)
             flow.redirect_uri = self._get_redirect_uri()
             
             import logging
