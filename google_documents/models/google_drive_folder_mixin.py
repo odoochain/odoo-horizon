@@ -25,7 +25,7 @@ import requests
 
 from datetime import date, timedelta
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError
 
 import google.oauth2.credentials
@@ -62,13 +62,19 @@ class GoogleDriveFolderMixin(models.AbstractModel):
 class GoogleDriveFile(models.Model):
     _name = "google_drive_file"
     
-    model = fields.Char('Related Record Model')
-    res_id = fields.Many2oneReference('Related Record ID', model_field='model')
+    res_model = fields.Char('Related Record Model')
+    res_id = fields.Many2oneReference('Related Record ID', model_field='res_model')
     
     name = fields.Char('Name')
     url = fields.Char('Url')
     mimeType = fields.Char('Mime Type')
     googe_drive_id = fields.Char('Google Drive Id')
+    
+    def _auto_init(self):
+        res = super(GoogleDriveFile, self)._auto_init()
+        tools.create_index(self._cr, 'google_drive_file_res_id_idx',
+                           self._table, ['res_model', 'res_id'])
+        return res
     
 class Company(models.Model):
     _inherit = 'res.company'
