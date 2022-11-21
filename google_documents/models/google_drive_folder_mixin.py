@@ -179,7 +179,6 @@ class GoogleDriveService(models.Model):
             refresh_token=cred_json['refresh_token'],
             token_uri=cred_json['token_uri'],
             client_id=cred_json['client_id'],
-            client_secret=cred_json['client_secret'],
-            scopes=cred_json['scopes']
+            client_secret=cred_json['client_secret']
         )
         return creds 
