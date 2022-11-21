@@ -127,7 +127,7 @@ class GoogleDriveService(models.Model):
         if not self.drive_credentials_json :
             flow = google_auth_oauthlib.flow.Flow.from_client_config(
                 client_config=json.loads(self.drive_client_config_json),
-                scopes=self._get_drive_scope())
+                scopes=SCOPES)
             flow.redirect_uri = self._get_redirect_uri()
             flow.fetch_token(code=self.drive_auth_code)
             self.drive_credentials_json = json.dumps(flow.credentials.to_json())
@@ -159,9 +159,6 @@ class GoogleDriveService(models.Model):
                         'url' : file1['webViewLink']
                     })
         return gdf_models.create(all_file_list)
-            
-    def _get_drive_scope(self):
-        return ['https://www.googleapis.com/auth/drive.readonly']
         
     def _get_redirect_uri(self):
         return '%s/google_documents/authorize' % self.env.user.get_base_url()
