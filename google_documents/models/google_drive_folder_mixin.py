@@ -155,7 +155,7 @@ class GoogleDriveService(models.Model):
         gdf_ids = self.env['google_drive_file']
         while len(folder_queue) != 0:
             if len(folder_queue) > 1 :
-                folder_query = "'" + "' in parents or ".join(folder_queue) + "' in parents and trashed=false"
+                folder_query = "'" + "' in parents or '".join(folder_queue) + "' in parents and trashed=false"
             else :
                 folder_query = f"'{folder_queue[0]}' in parents and trashed=false"
             folder_queue = []
