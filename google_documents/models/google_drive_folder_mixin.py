@@ -175,5 +175,5 @@ class GoogleDriveService(models.Model):
         credential_json = self.drive_credentials_json
         if credential_json is None:
             return None
-        credential = google.oauth2.credentials.from_authorized_user_info(credential_json)
+        credential = google.oauth2.credentials.Credentials.from_authorized_user_info(credential_json)
         return credential
