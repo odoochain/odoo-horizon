@@ -154,8 +154,12 @@ class GoogleDriveService(models.Model):
         gdf_models = self.env['google_drive_file']
         gdf_ids = self.env['google_drive_file']
         while len(folder_queue) != 0:
-            current_folder_id = folder_queue.pop(0)
-            file_list = drive.files().list(q=f"'{current_folder_id}' in parents and trashed=false",supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
+            if len(folder_queue) > 1 :
+                folder_query = " in parents or ".join(folder_queue) + " in parents and trashed=false"
+            else :
+                folder_query = f"'{folder_queue[0]}' in parents and trashed=false"
+            folder_queue = []
+            file_list = drive.files().list(q=folder_query,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
             for file1 in file_list['files']:
                 if file1['mimeType'] == 'application/vnd.google-apps.folder':
                     folder_queue.append(file1['id'])
