@@ -447,6 +447,11 @@ class website_portal_school_management(http.Controller):
             program = program[0]
             program.pop('course_group_ids')
             blocs = request.env['school.bloc'].sudo().search_read([('id','in',program['bloc_ids'])])
+            for i in range(len(blocs)):
+                bloc = blocs[i]
+                course_groups =  request.env['school.course_group'].sudo().search_read([('id','in',bloc['course_group_ids'])])
+                bloc['course_group_ids'] = course_groups
+                bloc[i] = bloc
             program['bloc_ids'] = blocs
             body = json.dumps(program, default=ustr)
             response = request.make_response(body, [
