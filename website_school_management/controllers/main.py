@@ -31,6 +31,7 @@ from odoo.addons.web.controllers.main import CSVExport
 from odoo.http import request, serialize_exception
 from odoo import tools
 from odoo.tools.translate import _
+from odoo.tools import ustr
 
 _logger = logging.getLogger(__name__)
 
