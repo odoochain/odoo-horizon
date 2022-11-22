@@ -32,7 +32,7 @@
 
   <template id="report_course_documentation_no_content">
         <t t-call="web.html_container">
-            <t t-set="data_report_margin_top" t-value="30" />
+            <t t-set="data_report_margin_top" t-value="45" />
             <t t-foreach="docs" t-as="o">
             <t t-set="desc" t-value="o"/>
               <t t-call="web.external_layout">
@@ -49,7 +49,7 @@
 
   <template id="report_course_documentation_content">
         <t t-call="web.html_container">
-            <t t-set="data_report_margin_top" t-value="30" />
+            <t t-set="data_report_margin_top" t-value="45" />
             <t t-foreach="docs" t-as="o">
             <t t-set="desc" t-value="o"/>
               <t t-call="web.external_layout">
@@ -196,7 +196,7 @@
 
   <template id="report_course_group_documentation_no_content">
         <t t-call="web.html_container">
-            <t t-set="data_report_margin_top" t-value="30" />
+            <t t-set="data_report_margin_top" t-value="45" />
             <t t-foreach="docs" t-as="o">
             <t t-set="desc" t-value="o"/>
               <t t-call="web.external_layout">
@@ -215,7 +215,7 @@
 
   <template id="report_course_group_documentation_content">
         <t t-call="web.html_container">
-            <t t-set="data_report_margin_top" t-value="30"/>
+            <t t-set="data_report_margin_top" t-value="45"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
             <t t-foreach="docs" t-as="o">
             <t t-set="desc" t-value="o"/>
