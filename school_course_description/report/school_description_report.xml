@@ -35,7 +35,7 @@
             <t t-set="data_report_margin_top" t-value="30" />
             <t t-foreach="docs" t-as="o">
               <t t-call="web.external_layout">
-                <div class="page" style="padding-left: 50px;padding-right: 50px;">
+                <div class="page article" t-att-data-oe-model="desc._name" t-att-data-oe-id="desc.id" style="padding-left: 50px;padding-right: 50px;">
                   <div class="jumbotron mt64">
                     <h1>No description found</h1>      
                     <p>Please contact the secretary or your teacher for more information about this activity.</p>
@@ -215,7 +215,7 @@
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
             <t t-foreach="docs" t-as="o">
-                <div class="page">
+                <div class="page article" t-att-data-oe-model="desc._name" t-att-data-oe-id="desc.id">
                     <div class="container">
                       <section>
                         <div class="row mt64 mb64">
