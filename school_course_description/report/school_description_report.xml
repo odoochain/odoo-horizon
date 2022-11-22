@@ -34,7 +34,7 @@
         <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="30" />
             <t t-foreach="docs" t-as="o">
-            <t t-set="desc" t-value="o">
+            <t t-set="desc" t-value="o"/>
               <t t-call="web.external_layout">
                 <div class="page" style="padding-left: 50px;padding-right: 50px;">
                   <div class="jumbotron mt64">
@@ -51,7 +51,7 @@
         <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="30" />
             <t t-foreach="docs" t-as="o">
-            <t t-set="desc" t-value="o">
+            <t t-set="desc" t-value="o"/>
               <t t-call="web.external_layout">
                 <div class="page" style="padding-left: 50px;padding-right: 50px;">
                   <t t-call="school_course_description.report_course_doc_section" />
@@ -198,7 +198,7 @@
         <t t-call="web.html_container">
             <t t-set="data_report_margin_top" t-value="30" />
             <t t-foreach="docs" t-as="o">
-            <t t-set="desc" t-value="o">
+            <t t-set="desc" t-value="o"/>
               <t t-call="web.external_layout">
                 <div class="page" style="padding-left: 50px;padding-right: 50px;">
                 <div class="container">
@@ -218,7 +218,7 @@
             <t t-set="data_report_margin_top" t-value="30"/>
             <t t-set="data_report_header_spacing" t-value="25"/>
             <t t-foreach="docs" t-as="o">
-            <t t-set="desc" t-value="o">
+            <t t-set="desc" t-value="o"/>
                 <div class="page">
                     <div class="container">
                       <section>
