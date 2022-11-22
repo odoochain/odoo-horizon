@@ -50,10 +50,12 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='google_drive_files']/tree" position="attributes">
                     <attribute name="editable">top</attribute>
+                    <attribute name="decoration-danger">not is_available</attribute>
+                    <attribute name="decoration-success">is_available</attribute>
                 </xpath>
                 <xpath expr="//field[@name='google_drive_files']//field[@name='mimeType']" position="before">
                     <field name="official_document_id" />
-                    <field name="is_available" />
+                    <field name="is_available" invisible="1"/>
                 </xpath>
             </field>
         </record>
