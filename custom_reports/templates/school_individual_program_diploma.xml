@@ -136,7 +136,7 @@
                 <t t-set="student_gender" t-value="True if doc.student_id.gender == 'male' else False"/>
                 <t t-set="student_birth_place_city" t-value="doc.student_id.birthplace"/>
                 <t t-set="student_birth_place_country" t-value="doc.student_id.birthcountry.name"/>
-                <t t-set="student_birth_date_formatted" t-value="doc.return_birthdate_formatted()"/>
+                <t t-set="student_birth_date_formatted" t-value="doc.return_date_formatted(doc.student_id.birthdate_date)"/>
                 <t t-set="student_first_name" t-value="doc.student_id.firstname"/>
                 <t t-set="student_family_name" t-value="doc.student_id.lastname"/>
                 <t t-if="doc.grade" t-set="student_success_grade" t-value="dict(doc.fields_get(allfields=['grade'])['grade']['selection'])[doc.grade]"/>
