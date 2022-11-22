@@ -39,7 +39,7 @@
                             <tree string="Google Documents">
                                 <field name="name" />
                                 <field name="mimeType" />
-                                <field name="url" widget="url" />
+                                <field name="url" widget="url" string="Google Drive" text="Open"/>
                             </tree>
                         </field>
                     </page>
