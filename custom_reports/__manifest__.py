@@ -13,7 +13,7 @@
     'author': "Deuse",
     'website': "https://deuse.be",
 
-    'version': '14.0.0.0.1',
+    'version': '14.0.1.0.0',
 
     'depends': ['school_management',"base","partner_contact_gender","partner_contact_birthdate","partner_firstname","custom_partner_fields"],
 
