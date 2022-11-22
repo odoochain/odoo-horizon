@@ -444,6 +444,10 @@ class website_portal_school_management(http.Controller):
         _, program_id = unslug(program_id)
         program = request.env['school.program'].sudo().search_read([('id','=',program_id)])
         if program :
+            program = program[0]
+            program.pop('course_group_ids')
+            blocs = request.env['school.bloc'].sudo().search_read([('id','in',program['bloc_ids'])])
+            program['bloc_ids'] = blocs
             body = json.dumps(program, default=ustr)
             response = request.make_response(body, [
                 # this method must specify a content-type application/json instead of using the default text/html set because
