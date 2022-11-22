@@ -51,7 +51,7 @@
             <t t-set="data_report_margin_top" t-value="30" />
             <t t-foreach="docs" t-as="desc">
               <t t-call="web.external_layout">
-                <div class="page" style="padding-left: 50px;padding-right: 50px;">
+                <div class="page" t-att-data-oe-model="desc._name" t-att-data-oe-id="desc.id" style="padding-left: 50px;padding-right: 50px;">
                   <t t-call="school_course_description.report_course_doc_section" />
                   <div class="row" style="margin-top:40px;margin-bottom:40px;">
                         Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
