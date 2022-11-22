@@ -20,7 +20,7 @@
 ##############################################################################
 
 import logging
-
+import json
 import werkzeug
 
 from odoo.addons.http_routing.models.ir_http import slug, unslug
