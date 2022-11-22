@@ -442,7 +442,7 @@ class website_portal_school_management(http.Controller):
     @http.route(['/program_json/<program_id>'], type='http', auth='public')
     def program_details_json(self, program_id, redirect=None, **post):
         _, program_id = unslug(program_id)
-        program = request.env['school.program'].sudo().search([('id','=',program_id)])
+        program = request.env['school.program'].sudo().search_read([('id','=',program_id)])
         if program :
             body = json.dumps(program, default=ustr)
             response = request.make_response(body, [
