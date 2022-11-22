@@ -52,6 +52,7 @@
                     <attribute name="editable">top</attribute>
                     <attribute name="decoration-danger">official_document_id and not is_available</attribute>
                     <attribute name="decoration-success">official_document_id and is_available</attribute>
+                    <attribute name="default_order">official_document_id desc</attribute>
                 </xpath>
                 <xpath expr="//field[@name='google_drive_files']//field[@name='mimeType']" position="before">
                     <field name="official_document_id" />
