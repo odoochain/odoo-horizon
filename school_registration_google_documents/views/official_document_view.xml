@@ -41,5 +41,21 @@
             </field>
         </record>
         
+        <!-- Add program for student form view -->
+        <record id="view_student_form_school_google_docs" model="ir.ui.view">
+            <field name="name">view.res.partner.form.school.google.docs</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="school_registration_documents.view_student_form_school_docs" />
+            <field eval="50" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='google_drive_files']/tree" position="attributes">
+                    <attribute name="editable">top</attribute>
+                </xpath>
+                <xpath expr="//field[@name='google_drive_files']//field[@name='mimeType']" position="before">
+                    <field name="official_document_id" />
+                </xpath>
+            </field>
+        </record>
+        
     
 </odoo>
