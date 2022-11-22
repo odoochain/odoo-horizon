@@ -437,6 +437,22 @@ class website_portal_school_management(http.Controller):
             return request.render("website_school_management.program_details", values)
         else :
             raise werkzeug.exceptions.HTTPException(description='Unkown program.')
+            
+    @http.route(['/program_json/<program_id>'], type='http', auth='public')
+    def program_details_json(self, program_id, redirect=None, **post):
+        _, program_id = unslug(program_id)
+        program = request.env['school.program'].sudo().search([('id','=',program_id)])
+        if program :
+            body = json.dumps(program, default=ustr)
+            response = request.make_response(body, [
+                # this method must specify a content-type application/json instead of using the default text/html set because
+                # the type of the route is set to HTTP, but the rpc is made with a get and expects JSON
+                ('Content-Type', 'application/json'),
+                ('Cache-Control', 'public, max-age=' + str(http.STATIC_CACHE_LONG)),
+            ])
+            return response
+        else :
+            raise werkzeug.exceptions.HTTPException(description='Unkown program.')
         
     @http.route(['/course/<course_id>'], type='http', auth='public')
     def course(self, course_id, redirect=None, **post):
