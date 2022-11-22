@@ -452,7 +452,7 @@ class website_portal_school_management(http.Controller):
                 for cg in course_groups :
                     cg.pop('bloc_ids')
                     courses = request.env['school.course'].sudo().search_read([('id','in',cg['course_ids'])])
-                    for c in course :
+                    for c in courses :
                         c.pop('bloc_ids')
                     cg['course_ids'] = courses
                 bloc['course_group_ids'] = course_groups
