@@ -53,6 +53,7 @@
                 </xpath>
                 <xpath expr="//field[@name='google_drive_files']//field[@name='mimeType']" position="before">
                     <field name="official_document_id" />
+                    <field name="is_available" />
                 </xpath>
             </field>
         </record>

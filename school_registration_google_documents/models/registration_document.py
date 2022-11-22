@@ -42,3 +42,4 @@ class GoogleDriveFile(models.Model):
     _inherit = "google_drive_file"
     
     official_document_id = fields.Many2one('school.official_document','Related Official Document')
+    is_available = fields.Boolean(related='official_document_id.is_available')
