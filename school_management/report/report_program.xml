@@ -255,46 +255,810 @@
         </div>
     </template>
 
-    <template id="report_individual_bloc_content">
-        <t t-call="web.html_container">
-            <t t-set="data_report_margin_top" t-value="45" />
-            <t t-set="data_report_header_spacing" t-value="40" />
-            <t t-foreach="docs" t-as="bloc">
-            <t t-set="o" t-value="bloc"/> 
-            <t t-call="web.external_layout">
-                <div class="page" t-att-data-oe-model="bloc._name" t-att-data-oe-id="bloc.id" style="margin: 1cm 0cm;">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title"><t t-esc="bloc.name"/></h4>
-                            <h6 class="card-subtitle text-muted">Basé sur <t t-esc="bloc.source_bloc_id.name"/></h6>
-                            <small class="text-muted">PAE-<t t-esc="bloc.id"/></small>
-                        </div>
-                        <div class="card-body">
-                          <t t-call="school_management.school_bloc"/>
-                        </div>
-                        <div class="card-footer">
-                            <table border="1" style="width:100%;">
-                              <tr>
-                                <td colspan="2" style="border: 1px solid black;padding: 10px 10px 80px 10px;">Date et signature de l'étudiant</td>
-                              </tr>
-                              <tr>
-                                <td colspan="2" style="border: 1px solid black;padding: 10px 10px 80px 10px;">Avis de la commission des études</td>
-                              </tr>
-                              <tr>
-                                <td style="border: 1px solid black;padding: 10px 10px 80px 10px;">Signature du président de la commission des études</td>
-                                <td style="border: 1px solid black;padding: 10px 10px 80px 10px;">Signature du secrétaire de la commission des études</td>
-                              </tr>
-                            </table>
-                            <div class="row" style="margin-top:20px;">
-                                <div class="col-9 col-offset-1">
-                                    Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+    <template name="School Report layout" id="report_layout">&lt;!DOCTYPE html&gt;
+        <html t-att-lang="lang and lang.replace('_', '-')" t-att-data-report-margin-top="data_report_margin_top" t-att-data-report-header-spacing="data_report_header_spacing" t-att-data-report-dpi="data_report_dpi" t-att-data-report-landscape="data_report_landscape" t-att-web-base-url="web_base_url">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="initial-scale=1"/>
+                <title><t t-esc="title or 'Horizon Report'"/></title>
+            </head>
+            <body t-att-class="'container' if not full_width else 'container-fluid'">
+                <div id="wrapwrap">
+                    <main>
+                        <t t-raw="0"/>
+                    </main>
                 </div>
-            </t>
+            </body>
+        </html>
+    </t>
+
+    <template id="report_individual_bloc_content">
+        <t t-call="school_management.report_layout">
+            <style type="text/css">
+                        @import url('https://themes.googleusercontent.com/fonts/css?kit=-h-6QXRxxJDDaybOwttsylUtBe9kKYizu0iG5PWoTFEjzna1oBj6YrRkZSo79Yur');
+                    
+                        ol {
+                          margin: 0;
+                          padding: 0
+                        }
+                    
+                        table td,
+                        table th {
+                          padding: 0
+                        }
+                    
+                        .c9 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #000000;
+                          border-top-width: 1pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: middle;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 0pt;
+                          width: 244.6pt;
+                          border-top-color: #767171;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c28 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #000000;
+                          border-top-width: 1pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: bottom;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 0pt;
+                          width: 244.6pt;
+                          border-top-color: #767171;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c45 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #767171;
+                          border-top-width: 0pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: bottom;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 1pt;
+                          width: 244.6pt;
+                          border-top-color: #000000;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c7 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #000000;
+                          border-top-width: 1pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: middle;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 0pt;
+                          width: 60pt;
+                          border-top-color: #767171;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c30 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #767171;
+                          border-top-width: 1pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: middle;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 1pt;
+                          width: 60pt;
+                          border-top-color: #767171;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c35 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #000000;
+                          border-top-width: 0pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: middle;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 0pt;
+                          width: 60pt;
+                          border-top-color: #000000;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c49 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #000000;
+                          border-top-width: 0pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: middle;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 0pt;
+                          width: 244.6pt;
+                          border-top-color: #000000;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c5 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #767171;
+                          border-top-width: 0pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: middle;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 1pt;
+                          width: 60pt;
+                          border-top-color: #000000;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c6 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #767171;
+                          border-top-width: 0pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: middle;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 1pt;
+                          width: 244.6pt;
+                          border-top-color: #000000;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c22 {
+                          border-right-style: solid;
+                          padding: 0pt 3.5pt 0pt 3.5pt;
+                          border-bottom-color: #767171;
+                          border-top-width: 1pt;
+                          border-right-width: 0pt;
+                          border-left-color: #000000;
+                          vertical-align: middle;
+                          border-right-color: #000000;
+                          border-left-width: 0pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 1pt;
+                          width: 244.6pt;
+                          border-top-color: #767171;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c23 {
+                          border-right-style: solid;
+                          border-bottom-color: #000000;
+                          border-top-width: 1pt;
+                          border-right-width: 1pt;
+                          border-left-color: #000000;
+                          vertical-align: top;
+                          border-right-color: #000000;
+                          border-left-width: 1pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 1pt;
+                          width: 216.6pt;
+                          border-top-color: #000000;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c48 {
+                          border-right-style: solid;
+                          border-bottom-color: #000000;
+                          border-top-width: 1pt;
+                          border-right-width: 1pt;
+                          border-left-color: #000000;
+                          vertical-align: top;
+                          border-right-color: #000000;
+                          border-left-width: 1pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 1pt;
+                          width: 488.9pt;
+                          border-top-color: #000000;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c42 {
+                          border-right-style: solid;
+                          border-bottom-color: #000000;
+                          border-top-width: 1pt;
+                          border-right-width: 1pt;
+                          border-left-color: #000000;
+                          vertical-align: top;
+                          border-right-color: #000000;
+                          border-left-width: 1pt;
+                          border-top-style: solid;
+                          border-left-style: solid;
+                          border-bottom-width: 1pt;
+                          width: 272.4pt;
+                          border-top-color: #000000;
+                          border-bottom-style: solid
+                        }
+                    
+                        .c17 {
+                          color: #000000;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 18pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c10 {
+                          color: #484f56;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 10pt;
+                          font-family: "Gill Sans";
+                          font-style: italic
+                        }
+                    
+                        .c24 {
+                          color: #000000;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 11pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c18 {
+                          margin-left: -7.1pt;
+                          padding-top: 0.2pt;
+                          text-indent: 7.1pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          text-align: left;
+                          height: 11pt
+                        }
+                    
+                        .c25 {
+                          color: #484f56;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9.5pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c15 {
+                          color: #000000;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 10pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c41 {
+                          color: #484f56;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c19 {
+                          color: #000000;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9pt;
+                          font-family: "Times New Roman";
+                          font-style: normal
+                        }
+                    
+                        .c32 {
+                          color: #002060;
+                          font-weight: 700;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9pt;
+                          font-family: "Times New Roman";
+                          font-style: normal
+                        }
+                    
+                        .c0 {
+                          color: #002060;
+                          font-weight: 700;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9.5pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c29 {
+                          color: #000000;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c2 {
+                          color: #000000;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 11pt;
+                          font-family: "Calibri";
+                          font-style: normal
+                        }
+                    
+                        .c20 {
+                          color: #000000;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9.5pt;
+                          font-family: "Roboto";
+                          font-style: italic
+                        }
+                    
+                        .c34 {
+                          color: #6b747c;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 18pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c8 {
+                          color: #000000;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9.5pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c14 {
+                          color: #6b747c;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 12pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c27 {
+                          color: #252527;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 9.5pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c11 {
+                          color: #484f56;
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-size: 18pt;
+                          font-family: "Roboto";
+                          font-style: normal
+                        }
+                    
+                        .c52 {
+                          margin-left: -7.1pt;
+                          padding-top: 3.4pt;
+                          text-indent: 7.1pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          text-align: left
+                        }
+                    
+                        .c38 {
+                          padding-top: 0pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          orphans: 2;
+                          widows: 2;
+                          text-align: right
+                        }
+                    
+                        .c4 {
+                          padding-top: 0pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          orphans: 2;
+                          widows: 2;
+                          text-align: left
+                        }
+                    
+                        .c3 {
+                          padding-top: 0pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          orphans: 2;
+                          widows: 2;
+                          text-align: center
+                        }
+                    
+                        .c39 {
+                          padding-top: 3.2pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          text-align: left;
+                          height: 11pt
+                        }
+                    
+                        .c16 {
+                          padding-top: 0pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.15;
+                          text-align: left;
+                          height: 11pt
+                        }
+                    
+                        .c26 {
+                          margin-left: 6.7pt;
+                          padding-top: 7.5pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          text-align: left
+                        }
+                    
+                        .c50 {
+                          font-size: 10pt;
+                          font-family: "Gill Sans";
+                          font-style: italic;
+                          color: #484f56;
+                          font-weight: 400
+                        }
+                    
+                        .c37 {
+                          margin-left: 14.2pt;
+                          padding-top: 5.7pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          text-align: left
+                        }
+                    
+                        .c44 {
+                          font-weight: 400;
+                          text-decoration: none;
+                          vertical-align: baseline;
+                          font-family: "Roboto";
+                          font-style: italic
+                        }
+                    
+                        .c13 {
+                          padding-top: 0pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          text-align: left;
+                          height: 11pt
+                        }
+                    
+                        .c46 {
+                          margin-left: -0.2pt;
+                          border-spacing: 0;
+                          border-collapse: collapse;
+                          margin-right: auto
+                        }
+                    
+                        .c12 {
+                          border-spacing: 0;
+                          border-collapse: collapse;
+                          margin-right: auto
+                        }
+                    
+                        .c21 {
+                          padding-top: 0pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          text-align: left
+                        }
+                    
+                        .c51 {
+                          padding-top: 3.2pt;
+                          padding-bottom: 0pt;
+                          line-height: 1.0;
+                          text-align: left
+                        }
+                    
+                        .c33 {
+                          background-color: #ffffff;
+                          max-width: 453.6pt;
+                          padding: 70.8pt 70.8pt 70.8pt 70.8pt
+                        }
+                    
+                        .c43 {
+                          color: #484f56;
+                          font-size: 9.5pt
+                        }
+                    
+                        .c40 {
+                          height: 37.8pt
+                        }
+                    
+                        .c36 {
+                          height: 99.9pt
+                        }
+                    
+                        .c1 {
+                          height: 15pt
+                        }
+                    
+                        .c31 {
+                          height: 15.5pt
+                        }
+                    
+                        .c47 {
+                          height: 45.4pt
+                        }
+                    
+                        .title {
+                          padding-top: 24pt;
+                          color: #000000;
+                          font-weight: 700;
+                          font-size: 36pt;
+                          padding-bottom: 6pt;
+                          font-family: "Roboto";
+                          line-height: 1.0;
+                          page-break-after: avoid;
+                          text-align: left
+                        }
+                    
+                        .subtitle {
+                          padding-top: 18pt;
+                          color: #666666;
+                          font-size: 24pt;
+                          padding-bottom: 4pt;
+                          font-family: "Georgia";
+                          line-height: 1.0;
+                          page-break-after: avoid;
+                          font-style: italic;
+                          text-align: left
+                        }
+                    
+                        li {
+                          color: #000000;
+                          font-size: 11pt;
+                          font-family: "Roboto"
+                        }
+                    
+                        p {
+                          margin: 0;
+                          color: #000000;
+                          font-size: 11pt;
+                          font-family: "Roboto"
+                        }
+                    
+                        h1 {
+                          padding-top: 24pt;
+                          color: #000000;
+                          font-weight: 700;
+                          font-size: 24pt;
+                          padding-bottom: 6pt;
+                          font-family: "Roboto";
+                          line-height: 1.0;
+                          page-break-after: avoid;
+                          text-align: left
+                        }
+                    
+                        h2 {
+                          padding-top: 18pt;
+                          color: #000000;
+                          font-weight: 700;
+                          font-size: 18pt;
+                          padding-bottom: 4pt;
+                          font-family: "Roboto";
+                          line-height: 1.0;
+                          page-break-after: avoid;
+                          text-align: left
+                        }
+                    
+                        h3 {
+                          padding-top: 14pt;
+                          color: #000000;
+                          font-weight: 700;
+                          font-size: 14pt;
+                          padding-bottom: 4pt;
+                          font-family: "Roboto";
+                          line-height: 1.0;
+                          page-break-after: avoid;
+                          text-align: left
+                        }
+                    
+                        h4 {
+                          padding-top: 12pt;
+                          color: #000000;
+                          font-weight: 700;
+                          font-size: 12pt;
+                          padding-bottom: 2pt;
+                          font-family: "Roboto";
+                          line-height: 1.0;
+                          page-break-after: avoid;
+                          text-align: left
+                        }
+                    
+                        h5 {
+                          padding-top: 11pt;
+                          color: #000000;
+                          font-weight: 700;
+                          font-size: 11pt;
+                          padding-bottom: 2pt;
+                          font-family: "Roboto";
+                          line-height: 1.0;
+                          page-break-after: avoid;
+                          text-align: left
+                        }
+                    
+                        h6 {
+                          padding-top: 10pt;
+                          color: #000000;
+                          font-weight: 700;
+                          font-size: 10pt;
+                          padding-bottom: 2pt;
+                          font-family: "Roboto";
+                          line-height: 1.0;
+                          page-break-after: avoid;
+                          text-align: left
+                        }
+            </style>  
+            <t t-foreach="docs" t-as="bloc">
+                <div class="article" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')" style="margin: 1cm 0cm;">
+                <p class="c13"><span class="c11"></span></p>
+                <p class="c21"><span class="c11"><t t-esc="bloc.name"/></span></p>
+                <p class="c52"><span class="c34">Basé sur Bachelier en musique : <t t-esc="bloc.source_bloc_id.name"/></span></p>
+                <p class="c51"><span class="c14"><t t-esc="bloc.uid"/></span></p>
+                <p class="c39"><span class="c14"></span></p>
+                <table class="c12">
+                  <tr class="c1">
+                    <td class="c30" colspan="1" rowspan="1">
+                      <p class="c4"><span class="c27">CODE UE</span></p>
+                    </td>
+                    <td class="c22" colspan="1" rowspan="1">
+                      <p class="c4"><span class="c27">UNITéS D'ENSEIGNEMENT</span></p>
+                    </td>
+                    <td class="c30" colspan="1" rowspan="1">
+                      <p class="c3"><span class="c27">HEURES</span></p>
+                    </td>
+                    <td class="c30" colspan="1" rowspan="1">
+                      <p class="c3"><span class="c27">ECTS</span></p>
+                    </td>
+                    <td class="c30" colspan="1" rowspan="1">
+                      <p class="c3"><span class="c27">POND</span></p>
+                    </td>
+                  </tr>
+                  <t t-foreach="bloc.course_group_ids" t-as="course_group">
+                  <tr class="c1">
+                    <td class="c7" colspan="1" rowspan="1">
+                      <p class="c4"><span class="c0"><t t-esc="course_group.uid"/></span></p>
+                    </td>
+                    <td class="c9" colspan="1" rowspan="1">
+                      <p class="c4"><span class="c0"><t t-esc="course_group.title"/></span></p>
+                    </td>
+                    <td class="c7" colspan="1" rowspan="1">
+                      <p class="c3"><span class="c0"><t t-esc="course_group.total_hours"/></span></p>
+                    </td>
+                    <td class="c7" colspan="1" rowspan="1">
+                      <p class="c3"><span class="c0"><t t-esc="course_group.total_credits"/></span></p>
+                    </td>
+                    <td class="c7" colspan="1" rowspan="1">
+                      <p class="c4"><span class="c0"></span></p>
+                    </td>
+                  </tr>
+                  <t t-foreach="course_group.course_ids" t-as="course">
+                  <tr class="c1">
+                    <td class="c5" colspan="1" rowspan="1">
+                      <p class="c4"><span class="c19"></span></p>
+                    </td>
+                    <td class="c6" colspan="1" rowspan="1">
+                      <p class="c4"><span class="c10"><t t-esc="course.title"/></span></p>
+                    </td>
+                    <td class="c5" colspan="1" rowspan="1">
+                      <p class="c3"><span class="c10"><t t-esc="course.hours"/></span></p>
+                    </td>
+                    <td class="c5" colspan="1" rowspan="1">
+                      <p class="c4"><span class="c19"></span></p>
+                    </td>
+                    <td class="c5" colspan="1" rowspan="1">
+                      <p class="c3"><span class="c10"><t t-esc="course.weight"/></span></p>
+                    </td>
+                  </tr>
+                  </t>
+                  </t>
+                </table>
+                <p class="c18"><span class="c29"></span></p>
+                <p class="c13"><span class="c15"></span></p>
+                <table class="c46">
+                  <tr class="c40">
+                    <td class="c48" colspan="2" rowspan="1">
+                      <p class="c26"><span class="c25">Date et signature de l'étudiant</span></p>
+                      <p class="c26"><span class="c43 c44">Le 27 octobre 2022</span></p>
+                      <p class="c26"><span
+                          style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 147.00px; height: 88.00px;"><img
+                            alt="" src="images/image1.png" style="width: 147.00px; height: 88.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                    </td>
+                  </tr>
+                  <tr class="c47">
+                    <td class="c48" colspan="2" rowspan="1">
+                      <p class="c26"><span class="c25">Avis de la commission des études</span></p>
+                      <p class="c26"><span class="c44 c43">Programme annuel approuvé par la commission des études (séances du 17 et 27 octobre 2022)</span></p>
+                    </td>
+                  </tr>
+                  <tr class="c36">
+                    <td class="c42" colspan="1" rowspan="1">
+                      <p class="c26"><span class="c41">Signature de la présidente de la commission des études</span></p>
+                      <p class="c26"><span
+                          style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 213.30px; height: 77.04px;"><img
+                            alt="" src="images/image3.jpg" style="width: 213.30px; height: 77.04px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                    </td>
+                    <td class="c23" colspan="1" rowspan="1">
+                      <p class="c26"><span class="c41">Signature du secrétaire de la commission des études</span><span
+                          style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 267.81px; height: 44.77px;"><img
+                            alt="Une image contenant texte
+              
+              Description générée automatiquement" src="images/image2.png"
+                            style="width: 267.81px; height: 44.77px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                    </td>
+                  </tr>
+                </table>
+                <p class="c13"><span class="c8"></span></p>
+                <p class="c37"><span class="c43">Imprimé <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/></span></p>
+                </div>
             </t>
         </t>
     </template>
