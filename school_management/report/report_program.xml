@@ -959,105 +959,105 @@
             </style>  
             <t t-foreach="docs" t-as="bloc">
                 <div class="article" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')" style="margin: 1cm 0cm;">
-                <p class="c13"><span class="c11"></span></p>
-                <p class="c21"><span class="c11"><t t-esc="bloc.name"/></span></p>
-                <p class="c52"><span class="c34">Basé sur Bachelier en musique : <t t-esc="bloc.source_bloc_id.name"/></span></p>
-                <p class="c51"><span class="c14"><t t-esc="bloc.uid"/></span></p>
-                <p class="c39"><span class="c14"></span></p>
-                <table class="c12">
-                  <tr class="c1">
-                    <td class="c30" colspan="1" rowspan="1">
-                      <p class="c4"><span class="c27">CODE UE</span></p>
-                    </td>
-                    <td class="c22" colspan="1" rowspan="1">
-                      <p class="c4"><span class="c27">UNITéS D'ENSEIGNEMENT</span></p>
-                    </td>
-                    <td class="c30" colspan="1" rowspan="1">
-                      <p class="c3"><span class="c27">HEURES</span></p>
-                    </td>
-                    <td class="c30" colspan="1" rowspan="1">
-                      <p class="c3"><span class="c27">ECTS</span></p>
-                    </td>
-                    <td class="c30" colspan="1" rowspan="1">
-                      <p class="c3"><span class="c27">POND</span></p>
-                    </td>
-                  </tr>
-                  <t t-foreach="bloc.course_group_ids" t-as="course_group">
-                  <tr class="c1">
-                    <td class="c7" colspan="1" rowspan="1">
-                      <p class="c4"><span class="c0"><t t-esc="course_group.uid"/></span></p>
-                    </td>
-                    <td class="c9" colspan="1" rowspan="1">
-                      <p class="c4"><span class="c0"><t t-esc="course_group.title"/></span></p>
-                    </td>
-                    <td class="c7" colspan="1" rowspan="1">
-                      <p class="c3"><span class="c0"><t t-esc="course_group.total_hours"/></span></p>
-                    </td>
-                    <td class="c7" colspan="1" rowspan="1">
-                      <p class="c3"><span class="c0"><t t-esc="course_group.total_credits"/></span></p>
-                    </td>
-                    <td class="c7" colspan="1" rowspan="1">
-                      <p class="c4"><span class="c0"></span></p>
-                    </td>
-                  </tr>
-                  <t t-foreach="course_group.course_ids" t-as="course">
-                  <tr class="c1">
-                    <td class="c5" colspan="1" rowspan="1">
-                      <p class="c4"><span class="c19"></span></p>
-                    </td>
-                    <td class="c6" colspan="1" rowspan="1">
-                      <p class="c4"><span class="c10"><t t-esc="course.title"/></span></p>
-                    </td>
-                    <td class="c5" colspan="1" rowspan="1">
-                      <p class="c3"><span class="c10"><t t-esc="course.hours"/></span></p>
-                    </td>
-                    <td class="c5" colspan="1" rowspan="1">
-                      <p class="c4"><span class="c19"></span></p>
-                    </td>
-                    <td class="c5" colspan="1" rowspan="1">
-                      <p class="c3"><span class="c10"><t t-esc="course.weight"/></span></p>
-                    </td>
-                  </tr>
-                  </t>
-                  </t>
-                </table>
-                <p class="c18"><span class="c29"></span></p>
-                <p class="c13"><span class="c15"></span></p>
-                <table class="c46">
-                  <tr class="c40">
-                    <td class="c48" colspan="2" rowspan="1">
-                      <p class="c26"><span class="c25">Date et signature de l'étudiant</span></p>
-                      <p class="c26"><span class="c43 c44">Le 27 octobre 2022</span></p>
-                      <p class="c26"><span
-                          style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 147.00px; height: 88.00px;"><img
-                            alt="" src="images/image1.png" style="width: 147.00px; height: 88.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
-                    </td>
-                  </tr>
-                  <tr class="c47">
-                    <td class="c48" colspan="2" rowspan="1">
-                      <p class="c26"><span class="c25">Avis de la commission des études</span></p>
-                      <p class="c26"><span class="c44 c43">Programme annuel approuvé par la commission des études (séances du 17 et 27 octobre 2022)</span></p>
-                    </td>
-                  </tr>
-                  <tr class="c36">
-                    <td class="c42" colspan="1" rowspan="1">
-                      <p class="c26"><span class="c41">Signature de la présidente de la commission des études</span></p>
-                      <p class="c26"><span
-                          style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 213.30px; height: 77.04px;"><img
-                            alt="" src="images/image3.jpg" style="width: 213.30px; height: 77.04px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
-                    </td>
-                    <td class="c23" colspan="1" rowspan="1">
-                      <p class="c26"><span class="c41">Signature du secrétaire de la commission des études</span><span
-                          style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 267.81px; height: 44.77px;"><img
-                            alt="Une image contenant texte
-              
-              Description générée automatiquement" src="images/image2.png"
-                            style="width: 267.81px; height: 44.77px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
-                    </td>
-                  </tr>
-                </table>
-                <p class="c13"><span class="c8"></span></p>
-                <p class="c37"><span class="c43">Imprimé <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/></span></p>
+                    <p class="c13"><span class="c11"></span></p>
+                    <p class="c21"><span class="c11"><t t-esc="bloc.name"/></span></p>
+                    <p class="c52"><span class="c34">Basé sur Bachelier en musique : <t t-esc="bloc.source_bloc_id.name"/></span></p>
+                    <p class="c51"><span class="c14"><t t-esc="bloc.uid"/></span></p>
+                    <p class="c39"><span class="c14"></span></p>
+                    <table class="c12">
+                      <tr class="c1">
+                        <td class="c30" colspan="1" rowspan="1">
+                          <p class="c4"><span class="c27">CODE UE</span></p>
+                        </td>
+                        <td class="c22" colspan="1" rowspan="1">
+                          <p class="c4"><span class="c27">UNITéS D'ENSEIGNEMENT</span></p>
+                        </td>
+                        <td class="c30" colspan="1" rowspan="1">
+                          <p class="c3"><span class="c27">HEURES</span></p>
+                        </td>
+                        <td class="c30" colspan="1" rowspan="1">
+                          <p class="c3"><span class="c27">ECTS</span></p>
+                        </td>
+                        <td class="c30" colspan="1" rowspan="1">
+                          <p class="c3"><span class="c27">POND</span></p>
+                        </td>
+                      </tr>
+                      <t t-foreach="bloc.course_group_ids" t-as="course_group">
+                      <tr class="c1">
+                        <td class="c7" colspan="1" rowspan="1">
+                          <p class="c4"><span class="c0"><t t-esc="course_group.uid"/></span></p>
+                        </td>
+                        <td class="c9" colspan="1" rowspan="1">
+                          <p class="c4"><span class="c0"><t t-esc="course_group.title"/></span></p>
+                        </td>
+                        <td class="c7" colspan="1" rowspan="1">
+                          <p class="c3"><span class="c0"><t t-esc="course_group.total_hours"/></span></p>
+                        </td>
+                        <td class="c7" colspan="1" rowspan="1">
+                          <p class="c3"><span class="c0"><t t-esc="course_group.total_credits"/></span></p>
+                        </td>
+                        <td class="c7" colspan="1" rowspan="1">
+                          <p class="c4"><span class="c0"></span></p>
+                        </td>
+                      </tr>
+                      <t t-foreach="course_group.course_ids" t-as="course">
+                      <tr class="c1">
+                        <td class="c5" colspan="1" rowspan="1">
+                          <p class="c4"><span class="c19"></span></p>
+                        </td>
+                        <td class="c6" colspan="1" rowspan="1">
+                          <p class="c4"><span class="c10"><t t-esc="course.title"/></span></p>
+                        </td>
+                        <td class="c5" colspan="1" rowspan="1">
+                          <p class="c3"><span class="c10"><t t-esc="course.hours"/></span></p>
+                        </td>
+                        <td class="c5" colspan="1" rowspan="1">
+                          <p class="c4"><span class="c19"></span></p>
+                        </td>
+                        <td class="c5" colspan="1" rowspan="1">
+                          <p class="c3"><span class="c10"><t t-esc="course.weight"/></span></p>
+                        </td>
+                      </tr>
+                      </t>
+                      </t>
+                    </table>
+                    <p class="c18"><span class="c29"></span></p>
+                    <p class="c13"><span class="c15"></span></p>
+                    <table class="c46">
+                      <tr class="c40">
+                        <td class="c48" colspan="2" rowspan="1">
+                          <p class="c26"><span class="c25">Date et signature de l'étudiant</span></p>
+                          <p class="c26"><span class="c43 c44">Le 27 octobre 2022</span></p>
+                          <p class="c26"><span
+                              style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 147.00px; height: 88.00px;"><img
+                                alt="" src="images/image1.png" style="width: 147.00px; height: 88.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                        </td>
+                      </tr>
+                      <tr class="c47">
+                        <td class="c48" colspan="2" rowspan="1">
+                          <p class="c26"><span class="c25">Avis de la commission des études</span></p>
+                          <p class="c26"><span class="c44 c43">Programme annuel approuvé par la commission des études (séances du 17 et 27 octobre 2022)</span></p>
+                        </td>
+                      </tr>
+                      <tr class="c36">
+                        <td class="c42" colspan="1" rowspan="1">
+                          <p class="c26"><span class="c41">Signature de la présidente de la commission des études</span></p>
+                          <p class="c26"><span
+                              style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 213.30px; height: 77.04px;"><img
+                                alt="" src="images/image3.jpg" style="width: 213.30px; height: 77.04px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                        </td>
+                        <td class="c23" colspan="1" rowspan="1">
+                          <p class="c26"><span class="c41">Signature du secrétaire de la commission des études</span><span
+                              style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 267.81px; height: 44.77px;"><img
+                                alt="Une image contenant texte
+                  
+                  Description générée automatiquement" src="images/image2.png"
+                                style="width: 267.81px; height: 44.77px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                        </td>
+                      </tr>
+                    </table>
+                    <p class="c13"><span class="c8"></span></p>
+                    <p class="c37"><span class="c43">Imprimé <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/></span></p>
                 </div>
             </t>
         </t>
