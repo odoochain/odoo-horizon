@@ -31,7 +31,7 @@ class IndividualBloc(models.Model):
     
     student_signature = fields.Binary(string="Student Signature", attachment=True)
     
-    student_signature_date = fields.Date(related="student_signature.__last_update")
+    student_signature_date = fields.Date(related="student_signature.write_date")
 
 class IndividualProgram(models.Model):
     '''Individual Program'''
