@@ -273,8 +273,17 @@
     </template>
 
     <template id="report_individual_bloc_content">
+        <t t-set="data_report_margin_top" t-value="20"/>
+        <t t-set="data_report_header_spacing" t-value="20"/>
         <t t-call="school_management.report_layout">
-            <style type="text/css">
+            <t t-foreach="docs" t-as="bloc">
+                <div class="header"><div><p class="c4"><span style="overflow: hidden; display: inline-block; margin: 20px 20px 20px 20px;">
+                    <img alt="" src="https://horizon.student-crlg.be/school_management/static/src/img/report_header.png" title=""/>
+                    </span></p>
+                    </div>
+                </div>
+                <div class="article" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')" style="margin: 0cm 1.5cm;">
+                  <style type="text/css">
                         @import url('https://themes.googleusercontent.com/fonts/css?kit=-h-6QXRxxJDDaybOwttsylUtBe9kKYizu0iG5PWoTFEjzna1oBj6YrRkZSo79Yur');
                     
                         ol {
@@ -285,6 +294,8 @@
                         table td,
                         table th {
                           padding: 0
+                          border-style : hidden!important;
+                          border-collapse: collapse;
                         }
                     
                         .c9 {
@@ -957,13 +968,11 @@
                           text-align: left
                         }
             </style>  
-            <t t-foreach="docs" t-as="bloc">
-                <div class="article" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')" style="margin: 1cm 0cm;">
-                    <p class="c13"><span class="c11"></span></p>
+                    <p class="c13"><span class="c11"/></p>
                     <p class="c21"><span class="c11"><t t-esc="bloc.name"/></span></p>
                     <p class="c52"><span class="c34">Basé sur Bachelier en musique : <t t-esc="bloc.source_bloc_id.name"/></span></p>
                     <p class="c51"><span class="c14"><t t-esc="bloc.uid"/></span></p>
-                    <p class="c39"><span class="c14"></span></p>
+                    <p class="c39"><span class="c14"/></p>
                     <table class="c12">
                       <tr class="c1">
                         <td class="c30" colspan="1" rowspan="1">
@@ -997,13 +1006,13 @@
                           <p class="c3"><span class="c0"><t t-esc="course_group.total_credits"/></span></p>
                         </td>
                         <td class="c7" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c0"></span></p>
+                          <p class="c4"><span class="c0"/></p>
                         </td>
                       </tr>
                       <t t-foreach="course_group.course_ids" t-as="course">
                       <tr class="c1">
                         <td class="c5" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c19"></span></p>
+                          <p class="c4"><span class="c19"/></p>
                         </td>
                         <td class="c6" colspan="1" rowspan="1">
                           <p class="c4"><span class="c10"><t t-esc="course.title"/></span></p>
@@ -1012,7 +1021,7 @@
                           <p class="c3"><span class="c10"><t t-esc="course.hours"/></span></p>
                         </td>
                         <td class="c5" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c19"></span></p>
+                          <p class="c4"><span class="c19"/></p>
                         </td>
                         <td class="c5" colspan="1" rowspan="1">
                           <p class="c3"><span class="c10"><t t-esc="course.weight"/></span></p>
@@ -1021,16 +1030,14 @@
                       </t>
                       </t>
                     </table>
-                    <p class="c18"><span class="c29"></span></p>
-                    <p class="c13"><span class="c15"></span></p>
+                    <p class="c18"><span class="c29"/></p>
+                    <p class="c13"><span class="c15"/></p>
                     <table class="c46">
                       <tr class="c40">
                         <td class="c48" colspan="2" rowspan="1">
                           <p class="c26"><span class="c25">Date et signature de l'étudiant</span></p>
                           <p class="c26"><span class="c43 c44">Le 27 octobre 2022</span></p>
-                          <p class="c26"><span
-                              style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 147.00px; height: 88.00px;"><img
-                                alt="" src="images/image1.png" style="width: 147.00px; height: 88.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                          <p class="c26"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 147.00px; height: 88.00px;"><img alt="" src="images/image1.png" style="width: 147.00px; height: 88.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
                         </td>
                       </tr>
                       <tr class="c47">
@@ -1042,21 +1049,14 @@
                       <tr class="c36">
                         <td class="c42" colspan="1" rowspan="1">
                           <p class="c26"><span class="c41">Signature de la présidente de la commission des études</span></p>
-                          <p class="c26"><span
-                              style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 213.30px; height: 77.04px;"><img
-                                alt="" src="images/image3.jpg" style="width: 213.30px; height: 77.04px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                          <p class="c26"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 213.30px; height: 77.04px;"><img alt="" src="images/image3.jpg" style="width: 213.30px; height: 77.04px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
                         </td>
                         <td class="c23" colspan="1" rowspan="1">
-                          <p class="c26"><span class="c41">Signature du secrétaire de la commission des études</span><span
-                              style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 267.81px; height: 44.77px;"><img
-                                alt="Une image contenant texte
-                  
-                  Description générée automatiquement" src="images/image2.png"
-                                style="width: 267.81px; height: 44.77px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                          <p class="c26"><span class="c41">Signature du secrétaire de la commission des études</span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 267.81px; height: 44.77px;"><img alt="Une image contenant texte                                      Description générée automatiquement" src="images/image2.png" style="width: 267.81px; height: 44.77px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
                         </td>
                       </tr>
                     </table>
-                    <p class="c13"><span class="c8"></span></p>
+                    <p class="c13"><span class="c8"/></p>
                     <p class="c37"><span class="c43">Imprimé <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/></span></p>
                 </div>
             </t>
