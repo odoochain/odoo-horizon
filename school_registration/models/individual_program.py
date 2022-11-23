@@ -33,7 +33,7 @@ class IndividualBloc(models.Model):
     
     def _compute_student_signature_date(self):
         for rec in self:
-            rec.student_signature_date = rec.student_signature.__last_update
+            rec.student_signature_date = None
             
     student_signature_date = fields.Date(string="Student Signature Date", compute=_compute_student_signature_date)
 
