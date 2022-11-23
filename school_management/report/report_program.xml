@@ -278,12 +278,12 @@
         <t t-call="school_management.report_layout">
             <t t-foreach="docs" t-as="bloc">
                 <div class="header"><div><p class="c4"><span style="overflow: hidden; display: inline-block; margin: 20px 20px 20px 20px;">
-                    <img alt="" src="https://horizon.student-crlg.be/school_management/static/src/img/report_header.png" title=""/>
+                    <img alt="" src="/school_management/static/src/img/report_header.png" title=""/>
                     </span></p>
                     </div>
                 </div>
                 <div class="article" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')" style="margin: 0cm 1.5cm;">
-                  <style type="text/css">
+                                    <style type="text/css">
                         @import url('https://themes.googleusercontent.com/fonts/css?kit=-h-6QXRxxJDDaybOwttsylUtBe9kKYizu0iG5PWoTFEjzna1oBj6YrRkZSo79Yur');
                     
                         ol {
@@ -299,87 +299,54 @@
                         }
                     
                         .c9 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          
                           border-top-width: 1pt;
-                          
-                          
                           vertical-align: middle;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
-                          
                           width: 244.6pt;
                           border-top-color: #767171;
                           border-bottom-style: solid
                         }
                     
                         .c28 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          
                           border-top-width: 1pt;
-                          
-                          
                           vertical-align: bottom;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
-                          
                           width: 244.6pt;
                           border-top-color: #767171;
                           border-bottom-style: solid
                         }
                     
                         .c45 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
-                          
-                          
-                          
                           vertical-align: bottom;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 244.6pt;
-                          
                           border-bottom-style: solid
                         }
                     
                         .c7 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          
                           border-top-width: 1pt;
-                          
-                          
                           vertical-align: middle;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
-                          
                           width: 60pt;
                           border-top-color: #767171;
                           border-bottom-style: solid
                         }
                     
                         .c30 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
                           border-top-width: 1pt;
-                          
-                          
                           vertical-align: middle;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
                           border-bottom-width: 1pt;
@@ -389,87 +356,50 @@
                         }
                     
                         .c35 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          
-                          
-                          
-                          
                           vertical-align: middle;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
-                          
                           width: 60pt;
-                          
                           border-bottom-style: solid
                         }
                     
                         .c49 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          
-                          
-                          
-                          
                           vertical-align: middle;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
-                          
                           width: 244.6pt;
-                          
                           border-bottom-style: solid
                         }
                     
                         .c5 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
-                          
-                          
-                          
                           vertical-align: middle;
-                          
-                          
                           border-top-style: none;
                           border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 60pt;
-                          
                           border-bottom-style: solid
                         }
                     
                         .c6 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
-                          
-                          
-                          
                           vertical-align: middle;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 244.6pt;
-                          
                           border-bottom-style: solid
                         }
                     
                         .c22 {
-                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
                           border-top-width: 1pt;
-                          
-                          
                           vertical-align: middle;
-                          
-                          
                           border-top-style: solid;
                           border-left-style: none;
                           border-bottom-width: 1pt;
@@ -479,53 +409,38 @@
                         }
                     
                         .c23 {
-                          
-                          
                           border-top-width: 1pt;
                           border-right-width: 1pt;
-                          
                           vertical-align: top;
-                          
                           border-left-width: 1pt;
                           border-top-style: solid;
                           border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 216.6pt;
-                          
                           border-bottom-style: solid
                         }
                     
                         .c48 {
-                          
-                          
                           border-top-width: 1pt;
                           border-right-width: 1pt;
-                          
                           vertical-align: top;
-                          
                           border-left-width: 1pt;
                           border-top-style: solid;
                           border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 488.9pt;
-                          
                           border-bottom-style: solid
                         }
                     
                         .c42 {
-                          
-                          
                           border-top-width: 1pt;
                           border-right-width: 1pt;
-                          
                           vertical-align: top;
-                          
                           border-left-width: 1pt;
                           border-top-style: solid;
                           border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 272.4pt;
-                          
                           border-bottom-style: solid
                         }
                     
@@ -1037,7 +952,7 @@
                         <td class="c48" colspan="2" rowspan="1">
                           <p class="c26"><span class="c25">Date et signature de l'étudiant</span></p>
                           <p class="c26"><span class="c43 c44">Le 27 octobre 2022</span></p>
-                          <p class="c26"><span style="overflow: hidden; display: inline-block;"><img  t-att-src="image_data_uri(bloc.student_signature)"/></span></p>
+                          <p class="c26"><img style="height:70px;width:210px;" t-att-src="image_data_uri(bloc.student_signature)"/></p>
                         </td>
                       </tr>
                       <tr class="c47">
