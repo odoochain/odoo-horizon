@@ -299,89 +299,89 @@
                         }
                     
                         .c9 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #000000;
+                          
                           border-top-width: 1pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
                           vertical-align: middle;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
-                          border-bottom-width: 0pt;
+                          border-left-style: none;
+                          
                           width: 244.6pt;
                           border-top-color: #767171;
                           border-bottom-style: solid
                         }
                     
                         .c28 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #000000;
+                          
                           border-top-width: 1pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
                           vertical-align: bottom;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
-                          border-bottom-width: 0pt;
+                          border-left-style: none;
+                          
                           width: 244.6pt;
                           border-top-color: #767171;
                           border-bottom-style: solid
                         }
                     
                         .c45 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
-                          border-top-width: 0pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
+                          
                           vertical-align: bottom;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
+                          border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 244.6pt;
-                          border-top-color: #000000;
+                          
                           border-bottom-style: solid
                         }
                     
                         .c7 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #000000;
+                          
                           border-top-width: 1pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
                           vertical-align: middle;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
-                          border-bottom-width: 0pt;
+                          border-left-style: none;
+                          
                           width: 60pt;
                           border-top-color: #767171;
                           border-bottom-style: solid
                         }
                     
                         .c30 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
                           border-top-width: 1pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
                           vertical-align: middle;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
+                          border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 60pt;
                           border-top-color: #767171;
@@ -389,89 +389,89 @@
                         }
                     
                         .c35 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #000000;
-                          border-top-width: 0pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
+                          
+                          
                           vertical-align: middle;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
-                          border-bottom-width: 0pt;
+                          border-left-style: none;
+                          
                           width: 60pt;
-                          border-top-color: #000000;
+                          
                           border-bottom-style: solid
                         }
                     
                         .c49 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #000000;
-                          border-top-width: 0pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
+                          
+                          
                           vertical-align: middle;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
-                          border-bottom-width: 0pt;
+                          border-left-style: none;
+                          
                           width: 244.6pt;
-                          border-top-color: #000000;
+                          
                           border-bottom-style: solid
                         }
                     
                         .c5 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
-                          border-top-width: 0pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
+                          
                           vertical-align: middle;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
-                          border-top-style: solid;
-                          border-left-style: solid;
+                          
+                          
+                          border-top-style: none;
+                          border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 60pt;
-                          border-top-color: #000000;
+                          
                           border-bottom-style: solid
                         }
                     
                         .c6 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
-                          border-top-width: 0pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
+                          
                           vertical-align: middle;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
+                          border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 244.6pt;
-                          border-top-color: #000000;
+                          
                           border-bottom-style: solid
                         }
                     
                         .c22 {
-                          border-right-style: solid;
+                          
                           padding: 0pt 3.5pt 0pt 3.5pt;
                           border-bottom-color: #767171;
                           border-top-width: 1pt;
-                          border-right-width: 0pt;
-                          border-left-color: #000000;
+                          
+                          
                           vertical-align: middle;
-                          border-right-color: #000000;
-                          border-left-width: 0pt;
+                          
+                          
                           border-top-style: solid;
-                          border-left-style: solid;
+                          border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 244.6pt;
                           border-top-color: #767171;
@@ -479,53 +479,53 @@
                         }
                     
                         .c23 {
-                          border-right-style: solid;
-                          border-bottom-color: #000000;
+                          
+                          
                           border-top-width: 1pt;
                           border-right-width: 1pt;
-                          border-left-color: #000000;
+                          
                           vertical-align: top;
-                          border-right-color: #000000;
+                          
                           border-left-width: 1pt;
                           border-top-style: solid;
-                          border-left-style: solid;
+                          border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 216.6pt;
-                          border-top-color: #000000;
+                          
                           border-bottom-style: solid
                         }
                     
                         .c48 {
-                          border-right-style: solid;
-                          border-bottom-color: #000000;
+                          
+                          
                           border-top-width: 1pt;
                           border-right-width: 1pt;
-                          border-left-color: #000000;
+                          
                           vertical-align: top;
-                          border-right-color: #000000;
+                          
                           border-left-width: 1pt;
                           border-top-style: solid;
-                          border-left-style: solid;
+                          border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 488.9pt;
-                          border-top-color: #000000;
+                          
                           border-bottom-style: solid
                         }
                     
                         .c42 {
-                          border-right-style: solid;
-                          border-bottom-color: #000000;
+                          
+                          
                           border-top-width: 1pt;
                           border-right-width: 1pt;
-                          border-left-color: #000000;
+                          
                           vertical-align: top;
-                          border-right-color: #000000;
+                          
                           border-left-width: 1pt;
                           border-top-style: solid;
-                          border-left-style: solid;
+                          border-left-style: none;
                           border-bottom-width: 1pt;
                           width: 272.4pt;
-                          border-top-color: #000000;
+                          
                           border-bottom-style: solid
                         }
                     
@@ -860,7 +860,7 @@
                         }
                     
                         .title {
-                          padding-top: 24pt;
+                          padding-top: 32pt;
                           color: #000000;
                           font-weight: 700;
                           font-size: 36pt;
@@ -872,7 +872,7 @@
                         }
                     
                         .subtitle {
-                          padding-top: 18pt;
+                          padding-top: 24pt;
                           color: #666666;
                           font-size: 24pt;
                           padding-bottom: 4pt;
@@ -1037,7 +1037,7 @@
                         <td class="c48" colspan="2" rowspan="1">
                           <p class="c26"><span class="c25">Date et signature de l'étudiant</span></p>
                           <p class="c26"><span class="c43 c44">Le 27 octobre 2022</span></p>
-                          <p class="c26"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 147.00px; height: 88.00px;"><img alt="" src="images/image1.png" style="width: 147.00px; height: 88.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                          <p class="c26"><span style="overflow: hidden; display: inline-block;"><img  t-att-src="image_data_uri(bloc.student_signature)"/></span></p>
                         </td>
                       </tr>
                       <tr class="c47">
