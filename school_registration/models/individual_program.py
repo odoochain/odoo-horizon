@@ -31,12 +31,7 @@ class IndividualBloc(models.Model):
     
     student_signature = fields.Binary(string="Student Signature", attachment=True)
     
-    def _compute_student_signature_date(self):
-        for rec in self:
-            att = self.env['ir.attachment'].search_read([['res_model','=','school.individual_bloc'],['res_id','=',rec.id]], fields=['__last_update'], limit=1)
-            rec.student_signature_date = att[0].__last_update if att else None
-            
-    student_signature_date = fields.Date(string="Student Signature Date", compute=_compute_student_signature_date)
+    student_signature_date = fields.Date(related="student_signature.__last_update")
 
 class IndividualProgram(models.Model):
     '''Individual Program'''
