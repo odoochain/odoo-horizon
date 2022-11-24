@@ -275,6 +275,7 @@
     <template id="report_individual_bloc_content">
         <t t-set="data_report_margin_top" t-value="20"/>
         <t t-set="data_report_header_spacing" t-value="20"/>
+        <t t-set="company" t-value="docs.company_id if len(docs) == 1 else docs.env.company"/>
         <t t-call="school_management.report_layout">
             <t t-foreach="docs" t-as="bloc">
                 <div class="header"><div><p class="c4"><span style="overflow: hidden; display: inline-block; margin: 20px 20px 20px 20px;">
@@ -963,11 +964,20 @@
                       </tr>
                       <tr class="c36">
                         <td class="c42" colspan="1" rowspan="1">
-                          <p class="c26"><span class="c41">Signature de la présidente de la commission des études</span></p>
-                          <p class="c26"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 213.30px; height: 77.04px;"><img alt="" src="images/image3.jpg" style="width: 213.30px; height: 77.04px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                          <p class="c26">
+                              <span class="c41">Signature de la présidente de la commission des études</span>
+                          </p>
+                          <p class="c26">
+                              <img style="height:70px;width:210px;" t-att-src="image_data_uri(company.director_signature)"/>
+                          </p>
                         </td>
                         <td class="c23" colspan="1" rowspan="1">
-                          <p class="c26"><span class="c41">Signature du secrétaire de la commission des études</span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 267.81px; height: 44.77px;"><img alt="Une image contenant texte                                      Description générée automatiquement" src="images/image2.png" style="width: 267.81px; height: 44.77px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/></span></p>
+                          <p class="c26">
+                              <span class="c41">Signature du secrétaire de la commission des études</span>
+                          </p>
+                          <p class="c26">
+                              <img style="height:70px;width:210px;" t-att-src="image_data_uri(company.secretary_signature)"/>
+                          </p>
                         </td>
                       </tr>
                     </table>
