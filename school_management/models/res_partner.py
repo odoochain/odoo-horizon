@@ -198,3 +198,10 @@ class Partner(models.Model):
             return tools.image_resize_image_big(image.encode('base64'))
         else:
             return super(Partner, self)._get_default_image(is_company, colorize)
+            
+class Company(models.Model):
+    _inherit = 'res.company'
+    
+    director_signature = fields.Binary(string="Director Signature")
+    
+    secretary_signature = fields.Binary(string="Secretarty Signature")
