@@ -952,7 +952,7 @@
                       <tr class="c40">
                         <td class="c48" colspan="2" rowspan="1">
                           <p class="c26"><span class="c25">Date et signature de l'étudiant</span></p>
-                          <p class="c26"><span class="c43 c44">Le 27 octobre 2022</span></p>
+                          <p class="c26"><span class="c43 c44">Le <span t-esc="bloc.student_signature_date.strftime('%d-%m-%Y')"/></span></p>
                           <p class="c26"><img style="height:70px;width:210px;" t-att-src="image_data_uri(bloc.student_signature)"/></p>
                         </td>
                       </tr>
