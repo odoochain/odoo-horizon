@@ -32,6 +32,7 @@
             <xpath expr="//field[@name='course_group_ids']" position="after">
                 <group>
                     <field name="student_signature" widget="signature" />
+                    <field name="student_signature_date" invisible="1" />
                 </group>
             </xpath>
         </field>
@@ -51,6 +52,7 @@
             <xpath expr="//div[@id='paes']" position="after">
                 <group>
                     <field name="student_signature" widget="signature" />
+                    <field name="student_signature_date" invisible="1" />
                 </group>
             </xpath>
         </field>

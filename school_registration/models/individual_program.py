@@ -19,6 +19,7 @@
 #
 ##############################################################################
 import logging
+from datetime import datetime
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, AccessError
@@ -29,19 +30,27 @@ class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit='school.individual_bloc'
     
-    student_signature = fields.Binary(string="Student Signature", attachment=True)
+    student_signature = fields.Binary(string="Student Signature")
+
+    student_signature_date = fields.Date(string="Student Signature Date")
     
-    def _compute_student_signature_date(self):
-        for rec in self:
-            rec.student_signature_date = None
-            
-    student_signature_date = fields.Date(string="Student Signature Date", compute=_compute_student_signature_date)
+    @api.onchange('student_signature')
+    def onchange_student_signature(self):
+        for rec in self :
+            rec.student_signature_date = datetime.today()
 
 class IndividualProgram(models.Model):
     '''Individual Program'''
     _inherit='school.individual_program'
     
-    student_signature = fields.Binary(string="Student Signature", attachment=True)
+    student_signature = fields.Binary(string="Student Signature")
+    
+    student_signature_date = fields.Date(string="Student Signature Date")
+    
+    @api.onchange('student_signature')
+    def onchange_student_signature(self):
+        for rec in self :
+            rec.student_signature_date = datetime.today()
     
     def _assign_cg(self, new_pae):
         cg_ids = []
