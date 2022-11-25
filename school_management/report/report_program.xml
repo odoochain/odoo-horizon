@@ -947,7 +947,7 @@
                       </t>
                       <tr class="c1">
                           <td class="c30" colspan="1" rowspan="1">
-                            <p class="c4"><span class="c19">&nbsp;</span></p>
+                            <p class="c4"><span class="c19"></span></p>
                           </td>
                           <td class="c22" colspan="1" rowspan="1">
                             <p class="c38"><span class="c0">Total :</span></p>
@@ -959,7 +959,7 @@
                             <p class="c3"><span class="c0"><t t-esc="bloc.total_credits"/></span></p>
                           </td>
                           <td class="c30" colspan="1" rowspan="1">
-                            <p class="c4"><span class="c19">&nbsp;</span></p>
+                            <p class="c4"><span class="c19"></span></p>
                           </td>
                         </tr>
                     </table>
