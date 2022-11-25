@@ -910,7 +910,7 @@
                       <t t-foreach="bloc.course_group_ids" t-as="course_group">
                       <tr class="c1">
                         <td class="c7" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c0"><t t-esc="course_group.uid"/></span></p>
+                          <p class="c4"><span class="c0"><t t-esc="course_group.source_course_group_id.uid"/></span></p>
                         </td>
                         <td class="c9" colspan="1" rowspan="1">
                           <p class="c4"><span class="c0"><t t-esc="course_group.title"/></span></p>

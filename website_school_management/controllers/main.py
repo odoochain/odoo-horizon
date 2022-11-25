@@ -448,6 +448,8 @@ class website_portal_school_management(http.Controller):
             program.pop('course_group_ids')
             blocs = request.env['school.bloc'].sudo().search_read([('id','in',program['bloc_ids'])])
             for bloc in blocs :
+                bloc['cycle_id'] = request.env['school.cycle'].sudo().search_read([('id','=',bloc['cycle_id'][0])])
+                bloc['speciality_id'] = request.env['school.speciality'].sudo().search_read([('id','=',bloc['speciality_id'][0])])
                 course_groups = request.env['school.course_group'].sudo().search_read([('id','in',bloc['course_group_ids'])])
                 for cg in course_groups :
                     cg.pop('bloc_ids')
