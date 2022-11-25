@@ -945,6 +945,23 @@
                       </tr>
                       </t>
                       </t>
+                      <tr class="c1">
+                          <td class="c30" colspan="1" rowspan="1">
+                            <p class="c4"><span class="c19">&nbsp;</span></p>
+                          </td>
+                          <td class="c22" colspan="1" rowspan="1">
+                            <p class="c38"><span class="c0">Total :</span></p>
+                          </td>
+                          <td class="c30" colspan="1" rowspan="1">
+                            <p class="c3"><span class="c0"><t t-esc="bloc.total_hours"/></span></p>
+                          </td>
+                          <td class="c30" colspan="1" rowspan="1">
+                            <p class="c3"><span class="c0"><t t-esc="bloc.total_credits"/></span></p>
+                          </td>
+                          <td class="c30" colspan="1" rowspan="1">
+                            <p class="c4"><span class="c19">&nbsp;</span></p>
+                          </td>
+                        </tr>
                     </table>
                     <p class="c18"><span class="c29"/></p>
                     <p class="c13"><span class="c15"/></p>
