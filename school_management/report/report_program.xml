@@ -959,7 +959,16 @@
                       <tr class="c47">
                         <td class="c48" colspan="2" rowspan="1">
                           <p class="c26"><span class="c25">Avis de la commission des études</span></p>
-                          <p class="c26"><span class="c44 c43">Programme annuel approuvé par la commission des études (séances du 17 et 27 octobre 2022)</span></p>
+                          <p class="c26">
+                              <span class="c44 c43">
+                              Programme annuel approuvé par la commission des études (séance(s) : 
+                              <t t-foreach="bloc.approuval_ids" t-as="app">
+                                  <t t-esc="app.date.strftime('%d-%m-%Y')"/>
+                                  <t t-if="not app_first and not app_last">
+                                      , 
+                                  </t>
+                              </t>)</span>
+                          </p>
                         </td>
                       </tr>
                       <tr class="c36">
