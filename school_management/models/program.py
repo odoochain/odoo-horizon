@@ -58,6 +58,8 @@ class Program(models.Model):
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
+    _rec_names_search = ['uid','title']
+    
     @api.depends('bloc_ids.total_hours','bloc_ids.total_credits')
     def _get_courses_total(self):
         for rec in self:
@@ -161,6 +163,8 @@ class Bloc(models.Model):
     _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     _order = 'program_id,sequence'
     
+    _rec_names_search = ['uid','title']
+    
     @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight')
     def _get_courses_total(self):
         for rec in self :
@@ -216,6 +220,8 @@ class CourseGroup(models.Model):
     _description = 'Courses Group'
     _inherit = ['mail.thread','school.uid.mixin','school.open.form.mixin']
     _order = 'sequence'
+    
+    _rec_names_search = ['uid','title']
 
     sequence = fields.Integer(string='Sequence')
     
@@ -335,6 +341,8 @@ class Course(models.Model):
     _description = 'Course'
     _inherit = ['mail.thread','school.uid.mixin']
     _order = 'sequence'
+    
+    _rec_names_search = ['uid','title']
 
     sequence = fields.Integer(string='Sequence')
     
