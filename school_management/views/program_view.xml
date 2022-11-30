@@ -348,7 +348,7 @@
       <field name="model">school.course</field>
       <field name="arch" type="xml">
         <search string="Search Course">
-          <field name="name" filter_domain="[('name','ilike',self)]" />
+          <field name="name" filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"/>
         </search>
       </field>
     </record>
