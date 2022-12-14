@@ -159,6 +159,7 @@ class GoogleDriveService(models.Model):
     
     def rename(self, google_drive_file, to_name):
         drive = googleapiclient.discovery.build(API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
+        _logger.info('Rename %s to %s' % (google_drive_file.googe_drive_id, to_name))
         updated_file = drive.files().update(fileId=google_drive_file.googe_drive_id,
             body={
                 'name' : to_name
