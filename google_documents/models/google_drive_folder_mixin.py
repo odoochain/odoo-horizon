@@ -163,7 +163,7 @@ class GoogleDriveService(models.Model):
         updated_file = drive.files().update(fileId=google_drive_file.googe_drive_id,
             body={
                 'name' : to_name
-            },supportsAllDrives=True,includeItemsFromAllDrives=True).execute()
+            },supportsAllDrives=True).execute()
     
     def get_files_from_folder_id(self, folderId):
 
