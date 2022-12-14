@@ -47,7 +47,7 @@ class GoogleDriveFile(models.Model):
     def onchange_official_document_id(self):
         if self.official_document_id :
             google_service = self.env.company.google_drive_id
-            if len(self.official_document_id.google_drive_files) > 1 :
+            if len(self.official_document_id.google_drive_files) == 1 :
                 doc_name = f"CRLG - {self.env.user.current_year_id.name} - {self.official_document_id.name} - {self.official_document_id.student_id.name}"
                 google_service.rename(self, doc_name)
             else :
