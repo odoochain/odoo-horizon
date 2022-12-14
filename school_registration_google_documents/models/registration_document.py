@@ -27,7 +27,6 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
-            
 class OfficialDocument(models.Model):
     '''Official Document'''
     _inherit = 'school.official_document'
@@ -43,3 +42,16 @@ class GoogleDriveFile(models.Model):
     
     official_document_id = fields.Many2one('school.official_document','Related Official Document')
     is_available = fields.Boolean(related='official_document_id.is_available')
+    
+    @api.onchange('official_document_id')
+    def onchange_official_document_id(self):
+        if self.official_document_id :
+            google_service = self.env.company.google_drive_id
+            if len(self.official_document_id.google_drive_files) > 1 :
+                doc_name = f"CRLG - {self.env.user.current_year_id.name} - {self.official_document_id.name} - {self.official_document_id.student_id.name}"
+                google_service.rename(self, doc_name)
+            else :
+                total = len(self.official_document_id.google_drive_files)
+                for index, file in enumerate(self.official_document_id.google_drive_files):
+                    doc_name = f"CRLG - {self.env.user.current_year_id.name} - {self.official_document_id.name} - {self.official_document_id.student_id.name} ({index}/{total})"
+                    google_service.rename(file, doc_name)

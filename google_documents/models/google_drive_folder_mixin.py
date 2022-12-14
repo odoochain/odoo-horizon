@@ -157,10 +157,16 @@ class GoogleDriveService(models.Model):
         self.ensure_one()
         return self.drive_credentials_json
     
+    def rename(self, google_drive_file, to_name):
+        drive = googleapiclient.discovery.build(API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
+        updated_file = drive.files().update(fileId=google_drive_file.googe_drive_id,
+            body={
+                'name' : to_name
+            }).execute()
+    
     def get_files_from_folder_id(self, folderId):
 
-        drive = googleapiclient.discovery.build(
-        API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
+        drive = googleapiclient.discovery.build(API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
 
         all_file_list = []
         folder_queue = [folderId]
