@@ -34,7 +34,7 @@ import googleapiclient.discovery
 
 _logger = logging.getLogger(__name__)
 
-SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+SCOPES = ['https://www.googleapis.com/auth/drive']
 API_SERVICE_NAME = 'drive'
 API_VERSION = 'v3'
 
