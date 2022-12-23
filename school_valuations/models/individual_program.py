@@ -106,6 +106,11 @@ class ValuationFollwup(models.Model):
             user_id = self.env['res.users'].search([['partner_id','=',rec.responsible_id.id]])
             rec.responsible_uid = user_id
     
+    valuation_type = fields.Selection([
+            ('A','Valuated based on experience'),
+            ('C','Valuated based on credits')
+    ], string="Valuation Type", default="C", tracking=True)
+    
     responsible_decision = fields.Selection([
             ('accept','Accepted'),
             ('reject','Rejected')

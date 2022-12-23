@@ -107,6 +107,7 @@
               <field name="individual_course_group_id" colspan="4"/>
               <field name="individual_program_id" colspan="4"/>
               <field name="responsible_id" colspan="4"/>
+              <field name="valuation_type" colspan="4"/>
               <field name="attachment_ids" widget="many2many_binary" colspan="4"/>
               <field name="responsible_decision"/>
             </group>
