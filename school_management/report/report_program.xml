@@ -370,50 +370,46 @@
                           </td>
                         </tr>
                     </table>
-                    <table class="c46">
-                      <tr class="c40">
-                        <td class="c48" colspan="2" rowspan="1">
-                          <p class="c26"><span class="c25">Date et signature de l'étudiant
-                          <p class="c26"><span class="c43 c44">Le <span t-esc="bloc.student_signature_date and bloc.student_signature_date.strftime('%d-%m-%Y')"/>
-                          <p class="c26"><img style="height:70px;width:210px;" t-att-src="bloc.student_signature and image_data_uri(bloc.student_signature)"/></p>
+                    <table>
+                      <tr>
+                        <tdcolspan="2" rowspan="1">
+                          <p>
+                              Date et signature de l'étudiant<br/>
+                              Le <span t-esc="bloc.student_signature_date and bloc.student_signature_date.strftime('%d-%m-%Y')"/>
+                          </p>
+                          <img style="height:70px;width:210px;" t-att-src="bloc.student_signature and image_data_uri(bloc.student_signature)"/>
                         </td>
                       </tr>
-                      <tr class="c47">
-                        <td class="c48" colspan="2" rowspan="1">
-                          <p class="c26"><span class="c25">Avis de la commission des études
-                          <p class="c26">
-                              <span class="c44 c43">
+                      <tr>
+                        <tdcolspan="2" rowspan="1">
+                          <p>Avis de la commission des études</p>
+                          <p>
                               Programme annuel approuvé par la commission des études (séance(s) : 
                               <t t-foreach="bloc.approuval_ids" t-as="app">
                                   <t t-esc="app.date.strftime('%d-%m-%Y')"/>
                                   <t t-if="not app_first and not app_last">
                                       , 
                                   </t>
-                              </t>)</span>
+                              </t>)
                           </p>
                         </td>
                       </tr>
-                      <tr class="c36">
-                        <td class="c42">
-                          <p class="c26">
-                              <span class="c41">Signature de la présidente de la commission des études</span>
+                      <tr>
+                        <td>
+                          <p>
+                              Signature de la présidente de la commission des études
                           </p>
-                          <p class="c26">
-                              <img style="height:70px;width:210px;" t-att-src="image_data_uri(company.director_signature)"/>
-                          </p>
+                          <img style="height:70px;width:210px;" t-att-src="image_data_uri(company.director_signature)"/>
                         </td>
-                        <td class="c23">
-                          <p class="c26">
-                              <span class="c41">Signature du secrétaire de la commission des études</span>
+                        <td>
+                          <p>
+                             Signature du secrétaire de la commission des études
                           </p>
-                          <p class="c26">
-                              <img style="height:70px;width:210px;" t-att-src="image_data_uri(company.secretary_signature)"/>
-                          </p>
+                          <img style="height:70px;width:210px;" t-att-src="image_data_uri(company.secretary_signature)"/>
                         </td>
                       </tr>
                     </table>
-                    <p class="c13"><span class="c8"/></p>
-                    <p class="c37"><span class="c43">Imprimé <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
+                    <p>Imprimé <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/></p>
                 </div>
             </t>
         </t>
