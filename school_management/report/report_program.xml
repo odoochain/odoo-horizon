@@ -261,7 +261,7 @@
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <title><t t-esc="title or 'Horizon Report'"/></title>
-                <link rel="stylesheet" href="/school_management/static/src/css/bulma.css"/>
+                <link rel="stylesheet" href="/school_management/static/src/scss/reporting_variables.scss"/>
             </head>
             <body>
                 <main>
