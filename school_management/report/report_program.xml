@@ -256,7 +256,7 @@
     </template>
     
     <template id="assets_reporting" name="Assets used in reporting">
-        <link rel="stylesheet" type="text/css" href="/school_management/static/src/scss/reporting_variables.scss"/>
+        <link rel="stylesheet" type="text/css" href="/school_management/static/lib/bulma/bulma.sass"/>
     </template>
 
     <template name="School Report layout" id="report_layout">&lt;!DOCTYPE html&gt;
