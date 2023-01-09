@@ -254,6 +254,10 @@
             </table>
         </div>
     </template>
+    
+    <template id="assets_reporting" name="Assets used in reporting">
+        <link rel="stylesheet" type="text/css" href="/school_management/static/src/scss/reporting_variables.scss"/>
+    </template>
 
     <template name="School Report layout" id="report_layout">&lt;!DOCTYPE html&gt;
         <html t-att-lang="lang and lang.replace('_', '-')" t-att-data-report-margin-top="data_report_margin_top" t-att-data-report-header-spacing="data_report_header_spacing" t-att-data-report-dpi="data_report_dpi" t-att-data-report-landscape="data_report_landscape" t-att-web-base-url="web_base_url">
@@ -261,7 +265,7 @@
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <title><t t-esc="title or 'Horizon Report'"/></title>
-                <link rel="stylesheet" href="/school_management/static/src/scss/reporting_variables.scss"/>
+                <t t-call-assets="school_management.assets_reporting"/>
             </head>
             <body>
                 <main>
