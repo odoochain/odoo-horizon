@@ -285,10 +285,8 @@
         <t t-set="company" t-value="docs.env.company"/>
         <t t-call="school_management.report_layout">
             <t t-foreach="docs" t-as="bloc">
-                <div class="header"><div><p class="c4"><span style="overflow: hidden; display: inline-block; margin: 20px 20px 20px 20px;">
+                <div class="header">
                     <img alt="" src="/school_management/static/src/img/report_header.png" title=""/>
-                    
-                    </div>
                 </div>
                 <div class="article" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')" style="margin: 0cm 1.5cm;">
                     <h1><t t-esc="bloc.name"/></h1>
