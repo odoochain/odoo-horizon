@@ -292,7 +292,7 @@
                     <h1><t t-esc="bloc.name"/></h1>
                     <h3>Basé sur Bachelier en musique : <t t-esc="bloc.source_bloc_id.name"/></h3>
                     <h5><t t-esc="bloc.uid"/></h5>
-                    <table class="pure-table pure-table-horizontal">
+                    <table class="pure-table pure-table-horizontal horizon-table">
                       <colgroup>
                           <col style="width:180px"/>
                           <col style="width:650px"/>
