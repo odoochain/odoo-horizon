@@ -370,7 +370,7 @@
                           </td>
                         </tr>
                     </table>
-                    <table>
+                    <table class="pure-table">
                       <tr>
                         <td colspan="2" rowspan="1">
                           <p>

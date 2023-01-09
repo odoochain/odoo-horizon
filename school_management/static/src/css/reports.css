@@ -21,3 +21,9 @@ h4, h5, h6 {
 .minor_row {
     font-style: italic;
 }
+
+.major_row td {
+    border-top: double;
+    border-right: 0;
+    border-left: 0;
+}
