@@ -257,6 +257,7 @@
     
     <template id="assets_reporting" name="Assets used in reporting">
         <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/pure-nr.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Fira+Sans">
         <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/reports.css"/>
     </template>
 

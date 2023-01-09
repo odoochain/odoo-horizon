@@ -1,8 +1,8 @@
 body {
-    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    font-family: "Fira Sans", Arial, sans-serif;
 }
 
 h1, h2, h3,
 h4, h5, h6 {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    font-family: "Lato", "Fira Sans", sans-serif;
 }
