@@ -28,3 +28,10 @@ h4, h5, h6 {
     border-right: 0;
     border-left: 0;
 }
+
+table {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-left: none;
+    border-right: none;
+}
