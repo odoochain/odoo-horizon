@@ -23,7 +23,8 @@ h4, h5, h6 {
 }
 
 .major_row td {
-    border-top: double;
+    border-top: solid 2px;
+    border-color: #888888;
     border-right: 0;
     border-left: 0;
 }
