@@ -264,7 +264,9 @@
                 <link rel="stylesheet" href="/school_management/static/src/css/bulma.css"/>
             </head>
             <body>
-                <t t-raw="0"/>
+                <main>
+                    <t t-raw="0"/>
+                </main>
             </body>
         </html>
     </template>
