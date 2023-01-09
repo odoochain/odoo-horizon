@@ -372,7 +372,7 @@
                     </table>
                     <table>
                       <tr>
-                        <tdcolspan="2" rowspan="1">
+                        <td colspan="2" rowspan="1">
                           <p>
                               Date et signature de l'étudiant<br/>
                               Le <span t-esc="bloc.student_signature_date and bloc.student_signature_date.strftime('%d-%m-%Y')"/>
@@ -381,7 +381,7 @@
                         </td>
                       </tr>
                       <tr>
-                        <tdcolspan="2" rowspan="1">
+                        <td colspan="2" rowspan="1">
                           <p>Avis de la commission des études</p>
                           <p>
                               Programme annuel approuvé par la commission des études (séance(s) : 
