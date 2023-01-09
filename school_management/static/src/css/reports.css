@@ -10,5 +10,14 @@ h1 {
 h2, h3,
 h4, h5, h6 {
     font-family: "Lato", "Fira Sans", sans-serif;
-    color : #cccccc;
+    color : #888888;
+}
+
+.major_row {
+    color : darkblue;
+    font-weight: 800;
+}
+
+.minor_row {
+    font-style: italic;
 }

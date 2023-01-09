@@ -258,6 +258,9 @@
     <template id="assets_reporting" name="Assets used in reporting">
         <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/pure-nr.css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Fira+Sans"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&family=Fira+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/reports.css"/>
     </template>
 
@@ -285,702 +288,102 @@
             <t t-foreach="docs" t-as="bloc">
                 <div class="header"><div><p class="c4"><span style="overflow: hidden; display: inline-block; margin: 20px 20px 20px 20px;">
                     <img alt="" src="/school_management/static/src/img/report_header.png" title=""/>
-                    </span></p>
+                    
                     </div>
                 </div>
                 <div class="article" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')" style="margin: 0cm 1.5cm;">
-                                    <style type="text/css">
-                        @import url('https://themes.googleusercontent.com/fonts/css?kit=-h-6QXRxxJDDaybOwttsylUtBe9kKYizu0iG5PWoTFEjzna1oBj6YrRkZSo79Yur');
-                    
-                        ol {
-                          margin: 0;
-                          padding: 0
-                        }
-                    
-                        table td,
-                        table th {
-                          padding: 0
-                          border-style : hidden!important;
-                          border-collapse: collapse;
-                        }
-                    
-                        .c9 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-top-width: 1pt;
-                          vertical-align: middle;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          width: 244.6pt;
-                          border-top-color: #767171;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c28 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-top-width: 1pt;
-                          vertical-align: bottom;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          width: 244.6pt;
-                          border-top-color: #767171;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c45 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #767171;
-                          vertical-align: bottom;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          border-bottom-width: 1pt;
-                          width: 244.6pt;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c7 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-top-width: 1pt;
-                          vertical-align: middle;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          width: 60pt;
-                          border-top-color: #767171;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c30 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #767171;
-                          border-top-width: 1pt;
-                          vertical-align: middle;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          border-bottom-width: 1pt;
-                          width: 60pt;
-                          border-top-color: #767171;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c35 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          vertical-align: middle;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          width: 60pt;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c49 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          vertical-align: middle;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          width: 244.6pt;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c5 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #767171;
-                          vertical-align: middle;
-                          border-top-style: none;
-                          border-left-style: none;
-                          border-bottom-width: 1pt;
-                          width: 60pt;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c6 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #767171;
-                          vertical-align: middle;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          border-bottom-width: 1pt;
-                          width: 244.6pt;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c22 {
-                          padding: 0pt 3.5pt 0pt 3.5pt;
-                          border-bottom-color: #767171;
-                          border-top-width: 1pt;
-                          vertical-align: middle;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          border-bottom-width: 1pt;
-                          width: 244.6pt;
-                          border-top-color: #767171;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c23 {
-                          border-top-width: 1pt;
-                          border-right-width: 1pt;
-                          vertical-align: top;
-                          border-left-width: 1pt;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          border-bottom-width: 1pt;
-                          width: 216.6pt;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c48 {
-                          border-top-width: 1pt;
-                          border-right-width: 1pt;
-                          vertical-align: top;
-                          border-left-width: 1pt;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          border-bottom-width: 1pt;
-                          width: 488.9pt;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c42 {
-                          border-top-width: 1pt;
-                          border-right-width: 1pt;
-                          vertical-align: top;
-                          border-left-width: 1pt;
-                          border-top-style: solid;
-                          border-left-style: none;
-                          border-bottom-width: 1pt;
-                          width: 272.4pt;
-                          border-bottom-style: solid
-                        }
-                    
-                        .c17 {
-                          color: #000000;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 18pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c10 {
-                          color: #484f56;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 10pt;
-                          font-family: "Gill Sans";
-                          font-style: italic
-                        }
-                    
-                        .c24 {
-                          color: #000000;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 11pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c18 {
-                          margin-left: -7.1pt;
-                          padding-top: 0.2pt;
-                          text-indent: 7.1pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          text-align: left;
-                          height: 11pt
-                        }
-                    
-                        .c25 {
-                          color: #484f56;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9.5pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c15 {
-                          color: #000000;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 10pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c41 {
-                          color: #484f56;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c19 {
-                          color: #000000;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9pt;
-                          font-family: "Times New Roman";
-                          font-style: normal
-                        }
-                    
-                        .c32 {
-                          color: #002060;
-                          font-weight: 700;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9pt;
-                          font-family: "Times New Roman";
-                          font-style: normal
-                        }
-                    
-                        .c0 {
-                          color: #002060;
-                          font-weight: 700;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9.5pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c29 {
-                          color: #000000;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c2 {
-                          color: #000000;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 11pt;
-                          font-family: "Calibri";
-                          font-style: normal
-                        }
-                    
-                        .c20 {
-                          color: #000000;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9.5pt;
-                          font-family: "Roboto";
-                          font-style: italic
-                        }
-                    
-                        .c34 {
-                          color: #6b747c;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 18pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c8 {
-                          color: #000000;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9.5pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c14 {
-                          color: #6b747c;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 12pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c27 {
-                          color: #252527;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 9.5pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c11 {
-                          color: #484f56;
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-size: 18pt;
-                          font-family: "Roboto";
-                          font-style: normal
-                        }
-                    
-                        .c52 {
-                          margin-left: -7.1pt;
-                          padding-top: 3.4pt;
-                          text-indent: 7.1pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          text-align: left
-                        }
-                    
-                        .c38 {
-                          padding-top: 0pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          orphans: 2;
-                          widows: 2;
-                          text-align: right
-                        }
-                    
-                        .c4 {
-                          padding-top: 0pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          orphans: 2;
-                          widows: 2;
-                          text-align: left
-                        }
-                    
-                        .c3 {
-                          padding-top: 0pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          orphans: 2;
-                          widows: 2;
-                          text-align: center
-                        }
-                    
-                        .c39 {
-                          padding-top: 3.2pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          text-align: left;
-                          height: 11pt
-                        }
-                    
-                        .c16 {
-                          padding-top: 0pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.15;
-                          text-align: left;
-                          height: 11pt
-                        }
-                    
-                        .c26 {
-                          margin-left: 6.7pt;
-                          padding-top: 7.5pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          text-align: left
-                        }
-                    
-                        .c50 {
-                          font-size: 10pt;
-                          font-family: "Gill Sans";
-                          font-style: italic;
-                          color: #484f56;
-                          font-weight: 400
-                        }
-                    
-                        .c37 {
-                          margin-left: 14.2pt;
-                          padding-top: 5.7pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          text-align: left
-                        }
-                    
-                        .c44 {
-                          font-weight: 400;
-                          text-decoration: none;
-                          vertical-align: baseline;
-                          font-family: "Roboto";
-                          font-style: italic
-                        }
-                    
-                        .c13 {
-                          padding-top: 0pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          text-align: left;
-                          height: 11pt
-                        }
-                    
-                        .c46 {
-                          margin-left: -0.2pt;
-                          border-spacing: 0;
-                          border-collapse: collapse;
-                          margin-right: auto
-                        }
-                    
-                        .c12 {
-                          border-spacing: 0;
-                          border-collapse: collapse;
-                          margin-right: auto
-                        }
-                    
-                        .c21 {
-                          padding-top: 0pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          text-align: left
-                        }
-                    
-                        .c51 {
-                          padding-top: 3.2pt;
-                          padding-bottom: 0pt;
-                          line-height: 1.0;
-                          text-align: left
-                        }
-                    
-                        .c33 {
-                          background-color: #ffffff;
-                          max-width: 453.6pt;
-                          padding: 70.8pt 70.8pt 70.8pt 70.8pt
-                        }
-                    
-                        .c43 {
-                          color: #484f56;
-                          font-size: 9.5pt
-                        }
-                    
-                        .c40 {
-                          height: 37.8pt
-                        }
-                    
-                        .c36 {
-                          height: 99.9pt
-                        }
-                    
-                        .c1 {
-                          height: 15pt
-                        }
-                    
-                        .c31 {
-                          height: 15.5pt
-                        }
-                    
-                        .c47 {
-                          height: 45.4pt
-                        }
-                    
-                        .title {
-                          padding-top: 32pt;
-                          color: #000000;
-                          font-weight: 700;
-                          font-size: 36pt;
-                          padding-bottom: 6pt;
-                          font-family: "Roboto";
-                          line-height: 1.0;
-                          page-break-after: avoid;
-                          text-align: left
-                        }
-                    
-                        .subtitle {
-                          padding-top: 24pt;
-                          color: #666666;
-                          font-size: 24pt;
-                          padding-bottom: 4pt;
-                          font-family: "Georgia";
-                          line-height: 1.0;
-                          page-break-after: avoid;
-                          font-style: italic;
-                          text-align: left
-                        }
-                    
-                        li {
-                          color: #000000;
-                          font-size: 11pt;
-                          font-family: "Roboto"
-                        }
-                    
-                        p {
-                          margin: 0;
-                          color: #000000;
-                          font-size: 11pt;
-                          font-family: "Roboto"
-                        }
-                    
-                        h1 {
-                          padding-top: 24pt;
-                          color: #000000;
-                          font-weight: 700;
-                          font-size: 24pt;
-                          padding-bottom: 6pt;
-                          font-family: "Roboto";
-                          line-height: 1.0;
-                          page-break-after: avoid;
-                          text-align: left
-                        }
-                    
-                        h2 {
-                          padding-top: 18pt;
-                          color: #000000;
-                          font-weight: 700;
-                          font-size: 18pt;
-                          padding-bottom: 4pt;
-                          font-family: "Roboto";
-                          line-height: 1.0;
-                          page-break-after: avoid;
-                          text-align: left
-                        }
-                    
-                        h3 {
-                          padding-top: 14pt;
-                          color: #000000;
-                          font-weight: 700;
-                          font-size: 14pt;
-                          padding-bottom: 4pt;
-                          font-family: "Roboto";
-                          line-height: 1.0;
-                          page-break-after: avoid;
-                          text-align: left
-                        }
-                    
-                        h4 {
-                          padding-top: 12pt;
-                          color: #000000;
-                          font-weight: 700;
-                          font-size: 12pt;
-                          padding-bottom: 2pt;
-                          font-family: "Roboto";
-                          line-height: 1.0;
-                          page-break-after: avoid;
-                          text-align: left
-                        }
-                    
-                        h5 {
-                          padding-top: 11pt;
-                          color: #000000;
-                          font-weight: 700;
-                          font-size: 11pt;
-                          padding-bottom: 2pt;
-                          font-family: "Roboto";
-                          line-height: 1.0;
-                          page-break-after: avoid;
-                          text-align: left
-                        }
-                    
-                        h6 {
-                          padding-top: 10pt;
-                          color: #000000;
-                          font-weight: 700;
-                          font-size: 10pt;
-                          padding-bottom: 2pt;
-                          font-family: "Roboto";
-                          line-height: 1.0;
-                          page-break-after: avoid;
-                          text-align: left
-                        }
-            </style>  
-                    <p class="c13"><span class="c11"/></p>
-                    <p class="c21"><span class="c11"><t t-esc="bloc.name"/></span></p>
-                    <p class="c52"><span class="c34">Basé sur Bachelier en musique : <t t-esc="bloc.source_bloc_id.name"/></span></p>
-                    <p class="c51"><span class="c14"><t t-esc="bloc.uid"/></span></p>
-                    <p class="c39"><span class="c14"/></p>
-                    <table class="c12">
-                      <tr class="c1">
-                        <td class="c30" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c27">CODE UE</span></p>
-                        </td>
-                        <td class="c22" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c27">UNITéS D'ENSEIGNEMENT</span></p>
-                        </td>
-                        <td class="c30" colspan="1" rowspan="1">
-                          <p class="c3"><span class="c27">HEURES</span></p>
-                        </td>
-                        <td class="c30" colspan="1" rowspan="1">
-                          <p class="c3"><span class="c27">ECTS</span></p>
-                        </td>
-                        <td class="c30" colspan="1" rowspan="1">
-                          <p class="c3"><span class="c27">POND</span></p>
-                        </td>
-                      </tr>
+                    <h1><t t-esc="bloc.name"/></h1>
+                    <h3>Basé sur Bachelier en musique : <t t-esc="bloc.source_bloc_id.name"/></h3>
+                    <h5><t t-esc="bloc.uid"/></h5>
+                    <table class="pure-table pure-table-horizontal">
+                      <colgroup>
+                          <col style="width:180px"/>
+                          <col style="width:650px"/>
+                          <col style="width:120px"/>
+                          <col style="width:120px"/>
+                          <col style="width:120px"/>
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th>
+                            CODE UE
+                          </th>
+                          <th>
+                            UNITéS D'ENSEIGNEMENT
+                          </th>
+                          <th>
+                            HEURES
+                          </th>
+                          <th>
+                            ECTS
+                          </th>
+                          <th>
+                            POND
+                          </th>
+                        </tr>
+                      </thead>
                       <t t-foreach="bloc.course_group_ids" t-as="course_group">
-                      <tr class="c1">
-                        <td class="c7" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c0"><t t-esc="course_group.source_course_group_id.uid"/></span></p>
+                      <tr class="major_row">
+                        <td>
+                          <t t-esc="course_group.source_course_group_id.uid"/>
                         </td>
-                        <td class="c9" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c0"><t t-esc="course_group.title"/></span></p>
+                        <td>
+                          <t t-esc="course_group.title"/>
                         </td>
-                        <td class="c7" colspan="1" rowspan="1">
-                          <p class="c3"><span class="c0"><t t-esc="course_group.total_hours"/></span></p>
+                        <td>
+                          <t t-esc="course_group.total_hours"/>
                         </td>
-                        <td class="c7" colspan="1" rowspan="1">
-                          <p class="c3"><span class="c0"><t t-esc="course_group.total_credits"/></span></p>
+                        <td>
+                          <t t-esc="course_group.total_credits"/>
                         </td>
-                        <td class="c7" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c0"/></p>
+                        <td>
                         </td>
                       </tr>
                       <t t-foreach="course_group.course_ids" t-as="course">
-                      <tr class="c1">
-                        <td class="c5" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c19"/></p>
+                      <tr class="minor_row">
+                        <td>
                         </td>
-                        <td class="c6" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c10"><t t-esc="course.title"/></span></p>
+                        <td>
+                            <t t-esc="course.title"/>
                         </td>
-                        <td class="c5" colspan="1" rowspan="1">
-                          <p class="c3"><span class="c10"><t t-esc="course.hours"/></span></p>
+                        <td>
+                          <t t-esc="course.hours"/>
                         </td>
-                        <td class="c5" colspan="1" rowspan="1">
-                          <p class="c4"><span class="c19"/></p>
+                        <td>
                         </td>
-                        <td class="c5" colspan="1" rowspan="1">
-                          <p class="c3"><span class="c10"><t t-esc="course.weight"/></span></p>
+                        <td>
+                          <t t-esc="course.weight"/>
                         </td>
                       </tr>
                       </t>
                       </t>
-                      <tr class="c1">
-                          <td class="c30" colspan="1" rowspan="1">
-                            <p class="c4"><span class="c19"></span></p>
+                      <tr class="major_row">
+                          <td>
                           </td>
-                          <td class="c22" colspan="1" rowspan="1">
-                            <p class="c38"><span class="c0">Total :</span></p>
+                          <td>
+                            Total :
                           </td>
-                          <td class="c30" colspan="1" rowspan="1">
-                            <p class="c3"><span class="c0"><t t-esc="bloc.total_hours"/></span></p>
+                          <td>
+                            <t t-esc="bloc.total_hours"/>
                           </td>
-                          <td class="c30" colspan="1" rowspan="1">
-                            <p class="c3"><span class="c0"><t t-esc="bloc.total_credits"/></span></p>
+                          <td>
+                            <t t-esc="bloc.total_credits"/>
                           </td>
-                          <td class="c30" colspan="1" rowspan="1">
-                            <p class="c4"><span class="c19"></span></p>
+                          <td>
                           </td>
                         </tr>
                     </table>
-                    <p class="c18"><span class="c29"/></p>
-                    <p class="c13"><span class="c15"/></p>
                     <table class="c46">
                       <tr class="c40">
                         <td class="c48" colspan="2" rowspan="1">
-                          <p class="c26"><span class="c25">Date et signature de l'étudiant</span></p>
-                          <p class="c26"><span class="c43 c44">Le <span t-esc="bloc.student_signature_date and bloc.student_signature_date.strftime('%d-%m-%Y')"/></span></p>
+                          <p class="c26"><span class="c25">Date et signature de l'étudiant
+                          <p class="c26"><span class="c43 c44">Le <span t-esc="bloc.student_signature_date and bloc.student_signature_date.strftime('%d-%m-%Y')"/>
                           <p class="c26"><img style="height:70px;width:210px;" t-att-src="bloc.student_signature and image_data_uri(bloc.student_signature)"/></p>
                         </td>
                       </tr>
                       <tr class="c47">
                         <td class="c48" colspan="2" rowspan="1">
-                          <p class="c26"><span class="c25">Avis de la commission des études</span></p>
+                          <p class="c26"><span class="c25">Avis de la commission des études
                           <p class="c26">
                               <span class="c44 c43">
                               Programme annuel approuvé par la commission des études (séance(s) : 
@@ -994,7 +397,7 @@
                         </td>
                       </tr>
                       <tr class="c36">
-                        <td class="c42" colspan="1" rowspan="1">
+                        <td class="c42">
                           <p class="c26">
                               <span class="c41">Signature de la présidente de la commission des études</span>
                           </p>
@@ -1002,7 +405,7 @@
                               <img style="height:70px;width:210px;" t-att-src="image_data_uri(company.director_signature)"/>
                           </p>
                         </td>
-                        <td class="c23" colspan="1" rowspan="1">
+                        <td class="c23">
                           <p class="c26">
                               <span class="c41">Signature du secrétaire de la commission des études</span>
                           </p>
@@ -1013,7 +416,7 @@
                       </tr>
                     </table>
                     <p class="c13"><span class="c8"/></p>
-                    <p class="c37"><span class="c43">Imprimé <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/></span></p>
+                    <p class="c37"><span class="c43">Imprimé <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
                 </div>
             </t>
         </t>
