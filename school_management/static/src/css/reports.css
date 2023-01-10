@@ -20,6 +20,9 @@ h4, h5, h6 {
 
 .minor_row {
     font-style: italic;
+}
+
+.minor_row td {
     padding: 0;
 }
 
