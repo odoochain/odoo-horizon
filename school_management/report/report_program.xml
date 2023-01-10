@@ -266,8 +266,6 @@
     </template>
     
     <template id="report_individual_bloc_content">
-        <t t-set="data_report_margin_top" t-value="20"/>
-        <t t-set="data_report_header_spacing" t-value="20"/>
         <t t-set="company" t-value="docs.env.company"/>
         <t t-call="web.report_layout">
             <t t-foreach="docs" t-as="bloc">
