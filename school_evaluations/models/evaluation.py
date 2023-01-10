@@ -67,6 +67,8 @@ class IndividualProgram(models.Model):
     program_completed = fields.Boolean(compute='_get_total_acquiered_credits', string="Program Completed",tracking=True,store=True)
 
     valuated_course_group_ids = fields.One2many('school.individual_course_group', 'valuated_program_id', string='Valuated Courses Groups', tracking=True)
+    
+    total_valuated_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Valuated Credits', tracking=True,store=True)
 
     @api.depends('valuated_course_group_ids', 'required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     def _get_total_acquiered_credits(self):
@@ -78,6 +80,7 @@ class IndividualProgram(models.Model):
             rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
             rec.total_registered_credits = rec.total_acquiered_credits + total_current
             rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
+            rec.total_valuated_credits = sum(cg.total_credits for cg in rec.valuated_course_group_ids)
 
     @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     def compute_evaluation(self):
