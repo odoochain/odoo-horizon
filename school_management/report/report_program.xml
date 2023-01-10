@@ -255,35 +255,21 @@
         </div>
     </template>
     
-    <template id="assets_reporting" name="Assets used in reporting">
-        <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/pure-nr.css"/>
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&amp;family=Fira+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&amp;family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&amp;display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/reports.css"/>
+    <template id="report_layout" inherit_id="web.report_layout">
+        <xpath expr="//head" position="inside">
+            <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/pure-nr.css"/>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+            <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&amp;family=Fira+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&amp;family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+            <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/reports.css"/>        
+        </xpath>
     </template>
-
-    <template name="School Report layout" id="report_layout">&lt;!DOCTYPE html&gt;
-        <html t-att-lang="lang and lang.replace('_', '-')" t-att-data-report-margin-top="data_report_margin_top" t-att-data-report-header-spacing="data_report_header_spacing" t-att-data-report-dpi="data_report_dpi" t-att-data-report-landscape="data_report_landscape" t-att-web-base-url="web_base_url">
-            <head>
-                <meta charset="utf-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <title><t t-esc="title or 'Horizon Report'"/></title>
-                <t t-call-assets="school_management.assets_reporting"/>
-            </head>
-            <body>
-                <main class="page">
-                    <t t-raw="0"/>
-                </main>
-            </body>
-        </html>
-    </template>
-
+    
     <template id="report_individual_bloc_content">
         <t t-set="data_report_margin_top" t-value="20"/>
         <t t-set="data_report_header_spacing" t-value="20"/>
         <t t-set="company" t-value="docs.env.company"/>
-        <t t-call="school_management.report_layout">
+        <t t-call="web.report_layout">
             <t t-foreach="docs" t-as="bloc">
                 <div class="header">
                     <img alt="" src="/school_management/static/src/img/report_header.png" title=""/>
