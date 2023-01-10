@@ -20,6 +20,7 @@ h4, h5, h6 {
 
 .minor_row {
     font-style: italic;
+    padding: 0;
 }
 
 .major_row td {
@@ -27,6 +28,7 @@ h4, h5, h6 {
     border-color: #888888;
     border-right: 0;
     border-left: 0;
+    padding: 0;
 }
 
 .horizon-table {
