@@ -580,7 +580,7 @@
                     <h2><t t-esc="program.student_id.name"/></h2>
                     <h4><t t-esc="program.source_program_id.name"/></h4>
                     <h5><t t-esc="program.uid"/></h5>
-                    <section>
+                    <section t-if="len(program.acquired_ind_course_group_ids) > 0">
                         <div class="pure-g horizon-section-title" style="color:rgb(50, 100, 200);">
                           VALORISATION(S) ACCORDÉE(S) : <t t-esc="program.total_valuated_credits"/> ECTS
                         </div>
@@ -620,10 +620,10 @@
                                     <t t-esc="course_group.title"/>
                                 </td>
                                 <td>
-                                    <t t-esc="course_group.total_hours"/>
+                                    <t t-esc="course_group.source_course_group_id.total_hours"/>
                                 </td>
                                 <td>
-                                    <t t-esc="course_group.total_credits"/>
+                                    <t t-esc="course_group.source_course_group_id.total_credits"/>
                                 </td>
                                 <td>
                                     TBC
