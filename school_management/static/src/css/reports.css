@@ -40,3 +40,11 @@ h4, h5, h6 {
     border-left: none;
     border-right: none;
 }
+
+.horizon-section-title {
+    font-size:130%;
+    font-weight:800;
+    border-bottom: solid 2px #cccccc; color:rgb(50, 100, 200); 
+    margin-bottom:10px;
+    margin-top:30px;
+}
