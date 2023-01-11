@@ -626,7 +626,7 @@
                                     <t t-esc="course_group.source_course_group_id.total_credits"/>
                                 </td>
                                 <td>
-                                    TBC
+                                    <t t-esc="course_group.valuation_followup.valuation_type"/>
                                 </td>
                             </tr>
                             </t>
