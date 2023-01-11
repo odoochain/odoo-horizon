@@ -50,6 +50,5 @@ h4, h5, h6 {
 }
 
 .center {
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
