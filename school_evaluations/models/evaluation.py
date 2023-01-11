@@ -73,7 +73,7 @@ class IndividualProgram(models.Model):
     @api.depends('valuated_course_group_ids', 'required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     def _get_total_acquiered_credits(self):
         for rec in self:
-            _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % rec.name)
+            _logger.info('Trigger "_get_total_acquiered_credits" on Program %s' % rec.name)
             total = sum(cg.total_credits for cg in rec.valuated_course_group_ids) + sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in rec.bloc_ids) or 0
             total_current = sum(bloc_id.total_credits if bloc_id.state in ['progress','postponed'] else 0 for bloc_id in rec.bloc_ids)
             rec.total_acquiered_credits = total + rec.historical_bloc_1_credits + rec.historical_bloc_2_credits
