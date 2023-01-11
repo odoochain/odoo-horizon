@@ -74,13 +74,13 @@ class IndividualProgram(models.Model):
     def _get_total_acquiered_credits(self):
         for rec in self:
             _logger.info('Trigger "_get_total_acquiered_credits" on Program %s' % rec.name)
-            total = sum(cg.total_credits for cg in rec.valuated_course_group_ids) + sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in rec.bloc_ids) or 0
+            total = sum(cg.source_course_group_id.total_credits for cg in rec.valuated_course_group_ids) + sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in rec.bloc_ids) or 0
             total_current = sum(bloc_id.total_credits if bloc_id.state in ['progress','postponed'] else 0 for bloc_id in rec.bloc_ids)
             rec.total_acquiered_credits = total + rec.historical_bloc_1_credits + rec.historical_bloc_2_credits
             rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
             rec.total_registered_credits = rec.total_acquiered_credits + total_current
             rec.program_completed = rec.required_credits > 0 and rec.total_acquiered_credits >= rec.required_credits
-            rec.total_valuated_credits = sum(cg.total_credits for cg in rec.valuated_course_group_ids)
+            rec.total_valuated_credits = sum(cg.source_course_group_id.total_credits for cg in rec.valuated_course_group_ids)
 
     @api.depends('valuated_course_group_ids', 'bloc_ids.evaluation','historical_bloc_1_eval','historical_bloc_2_eval')
     def compute_evaluation(self):
