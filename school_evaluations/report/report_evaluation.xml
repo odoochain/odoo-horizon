@@ -619,13 +619,13 @@
                                 <td>
                                     <t t-esc="course_group.title"/>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <t t-esc="course_group.source_course_group_id.total_hours"/>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <t t-esc="course_group.source_course_group_id.total_credits"/>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <t t-esc="course_group.valuation_followup.valuation_type if course_group.valuation_followup else ''"/>
                                 </td>
                             </tr>
