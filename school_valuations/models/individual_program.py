@@ -76,6 +76,20 @@ class IndividualCourseSummary(models.Model):
             'type': 'ir.actions.act_view_reload',
         }
     
+class IndividualCourseGroup(models.Model):
+    '''Individual Course Group'''
+    _inherit = 'school.individual_course_group'
+    
+    valuation_followup = fields.Many2one('school.valuation_followup', string='Valuation Followup', compute="_compute_valuation_followup")
+    
+    def _compute_valuation_followup(self):
+        for rec in self:
+            followup_id = self.env['school.valuation_followup'].search([('individual_course_group_id','=',rec.id),('state','=','0_valuated')])
+            if followup_id :
+                rec.valuation_followup = followup_id[0]
+            else:
+                rec.valuation_followup = False
+    
 class ValuationFollwup(models.Model):
     '''Valuation Follow Up'''
     _name='school.valuation_followup'
