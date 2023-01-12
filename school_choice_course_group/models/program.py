@@ -30,6 +30,22 @@ class CourseGroup(models.Model):
 
     type = fields.Selection([('CHOIX','CHOIX'),('ORI1','ORI1'),('ORI2','ORI2'),('OBLIGATOIRE','OBLIGATOIRE')],string='Type')
 
+    is_choice_course_group = fields.Boolean(string="Is Choice Course Group", default=False)
+    
+    total_credits_to_select = fields.Integer(string='Total Credits to Select')
+    total_hours_to_select = fields.Integer(string='Total Hours to Select')
+    total_weight_to_select = fields.Integer(string='Total Weight to Select')
+    
+    @api.depends('course_ids','is_choice_course_group','total_credits_to_select','total_hours_to_select','total_weight_to_select')
+    def _get_courses_total(self):
+        for rec in self:
+            if rec.is_choice_course_group:
+                rec.total_hours = rec.total_hours_to_select
+                rec.total_credits = rec.total_credits_to_select
+                rec.total_weight = rec.total_weight_to_select
+            else:
+                super(CourseGroup, rec)._get_courses_total()
+    
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
