@@ -577,9 +577,10 @@
                     <img alt="" src="/school_management/static/src/img/HeaderCRLG.png" title=""/>
                 </div>
                 <div class="article" t-att-data-oe-model="program and program._name" t-att-data-oe-id="program and program.id" t-att-data-oe-lang="program and program.env.context.get('lang')" style="margin: 0cm 1.5cm;">
-                    <h2><t t-esc="program.student_id.name"/></h2>
-                    <h4><t t-esc="program.source_program_id.name"/></h4>
-                    <h5><t t-esc="program.uid"/></h5>
+                    <h1>FICHE DE CYCLE INDIVIDUEL DE L'ÉTUDIANT·E</h1>
+                    <h2>Étudiant·e : <t t-esc="program.student_id.name"/></h2>
+                    <h4>Cycle : <t t-esc="program.source_program_id.name"/></h4>
+                    <h5>Identifiant de cycle individuel : <t t-esc="program.uid"/></h5>
                     <section t-if="program.total_valuated_credits &gt; 0">
                         <div class="pure-g horizon-section-title" style="color:rgb(50, 100, 200);">
                           VALORISATION(S) ACCORDÉE(S) : <t t-esc="program.total_valuated_credits"/> ECTS
@@ -645,8 +646,8 @@
                                 <col style="width:80px"/>
                                 <col style="width:80px"/>
                                 <col style="width:110px"/>
-                                <col style="width:180px"/>
-                                <col style="width:180px"/>
+                                <!--<col style="width:180px"/>
+                                <col style="width:180px"/>-->
                             </colgroup>
                             <thead>
                                 <tr>
@@ -657,8 +658,8 @@
                                     <th class="center">Résultat final</th>
                                     <th class="center">ECTS acquis</th>
                                     <th>Origine</th>
-                                    <th>Avis pédagogique</th>
-                                    <th>Décision jury</th>
+                                    <!--<th>Avis pédagogique</th>
+                                    <th>Décision jury</th>-->
                                 </tr>
                             </thead>
                             <tbody>
@@ -693,12 +694,12 @@
                                             Valorisation
                                             </t>
                                         </td>
-                                        <td>
+                                        <!--<td>
                                             <span/>
                                         </td>
                                         <td>
                                             <span/>
-                                        </td>
+                                        </td>-->
                                     </tr>
                                     <t t-if="course_group.state == 'candidate'">
                                     <t t-foreach="course_group.course_ids" t-as="course">
@@ -715,7 +716,7 @@
                                         <td>
                                             <i><t t-esc="course.credits"/></i>
                                         </td>
-                                        <td colspan="5">
+                                        <td colspan="3">
                                             <i/>
                                         </td>
                                     </tr>
@@ -727,7 +728,8 @@
                     </section>
                     <section t-if="len(program.bloc_ids) > 0">
                       <div class="pure-g horizon-section-title" style="color:rgb(255, 180, 15);">
-                          PAE EN COURS : <t t-esc="program.bloc_ids[-1].uid"/> de <t t-esc="program.bloc_ids[-1].total_credits"/> Crédits
+                          PAE EN COURS : <t t-esc="program.bloc_ids[-1].uid"/> de <t t-esc="program.bloc_ids[-1].total_credits"/> Crédits<br/>
+                          (année académique <t t-esc="program.bloc_ids[-1].year_id"/>)
                       </div>
                       <table class="pure-table pure-table-horizontal horizon-table">
                           <colgroup>
@@ -754,7 +756,7 @@
                               <t t-foreach="program.bloc_ids[-1].course_group_ids" t-as="course_group">
                                   <tr class="major_row">
                                       <td>
-                                          <t t-esc="course_group.uid"/>
+                                          <t t-esc="course_group.source_course_group_id.uid"/>
                                       </td>
                                       <td>
                                           <t t-esc="course_group.title"/>
