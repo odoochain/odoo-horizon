@@ -587,8 +587,8 @@
                         </div>
                         <table class="pure-table pure-table-horizontal horizon-table">
                             <colgroup>
-                                <col style="width:100px"/>
-                                <col style="width:650px"/>
+                                <col style="width:120px"/>
+                                <col style="width:630px"/>
                                 <col style="width:150px"/>
                                 <col style="width:150px"/>
                                 <col style="width:150px"/>
@@ -637,15 +637,15 @@
                         <div class="pure-g horizon-section-title" style="color:rgb(100, 165, 60);">
                           CRÉDITS OBTENUS : <t t-esc="program.total_acquiered_credits - program.total_valuated_credits"/> / <t t-esc="program.source_program_id.total_credits - program.total_valuated_credits"/> Crédits
                         </div>
-                        <table class="pure-table pure-table-horizontal horizon-table" t-if="(program.total_acquiered_credits - program.total_valuated_credits) > 0">
+                        <table class="pure-table pure-table-horizontal horizon-table" t-if="(program.total_acquiered_credits - program.total_valuated_credits) &gt; 0">
                             <colgroup>
+                                <col style="width:120px"/>
+                                <col style="width:630px"/>
                                 <col style="width:100px"/>
-                                <col style="width:300px"/>
-                                <col style="width:80px"/>
-                                <col style="width:80px"/>
-                                <col style="width:80px"/>
-                                <col style="width:80px"/>
-                                <col style="width:110px"/>
+                                <col style="width:100px"/>
+                                <col style="width:100px"/>
+                                <!--<col style="width:80px"/>-->
+                                <col style="width:150px"/>
                                 <!--<col style="width:180px"/>
                                 <col style="width:180px"/>-->
                             </colgroup>
@@ -656,7 +656,7 @@
                                     <th class="center">Heures</th>
                                     <th class="center">ECTS</th>
                                     <th class="center">Résultat final</th>
-                                    <th class="center">ECTS acquis</th>
+                                    <!--<th class="center">ECTS acquis</th>-->
                                     <th>Origine</th>
                                     <!--<th>Avis pédagogique</th>
                                     <th>Décision jury</th>-->
@@ -666,7 +666,7 @@
                                 <t t-foreach="program.ind_course_group_ids.filtered(lambda ic: ic.acquiered == 'A')" t-as="course_group">
                                     <tr class="major_row">
                                         <td>
-                                            <t t-esc="course_group.uid"/>
+                                            <t t-esc="course_group.source_course_group_id.uid"/>
                                         </td>
                                         <td>
                                             <t t-esc="course_group.title"/>
@@ -680,9 +680,9 @@
                                         <td class="center">
                                             <t t-esc="course_group.final_result_disp"/>
                                         </td>
-                                        <td class="center">
+                                        <!--<td class="center">
                                             <t t-esc="course_group.total_credits"/>
-                                        </td>
+                                        </td>-->
                                         <td>
                                             <t t-if="course_group.bloc_id">
                                             PAE <t t-esc="course_group.bloc_id.year_id.name"/>
@@ -701,54 +701,60 @@
                                             <span/>
                                         </td>-->
                                     </tr>
-                                    <t t-if="course_group.state == 'candidate'">
                                     <t t-foreach="course_group.course_ids" t-as="course">
-                                    <tr class="major_row">
+                                    <tr class="minor_row">
                                         <td>
                                             <span/>
                                         </td>
                                         <td>
                                             <i><t t-esc="course.title"/></i>
                                         </td>
-                                        <td>
+                                        <td class="center">
                                             <i><t t-esc="course.hours"/></i>
                                         </td>
-                                        <td>
+                                        <td class="center">
                                             <i><t t-esc="course.credits"/></i>
                                         </td>
-                                        <td colspan="3">
-                                            <i/>
+                                        <td class="center">
+                                            <i><t t-if="course.second_session_result_bool">
+                                                <t t-esc="course.second_session_result_disp"/>
+                                            </t>
+                                            <t t-if="not course.second_session_result_bool">
+                                                <t t-esc="course.first_session_result_disp"/>
+                                            </t></i>
+                                        </td>
+                                        <td>
+                                            <span/>
                                         </td>
                                     </tr>
-                                    </t>
                                     </t>
                                 </t>
                             </tbody>
                         </table>
                     </section>
-                    <section t-if="len(program.bloc_ids) > 0">
+                    <section t-if="len(program.bloc_ids) &gt; 0">
                       <div class="pure-g horizon-section-title" style="color:rgb(255, 180, 15);">
                           PAE EN COURS : <t t-esc="program.bloc_ids[-1].uid"/> de <t t-esc="program.bloc_ids[-1].total_credits"/> Crédits<br/>
-                          (année académique <t t-esc="program.bloc_ids[-1].year_id"/>)
+                          (année académique <t t-esc="program.bloc_ids[-1].year_id.name"/>)
                       </div>
                       <table class="pure-table pure-table-horizontal horizon-table">
                           <colgroup>
-                              <col style="width:100px"/>
-                              <col style="width:300px"/>
-                              <col style="width:100px"/>
-                              <col style="width:100px"/>
+                              <col style="width:120px"/>
+                              <col style="width:480px"/>
                               <col style="width:100px"/>
                               <col style="width:100px"/>
-                              <col style="width:400px"/>
+                              <col style="width:100px"/>
+                              <col style="width:100px"/>
+                              <col style="width:200px"/>
                           </colgroup>
                           <thead>
                               <tr>
                                   <th>UE Id</th>
                                   <th>Nom</th>
-                                  <th>Heures</th>
-                                  <th>ECTS</th>
-                                  <th>Résultat final</th>
-                                  <th>ECTS acquis</th>
+                                  <th class="center">Heures</th>
+                                  <th class="center">ECTS</th>
+                                  <th class="center">Résultat final</th>
+                                  <th class="center">ECTS acquis</th>
                                   <th>Commentaire</th>
                               </tr>
                           </thead>
@@ -761,18 +767,18 @@
                                       <td>
                                           <t t-esc="course_group.title"/>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <t t-esc="course_group.total_hours"/>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <t t-esc="course_group.total_credits"/>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <t t-if="course_group.final_result_bool">
                                               <t t-esc="course_group.final_result_disp"/>
                                           </t>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <t t-if="course_group.acquiered == 'A'">
                                               Acquis
                                           </t>
@@ -781,24 +787,24 @@
                                           </t>
                                       </td>
                                       <td>
-                                          <span />
+                                          <span/>
                                       </td>
                                   </tr>
                                   <t t-foreach="course_group.course_ids" t-as="course">
                                   <tr class="minor_row">
                                       <td>
-                                          <span />
+                                          <span/>
                                       </td>
                                       <td>
                                           <i><t t-esc="course.title"/></i>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <i><t t-esc="course.hours"/></i>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <i><t t-esc="course.credits"/></i>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <i><t t-if="course.second_session_result_bool">
                                               <t t-esc="course.second_session_result_disp"/>
                                           </t>
@@ -807,10 +813,10 @@
                                           </t></i>
                                       </td>
                                       <td>
-                                          <span />
+                                          <span/>
                                       </td>
                                       <td>
-                                          <span />
+                                          <span/>
                                       </td>
                                   </tr>
                                   </t>
@@ -824,18 +830,18 @@
                       </div>
                       <table class="pure-table pure-table-horizontal horizon-table">
                           <colgroup>
-                              <col style="width:100px"/>
+                              <col style="width:120px"/>
                               <col style="width:500px"/>
                               <col style="width:100px"/>
                               <col style="width:100px"/>
-                              <col style="width:400px"/>
+                              <col style="width:380px"/>
                           </colgroup>
                           <thead>
                               <tr>
                                   <th>UE Id</th>
                                   <th>Nom</th>
-                                  <th>Heures</th>
-                                  <th>ECTS</th>
+                                  <th class="center">Heures</th>
+                                  <th class="center">ECTS</th>
                                   <th>Commentaire</th>
                               </tr>
                           </thead>
@@ -848,14 +854,14 @@
                                       <td>
                                           <t t-esc="course_group.title"/>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <t t-esc="course_group.total_hours"/>
                                       </td>
-                                      <td>
+                                      <td class="center">
                                           <t t-esc="course_group.total_credits"/>
                                       </td>
                                       <td>
-                                          <span />
+                                          <span/>
                                       </td>
                                   </tr>
                             </t>
@@ -864,25 +870,7 @@
                     </section>
                     <section>
                       <div class="pure-g" style="margin-left:60px;margin-right:60px;page-break-before:always;">
-                          <div class="pure-u-1-2" style="margin-top:100px;">
-                            Remarques : 
-                          </div>
-                          <div class="pure-u-1-2" style="margin-top:100px;">
-                          </div>
-                          <div class="pure-u-1-2" style="margin-top:100px;">
-                            Le/La Président-e du jury
-                          </div>
-                          <div class="pure-u-1-2" style="margin-top:100px;">
-                            Le/La Secrétaire du jury
-                          </div>
-                          <div class="pure-u-1-2" style="margin-top:100px;">
-                            Les Membres du jury
-                          </div>
-                          <div class="pure-u-1-2" style="margin-top:100px;">
-                          </div>
-                          <div class="pure-u-3-3" style="margin-top:100px;">
-                            Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
-                          </div>
+                          <span />
                       </div>
                     </section>
                 </div>
