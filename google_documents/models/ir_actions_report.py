@@ -37,24 +37,23 @@ class IrActionsReport(models.Model):
     google_drive_patner_field = fields.Char(string='Partner property to save into',
                              help='This field name is the Partner to which the Google Drive Forlder to save to.')
 
-    def _render_qweb_pdf(self, res_ids, data=None):
+    def _render_qweb_pdf(self, res_ids=None, data=None):
         
         pdf_content, type = super(IrActionsReport, self)._render_qweb_pdf(res_ids=res_ids, data=data)
         
         google_service = self.env.company.google_drive_id
         
-        if google_service and self.google_drive_enabled :
-            for res_id, stream_data in pdf_content.items():
-                record = self.env[self.model].browse(res_id)
-                partner_id = record.get(self.google_drive_patner_field)
-                if partner_id.google_drive_folder_id :
-                    file = google_service.create_file(stream_data, 'application/pdf', partner_id.google_drive_folder_id)
-                    google_drive_file = self.env['google_drive_file'].create({
-                        'name' : file['name'],
-                        'googe_drive_id' : file['id'],
-                        'mimeType' : file['mimeType'],
-                        'url' : file['webViewLink'],
-                        'res_model' : partner_id._name,
-                    })
-                    partner_id.google_drive_files += google_drive_file
+        if google_service and self.google_drive_enabled and length(res_ids) == 1 :
+            record = self.env[self.model].browse(res_ids)
+            partner_id = record.get(self.google_drive_patner_field)
+            if partner_id.google_drive_folder_id :
+                file = google_service.create_file(pdf_content, 'application/pdf', partner_id.google_drive_folder_id)
+                google_drive_file = self.env['google_drive_file'].create({
+                    'name' : file['name'],
+                    'googe_drive_id' : file['id'],
+                    'mimeType' : file['mimeType'],
+                    'url' : file['webViewLink'],
+                    'res_model' : partner_id._name,
+                })
+                partner_id.google_drive_files += google_drive_file
         return pdf_content, type
