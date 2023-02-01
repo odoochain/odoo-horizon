@@ -25,6 +25,7 @@ from datetime import date, timedelta
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -49,8 +50,8 @@ class IrActionsReport(models.Model):
             record = self.env[self.model].browse(res_ids)
             partner_id = record.mapped(self.google_drive_patner_field)
             if partner_id.google_drive_folder_id :
-                attachment = self_sudo.retrieve_attachment(res_ids[0])
-                file = google_service.create_file(pdf_content, attachment.name, 'application/pdf', partner_id.google_drive_folder_id)
+                report_name = safe_eval(self.print_report_name, {'object': record})
+                file = google_service.create_file(pdf_content, report_name, 'application/pdf', partner_id.google_drive_folder_id)
                 google_drive_file = self.env['google_drive_file'].create({
                     'name' : file['name'],
                     'googe_drive_id' : file['id'],
