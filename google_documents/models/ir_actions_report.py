@@ -43,7 +43,7 @@ class IrActionsReport(models.Model):
         
         google_service = self.env.company.google_drive_id
         
-        if google_service and self.google_drive_enabled and length(res_ids) == 1 :
+        if google_service and self.google_drive_enabled and len(res_ids) == 1 :
             record = self.env[self.model].browse(res_ids)
             partner_id = record.get(self.google_drive_patner_field)
             if partner_id.google_drive_folder_id :
