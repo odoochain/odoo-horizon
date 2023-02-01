@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -18,26 +19,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Google documents mixin',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'ito-invest.lu (Jerome Sonnet)',
-    'website': '',
-    'category': 'Documents',
-    'depends': ['google_account'],
-    'init_xml': [],
-    'data': [
-        #'views/configuration_view.xml',
-        'views/res_partner_view.xml',
-        'views/ir_actions_report_view.xml',
-        'security/ir.model.access.csv',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules manages displays google documents for a contact.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+-->
+<odoo>
+    <!-- Add program for student form view -->
+        <record id="act_report_xml_view_google_docs" model="ir.ui.view">
+            <field name="name">ir.actions.report.google.docs</field>
+            <field name="model">ir.actions.report</field>
+            <field name="inherit_id" ref="base.act_report_xml_view" />
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='attachment']" position="after">
+                    <field name="google_drive_enabled"/>
+                    <field name="google_drive_patner_field"/>
+                </xpath>
+            </field>
+        </record>
+</odoo>

@@ -31,6 +31,7 @@ from odoo.exceptions import UserError
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
+from googleapiclient.http import MediaIoBaseUpload
 
 _logger = logging.getLogger(__name__)
 
@@ -156,8 +157,24 @@ class GoogleDriveService(models.Model):
     def is_google_drive_connected(self):
         self.ensure_one()
         return self.drive_credentials_json
-    
-    def rename(self, google_drive_file, to_name):
+        
+    def create_file(self, stream, to_name, mime_type, folder_id):
+        drive = googleapiclient.discovery.build(API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
+        _logger.info('Write new file %s in %s' % (to_name, folder_id))
+        file_metadata = {
+            "name": to_name,
+            "mimeType": mime_type, # Mimetype for docx
+            'parents': [folder_id],
+        }
+        media = MediaIoBaseUpload(stream, # **Pass your bytes object/string here
+                                  mimetype=mime_type,
+                                  resumable=True)
+        file1 = drive.files().create(body=file_metadata,
+                                            media_body=media,
+                                            fields="id, name, mimeType, webViewLink").execute()
+        return file1
+        
+    def rename_file(self, google_drive_file, to_name):
         drive = googleapiclient.discovery.build(API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
         _logger.info('Rename %s to %s' % (google_drive_file.googe_drive_id, to_name))
         updated_file = drive.files().update(fileId=google_drive_file.googe_drive_id,

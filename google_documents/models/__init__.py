@@ -20,3 +20,4 @@
 ##############################################################################
 from . import google_drive_folder_mixin
 from . import res_partner
+from . import ir_actions_report

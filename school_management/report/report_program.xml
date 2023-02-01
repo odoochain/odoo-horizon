@@ -274,7 +274,7 @@
                 </div>
                 <div class="article" t-att-data-oe-model="bloc and bloc._name" t-att-data-oe-id="bloc and bloc.id" t-att-data-oe-lang="bloc and bloc.env.context.get('lang')" style="margin: 0cm 1.5cm;">
                     <h2><t t-esc="bloc.name"/></h2>
-                    <h4>Basé sur Bachelier en musique : <t t-esc="bloc.source_bloc_id.name"/></h4>
+                    <h4>Basé sur <t t-esc="bloc.source_bloc_id.name"/></h4>
                     <h5><t t-esc="bloc.uid"/></h5>
                     <table class="pure-table pure-table-horizontal horizon-table">
                       <colgroup>

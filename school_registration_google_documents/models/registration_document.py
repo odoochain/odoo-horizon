@@ -49,9 +49,9 @@ class GoogleDriveFile(models.Model):
             google_service = self.env.company.google_drive_id
             if len(self.official_document_id.google_drive_files) == 1 :
                 doc_name = f"CRLG - {self.env.user.current_year_id.name} - {self.official_document_id.name}"
-                google_service.rename(self, doc_name)
+                google_service.rename_file(self, doc_name)
             else :
                 total = len(self.official_document_id.google_drive_files)
                 for index, file in enumerate(self.official_document_id.google_drive_files):
                     doc_name = f"CRLG - {self.env.user.current_year_id.name} - {self.official_document_id.name} ({index}/{total})"
-                    google_service.rename(file, doc_name)
+                    google_service.rename_file(file, doc_name)
