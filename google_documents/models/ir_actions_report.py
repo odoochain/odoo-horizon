@@ -65,4 +65,4 @@ class IrActionsReport(models.Model):
                 partner_id.google_drive_files += google_drive_file
                 
         content.seek(0)
-        return content, type
+        return content.read(), type
