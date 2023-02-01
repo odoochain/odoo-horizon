@@ -41,13 +41,11 @@ class IrActionsReport(models.Model):
         
         pdf_content, type = super(IrActionsReport, self)._render_qweb_pdf(res_ids=res_ids, data=data)
         
-        report_sudo = self._get_report(report_ref)
-        
         google_service = self.env.company.google_drive_id
         
         if google_service and self.google_drive_enabled :
             for res_id, stream_data in pdf_content.items():
-                record = self.env[report_sudo.model].browse(res_id)
+                record = self.env[self.model].browse(res_id)
                 partner_id = record.get(self.google_drive_patner_field)
                 if partner_id.google_drive_folder_id :
                     file = google_service.create_file(stream_data, 'application/pdf', partner_id.google_drive_folder_id)
