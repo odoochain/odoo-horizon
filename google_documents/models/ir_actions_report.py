@@ -39,7 +39,7 @@ class IrActionsReport(models.Model):
 
     def _render_qweb_pdf(self, report_ref, res_ids=None, data=None):
         
-        pdf_content, type = super(IrActionsReport, self)._render_qweb_pdf(report_ref, res_ids, data)
+        pdf_content, type = super(IrActionsReport, self)._render_qweb_pdf(res_ids=res_ids, data=data)
         
         report_sudo = self._get_report(report_ref)
         
