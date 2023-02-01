@@ -20,6 +20,7 @@
 ##############################################################################
 
 import logging
+import io
 
 from datetime import date, timedelta
 
@@ -51,7 +52,7 @@ class IrActionsReport(models.Model):
             partner_id = record.mapped(self.google_drive_patner_field)
             if partner_id.google_drive_folder_id :
                 report_name = safe_eval(self.print_report_name, {'object': record, 'time' : time})
-                file = google_service.create_file(pdf_content, report_name, 'application/pdf', partner_id.google_drive_folder_id)
+                file = google_service.create_file(io.BytesIO(pdf_content), report_name, 'application/pdf', partner_id.google_drive_folder_id)
                 google_drive_file = self.env['google_drive_file'].create({
                     'name' : file['name'],
                     'googe_drive_id' : file['id'],
