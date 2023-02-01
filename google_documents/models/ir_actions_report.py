@@ -43,10 +43,13 @@ class IrActionsReport(models.Model):
         
         google_service = self.env.company.google_drive_id
         
+        self_sudo = self.sudo()
+        
         if google_service and self.google_drive_enabled and len(res_ids) == 1 :
             record = self.env[self.model].browse(res_ids)
             partner_id = record.mapped(self.google_drive_patner_field)
             if partner_id.google_drive_folder_id :
+                attachment = self_sudo.retrieve_attachment(res_ids[0])
                 file = google_service.create_file(pdf_content, file['name'], 'application/pdf', partner_id.google_drive_folder_id)
                 google_drive_file = self.env['google_drive_file'].create({
                     'name' : file['name'],
