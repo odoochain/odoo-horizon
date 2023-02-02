@@ -31,6 +31,7 @@ from odoo.exceptions import UserError
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
+import googleapiclient.errors
 from googleapiclient.http import MediaIoBaseUpload
 
 _logger = logging.getLogger(__name__)
@@ -169,18 +170,33 @@ class GoogleDriveService(models.Model):
         media = MediaIoBaseUpload(stream, # **Pass your bytes object/string here
                                   mimetype=mime_type,
                                   resumable=True)
-        file1 = drive.files().create(body=file_metadata,
+        try:
+            file1 = drive.files().create(body=file_metadata,
                                             media_body=media,
                                             fields="id, name, mimeType, webViewLink",supportsAllDrives=True).execute()
+        except googleapiclient.errors.Error as error:
+            raise UserError(_('Error creating the file in Google Drive : %s' % error))
+            
         return file1
         
     def rename_file(self, google_drive_file, to_name):
         drive = googleapiclient.discovery.build(API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
         _logger.info('Rename %s to %s' % (google_drive_file.googe_drive_id, to_name))
-        updated_file = drive.files().update(fileId=google_drive_file.googe_drive_id,
-            body={
-                'name' : to_name
-            },supportsAllDrives=True).execute()
+        try:
+            updated_file = drive.files().update(fileId=google_drive_file.googe_drive_id,
+                body={
+                    'name' : to_name
+                },supportsAllDrives=True).execute()
+        except googleapiclient.errors.Error as error:
+            raise UserError(_('Error creating the file in Google Drive : %s' % error))
+    
+    def delete_file(self, google_drive_file):
+        drive = googleapiclient.discovery.build(API_SERVICE_NAME, API_VERSION, credentials=self._get_credential())
+        _logger.info('Delete %s' % (google_drive_file.googe_drive_id))
+        try:
+            updated_file = drive.files().delete(fileId=google_drive_file.googe_drive_id,supportsAllDrives=True).execute()
+        except googleapiclient.errors.Error as error:
+            raise UserError(_('Error creating the file in Google Drive : %s' % error))
     
     def get_files_from_folder_id(self, folderId):
 
@@ -188,23 +204,26 @@ class GoogleDriveService(models.Model):
 
         all_file_list = []
         folder_queue = [folderId]
-        while len(folder_queue) != 0:
-            if len(folder_queue) > 1 :
-                folder_query = "'" + "' in parents or '".join(folder_queue) + "' in parents and trashed=false"
-            else :
-                folder_query = f"'{folder_queue[0]}' in parents and trashed=false"
-            folder_queue = []
-            file_list = drive.files().list(q=folder_query,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
-            for file1 in file_list['files']:
-                if file1['mimeType'] == 'application/vnd.google-apps.folder':
-                    folder_queue.append(file1['id'])
+        try:
+            while len(folder_queue) != 0:
+                if len(folder_queue) > 1 :
+                    folder_query = "'" + "' in parents or '".join(folder_queue) + "' in parents and trashed=false"
                 else :
-                    all_file_list.append({
-                        'name' : file1['name'],
-                        'googe_drive_id' : file1['id'],
-                        'mimeType' : file1['mimeType'],
-                        'url' : file1['webViewLink']
-                    })
+                    folder_query = f"'{folder_queue[0]}' in parents and trashed=false"
+                folder_queue = []
+                file_list = drive.files().list(q=folder_query,supportsAllDrives=True,includeItemsFromAllDrives=True,fields='files(id,name,mimeType,webViewLink)').execute()
+                for file1 in file_list['files']:
+                    if file1['mimeType'] == 'application/vnd.google-apps.folder':
+                        folder_queue.append(file1['id'])
+                    else :
+                        all_file_list.append({
+                            'name' : file1['name'],
+                            'googe_drive_id' : file1['id'],
+                            'mimeType' : file1['mimeType'],
+                            'url' : file1['webViewLink']
+                        })
+        except googleapiclient.errors.Error as error:
+            raise UserError(_('Error creating the file in Google Drive : %s' % error))
         return all_file_list
         
     def _get_redirect_uri(self):
