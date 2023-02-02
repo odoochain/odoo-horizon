@@ -169,9 +169,9 @@ class GoogleDriveService(models.Model):
         media = MediaIoBaseUpload(stream, # **Pass your bytes object/string here
                                   mimetype=mime_type,
                                   resumable=True)
-        file1 = drive.files(supportsAllDrives=True,includeItemsFromAllDrives=True).create(body=file_metadata,
+        file1 = drive.files().create(body=file_metadata,
                                             media_body=media,
-                                            fields="id, name, mimeType, webViewLink").execute()
+                                            fields="id, name, mimeType, webViewLink",supportsAllDrives=True).execute()
         return file1
         
     def rename_file(self, google_drive_file, to_name):
