@@ -29,10 +29,6 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="priority">100</field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='category_id']" position="before">
-                    <field name="google_drive_folder_id"/>
-                    <button type="object" name="action_open_google_drive" class="oe_highlight btn btn-primary">Open Drive</button>
-                </xpath>
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="google_document_list" string="Google Documents" attrs="{'invisible': [('google_drive_folder_id','=',False)]}" >
                         <button class="btn btn-primary float-end" name="action_refresh_google_drive_files" icon="fa-refresh" string="Refresh" type="object" />
@@ -43,6 +39,8 @@
                                 <field name="url" widget="url" string="Google Drive" text="Open"/>
                             </tree>
                         </field>
+                        <field name="google_drive_folder_id"/>
+                        <button type="object" name="action_open_google_drive" class="oe_highlight btn btn-primary">Open Drive</button>
                     </page>
                 </xpath>
             </field>
