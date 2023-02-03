@@ -50,6 +50,15 @@ class GoogleDriveFolderMixin(models.AbstractModel):
         
     google_drive_connected = fields.Boolean(string="Is Google Drive Connected", compute=_compute_google_drive_connected)
 
+    def action_open_google_drive(self):
+        return {
+            'name'     : 'Go to google drive',
+            'res_model': 'ir.actions.act_url',
+            'type'     : 'ir.actions.act_url',
+            'target'   : 'new',
+            'url'      : 'https://drive.google.com/drive/folders/%s' % self.google_drive_folder_id
+        }
+
     def action_refresh_google_drive_files(self):
         google_service = self.env.company.google_drive_id
         gdf_ids = self.env['google_drive_file']
