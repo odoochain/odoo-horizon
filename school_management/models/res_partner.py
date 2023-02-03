@@ -184,20 +184,6 @@ class Partner(models.Model):
     def _get_teacher_current_course_session_ids(self):
         for rec in self:
             rec.teacher_current_assigment_ids = self.env['school.course_session'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', rec.id]])
-        
-    # TODO : This is not working but don't know why
-    @api.model
-    def _get_default_image(self, is_company, colorize=False):
-        if getattr(threading.currentThread(), 'testing', False) or self.env.context.get('install_mode'):
-            return False
-
-        if self.env.context.get('partner_type') == 'invoice':
-            img_path = openerp.modules.get_module_resource('school_management', 'static/src/img', 'home-icon.png')
-            with open(img_path, 'rb') as f:
-                image = f.read()
-            return tools.image_resize_image_big(image.encode('base64'))
-        else:
-            return super(Partner, self)._get_default_image(is_company, colorize)
             
 class Company(models.Model):
     _inherit = 'res.company'
