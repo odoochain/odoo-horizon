@@ -94,11 +94,6 @@
       <field name="model">school.registration</field>
       <field name="arch" type="xml">
         <search string="Search registration">
-          <field name="name" filter_domain="[('name', 'ilike',self)]" />
-          <filter string="Current Year" name="current" domain="[('year_sequence','=','current')]" />
-          <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
-          <filter string="Previous Year" name="previous" domain="[('year_sequence','=','previous')]" />
-          <separator />
           <filter string="Draft" name="draft" domain="[('state','=','draft')]" />
           <filter string="Active" name="active" domain="[('state','=','active')]" />
           <filter string="Archived" name="archived" domain="[('state','=','archived')]" />
