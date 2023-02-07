@@ -19,3 +19,4 @@
 #
 ##############################################################################
 from . import individual_program
+from . import registration
