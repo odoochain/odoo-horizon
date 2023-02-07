@@ -39,8 +39,10 @@
                                 <field name="url" widget="url" string="Google Drive" text="Open"/>
                             </tree>
                         </field>
-                        <field name="google_drive_folder_id"/>
-                        <button type="object" name="action_open_google_drive" class="oe_highlight btn btn-primary">Open Drive</button>
+                        <group>
+                            <field name="google_drive_folder_id"/>
+                            <button type="object" name="action_open_google_drive" class="oe_highlight btn btn-primary">Open Drive</button>
+                        </group>
                     </page>
                 </xpath>
             </field>
