@@ -52,3 +52,12 @@ class Registration(models.Model):
     
     def action_fill_contact_with_form(self):
         pass
+    
+    def to_draft(self):
+        return self.write({'state': 'draft'})
+
+    def activate(self):
+        return self.write({'state': 'active'})
+
+    def archive(self):
+        return self.write({'state': 'archived'})
