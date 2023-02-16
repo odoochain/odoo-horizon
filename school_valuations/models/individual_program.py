@@ -98,7 +98,7 @@ class ValuationFollwup(models.Model):
     
     active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
     
-    individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group', required=True, store=True)
+    individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group', store=True)
     
     individual_program_id = fields.Many2one('school.individual_program', string='Individual Program', related="individual_course_group_id.valuated_program_id", store=True)
     
