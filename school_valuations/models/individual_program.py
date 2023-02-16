@@ -212,7 +212,4 @@ class ValuationFollwup(models.Model):
             rec.write({
                 'active' : False
             })
-            rec.individual_course_group_id.write({
-                'state' : '9_draft',
-                'active' : False
-            }) 
+            rec.individual_course_group_id.unlink()
