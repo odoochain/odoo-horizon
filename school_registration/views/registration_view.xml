@@ -105,7 +105,7 @@
     </record>
   
     <record id="action_registration_form" model="ir.actions.act_window">
-      <field name="name">registrations</field>
+      <field name="name">Registrations</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.registration</field>
       <field name="view_mode">kanban,form</field>

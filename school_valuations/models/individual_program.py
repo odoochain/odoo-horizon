@@ -203,4 +203,10 @@ class ValuationFollwup(models.Model):
         for rec in self :
             rec.individual_course_group_id.write({
                 'state' : '2_candidate'
+            })
+    
+    def action_to_failed_course_group(self):
+        for rec in self :
+            rec.individual_course_group_id.write({
+                'state' : '7_failed'
             }) 
