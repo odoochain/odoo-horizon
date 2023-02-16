@@ -43,7 +43,7 @@ class IndividualBloc(models.Model):
     def on_change_course_group_ids(self):
         for rec in self:
             rec.student_signature = None
-            rec.rec.student_signature = None
+            rec.student_signature_date = None
 
 class IndividualProgram(models.Model):
     '''Individual Program'''
