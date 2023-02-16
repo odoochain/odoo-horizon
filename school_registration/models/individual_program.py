@@ -38,6 +38,12 @@ class IndividualBloc(models.Model):
     def onchange_student_signature(self):
         for rec in self :
             rec.student_signature_date = datetime.today()
+            
+    @api.onchange('course_group_ids')
+    def on_change_course_group_ids(self):
+        for rec in self:
+            rec.student_signature = None
+            rec.rec.student_signature = None
 
 class IndividualProgram(models.Model):
     '''Individual Program'''
@@ -52,12 +58,6 @@ class IndividualProgram(models.Model):
         for rec in self :
             rec.student_signature_date = datetime.today()
         
-    @api.onchange('course_group_ids')
-    def onchange_course_group_ids(self):
-        for rec in self:
-            rec.student_signature = None
-            rec.rec.student_signature = None
-            
     def _assign_cg(self, new_pae):
         cg_ids = []
         for group in new_pae.source_bloc_id.course_group_ids:
