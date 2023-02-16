@@ -96,6 +96,8 @@ class ValuationFollwup(models.Model):
     _description='Valuation Followup'
     _inherit = ['mail.thread','school.uid.mixin']
     
+    active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
+    
     individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group', required=True, store=True)
     
     individual_program_id = fields.Many2one('school.individual_program', string='Individual Program', related="individual_course_group_id.valuated_program_id", store=True)
@@ -207,6 +209,10 @@ class ValuationFollwup(models.Model):
     
     def action_to_failed_course_group(self):
         for rec in self :
+            rec.write({
+                'active' : False
+            })
             rec.individual_course_group_id.write({
-                'state' : '9_draft'
+                'state' : '9_draft',
+                'active' : False
             }) 
