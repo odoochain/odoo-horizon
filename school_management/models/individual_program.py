@@ -269,7 +269,7 @@ class IndividualBloc(models.Model):
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', tracking=True)
     
     @api.constrains('course_group_ids')
-    def _check_cycle(self):
+    def _check_individual_block(self):
         for record in self:
             scg_ids = record.course_group_ids.mapped('source_course_group_id')
             if len(scg_ids) != len(set(scg_ids)):
