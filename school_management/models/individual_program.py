@@ -356,7 +356,18 @@ class IndividualBloc(models.Model):
     
     new_source_course_group_id = fields.Many2one('school.course_group', string="New Source Course Group", domain=lambda self: self._domain_source_course_group_id())
     
-    
+    @api.onchange('new_source_course_group_id')
+    def _on_change_new_source_course_group_id(self):
+        for rec in self:
+            _logger.debug('Assign course groups : ' + rec.new_source_course_group_id.uid + ' - ' +rec.new_source_course_group_id.name)
+            courses = []
+            for course in rec.new_source_course_group_id.course_ids:
+                _logger.debug('Assign course : ' + course.name)
+                courses.append((0,0,{'source_course_id': course.id}))
+            cg = rec.course_group_ids.create({'bloc_id': self.id,'source_course_group_id': rec.new_source_course_group_id.id, 'acquiered' : 'NA', 'course_ids' : courses})
+            rec.course_group_ids.append(cg)
+            rec.new_source_course_group_id = False
+
 
 class IndividualBlocTag(models.Model):
     _name = 'school.individual_bloc.tag'
