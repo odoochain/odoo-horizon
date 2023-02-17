@@ -358,6 +358,7 @@
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
+            <label for="new_source_course_group_id" class="oe_edit_only" string="Add new UE : "/><field name="new_source_course_group_id" class="oe_edit_only"/>
             <field name="course_group_ids" widget="many2many_kanban" attrs="{'readonly': ['!',('state', 'in', ('draft'))]}">
               <kanban quick_create="false" create="true" delete="true" group_create="false" class="o_kanban_mobile">
                 <field name="uid"/>
@@ -378,7 +379,6 @@
                                   <div class="col-12 col-md-7">
                                     <div class="row m-2">
                                       <h5><field name="name"/><br/></h5>
-                                      <a t-if="! read_only_mode" class="oe_highlight btn btn-primary" type="delete" style="position: absolute; right: 20px; padding: 4px; diplay: inline-block">X</a>
                                       <!--<i><field name="responsible_id"/></i>-->
                                     </div>
                                     <div class="row m-2">
@@ -389,7 +389,9 @@
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="col-12 col-md-3 horizon_cgs_evals"></div>
+                                  <div class="col-12 col-md-3 horizon_cgs_evals">
+                                    <a t-if="! read_only_mode" class="oe_highlight btn btn-primary" type="delete" style="font-size: xx-large;position: absolute; right: 20px; padding: 4px; diplay: inline-block">X</a>
+                                  </div>
                                 </div>
                               </div>
                           </div>
