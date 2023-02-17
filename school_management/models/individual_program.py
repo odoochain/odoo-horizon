@@ -19,6 +19,7 @@
 #
 ##############################################################################
 import logging
+import collections
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, AccessError
@@ -339,11 +340,11 @@ class IndividualBloc(models.Model):
     
     @api.constrains('course_group_ids')
     def _check_individual_block(self):
-        for record in self:
-            scg_ids = record.course_group_ids.mapped('source_course_group_id')
-            if len(scg_ids) != len(set(scg_ids)):
-                raise ValidationError("Cannot have duplicated UE in a bloc.")
-
+        for rec in self:
+            scg_ids = rec.course_group_ids.mapped('source_course_group_id')
+            duplicates = [item for item, count in collections.Counter(scg_ids).items() if count > 1]
+            if len(duplicates) > 0 :
+                raise ValidationError("Cannot have duplicated UE in a program : %s." % self.env['school.course_group'].browse(duplicates).mapped('uid'))
 
     ##############################################################################
     #
@@ -353,7 +354,7 @@ class IndividualBloc(models.Model):
     def _domain_source_course_group_id(self):
         return []
     
-    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=lambda self: self._domain_source_course_group_id())
+    new_source_course_group_id = fields.Many2one('school.course_group', string="New Source Course Group", domain=lambda self: self._domain_source_course_group_id())
     
     
 

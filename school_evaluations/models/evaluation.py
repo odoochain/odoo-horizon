@@ -18,6 +18,7 @@
 #
 ##############################################################################
 import logging
+import collections
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
@@ -145,9 +146,10 @@ class IndividualProgram(models.Model):
             # Only previously failed CG can be valuated
             acq_scg_ids = rec.all_ind_course_group_ids.filtered(lambda ic: ic.state != '7_failed').mapped('source_course_group_id')
             val_scg_ids = rec.valuated_course_group_ids.mapped('source_course_group_id')
-            if len(list(set(acq_scg_ids) & set(val_scg_ids))) > 0 :
-                raise ValidationError("Cannot add valuation for a course group already in the program : %s" % list(set(acq_scg_ids) & set(val_scg_ids)))
-    
+            duplicates = [item for item, count in collections.Counter(acq_scg_ids | val_scg_ids).items() if count > 1]
+            if len(duplicates) > 0 :
+                raise ValidationError("Cannot have duplicated UE in a program : %s." % self.env['school.course_group'].browse(duplicates).mapped('uid'))
+                
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
     _inherit = 'school.individual_course_summary'
