@@ -335,7 +335,7 @@
                       <div class="col">
                         <label for="source_bloc_id" invisible="1"/>
                         <span class="oe_grey"> Based on </span>
-                        <span class="oe_grey" ><field name="source_bloc_id"/></span>
+                        <span class="oe_grey" ><field name="source_bloc_id" attrs="{'readonly': ['!',('state', 'in', ('done','cancel'))]}">/></span>
                       </div>
                   </h3>
                   <h3 class="o_row row no-gutters d-flex">
@@ -349,14 +349,14 @@
             </div>
             <group col="4">
               <field name="tag_ids" widget="many2many_tags" colspan="4"/>
-              <field name="program_id" colspan="4"/>
-              <field name="year_id" colspan="4"/>
-              <field name="is_final_bloc" />
-              <field name="is_light_bloc" />
+              <field name="program_id" colspan="4" attrs="{'readonly': ['!',('state', 'in', ('done','cancel'))]}">/>
+              <field name="year_id" colspan="4" attrs="{'readonly': ['!',('state', 'in', ('done','cancel'))]}">/>
+              <field name="is_final_bloc" attrs="{'readonly': ['!',('state', 'in', ('done','cancel'))]}">/>
+              <field name="is_light_bloc" attrs="{'readonly': ['!',('state', 'in', ('done','cancel'))]}">/>
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
-            <field name="course_group_ids" widget="many2many_kanban">
+            <field name="course_group_ids" widget="many2many_kanban" attrs="{'readonly': ['!',('state', 'in', ('done','cancel'))]}">
               <kanban quick_create="false" create="true" delete="true" group_create="false" class="o_kanban_mobile">
                 <field name="uid"/>
                 <field name="name" />
