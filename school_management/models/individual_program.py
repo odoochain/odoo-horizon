@@ -187,6 +187,25 @@ class IndividualBloc(models.Model):
     
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
+    state = fields.Selection([
+            ('irregular','Irregular'),
+            ('draft','Draft'),
+            ('progress','In Progress'),
+            ('postponed', 'Postponed'),
+            ('awarded_first_session', 'Awarded in First Session'),
+            ('awarded_second_session', 'Awarded in Second Session'),
+            ('failed', 'Failed'),
+            ('abandoned','Abandoned'),
+        ], string='Status', index=True, default='draft',
+        copy=False,
+        help=" * The 'Draft' status is used when results are not confirmed yet.\n"
+             " * The 'In Progress' status is used during the courses.\n"
+             " * The 'Postponed' status is used when a second session is required.\n"
+             " * The 'Awarded' status is used when the bloc is awarded in either first or second session.\n"
+             " * The 'Failed' status is used when the bloc is definitively considered as failed.\n"
+             " * The 'Abandoned' status is when the student abandoned his bloc.\n"
+             ,tracking=True)
+    
     program_id = fields.Many2one('school.individual_program', string='Individual Program', required=True)
     
     year_id = fields.Many2one('school.year', string='Year')
@@ -354,6 +373,31 @@ class IndividualCourseGroup(models.Model):
     title = fields.Char(related="source_course_group_id.title", readonly=True, store=True)
     
     sequence = fields.Integer(related="source_course_group_id.sequence", readonly=True, store=True)
+    
+    state = fields.Selection([
+            ('10_irregular','Irregular'),
+            ('9_draft','Draft'),
+            ('7_failed', 'Failed'),
+            ('6_success', 'Success'),
+            ('5_progress','In Progress'),
+            ('3_rejected','Rejected'),
+            ('2_candidate','Candidate'),
+            ('1_confirmed','Confirmed'),
+            ('1_1_checked','Checked'),
+            ('0_valuated', 'Valuated'),
+        ], string='Status', index=True, default='9_draft',
+        tracking=True,
+        copy=False,
+        help=" * The 'Draft' status is used when course group is only plan.\n"
+             " * The 'Irregular' status is used when course group is in an irregular program.\n"
+             " * The 'In Progress' status is used when results are not confirmed yet.\n"
+             " * The 'Confirmed' status is when restults are confirmed.\n"
+             " * The 'Success' status is when delibration has confirmed success.\n"
+             " * The 'Failed' status is when delibration has confirmed failure.\n"
+             " * The 'Rejected' status is used when the course group is rejected for valuation.\n"
+             " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
+             " * The 'Confirmed' status is used when the course group is confirmed for valuation.\n"
+             " * The 'Valuated' status is used when the course group is confirmed for valuation.")
     
     year_id = fields.Many2one(related="bloc_id.year_id", string='Year', store=True)
     student_id = fields.Many2one(related="bloc_id.student_id", string='Student', store=True, domain=[('student', '=', True)])

@@ -224,25 +224,6 @@ class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _inherit = 'school.individual_bloc'
 
-    state = fields.Selection([
-            ('irregular','Irregular'),
-            ('draft','Draft'),
-            ('progress','In Progress'),
-            ('postponed', 'Postponed'),
-            ('awarded_first_session', 'Awarded in First Session'),
-            ('awarded_second_session', 'Awarded in Second Session'),
-            ('failed', 'Failed'),
-            ('abandoned','Abandoned'),
-        ], string='Status', index=True, default='draft',
-        copy=False,
-        help=" * The 'Draft' status is used when results are not confirmed yet.\n"
-             " * The 'In Progress' status is used during the courses.\n"
-             " * The 'Postponed' status is used when a second session is required.\n"
-             " * The 'Awarded' status is used when the bloc is awarded in either first or second session.\n"
-             " * The 'Failed' status is used when the bloc is definitively considered as failed.\n"
-             " * The 'Abandoned' status is when the student abandoned his bloc.\n"
-             ,tracking=True)
-    
     total_acquiered_credits = fields.Integer(compute="compute_credits",string="Acquiered Credits",store=True)
     total_acquiered_hours = fields.Integer(compute="compute_credits",string="Acquiered Hours",store=True)
     total_not_acquiered_credits = fields.Integer(compute='compute_credits', string='Not Acquiered Credits',store=True)
@@ -414,31 +395,6 @@ class IndividualBloc(models.Model):
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _inherit = 'school.individual_course_group'
-    
-    state = fields.Selection([
-            ('10_irregular','Irregular'),
-            ('9_draft','Draft'),
-            ('7_failed', 'Failed'),
-            ('6_success', 'Success'),
-            ('5_progress','In Progress'),
-            ('3_rejected','Rejected'),
-            ('2_candidate','Candidate'),
-            ('1_confirmed','Confirmed'),
-            ('1_1_checked','Checked'),
-            ('0_valuated', 'Valuated'),
-        ], string='Status', index=True, default='9_draft',
-        tracking=True,
-        copy=False,
-        help=" * The 'Draft' status is used when course group is only plan.\n"
-             " * The 'Irregular' status is used when course group is in an irregular program.\n"
-             " * The 'In Progress' status is used when results are not confirmed yet.\n"
-             " * The 'Confirmed' status is when restults are confirmed.\n"
-             " * The 'Success' status is when delibration has confirmed success.\n"
-             " * The 'Failed' status is when delibration has confirmed failure.\n"
-             " * The 'Rejected' status is used when the course group is rejected for valuation.\n"
-             " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
-             " * The 'Confirmed' status is used when the course group is confirmed for valuation.\n"
-             " * The 'Valuated' status is used when the course group is confirmed for valuation.")
      
     def set_to_draft(self, context=None):
         return self.write({'state': '9_draft'})
