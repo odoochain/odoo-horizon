@@ -424,7 +424,7 @@ class IndividualCourseGroup(models.Model):
         return []
     
     source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=lambda self: self._domain_source_course_group_id())
-    source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
+    source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID", store=True)
     source_course_group_responsible_id = fields.Many2one('res.partner', related='source_course_group_id.responsible_id', string="Source Course Group Responsible")
     
     bloc_id = fields.Many2one('school.individual_bloc', string="Bloc", ondelete='cascade', readonly=True)

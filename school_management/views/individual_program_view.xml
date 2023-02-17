@@ -285,6 +285,12 @@
                         <small class="oe_grey" ><field name="uid" readonly="1"/></small>
                       </div>
                   </h3>
+                  <h3 class="o_row row no-gutters d-flex">
+                      <div class="col">
+                        <label for="uid" invisible="1"/>
+                        <small class="oe_grey" ><field name="source_course_group_uid" readonly="1"/></small>
+                      </div>
+                  </h3>
                 </div>
               </div>
             </div>
