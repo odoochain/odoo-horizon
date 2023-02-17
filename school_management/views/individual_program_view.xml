@@ -282,13 +282,7 @@
                   <h3 class="o_row row no-gutters d-flex">
                       <div class="col">
                         <label for="uid" invisible="1"/>
-                        <small class="oe_grey" ><field name="uid" readonly="1"/></small>
-                      </div>
-                  </h3>
-                  <h3 class="o_row row no-gutters d-flex">
-                      <div class="col">
-                        <label for="uid" invisible="1"/>
-                        <small class="oe_grey" ><field name="source_course_group_uid" readonly="1"/></small>
+                        <small class="oe_grey" ><field name="uid" readonly="1"/> for <field name="source_course_group_uid" readonly="1"/></small>
                       </div>
                   </h3>
                 </div>
@@ -491,6 +485,7 @@
       <field name="arch" type="xml">
         <tree string="Individual Course Group" create="0">
           <field name="uid"/>
+          <field name="source_course_group_uid"/>
           <field name="year_id"/>
           <field name="student_id" />
           <field name="name" />
