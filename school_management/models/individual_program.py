@@ -341,10 +341,10 @@ class IndividualBloc(models.Model):
     @api.constrains('course_group_ids')
     def _check_individual_block(self):
         for rec in self:
-            scg_ids = rec.course_group_ids.mapped('source_course_group_id')
+            scg_ids = list(map(lambda cg : cg.source_course_group_id.uid,rec.program_id.all_ind_course_group_ids.filtered(lambda ic: ic.state != '7_failed')))
             duplicates = [item for item, count in collections.Counter(scg_ids).items() if count > 1]
             if len(duplicates) > 0 :
-                raise ValidationError("Cannot have duplicated UE in a program : %s." % self.env['school.course_group'].browse(duplicates).mapped('uid'))
+                raise ValidationError("Cannot have duplicated UE in a program : %s." % duplicates)
 
     ##############################################################################
     #

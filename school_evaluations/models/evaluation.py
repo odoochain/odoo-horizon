@@ -144,9 +144,9 @@ class IndividualProgram(models.Model):
     def _check_cycle(self):
         for rec in self:
             # Only previously failed CG can be valuated
-            acq_scg_ids = rec.all_ind_course_group_ids.filtered(lambda ic: ic.state != '7_failed').mapped('source_course_group_id')
-            val_scg_ids = rec.valuated_course_group_ids.mapped('source_course_group_id')
-            duplicates = [item for item, count in collections.Counter(acq_scg_ids | val_scg_ids).items() if count > 1]
+            acq_scg_ids = list(map(lambda cg : cg.source_course_group_id.uid,rec.program_id.all_ind_course_group_ids.filtered(lambda ic: ic.state != '7_failed')))
+            val_scg_ids = list(map(lambda cg : cg.source_course_group_id.uid,rec.valuated_course_group_ids))
+            duplicates = [item for item, count in collections.Counter(acq_scg_ids.extend(val_scg_ids)).items() if count > 1]
             if len(duplicates) > 0 :
                 raise ValidationError("Cannot have duplicated UE in a program : %s." % self.env['school.course_group'].browse(duplicates).mapped('uid'))
                 
