@@ -352,7 +352,7 @@ class IndividualBloc(models.Model):
     #
 
     def _domain_source_course_group_id(self):
-        return ['id','in',self.program_id.source_program_id.course_group_ids.ids]
+        return ['uid','ilike','UE-1%']
     
     new_source_course_group_id = fields.Many2one('school.course_group', string="New Source Course Group", domain=lambda self: self._domain_source_course_group_id())
     
