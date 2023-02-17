@@ -142,10 +142,11 @@ class IndividualProgram(models.Model):
     @api.constrains('valuated_course_group_ids')
     def _check_cycle(self):
         for rec in self:
-            acq_scg_ids = rec.acquired_ind_course_group_ids.mapped('source_course_group_id')
+            # Only previously failed CG can be valuated
+            acq_scg_ids = rec.all_ind_course_group_ids.filtered(lambda ic: ic.state != '7_failed').mapped('source_course_group_id')
             val_scg_ids = rec.valuated_course_group_ids.mapped('source_course_group_id')
             if len(list(set(acq_scg_ids) & set(val_scg_ids))) > 0 :
-                raise ValidationError("Cannot add valuation for a course_group already acquiered : %s" % list(set(acq_scg_ids) & set(val_scg_ids)))
+                raise ValidationError("Cannot add valuation for a course group already in the program : %s" % list(set(acq_scg_ids) & set(val_scg_ids)))
     
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
