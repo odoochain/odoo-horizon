@@ -364,8 +364,8 @@ class IndividualBloc(models.Model):
             for course in rec.new_source_course_group_id.course_ids:
                 _logger.debug('Assign course : ' + course.name)
                 courses.append((0,0,{'source_course_id': course.id}))
-            cg = rec.course_group_ids.create({'bloc_id': self.id,'source_course_group_id': rec.new_source_course_group_id.id, 'acquiered' : 'NA', 'course_ids' : courses})
-            rec.course_group_ids.append(cg)
+            cg = {'bloc_id': self.id,'source_course_group_id': rec.new_source_course_group_id.id, 'acquiered' : 'NA', 'course_ids' : courses}
+            rec.course_group_ids = [(0,0,cg)]
             rec.new_source_course_group_id = False
 
 
