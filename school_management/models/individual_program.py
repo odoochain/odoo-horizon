@@ -151,6 +151,7 @@ class IndividualCourseSummary(models.Model):
     course_group_id = fields.Many2one('school.course_group', string='Course Group')
     
     uid = fields.Char(string="UID",related="course_group_id.uid")
+    source_course_group_uid = fields.Char(string="UEID",related="course_group_id.source_course_group_uid")
     name = fields.Char(string="Name",related="course_group_id.name")
     responsible_id = fields.Many2one('res.partner', string="Name",related="course_group_id.responsible_id")
     total_hours = fields.Integer(string="Credits",related="course_group_id.total_hours")
