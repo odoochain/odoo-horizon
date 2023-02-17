@@ -60,6 +60,9 @@ class IndividualProgram(models.Model):
         
     def _assign_cg(self, new_pae):
         cg_ids = []
+        
+        # TODO - Add 'Not Acquiered' cg automatic
+        
         for group in new_pae.source_bloc_id.course_group_ids:
             # Check if cg already acquiered
             count = self.env['school.individual_course_group'].search_count([('student_id','=',self.student_id.id),('acquiered','=','A'),('source_course_group_id','=',group.id)])

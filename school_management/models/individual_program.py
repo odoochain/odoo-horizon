@@ -25,6 +25,8 @@ from odoo.exceptions import UserError, AccessError
 
 _logger = logging.getLogger(__name__)
 
+from odoo.exceptions import ValidationError
+
 class IndividualProgram(models.Model):
     '''Individual Program'''
     _name='school.individual_program'
@@ -265,6 +267,13 @@ class IndividualBloc(models.Model):
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', tracking=True)
+    
+    @api.constrains('course_group_ids')
+    def _check_cycle(self):
+        for record in self:
+            scg_ids = record.course_group_ids.mapped('source_course_group_id')
+            if len(scg_ids) != len(set(scg_ids)):
+                raise ValidationError("Cannot have duplicated UE in a bloc.")
     
     total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)

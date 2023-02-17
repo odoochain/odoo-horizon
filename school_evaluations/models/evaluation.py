@@ -22,6 +22,8 @@ import logging
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
+from odoo.exceptions import ValidationError
+
 from odoo.addons import decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
@@ -70,6 +72,14 @@ class IndividualProgram(models.Model):
     
     total_valuated_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Valuated Credits', tracking=True,store=True)
 
+    @api.constrains('valuated_course_group_ids', 'valuated_course_group_ids.state','bloc_ids','bloc_ids.course_group_ids')
+    def _check_cycle(self):
+        for record in self:
+            pass
+            # TODO ADD CHECK THAT a valorisation in not in a PAE
+            #    raise ValidationError("The end date cannot be set in the past")
+            # all records passed the test, don't return anything
+        
     @api.depends('valuated_course_group_ids', 'required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     def _get_total_acquiered_credits(self):
         for rec in self:
