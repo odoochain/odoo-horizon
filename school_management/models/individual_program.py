@@ -130,17 +130,6 @@ class IndividualProgram(models.Model):
         
     bloc_ids = fields.One2many('school.individual_bloc', 'program_id', string='Individual Blocs')
     
-    #highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
-
-    #@api.depends('bloc_ids.source_bloc_level')
-    #def _compute_highest_level(self):
-    #    for rec in self:
-    #        levels = rec.bloc_ids.mapped('source_bloc_level')
-    #        if levels:
-    #            rec.highest_level = max(levels)
-    #        else:
-    #            rec.highest_level = 0
-
     def get_all_tearchers(self):
         return self.bloc_ids.course_group_ids.course_ids.teacher_id
         
@@ -174,7 +163,6 @@ class IndividualCourseSummary(models.Model):
         for rec in self:
             rec.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.program_id.bloc_ids.ids),('source_course_group_id','=',rec.course_group_id.id)])
     
-
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _name='school.individual_bloc'
@@ -287,13 +275,6 @@ class IndividualBloc(models.Model):
     
     course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', tracking=True)
     
-    @api.constrains('course_group_ids')
-    def _check_individual_block(self):
-        for record in self:
-            scg_ids = record.course_group_ids.mapped('source_course_group_id')
-            if len(scg_ids) != len(set(scg_ids)):
-                raise ValidationError("Cannot have duplicated UE in a bloc.")
-    
     total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
     total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)
     total_weight = fields.Float(compute='_get_courses_total', string='Weight', store=True)
@@ -350,6 +331,31 @@ class IndividualBloc(models.Model):
         
     def get_all_responsibles(self):
         return self.course_group_ids.source_course_group_responsible_id
+
+    ##############################################################################
+    #
+    # Constraints
+    #
+    
+    @api.constrains('course_group_ids')
+    def _check_individual_block(self):
+        for record in self:
+            scg_ids = record.course_group_ids.mapped('source_course_group_id')
+            if len(scg_ids) != len(set(scg_ids)):
+                raise ValidationError("Cannot have duplicated UE in a bloc.")
+
+
+    ##############################################################################
+    #
+    # UX/UI Helpers
+    #
+
+    def _domain_source_course_group_id(self):
+        return []
+    
+    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=lambda self: self._domain_source_course_group_id())
+    
+    
 
 class IndividualBlocTag(models.Model):
     _name = 'school.individual_bloc.tag'

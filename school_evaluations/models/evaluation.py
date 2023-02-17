@@ -72,14 +72,6 @@ class IndividualProgram(models.Model):
     
     total_valuated_credits = fields.Integer(compute='_get_total_acquiered_credits', string='Valuated Credits', tracking=True,store=True)
 
-    @api.constrains('valuated_course_group_ids', 'valuated_course_group_ids.state','bloc_ids','bloc_ids.course_group_ids')
-    def _check_cycle(self):
-        for record in self:
-            pass
-            # TODO ADD CHECK THAT a valorisation in not in a PAE
-            #    raise ValidationError("The end date cannot be set in the past")
-            # all records passed the test, don't return anything
-        
     @api.depends('valuated_course_group_ids', 'required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     def _get_total_acquiered_credits(self):
         for rec in self:
@@ -140,6 +132,20 @@ class IndividualProgram(models.Model):
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids - rec.bloc_ids[-1].course_group_ids.mapped('source_course_group_id')
             else :
                 rec.remaining_not_planned_course_group_ids = rec.remaining_course_group_ids
+
+
+    ##############################################################################
+    #
+    # Constraints
+    #
+
+    @api.constrains('valuated_course_group_ids')
+    def _check_cycle(self):
+        for rec in self:
+            acq_scg_ids = rec.acquired_ind_course_group_ids.mapped('source_course_group_id')
+            val_scg_ids = rec.valuated_course_group_ids.mapped('source_course_group_id')
+            if len(list(set(acq_scg_ids) & set(val_scg_ids))) > 0 :
+                raise ValidationError("Cannot add valuation for a course_group already acquiered : %s" % list(set(acq_scg_ids) & set(val_scg_ids)))
     
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''

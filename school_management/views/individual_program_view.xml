@@ -196,6 +196,7 @@
           <filter name="theatre" string="Théatre" domain="[('domain_id', '=', 2)]"/>
           <separator/>
           <group expand="1" string="Group By">
+            <filter string="State" name="state_group" context="{'group_by':'state'}" />
             <filter string="Domain" name="domain_id_group" context="{'group_by':'domain_id'}" />
             <filter string="Cycle" name="cycle_id_group" context="{'group_by':'cycle_id'}" />
             <filter string="Section" name="section_id_group" context="{'group_by':'section_id'}" />
@@ -428,6 +429,7 @@
           <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
           <filter string="Previous Year" name="previous" domain="[('year_sequence','=','previous')]" />
           <group expand="1" string="Group By">
+            <filter string="State" name="state_group" context="{'group_by':'state'}" />
             <filter string="Domain" name="source_bloc_domain_id_group" context="{'group_by':'source_bloc_domain_id'}" />
             <filter string="Cycle" name="source_bloc_cycle_id_group" context="{'group_by':'source_bloc_cycle_id'}" />
             <filter string="Section" name="source_bloc_section_id_group" context="{'group_by':'source_bloc_section_id'}" />
