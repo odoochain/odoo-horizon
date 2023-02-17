@@ -83,7 +83,7 @@ class IndividualProgram(models.Model):
     @api.depends('valuated_course_group_ids', 'required_credits', 'bloc_ids.state','bloc_ids.total_acquiered_credits','historical_bloc_1_credits','historical_bloc_2_credits')
     def _get_total_acquiered_credits(self):
         for rec in self:
-            _logger.info('Trigger "_get_total_acquiered_credits" on Program %s' % rec.name)
+            _logger.debug('Trigger "_get_total_acquiered_credits" on Program %s' % rec.name)
             total = sum(cg.source_course_group_id.total_credits for cg in rec.valuated_course_group_ids.filtered(lambda vcg: vcg.state == '0_valuated')) + sum(bloc_id.total_acquiered_credits if bloc_id.state in ['awarded_first_session','awarded_second_session','failed'] else 0 for bloc_id in rec.bloc_ids) or 0
             total_current = sum(bloc_id.total_credits if bloc_id.state in ['progress','postponed'] else 0 for bloc_id in rec.bloc_ids)
             rec.total_acquiered_credits = total + rec.historical_bloc_1_credits + rec.historical_bloc_2_credits
@@ -583,7 +583,7 @@ class IndividualCourseGroup(models.Model):
     @api.depends('course_ids.first_session_result_bool','course_ids.first_session_result','course_ids.first_session_exception','course_ids.second_session_result_bool','course_ids.second_session_result','course_ids.second_session_exception','course_ids.weight')
     def compute_average_results(self, force = False):
         for rec in self : # .filtered(lambda r: force or r.state in ['7_failed','5_progress']) :
-            _logger.info('Trigger "compute_average_results" on Course Group %s' % rec.uid)
+            _logger.debug('Trigger "compute_average_results" on Course Group %s' % rec.uid)
             ## Compute Weighted Average
             running_first_session_result = 0
             running_second_session_result = 0
@@ -642,7 +642,7 @@ class IndividualCourseGroup(models.Model):
     @api.depends('first_session_deliberated_result_bool','first_session_deliberated_result','first_session_computed_result_bool','first_session_computed_result','first_session_computed_exception')
     def compute_first_session_results(self, force = False):
         for rec in self : # .filtered(lambda r: force or r.state in ['7_failed','5_progress']) :
-            _logger.info('Trigger "compute_first_session_results" on Course Group %s' % rec.uid)
+            _logger.debug('Trigger "compute_first_session_results" on Course Group %s' % rec.uid)
             ## Compute Session Results
             if rec.first_session_deliberated_result_bool :
                 try:
@@ -677,7 +677,7 @@ class IndividualCourseGroup(models.Model):
     @api.depends('second_session_deliberated_result_bool','second_session_deliberated_result','second_session_computed_result_bool','second_session_computed_result','second_session_computed_exception')
     def compute_second_session_results(self, force = False):
         for rec in self : # .filtered(lambda r: force or r.state in ['7_failed','5_progress']) :
-            _logger.info('Trigger "compute_second_session_results" on Course Group %s' % rec.uid)
+            _logger.debug('Trigger "compute_second_session_results" on Course Group %s' % rec.uid)
             if rec.second_session_deliberated_result_bool :
                 try:
                     f = rec._parse_result(rec.second_session_deliberated_result)
@@ -710,7 +710,7 @@ class IndividualCourseGroup(models.Model):
     @api.depends('second_session_result_bool','second_session_exception','second_session_result','first_session_result_bool','first_session_exception','first_session_result')
     def compute_final_results(self, force = False):
         for rec in self : # .filtered(lambda r: force or r.state in ['7_failed','5_progress']) :
-            _logger.info('Trigger "compute_final_results" on Course Group %s' % rec.uid)
+            _logger.debug('Trigger "compute_final_results" on Course Group %s' % rec.uid)
             ## Compute Final Results
             if rec.second_session_result_bool :
                 if rec.second_session_exception :

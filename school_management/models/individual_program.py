@@ -240,11 +240,11 @@ class IndividualBloc(models.Model):
         self.ensure_one()
         self.course_group_ids.unlink()
         for group in self.source_bloc_id.course_group_ids:
-            _logger.info('Assign course groups : ' + group.uid + ' - ' +group.name)
+            _logger.debug('Assign course groups : ' + group.uid + ' - ' +group.name)
             cg = self.course_group_ids.create({'bloc_id': self.id,'source_course_group_id': group.id, 'acquiered' : 'NA'})
             courses = []
             for course in group.course_ids:
-                _logger.info('Assign course : ' + course.name)
+                _logger.debug('Assign course : ' + course.name)
                 courses.append((0,0,{'source_course_id': course.id}))
             cg.write({'course_ids': courses})
     
@@ -394,9 +394,7 @@ class IndividualCourseGroup(models.Model):
     def onchange_source_cg(self):
         courses = []
         for course in self.source_course_group_id.course_ids:
-            _logger.info('assign course : ' + course.name)
             courses.append((0,0,{'source_course_id':course.id}))
-        _logger.info(courses)
         self.update({'course_ids': courses})
 
     @api.depends('course_ids.hours','course_ids.credits','course_ids.weight')
