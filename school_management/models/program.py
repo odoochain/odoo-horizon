@@ -109,7 +109,7 @@ class Program(models.Model):
     
     cycle_required_credits = fields.Integer(related='cycle_id.required_credits', string='Required Credits')
     
-    cycle_type = fields.Char(related='cycle_id.short_name', store=True)
+    cycle_type = fields.Char(related='cycle_id.short_name', string="Cycle Type", store=True)
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
     
