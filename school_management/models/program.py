@@ -113,8 +113,6 @@ class Program(models.Model):
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
     
-    domain = fields.Char(related='speciality_id.name', store=True)
-    
     ares_code = fields.Char(required=True, string='ARES Code', size=10)
     
     graca_code = fields.Char(required=True, string='GRACA Code', size=10)
