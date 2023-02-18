@@ -190,7 +190,7 @@ class Bloc(models.Model):
     
     level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),('6','Agregation'),],string='Level')
  
-    domain_name = fields.Char(related='program_id.domain', string='Domain Name',store=True)
+    domain_name = fields.Char(related='program_id.domain_name', string='Domain Name',store=True)
     cycle_type = fields.Char(related='program_id.cycle_type', string='Cycle Type',store=True)
     
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
