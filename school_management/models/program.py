@@ -96,11 +96,6 @@ class Program(models.Model):
         for prog in self:
             prog.name = "%s - %s" % (prog.year_id.short_name, prog.title)
     
-    domain = fields.Selection([
-            ('musique','Musique'),
-            ('theatre', 'Théâtre et arts de la parole')
-        ], string='Domaine')
-    
     year_id = fields.Many2one('school.year', required=True, string="Year")
     
     description = fields.Text(string='Description')
@@ -108,7 +103,8 @@ class Program(models.Model):
     cycle_id = fields.Many2one('school.cycle', string='Cycle', required=True, domain=[('type', '!=', False)])
     
     cycle_required_credits = fields.Integer(related='cycle_id.required_credits', string='Required Credits')
-    
+
+    domain = fields.Char(related='speciality_id.domain_id.name', string='Domain',store=True)
     cycle_type = fields.Char(related='cycle_id.short_name', string="Cycle Type", store=True)
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
@@ -194,7 +190,8 @@ class Bloc(models.Model):
     
     level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),('6','Agregation'),],string='Level')
  
-    domain = fields.Selection(related='program_id.domain', string='Domain',store=True)   
+    domain = fields.Char(related='program_id.domain', string='Domain',store=True)
+    cycle_type = fields.Char(related='program_id.cycle_type', string='Cycle Type',store=True)
     
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
  
