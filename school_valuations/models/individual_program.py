@@ -100,19 +100,30 @@ class ValuationFollwup(models.Model):
     
     individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group')
     
-    individual_program_id = fields.Many2one('school.individual_program', string='Individual Program', related="individual_course_group_id.valuated_program_id", store=True)
+    def write(self, vals):
+        partner_ids = []
+        # subscribe employee or department manager when equipment assign to employee or department.
+        if vals.get('individual_course_group_id'):
+            icg_id = self.env['school.individual_course_group'].browse(vals['individual_course_group_id'])
+            if icg_id:
+                vals.append({
+                    'name': icg_id.name,
+                    'title': icg_id.title,
+                    'student_id': icg_id.student_id,
+                    'responsible_id': icg_id.responsible_id,
+                    'individual_program_id': icg_id.individual_program_id
+                })
+        return super(ValuationFollwup, self).write(vals)
     
-    name = fields.Char(related="individual_course_group_id.name", string="Name", store=True)
-    
-    title = fields.Char(related="individual_course_group_id.title", string="Title", store=True)
-    
-    student_id = fields.Many2one('res.partner', related='individual_course_group_id.valuated_program_id.student_id', string="Student", store=True)
+    name = fields.Char(string="Name")
+    title = fields.Char(string="Title")
+    student_id = fields.Many2one('res.partner', string="Student")
+    responsible_id = fields.Many2one('res.partner', string="Responsible")
+    individual_program_id = fields.Many2one('school.individual_program', string='Individual Program')
     
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_512= fields.Binary('Image', attachment=True, related='student_id.image_512')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
-    
-    responsible_id = fields.Many2one('res.partner', related='individual_course_group_id.responsible_id', string="Responsible", store=True)
     
     responsible_uid = fields.Many2one('res.users', compute='_compute_responsible_uid', store=True)
     
@@ -212,7 +223,4 @@ class ValuationFollwup(models.Model):
             rec.write({
                 'active' : False
             })
-            rec.individual_course_group_id.write({
-                'active' : False,
-                'state' : '3_rejected'
-            })
+            rec.individual_course_group_id.unlink()
