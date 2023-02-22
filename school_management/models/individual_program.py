@@ -359,13 +359,13 @@ class IndividualBloc(models.Model):
     @api.onchange('new_source_course_group_id')
     def _on_change_new_source_course_group_id(self):
         for rec in self:
-            _logger.debug('Assign course groups : ' + rec.new_source_course_group_id.uid + ' - ' +rec.new_source_course_group_id.name)
+            _logger.info('Assign course group : ' + rec.new_source_course_group_id.uid + ' - ' +rec.new_source_course_group_id.name)
             courses = []
             for course in rec.new_source_course_group_id.course_ids:
-                _logger.debug('Assign course : ' + course.name)
+                _logger.info('Assign course : ' + course.name)
                 courses.append((0,0,{'source_course_id': course.id}))
-            cg = {'bloc_id': self.id,'source_course_group_id': rec.new_source_course_group_id.id, 'acquiered' : 'NA', 'course_ids' : courses}
-            rec.course_group_ids = [(0,0,cg)]
+            cg = self.env['school.individual_course_group'].create({'bloc_id': self.id,'source_course_group_id': rec.new_source_course_group_id.id, 'acquiered' : 'NA', 'course_ids' : courses})
+            rec.course_group_ids |= cg
             rec.new_source_course_group_id = False
 
 
