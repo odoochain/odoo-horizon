@@ -34,6 +34,7 @@
             <field name="arch" type="xml">
                 <tree string="Cycles">
                     <field name="name" />
+                    <field name="code" />
                     <field name="short_name" />
                     <field name="required_credits"/>
                     <field name="type"/>

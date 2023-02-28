@@ -30,7 +30,7 @@ class Registration(models.Model):
     '''Registration'''
     _name = 'school.registration'
     _description = 'Registration of new/existing students'
-    _inherit = ['mail.thread','school.uid.mixin','school.open.form.mixin']
+    _inherit = ['mail.thread','school.uid.mixin','school.year_sequence.mixin','school.open.form.mixin']
     
     student_id = fields.Many2one('res.partner', string='Student')
     
@@ -61,3 +61,21 @@ class Registration(models.Model):
 
     def archive(self):
         return self.write({'state': 'archived'})
+        
+    _sql_constraints = [
+        ('student_year_uniq', 'unique (student_id, year_id)', "Registration already exists for that student in this year!"),
+    ]
+        
+class Form(models.Model):
+    '''Individual Bloc'''
+    _inherit = 'formio.form'
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super(Form, self).create(vals_list)
+        records._create_or_update_registration()
+        
+    def _create_or_update_registration(self):
+        for rec in self:
+            if rec.name == 'new_contact':
+                reg = self.env['school.registration'].search([['year_id','=',],['student_id','=',]])

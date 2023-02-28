@@ -414,6 +414,7 @@ class Cycle(models.Model):
     _name = 'school.cycle'
     
     name = fields.Char(required=True, string='Name', size=60)
+    code = fields.Char(string='Short Name', size=5)
     short_name = fields.Char(string='Short Name', size=2)
     description = fields.Text(string='Description')
     required_credits = fields.Integer(string='Required Credits')
