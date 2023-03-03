@@ -71,11 +71,22 @@ class Form(models.Model):
     _inherit = 'formio.form'
 
     @api.model_create_multi
-    def create(self, vals_list):
-        records = super(Form, self).create(vals_list)
-        records._create_or_update_registration()
+    def write(self, vals):
+        res = super(Form, self).write(vals)
+        if 'data' in vals :
+            self._create_or_update_registration()
+        return res
         
     def _create_or_update_registration(self):
+        registration_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.registration_open_year_id', '0')
         for rec in self:
-            if rec.name == 'new_contact':
-                reg = self.env['school.registration'].search([['year_id','=',],['student_id','=',]])
+            if rec.name == 'new_contact' and rec.submission_partner_id :
+                reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id]])
+                if reg :
+                    reg.contact_form_id = rec
+                else :
+                    self.env['school.registration'].create({
+                        'year_id' : registration_open_year_id.id,
+                        'student_id' : rec.submission_partner_id.id,
+                        'contact_form_id' : rec.id
+                    })
