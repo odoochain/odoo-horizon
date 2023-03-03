@@ -32,6 +32,8 @@ class Registration(models.Model):
     _description = 'Registration of new/existing students'
     _inherit = ['mail.thread','school.uid.mixin','school.year_sequence.mixin','school.open.form.mixin']
     
+    year_id = fields.Many2one('school.year', required=True, string="Year")
+    
     student_id = fields.Many2one('res.partner', string='Student')
     
     name = fields.Char(related='student_id.name')
