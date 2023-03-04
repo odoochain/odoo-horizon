@@ -53,6 +53,8 @@ class Registration(models.Model):
              
     contact_form_id = fields.Many2one('formio.form', string='Contact Form')
     
+    contact_form_data = fields.Text(related='contact_form_id.submission_data')
+    
     def action_fill_contact_with_form(self):
         pass
     
