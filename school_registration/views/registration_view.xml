@@ -27,6 +27,16 @@
           
           -->
   
+    <!-- Add Highligth.js -->
+    <template id="assets_backend" name="registration assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.js"></script>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/json.js"></script>
+      </xpath>
+    </template>
+  
     <!-- Registration Kanban View -->
     <record model="ir.ui.view" id="registration_kanban_view">
       <field name="name">school.registration.kanban</field>
