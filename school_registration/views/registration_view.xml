@@ -80,8 +80,8 @@
         <form string="registration">
           <header>
             <button name="to_draft" type="object" states="active,archived" string="Set to Draft" />
-            <button name="activate" type="object" states="draft" string="Activate Registration" class="oe_highlight" />
-            <button name="archive" type="object" states="draft,active" string="Archive Approuval" />
+            <button name="activate" type="object" states="draft" string="Confirm Registration" class="oe_highlight" />
+            <button name="archive" type="object" states="draft,active" string="Archive Registration" />
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
           <sheet>
@@ -96,6 +96,10 @@
                   </h2>
                 </div>
               </div>
+              <group>
+                <field name="student_id"/>
+                <field name="contact_form_id"/>
+              </group>
             </div>
           </sheet>
         </form>

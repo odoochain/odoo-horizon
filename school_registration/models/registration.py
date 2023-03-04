@@ -37,6 +37,7 @@ class Registration(models.Model):
     student_id = fields.Many2one('res.partner', string='Student')
     
     name = fields.Char(related='student_id.name')
+    
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
@@ -82,12 +83,12 @@ class Form(models.Model):
         registration_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.registration_open_year_id', '0')
         for rec in self:
             if rec.name == 'new_contact' and rec.submission_partner_id :
-                reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id]])
+                reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id]])
                 if reg :
                     reg.contact_form_id = rec
                 else :
                     self.env['school.registration'].create({
-                        'year_id' : registration_open_year_id.id,
+                        'year_id' : registration_open_year_id,
                         'student_id' : rec.submission_partner_id.id,
                         'contact_form_id' : rec.id
                     })
