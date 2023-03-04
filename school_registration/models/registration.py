@@ -80,7 +80,7 @@ class Form(models.Model):
         return res
         
     def _create_or_update_registration(self):
-        registration_open_year_id = self.env['ir.config_parameter'].sudo().get_param('school.registration_open_year_id', '0')
+        registration_open_year_id = int(self.env['ir.config_parameter'].sudo().get_param('school.registration_open_year_id', '0'))
         for rec in self:
             if rec.name == 'new_contact' and rec.submission_partner_id :
                 reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id]])
