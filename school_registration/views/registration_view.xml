@@ -94,8 +94,8 @@
             <button name="archive" type="object" states="draft,active" string="Archive Registration" />
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
-          <sheet>
-            <div class="container h_registration_dialog">
+          <div class="container h_registration_dialog">
+            <sheet>
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
                   <field name="image_1920" readonly="1" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
@@ -104,12 +104,15 @@
                   <h2>
                    <field name="name"/>
                   </h2>
+                  <group>
+                    <field name="student_id"/>
+                    <field name="contact_form_id"/>
+                  </group>
                 </div>
               </div>
-              <group>
-                <field name="student_id"/>
-                <field name="contact_form_id"/>
-              </group>
+              <div class="row">
+                <pre><code><t t-raw="contact_form_data"/></code></pre>
+              </div>
             </div>
           </sheet>
           <div class="oe_chatter">
