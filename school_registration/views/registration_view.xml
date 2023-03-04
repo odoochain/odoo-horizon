@@ -94,8 +94,8 @@
             <button name="archive" type="object" states="draft,active" string="Archive Registration" />
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
-          <div class="container h_registration_dialog">
-            <sheet>
+          <sheet>
+            <div class="container h_registration_dialog">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
                   <field name="image_1920" readonly="1" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
