@@ -72,7 +72,6 @@ class Form(models.Model):
     '''Individual Bloc'''
     _inherit = 'formio.form'
 
-    @api.model_create_multi
     def write(self, vals):
         res = super(Form, self).write(vals)
         if 'data' in vals :
