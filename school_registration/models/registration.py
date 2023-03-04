@@ -74,7 +74,7 @@ class Form(models.Model):
 
     def write(self, vals):
         res = super(Form, self).write(vals)
-        if 'data' in vals :
+        if 'submission_data' in vals and 'state' in vals and vals['state'] == 'COMPLETE' :
             self._create_or_update_registration()
         return res
         
