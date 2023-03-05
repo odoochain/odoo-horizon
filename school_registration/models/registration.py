@@ -82,26 +82,27 @@ class Registration(models.Model):
     def action_fill_partner_date(self):
         for rec in self:
             contact_data = json.loads(rec.contact_form_data)
-            rec.lastname = contact_data['nom']
-            rec.firstname = contact_data['prenom']
-            rec.gender = contact_data['sexe']
-            rec.birthdate_date = fields.Datetime.from_string(rec._format_date(contact_data['dateDeNaissance']))
-            rec.birthplace = contact_data['lieuDeNaiss']
-            rec.lastname = contact_data['nom']
-            rec.birthcountry = self.env['res.country'].browse(contact_data['brith_country'])
-            #rec.nationalites
-            rec.image_1920 = tools.base64_to_image(rec._extract_base64_data_from_data_url(contact_data['photo']['url']))
-            rec.street = contact_data['adresseLigne']
-            rec.city = contact_data['ville']
-            rec.zip= contact_data['codePostal']
-            rec.country = self.env['res.country'].browse(contact_data['country'])
-            rec.street = contact_data['adresseLigne1']
-            rec.city = contact_data['ville1']
-            rec.zip= contact_data['codePostal1']
-            rec.country = self.env['res.country'].browse(contact_data['country1'])
-            rec.phone = contact_data['telephonePortab']
-            rec.email_personnel = contact_data['email']
-            rec.reg_number = contact_data['numeroDeRegistreNational']
+            student_id = rec.student_id
+            student_id.lastname = contact_data['nom']
+            student_id.firstname = contact_data['prenom']
+            student_id.gender = contact_data['sexe']
+            student_id.birthdate_date = fields.Datetime.from_string(rec._format_date(contact_data['dateDeNaissance']))
+            student_id.birthplace = contact_data['lieuDeNaiss']
+            student_id.lastname = contact_data['nom']
+            student_id.birthcountry = self.env['res.country'].browse(contact_data['brith_country'])
+            #student_id.nationalites
+            student_id.image_1920 = tools.base64_to_image(rec._extract_base64_data_from_data_url(contact_data['photo']['url']))
+            student_id.street = contact_data['adresseLigne']
+            student_id.city = contact_data['ville']
+            student_id.zip= contact_data['codePostal']
+            student_id.country = self.env['res.country'].browse(contact_data['country'])
+            student_id.street = contact_data['adresseLigne1']
+            student_id.city = contact_data['ville1']
+            student_id.zip= contact_data['codePostal1']
+            student_id.country = self.env['res.country'].browse(contact_data['country1'])
+            student_id.phone = contact_data['telephonePortab']
+            student_id.email_personnel = contact_data['email']
+            student_id.reg_number = contact_data['numeroDeRegistreNational']
         
     def action_open_student(self):
         self.ensure_one()
