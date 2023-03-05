@@ -92,10 +92,7 @@ class Registration(models.Model):
             student_id.lastname = contact_data['nom']
             student_id.birthcountry = self.env['res.country'].browse(contact_data['brith_country'])
             #student_id.nationalites
-            try :
-                student_id.image_1920 = base64.b64decode(rec._extract_base64_data_from_data_url(contact_data['photo'][0]['url']))
-            except:
-                pass
+            student_id.image_1920 = base64.b64decode(rec._extract_base64_data_from_data_url(contact_data['photo'][0]['url']))
             student_id.street = contact_data['adresseLigne']
             student_id.city = contact_data['ville']
             student_id.zip= contact_data['codePostal']
