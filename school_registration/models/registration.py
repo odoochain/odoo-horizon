@@ -91,7 +91,7 @@ class Registration(models.Model):
             student_id.lastname = contact_data['nom']
             student_id.birthcountry = self.env['res.country'].browse(contact_data['brith_country'])
             #student_id.nationalites
-            photo_data = json.loads(contact_data['photo'][1])
+            photo_data = json.loads(contact_data['photo'][0])
             student_id.image_1920 = tools.base64_to_image(rec._extract_base64_data_from_data_url(photo_data['url']))
             student_id.street = contact_data['adresseLigne']
             student_id.city = contact_data['ville']
