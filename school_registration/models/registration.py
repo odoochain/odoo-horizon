@@ -81,7 +81,7 @@ class Registration(models.Model):
         
     def action_fill_partner_date(self):
         for rec in self:
-            contact_data = json.load(rec.contact_form_data)
+            contact_data = json.loads(rec.contact_form_data)
             rec.lastname = contact_data['nom']
             rec.firstname = contact_data['prenom']
             rec.gender = contact_data['sexe']
