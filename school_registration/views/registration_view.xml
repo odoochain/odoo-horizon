@@ -95,6 +95,9 @@
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
           <sheet>
+            <header>
+                <button name="action_open_student" type="object" icon="fa-user" string="Student"/>
+            </header>
             <div class="container h_registration_dialog">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
@@ -111,7 +114,13 @@
                 </div>
               </div>
               <div class="row">
-                <pre><code><t t-raw="contact_form_data"/></code></pre>
+                <div class="col-8">
+                  <pre><code class="hljs language-json"><field name="contact_form_data"/></code></pre>
+                </div>
+              </div>
+              <div class="row">
+                Ingestion des données : <br/>
+                <button name="action_fill_partner_date" type="object" class="oe_stat_button" icon="fa-list"/>
               </div>
             </div>
           </sheet>

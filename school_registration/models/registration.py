@@ -67,6 +67,52 @@ class Registration(models.Model):
     def archive(self):
         return self.write({'state': 'archived'})
         
+    def _format_date(self, date_str):
+        day, month, year = date_str.split('/')
+        return f"{year}-{month}-{day}"
+        
+    def _extract_base64_data_from_data_url(self,data_url):
+        # split the data URL into its components
+        parts = data_url.split(",")
+        # extract the base64-encoded data from the URL
+        base64_data = parts[1]
+        return base64_data
+        
+    def action_fill_partner_date(self):
+        for rec in self:
+            rec.lastname = rec.contact_form_data['nom']
+            rec.firstname = rec.contact_form_data['prenom']
+            rec.gender = rec.contact_form_data['sexe']
+            rec.birthdate_date = fields.Datetime.from_string(rec._format_date(rec.contact_form_data['dateDeNaissance']))
+            rec.birthplace = rec.contact_form_data['lieuDeNaiss']
+            rec.lastname = rec.contact_form_data['nom']
+            rec.birthcountry = self.env['res.country'].browse(rec.contact_form_data['brith_country'])
+            #rec.nationalites
+            rec.image_1920 = tools.base64_to_image(rec._extract_base64_data_from_data_url(rec.contact_form_data['photo']['url']))
+            rec.street = rec.contact_form_data['adresseLigne']
+            rec.city = rec.contact_form_data['ville']
+            rec.zip= rec.contact_form_data['codePostal']
+            rec.country = self.env['res.country'].browse(rec.contact_form_data['country'])
+            rec.street = rec.contact_form_data['adresseLigne1']
+            rec.city = rec.contact_form_data['ville1']
+            rec.zip= rec.contact_form_data['codePostal1']
+            rec.country = self.env['res.country'].browse(rec.contact_form_data['country1'])
+            rec.phone = rec.contact_form_data['telephonePortab']
+            rec.email_personnel = rec.contact_form_data['email']
+            rec.reg_number = rec.contact_form_data['numeroDeRegistreNational']
+        
+    def action_open_student(self):
+        self.ensure_one()
+        return {
+            'name': 'Student',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'res.partner',
+            'res_id': self.student_id,
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }
+        
     _sql_constraints = [
         ('student_year_uniq', 'unique (student_id, year_id)', "Registration already exists for that student in this year!"),
     ]
