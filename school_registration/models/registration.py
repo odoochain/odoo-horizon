@@ -20,6 +20,7 @@
 ##############################################################################
 import logging
 from datetime import datetime
+import json
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, AccessError
@@ -80,26 +81,27 @@ class Registration(models.Model):
         
     def action_fill_partner_date(self):
         for rec in self:
-            rec.lastname = rec.contact_form_data['nom']
-            rec.firstname = rec.contact_form_data['prenom']
-            rec.gender = rec.contact_form_data['sexe']
-            rec.birthdate_date = fields.Datetime.from_string(rec._format_date(rec.contact_form_data['dateDeNaissance']))
-            rec.birthplace = rec.contact_form_data['lieuDeNaiss']
-            rec.lastname = rec.contact_form_data['nom']
-            rec.birthcountry = self.env['res.country'].browse(rec.contact_form_data['brith_country'])
+            contact_data = json.load(rec.contact_form_data)
+            rec.lastname = contact_data['nom']
+            rec.firstname = contact_data['prenom']
+            rec.gender = contact_data['sexe']
+            rec.birthdate_date = fields.Datetime.from_string(rec._format_date(contact_data['dateDeNaissance']))
+            rec.birthplace = contact_data['lieuDeNaiss']
+            rec.lastname = contact_data['nom']
+            rec.birthcountry = self.env['res.country'].browse(contact_data['brith_country'])
             #rec.nationalites
-            rec.image_1920 = tools.base64_to_image(rec._extract_base64_data_from_data_url(rec.contact_form_data['photo']['url']))
-            rec.street = rec.contact_form_data['adresseLigne']
-            rec.city = rec.contact_form_data['ville']
-            rec.zip= rec.contact_form_data['codePostal']
-            rec.country = self.env['res.country'].browse(rec.contact_form_data['country'])
-            rec.street = rec.contact_form_data['adresseLigne1']
-            rec.city = rec.contact_form_data['ville1']
-            rec.zip= rec.contact_form_data['codePostal1']
-            rec.country = self.env['res.country'].browse(rec.contact_form_data['country1'])
-            rec.phone = rec.contact_form_data['telephonePortab']
-            rec.email_personnel = rec.contact_form_data['email']
-            rec.reg_number = rec.contact_form_data['numeroDeRegistreNational']
+            rec.image_1920 = tools.base64_to_image(rec._extract_base64_data_from_data_url(contact_data['photo']['url']))
+            rec.street = contact_data['adresseLigne']
+            rec.city = contact_data['ville']
+            rec.zip= contact_data['codePostal']
+            rec.country = self.env['res.country'].browse(contact_data['country'])
+            rec.street = contact_data['adresseLigne1']
+            rec.city = contact_data['ville1']
+            rec.zip= contact_data['codePostal1']
+            rec.country = self.env['res.country'].browse(contact_data['country1'])
+            rec.phone = contact_data['telephonePortab']
+            rec.email_personnel = contact_data['email']
+            rec.reg_number = contact_data['numeroDeRegistreNational']
         
     def action_open_student(self):
         self.ensure_one()
