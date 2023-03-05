@@ -99,11 +99,11 @@ class Registration(models.Model):
             student_id.street = contact_data['adresseLigne']
             student_id.city = contact_data['ville']
             student_id.zip= contact_data['codePostal']
-            student_id.country = self.env['res.country'].browse(contact_data['country'])
-            student_id.street = contact_data['adresseLigne1']
-            student_id.city = contact_data['ville1']
-            student_id.zip= contact_data['codePostal1']
-            student_id.country = self.env['res.country'].browse(contact_data['country1'])
+            student_id.country_id = self.env['res.country'].browse(contact_data['country'])
+            student_id.secondary_street = contact_data['adresseLigne1']
+            student_id.secondary_city = contact_data['ville1']
+            student_id.secondary_zip= contact_data['codePostal1']
+            student_id.secondary_country_id = self.env['res.country'].browse(contact_data['country1'])
             student_id.phone = contact_data['telephonePortab']
             student_id.email_personnel = contact_data['email']
             student_id.reg_number = contact_data['numeroDeRegistreNational']
