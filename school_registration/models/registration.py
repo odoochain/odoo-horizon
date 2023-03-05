@@ -108,7 +108,7 @@ class Registration(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'res.partner',
-            'res_id': self.student_id,
+            'res_id': self.student_id.id,
             'type': 'ir.actions.act_window',
             'target': 'current',
         }
