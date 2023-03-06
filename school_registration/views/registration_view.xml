@@ -105,7 +105,10 @@
               </div>
               <div class="row">
                 <div class="col-8">
-                  <field name="contact_form_data_pretty" widget="ace"/>
+                  <h4>Donnée de contact</h4>
+                  <div class="card mt-4 mb-4 box-shadow">
+                    <field name="contact_form_data_pretty" widget="ace" options="{'mode': 'python'}"/>
+                  </div>
                 </div>
               </div>
               <div class="row">

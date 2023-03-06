@@ -59,6 +59,9 @@ class Registration(models.Model):
     
     contact_form_data_pretty = fields.Text(string='Data Pretty Print', compute='_compute_contact_form_data_pretty')
     
+    registration_form_ids = fields.One2many('formio.form', 'course_group_id', string='Registrations')
+    
+    
     def _compute_contact_form_data_pretty(self):
         for rec in self:
             json_object = json.loads(rec.contact_form_data)
@@ -132,6 +135,8 @@ class Registration(models.Model):
 class Form(models.Model):
     '''Individual Bloc'''
     _inherit = 'formio.form'
+    
+    registration_id = fields.Many2one('school.registration', string='Registration')
 
     def write(self, vals):
         res = super(Form, self).write(vals)
@@ -152,3 +157,7 @@ class Form(models.Model):
                         'student_id' : rec.submission_partner_id.id,
                         'contact_form_id' : rec.id
                     })
+            if rec.name == 'new_registration' and rec.submission_partner_id :
+                reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id]])
+                if reg :
+                    rec.registration_id = reg.id
