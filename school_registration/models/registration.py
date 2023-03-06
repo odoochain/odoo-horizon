@@ -38,6 +38,8 @@ class Registration(models.Model):
     
     student_id = fields.Many2one('res.partner', string='Student')
     
+    employee_id = fields.Many2one('res.partner', string='Employee', domain=[('employee','=',True)])
+    
     name = fields.Char(related='student_id.name')
     
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
