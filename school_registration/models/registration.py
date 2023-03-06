@@ -42,9 +42,9 @@ class Registration(models.Model):
     
     def _compute_user_id(self):
         for rec in self:
-            rec.user_id = self.env['res.users'].search([['partner_id','=',rec.employee_id.id]])
+            rec.employee_user_id = self.env['res.users'].search([['partner_id','=',rec.employee_id.id]])
     
-    user_id = fields.Many2one('res.users',string='User', compute='_compute_user_id')
+    employee_user_id = fields.Many2one('res.users',string='User', compute='_compute_user_id')
     
     name = fields.Char(related='student_id.name')
     
