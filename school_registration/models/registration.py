@@ -32,7 +32,7 @@ class Registration(models.Model):
     '''Registration'''
     _name = 'school.registration'
     _description = 'Registration of new/existing students'
-    _inherit = ['mail.thread','school.uid.mixin','school.year_sequence.mixin','school.open.form.mixin']
+    _inherit = ['mail.thread','mail.activity.mixin','school.uid.mixin','school.year_sequence.mixin','school.open.form.mixin']
     
     year_id = fields.Many2one('school.year', required=True, string="Year")
     

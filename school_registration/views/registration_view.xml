@@ -103,22 +103,19 @@
                   </group>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-8">
-                  <h4>Donnée de contact</h4>
+              <notebook>
+                <page string="Donnée de contact" name="contact">
+                  <button name="action_fill_partner_date" type="object" class="btn btn-primary" icon="fa-refresh">Update Contact Info</button>
                   <div class="card mt-4 mb-4 box-shadow">
                     <field name="contact_form_data_pretty" widget="ace" options="{'mode': 'python'}"/>
                   </div>
-                </div>
-              </div>
-              <div class="row">
-                Ingestion des données : <br/>
-                <button name="action_fill_partner_date" type="object" class="oe_stat_button" icon="fa-list"/>
-              </div>
+                </page>
+              </notebook>
             </div>
           </sheet>
           <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="activity_ids" widget="mail_activity"/>
             <field name="message_ids" widget="mail_thread"/>
           </div>
         </form>
