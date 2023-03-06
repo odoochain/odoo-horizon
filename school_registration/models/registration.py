@@ -126,6 +126,12 @@ class Form(models.Model):
     _inherit = 'formio.form'
 
     def write(self, vals):
+        # Pretty print json data    
+        if 'submission_data' in vals :
+            json_object = json.loads(vals['submission_data'])
+            json_formatted_str = json.dumps(json_object, indent=2)
+            vals['submission_data'] = json_formatted_str
+
         res = super(Form, self).write(vals)
         if 'submission_data' in vals and 'state' in vals and vals['state'] == 'COMPLETE' :
             self._create_or_update_registration()

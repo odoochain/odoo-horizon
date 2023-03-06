@@ -95,9 +95,9 @@
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
           <sheet>
-            <header>
-                <button name="action_open_student" type="object" icon="fa-user" string="Student"/>
-            </header>
+            <div class="oe_button_box" name="button_box">
+              <button name="action_open_student" class="oe_stat_button" type="object" icon="fa-user" string="Student"/>
+            </div>
             <div class="container h_registration_dialog">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
