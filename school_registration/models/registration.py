@@ -57,6 +57,14 @@ class Registration(models.Model):
     
     contact_form_data = fields.Text(related='contact_form_id.submission_data')
     
+    contact_form_data_pretty = fields.Text(string='Data Pretty Print', compute='_compute_contact_form_data_pretty')
+    
+    def _compute_contact_form_data_pretty(self):
+        for rec in self:
+            json_object = json.loads(rec.submission_data)
+            json_formatted_str = json.dumps(json_object, indent=2)
+            rec.contact_form_data_pretty = json_formatted_str
+    
     def action_fill_contact_with_form(self):
         pass
     
@@ -126,12 +134,6 @@ class Form(models.Model):
     _inherit = 'formio.form'
 
     def write(self, vals):
-        # Pretty print json data    
-        if 'submission_data' in vals :
-            json_object = json.loads(vals['submission_data'])
-            json_formatted_str = json.dumps(json_object, indent=2)
-            vals['submission_data'] = json_formatted_str
-
         res = super(Form, self).write(vals)
         if 'submission_data' in vals and 'state' in vals and vals['state'] == 'COMPLETE' :
             self._create_or_update_registration()
