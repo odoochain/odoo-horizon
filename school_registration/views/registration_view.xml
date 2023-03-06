@@ -107,11 +107,19 @@
                 </div>
               </div>
               <notebook>
-                <page string="Donnée de contact" name="contact">
+                <page string="Contact information" name="contact">
                   <button name="action_fill_partner_date" type="object" class="btn btn-primary" icon="fa-refresh">Update Contact Info</button>
                   <div class="card mt-4 mb-4 box-shadow">
                     <field name="contact_form_data_pretty" widget="ace" options="{'mode': 'python'}"/>
                   </div>
+                </page>
+                <page string="Registrations" name="registrations">
+                  <field name="registration_form_ids">
+                    <tree string="Registration Forms">
+                      <field name="submission_date" />
+                      <field name="submission_data" />
+                    </tree>
+                  </field>
                 </page>
               </notebook>
             </div>
