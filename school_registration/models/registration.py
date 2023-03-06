@@ -63,7 +63,6 @@ class Registration(models.Model):
     
     registration_form_ids = fields.One2many('formio.form', 'registration_id', string='Registrations')
     
-    
     def _compute_contact_form_data_pretty(self):
         for rec in self:
             json_object = json.loads(rec.contact_form_data)
