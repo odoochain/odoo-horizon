@@ -40,6 +40,12 @@ class Registration(models.Model):
     
     employee_id = fields.Many2one('res.partner', string='Employee', domain=[('employee','=',True)], default=lambda self: self.env['ir.config_parameter'].sudo().get_param('school.registration_open_year_id', '0'))
     
+    def _compute_user_id(self):
+        for rec in self:
+            rec.user_id = self.env['res.users'].search([['partner_id','=',rec.employee_id.id]])
+    
+    user_id = fields.Many2one('res.users',string='User', compute='_compute_user_id')
+    
     name = fields.Char(related='student_id.name')
     
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
