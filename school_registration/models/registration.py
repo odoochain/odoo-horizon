@@ -61,7 +61,7 @@ class Registration(models.Model):
     
     def _compute_contact_form_data_pretty(self):
         for rec in self:
-            json_object = json.loads(rec.submission_data)
+            json_object = json.loads(rec.contact_form_data)
             json_formatted_str = json.dumps(json_object, indent=2)
             rec.contact_form_data_pretty = json_formatted_str
     
