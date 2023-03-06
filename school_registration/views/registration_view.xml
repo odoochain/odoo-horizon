@@ -105,7 +105,7 @@
               </div>
               <div class="row">
                 <div class="col-8">
-                  <field name="contact_form_data" widget="ace"/>
+                  <field name="contact_form_data_pretty" widget="ace"/>
                 </div>
               </div>
               <div class="row">
