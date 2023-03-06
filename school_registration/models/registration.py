@@ -38,7 +38,7 @@ class Registration(models.Model):
     
     student_id = fields.Many2one('res.partner', string='Student')
     
-    employee_id = fields.Many2one('res.partner', string='Employee', domain=[('employee','=',True)])
+    employee_id = fields.Many2one('res.partner', string='Employee', domain=[('employee','=',True)], default=self.env['ir.config_parameter'].sudo().get_param('school.registration_open_year_id', '0'))
     
     name = fields.Char(related='student_id.name')
     

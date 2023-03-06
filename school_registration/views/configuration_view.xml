@@ -49,6 +49,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="registration_employee"
+                                title="Configure employee that manage/dispatch registrations.">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Employee managing registrations</span>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label string="Employee" for="registration_employee_id" class="col-lg-3 o_light_label"/>
+                                            <field name="registration_employee_id" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </xpath>
