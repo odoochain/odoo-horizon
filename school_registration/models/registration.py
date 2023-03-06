@@ -59,7 +59,7 @@ class Registration(models.Model):
     
     contact_form_data_pretty = fields.Text(string='Data Pretty Print', compute='_compute_contact_form_data_pretty')
     
-    registration_form_ids = fields.One2many('formio.form', 'course_group_id', string='Registrations')
+    registration_form_ids = fields.One2many('formio.form', 'registration_id', string='Registrations')
     
     
     def _compute_contact_form_data_pretty(self):
