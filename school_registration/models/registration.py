@@ -32,19 +32,11 @@ class Registration(models.Model):
     '''Registration'''
     _name = 'school.registration'
     _description = 'Registration of new/existing students'
-    _inherit = ['mail.thread','mail.activity.mixin','school.uid.mixin','school.year_sequence.mixin','school.open.form.mixin']
+    _inherit = ['mail.thread','school.uid.mixin','school.year_sequence.mixin','school.open.form.mixin']
     
     year_id = fields.Many2one('school.year', required=True, string="Year")
     
     student_id = fields.Many2one('res.partner', string='Student')
-    
-    employee_id = fields.Many2one('res.partner', string='Employee', domain=[('employee','=',True)], default=lambda self: self.env['ir.config_parameter'].sudo().get_param('school.registration_employee_id', '0'))
-    
-    def _compute_user_id(self):
-        for rec in self:
-            rec.employee_user_id = self.env['res.users'].search([['partner_id','=',rec.employee_id.id]])
-    
-    employee_user_id = fields.Many2one('res.users',string='User', compute='_compute_user_id')
     
     name = fields.Char(related='student_id.name')
     
@@ -52,14 +44,12 @@ class Registration(models.Model):
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     kanban_state = fields.Selection([
+        ('new', 'New'),
         ('grey', 'In Progress'),
         ('green', 'Ready'),
         ('red', 'Blocked'),
         ('black', 'Done')], string='Status',
-        copy=False, default='grey', required=True, compute='_compute_kanban_state', readonly=False, store=True)
-        
-    def _compute_kanban_state(self):
-        self.kanban_state = 'grey'
+        copy=False, default='grey', required=True, default='new', readonly=False, store=True)
         
     state = fields.Selection([
             ('draft','Draft'),
@@ -75,7 +65,7 @@ class Registration(models.Model):
     
     contact_form_data = fields.Text(related='contact_form_id.submission_data')
     
-    contact_form_data_pretty = fields.Text(string='Data Pretty Print', compute='_compute_contact_form_data_pretty')
+    contact_form_data_pretty = fields.Text(related='contact_form_id.submission_data_pretty')
     
     registration_form_ids = fields.One2many('formio.form', 'registration_id', string='Registrations')
     
@@ -157,6 +147,17 @@ class Form(models.Model):
     _inherit = 'formio.form'
     
     registration_id = fields.Many2one('school.registration', string='Registration')
+
+    submission_data_pretty = fields.Text(string='Data Pretty Print', compute='_compute_submission_data_pretty')
+    
+    def _compute_submission_data_pretty(self):
+        for rec in self:
+            if rec.submission_data :
+                json_object = json.loads(rec.submission_data)
+                json_formatted_str = json.dumps(json_object, indent=2)
+                rec.submission_data_pretty = json_formatted_str
+            else:
+                rec.submission_data_pretty = False
 
     def write(self, vals):
         res = super(Form, self).write(vals)
