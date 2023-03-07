@@ -49,7 +49,7 @@ class Registration(models.Model):
         ('green', 'Ready'),
         ('red', 'Blocked'),
         ('black', 'Done')], string='Status',
-        copy=False, default='grey', required=True, default='new', readonly=False, store=True)
+        copy=False, default='new', required=True, readonly=False, store=True)
         
     state = fields.Selection([
             ('draft','Draft'),
