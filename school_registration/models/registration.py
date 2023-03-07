@@ -51,6 +51,16 @@ class Registration(models.Model):
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
+    kanban_state = fields.Selection([
+        ('grey', 'In Progress'),
+        ('green', 'Ready'),
+        ('red', 'Blocked'),
+        ('black', 'Done')], string='Status',
+        copy=False, default='grey', required=True, compute='_compute_kanban_state', readonly=False, store=True)
+        
+    def _compute_kanban_state(self):
+        self.kanban_state = 'grey'
+        
     state = fields.Selection([
             ('draft','Draft'),
             ('active', 'Active'),
