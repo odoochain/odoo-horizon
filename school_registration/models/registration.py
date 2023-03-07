@@ -76,8 +76,9 @@ class Registration(models.Model):
             else:
                 rec.contact_form_data_pretty = False
     
-    def action_fill_contact_with_form(self):
-        pass
+    def action_view_contact_formio(self):
+        self.ensure_one()
+        return self.contact_form_id.action_view_formio()
     
     def to_draft(self):
         return self.write({'state': 'draft'})
