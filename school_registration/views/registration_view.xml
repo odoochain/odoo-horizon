@@ -66,8 +66,10 @@
         <tree string="Registrations">
           <field name="year_id" />
           <field name="student_id" />
-          <field name="employee_id" />
+          <field name="employee_id" optional="hide" />
           <field name="state" />
+          <field name="activity_ids" widget="list_activity" optional="show" />
+          <field name="activity_user_id" optional="show" string="Activity by" widget="many2one_avatar_user"/>
         </tree>
       </field>
     </record>
