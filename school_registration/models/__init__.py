@@ -20,3 +20,4 @@
 ##############################################################################
 from . import individual_program
 from . import registration
+from . import res_config_settings

@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2015 be-cloud.be
@@ -18,26 +19,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School registration',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['base_automation','school_dispense_approval','formio','formio_data_api'],
-    'init_xml': [],
-    'data': [
-        'registration_data.xml',
-        'views/configuration_view.xml',
-        'views/registration_view.xml',
-        'security/ir.model.access.csv',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules add registration tools for a school.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+-->
+<odoo noupdate="1">
+    <record id="mail_activity_type_alert_new_contact_data" model="mail.activity.type">
+        <field name="name">New Contact Information</field>
+        <field name="icon">fa-upload</field>
+        <field name="delay_count">5</field>
+        <field name="sequence">25</field>
+        <field name="category">upload_file</field>
+    </record>
+    <record id="mail_activity_type_alert_new_registration" model="mail.activity.type">
+        <field name="name">New Registration</field>
+        <field name="icon">fa-upload</field>
+        <field name="delay_count">5</field>
+        <field name="sequence">25</field>
+        <field name="category">upload_file</field>
+    </record>
+</odoo>

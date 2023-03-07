@@ -27,7 +27,7 @@
           
           -->
   
-    <!-- Registration Kanban View -->
+    <!-- Registration Kanban View 
     <record model="ir.ui.view" id="registration_kanban_view">
       <field name="name">school.registration.kanban</field>
       <field name="model">school.registration</field>
@@ -56,6 +56,19 @@
           </templates>
         </kanban>
       </field>
+    </record> -->
+    
+    <!-- Registration Tree View -->
+    <record model="ir.ui.view" id="registration_tree_view">
+      <field name="name">school.registration.tree</field>
+      <field name="model">school.registration</field>
+      <field name="arch" type="xml">
+        <tree string="Registrations">
+          <field name="year_id" />
+          <field name="student_id" />
+          <field name="state" />
+        </tree>
+      </field>
     </record>
   
     <!-- Registration Form View -->
@@ -67,11 +80,14 @@
         <form string="registration">
           <header>
             <button name="to_draft" type="object" states="active,archived" string="Set to Draft" />
-            <button name="activate" type="object" states="draft" string="Activate Registration" class="oe_highlight" />
-            <button name="archive" type="object" states="draft,active" string="Archive Approuval" />
+            <button name="activate" type="object" states="draft" string="Confirm Registration" class="oe_highlight" />
+            <button name="archive" type="object" states="draft,active" string="Archive Registration" />
             <field name="state" widget="statusbar" statusbar_visible="draft,active,archived" />
           </header>
           <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="action_open_student" class="oe_stat_button" type="object" icon="fa-user" string="Student"/>
+            </div>
             <div class="container h_registration_dialog">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
@@ -79,12 +95,38 @@
                 </div>
                 <div class="col-8">
                   <h2>
-                   <field name="name"/>
+                   <field name="name"/><field name="kanban_state" class="oe_inline ml-2" widget="state_selection"/>
                   </h2>
+                  <group>
+                    <field name="student_id"/>
+                    <field name="year_id" />
+                    <field name="contact_form_id"/>
+                  </group>
                 </div>
               </div>
+              <notebook>
+                <page string="Contact information" name="contact">
+                  <button name="action_fill_partner_data" type="object" class="btn btn-primary" icon="fa-refresh">Update Contact Info</button>
+                  <button name="action_view_contact_formio" type="object" class="btn btn-primary" icon="fa-rocket" aria-label="">Contact Form</button>
+                  <div class="card mt-4 mb-4 box-shadow">
+                    <field name="contact_form_data_pretty" widget="ace" options="{'mode': 'python'}"/>
+                  </div>
+                </page>
+                <page string="Registrations" name="registrations">
+                  <field name="registration_form_ids">
+                    <tree string="Registration Forms">
+                      <field name="submission_date" />
+                      <field name="submission_data_pretty" />
+                    </tree>
+                  </field>
+                </page>
+              </notebook>
             </div>
           </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
         </form>
       </field>
     </record>
@@ -94,11 +136,13 @@
       <field name="model">school.registration</field>
       <field name="arch" type="xml">
         <search string="Search registration">
+          <field name="name" filter_domain="[('name', 'ilike',self)]" />
           <filter string="Draft" name="draft" domain="[('state','=','draft')]" />
           <filter string="Active" name="active" domain="[('state','=','active')]" />
           <filter string="Archived" name="archived" domain="[('state','=','archived')]" />
           <searchpanel>
-            <field name="state" icon="fa-users" enable_counters="1" />
+            <field name="state" icon="fa-step-forward" enable_counters="1" />
+            <field name="kanban_state" icon="fa-users" enable_counters="1" />
           </searchpanel>
         </search>
       </field>
@@ -108,7 +152,7 @@
       <field name="name">Registrations</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">school.registration</field>
-      <field name="view_mode">kanban,form</field>
+      <field name="view_mode">tree,form</field>
       <field name="context">{"search_default_current":1}</field>
       <field name="search_view_id" ref="view_registration_filter" />
       <field name="help" type="html">
@@ -123,8 +167,8 @@
   
     <record id="action_registration_form_view1" model="ir.actions.act_window.view">
       <field name="sequence" eval="0" />
-      <field name="view_mode">kanban</field>
-      <field name="view_id" ref="registration_kanban_view" />
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="registration_tree_view" />
       <field name="act_window_id" ref="action_registration_form" />
     </record>
     <record id="action_registration_form_view2" model="ir.actions.act_window.view">

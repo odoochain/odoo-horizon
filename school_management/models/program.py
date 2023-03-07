@@ -106,6 +106,8 @@ class Program(models.Model):
 
     domain_name = fields.Char(related='speciality_id.domain_id.name', string='Domain Name',store=True)
     cycle_type = fields.Char(related='cycle_id.short_name', string="Cycle Type", store=True)
+    cycle_code = fields.Char(related='cycle_id.code', string="Cycle Code", store=True)
+    
     year_short_name = fields.Char(related='year_id.short_name', string='Year Name',store=True)
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
@@ -414,6 +416,7 @@ class Cycle(models.Model):
     _name = 'school.cycle'
     
     name = fields.Char(required=True, string='Name', size=60)
+    code = fields.Char(string='Code', size=5)
     short_name = fields.Char(string='Short Name', size=2)
     description = fields.Text(string='Description')
     required_credits = fields.Integer(string='Required Credits')

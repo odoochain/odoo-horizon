@@ -18,26 +18,22 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School registration',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['base_automation','school_dispense_approval','formio','formio_data_api'],
-    'init_xml': [],
-    'data': [
-        'registration_data.xml',
-        'views/configuration_view.xml',
-        'views/registration_view.xml',
-        'security/ir.model.access.csv',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules add registration tools for a school.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+
+from odoo import api, fields, models, _
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    registration_open_year_id = fields.Many2one(
+        comodel_name='school.year',
+        string='Current Year for Registrations',
+        readonly=False,
+        help='Only registration in selected year is allowed.', config_parameter='school.registration_open_year_id')
+        
+    registration_employee_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Employee Managing Registrations',
+        readonly=False,
+        help='The employee that manage/dispatch registrations.', config_parameter='school.registration_employee_id')
+        
