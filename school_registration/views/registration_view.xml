@@ -27,7 +27,7 @@
           
           -->
   
-    <!-- Registration Kanban View -->
+    <!-- Registration Kanban View 
     <record model="ir.ui.view" id="registration_kanban_view">
       <field name="name">school.registration.kanban</field>
       <field name="model">school.registration</field>
@@ -56,7 +56,7 @@
           </templates>
         </kanban>
       </field>
-    </record>
+    </record> -->
     
     <!-- Registration Tree View -->
     <record model="ir.ui.view" id="registration_tree_view">
