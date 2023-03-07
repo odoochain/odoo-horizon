@@ -91,9 +91,6 @@
             <div class="oe_button_box" name="button_box">
               <button name="action_open_student" class="oe_stat_button" type="object" icon="fa-user" string="Student"/>
             </div>
-            <div class="oe_right">
-                <field name="kanban_state" class="oe_inline" widget="state_selection"/>
-            </div>
             <div class="container h_registration_dialog">
               <div class="row">
                 <div class="h-100 d-inline-block" style="width: 150px;">
@@ -101,12 +98,11 @@
                 </div>
                 <div class="col-8">
                   <h2>
-                   <field name="name"/>
+                   <field name="name"/><field name="kanban_state" class="oe_inline" widget="state_selection"/>
                   </h2>
                   <group>
                     <field name="student_id"/>
                     <field name="year_id" />
-                    <field name="employee_id" />
                     <field name="contact_form_id"/>
                   </group>
                 </div>
