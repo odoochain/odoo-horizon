@@ -44,12 +44,10 @@ class Registration(models.Model):
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     kanban_state = fields.Selection([
-        ('new', 'New'),
-        ('grey', 'In Progress'),
-        ('green', 'Ready'),
-        ('red', 'Blocked'),
-        ('black', 'Done')], string='Status',
-        copy=False, default='new', required=True, readonly=False, store=True)
+        ('normal', 'In Progress'),
+        ('done', 'Ready'),
+        ('blocked', 'Blocked')], string='Status',
+        copy=False, default='blocked', required=True, readonly=False, store=True)
         
     state = fields.Selection([
             ('draft','Draft'),
@@ -101,7 +99,12 @@ class Registration(models.Model):
         base64_data = parts[1]
         return base64_data
         
-    def action_fill_partner_date(self):
+    def action_fill_registration_data(self):
+        for rec in self:
+            for registration in rec.registration_form_ids:
+                pass
+        
+    def action_fill_partner_data(self):
         for rec in self:
             contact_data = json.loads(rec.contact_form_data)
             student_id = rec.student_id

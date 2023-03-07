@@ -106,7 +106,7 @@
               </div>
               <notebook>
                 <page string="Contact information" name="contact">
-                  <button name="action_fill_partner_date" type="object" class="btn btn-primary" icon="fa-refresh">Update Contact Info</button>
+                  <button name="action_fill_partner_data" type="object" class="btn btn-primary" icon="fa-refresh">Update Contact Info</button>
                   <div class="card mt-4 mb-4 box-shadow">
                     <field name="contact_form_data_pretty" widget="ace" options="{'mode': 'python'}"/>
                   </div>
