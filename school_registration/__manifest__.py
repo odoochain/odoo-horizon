@@ -31,6 +31,7 @@
         'registration_data.xml',
         'views/configuration_view.xml',
         'views/registration_view.xml',
+        'wizard/year_opening.xml',
         'security/ir.model.access.csv',
     ],
     'demo_xml': [],
