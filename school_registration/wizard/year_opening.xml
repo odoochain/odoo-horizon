@@ -27,7 +27,7 @@
         <field name="arch" type="xml">
             <form string="Year Opening Wizard">
                 <separator string="Open a new Year"/>
-                <label string="This wizard will duplicate all programs into the new year and enable it as the default year."/>
+                <p>This wizard will duplicate all programs into the new year and enable it as the default year."</p>
                 <group col="2">
                     <field name="year_id" delete='false'/>
                     <field name="program_to_duplicate_ids">
