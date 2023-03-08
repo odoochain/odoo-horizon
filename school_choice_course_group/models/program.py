@@ -69,10 +69,19 @@ class Bloc(models.Model):
                     total_hours += course_group.total_hours
                     total_credits += course_group.total_credits
                     total_weight += course_group.total_weight
+                elif course_group.type == 'CHOIX':
+                    if course_group.type in has_sum_type :
+                        pass
+                    else :
+                        # Need to select two of those course groups
+                        total_hours += course_group.total_hours * 2
+                        total_credits += course_group.total_credits * 2
+                        total_weight += course_group.total_weight * 2
                 else :
                     if course_group.type in has_sum_type :
                         pass
                     else :
+                        # Need to select two of those course groups
                         has_sum_type.append(course_group.type)
                         total_hours += course_group.total_hours
                         total_credits += course_group.total_credits
