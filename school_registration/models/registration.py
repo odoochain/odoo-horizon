@@ -43,7 +43,11 @@ class Registration(models.Model):
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
-    program_ids = fields.One2many('school.program', related='registration_form_ids.program_id')
+    program_ids = fields.One2many('school.program', compute='_compute_program_ids')
+    
+    def _compute_program_ids(self):
+        for rec in self:
+            rec.program_ids = rec.registration_form_ids.mapped('program_id')
     
     kanban_state = fields.Selection([
         ('normal', 'In Progress'),
