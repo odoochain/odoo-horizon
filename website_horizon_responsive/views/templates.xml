@@ -816,9 +816,7 @@
             </t>
             </xpath>
         </template>
-        
-        auth_signup
-        
+
         <template id="website_horizon_responsive_menuitem" inherit_id="portal.user_dropdown" name="header menu">
 		       <xpath expr="//div[@id='o_logout_divider']" position="before">
 		    		<a href="/responsive" role="menuitem" class="dropdown-item">Horizon Responsive</a>
