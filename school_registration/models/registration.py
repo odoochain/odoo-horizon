@@ -156,6 +156,12 @@ class Form(models.Model):
 
     submission_data_pretty = fields.Text(string='Data Pretty Print', compute='_compute_submission_data_pretty')
     
+    def action_open_form(self):
+        self.ensure_one()
+        action = self.action_view_formio()
+        action['target'] = 'new' 
+        return action
+    
     def _compute_submission_data_pretty(self):
         for rec in self:
             if rec.submission_data :

@@ -107,7 +107,6 @@
                   <group>
                     <field name="student_id"/>
                     <field name="year_id" />
-                    <field name="contact_form_id"/>
                   </group>
                 </div>
               </div>
@@ -123,6 +122,9 @@
                       <div class="col-10"><h4>Mettre à jour la fiche de l'étudiant</h4></div>
                     </div>
                   </div>
+                  <group>
+                    <field name="contact_form_id"/>
+                  </group>
                 </page>
                 <page string="Registrations" name="registrations">
                   <field name="registration_form_ids">
