@@ -45,9 +45,12 @@ class Registration(models.Model):
     
     program_ids = fields.One2many('school.program', compute='_compute_program_ids')
     
+    speciality_ids = fields.One2many('school.program', compute='_compute_program_ids')
+    
     def _compute_program_ids(self):
         for rec in self:
             rec.program_ids = rec.registration_form_ids.mapped('program_id')
+            rec.speciality_ids = rec.program_ids.mapped('speciality_id')
     
     kanban_state = fields.Selection([
         ('normal', 'In Progress'),
