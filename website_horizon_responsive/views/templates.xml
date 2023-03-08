@@ -718,7 +718,7 @@
 					<meta charset="utf-8"/>
 					<!-- set the viewport width and initial-scale on mobile devices -->
 					<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-					<title>HerveJungblut</title>
+					<title>CRLG Login</title>
 					<!-- include google fonts -->
 					<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet"/>
 					<!-- include the site stylesheet -->
@@ -767,7 +767,8 @@
 						<!-- contain main informative part of the site -->
 						<main id="main" class="mb-lg-auto">
 							<div class="container">
-								<div class="login-block text-center mx-auto pb-2 pb-lg-0">
+								<t t-raw="0"/>
+								<!-- <div class="login-block text-center mx-auto pb-2 pb-lg-0">
 									<t t-foreach="providers" t-as="p">
 									<a class="btn btn-primary btn-icon w-100 mb-4" t-att-href="p['auth_link'].replace('http%3A%2F%2F','https%3A%2F%2F').replace('%252Fweb','%252Fresponsive')" role="button">
 										<i class="icon icon-google"></i>
@@ -775,7 +776,7 @@
 									</a>
 									</t>
 									<span class="hr-text d-flex align-items-center font-weight-bold mb-4">ou</span>
-									<!-- sign up form -->
+									<!- - sign up form - - >
 									<form role="form" t-attf-action="/web/login{{ '?debug' if debug else '' }}" method="post" onsubmit="this.action = this.action + location.hash">
                     					<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                     					<input type="hidden" name="redirect" value="/responsive"/>
@@ -796,10 +797,10 @@
 											<input class="btn btn-primary btn-block" type="submit" value="Se connecter"/>
 										</div>
 									</form>
-                	<p class="btn btn-warning btn-block p-2 font-weight-bold" t-if="error">
-                    	<t t-esc="error"/>
-                  </p>
-								</div>
+				                	<p class="btn btn-warning btn-block p-2 font-weight-bold" t-if="error">
+				                    	<t t-esc="error"/>
+				                	</p>
+								</div>-->
 							</div>
 						</main>
 						<!-- footer of the page -->
@@ -815,6 +816,8 @@
             </t>
             </xpath>
         </template>
+        
+        auth_signup
         
         <template id="website_horizon_responsive_menuitem" inherit_id="portal.user_dropdown" name="header menu">
 		       <xpath expr="//div[@id='o_logout_divider']" position="before">
