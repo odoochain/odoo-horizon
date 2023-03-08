@@ -116,8 +116,7 @@ class Registration(models.Model):
     def action_fill_partner_data(self):
         for rec in self:
             rec.sudo().message_post(
-                body=f"Update Contact Information by {self.env.user.name}",
-                partner_ids=self.env.user.partner_id,
+                body=f"Update Contact Information by {self.env.user.name}"
             )
             contact_data = json.loads(rec.contact_form_data)
             student_id = rec.student_id
