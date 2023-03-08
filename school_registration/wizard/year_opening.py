@@ -52,9 +52,9 @@ class YearOpening(models.TransientModel):
             _logger.info("Duplicate %s" % program.name)
             uid = program.uid
             if uid.find('-', uid.find('-') + 1) < 0 :
-                new_uid = f'{{uid}}-{{self.year_id.short_name}}'
+                new_uid = f"{uid}-{self.year_id.short_name}"
             else:
-                new_uid = f'{{uid[:uid.find('-', uid.find('-') + 1)]}}-{{self.year_id.short_name}}'
+                new_uid = f"{uid[:uid.find('-', uid.find('-') + 1)]}-{self.year_id.short_name}"
             new_program = program.copy(default={
                 'year_id':self.year_id.id,
                 'uid': new_uid
