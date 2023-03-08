@@ -130,7 +130,8 @@
                   <field name="registration_form_ids">
                     <tree string="Registration Forms">
                       <field name="submission_date" />
-                      <field name="submission_data_pretty" />
+                      <field name="program_id" />
+                      <button type="object" icon="fa-folder-open" name="action_open_form" string=""/>
                     </tree>
                   </field>
                 </page>

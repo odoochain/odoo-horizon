@@ -194,3 +194,17 @@ class Form(models.Model):
                 reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id]])
                 if reg :
                     rec.registration_id = reg.id
+                    
+    # Fields for registrations forms
+    
+    program_id = fields.Many2one('school.program', string='Program', compute='_compute_program_id')
+
+    def _compute_program_id(self):
+        for rec in self:
+            if rec.name == 'new_registration' and rec.submission_data :
+                program_id = json.loads(rec.submission_data).get('choixDuCycle')
+                if program_id:
+                    rec.program_id = self.env['school_program'].browse(program_id)
+                else:
+                    rec.program_id = False
+                
