@@ -43,6 +43,8 @@ class Registration(models.Model):
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
+    program_ids = fields.One2many('school.program', related='registration_form_ids.program_id')
+    
     kanban_state = fields.Selection([
         ('normal', 'In Progress'),
         ('done', 'Ready'),
