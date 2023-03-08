@@ -767,8 +767,9 @@
 						<!-- contain main informative part of the site -->
 						<main id="main" class="mb-lg-auto">
 							<div class="container">
+								<div class="login-block text-center mx-auto pb-2 pb-lg-0">
 								<t t-raw="0"/>
-								<!-- <div class="login-block text-center mx-auto pb-2 pb-lg-0">
+								<!-- 
 									<t t-foreach="providers" t-as="p">
 									<a class="btn btn-primary btn-icon w-100 mb-4" t-att-href="p['auth_link'].replace('http%3A%2F%2F','https%3A%2F%2F').replace('%252Fweb','%252Fresponsive')" role="button">
 										<i class="icon icon-google"></i>
@@ -799,8 +800,8 @@
 									</form>
 				                	<p class="btn btn-warning btn-block p-2 font-weight-bold" t-if="error">
 				                    	<t t-esc="error"/>
-				                	</p>
-								</div>-->
+				                	</p>-->
+								</div>
 							</div>
 						</main>
 						<!-- footer of the page -->
