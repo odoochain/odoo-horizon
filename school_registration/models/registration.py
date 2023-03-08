@@ -78,7 +78,9 @@ class Registration(models.Model):
     
     def action_view_contact_formio(self):
         self.ensure_one()
-        return self.contact_form_id.action_view_formio()
+        action = self.contact_form_id.action_view_formio()
+        action['target'] = 'new' 
+        return action
     
     def to_draft(self):
         return self.write({'state': 'draft'})
