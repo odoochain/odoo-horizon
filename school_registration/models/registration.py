@@ -53,7 +53,7 @@ class Registration(models.Model):
         ('normal', 'In Progress'),
         ('done', 'Ready'),
         ('blocked', 'Blocked')], string='Status',
-        copy=False, default='blocked', required=True, readonly=False, store=True)
+        copy=False, default='blocked', required=True, readonly=False, store=True,tracking=True)
         
     state = fields.Selection([
             ('draft','Draft'),
@@ -63,15 +63,15 @@ class Registration(models.Model):
         copy=False,
         help=" * The 'Draft' status is used when a new registration is created and not running yet.\n"
              " * The 'Active' status is when a registration is ready to be processed.\n"
-             " * The 'Archived' status is used when a registration is obsolete and shall be archived.")
+             " * The 'Archived' status is used when a registration is obsolete and shall be archived.",tracking=True)
              
-    contact_form_id = fields.Many2one('formio.form', string='Contact Form')
+    contact_form_id = fields.Many2one('formio.form', string='Contact Form',tracking=True)
     
     contact_form_data = fields.Text(related='contact_form_id.submission_data')
     
     contact_form_data_pretty = fields.Text(related='contact_form_id.submission_data_pretty')
     
-    registration_form_ids = fields.One2many('formio.form', 'registration_id', string='Registrations')
+    registration_form_ids = fields.One2many('formio.form', 'registration_id', string='Registrations',tracking=True)
     
     def _compute_contact_form_data_pretty(self):
         for rec in self:
@@ -115,6 +115,10 @@ class Registration(models.Model):
         
     def action_fill_partner_data(self):
         for rec in self:
+            rec.sudo().message_post(
+                body=f"Update Contact Information by {self.env.user.name}",
+                partner_ids=self.env.user.partner_id,
+            )
             contact_data = json.loads(rec.contact_form_data)
             student_id = rec.student_id
             student_id.lastname = contact_data['nom']
