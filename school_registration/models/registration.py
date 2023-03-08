@@ -45,7 +45,7 @@ class Registration(models.Model):
     
     program_ids = fields.One2many('school.program', compute='_compute_program_ids')
     
-    speciality_ids = fields.One2many('school.program', compute='_compute_program_ids')
+    speciality_ids = fields.One2many('school.speciality', compute='_compute_program_ids')
     
     def _compute_program_ids(self):
         for rec in self:
