@@ -204,7 +204,7 @@ class Form(models.Model):
             if rec.name == 'new_registration' and rec.submission_data :
                 program_id = json.loads(rec.submission_data).get('choixDuCycle')
                 if program_id:
-                    rec.program_id = self.env['school_program'].browse(program_id)
+                    rec.program_id = self.env['school.program'].browse(program_id)
                 else:
                     rec.program_id = False
                 
