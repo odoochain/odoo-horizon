@@ -202,7 +202,7 @@ class Form(models.Model):
     def _compute_program_id(self):
         for rec in self:
             if rec.name == 'new_registration' and rec.submission_data :
-                program_id = json.loads(rec.submission_data).get('choixDuCycle')
+                program_id = int(json.loads(rec.submission_data).get('choixDuCycle'))
                 if program_id:
                     rec.program_id = self.env['school.program'].browse(program_id)
                 else:
