@@ -157,8 +157,16 @@ class Registration(models.Model):
         ('student_year_uniq', 'unique (student_id, year_id)', "Registration already exists for that student in this year!"),
     ]
         
+class Country(models.Model):
+    '''Country'''
+    _inherit = 'res.country'
+    
+    nis_code = fields.Char(string="NIS-code")
+    
+    in_use = fields.Boolean(string="In Use")
+        
 class Form(models.Model):
-    '''Individual Bloc'''
+    '''Form'''
     _inherit = 'formio.form'
     
     registration_id = fields.Many2one('school.registration', string='Registration')
