@@ -45,7 +45,7 @@ class Registration(models.Model):
     
     program_ids = fields.One2many('school.program', compute='_compute_program_ids')
     
-    speciality_ids = fields.One2many('school.speciality', compute='_compute_program_ids')
+    speciality_ids = fields.One2many('school.speciality', compute='_compute_program_ids', string='Specialities')
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality', compute='_compute_program_ids', store="True")
     
@@ -129,26 +129,31 @@ class Registration(models.Model):
             )
             contact_data = json.loads(rec.contact_form_data)
             student_id = rec.student_id
-            student_id.lastname = contact_data['nom']
-            student_id.firstname = contact_data['prenom']
-            student_id.gender = contact_data['sexe']
-            student_id.birthdate_date = fields.Datetime.from_string(rec._format_date(contact_data['dateDeNaissance']))
-            student_id.birthplace = contact_data['lieuDeNaiss']
-            student_id.lastname = contact_data['nom']
-            student_id.birthcountry = self.env['res.country'].browse(contact_data['brith_country'])
+            student_id.lastname = contact_data.get('nom',False)
+            student_id.firstname = contact_data.get('prenom',False)
+            student_id.gender = contact_data.get('sexe',False)
+            if contact_data.get('dateDeNaissance',False):
+                student_id.birthdate_date = fields.Datetime.from_string(rec._format_date(contact_data.get('dateDeNaissance')))
+            student_id.birthplace = contact_data.get('lieuDeNaiss',False)
+            student_id.lastname = contact_data.get('nom',False)
+            if contact_data.get('brith_country',False):
+                student_id.birthcountry = self.env['res.country'].browse(contact_data.get('brith_country'))
             #student_id.nationalites
-            student_id.image_1920 = rec._extract_base64_data_from_data_url(contact_data['photo'][0]['url'])
-            student_id.street = contact_data['adresseLigne']
-            student_id.city = contact_data['ville']
-            student_id.zip= contact_data['codePostal']
-            student_id.country_id = self.env['res.country'].browse(contact_data['country'])
-            student_id.secondary_street = contact_data['adresseLigne1']
-            student_id.secondary_city = contact_data['ville1']
-            student_id.secondary_zip= contact_data['codePostal1']
-            student_id.secondary_country_id = self.env['res.country'].browse(contact_data['country1'])
-            student_id.phone = contact_data['telephonePortab']
-            student_id.email_personnel = contact_data['email']
-            student_id.reg_number = contact_data['numeroDeRegistreNational']
+            if contact_data.get('photo',False):
+                student_id.image_1920 = rec._extract_base64_data_from_data_url(contact_data.get('photo')[0]['url'])
+            student_id.street = contact_data.get('adresseLigne',False)
+            student_id.city = contact_data.get('ville',False)
+            student_id.zip= contact_data.get('codePostal',False)
+            if contact_data.get('country',False):
+                student_id.country_id = self.env['res.country'].browse(contact_data.get('country'))
+            student_id.secondary_street = contact_data.get('adresseLigne1',False)
+            student_id.secondary_city = contact_data.get('ville1',False)
+            student_id.secondary_zip= contact_data.get('codePostal1',False)
+            if contact_data.get('country1',False):
+                student_id.secondary_country_id = self.env['res.country'].browse(contact_data.get('country1'))
+            student_id.phone = contact_data.get('telephonePortab',False)
+            student_id.email_personnel = contact_data.get('email',False)
+            student_id.reg_number = contact_data.get('numeroDeRegistreNational',False)
         
     def action_open_student(self):
         self.ensure_one()
