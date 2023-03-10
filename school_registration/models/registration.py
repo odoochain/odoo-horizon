@@ -150,7 +150,10 @@ class Registration(models.Model):
             student_id.secondary_city = contact_data.get('ville1',False)
             student_id.secondary_zip= contact_data.get('codePostal1',False)
             if contact_data.get('country1',False):
-                student_id.secondary_country_id = self.env['res.country'].browse(contact_data.get('country1'))
+                try:
+                    student_id.secondary_country_id = self.env['res.country'].browse(contact_data.get('country1'))
+                except:
+                    pass
             student_id.phone = contact_data.get('telephonePortab',False)
             student_id.email_personnel = contact_data.get('email',False)
             student_id.reg_number = contact_data.get('numeroDeRegistreNational',False)
