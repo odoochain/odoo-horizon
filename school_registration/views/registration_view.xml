@@ -74,6 +74,8 @@
           <field name="student_id" />
           <field name="state" />
           <field name="kanban_state" widget="state_selection"/>
+          <field name="speciality_id" />
+          <field name="speciality_ids" widget="many2many_tags"/>
         </tree>
       </field>
     </record>
@@ -157,6 +159,7 @@
           <searchpanel>
             <field name="state" icon="fa-step-forward" enable_counters="1" />
             <field name="kanban_state" icon="fa-users" enable_counters="1" />
+            <field name="speciality_id" icon="fa-users" enable_counters="1" />
           </searchpanel>
         </search>
       </field>
