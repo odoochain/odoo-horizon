@@ -37,8 +37,15 @@ class Registration(models.Model):
     year_id = fields.Many2one('school.year', required=True, string="Year")
     
     student_id = fields.Many2one('res.partner', string='Student')
+    student_user_id = fields.Many2one('res.users', string='Student User', compute='_compute_student_user_id')
+    
+    def _compute_student_user_id(self):
+        for rec in self :
+            self.env['res.users'].search(['partner_id','=',rec.id])
     
     name = fields.Char(related='student_id.name')
+    email = fields.Char(related='student_id.email')
+    email_personnel = fields.Char(related='student_id.email_personnel')
     
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
@@ -150,10 +157,7 @@ class Registration(models.Model):
             student_id.secondary_city = contact_data.get('ville1',False)
             student_id.secondary_zip= contact_data.get('codePostal1',False)
             if contact_data.get('country1',False):
-                try:
-                    student_id.secondary_country_id = self.env['res.country'].browse(contact_data.get('country1'))
-                except:
-                    pass
+                student_id.secondary_country_id = self.env['res.country'].browse(contact_data.get('country1'))
             student_id.phone = contact_data.get('telephonePortab',False)
             student_id.email_personnel = contact_data.get('email',False)
             student_id.reg_number = contact_data.get('numeroDeRegistreNational',False)
