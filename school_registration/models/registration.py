@@ -47,10 +47,16 @@ class Registration(models.Model):
     
     speciality_ids = fields.One2many('school.speciality', compute='_compute_program_ids')
     
+    speciality_id = fields.Many2one('res.partner', string='Speciality', compute='_compute_program_ids')
+    
     def _compute_program_ids(self):
         for rec in self:
             rec.program_ids = rec.registration_form_ids.mapped('program_id')
             rec.speciality_ids = rec.program_ids.mapped('speciality_id')
+            if len(rec.program_ids.mapped('speciality_id')) > 0 :
+                rec.speciality_id = rec.program_ids.mapped('speciality_id')[0]
+            else:
+                rec.speciality_id = False
     
     kanban_state = fields.Selection([
         ('normal', 'In Progress'),
