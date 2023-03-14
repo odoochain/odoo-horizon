@@ -78,7 +78,7 @@ class Registration(models.Model):
     
     registration_form_data_pretty = fields.Text(related='registration_form_id.submission_data_pretty')
     
-    program_id = fields.Many2one('school.program', string='Program')
+    program_id = fields.Many2one('school.program', string='Program', related="registration_form_id.program_id",store=True, readonly=True)
     
     speciality_id = speciality_id = fields.Many2one('school.speciality', related='program_id.speciality_id', string='Speciality', store=True, readonly=True)
     
@@ -114,8 +114,11 @@ class Registration(models.Model):
         base64_data = parts[1]
         return base64_data
         
-    def action_fill_registration_data(self):
+    def action_fill_program_data(self):
         for rec in self:
+            rec.sudo().message_post(
+                body=f"Update Program Information by {self.env.user.name}"
+            )
             pass
         
     def action_fill_partner_data(self):
