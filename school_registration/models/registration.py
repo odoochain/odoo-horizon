@@ -82,7 +82,7 @@ class Registration(models.Model):
     
     speciality_id = speciality_id = fields.Many2one('school.speciality', related='program_id.speciality_id', string='Speciality', store=True, readonly=True)
     
-    forms_attachment_ids = fields.many2many('ir.attachment', string='Attachments', compute='_compute_forms_attachment_ids'),
+    forms_attachment_ids = fields.Many2many('ir.attachment', string='Attachments', compute='_compute_forms_attachment_ids'),
     
     def _compute_forms_attachment_ids(self):
         for rec in self:
