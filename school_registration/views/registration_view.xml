@@ -72,10 +72,10 @@
         <tree string="Registrations">
           <field name="year_id" />
           <field name="student_id" />
-          <field name="state" />
           <field name="speciality_id" />
-          <field name="speciality_ids" widget="many2many_tags" string="Specialities"/>
+          <field name="email"/>
           <field name="kanban_state" widget="state_selection"/>
+          <field name="state" />
         </tree>
       </field>
     </record>

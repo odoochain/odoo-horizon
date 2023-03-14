@@ -87,20 +87,21 @@ class Registration(models.Model):
     
     contact_form_data_pretty = fields.Text(related='contact_form_id.submission_data_pretty')
     
-    registration_form_ids = fields.One2many('formio.form', 'registration_id', string='Registrations',tracking=True)
+    registration_form_id = fields.Many2one('formio.form', string='Registration Form',tracking=True)
     
-    def _compute_contact_form_data_pretty(self):
-        for rec in self:
-            if rec.contact_form_data :
-                json_object = json.loads(rec.contact_form_data)
-                json_formatted_str = json.dumps(json_object, indent=2)
-                rec.contact_form_data_pretty = json_formatted_str
-            else:
-                rec.contact_form_data_pretty = False
+    registration_form_data = fields.Text(related='registration_form_id.submission_data')
+    
+    registration_form_data_pretty = fields.Text(related='registration_form_id.submission_data_pretty')
     
     def action_view_contact_formio(self):
         self.ensure_one()
         action = self.contact_form_id.action_view_formio()
+        action['target'] = 'new' 
+        return action
+        
+    def action_view_registration_formio(self):
+        self.ensure_one()
+        action = self.registration_form_id.action_view_formio()
         action['target'] = 'new' 
         return action
     
@@ -175,7 +176,7 @@ class Registration(models.Model):
         }
         
     _sql_constraints = [
-        ('student_year_uniq', 'unique (student_id, year_id)', "Registration already exists for that student in this year!"),
+        ('registration_uniq', 'unique (registration_form_id)', "Registration already exists for that registration !"),
     ]
         
 class Country(models.Model):
@@ -229,10 +230,20 @@ class Form(models.Model):
                         'contact_form_id' : rec.id
                     })
             if rec.name == 'new_registration' and rec.submission_partner_id :
-                reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id]])
+                reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id],['registration_id','=',False]])
                 if reg :
-                    rec.registration_id = reg.id
-                    
+                    rec.registration_id = rec.id
+                else :
+                    reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id],['registration_id','=',rec.id]])
+                    if not reg :
+                        contact_form_ids = rec.search([['name','=','new_contact'],['submission_partner_id','=',rec.submission_partner_id],['state','=','COMPLETE']])
+                        self.env['school.registration'].create({
+                            'year_id' : registration_open_year_id,
+                            'student_id' : rec.submission_partner_id.id,
+                            'contact_form_id' : max(contact_form_ids.ids),
+                            'registration_id' : rec.id
+                        })
+    
     # Fields for registrations forms
     
     program_id = fields.Many2one('school.program', string='Program', compute='_compute_program_id')
