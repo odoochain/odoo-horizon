@@ -131,6 +131,7 @@
                   </div>
                 </page>
                 <page string="Registrations" name="registrations">
+                  <t t-if="registration_form_id">
                   <div class="container h_registration_dialog">
                     <div class="row mt-4">
                       <div class="col-2 text-center"><button name="action_view_registration_formio" type="object" class="btn btn-primary" icon="fa-rocket" aria-label="">Registration Form</button></div>
@@ -141,6 +142,10 @@
                       <div class="col-10"><h4>Mettre à jour les informations d'inscription</h4></div>
                     </div>
                   </div>
+                  </t>
+                  <t t-if="not registration_form_id">
+                    <h4>No registration form completed !</h4>
+                  </t>
                 </page>
               </notebook>
             </div>
