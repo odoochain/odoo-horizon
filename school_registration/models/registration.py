@@ -50,21 +50,6 @@ class Registration(models.Model):
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
-    program_ids = fields.One2many('school.program', compute='_compute_program_ids')
-    
-    speciality_ids = fields.One2many('school.speciality', compute='_compute_program_ids', string='Specialities')
-    
-    speciality_id = fields.Many2one('school.speciality', string='Speciality', compute='_compute_program_ids', store="True")
-    
-    def _compute_program_ids(self):
-        for rec in self:
-            rec.program_ids = rec.registration_form_ids.mapped('program_id')
-            rec.speciality_ids = rec.program_ids.mapped('speciality_id')
-            if len(rec.program_ids.mapped('speciality_id')) > 0 :
-                rec.speciality_id = rec.program_ids.mapped('speciality_id')[0]
-            else:
-                rec.speciality_id = False
-    
     kanban_state = fields.Selection([
         ('normal', 'In Progress'),
         ('done', 'Ready'),
@@ -127,8 +112,7 @@ class Registration(models.Model):
         
     def action_fill_registration_data(self):
         for rec in self:
-            for registration in rec.registration_form_ids:
-                pass
+            pass
         
     def action_fill_partner_data(self):
         for rec in self:
