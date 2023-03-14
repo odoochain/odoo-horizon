@@ -129,6 +129,9 @@
                       <div class="col-10"><h4>Mettre à jour la fiche de l'étudiant</h4></div>
                     </div>
                   </div>
+                  <group>
+                    <field name="contact_form_id"/>
+                  </group>
                 </page>
                 <page string="Registrations" name="registrations">
                   <t t-if="registration_form_id">
@@ -143,9 +146,12 @@
                     </div>
                   </div>
                   </t>
-                  <t t-if="not registration_form_id">
+                  <t t-if="registration_form_id == False">
                     <h4>No registration form completed !</h4>
                   </t>
+                  <group>
+                    <field name="registration_form_id"/>
+                  </group>
                 </page>
               </notebook>
             </div>
