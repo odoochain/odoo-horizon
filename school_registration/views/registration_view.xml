@@ -152,7 +152,7 @@
                 <page string="Attachements" name="attachemets">
                   <field name="forms_attachment_ids">
                     <tree>
-                      <field name="datas" filename="name" attrs="{'invisible':[('type','=','url')]}"/>
+                      <field name="datas" filename="name"/>
                       <field name="mimetype"/>
                     </tree>
                   </field>
