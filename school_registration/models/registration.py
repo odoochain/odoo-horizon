@@ -78,6 +78,8 @@ class Registration(models.Model):
     
     registration_form_data_pretty = fields.Text(related='registration_form_id.submission_data_pretty')
     
+    program_id = fields.Many2one('school.program', string='Program')
+    
     def action_view_contact_formio(self):
         self.ensure_one()
         action = self.contact_form_id.action_view_formio()

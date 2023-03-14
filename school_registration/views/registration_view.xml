@@ -111,7 +111,8 @@
                     <field name="year_id" />
                     <field name="contact_form_id"/>
                     <field name="registration_form_id"/>
-                    <!--<field name="program_id"/>-->
+                    <field name="program_id"/>
+                    <field name="speciality_id"/>
                   </group>
                 </div>
               </div>
