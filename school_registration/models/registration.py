@@ -82,6 +82,12 @@ class Registration(models.Model):
     
     speciality_id = speciality_id = fields.Many2one('school.speciality', related='program_id.speciality_id', string='Speciality', store=True, readonly=True)
     
+    forms_attachment_ids = fields.many2many('ir.attachment', string='Attachments', compute='_compute_forms_attachment_ids'),
+    
+    def _compute_forms_attachment_ids(self):
+        for rec in self:
+            forms_attachment_ids = self.env['ir.attachment'].search([['res_model','=','formio.form'],['res_id','in',[rec.contact_form_id.id,rec.registration_form_id.id]]])
+    
     def action_view_contact_formio(self):
         self.ensure_one()
         action = self.contact_form_id.action_view_formio()
