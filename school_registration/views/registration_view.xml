@@ -110,7 +110,7 @@
                     <field name="student_id"/>
                     <field name="year_id" />
                     <field name="contact_form_id"/>
-                    <field name="program_ids" widget="many2many_tags"/>
+                    <field name="program_id"/>
                   </group>
                 </div>
               </div>
