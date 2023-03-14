@@ -86,7 +86,7 @@ class Registration(models.Model):
     
     def _compute_forms_attachment_ids(self):
         for rec in self:
-            forms_attachment_ids = self.env['ir.attachment'].search([['res_model','=','formio.form'],['res_id','in',[rec.contact_form_id.id,rec.registration_form_id.id]]])
+            rec.forms_attachment_ids = self.env['ir.attachment'].search([['res_model','=','formio.form'],['res_id','in',[rec.contact_form_id.id,rec.registration_form_id.id]]])
     
     def action_view_contact_formio(self):
         self.ensure_one()
