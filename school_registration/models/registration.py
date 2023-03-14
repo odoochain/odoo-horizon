@@ -66,13 +66,13 @@ class Registration(models.Model):
              " * The 'Active' status is when a registration is ready to be processed.\n"
              " * The 'Archived' status is used when a registration is obsolete and shall be archived.",tracking=True)
              
-    contact_form_id = fields.Many2one('formio.form', string='Contact Form',tracking=True)
+    contact_form_id = fields.Many2one('formio.form', string='Contact Form',tracking=True, domain=[['submission_partner_id','=','student_id'],['name','=','new_contact']])
     
     contact_form_data = fields.Text(related='contact_form_id.submission_data')
     
     contact_form_data_pretty = fields.Text(related='contact_form_id.submission_data_pretty')
     
-    registration_form_id = fields.Many2one('formio.form', string='Registration Form',tracking=True)
+    registration_form_id = fields.Many2one('formio.form', string='Registration Form',tracking=True, domain=[['submission_partner_id','=','student_id'],['name','=','new_registration']])
     
     registration_form_data = fields.Text(related='registration_form_id.submission_data')
     
