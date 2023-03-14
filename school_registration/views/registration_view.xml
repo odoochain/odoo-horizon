@@ -72,7 +72,8 @@
         <tree string="Registrations">
           <field name="year_id" />
           <field name="student_id" />
-          <!--<field name="speciality_id" />-->
+          <field name="program_id"/>
+          <field name="speciality_id"/>
           <field name="email"/>
           <field name="kanban_state" widget="state_selection"/>
           <field name="state" />
@@ -109,8 +110,8 @@
                   <group>
                     <field name="student_id"/>
                     <field name="year_id" />
-                    <field name="contact_form_id"/>
-                    <field name="registration_form_id"/>
+                    <!--<field name="contact_form_id"/>
+                    <field name="registration_form_id"/>-->
                     <field name="program_id"/>
                     <field name="speciality_id"/>
                   </group>
