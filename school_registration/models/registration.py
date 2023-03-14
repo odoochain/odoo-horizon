@@ -119,7 +119,7 @@ class Registration(models.Model):
             rec.sudo().message_post(
                 body=f"Update Program Information by {self.env.user.name}"
             )
-            pass
+            rec.program_id = rec.registration_form_id.program_id
         
     def action_fill_partner_data(self):
         for rec in self:
