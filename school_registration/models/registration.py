@@ -78,7 +78,7 @@ class Registration(models.Model):
     
     registration_form_data_pretty = fields.Text(related='registration_form_id.submission_data_pretty')
     
-    program_id = fields.Many2one('school.program', string='Program', related="registration_form_id.program_id",store=True, readonly=True)
+    program_id = fields.Many2one('school.program', string='Program')
     
     speciality_id = speciality_id = fields.Many2one('school.speciality', related='program_id.speciality_id', string='Speciality', store=True, readonly=True)
     
