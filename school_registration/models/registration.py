@@ -80,6 +80,8 @@ class Registration(models.Model):
     
     program_id = fields.Many2one('school.program', string='Program')
     
+    speciality_id = speciality_id = fields.Many2one('school.speciality', related='program_id.speciality_id', string='Speciality', store=True, readonly=True)
+    
     def action_view_contact_formio(self):
         self.ensure_one()
         action = self.contact_form_id.action_view_formio()
