@@ -134,7 +134,7 @@
                   </group>
                 </page>
                 <page string="Registrations" name="registrations">
-                  <div class="container h_registration_dialog" attrs="{'invisible': [('registration_form_id','&lt;&gt;', False)]}">
+                  <div class="container h_registration_dialog" attrs="{'invisible': [('registration_form_id','=', False)]}">
                     <div class="row mt-4">
                       <div class="col-2 text-center"><button name="action_view_registration_formio" type="object" class="btn btn-primary" icon="fa-rocket" aria-label="">Registration Form</button></div>
                       <div class="col-10"><h4>Afficher le formulaire de contact complété</h4></div>
@@ -144,7 +144,7 @@
                       <div class="col-10"><h4>Mettre à jour les informations d'inscription</h4></div>
                     </div>
                   </div>
-                  <h4 attrs="{'invisible': [('registration_form_id','=', False)]}">No registration form completed !</h4>
+                  <h4 attrs="{'invisible': [('registration_form_id','&lt;&gt;', False)]}">No registration form completed !</h4>
                   <group>
                     <field name="registration_form_id"/>
                   </group>
