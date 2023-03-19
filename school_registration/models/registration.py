@@ -156,7 +156,11 @@ class Registration(models.Model):
                 student_id.birthcountry = self.env['res.country'].browse(contact_data.get('brith_country'))
             #student_id.nationalites
             if contact_data.get('photo',False):
-                student_id.image_1920 = rec._extract_base64_data_from_url(contact_data.get('photo')[0]['url'])
+                url = contact_data.get('photo')[0]['url']
+                if url.startswith('data'):
+                    student_id.image_1920 = rec._extract_base64_data_from_data_url(url)
+                else :
+                    student_id.image_1920 = rec._extract_base64_data_from_url(url)
             student_id.street = contact_data.get('adresseLigne',False)
             student_id.city = contact_data.get('ville',False)
             student_id.zip= contact_data.get('codePostal',False)
