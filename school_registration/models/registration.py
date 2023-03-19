@@ -160,7 +160,7 @@ class Registration(models.Model):
                 if url.startswith('data'):
                     student_id.image_1920 = rec._extract_base64_data_from_data_url(url)
                 else :
-                    attachment_id = contact_data.get('photo')[0]['id']
+                    attachment_id = contact_data.get('photo').get('data')[0]['id']
                     if attachment_id:
                         attachment = self.env['ir.attachment'].browse(attachment_id)
                         if attachment and attachment.type == 'binary':
