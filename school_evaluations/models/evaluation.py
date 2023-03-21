@@ -144,7 +144,7 @@ class IndividualProgram(models.Model):
     def _check_cycle(self):
         for rec in self:
             # Only previously failed CG can be valuated
-            acq_scg_ids = list(map(lambda cg : cg.source_course_group_id.uid,rec.program_id.all_ind_course_group_ids.filtered(lambda ic: ic.state != '7_failed')))
+            acq_scg_ids = list(map(lambda cg : cg.source_course_group_id.uid,rec.all_ind_course_group_ids.filtered(lambda ic: ic.state != '7_failed')))
             val_scg_ids = list(map(lambda cg : cg.source_course_group_id.uid,rec.valuated_course_group_ids))
             duplicates = [item for item, count in collections.Counter(acq_scg_ids.extend(val_scg_ids)).items() if count > 1]
             if len(duplicates) > 0 :
