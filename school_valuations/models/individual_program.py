@@ -115,13 +115,13 @@ class ValuationFollwup(models.Model):
         if vals.get('individual_course_group_id'):
             icg_id = self.env['school.individual_course_group'].browse(vals['individual_course_group_id'])
             if icg_id:
-                vals.append({
+                vals |= {
                     'name': icg_id.name,
                     'title': icg_id.title,
                     'student_id': icg_id.student_id,
                     'responsible_id': icg_id.responsible_id,
                     'individual_program_id': icg_id.individual_program_id
-                })
+                }
         return vals
     
     name = fields.Char(string="Name")
