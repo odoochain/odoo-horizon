@@ -98,7 +98,7 @@ class ValuationFollwup(models.Model):
     
     active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
     
-    individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group')
+    individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group', delete='cascade')
     
     @api.model
     def create(self, vals):
