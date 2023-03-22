@@ -418,7 +418,7 @@ class IndividualCourseGroup(models.Model):
              " * The 'Valuated' status is used when the course group is confirmed for valuation.")
     
     year_id = fields.Many2one(related="bloc_id.year_id", string='Year', store=True)
-    student_id = fields.Many2one(related="bloc_id.student_id", string='Student', store=True, compute='_compute_student_id')
+    student_id = fields.Many2one('res.partner', string='Student', store=True, compute='_compute_student_id')
     
     @api.depends('bloc_id.student_id')
     def _compute_student_id(self):
