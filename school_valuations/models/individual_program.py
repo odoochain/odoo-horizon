@@ -120,7 +120,7 @@ class ValuationFollwup(models.Model):
                     'title': icg_id.title,
                     'student_id': icg_id.student_id.id,
                     'responsible_id': icg_id.responsible_id.id,
-                    'program_id': icg_id.program_id.id
+                    'program_id': icg_id.valuated_program_id.id
                 }
         return vals
     
