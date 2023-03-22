@@ -249,6 +249,7 @@ class Form(models.Model):
             if rec.name == 'new_registration' and rec.submission_partner_id :
                 reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id],['registration_form_id','=',False]])
                 if reg :
+                    reg.registration_form_id = rec.id
                     rec.registration_id = reg.id
                 else :
                     reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id],['registration_form_id','=',rec.id]])
