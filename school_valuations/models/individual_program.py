@@ -120,7 +120,7 @@ class ValuationFollwup(models.Model):
                     'title': icg_id.title,
                     'student_id': icg_id.student_id,
                     'responsible_id': icg_id.responsible_id,
-                    'individual_program_id': icg_id.individual_program_id
+                    'program_id': icg_id.program_id
                 }
         return vals
     
@@ -128,7 +128,7 @@ class ValuationFollwup(models.Model):
     title = fields.Char(string="Title")
     student_id = fields.Many2one('res.partner', string="Student")
     responsible_id = fields.Many2one('res.partner', string="Responsible")
-    individual_program_id = fields.Many2one('school.individual_program', string='Individual Program')
+    program_id = fields.Many2one('school.individual_program', string='Individual Program')
     
     image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
     image_512= fields.Binary('Image', attachment=True, related='student_id.image_512')
