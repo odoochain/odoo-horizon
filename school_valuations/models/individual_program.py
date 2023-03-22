@@ -100,7 +100,16 @@ class ValuationFollwup(models.Model):
     
     individual_course_group_id = fields.Many2one('school.individual_course_group', string='Individual Course Group')
     
+    @api.model
+    def create(self, vals):
+        self._update_create_write_vals(vals)
+        return super().create(vals)
+
     def write(self, vals):
+        self._update_create_write_vals(vals)
+        return super().write(vals)
+    
+    def _update_create_write_vals(self, vals):
         partner_ids = []
         # subscribe employee or department manager when equipment assign to employee or department.
         if vals.get('individual_course_group_id'):
@@ -113,7 +122,7 @@ class ValuationFollwup(models.Model):
                     'responsible_id': icg_id.responsible_id,
                     'individual_program_id': icg_id.individual_program_id
                 })
-        return super(ValuationFollwup, self).write(vals)
+        return vals
     
     name = fields.Char(string="Name")
     title = fields.Char(string="Title")
