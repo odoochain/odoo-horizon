@@ -118,9 +118,9 @@ class ValuationFollwup(models.Model):
                 vals |= {
                     'name': icg_id.name,
                     'title': icg_id.title,
-                    'student_id': icg_id.student_id,
-                    'responsible_id': icg_id.responsible_id,
-                    'program_id': icg_id.program_id
+                    'student_id': icg_id.student_id.id,
+                    'responsible_id': icg_id.responsible_id.id,
+                    'program_id': icg_id.program_id.id
                 }
         return vals
     
