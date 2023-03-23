@@ -26,8 +26,8 @@
         model="res.partner"
         string="Print to XLSX"
         report_type="xlsx"
-        name="res.partner.xlsx"
-        file="res.partner.xlsx"
+        name="school_reporting_xlsx.partner_export_xlsx"
+        file="school_reporting_xlsx.partner_export_xlsx"
         attachment_use="False"
     />
 </odoo>
