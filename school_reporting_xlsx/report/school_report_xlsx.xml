@@ -30,4 +30,14 @@
         file="school_reporting_xlsx.partner_export_xlsx"
         attachment_use="False"
     />
+    
+    <report
+        id="registration_xlsx"
+        model="school.registration"
+        string="Print to XLSX"
+        report_type="xlsx"
+        name="school_reporting_xlsx.registration_export_xlsx"
+        file="school_reporting_xlsx.registration_export_xlsx"
+        attachment_use="False"
+    />
 </odoo>

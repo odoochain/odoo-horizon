@@ -25,7 +25,7 @@
     'author': 'be-Cloud.be (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': ['base_automation','school_dispense_approval','formio','formio_data_api','report_xlsx'],
+    'depends': ['base_automation','school_dispense_approval','formio','formio_data_api'],
     'init_xml': [],
     'data': [
         'registration_data.xml',
@@ -33,7 +33,6 @@
         'views/configuration_view.xml',
         'views/registration_view.xml',
         'wizard/year_opening.xml',
-        'report/school_report_xlsx.xml',
     ],
     'demo_xml': [],
     'description': '''

@@ -41,3 +41,15 @@ class PartnerExportXlsx(models.AbstractModel):
             bold = workbook.add_format({"bold": True})
             sheet.write(i, 0, obj.name, bold)
             sheet.write(i, 0, obj.email, bold)
+            
+class RegistrationExportXlsx(models.AbstractModel):
+    _name = "report.school_reporting_xlsx.registration_export_xlsx"
+    _description = "Report xlsx helpers"
+    _inherit = "report.report_xlsx.abstract"
+    
+    def generate_xlsx_report(self, workbook, data, registrations):
+        sheet = workbook.add_worksheet("Registrations")
+        for i, obj in enumerate(registrations):
+            bold = workbook.add_format({"bold": True})
+            sheet.write(i, 0, obj.name, bold)
+            sheet.write(i, 0, obj.email, bold)
