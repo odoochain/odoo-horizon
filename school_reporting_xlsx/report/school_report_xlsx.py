@@ -25,35 +25,73 @@ from odoo.exceptions import MissingError
 
 _logger = logging.getLogger(__name__)
 
-from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsx
+from odoo.addons.report_xlsx_helper.report.report_xlsx_format import (
+    FORMATS,
+    XLS_HEADERS,
+)
 
-class PartnerXlsx(ReportXlsx):
 
-    def generate_xlsx_report(self, workbook, data, partners):
-        # One sheet by partner
-        sheet = workbook.add_worksheet('partners')
-        i = 0
-        sheet.write(i, 0, 'name')
-        sheet.write(i, 1, 'firstname')
-        sheet.write(i, 2, 'lastname')
-        sheet.write(i, 3, 'initials')
-        sheet.write(i, 4, 'reg_number')
-        sheet.write(i, 5, 'mat_number')
-        sheet.write(i, 6, 'student_current_bloc_name')
-        sheet.write(i, 7, 'birthplace')
-        sheet.write(i, 8, 'birthdate')
-        i = 1
-        for obj in partners:
-            sheet.write(i, 0, obj.name)
-            sheet.write(i, 1, obj.firstname)
-            sheet.write(i, 2, obj.lastname)
-            sheet.write(i, 3, obj.initials)
-            sheet.write(i, 4, obj.reg_number)
-            sheet.write(i, 5, obj.mat_number)
-            sheet.write(i, 6, obj.student_current_bloc_name)
-            sheet.write(i, 7, obj.birthplace)
-            sheet.write(i, 8, obj.birthdate)
-            i = i + 1
+class PartnerExportXlsx(models.AbstractModel):
+    _name = "report.report_xlsx_helper_demo.partner_export_xlsx"
+    _description = "Report xlsx helpers"
+    _inherit = "report.report_xlsx.abstract"
 
-PartnerXlsx('report.res.partner.xlsx',
-            'res.partner')
+    def _get_ws_params(self, wb, data, partners):
+
+        partner_template = {
+            "name": {
+                "header": {"value": "Name"},
+                "data": {"value": self._render("partner.name")},
+                "width": 20,
+            },
+            "number_of_contacts": {
+                "header": {"value": "# Contacts"},
+                "data": {"value": self._render("len(partner.child_ids)")},
+                "width": 10,
+            },
+            "date": {
+                "header": {"value": "Date"},
+                "data": {"value": self._render("partner.date")},
+                "width": 13,
+            },
+        }
+
+        ws_params = {
+            "ws_name": "Partners",
+            "generate_ws_method": "_partner_report",
+            "title": "Partners",
+            "wanted_list": [k for k in partner_template],
+            "col_specs": partner_template,
+        }
+
+        return [ws_params]
+
+
+    def _partner_report(self, workbook, ws, ws_params, data, partners):
+
+        ws.set_portrait()
+        ws.fit_to_pages(1, 0)
+        ws.set_header(XLS_HEADERS["xls_headers"]["standard"])
+        ws.set_footer(XLS_HEADERS["xls_footers"]["standard"])
+        self._set_column_width(ws, ws_params)
+
+        row_pos = 0
+        row_pos = self._write_ws_title(ws, row_pos, ws_params)
+        row_pos = self._write_line(
+            ws,
+            row_pos,
+            ws_params,
+            col_specs_section="header",
+            default_format=FORMATS["format_theader_yellow_left"],
+        )
+        ws.freeze_panes(row_pos, 0)
+
+        for partner in partners:
+            row_pos = self._write_line(
+                ws,
+                row_pos,
+                ws_params,
+                col_specs_section="data",
+                render_space={"partner": partner},
+                default_format=FORMATS["format_tcell_left"],
+            )
