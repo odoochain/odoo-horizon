@@ -30,9 +30,8 @@ from odoo.addons.report_xlsx_helper.report.report_xlsx_format import (
     XLS_HEADERS,
 )
 
-
 class PartnerExportXlsx(models.AbstractModel):
-    _name = "report.report_xlsx_helper_demo.partner_export_xlsx"
+    _name = "report.school_reporting_xlsx.partner_export_xlsx"
     _description = "Report xlsx helpers"
     _inherit = "report.report_xlsx.abstract"
 
