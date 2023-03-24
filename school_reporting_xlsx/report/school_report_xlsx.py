@@ -103,4 +103,10 @@ class RegistrationExportXlsx(models.AbstractModel):
             item['registration_form_data'] = json.dumps(registration_form_data, indent=2)
             items.append(item)
         df = pd.json_normalize(items)
-        df.to_excel(workbook, sheet_name='Registrations')
+        worksheet = workbook.add_worksheet('Registration')
+        header_format = workbook.add_format({'bold': True, 'align': 'center', 'valign': 'vcenter'})
+        for col_num, value in enumerate(df.columns.values):
+            worksheet.write(0, col_num, value, header_format)
+        for row_num, row_data in enumerate(df.values):
+            for col_num, col_data in enumerate(row_data):
+                worksheet.write(row_num + 1, col_num, col_data)
