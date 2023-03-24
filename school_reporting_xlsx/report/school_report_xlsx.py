@@ -35,6 +35,9 @@ def remove_url(d):
     for k, v in d.items():
         if isinstance(v, dict):
             remove_url(v)
+        if isinstance(v, list):
+            for item in v:
+                remove_url(item)
         elif k == "url":
             del d[k]
     return d
@@ -109,9 +112,7 @@ class RegistrationExportXlsx(models.AbstractModel):
             for key, value in contact_form_data.items():
                 if i == 0:
                     sheet.write(i, j, key)
-                if type(value) == list:
-                    sheet.write(i+1, j, json.dumps(value, indent=2))
-                elif type(value) == dict:
+                if isinstance(value,list) or isinstance(value,dict) :
                     sheet.write(i+1, j, json.dumps(value, indent=2))
                 else:
                     sheet.write(i+1, j, value)
@@ -120,9 +121,7 @@ class RegistrationExportXlsx(models.AbstractModel):
             for key, value in registration_form_data.items():
                 if i == 0:
                     sheet.write(i, j, key)
-                if type(value) == list:
-                    sheet.write(i+1, j, json.dumps(value, indent=2))
-                elif type(value) == dict:
+                if isinstance(value,list) or isinstance(value,dict) :
                     sheet.write(i+1, j, json.dumps(value, indent=2))
                 else:
                     sheet.write(i+1, j, value)
