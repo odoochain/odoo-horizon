@@ -76,12 +76,14 @@ class RegistrationExportXlsx(models.AbstractModel):
                 'state' : obj.state,
                 'kanban_state' : obj.kanban_state
             }
-            contact_form_data = json.loads(obj.contact_form_data)
-            contact_form_data = remove_url_keys(contact_form_data)
-            item['contact_form_data'] = contact_form_data
-            registration_form_data = json.loads(obj.registration_form_data)
-            registration_form_data = remove_url_keys(registration_form_data)
-            item['registration_form_data'] = registration_form_data
+            if obj.contact_form_data :
+                contact_form_data = json.loads(obj.contact_form_data)
+                contact_form_data = remove_url_keys(contact_form_data)
+                item['contact_form_data'] = contact_form_data
+            if obj.registration_form_data :
+                registration_form_data = json.loads(obj.registration_form_data)
+                registration_form_data = remove_url_keys(registration_form_data)
+                item['registration_form_data'] = registration_form_data
             items.append(item)
         df = pd.json_normalize(items)
         df = df.fillna('').replace([np.inf, -np.inf], '')
