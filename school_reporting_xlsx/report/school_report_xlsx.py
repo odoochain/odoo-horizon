@@ -74,7 +74,9 @@ class RegistrationExportXlsx(models.AbstractModel):
                 'contact_form_id' : obj.contact_form_id.id,
                 'registration_form_id' : obj.registration_form_id.id,
                 'state' : obj.state,
-                'kanban_state' : obj.kanban_state
+                'kanban_state' : obj.kanban_state,
+                'program' : obj.program_id.name,
+                'speciality' : obj.speciality_id.name,
             }
             if obj.contact_form_data :
                 contact_form_data = json.loads(obj.contact_form_data)
