@@ -31,6 +31,14 @@ from odoo.addons.report_xlsx_helper.report.report_xlsx_format import (
     XLS_HEADERS,
 )
 
+def remove_url(d):
+    for k, v in d.items():
+        if isinstance(v, dict):
+            remove_url(v)
+        elif k == "url":
+            del d[k]
+    return d
+
 def flattern_json(d):
     if len(d) == 0:
         return {}
@@ -96,9 +104,18 @@ class RegistrationExportXlsx(models.AbstractModel):
                 sheet.write(i, 1, "email")
             sheet.write(i+1, 0, obj.name)
             sheet.write(i+1, 1, obj.email)
-            contact_form_data = json.loads(obj.contact_form_data)
             j = 2
+            contact_form_data = remove_url(json.loads(obj.contact_form_data))
             for key, value in contact_form_data.items():
+                if i == 0:
+                    sheet.write(i, j, key)
+                if type(value) == list:
+                    sheet.write(i+1, j, json.dumps(value, indent=2))
+                else:
+                    sheet.write(i+1, j, value)
+                j += 1
+            registration_form_data = remove_url(json.loads(obj.registration_form_data))
+            for key, value in registration_form_data.items():
                 if i == 0:
                     sheet.write(i, j, key)
                 if type(value) == list:
