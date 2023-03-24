@@ -98,9 +98,9 @@ class RegistrationExportXlsx(models.AbstractModel):
                 'email' : obj.email
             }
             contact_form_data = json.loads(obj.contact_form_data)
-            item['contact_form_data'] = json.dumps(contact_form_data, indent=2)
+            item['contact_form_data'] = contact_form_data
             registration_form_data = json.loads(obj.registration_form_data)
-            item['registration_form_data'] = json.dumps(registration_form_data, indent=2)
+            item['registration_form_data'] = registration_form_data
             items.append(item)
         df = pd.json_normalize(items)
         worksheet = workbook.add_worksheet('Registration')
