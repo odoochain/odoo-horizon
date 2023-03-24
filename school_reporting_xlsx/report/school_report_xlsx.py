@@ -39,7 +39,8 @@ def remove_url(d):
             remove_url(v)
         if isinstance(v, list):
             for item in v:
-                remove_url(item)
+                if isinstance(item, dict):
+                    remove_url(item)
         elif k == "url":
             del d[k]
     return d
