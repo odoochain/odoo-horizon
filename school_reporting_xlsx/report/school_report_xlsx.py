@@ -22,6 +22,7 @@ import logging
 import json
 
 import pandas as pd
+import numpy as np
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import MissingError
@@ -103,6 +104,7 @@ class RegistrationExportXlsx(models.AbstractModel):
             item['registration_form_data'] = registration_form_data
             items.append(item)
         df = pd.json_normalize(items)
+        df = df.fillna('').replace([np.inf, -np.inf], '')
         worksheet = workbook.add_worksheet('Registration')
         header_format = workbook.add_format({'bold': True, 'align': 'center', 'valign': 'vcenter'})
         for col_num, value in enumerate(df.columns.values):
