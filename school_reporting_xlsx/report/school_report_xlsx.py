@@ -111,6 +111,8 @@ class RegistrationExportXlsx(models.AbstractModel):
                     sheet.write(i, j, key)
                 if type(value) == list:
                     sheet.write(i+1, j, json.dumps(value, indent=2))
+                elif type(value) == dict:
+                    sheet.write(i+1, j, json.dumps(value, indent=2))
                 else:
                     sheet.write(i+1, j, value)
                 j += 1
@@ -119,6 +121,8 @@ class RegistrationExportXlsx(models.AbstractModel):
                 if i == 0:
                     sheet.write(i, j, key)
                 if type(value) == list:
+                    sheet.write(i+1, j, json.dumps(value, indent=2))
+                elif type(value) == dict:
                     sheet.write(i+1, j, json.dumps(value, indent=2))
                 else:
                     sheet.write(i+1, j, value)
