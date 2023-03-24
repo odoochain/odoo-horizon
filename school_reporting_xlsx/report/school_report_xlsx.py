@@ -34,45 +34,18 @@ from odoo.addons.report_xlsx_helper.report.report_xlsx_format import (
     XLS_HEADERS,
 )
 
-def flattern_json(d):
-    if len(d) == 0:
-        return {}
-    from collections import deque
-    q = deque()
-    res = dict()
-    for key, val in d.items(): # This loop push the top most keys and values into queue.
-        if not isinstance(val, dict):  # If it's not dict
-            if isinstance(val, list):  # If it's list then check list values if it contains dict object.
-                temp = list()  # Creating temp list for storing the values that we will need which are not dict.
-                for v in val:
-                    if not isinstance(v, dict):
-                        temp.append(v)
-                    else:
-                        q.append((key, v))  # if it's value is dict type then we push along with parent which is key.
-                if len(temp) > 0:
-                    res[key] = temp
-            else:
-                res[key] = val
-        else:
-            q.append((key, val))
-    while q:
-        k, v = q.popleft()  # Taking parent and the value out of queue
-        for key, val in v.items():
-            new_parent = k + "_" + key  # New parent will be old parent_currentval
-            if isinstance(val, list):
-                temp = list()
-                for v in val:
-                    if not isinstance(v, dict):
-                        temp.append(v)
-                    else:
-                        q.append((new_parent, v))
-                if len(temp) >= 0:
-                    res[new_parent] = temp
-            elif not isinstance(val, dict):
-                res[new_parent] = val
-            else:
-                q.append((new_parent, val))
-    return res
+def remove_url_keys(json_data):
+    """
+    Recursively remove all "url" keys from a nested JSON file.
+    :param json_data: JSON data to process.
+    :return: Processed JSON data with all "url" keys removed.
+    """
+    if isinstance(json_data, dict):
+        return {k: remove_url_keys(v) for k, v in json_data.items() if k != 'url'}
+    elif isinstance(json_data, list):
+        return [remove_url_keys(item) for item in json_data]
+    else:
+        return json_data
 
 class PartnerExportXlsx(models.AbstractModel):
     _name = "report.school_reporting_xlsx.partner_export_xlsx"
@@ -95,12 +68,19 @@ class RegistrationExportXlsx(models.AbstractModel):
         items = []
         for i, obj in enumerate(registrations):
             item = {
+                'id' : obj.id,
                 'name' : obj.name,
-                'email' : obj.email
+                'email' : obj.email,
+                'contact_form_id' : obj.contact_form_id.id,
+                'registration_form_id' : obj.registration_form_id.id,
+                'state' : obj.state,
+                'kanban_state' : obj.kanban_state
             }
             contact_form_data = json.loads(obj.contact_form_data)
+            contact_form_data = remove_url_keys(contact_form_data)
             item['contact_form_data'] = contact_form_data
             registration_form_data = json.loads(obj.registration_form_data)
+            registration_form_data = remove_url_keys(registration_form_data)
             item['registration_form_data'] = registration_form_data
             items.append(item)
         df = pd.json_normalize(items)
