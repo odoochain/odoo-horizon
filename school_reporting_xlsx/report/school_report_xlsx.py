@@ -91,13 +91,18 @@ class RegistrationExportXlsx(models.AbstractModel):
     def generate_xlsx_report(self, workbook, data, registrations):
         sheet = workbook.add_worksheet("Registrations")
         for i, obj in enumerate(registrations):
-            sheet.write(i, 0, obj.name)
-            sheet.write(i, 1, obj.email)
+            if i == 1:
+                sheet.write(i, 0, "name")
+                sheet.write(i, 1, "email")
+            sheet.write(i+1, 0, obj.name)
+            sheet.write(i+1, 1, obj.email)
             contact_form_data = json.loads(obj.contact_form_data)
             j = 2
             for key, value in contact_form_data.items():
+                if i == 1:
+                    sheet.write(i, j, key)
                 if type(value) == list:
-                    sheet.write(i, j, json.dumps(value, indent=2))
+                    sheet.write(i+1, j, json.dumps(value, indent=2))
                 else:
-                    sheet.write(i, j, value)
+                    sheet.write(i+1, j, value)
                 j += 1
