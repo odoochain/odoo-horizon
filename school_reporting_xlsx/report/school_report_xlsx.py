@@ -21,6 +21,8 @@
 import logging
 import json
 
+import pandas as pd
+
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import MissingError
 
@@ -100,29 +102,16 @@ class RegistrationExportXlsx(models.AbstractModel):
     _inherit = "report.report_xlsx.abstract"
     
     def generate_xlsx_report(self, workbook, data, registrations):
-        sheet = workbook.add_worksheet("Registrations")
+        items = []
         for i, obj in enumerate(registrations):
-            if i == 0:
-                sheet.write(i, 0, "name")
-                sheet.write(i, 1, "email")
-            sheet.write(i+1, 0, obj.name)
-            sheet.write(i+1, 1, obj.email)
-            j = 2
+            item = {
+                'name' : obj.name,
+                'email' : obj.email
+            }
             contact_form_data = remove_url(json.loads(obj.contact_form_data))
-            for key, value in contact_form_data.items():
-                if i == 0:
-                    sheet.write(i, j, key)
-                if isinstance(value,list) or isinstance(value,dict) :
-                    sheet.write(i+1, j, json.dumps(value, indent=2))
-                else:
-                    sheet.write(i+1, j, value)
-                j += 1
+            item['contact_form_data'] = json.dumps(contact_form_data, indent=2)
             registration_form_data = remove_url(json.loads(obj.registration_form_data))
-            for key, value in registration_form_data.items():
-                if i == 0:
-                    sheet.write(i, j, key)
-                if isinstance(value,list) or isinstance(value,dict) :
-                    sheet.write(i+1, j, json.dumps(value, indent=2))
-                else:
-                    sheet.write(i+1, j, value)
-                j += 1
+            item['registration_form_data'] = json.dumps(registration_form_data, indent=2)
+            items.append(item)
+        df = pd.json_normalize(items)
+        df.to_excel(workbook, sheet_name='Registrations')
