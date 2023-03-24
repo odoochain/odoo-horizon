@@ -96,5 +96,8 @@ class RegistrationExportXlsx(models.AbstractModel):
             contact_form_data = json.loads(obj.contact_form_data)
             j = 2
             for key, value in contact_form_data.items():
-                sheet.write(i, j, value)
+                if type(value) == list:
+                    sheet.write(i, j, json.dumps(value, indent=2))
+                else:
+                    sheet.write(i, j, value)
                 j += 1
