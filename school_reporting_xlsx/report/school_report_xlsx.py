@@ -94,5 +94,7 @@ class RegistrationExportXlsx(models.AbstractModel):
             sheet.write(i, 0, obj.name)
             sheet.write(i, 1, obj.email)
             contact_form_data = json.loads(obj.contact_form_data)
-            for j, n_obj in contact_form_data:
-                sheet.write(i, j+2, n_obj)
+            j = 2
+            for key, value in contact_form_data.items():
+                sheet.write(i, j, value)
+                j += 1
