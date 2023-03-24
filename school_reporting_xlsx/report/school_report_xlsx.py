@@ -109,4 +109,7 @@ class RegistrationExportXlsx(models.AbstractModel):
             worksheet.write(0, col_num, value, header_format)
         for row_num, row_data in enumerate(df.values):
             for col_num, col_data in enumerate(row_data):
-                worksheet.write(row_num + 1, col_num, col_data)
+                if isinstance(col_data, list):
+                    worksheet.write(row_num + 1, col_num, ','.join(col_data))
+                else : 
+                    worksheet.write(row_num + 1, col_num, col_data)
