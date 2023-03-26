@@ -87,7 +87,7 @@ class Registration(models.Model):
                                                           width: 100%;
                                                           height: 1200px;" title="Contact Form"></iframe>'''
             _logger.info(iframe)
-            rec.contact_form_iframe = '<h1>Test</h1>'
+            rec.contact_form_iframe = f'<iframe src="/formio/form/{rec.contact_form_uuid}" style="display: block;background: #000;border: none;width: 100%;height: 1200px;" title="Contact Form"></iframe>'
     
     registration_form_id = fields.Many2one('formio.form', string='Registration Form',tracking=True, domain="[['submission_partner_id','=',student_id],['name','=','new_registration']]")
     
