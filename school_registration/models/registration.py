@@ -80,7 +80,7 @@ class Registration(models.Model):
     
     def _compute_contact_form_iframe(self):
         for rec in self:
-            rec._compute_contact_form_iframe=f'''<iframe src='/formio/form/{rec.uuid}'
+            rec._compute_contact_form_iframe=f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
                                                    style="display: block;       /* iframes are inline by default */
                                                           background: #000;
                                                           border: none;         /* Reset default border */
