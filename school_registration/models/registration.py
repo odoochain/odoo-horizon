@@ -80,12 +80,14 @@ class Registration(models.Model):
     
     def _compute_contact_form_iframe(self):
         for rec in self:
-            rec.contact_form_iframe=f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
+            iframe=f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
                                                    style="display: block;       /* iframes are inline by default */
                                                           background: #000;
                                                           border: none;         /* Reset default border */
                                                           width: 100%;
                                                           height: 1200px;" title="Contact Form"></iframe>'''
+            _logger.info(iframe)
+            rec.contact_form_iframe = iframe
     
     registration_form_id = fields.Many2one('formio.form', string='Registration Form',tracking=True, domain="[['submission_partner_id','=',student_id],['name','=','new_registration']]")
     
