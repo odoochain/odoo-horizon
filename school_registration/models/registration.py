@@ -72,11 +72,26 @@ class Registration(models.Model):
     
     contact_form_data = fields.Text(related='contact_form_id.submission_data')
     
+    contact_form_uuid = fields.Char(related='contact_form_id.uuid')
+    
     contact_form_data_pretty = fields.Text(related='contact_form_id.submission_data_pretty')
+    
+    contact_form_iframe = fields.Html(compute='_compute_contact_form_iframe')
+    
+    def _compute_contact_form_iframe(self):
+        for rec in self:
+            rec._compute_contact_form_iframe=f'''<iframe src='/formio/form/{rec.uuid}'
+                                                   style="display: block;       /* iframes are inline by default */
+                                                          background: #000;
+                                                          border: none;         /* Reset default border */
+                                                          width: 100%;
+                                                          height: 1200px;" title="Contact Form"></iframe>'''
     
     registration_form_id = fields.Many2one('formio.form', string='Registration Form',tracking=True, domain="[['submission_partner_id','=',student_id],['name','=','new_registration']]")
     
     registration_form_data = fields.Text(related='registration_form_id.submission_data')
+    
+    registration_form_uuid = fields.Char(related='registration_form_id.uuid')
     
     registration_form_data_pretty = fields.Text(related='registration_form_id.submission_data_pretty')
     
