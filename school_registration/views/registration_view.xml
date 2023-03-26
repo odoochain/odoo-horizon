@@ -136,7 +136,7 @@
                   <div class="container h_registration_dialog">
                     <field name="contact_form_iframe"/>
                     <field name="contact_form_id"/>
-                  </group>
+                  </div>
                 </page>
                 <page string="Registrations" name="registrations">
                   <div class="container h_registration_dialog" attrs="{'invisible': [('registration_form_id','=', False)]}">
