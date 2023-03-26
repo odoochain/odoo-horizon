@@ -76,8 +76,7 @@ class Registration(models.Model):
     
     contact_form_data_pretty = fields.Text(related='contact_form_id.submission_data_pretty')
     
-    contact_form_iframe = fields.Html(compute='_compute_contact_form_iframe',sanitize_overridable=True,
-        sanitize_attributes=False, translate=False, sanitize_form=False)
+    contact_form_iframe = fields.Html(compute='_compute_contact_form_iframe',sanitize=False)
     
     def _compute_contact_form_iframe(self):
         for rec in self:
