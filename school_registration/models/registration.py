@@ -76,19 +76,8 @@ class Registration(models.Model):
     
     contact_form_data_pretty = fields.Text(related='contact_form_id.submission_data_pretty')
     
-    contact_form_iframe = fields.Html(compute='_compute_contact_form_iframe',sanitize=False)
+    contact_form_iframe = fields.Html(compute='_compute_form_iframe',sanitize=False)
     
-    def _compute_contact_form_iframe(self):
-        for rec in self:
-            iframe=f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
-                                                   style="display: block;       /* iframes are inline by default */
-                                                          background: #000;
-                                                          border: none;         /* Reset default border */
-                                                          width: 100%;
-                                                          height: 1200px;" title="Contact Form"></iframe>'''
-            _logger.info(iframe)
-            rec.contact_form_iframe = iframe
-            
     registration_form_id = fields.Many2one('formio.form', string='Registration Form',tracking=True, domain="[['submission_partner_id','=',student_id],['name','=','new_registration']]")
     
     registration_form_data = fields.Text(related='registration_form_id.submission_data')
@@ -97,6 +86,29 @@ class Registration(models.Model):
     
     registration_form_data_pretty = fields.Text(related='registration_form_id.submission_data_pretty')
     
+    registration_form_iframe = fields.Html(compute='_compute_form_iframe',sanitize=False)
+    
+    def _compute_form_iframe(self):
+        for rec in self:
+            if rec.contact_form_id:
+                rec.contact_form_iframe = f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
+                                                   style="display: block;       /* iframes are inline by default */
+                                                          background: #000;
+                                                          border: none;         /* Reset default border */
+                                                          width: 100%;
+                                                          height: 1200px;" title="Contact Form"></iframe>'''
+            else:
+                rec.contact_form_iframe = f'''<h4>No contact form</h4>'''
+            if rec.registration_form_id:
+                rec.contact_form_iframe = f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
+                                                   style="display: block;       /* iframes are inline by default */
+                                                          background: #000;
+                                                          border: none;         /* Reset default border */
+                                                          width: 100%;
+                                                          height: 1200px;" title="Contact Form"></iframe>'''
+            else:
+                rec.contact_form_iframe = f'''<h4>No registration form</h4>'''
+                
     program_id = fields.Many2one('school.program', string='Program', domain="[['year_id','=',year_id]]")
     
     speciality_id = speciality_id = fields.Many2one('school.speciality', related='program_id.speciality_id', string='Speciality', store=True, readonly=True)
