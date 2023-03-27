@@ -100,14 +100,14 @@ class Registration(models.Model):
             else:
                 rec.contact_form_iframe = f'''<h4>No contact form</h4>'''
             if rec.registration_form_id:
-                rec.contact_form_iframe = f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
+                rec.registration_form_iframe = f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
                                                    style="display: block;       /* iframes are inline by default */
                                                           background: #fff;
                                                           border: none;         /* Reset default border */
                                                           width: 100%;
                                                           height: 1200px;" title="Contact Form"></iframe>'''
             else:
-                rec.contact_form_iframe = f'''<h4>No registration form</h4>'''
+                rec.registration_form_iframe = f'''<h4>No registration form</h4>'''
                 
     program_id = fields.Many2one('school.program', string='Program', domain="[['year_id','=',year_id]]")
     
