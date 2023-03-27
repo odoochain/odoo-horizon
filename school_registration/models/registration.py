@@ -100,7 +100,7 @@ class Registration(models.Model):
             else:
                 rec.contact_form_iframe = f'''<h4>No contact form</h4>'''
             if rec.registration_form_id:
-                rec.registration_form_iframe = f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
+                rec.registration_form_iframe = f'''<iframe src='/formio/form/{rec.registration_form_uuid}'
                                                    style="display: block;       /* iframes are inline by default */
                                                           background: #fff;
                                                           border: none;         /* Reset default border */
