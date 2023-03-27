@@ -93,7 +93,7 @@ class Registration(models.Model):
             if rec.contact_form_id:
                 rec.contact_form_iframe = f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
                                                    style="display: block;       /* iframes are inline by default */
-                                                          background: #000;
+                                                          background: #fff;
                                                           border: none;         /* Reset default border */
                                                           width: 100%;
                                                           height: 1200px;" title="Contact Form"></iframe>'''
@@ -102,7 +102,7 @@ class Registration(models.Model):
             if rec.registration_form_id:
                 rec.contact_form_iframe = f'''<iframe src='/formio/form/{rec.contact_form_uuid}'
                                                    style="display: block;       /* iframes are inline by default */
-                                                          background: #000;
+                                                          background: #fff;
                                                           border: none;         /* Reset default border */
                                                           width: 100%;
                                                           height: 1200px;" title="Contact Form"></iframe>'''
