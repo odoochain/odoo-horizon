@@ -38,7 +38,9 @@
         'sequences/school_sequence.xml',
         'security/ir.model.access.csv',
     ],
-    'demo_xml': [],
+    'demo': [
+        'school_data_demo.xml'
+    ],
     'description': '''
         This modules add management tools for a school.
     ''',
