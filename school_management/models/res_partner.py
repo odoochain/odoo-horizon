@@ -68,6 +68,14 @@ class Year(models.Model):
     
     previous = fields.Many2one('school.year', string='Previous Year')
     next = fields.Many2one('school.year', string='Next Year')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        years = super().create(vals_list)
+        for year in years:
+            if year.previous :
+                year.previous.next = year
+        return years
     
 class Users(models.Model):
     '''Users'''

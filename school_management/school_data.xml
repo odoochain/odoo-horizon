@@ -47,8 +47,32 @@
     </record>
 
     <record id="year_2021_2022" model="school.year">
+        <field name="name">2021-2022</field>
+        <field name="short_name">21-22</field>
+    </record>
+
+    <record id="year_2022_2023" model="school.year">
         <field name="name">2022-2023</field>
         <field name="short_name">22-23</field>
+        <field name="previous" ref="year_2021_2022"/>
+    </record>
+
+    <record id="year_2023_2024" model="school.year">
+        <field name="name">2023-2024</field>
+        <field name="short_name">23-24</field>
+        <field name="previous" ref="year_2022_2023"/>
+    </record>
+
+    <record id="year_2024_2025" model="school.year">
+        <field name="name">2024-2025</field>
+        <field name="short_name">24-25</field>
+        <field name="previous" ref="year_2023_2024"/>
+    </record>
+
+    <record id="year_2025_2026" model="school.year">
+        <field name="name">2025-2026</field>
+        <field name="short_name">25-26</field>
+        <field name="previous" ref="year_2024_2025"/>
     </record>
 
     <record id="sequence_school_program" model="ir.sequence">
