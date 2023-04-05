@@ -36,22 +36,19 @@
     <record id="base.res_partner_address_5" model="res.partner">
         <field name="student">1</field>
     </record>
-    <record id="base.res_partner_address_6" model="res.partner">
-        <field name="teacher">1</field>
-    </record>
     <record id="base.res_partner_address_7" model="res.partner">
         <field name="teacher">1</field>
     </record>
-    <record id="base.res_partner_address_8" model="res.partner">
+    <record id="base.res_partner_address_10" model="res.partner">
         <field name="teacher">1</field>
     </record>
-    <record id="base.res_partner_address_9" model="res.partner">
-        <field name="employee">1</field>
-    </record>
-    <record id="base.res_partner_address_10" model="res.partner">
-        <field name="employee">1</field>
-    </record>
     <record id="base.res_partner_address_11" model="res.partner">
+        <field name="teacher">1</field>
+    </record>
+    <record id="base.res_partner_address_13" model="res.partner">
+        <field name="employee">1</field>
+    </record>
+    <record id="base.res_partner_address_14" model="res.partner">
         <field name="employee">1</field>
     </record>
 </odoo>
