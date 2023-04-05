@@ -39,24 +39,6 @@
             </field>
         </record>
 
-        <!-- Year Form View -->
-        <record id="view_year_form" model="ir.ui.view">
-            <field name="name">school.year.tree</field>
-            <field name="model">school.year</field>
-            <field eval="8" name="priority" />
-            <field name="arch" type="xml">
-                <sheet string="school.year">
-                    <group col="4">
-                        <field name="name"/>
-                        <field name="short_name" />
-                        <field name="previous"/>
-                        <field name="next"/>
-                        <separator/>
-                    </group>
-                </sheet>
-            </field>
-        </record>
-
         <record id="action_year_list" model="ir.actions.act_window">
             <field name="name">Years</field>
             <field name="type">ir.actions.act_window</field>
@@ -74,7 +56,7 @@
         <record id="action_year_form_view1" model="ir.actions.act_window.view">
             <field name="sequence" eval="5" />
             <field name="view_mode">form</field>
-            <field name="act_window_id" ref="view_year_form" />
+            <field name="act_window_id" ref="action_year_list" />
         </record>
         
         <menuitem id="menu_year_list" parent="menu_school_admin" action="action_year_list" sequence="40" />
