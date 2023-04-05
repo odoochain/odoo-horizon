@@ -21,6 +21,11 @@
 ##############################################################################
 -->
 <odoo noupdate="1">
+
+    <!-- 
+        Make some contacts part of the school types        
+    -->
+
     <record id="base.res_partner_address_1" model="res.partner">
         <field name="student">1</field>
     </record>
@@ -51,4 +56,35 @@
     <record id="base.res_partner_address_14" model="res.partner">
         <field name="employee">1</field>
     </record>
+
+    <!-- 
+        Programs        
+    -->
+
+    <record id="school_course_1" model="school.course">
+        <field name="title">Course Number 1</field>
+        <field name="credits">2</field>
+        <field name="hours">10</field>
+        <field name="weight">1</field>
+        <field name="has_second_session">1</field>
+        <field name="is_annual">1</field>
+        <field name="teacher_ids" eval="[(4, ref('base.res_partner_address_10'))]"/>
+    </record>
+
+    <record id="school_course_2" model="school.course">
+        <field name="title">Course Number 2</field>
+        <field name="credits">4</field>
+        <field name="hours">20</field>
+        <field name="weight">2</field>
+        <field name="has_second_session">0</field>
+        <field name="is_annual">0</field>
+        <field name="teacher_ids" eval="[(4, ref('base.res_partner_address_7')), (4, ref('base.res_partner_address_11'))]"/>
+    </record>
+
+    <record id="school_course_group_1" model="school.course_group">
+        <field name="title">Course Group Number 1</field>
+        <field name="responsible_id" ref="base.res_partner_address_10"/>
+        <field name="course_ids" eval="[(4, ref('school_management.school_course_1')), (4, ref('school_management.school_course_2'))]"/>
+    </record>
+
 </odoo>
