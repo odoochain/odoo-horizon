@@ -77,9 +77,7 @@
             <field name="act_window_id" ref="action_year_list" />
         </record>
         
-        <menuitem id="menu_year_list" parent="menu_admin_program" action="action_year_list" sequence="40" />
-
-        <menuitem name="Programs" parent="menu_school_admin" id="menu_admin_program" sequence="20" />
+        <menuitem id="menu_year_list" parent="menu_school_admin" action="action_year_list" sequence="40" />
 
         <menuitem name="Programs" parent="menu_school_admin" id="menu_admin_program" sequence="20" />
         
