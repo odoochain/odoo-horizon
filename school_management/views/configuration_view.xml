@@ -40,7 +40,7 @@
         </record>
 
         <!-- Year Form View -->
-        <record id="view_year_list" model="ir.ui.view">
+        <record id="view_year_form" model="ir.ui.view">
             <field name="name">school.year.tree</field>
             <field name="model">school.year</field>
             <field eval="8" name="priority" />
@@ -74,7 +74,7 @@
         <record id="action_year_form_view1" model="ir.actions.act_window.view">
             <field name="sequence" eval="5" />
             <field name="view_mode">form</field>
-            <field name="act_window_id" ref="action_year_list" />
+            <field name="act_window_id" ref="view_year_form" />
         </record>
         
         <menuitem id="menu_year_list" parent="menu_school_admin" action="action_year_list" sequence="40" />
