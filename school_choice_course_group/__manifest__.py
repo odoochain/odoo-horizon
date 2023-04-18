@@ -22,7 +22,7 @@
     'name': 'School choice course group',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
     'depends': ['school_management','school_evaluations'],

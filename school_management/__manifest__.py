@@ -22,7 +22,7 @@
     'name': 'School management',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
     'depends': ['mail','partner_contact_gender','partner_second_lastname','partner_contact_birthdate','partner_contact_birthplace'],

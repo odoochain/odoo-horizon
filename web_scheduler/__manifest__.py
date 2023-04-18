@@ -30,7 +30,7 @@ Web Scheduler FullCalendar
 Extend calendar view to support scheduler.
 """,
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'depends': ['web'],
     'data': [

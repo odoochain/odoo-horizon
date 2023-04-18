@@ -22,7 +22,7 @@
     'name': 'School deliberation base',
     'version': '14.0.0.0.1',
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
     'depends': ['school_evaluations'],

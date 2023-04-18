@@ -22,7 +22,7 @@
     'name': 'School registration google documents',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
     'depends': ['google_documents','school_registration_documents'],

@@ -22,7 +22,7 @@
     'name': 'School registration',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
     'depends': ['base_automation','school_dispense_approval','formio','formio_data_api'],

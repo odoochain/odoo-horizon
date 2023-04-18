@@ -22,7 +22,7 @@
     'name': 'School Contacts',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Contacts',
     'depends': ['contacts','partner_contact_gender','partner_contact_birthdate','partner_contact_birthplace','partner_firstname'],
