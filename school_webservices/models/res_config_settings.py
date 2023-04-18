@@ -25,15 +25,18 @@ from odoo import api, fields, models, _
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
+    webservice_certificate = fields.Binary(string='Certificate',
+        description='Used to sign requests',
+        config_parameter='school.webservice_certificate')
+
     # registration_open_year_id = fields.Many2one(
     #     comodel_name='school.year',
     #     string='Current Year for Registrations',
     #     readonly=False,
     #     help='Only registration in selected year is allowed.', config_parameter='school.registration_open_year_id')
-        
+
     # registration_employee_id = fields.Many2one(
     #     comodel_name='res.partner',
     #     string='Employee Managing Registrations',
     #     readonly=False,
     #     help='The employee that manage/dispatch registrations.', config_parameter='school.registration_employee_id')
-        

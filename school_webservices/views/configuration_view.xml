@@ -21,49 +21,33 @@
 ##############################################################################
 -->
 <odoo>
-            
-        <!--<record id="res_config_settings_view_form" model="ir.ui.view">
-            <field name="name">res.config.settings.view.form.inherit.registration</field>
-            <field name="model">res.config.settings</field>
-            <field name="priority" eval="60"/>
-            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//div[hasclass('settings')]" position="inside">
-                    <div class="app_settings_block" data-string="Registration" string="Registration" data-key="registration" groups="base.group_system">
-                        <h2>Registrations</h2>
-                        <div class="row mt16 o_settings_container" name="registration_setting_container">
-                            <div class="col-12 col-lg-6 o_setting_box"
-                                id="registration"
-                                title="Configure registration that can be accessed by students.">
-                                <div class="o_setting_left_pane"/>
-                                <div class="o_setting_right_pane">
-                                    <span class="o_form_label">Open year for registration</span>
-                                    <div class="content-group">
-                                        <div class="row mt16">
-                                            <label string="Open Year" for="registration_open_year_id" class="col-lg-3 o_light_label"/>
-                                            <field name="registration_open_year_id" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 o_setting_box"
-                                id="registration_employee"
-                                title="Configure employee that manage/dispatch registrations.">
-                                <div class="o_setting_left_pane"/>
-                                <div class="o_setting_right_pane">
-                                    <span class="o_form_label">Employee managing registrations</span>
-                                    <div class="content-group">
-                                        <div class="row mt16">
-                                            <label string="Employee" for="registration_employee_id" class="col-lg-3 o_light_label"/>
-                                            <field name="registration_employee_id" />
-                                        </div>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.webservices</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="62"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Webservices" string="Webservices" data-key="webservices" groups="base.group_system">
+                    <h2>Webservices</h2>
+                    <div class="row mt16 o_settings_container" name="webservices_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="webservices"
+                            title="Configure webservices">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Webservices certificate</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Certificate" for="webservice_certificate" class="col-lg-3 o_light_label"/>
+                                        <field name="webservice_certificate" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </xpath>
-            </field>
-        </record>-->
-    
+                </div>
+            </xpath>
+        </field>
+    </record>
 </odoo>

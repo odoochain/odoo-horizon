@@ -31,7 +31,8 @@
     'data': [
         'school_webservices_data.xml',
         'views/configuration_view.xml',
-        'views/school_webservices_view.xml',
+        'views/res_partner_view.xml',
+        'views/res_company_view.xml',
         'security/ir.model.access.csv',
     ],
     'demo_xml': [],
