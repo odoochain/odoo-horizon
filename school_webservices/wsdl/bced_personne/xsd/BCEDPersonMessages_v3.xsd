@@ -1,0 +1,215 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dat="http://soa.spw.wallonie.be/data/common/date/v1" xmlns:num="http://soa.spw.wallonie.be/data/entity/person/number/v2" xmlns:nam="http://soa.spw.wallonie.be/data/entity/person/name/v1" xmlns:per="http://soa.spw.wallonie.be/data/entity/person/v2" xmlns:msg="http://soa.spw.wallonie.be/services/person/messages/v3" xmlns:common="http://soa.spw.wallonie.be/data/common/common/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/services/person/messages/v3" version="3.1">
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/common/v1" schemaLocation="common_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/v2" schemaLocation="person_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/number/v2" schemaLocation="personNumber_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/name/v1" schemaLocation="name_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/date/v1" schemaLocation="date_v1.xsd"></xs:import>
+<xs:element name="getPerson">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:AbstractPrivacySyncRequestType">
+<xs:sequence>
+<xs:element name="request">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="personNumber" type="num:PersonNumberType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="getPersonResponse">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:AbstractSyncResponseType">
+<xs:sequence minOccurs="0">
+<xs:element minOccurs="0" name="person" type="per:PersonType"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="searchPersonByName">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:AbstractPrivacySyncRequestType">
+<xs:sequence>
+<xs:element name="request">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="personName" type="nam:BasicNameType"></xs:element>
+<xs:element name="birthDate" type="dat:IncompleteDateType"></xs:element>
+<xs:element minOccurs="0" name="birthDateTolerance" type="xs:nonNegativeInteger">
+<xs:annotation>
+<xs:documentation>The birth date tolerance is specified in the most significant units of the birth date that are filled in. For example, if the birth date is specified to the month, then the tolerance is in months.
+If the birth date is specified to the year, then the tolerance is in years.
+Note that for rare names a tolerance in years may work fine, but for a very common name the tolerance should be set very small.
+If no tolerance is provided, it is set to one, by default.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element minOccurs="0" name="gender" type="msg:GenderType"></xs:element>
+<xs:element minOccurs="0" name="maxReturnData">
+<xs:annotation>
+<xs:documentation>The maximum number of data to be returned.
+Note that the service provider has a limitation of 30 persons.
+If more persons are found, the service provider returns an error.</xs:documentation>
+</xs:annotation>
+<xs:simpleType>
+<xs:restriction base="xs:integer">
+<xs:minExclusive value="0"></xs:minExclusive>
+<xs:maxExclusive value="30"></xs:maxExclusive>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="searchPersonByNameResponse">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:AbstractSyncResponseType">
+<xs:sequence minOccurs="0">
+<xs:element minOccurs="0" name="persons">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="50" name="person" type="per:PersonType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="searchPersonByAddress">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:AbstractPrivacySyncRequestType">
+<xs:sequence>
+<xs:element name="request">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="address">
+<xs:complexType>
+<xs:choice>
+<xs:sequence>
+<xs:element name="adressID">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="source" type="xs:string"></xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:sequence>
+<xs:element name="postCode">
+<xs:annotation>
+<xs:documentation>The postal code specification allows non negative numbers with a maximum length of 4.</xs:documentation>
+</xs:annotation>
+<xs:simpleType>
+<xs:restriction base="xs:integer">
+<xs:minInclusive value="1000"></xs:minInclusive>
+<xs:maxInclusive value="9999"></xs:maxInclusive>
+<xs:pattern value="[0-9][0-9][0-9][0-9]"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="streetCode">
+<xs:annotation>
+<xs:documentation>The street code specification allows non negative numbers with a maximum length of 4.</xs:documentation>
+</xs:annotation>
+<xs:simpleType>
+<xs:restriction base="xs:integer">
+<xs:minInclusive value="1"></xs:minInclusive>
+<xs:maxInclusive value="9999"></xs:maxInclusive>
+<xs:pattern value="[0-9][0-9][0-9][0-9]"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="houseNumber" type="xs:string"></xs:element>
+<xs:element minOccurs="0" name="houseNumberExtension" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="page" type="xs:nonNegativeInteger">
+<xs:annotation>
+<xs:documentation>The page number of the search results. Defaults to one.</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="searchPersonByAddressResponse">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:AbstractSyncResponseType">
+<xs:sequence minOccurs="0">
+<xs:element minOccurs="0" name="persons">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="person" type="per:PersonType"></xs:element>
+<xs:element name="page" type="xs:nonNegativeInteger"></xs:element>
+<xs:element name="hasNextPage">
+<xs:simpleType>
+<xs:restriction base="xs:boolean">
+<xs:pattern value="true"></xs:pattern>
+<xs:pattern value="false"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="publishPerson">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:AbstractPrivacySyncRequestType">
+<xs:sequence>
+<xs:element name="request" type="per:PersonDeclarationType"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="publishPersonResponse">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:AbstractSyncResponseType">
+<xs:sequence minOccurs="0">
+<xs:element minOccurs="0" name="result" type="per:RegisterPersonResultType"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:simpleType name="GenderType">
+<xs:annotation>
+<xs:documentation>The gender specification allows searches to be limited to either males or females.</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:string">
+<xs:enumeration value="MALE"></xs:enumeration>
+<xs:enumeration value="FEMALE"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

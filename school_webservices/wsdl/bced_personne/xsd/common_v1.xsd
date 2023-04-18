@@ -1,0 +1,210 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:id="http://soa.spw.wallonie.be/common/identification/v1" xmlns:iso="http://soa.spw.wallonie.be/data/common/isocodes/v1" xmlns:cod="http://soa.spw.wallonie.be/data/common/code/v1" xmlns:common="http://soa.spw.wallonie.be/data/common/common/v1" xmlns:err="http://soa.spw.wallonie.be/data/common/error/v1" xmlns:tic="http://soa.spw.wallonie.be/data/common/ticket/v1" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:priv="http://soa.spw.wallonie.be/common/privacylog/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/common/common/v1" vc:minVersion="1.1" version="1.01">
+<xs:import namespace="http://soa.spw.wallonie.be/common/identification/v1" schemaLocation="identification_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/common/privacylog/v1" schemaLocation="privacy_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/code/v1" schemaLocation="code_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/isocodes/v1" schemaLocation="isocodes_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/ticket/v1" schemaLocation="ticket_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/error/v1" schemaLocation="error_v1.xsd"></xs:import>
+<xs:complexType name="AbstractPublicSyncRequestType">
+<xs:sequence>
+<xs:element ref="id:customerInformations"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AbstractPrivacySyncRequestType">
+<xs:sequence>
+<xs:element ref="id:customerInformations"></xs:element>
+<xs:element ref="priv:privacyLog"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AbstractPrivacySyncRequestSPWType">
+<xs:sequence>
+<xs:element ref="id:customerInformations"></xs:element>
+<xs:element name="context" type="xs:string"></xs:element>
+<xs:element minOccurs="0" name="dossier" type="priv:DossierType"></xs:element>
+<xs:element name="treatmentResponsability">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="treatmentManager">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="identityManager" use="required">
+<xs:annotation>
+<xs:documentation>Ex : RN,ULIS</xs:documentation>
+</xs:annotation>
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:maxLength value="64"></xs:maxLength>
+<xs:enumeration value="RN/RBis"></xs:enumeration>
+<xs:enumeration value="ULIS"></xs:enumeration>
+<xs:enumeration value="CERBERE"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="civilServant">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="identityManager" use="required">
+<xs:annotation>
+<xs:documentation>Ex : RN,ULIS</xs:documentation>
+</xs:annotation>
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:maxLength value="64"></xs:maxLength>
+<xs:enumeration value="RN/RBis"></xs:enumeration>
+<xs:enumeration value="ULIS"></xs:enumeration>
+<xs:enumeration value="CERBERE"></xs:enumeration>
+<xs:enumeration value="OTHER"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AbstractPrivacySyncRequestBCEDType">
+<xs:sequence>
+<xs:element ref="id:customerInformations"></xs:element>
+<xs:element name="context" type="xs:string"></xs:element>
+<xs:element minOccurs="0" name="dossier" type="priv:DossierType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AbstractPrivacyAsyncRequestType">
+<xs:complexContent>
+<xs:extension base="common:AbstractPrivacySyncRequestType">
+<xs:attribute name="transactionId"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="AbstractSyncResponseType">
+<xs:complexContent>
+<xs:extension base="common:AbstractResponseType">
+<xs:sequence>
+<xs:element name="status" type="common:StatusType"></xs:element>
+</xs:sequence>
+<xs:attribute name="inscriptionReference">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:maxLength value="36"></xs:maxLength>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="AbstractAsyncResponseType">
+<xs:complexContent>
+<xs:extension base="common:AbstractResponseType">
+<xs:sequence>
+<xs:element name="transactions">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="transaction">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="common:BatchTransactionType">
+<xs:sequence>
+<xs:element name="businessResponse"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="BatchTransactionType">
+<xs:sequence>
+<xs:element name="status" type="common:StatusType"></xs:element>
+</xs:sequence>
+<xs:attribute name="transactionId"></xs:attribute>
+<xs:attribute name="inscriptionReference"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="AbstractResponseType">
+<xs:attribute name="customerTicket" type="tic:UUIDType"></xs:attribute>
+<xs:attribute name="requestId">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:maxLength value="36"></xs:maxLength>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+<xs:complexType name="StatusType">
+<xs:sequence>
+<xs:element name="value">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="PROCESSED"></xs:enumeration>
+<xs:enumeration value="PROCESSING"></xs:enumeration>
+<xs:enumeration value="ERROR"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="code">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:pattern value="SOA[0-9]{7}"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element maxOccurs="3" minOccurs="0" name="description">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="lang" type="iso:LanguageType"></xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="details">
+<xs:complexType>
+<xs:sequence minOccurs="0">
+<xs:element minOccurs="0" name="informations">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="information">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="informationField" type="xs:string"></xs:element>
+<xs:element name="informationValue" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" ref="err:warning"></xs:element>
+<xs:element minOccurs="0" ref="err:error"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AbstractSyncRequestType">
+<xs:sequence>
+<xs:element ref="id:customerInformations"></xs:element>
+<xs:element name="context">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:maxLength value="64"></xs:maxLength>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

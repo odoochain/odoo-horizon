@@ -1,0 +1,240 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns2="http://schemas.xmlsoap.org/wsdl/jms/" xmlns:ns1="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns3="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soa.spw.wallonie.be/services/person/v3" xmlns:ns0="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:err="http://soa.spw.wallonie.be/data/common/error/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:msg="http://soa.spw.wallonie.be/services/person/messages/v3" name="Person" targetNamespace="http://soa.spw.wallonie.be/services/person/v3">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://soa.spw.wallonie.be/services/person/messages/v3" schemaLocation="xsd/BCEDPersonMessages_v3.xsd"></xsd:import>
+      <xsd:import namespace="http://soa.spw.wallonie.be/data/common/error/v1" schemaLocation="xsd/error_v1.xsd"></xsd:import>
+    </xsd:schema>
+  </types>
+  <message name="searchPersonByName">
+    <part name="request" element="msg:searchPersonByName">
+    </part>
+  </message>
+  <message name="searchPersonByAddress">
+    <part name="request" element="msg:searchPersonByAddress">
+    </part>
+  </message>
+  <message name="publishPersonResponse">
+    <part name="response" element="msg:publishPersonResponse">
+    </part>
+  </message>
+  <message name="getPerson">
+    <part name="request" element="msg:getPerson">
+    </part>
+  </message>
+  <message name="getPersonResponse">
+    <part name="response" element="msg:getPersonResponse">
+    </part>
+  </message>
+  <message name="publishPerson">
+    <part name="request" element="msg:publishPerson">
+    </part>
+  </message>
+  <message name="fault">
+    <part name="fault" element="err:error">
+    </part>
+  </message>
+  <message name="searchPersonByNameResponse">
+    <part name="response" element="msg:searchPersonByNameResponse">
+    </part>
+  </message>
+  <message name="searchPersonByAddressResponse">
+    <part name="response" element="msg:searchPersonByAddressResponse">
+    </part>
+  </message>
+  <portType name="personPortType">
+    <operation name="getPerson">
+      <input message="tns:getPerson">
+    </input>
+      <output message="tns:getPersonResponse">
+    </output>
+      <fault name="fault" message="tns:fault">
+    </fault>
+    </operation>
+    <operation name="searchPersonByName">
+      <input message="tns:searchPersonByName">
+    </input>
+      <output message="tns:searchPersonByNameResponse">
+    </output>
+      <fault name="fault" message="tns:fault">
+    </fault>
+    </operation>
+    <operation name="searchPersonByAddress">
+      <input message="tns:searchPersonByAddress">
+    </input>
+      <output message="tns:searchPersonByAddressResponse">
+    </output>
+      <fault name="fault" message="tns:fault">
+    </fault>
+    </operation>
+    <operation name="publishPerson">
+      <input message="tns:publishPerson">
+    </input>
+      <output message="tns:publishPersonResponse">
+    </output>
+      <fault name="fault" message="tns:fault">
+    </fault>
+    </operation>
+  </portType>
+  <binding name="personSOAPBinding" type="tns:personPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"></soap:binding>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#personPortType_personSOAPBinding_policy"></wsp:PolicyReference>
+    <operation name="getPerson">
+      <soap:operation soapAction="http://soa.spw.wallonie.be/services/person/v3/getPerson"></soap:operation>
+      <input>
+        <soap:body use="literal"></soap:body>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#getPerson_input_policy"></wsp:PolicyReference>
+      </input>
+      <output>
+        <soap:body use="literal"></soap:body>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#getPerson_output_policy"></wsp:PolicyReference>
+      </output>
+      <fault name="fault">
+        <soap:fault name="fault" use="literal"></soap:fault>
+      </fault>
+    </operation>
+    <operation name="searchPersonByName">
+      <soap:operation soapAction="http://soa.spw.wallonie.be/services/person/v3/searchPersonByName"></soap:operation>
+      <input>
+        <soap:body use="literal"></soap:body>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#searchPersonByName_input_policy"></wsp:PolicyReference>
+      </input>
+      <output>
+        <soap:body use="literal"></soap:body>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#searchPersonByName_output_policy"></wsp:PolicyReference>
+      </output>
+      <fault name="fault">
+        <soap:fault name="fault" use="literal"></soap:fault>
+      </fault>
+    </operation>
+    <operation name="searchPersonByAddress">
+      <soap:operation soapAction="http://soa.spw.wallonie.be/services/person/v3/searchByAddress"></soap:operation>
+      <input>
+        <soap:body use="literal"></soap:body>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#searchPersonByAddress_input_policy"></wsp:PolicyReference>
+      </input>
+      <output>
+        <soap:body use="literal"></soap:body>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#searchPersonByAddress_output_policy"></wsp:PolicyReference>
+      </output>
+      <fault name="fault">
+        <soap:fault name="fault" use="literal"></soap:fault>
+      </fault>
+    </operation>
+    <operation name="publishPerson">
+      <soap:operation soapAction="http://soa.spw.wallonie.be/services/person/v3/publishPerson"></soap:operation>
+      <input>
+        <soap:body use="literal"></soap:body>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#publishPerson_input_policy"></wsp:PolicyReference>
+      </input>
+      <output>
+        <soap:body use="literal"></soap:body>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#publishPerson_output_policy"></wsp:PolicyReference>
+      </output>
+      <fault name="fault">
+        <soap:fault name="fault" use="literal"></soap:fault>
+      </fault>
+    </operation>
+  </binding>
+  <service name="PersonV3">
+    <port name="personPort" binding="tns:personSOAPBinding">
+      <soap:address location="https://services-web.tq.etnic.be:11443/bced/person/v3"></soap:address>
+    </port>
+  </service>
+    <wsp:UsingPolicy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" wsdl:Required="true"></wsp:UsingPolicy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="publishPerson_input_policy">
+    <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+      <sp:Body></sp:Body>
+    </sp:SignedParts>
+  </wsp:Policy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="publishPerson_output_policy">
+    <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+      <sp:Body></sp:Body>
+    </sp:SignedParts>
+  </wsp:Policy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="searchPersonByAddress_input_policy">
+    <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+      <sp:Body></sp:Body>
+    </sp:SignedParts>
+  </wsp:Policy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="searchPersonByAddress_output_policy">
+    <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+      <sp:Body></sp:Body>
+    </sp:SignedParts>
+  </wsp:Policy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="searchPersonByName_input_policy">
+    <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+      <sp:Body></sp:Body>
+    </sp:SignedParts>
+  </wsp:Policy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="searchPersonByName_output_policy">
+    <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+      <sp:Body></sp:Body>
+    </sp:SignedParts>
+  </wsp:Policy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="getPerson_input_policy">
+    <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+      <sp:Body></sp:Body>
+    </sp:SignedParts>
+  </wsp:Policy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="getPerson_output_policy">
+    <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+      <sp:Body></sp:Body>
+    </sp:SignedParts>
+  </wsp:Policy>
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="personPortType_personSOAPBinding_policy">
+    <wsp:All>
+      <wsp:Policy>
+        <sp:AsymmetricBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:InitiatorToken>
+              <wsp:Policy>
+                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                  <wsp:Policy>
+                    <sp:WssX509V3Token10></sp:WssX509V3Token10>
+                  </wsp:Policy>
+                </sp:X509Token>
+              </wsp:Policy>
+            </sp:InitiatorToken>
+            <sp:RecipientToken>
+              <wsp:Policy>
+                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                  <wsp:Policy>
+                    <sp:WssX509V3Token10></sp:WssX509V3Token10>
+                  </wsp:Policy>
+                </sp:X509Token>
+              </wsp:Policy>
+            </sp:RecipientToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256></sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict></sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp></sp:IncludeTimestamp>
+            <sp:OnlySignEntireHeadersAndBody></sp:OnlySignEntireHeadersAndBody>
+          </wsp:Policy>
+        </sp:AsymmetricBinding>
+        <sp:Wss10 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:MustSupportRefKeyIdentifier></sp:MustSupportRefKeyIdentifier>
+            <sp:MustSupportRefIssuerSerial></sp:MustSupportRefIssuerSerial>
+          </wsp:Policy>
+        </sp:Wss10>
+        <sp:SupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:WssX509V3Token10></sp:WssX509V3Token10>
+                <sp:RequireKeyIdentifierReference></sp:RequireKeyIdentifierReference>
+              </wsp:Policy>
+            </sp:X509Token>
+          </wsp:Policy>
+        </sp:SupportingTokens>
+      </wsp:Policy>
+    </wsp:All>
+  </wsp:Policy>
+</definitions>

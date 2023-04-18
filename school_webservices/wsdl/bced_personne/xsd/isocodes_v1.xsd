@@ -1,0 +1,135 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:iso="http://soa.spw.wallonie.be/data/common/isocodes/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/common/isocodes/v1">
+<xs:simpleType name="LanguageType">
+<xs:annotation>
+<xs:documentation xml:lang="en">Language codes follow the
+				ISO-639-1 two-letter code standards.
+				For details, see http://www.loc.gov/standards/iso639-2/iso639jac.html
+
+				Validation rules:
+				- two lower case letters
+
+				Regular expression: [a-z]{2}
+
+				Examples: nl, fr, de, en, es, ...
+
+				Notes.
+				1. The xs:language type has a facet
+				([a-zA-Z]{1,8})(-[a-zA-Z0-9]{1,8})*
+				which allows more than two characters. For example to denote regional
+				languages.
+				2. For undetermined languages, ISO reserves the
+				three-letter code
+				"und". For this reason, the two-letter restriction is not enforced
+				in the schema.
+			</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:language"></xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="CountryType">
+<xs:annotation>
+<xs:documentation xml:lang="en">Country codes must be in
+				the ISO-3166 two-letter format.
+				For a complete list, see
+				http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/index.html
+				The FSB will translate the ISO code into specific KBO codes, if
+				required.
+				The ISO standards permit certain two-letter codes to be customized by
+				users. This
+				allows for the following codes, which can be used withing the PROVE
+				application:
+				ISO CODE KBO CODE meaning
+				XA 900 stateless (when applied to nationalities)
+				XB 901 not yet proven (when applied to nationalities)
+				XC 992 moved to abroad (when applied nationalities)
+				XD 995 at sea (international waters)
+				XE 999 undetermined
+
+				Validation rules:
+				- two upper case letters
+
+				Regular expression: [A-Z]{2}
+
+				Examples: BE, NL, FR, DE, GB, ES, ...
+				(Note that UK is not a valid country code!)
+			</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-Z]{2}"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="currency">
+<xs:annotation>
+<xs:documentation xml:lang="en">Currency codes must
+				follow the ISO-4217 code standards. These are three-letter codes
+				derived from the ISO-639-1 two-letter country codes. For details,
+				see
+				http://www.bsi-global.com/British_Standards/currency/index.xalter
+
+				Validation rules:
+				- three upper case letters
+
+				Regular expression: [A-Z]{3}
+
+				Examples: EUR, GBP, USD, ...
+			</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-Z]{3}"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="bic">
+<xs:annotation>
+<xs:documentation xml:lang="en">The type definition of a
+				"Bank Identifier Code" (BIC), specified in ISO 9362.
+
+				For details, see
+				http://www.swift.com/biconline/index.cfm?fuseaction=display_aboutbic
+
+				Validation rules:
+				- The length is 8 or 11 characters.
+				- First 4 chars are alphabetic and denote the bank code
+				- 5th and 6th char are an ISO country code
+				- 7th and 8th char are alphanumeric and denote the region within a
+				country
+				- 9th - 11th char are the alphanumeric branch code
+				- A BIC code must be in upper case letters
+
+				Regular expression: [A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3}){0,1}
+
+				Examples: ABNAFRPP, GEBABEBB04A, ...
+			</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3}){0,1}"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="iban">
+<xs:annotation>
+<xs:documentation xml:lang="en">The type definition of an
+				international bank account number (IBAN), specified in ISO 13616.
+
+				Validation rules:
+				- The length is up to 34 characters
+				- The first two characters are the ISO two-letter country code
+				- The 3rd and 4th character are numeric control digits
+				- The 5th to the last char are alphanumeric
+				- For the calculation of the control digits:
+				o move the first four chars to the end of the number
+				o convert each alphabetic char in the number to a digit according to
+				a conversion
+				table: A=10, B=11, C=12, ..., Y=34, Z=35
+				Note: each letter is converted to two digits, so the number of chars
+				increases
+				o calculate the mod 97 of the full number: it must be equal to one
+
+				Regular expression: [A-Z]{2}\d{2}[A-Z0-9]{1,30}
+
+				Examples: BE68539007547034, FR1420041010050500013M02606,
+				GB29NWBK60161331926819
+			</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-Z]{2}\d{2}[A-Z0-9]{1,30}"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

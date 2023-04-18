@@ -1,0 +1,20 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:photo="http://soa.spw.wallonie.be/data/entity/photo/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/entity/photo/v1" version="1.00">
+<xs:complexType name="PhotoType">
+<xs:annotation>
+<xs:documentation>Photo.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element minOccurs="0" name="captureDate" type="xs:date">
+<xs:annotation>
+<xs:documentation>Capture date of the photo.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="encodedPhoto" type="xs:base64Binary">
+<xs:annotation>
+<xs:documentation>Base64 encoded photo.</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="photo" nillable="true" type="photo:PhotoType"></xs:element>
+</xs:schema>
