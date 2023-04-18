@@ -1,0 +1,7 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.cfwb.be/commun/contact" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cfwb.be/commun/contact">
+<simpleType name="EmailST">
+<restriction base="string">
+<pattern value="[0-9A-Za-z'\.\-_]{1,127}@[0-9A-Za-z'\.\-_]{1,127}"></pattern>
+</restriction>
+</simpleType>
+</schema>

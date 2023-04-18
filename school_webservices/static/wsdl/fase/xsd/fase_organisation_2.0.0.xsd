@@ -1,0 +1,95 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pers="http://www.cfwb.be/commun/personne" xmlns:fase="http://www.cfwb.be/enseignement/fase" xmlns:cont="http://www.cfwb.be/commun/contact" xmlns:tns="http://www.etnic.be/services/fase/organisation/v2" xmlns:msg="http://www.etnic.be/services/commun/message/statut/v1" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://www.etnic.be/services/fase/organisation/v2">
+<xsd:import namespace="http://www.cfwb.be/enseignement/fase" schemaLocation="faseST_ecole.xsd"></xsd:import>
+<xsd:import namespace="http://www.cfwb.be/commun/personne" schemaLocation="personneST_ecole.xsd"></xsd:import>
+<xsd:import namespace="http://www.cfwb.be/commun/contact" schemaLocation="contactST_ecole.xsd"></xsd:import>
+<xsd:import namespace="http://www.etnic.be/services/commun/message/statut/v1" schemaLocation="message_statut_1.0.0.xsd"></xsd:import>
+<xsd:element name="ObtenirOrganisationRequete" type="tns:ObtenirOrganisationRequeteCT"></xsd:element>
+<xsd:element name="ObtenirOrganisationReponse" type="tns:ObtenirOrganisationReponseCT"></xsd:element>
+<xsd:complexType name="ObtenirOrganisationRequeteCT">
+<xsd:sequence>
+<xsd:element maxOccurs="2" name="Organisation" type="tns:OrganisationCT"></xsd:element>
+<xsd:element name="Dmd" type="fase:DmdST"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OrganisationCT">
+<xsd:sequence>
+<xsd:element name="Type" type="fase:OrganisationST"></xsd:element>
+<xsd:element name="Identifiant" type="xsd:int"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ObtenirOrganisationReponseCT">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="InfoOrganisation" type="tns:InfoOrganisationCT"></xsd:element>
+<xsd:element ref="msg:BlocRetour"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InfoOrganisationCT">
+<xsd:sequence>
+<xsd:element name="Fiche" type="tns:FicheCT"></xsd:element>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="SsOrganisation" type="tns:InfoOrganisationCT"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="FicheCT">
+<xsd:sequence>
+<xsd:element name="Type" type="fase:OrganisationST"></xsd:element>
+<xsd:element name="Identifiant" type="xsd:int"></xsd:element>
+<xsd:element name="Nom" type="xsd:string"></xsd:element>
+<xsd:element minOccurs="0" name="Adresse" type="tns:AdresseCT"></xsd:element>
+<xsd:element minOccurs="0" name="ContactInfo" type="tns:ContactCT"></xsd:element>
+<xsd:element minOccurs="0" name="DateDebut" type="xsd:date"></xsd:element>
+<xsd:element minOccurs="0" name="DateFin" type="xsd:date"></xsd:element>
+<xsd:element minOccurs="0" name="BanqueInfo" type="tns:BanqueCT"></xsd:element>
+<xsd:element minOccurs="0" name="NumBCE" type="xsd:string"></xsd:element>
+<xsd:choice minOccurs="0">
+<xsd:element name="Directeur" type="tns:DirecteurCT"></xsd:element>
+<xsd:element name="InfoImpl" type="tns:InfoImplCT"></xsd:element>
+</xsd:choice>
+<xsd:element minOccurs="0" name="Reseau" type="tns:ReseauCT"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InfoImplCT">
+<xsd:sequence>
+<xsd:element name="Unite" type="xsd:string"></xsd:element>
+<xsd:element name="Intitule" type="xsd:string"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="AdresseCT">
+<xsd:sequence>
+<xsd:element name="Rue" type="xsd:string"></xsd:element>
+<xsd:element name="Numero" type="xsd:string"></xsd:element>
+<xsd:element name="BtePostale" type="xsd:string"></xsd:element>
+<xsd:element name="Commune" type="xsd:string"></xsd:element>
+<xsd:element name="CodePostal" type="xsd:string"></xsd:element>
+<xsd:element name="Localite" type="xsd:string"></xsd:element>
+<xsd:element minOccurs="0" name="Pays" type="xsd:string"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ContactCT">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="NumTel" type="xsd:string"></xsd:element>
+<xsd:element minOccurs="0" name="NumFax" type="xsd:string"></xsd:element>
+<xsd:element minOccurs="0" name="Email" type="cont:EmailST"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="BanqueCT">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="NumCompte" type="xsd:string"></xsd:element>
+<xsd:element minOccurs="0" name="TitulaireCompte" type="xsd:string"></xsd:element>
+<xsd:element minOccurs="0" name="NumBIC" type="xsd:string"></xsd:element>
+<xsd:element minOccurs="0" name="NumIBAN" type="xsd:string"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="DirecteurCT">
+<xsd:sequence>
+<xsd:element name="Civilite" type="xsd:string"></xsd:element>
+<xsd:element name="Nom" type="xsd:string"></xsd:element>
+<xsd:element name="Prenom" type="xsd:string"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ReseauCT">
+<xsd:sequence>
+<xsd:element name="Nom" type="xsd:string"></xsd:element>
+<xsd:element name="Code" type="xsd:string"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

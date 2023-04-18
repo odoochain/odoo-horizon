@@ -1,0 +1,54 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.cfwb.be/enseignement/fase" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cfwb.be/enseignement/fase">
+<simpleType name="OrganisationST">
+<annotation>
+<documentation>Type d'organisation</documentation>
+</annotation>
+<restriction base="string">
+<enumeration value="PO"></enumeration>
+<enumeration value="ETAB"></enumeration>
+<enumeration value="IMPL"></enumeration>
+</restriction>
+</simpleType>
+<simpleType name="DmdST">
+<annotation>
+<documentation>Type d'organisation</documentation>
+</annotation>
+<restriction base="string">
+<enumeration value="FICHE"></enumeration>
+<enumeration value="LST_ETAB"></enumeration>
+<enumeration value="LST_ETAB_IMPL"></enumeration>
+</restriction>
+</simpleType>
+<simpleType name="CommunicationST">
+<restriction base="string"></restriction>
+</simpleType>
+<simpleType name="FaseIdST">
+<restriction base="int">
+<totalDigits value="6"></totalDigits>
+</restriction>
+</simpleType>
+<simpleType name="CodeUniteST">
+<restriction base="string">
+<minLength value="3"></minLength>
+<maxLength value="3"></maxLength>
+<pattern value="[0-9]{3}"></pattern>
+<enumeration value="110"></enumeration>
+<enumeration value="111"></enumeration>
+<enumeration value="112"></enumeration>
+<enumeration value="113"></enumeration>
+<enumeration value="114"></enumeration>
+<enumeration value="115"></enumeration>
+<enumeration value="116"></enumeration>
+<enumeration value="119"></enumeration>
+<enumeration value="120"></enumeration>
+<enumeration value="121"></enumeration>
+<enumeration value="122"></enumeration>
+<enumeration value="132"></enumeration>
+<enumeration value="212"></enumeration>
+<enumeration value="215"></enumeration>
+<enumeration value="219"></enumeration>
+<enumeration value="222"></enumeration>
+<enumeration value="312"></enumeration>
+</restriction>
+</simpleType>
+</schema>

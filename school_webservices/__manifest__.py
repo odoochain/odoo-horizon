@@ -25,7 +25,8 @@
     'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': ['school_evaluations'],
+    'depends': ['school_management'],
+    "external_dependencies": {"python": ["zeep"]},
     'init_xml': [],
     'data': [
         'school_webservices_data.xml',
