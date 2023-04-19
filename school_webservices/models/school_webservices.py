@@ -88,7 +88,7 @@ class WebService(models.Model):
         result = self._callOperation(client, record)
         self._applyChanges(result, record)
 
-    def __callOperation(self, record=False):
+    def _callOperation(self, record=False):
         raise NotImplementedError('__callOperation not implemted for service %s' % self.name)
 
     def _applyChanges(self, record=False):
@@ -99,9 +99,9 @@ class FaseService(models.Model):
     _inherit = 'school.webservice'
 
     def action_test_service(self):
-        self.doRequest(self.env.context['allowed_company_ids'][0])
+        self.doRequest(self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]))
 
-    def __callOperation(self, client, record=False):
+    def _callOperation(self, client, record=False):
         if self.name == 'fase':
             message = {
                 'soapenv:Envelope': {
