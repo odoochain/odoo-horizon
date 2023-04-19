@@ -19,6 +19,7 @@
 #
 ##############################################################################
 import logging
+import io
 from datetime import datetime, timedelta
 
 from odoo import api, fields, models, tools, _
@@ -41,22 +42,32 @@ class WebService(models.Model):
         self._soapClientsCache = {}
 
     @api.model
+    def _getCertificate(self):
+        res_company = self.env.context['allowed_company_ids'][0]
+        return {
+            'webservices_key': io.BytesIO(res_company.webservices_key).get_value(),
+            'webservices_key_passwd': res_company.webservices_key_passwd,
+            'webservices_certificate': io.BytesIO(res_company.webservices_certificate).get_value(),
+        }
+
+    @api.model
     def _getClient(self):
         if not self._soapClientsCache[self.name]:
+            cert = self._getCertificate()
             try:
                 from zeep.transports import Transport
                 transport = Transport(timeout=TIMEOUT)
                 from zeep import CachingClient
                 from zeep.wsse.signature import MemorySignature
                 client = CachingClient(self.wsdl_url, transport=transport,
-                    wsse=MemorySignature(private_key_filename, public_key_filename))
+                    wsse=MemorySignature(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']))
             except ImportError:
                 # fall back to non-caching zeep client
                 try:
                     from zeep import Client
                     from zeep.wsse.signature import MemorySignature
                     client = Client(self.wsdl_url, transport=transport,
-                    wsse=MemorySignature(private_key_filename, public_key_filename))
+                    wsse=MemorySignature(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']))
                 except ImportError:
                     raise ImportError('Pleas install zeep SOAP Library')
             self._soapClientsCache[self.name] = client
