@@ -19,6 +19,7 @@
 #
 ##############################################################################
 import logging
+from datetime import datetime, timedelta
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
@@ -46,12 +47,16 @@ class WebService(models.Model):
                 from zeep.transports import Transport
                 transport = Transport(timeout=TIMEOUT)
                 from zeep import CachingClient
-                client = CachingClient(self.wsdl_url, transport=transport).service
+                from zeep.wsse.signature import MemorySignature
+                client = CachingClient(self.wsdl_url, transport=transport,
+                    wsse=MemorySignature(private_key_filename, public_key_filename))
             except ImportError:
                 # fall back to non-caching zeep client
                 try:
                     from zeep import Client
-                    client = Client(self.wsdl_url, transport=transport).service
+                    from zeep.wsse.signature import MemorySignature
+                    client = Client(self.wsdl_url, transport=transport,
+                    wsse=MemorySignature(private_key_filename, public_key_filename))
                 except ImportError:
                     raise ImportError('Pleas install zeep SOAP Library')
             self._soapClientsCache[self.name] = client
@@ -82,6 +87,15 @@ class FaseService(models.Model):
                 'soapenv:Envelope': {
                     '@xmlns:soapenv': 'http://schemas.xmlsoap.org/soap/envelope/',
                     'soapenv:Header': {
+                        '@xmlns:wsse': 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
+                        'wsse:Security': {
+                            '@mustUnderstand': 'true',
+                            '@xmlns:wsu': 'http://schemas.xmlsoap.org/ws/2002/07/utility',
+                            'wsu:Timestamp': {
+                                'wsu:Created': datetime.utcnow().isoformat() + 'Z',
+                                'wsu:Expires': (datetime.utcnow() + timedelta(minutes=5)).isoformat() + 'Z',
+                            }
+                        },
                         '@xmlns:wsa': 'http://www.w3.org/2005/08/addressing',
                         'wsa:Action': 'domaine:fase?mode=sync',
                         'wsa:From': {

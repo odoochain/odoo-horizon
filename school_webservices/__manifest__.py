@@ -26,7 +26,7 @@
     'website': '',
     'category': 'School Management',
     'depends': ['school_management'],
-    "external_dependencies": {"python": ["zeep"]},
+    "external_dependencies": {"python": ["zeep", "xmlsec"]},
     'init_xml': [],
     'data': [
         'school_webservices_data.xml',

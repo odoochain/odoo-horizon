@@ -28,6 +28,8 @@
             <field name="priority">110</field>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='website']" position="after">
+                    <field name="webservices_key"/>
+                    <field name="webservices_key_passwd"/>
                     <field name="webservices_certificate"/>
                 </xpath>
             </field>

@@ -29,5 +29,7 @@ _logger = logging.getLogger(__name__)
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
+    webservices_key = fields.Binary(string='Web Services Keys')
+    # TODO : store encoded ?
+    webservices_key_passwd = fields.Char(string='Web Services Key Password')
     webservices_certificate = fields.Binary(string='Web Services Certificate')
-    
