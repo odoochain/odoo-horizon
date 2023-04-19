@@ -59,14 +59,20 @@ class WebService(models.Model):
                 transport = Transport(timeout=TIMEOUT)
                 from zeep import CachingClient
                 from zeep.wsse.signature import MemorySignature
-                client = CachingClient('./static/' + self.wsdl_url, transport=transport,
+                import os
+                dirname = os.path.dirname(__file__)
+                filename = os.path.join(dirname, './static/' + self.wsdl_url)
+                client = CachingClient(filename, transport=transport,
                     wsse=MemorySignature(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']))
             except ImportError:
                 # fall back to non-caching zeep client
                 try:
                     from zeep import Client
                     from zeep.wsse.signature import MemorySignature
-                    client = Client(self.wsdl_url, transport=transport,
+                    import os
+                    dirname = os.path.dirname(__file__)
+                    filename = os.path.join(dirname, './static/' + self.wsdl_url)
+                    client = Client(filename, transport=transport,
                     wsse=MemorySignature(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']))
                 except ImportError:
                     raise ImportError('Please install zeep SOAP Library')
