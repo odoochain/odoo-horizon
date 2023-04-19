@@ -57,8 +57,8 @@ class WebService(models.Model):
             self._soapClientsCache[self.name] = client
         return self._soapClientsCache[self.name]
 
-    name = fields.String('name')
-    wsdl_url = fields.String('WSDL Url')
+    name = fields.Char('name')
+    wsdl_url = fields.Char('WSDL Url')
 
     def doRequest(self, record=False):
         self.ensure_one()
