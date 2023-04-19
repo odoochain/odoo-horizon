@@ -81,7 +81,15 @@ class FaseService(models.Model):
             message = {
                 'soapenv:Envelope': {
                     '@xmlns:soapenv': 'http://schemas.xmlsoap.org/soap/envelope/',
-                    'soapenv:Header': {},
+                    'soapenv:Header': {
+                        '@xmlns:wsa': 'http://www.w3.org/2005/08/addressing',
+                        'wsa:Action': 'domaine:fase?mode=sync',
+                        'wsa:From': {
+                            'wsa:Address': 'https://horizon.student-crlg.be'
+                        },
+                        'wsa:MessageID': 'uuid:3164ab7f-bf5a-423b-95ba-f4e5ebddd6b0',
+                        'wsa:To': 'http://www.etnic.be/janus/dedale'
+                    },
                     'soapenv:Body': {
                         'fase:ObtenirOrganisationRequete': {
                             '@xmlns:fase': 'http://www.etnic.be/services/fase/organisation/v2',

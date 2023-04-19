@@ -18,6 +18,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-#from . import res_config_settings
-from . import res_company
-from . import school_webservices
+import logging
+
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.safe_eval import safe_eval
+
+_logger = logging.getLogger(__name__)
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    webservices_certificate = fields.Binary(string='Web Services Certificate')
+    

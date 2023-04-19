@@ -25,9 +25,7 @@ from odoo import api, fields, models, _
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    webservice_certificate = fields.Binary(string='Certificate',
-        description='Used to sign requests',
-        config_parameter='school.webservice_certificate')
+    pass
 
     # registration_open_year_id = fields.Many2one(
     #     comodel_name='school.year',
