@@ -84,5 +84,5 @@
         <field name="act_window_id" ref="action_webservice_list" />
     </record>
     
-    <menuitem id="menu_webservice_list" parent="menu_school_admin" action="action_webservice_list" sequence="40" />
+    <menuitem id="menu_webservice_list" parent="school_management.menu_school_admin" action="action_webservice_list" sequence="40" />
 </odoo>
