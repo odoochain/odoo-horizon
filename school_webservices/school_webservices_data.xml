@@ -21,5 +21,8 @@
 ##############################################################################
 -->
 <odoo noupdate="1">
-  
+    <record id="fase" model="school.webservice">
+        <field name="name">fase</field>
+        <field name="wsdl_url">/wsdl/fase/fase_organisation.wsdl</field>
+    </record>
 </odoo>
