@@ -50,4 +50,39 @@
             </xpath>
         </field>
     </record>
+
+    <!-- Webservice List View -->
+    <record id="view_webservice_list" model="ir.ui.view">
+        <field name="name">school.webservice.tree</field>
+        <field name="model">school.webservice</field>
+        <field eval="8" name="priority" />
+        <field name="arch" type="xml">
+            <tree string="webservice">
+                <field name="name" />
+                <field name="wsdl_url" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_webservice_list" model="ir.actions.act_window">
+        <field name="name">Web Services</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.webservice</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record id="action_webservice_tree_view1" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_webservice_list" />
+        <field name="act_window_id" ref="action_webservice_list" />
+    </record>
+    
+    <record id="action_webservice_form_view1" model="ir.actions.act_window.view">
+        <field name="sequence" eval="5" />
+        <field name="view_mode">form</field>
+        <field name="act_window_id" ref="action_webservice_list" />
+    </record>
+    
+    <menuitem id="menu_webservice_list" parent="menu_school_admin" action="action_webservice_list" sequence="40" />
 </odoo>
