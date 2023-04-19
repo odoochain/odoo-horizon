@@ -94,12 +94,18 @@ class WebService(models.Model):
     def _applyChanges(self, record=False):
         raise NotImplementedError('_applyChanges not implemted for service %s' % self.name)
 
+    def action_test_service(self):
+        raise NotImplementedError('action_test_service not implemted for service %s' % self.name)
+
 class FaseService(models.Model):
     '''Fase Web Service'''
     _inherit = 'school.webservice'
 
     def action_test_service(self):
-        self.doRequest(self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]))
+        if self.name == 'fase':
+            self.doRequest(self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]))
+        else:
+            self.super()
 
     def _callOperation(self, client, record=False):
         if self.name == 'fase':
