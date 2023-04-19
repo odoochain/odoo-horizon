@@ -52,7 +52,7 @@ class WebService(models.Model):
 
     @api.model
     def _getClient(self):
-        if not self._soapClientsCache[self.name]:
+        if not self._soapClientsCache.get(self.name):
             cert = self._getCertificate()
             try:
                 from zeep.transports import Transport
