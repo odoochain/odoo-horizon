@@ -33,3 +33,5 @@ class ResCompany(models.Model):
     # TODO : store encoded ?
     webservices_key_passwd = fields.Char(string='Web Services Key Password')
     webservices_certificate = fields.Binary(string='Web Services Certificate')
+
+    fase_code = fields.Char('FASE code')

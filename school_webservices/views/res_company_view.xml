@@ -31,6 +31,7 @@
                     <field name="webservices_key"/>
                     <field name="webservices_key_passwd"/>
                     <field name="webservices_certificate"/>
+                    <field name="fase_code"/>
                 </xpath>
             </field>
         </record>

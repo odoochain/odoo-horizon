@@ -92,6 +92,9 @@ class FaseService(models.Model):
     '''Fase Web Service'''
     _inherit = 'school.webservice'
 
+    def action_test_fase(self):
+        self.doRequest(self.env.context['allowed_company_ids'][0])
+
     def __callOperation(self, client, record=False):
         if self.name == 'fase':
             message = {
