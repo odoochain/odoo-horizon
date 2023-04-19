@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-school_webservice_employee,school_webservice_employee,model_school_webservice,group_employee,1,1,1,1
+school_webservice_employee,school_webservice_employee,model_school_webservice,school_management.group_employee,1,1,1,1
