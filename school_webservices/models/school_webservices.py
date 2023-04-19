@@ -61,7 +61,7 @@ class WebService(models.Model):
                 from zeep.wsse.signature import MemorySignature
                 import os
                 dirname = os.path.dirname(__file__)
-                filename = os.path.join(dirname, './static/' + self.wsdl_url)
+                filename = os.path.join(dirname, '../static' + self.wsdl_url)
                 client = CachingClient(filename, transport=transport,
                     wsse=MemorySignature(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']))
             except ImportError:
