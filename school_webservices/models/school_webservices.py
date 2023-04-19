@@ -43,7 +43,7 @@ class WebService(models.Model):
 
     @api.model
     def _getCertificate(self):
-        res_company = self.env.context['allowed_company_ids'][0]
+        res_company = self.env['res.company'].browse(self.env.context['allowed_company_ids'][0])
         return {
             'webservices_key': io.BytesIO(res_company.webservices_key).get_value(),
             'webservices_key_passwd': res_company.webservices_key_passwd,
