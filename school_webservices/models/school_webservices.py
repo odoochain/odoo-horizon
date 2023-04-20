@@ -21,12 +21,22 @@
 import logging
 import io
 from datetime import datetime, timedelta
+import uuid
+from lxml import etree
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
 
+from zeep.transports import Transport
+from zeep import CachingClient
+from zeep.wsse.signature import MemorySignature
+import os
+from zeep.plugins import HistoryPlugin
+
 _logger = logging.getLogger(__name__)
+
+_history = HistoryPlugin()
 
 TIMEOUT = 30
 
@@ -54,33 +64,18 @@ class WebService(models.Model):
     def _getClient(self):
         if not self._soapClientsCache.get(self.name):
             cert = self._getCertificate()
-            try:
-                from zeep.transports import Transport
-                transport = Transport(timeout=TIMEOUT)
-                from zeep import CachingClient
-                from zeep.wsse.signature import MemorySignature
-                import os
-                dirname = os.path.dirname(__file__)
-                filename = os.path.join(dirname, '../static' + self.wsdl_url)
-                client = CachingClient(filename, transport=transport,
-                    wsse=MemorySignature(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']))
-            except ImportError:
-                # fall back to non-caching zeep client
-                try:
-                    from zeep import Client
-                    from zeep.wsse.signature import MemorySignature
-                    import os
-                    dirname = os.path.dirname(__file__)
-                    filename = os.path.join(dirname, './static/' + self.wsdl_url)
-                    client = Client(filename, transport=transport,
-                    wsse=MemorySignature(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']))
-                except ImportError:
-                    raise ImportError('Please install zeep SOAP Library')
+            transport = Transport(timeout=TIMEOUT)
+            dirname = os.path.dirname(__file__)
+            filename = os.path.join(dirname, '../static' + self.wsdl_url)
+            client = CachingClient(filename, transport=transport,
+                wsse=MemorySignature(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']), plugins=[_history])
             self._soapClientsCache[self.name] = client
         return self._soapClientsCache[self.name]
 
     name = fields.Char('name')
     wsdl_url = fields.Char('WSDL Url')
+    wsa_action = fields.Char('Action WS-Addressing')
+    wsa_to = fields.Char('Destination (To) WS-Addressing')
 
     def doRequest(self, record=False):
         self.ensure_one()
@@ -97,52 +92,82 @@ class WebService(models.Model):
     def action_test_service(self):
         raise NotImplementedError('action_test_service not implemted for service %s' % self.name)
 
+    def _get_Headers(self):
+        return self._get_WSA_Headers() + self._get_WSSE_Headers()
+
+    def _get_WSA_Headers(self):
+        # Create the wsa:Action element
+        wsa_action = etree.Element("{http://www.w3.org/2005/08/addressing}Action")
+        wsa_action.text = self.wsa_action
+
+        # Create the wsa:From element
+        wsa_from = etree.Element("{http://www.w3.org/2005/08/addressing}From")
+        wsa_address = etree.Element("{http://www.w3.org/2005/08/addressing}Address")
+        wsa_address.text = self.wsa_to
+        wsa_from.append(wsa_address)
+
+        # Create the wsa:MessageID element
+        wsa_message_id = etree.Element("{http://www.w3.org/2005/08/addressing}MessageID")
+        wsa_message_id.text = 'uuid:%s' % uuid.uuid4()
+
+        # Create the wsa:To element
+        wsa_to = etree.Element("{http://www.w3.org/2005/08/addressing}To")
+        wsa_to.text = "http://www.etnic.be/services/fase"
+
+        return [wsa_action, wsa_from, wsa_message_id, wsa_to]
+
+    def _get_WSSE_Headers(self):
+        timestamp = datetime.now()
+        expires = timestamp + timedelta(minutes=10)
+
+        wsse_security = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}Security")
+        wsse_security.set("{http://www.w3.org/2003/05/soap-envelope}mustUnderstand", "1")
+
+        wsu_timestamp = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp",
+                                    wsu_Id='uuid-4-%s' % uuid.uuid4())
+        wsu_created = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Created")
+        wsu_created.text = timestamp.strftime("%Y-%m-%dT%H:%M:%SZ")
+        wsu_expires = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Expires")
+        wsu_expires.text = expires.strftime("%Y-%m-%dT%H:%M:%SZ")
+        wsu_timestamp.append(wsu_created)
+        wsu_timestamp.append(wsu_expires)
+
+        wsse_security.append(wsu_timestamp)
+
+        return [wsse_security]
+
 class FaseService(models.Model):
     '''Fase Web Service'''
     _inherit = 'school.webservice'
 
     def action_test_service(self):
         if self.name == 'fase':
-            self.doRequest(self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]))
+            resp = self.doRequest(self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]))
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'message': _('Web Service response : %s' % etree.tostring(_history.last_received["envelope"], encoding="unicode", pretty_print=True)),
+                    'next': {'type': 'ir.actions.act_window_close'},
+                    'sticky': False,
+                    'type': 'warning',
+                }
+            }
         else:
             self.super()
 
     def _callOperation(self, client, record=False):
         if self.name == 'fase':
-            message = {
-                'soapenv:Envelope': {
-                    '@xmlns:soapenv': 'http://schemas.xmlsoap.org/soap/envelope/',
-                    'soapenv:Header': {
-                        '@xmlns:wsse': 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
-                        'wsse:Security': {
-                            '@mustUnderstand': 'true',
-                            '@xmlns:wsu': 'http://schemas.xmlsoap.org/ws/2002/07/utility',
-                            'wsu:Timestamp': {
-                                'wsu:Created': datetime.utcnow().isoformat() + 'Z',
-                                'wsu:Expires': (datetime.utcnow() + timedelta(minutes=5)).isoformat() + 'Z',
-                            }
-                        },
-                        '@xmlns:wsa': 'http://www.w3.org/2005/08/addressing',
-                        'wsa:Action': 'domaine:fase?mode=sync',
-                        'wsa:From': {
-                            'wsa:Address': 'https://horizon.student-crlg.be'
-                        },
-                        'wsa:MessageID': 'uuid:3164ab7f-bf5a-423b-95ba-f4e5ebddd6b0',
-                        'wsa:To': 'http://www.etnic.be/janus/dedale'
-                    },
-                    'soapenv:Body': {
-                        'fase:ObtenirOrganisationRequete': {
-                            '@xmlns:fase': 'http://www.etnic.be/services/fase/organisation/v2',
-                            'fase:Organisation': {
-                                'fase:Type': 'ETAB',
-                                'fase:Identifiant': record.fase_code
-                            },
-                            'fase:Dmd': 'FICHE'
-                        }
-                    }
-                }
-            }
-            return client.service.obtenirOrganisation(message)
+            fase_ns = 'http://www.etnic.be/services/fase/organisation/v2'
+            fase_cfwb_ns = 'http://www.cfwb.be/enseignement/fase'
+            fase = client.type_factory(fase_ns)
+            fase_cfwb = client.type_factory(fase_cfwb_ns)
+            res = client.service.obtenirOrganisation(
+                Organisation=[fase.OrganisationCT(
+                    Type=fase_cfwb.OrganisationST('ETAB'),
+                    Identifiant=record.fase_code
+                )], 
+                Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
         else:
             self.super(client, record)
 

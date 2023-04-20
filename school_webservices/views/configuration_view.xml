@@ -60,6 +60,8 @@
             <tree string="webservice">
                 <field name="name" />
                 <field name="wsdl_url" />
+                <field name="wsa_action"/>
+                <field name="wsa_to"/>
                 <button type="object" icon="fa-folder-open" name="action_test_service" string="" />
             </tree>
         </field>

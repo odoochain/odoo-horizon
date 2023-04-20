@@ -7,7 +7,7 @@
 <xsd:element name="ObtenirOrganisationReponse" type="tns:ObtenirOrganisationReponseCT"></xsd:element>
 <xsd:complexType name="ObtenirOrganisationRequeteCT">
 <xsd:sequence>
-<xsd:element maxOccurs="2" name="Organisation" type="tns:OrganisationCT"></xsd:element>
+<xsd:element name="Organisation" type="tns:OrganisationCT"></xsd:element>
 <xsd:element name="Dmd" type="fase:DmdST"></xsd:element>
 </xsd:sequence>
 </xsd:complexType>
