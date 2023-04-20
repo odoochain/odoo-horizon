@@ -19,6 +19,7 @@
 #
 ##############################################################################
 import logging
+import base64
 import io
 from datetime import datetime, timedelta
 import uuid
@@ -55,9 +56,9 @@ class WebService(models.Model):
     def _getCertificate(self):
         res_company = self.env['res.company'].browse(self.env.context['allowed_company_ids'][0])
         return {
-            'webservices_key': io.BytesIO(res_company.webservices_key).read().decode('UTF-8'),
+            'webservices_key': io.BytesIO(base64.decodestring(res_company.webservices_key)).read().decode('utf-8'),
             'webservices_key_passwd': res_company.webservices_key_passwd,
-            'webservices_certificate': io.BytesIO(res_company.webservices_certificate).read().decode('UTF-8'),
+            'webservices_certificate': io.BytesIO(base64.decodestring(res_company.webservices_certificate)).read().decode('utf-8'),
         }
 
     @api.model
