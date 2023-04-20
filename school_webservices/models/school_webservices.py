@@ -124,8 +124,9 @@ class WebService(models.Model):
         wsse_security = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}Security")
         wsse_security.set("{http://www.w3.org/2003/05/soap-envelope}mustUnderstand", "1")
 
-        wsu_timestamp = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp",
-                                    wsu_Id='uuid-4-%s' % uuid.uuid4())
+        wsu_timestamp = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp")
+        wsu_timestamp.set("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Id", 'id-%s' % uuid.uuid4())
+
         wsu_created = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Created")
         wsu_created.text = timestamp.strftime("%Y-%m-%dT%H:%M:%SZ")
         wsu_expires = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Expires")
