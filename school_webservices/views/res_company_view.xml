@@ -27,11 +27,13 @@
             <field name="inherit_id" ref="base.view_company_form" />
             <field name="priority">110</field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='website']" position="after">
-                    <field name="webservices_key"/>
-                    <field name="webservices_key_passwd"/>
-                    <field name="webservices_certificate"/>
-                    <field name="fase_code"/>
+                <xpath expr="//page[@name='general_info']" position="after">
+                    <page string="ARES Web Services" name="webservices">
+                        <field name="webservices_key"/>
+                        <field name="webservices_key_passwd"/>
+                        <field name="webservices_certificate"/>
+                        <field name="fase_code"/>
+                    </page>
                 </xpath>
             </field>
         </record>
