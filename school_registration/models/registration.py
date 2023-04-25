@@ -286,7 +286,7 @@ class Form(models.Model):
                 else :
                     reg = self.env['school.registration'].search([['year_id','=',registration_open_year_id],['student_id','=',rec.submission_partner_id.id],['registration_form_id','=',rec.id]])
                     if not reg :
-                        contact_form_ids = rec.search([['name','=','new_contact'],['submission_partner_id','=',rec.submission_partner_id],['state','=','COMPLETE']])
+                        contact_form_ids = rec.search([['name','=','new_contact'],['submission_partner_id','=',rec.submission_partner_id.id],['state','=','COMPLETE']])
                         reg = self.env['school.registration'].create({
                             'year_id' : registration_open_year_id,
                             'student_id' : rec.submission_partner_id.id,
