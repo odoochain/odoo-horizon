@@ -290,7 +290,7 @@ class Form(models.Model):
                         reg = self.env['school.registration'].create({
                             'year_id' : registration_open_year_id,
                             'student_id' : rec.submission_partner_id.id,
-                            'contact_form_id' : max(contact_form_ids.ids),
+                            'contact_form_id' : max(contact_form_ids.ids) if contact_form_ids else False,
                             'registration_form_id' : rec.id
                         })
                         rec.registration_id = reg.id
