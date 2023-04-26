@@ -261,6 +261,59 @@
       </field>
     </record>
 
+    
+    <!-- Course Group Summary Form View -->
+    <record model="ir.ui.view" id="individual_course_summary_form">
+      <field name="name">school.individual_course_summary.view</field>
+      <field name="model">school.individual_course_summary</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Course Summary">
+          <sheet>
+            <widget name="web_ribbon" text="Unité" bg_color="bg-primary"/>
+            <div class="container" style="margin-left:0px;">
+              <div class="row">
+                <div class="h-100 d-inline-block" style="width: 150px;">
+                  <field name="image_512" readonly="1" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
+                </div>
+                <div class="col-8">
+                  <h2>
+                    <field name="name"/>
+                  </h2>
+                  <h3 class="o_row row no-gutters d-flex">
+                      <div class="col">
+                        <label for="uid" invisible="1"/>
+                        <small class="oe_grey" ><field name="uid" readonly="1"/></small>
+                      </div>
+                  </h3>
+                </div>
+              </div>
+            </div>
+                <!--<h3 class="oe_fade">
+                 <field name="bloc_id" options='{"no_open":True}'/>
+                </h3>-->
+            <group col="2">
+              <field name="course_group_id" />
+              <field name="responsible_id" />
+              <!--<field name="weight" />-->
+              <field name="total_hours" />
+              <field name="total_credits" />
+            </group>
+            <separator string="Course Group" colspan="4"/>
+            <field name="ind_course_group_ids" colspan="4">
+              <tree string="Course Groups">
+                <field name="uid" />
+                <field name="year_id" />
+                <field name="name" />
+                <field name="total_hours" />
+                <field name="total_credits" />
+              </tree>
+            </field>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
     <record id="view_individual_courses_filter" model="ir.ui.view">
       <field name="name">individual_course.select</field>
       <field name="model">school.individual_course</field>
