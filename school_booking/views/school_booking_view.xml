@@ -85,7 +85,7 @@
         <field name="inherit_id" ref="calendar.view_calendar_event_form" />
         <field eval="25" name="priority" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_ids']" position="before">
+            <xpath expr="//notebook" position="before">
               <group>
                 <field name="room_id"/>
                 <field name="asset_ids" widget="many2many_tags"/>
