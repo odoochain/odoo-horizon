@@ -22,15 +22,6 @@
 -->
 
 <odoo>
-  
-
-    <template id="assets_backend" name="school calendar assets" inherit_id="calendar.assets_backend">
-        <xpath expr="." position="inside">
-            <!--<link rel="stylesheet" href="/school_booking/static/src/css/booking_calendar.css"/>
-            <script type="text/javascript" src="/school_booking/static/src/js/booking_calendar.js"></script>-->
-        </xpath>
-    </template>
-
     <!-- School Calendar Form View -->
     <record model="ir.ui.view" id="calendar_form">
       <field name="name">school.calendar.view</field>
