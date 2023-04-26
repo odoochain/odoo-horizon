@@ -25,7 +25,7 @@
     'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': ['mail','partner_contact_gender','partner_second_lastname','partner_contact_birthdate','partner_contact_birthplace'],
+    'depends': ['mail', 'partner_contact_birthdate', 'partner_firstname', 'partner_contact_gender'],
     'init_xml': [],
     'data': [
         'school_data.xml',

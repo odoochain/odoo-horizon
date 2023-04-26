@@ -112,7 +112,6 @@ class Partner(models.Model):
     birthplace = fields.Char('Birthplace')
     birthcountry = fields.Many2one('res.country', 'Birth Country', ondelete='restrict')
     phone2 = fields.Char('Phone2')
-    title = fields.Selection([('Mr', 'Monsieur'),('Mme', 'Madame'),('Mlle', 'Mademoiselle')])
     marial_status = fields.Selection([('M', 'Maried'),('S', 'Single')])
     registration_date = fields.Date('Registration Date')
     email_personnel = fields.Char('Email personnel')
