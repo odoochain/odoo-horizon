@@ -73,10 +73,12 @@
 
     <record id='domain_1' model='school.domain'>
         <field name="name">MUSIC</field>
+        <field name="long_name">Musique</field>
     </record>
 
     <record id='domain_2' model='school.domain'>
         <field name="name">THEATRE</field>
+        <field name="long_name">Théatre et art de la parole</field>
     </record>
 
     <record id='spec_1' model='school.speciality'>
