@@ -41,6 +41,11 @@
     'demo': [
         'school_data_demo.xml'
     ],
+    'assets': {
+        'web.assets_backend': [
+            'school_management/static/src/scss/primary_variables.scss'
+        ],
+    },
     'description': '''
         This modules add management tools for a school.
     ''',
