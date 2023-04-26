@@ -120,6 +120,7 @@
 
     <record id="school_program_1" model="school.program">
         <field name="title">Program Number 1</field>
+        <field name="year_id" ref="school_management.year_2023_2024"/>
         <field name="bloc_ids" eval="[(4, ref('school_management.school_bloc_1'))]"/>
     </record>
 
