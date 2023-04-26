@@ -1,0 +1,54 @@
+body {
+    font-family: "Fira Sans", Arial, sans-serif;
+}
+
+h1 {
+    font-family: "Lato", "Fira Sans", sans-serif;
+    color : #666666;
+}
+
+h2, h3,
+h4, h5, h6 {
+    font-family: "Lato", "Fira Sans", sans-serif;
+    color : #888888;
+}
+
+.major_row {
+    color : darkblue;
+    font-weight: 800;
+}
+
+.minor_row {
+    font-style: italic;
+}
+
+.minor_row td {
+    padding: 0;
+}
+
+.major_row td {
+    border-top: solid 2px;
+    border-color: #888888;
+    border-right: 0;
+    border-left: 0;
+    padding: 0;
+}
+
+.horizon-table {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-left: none;
+    border-right: none;
+}
+
+.horizon-section-title {
+    font-size:130%;
+    font-weight:800;
+    border-bottom: solid 2px #cccccc; color:rgb(50, 100, 200); 
+    margin-bottom:10px;
+    margin-top:30px;
+}
+
+.center {
+    text-align: center;
+}

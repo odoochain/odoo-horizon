@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -68,6 +68,14 @@ class Year(models.Model):
     
     previous = fields.Many2one('school.year', string='Previous Year')
     next = fields.Many2one('school.year', string='Next Year')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        years = super().create(vals_list)
+        for year in years:
+            if year.previous :
+                year.previous.next = year
+        return years
     
 class Users(models.Model):
     '''Users'''
@@ -94,11 +102,7 @@ class Partner(models.Model):
     initials = fields.Char('Initials')
     
     nationality_id = fields.Many2one("res.country", "Nationality")
-    
-    image = fields.Binary('Image', oldname='image_1920')
-    image_medium = fields.Binary('Image Medium', oldname='image_512')
-    image_small = fields.Binary('Image Small', oldname='image_128')
-    
+
     @api.constrains('initials')
     def _check_initials(self):
         for rec in self:
@@ -116,7 +120,7 @@ class Partner(models.Model):
     
     student_program_ids = fields.One2many('school.individual_program', 'student_id', string='Programs')
     student_bloc_ids = fields.One2many('school.individual_bloc', 'student_id', string='Programs')
-
+    
     # Secondary adress
 
     secondary_street = fields.Char('Street')
@@ -161,6 +165,8 @@ class Partner(models.Model):
             year_ids.append(current_year_id.next.id)
         return [('student_bloc_ids.year_id','in',year_ids)]
         
+    student_current_block_name = fields.Char('Current Bloc', compute='_get_student_current_block_name')
+        
     student_current_course_ids = fields.One2many('school.individual_course', compute='_get_student_current_individual_course_ids', string='Courses')
     student_course_ids = fields.One2many('school.individual_course', 'student_id', string='Courses', domain="[('year_id', '=', self.env.user.current_year_id.id)]")
     
@@ -169,6 +175,11 @@ class Partner(models.Model):
     
     teacher_curriculum_vitae = fields.Html('Curriculum Vitae')
     
+    def _get_student_current_block_name(self):
+        for rec in self:
+            blocs = self.env['school.individual_bloc'].search([['year_id', '=', self.env.user.current_year_id.id], ['student_id', '=', rec.id]])
+            rec.student_current_block_name = ','.join(blocs.mapped('source_bloc_id.name'))
+            
     def _get_teacher_current_individual_course_ids(self):
         for rec in self:
             rec.teacher_current_course_ids = self.env['school.individual_course_proxy'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', rec.id]])
@@ -180,17 +191,10 @@ class Partner(models.Model):
     def _get_teacher_current_course_session_ids(self):
         for rec in self:
             rec.teacher_current_assigment_ids = self.env['school.course_session'].search([['year_id', '=', self.env.user.current_year_id.id], ['teacher_id', '=', rec.id]])
-        
-    # TODO : This is not working but don't know why
-    @api.model
-    def _get_default_image(self, is_company, colorize=False):
-        if getattr(threading.currentThread(), 'testing', False) or self.env.context.get('install_mode'):
-            return False
-
-        if self.env.context.get('partner_type') == 'invoice':
-            img_path = openerp.modules.get_module_resource('school_management', 'static/src/img', 'home-icon.png')
-            with open(img_path, 'rb') as f:
-                image = f.read()
-            return tools.image_resize_image_big(image.encode('base64'))
-        else:
-            return super(Partner, self)._get_default_image(is_company, colorize)
+            
+class Company(models.Model):
+    _inherit = 'res.company'
+    
+    director_signature = fields.Binary(string="Director Signature")
+    
+    secretary_signature = fields.Binary(string="Secretarty Signature")

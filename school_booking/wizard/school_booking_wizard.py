@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -46,7 +46,7 @@ class BookingWizard(models.TransientModel):
                 ('room_id', '<>', False),
             ]
             all_rooms_ids = self.env['school.asset'].search( [['asset_type_id.is_room','=',True]] )
-            busy_rooms_ids = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain,the_fields)
+            busy_rooms_ids = self.env['calendar.event'].sudo().with_context({'virtual_id': True}).search(domain)
             busy_rooms_ids = busy_rooms_ids.filtered(lambda r : r.start < self.to_date).filtered(lambda r : r.stop > self.from_date).mapped('room_id')
             available_rooms_ids = all_rooms_ids - busy_rooms_ids
             return {'domain': {'room_id': [('is_room','=',True),('id','in',available_rooms_ids.ids)]}}

@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,41 +19,83 @@
 #
 ##############################################################################
 import logging
+import json
+
+import pandas as pd
+import numpy as np
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import MissingError
 
 _logger = logging.getLogger(__name__)
 
-from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsx
+from odoo.addons.report_xlsx_helper.report.report_xlsx_format import (
+    FORMATS,
+    XLS_HEADERS,
+)
 
-class PartnerXlsx(ReportXlsx):
+def remove_url_keys(json_data):
+    """
+    Recursively remove all "url" keys from a nested JSON file.
+    :param json_data: JSON data to process.
+    :return: Processed JSON data with all "url" keys removed.
+    """
+    if isinstance(json_data, dict):
+        return {k: remove_url_keys(v) for k, v in json_data.items() if k != 'url'}
+    elif isinstance(json_data, list):
+        return [remove_url_keys(item) for item in json_data]
+    else:
+        return json_data
 
+class PartnerExportXlsx(models.AbstractModel):
+    _name = "report.school_reporting_xlsx.partner_export_xlsx"
+    _description = "Report xlsx helpers"
+    _inherit = "report.report_xlsx.abstract"
+    
     def generate_xlsx_report(self, workbook, data, partners):
-        # One sheet by partner
-        sheet = workbook.add_worksheet('partners')
-        i = 0
-        sheet.write(i, 0, 'name')
-        sheet.write(i, 1, 'firstname')
-        sheet.write(i, 2, 'lastname')
-        sheet.write(i, 3, 'initials')
-        sheet.write(i, 4, 'reg_number')
-        sheet.write(i, 5, 'mat_number')
-        sheet.write(i, 6, 'student_current_bloc_name')
-        sheet.write(i, 7, 'birthplace')
-        sheet.write(i, 8, 'birthdate')
-        i = 1
-        for obj in partners:
-            sheet.write(i, 0, obj.name)
-            sheet.write(i, 1, obj.firstname)
-            sheet.write(i, 2, obj.lastname)
-            sheet.write(i, 3, obj.initials)
-            sheet.write(i, 4, obj.reg_number)
-            sheet.write(i, 5, obj.mat_number)
-            sheet.write(i, 6, obj.student_current_bloc_name)
-            sheet.write(i, 7, obj.birthplace)
-            sheet.write(i, 8, obj.birthdate)
-            i = i + 1
-
-PartnerXlsx('report.res.partner.xlsx',
-            'res.partner')
+        sheet = workbook.add_worksheet("Partners")
+        for i, obj in enumerate(partners):
+            bold = workbook.add_format({"bold": True})
+            sheet.write(i, 0, obj.name, bold)
+            sheet.write(i, 1, obj.email, bold)
+            
+class RegistrationExportXlsx(models.AbstractModel):
+    _name = "report.school_reporting_xlsx.registration_export_xlsx"
+    _description = "Report xlsx helpers"
+    _inherit = "report.report_xlsx.abstract"
+    
+    def generate_xlsx_report(self, workbook, data, registrations):
+        items = []
+        for i, obj in enumerate(registrations):
+            item = {
+                'id' : obj.id,
+                'name' : obj.name,
+                'email' : obj.email,
+                'contact_form_id' : obj.contact_form_id.id,
+                'registration_form_id' : obj.registration_form_id.id,
+                'state' : obj.state,
+                'kanban_state' : obj.kanban_state,
+                'program' : obj.program_id.name,
+                'speciality' : obj.speciality_id.name,
+            }
+            if obj.contact_form_data :
+                contact_form_data = json.loads(obj.contact_form_data)
+                contact_form_data = remove_url_keys(contact_form_data)
+                item['contact_form_data'] = contact_form_data
+            if obj.registration_form_data :
+                registration_form_data = json.loads(obj.registration_form_data)
+                registration_form_data = remove_url_keys(registration_form_data)
+                item['registration_form_data'] = registration_form_data
+            items.append(item)
+        df = pd.json_normalize(items)
+        df = df.fillna('').replace([np.inf, -np.inf], '')
+        worksheet = workbook.add_worksheet('Registration')
+        header_format = workbook.add_format({'bold': True, 'align': 'center', 'valign': 'vcenter'})
+        for col_num, value in enumerate(df.columns.values):
+            worksheet.write(0, col_num, value, header_format)
+        for row_num, row_data in enumerate(df.values):
+            for col_num, col_data in enumerate(row_data):
+                if isinstance(col_data, list):
+                    worksheet.write(row_num + 1, col_num, json.dumps(col_data, indent=2))
+                else : 
+                    worksheet.write(row_num + 1, col_num, col_data)

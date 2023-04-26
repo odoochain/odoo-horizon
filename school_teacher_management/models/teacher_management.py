@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -37,7 +37,7 @@ class SchoolTeacherDesignation(models.Model):
             ('active', 'Active'),
             ('canceled', 'Canceled'),
         ], string='Status', index=True, readonly=True, default='draft',
-        track_visibility='onchange',
+        tracking=True,
         copy=False,
         help=" * The 'Draft' status is used when a designation is not validated yet.\n"
              " * The 'Active' status is when a designation is currently active.\n"

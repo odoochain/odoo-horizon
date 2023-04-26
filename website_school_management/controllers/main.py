@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,7 @@
 ##############################################################################
 
 import logging
-
+import json
 import werkzeug
 
 from odoo.addons.http_routing.models.ir_http import slug, unslug
@@ -31,6 +31,7 @@ from odoo.addons.web.controllers.main import CSVExport
 from odoo.http import request, serialize_exception
 from odoo import tools
 from odoo.tools.translate import _
+from odoo.tools import ustr
 
 _logger = logging.getLogger(__name__)
 
@@ -178,10 +179,6 @@ class csv_school_management(CSVExport):
                     {
                       "name": "title",
                       "label": "Titre"
-                    },
-                    {
-                      "name": "enable_exclusion_bool",
-                      "label": "Tient compte des côtes d'exclusion"
                     },
                     {
                       "name": "total_weight",
@@ -439,6 +436,37 @@ class website_portal_school_management(http.Controller):
                 'slug_id' : program_id,
             }
             return request.render("website_school_management.program_details", values)
+        else :
+            raise werkzeug.exceptions.HTTPException(description='Unkown program.')
+            
+    @http.route(['/program_json/<program_id>'], type='http', auth='public')
+    def program_details_json(self, program_id, redirect=None, **post):
+        _, program_id = unslug(program_id)
+        program = request.env['school.program'].sudo().search_read([('id','=',program_id)])
+        if program :
+            program = program[0]
+            program.pop('course_group_ids')
+            blocs = request.env['school.bloc'].sudo().search_read([('id','in',program['bloc_ids'])])
+            for bloc in blocs :
+                bloc['cycle_id'] = request.env['school.cycle'].sudo().search_read([('id','=',bloc['cycle_id'][0])])
+                bloc['speciality_id'] = request.env['school.speciality'].sudo().search_read([('id','=',bloc['speciality_id'][0])])
+                course_groups = request.env['school.course_group'].sudo().search_read([('id','in',bloc['course_group_ids'])])
+                for cg in course_groups :
+                    cg.pop('bloc_ids')
+                    courses = request.env['school.course'].sudo().search_read([('id','in',cg['course_ids'])])
+                    for c in courses :
+                        c.pop('bloc_ids')
+                    cg['course_ids'] = courses
+                bloc['course_group_ids'] = course_groups
+            program['bloc_ids'] = blocs
+            body = json.dumps(program, default=ustr)
+            response = request.make_response(body, [
+                # this method must specify a content-type application/json instead of using the default text/html set because
+                # the type of the route is set to HTTP, but the rpc is made with a get and expects JSON
+                ('Content-Type', 'application/json'),
+                ('Cache-Control', 'public, max-age=' + str(http.STATIC_CACHE_LONG)),
+            ])
+            return response
         else :
             raise werkzeug.exceptions.HTTPException(description='Unkown program.')
         

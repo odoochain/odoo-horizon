@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,7 +22,7 @@
     'name': 'School management',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'be-Cloud.be (Jerome Sonnet)',
+    'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
     'depends': ['mail', 'partner_contact_birthdate', 'partner_firstname', 'partner_contact_gender'],
@@ -33,11 +33,14 @@
         'views/program_view.xml',
         'views/individual_program_view.xml',
         'views/configuration_view.xml',
+        'views/ir_assets.xml',
         'report/report_program.xml',
         'sequences/school_sequence.xml',
         'security/ir.model.access.csv',
     ],
-    'demo_xml': [],
+    'demo': [
+        'school_data_demo.xml'
+    ],
     'description': '''
         This modules add management tools for a school.
     ''',

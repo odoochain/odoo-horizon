@@ -2,8 +2,8 @@
 <!--
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -64,15 +64,22 @@
                     <sheet>
                         <div class="oe_title">
                           <h1>
-                            Course Description - <field name="course_id" class="oe_inline" style="width: 800px !important;" domain="[('cycle_id.short_name','!=','MB')]" options="{'no_create': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            Course Description - <field name="course_id" domain="[('uid','ilike','AA-1'),('teacher_ids','in',[partner_id])]" class="oe_inline" style="width: 800px !important;" options="{'no_create': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
                           </h1>
                           <h3 class="oe_fade">
-                            by <field name="author_id" class="oe_inline" readonly="1"/>
-                          </h3>
-                          <h3 class="oe_fade">
-                            for <field name="course_ids" class="oe_inline" widget="many2many_tags"/>
+                            by <field name="author_id" class="oe_inline" readonly="1"/><field name="partner_id" invisible="1"/>
                           </h3>
                         </div>
+                        <group>
+                          <field name="course_ids" class="oe_inline" domain="[('uid','ilike','AA-1'),('teacher_ids','in',[partner_id])]" >
+                            <tree>
+                              <field name="uid"/>
+                              <field name="name"/>
+                              <field name="quadri"/>
+                              <field name="bloc_ids" widget="many2many_tags"/>
+                            </tree>
+                          </field>
+                        </group>
                         <group col="4">
                           <field name="cycle_id" readonly="1" colspan="4"/>
                           <field name="course_group_id" readonly="1"/>
@@ -191,7 +198,7 @@
         </record>
         
         <!-- Top menu item -->
-        <menuitem name="Course Description" id="menu_course_description" web_icon="note,static/description/icon.png" sequence="61" groups="school_management.group_program_management,school_management.group_teacher"/>
+        <menuitem name="Course Description" id="menu_course_description" web_icon="note,static/description/icon.png" sequence="8" groups="school_management.group_program_management,school_management.group_teacher"/>
 
         <menuitem id="menu_course_documentation_list" parent="school_course_description.menu_course_description" action="action_course_documentation_list" sequence="10" />
         

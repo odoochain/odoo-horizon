@@ -2,8 +2,8 @@
 <!--
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,7 @@
 #
 ##############################################################################
 -->
-<odoo>
+<odoo noupdate="1">
 
     <record id="group_employee" model="res.groups">
         <field name="name">Employees</field>
@@ -46,11 +46,40 @@
         <field name="name">Enseignant Portail</field>
     </record>
 
+    <record id="year_2021_2022" model="school.year">
+        <field name="name">2021-2022</field>
+        <field name="short_name">21-22</field>
+    </record>
+
+    <record id="year_2022_2023" model="school.year">
+        <field name="name">2022-2023</field>
+        <field name="short_name">22-23</field>
+        <field name="previous" ref="year_2021_2022"/>
+    </record>
+
+    <record id="year_2023_2024" model="school.year">
+        <field name="name">2023-2024</field>
+        <field name="short_name">23-24</field>
+        <field name="previous" ref="year_2022_2023"/>
+    </record>
+
+    <record id="year_2024_2025" model="school.year">
+        <field name="name">2024-2025</field>
+        <field name="short_name">24-25</field>
+        <field name="previous" ref="year_2023_2024"/>
+    </record>
+
+    <record id="year_2025_2026" model="school.year">
+        <field name="name">2025-2026</field>
+        <field name="short_name">25-26</field>
+        <field name="previous" ref="year_2024_2025"/>
+    </record>
+
     <record id="sequence_school_program" model="ir.sequence">
         <field name="name">School Program Sequence</field>
         <field name="code">school.program</field>
-        <field name="prefix">PROG-</field>
-        <field name="padding">5</field>
+        <field name="prefix">CYC-</field>
+        <field name="padding">6</field>
         <field name="number_next">1</field>
         <field name="number_increment">1</field>
         <field name="company_id"></field>
@@ -60,7 +89,7 @@
         <field name="name">School Bloc Sequence</field>
         <field name="code">school.bloc</field>
         <field name="prefix">BLOC-</field>
-        <field name="padding">5</field>
+        <field name="padding">6</field>
         <field name="number_next">1</field>
         <field name="number_increment">1</field>
         <field name="company_id"></field>
@@ -70,7 +99,7 @@
         <field name="name">School Course Group Sequence</field>
         <field name="code">school.course_group</field>
         <field name="prefix">UE-</field>
-        <field name="padding">5</field>
+        <field name="padding">6</field>
         <field name="number_next">1</field>
         <field name="number_increment">1</field>
         <field name="company_id"></field>
@@ -80,7 +109,47 @@
         <field name="name">School Course Sequence</field>
         <field name="code">school.course</field>
         <field name="prefix">AA-</field>
-        <field name="padding">5</field>
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id"></field>
+    </record>
+    
+    <record id="sequence_school_individual_program" model="ir.sequence">
+        <field name="name">School Individual Program Sequence</field>
+        <field name="code">school.individual_program</field>
+        <field name="prefix">CIE-</field>
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id"></field>
+    </record>
+    
+    <record id="sequence_school_individual_bloc" model="ir.sequence">
+        <field name="name">School Individual Bloc Sequence</field>
+        <field name="code">school.individual_bloc</field>
+        <field name="prefix">PAE-</field>
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id"></field>
+    </record>
+    
+    <record id="sequence_school_individual_course_group" model="ir.sequence">
+        <field name="name">School Individual Course Group Sequence</field>
+        <field name="code">school.individual_course_group</field>
+        <field name="prefix">UEI-</field>
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id"></field>
+    </record>
+    
+    <record id="sequence_school_individual_course" model="ir.sequence">
+        <field name="name">School Individual Course Sequence</field>
+        <field name="code">school.individual_course</field>
+        <field name="prefix">AAI-</field>
+        <field name="padding">6</field>
         <field name="number_next">1</field>
         <field name="number_increment">1</field>
         <field name="company_id"></field>

@@ -2,8 +2,8 @@
 <!--
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -64,27 +64,27 @@
         </record>
             
         <template id="evaluation_summary_content">
-            <t t-call="report.html_container">
+            <t t-call="web.html_container">
                 <t t-set="data_report_margin_top" t-value="20"/>
                 <t t-set="data_report_header_spacing" t-value="15"/>
                 <t t-set="data_report_dpi" t-value="110"/>
-                <t t-call="report.external_layout">
+                <t t-call="web.external_layout">
                     <div class="page">
                         <div class="container">
                             <div class="row">
-                                <div class="col-xs-10 col-xs-offset-1">
+                                <div class="col-10 col-offset-1">
                                     <h2>Résultats <t t-esc="year"/></h2>
                                 </div>
                             </div>
                             <t t-foreach="docs" t-as="doc">
                             <t t-if="len(doc['blocs']) > 0">
                             <div class="row">
-                                <div class="col-xs-10 col-xs-offset-1">
+                                <div class="col-10 col-offset-1">
                                     <h4><t t-esc="doc['name']"/></h4>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-10 col-xs-offset-1">
+                                <div class="col-10 col-offset-1">
                                     <!-- Table -->
                                     <table class="table table-condensed table-bordered result_table">
                                         <colgroup>
@@ -130,7 +130,7 @@
                             </t>
                             </t>
                             <div class="row" style="margin-bottom:10px;">
-                                <div class="col-xs-10 col-xs-offset-1">
+                                <div class="col-10 col-offset-1">
                                     <u>Article 134 du Décret définissant le paysage de l'enseignement supérieur et l'organisation académique des études du 7-11-2013</u>
                                     Les autorités de l'établissement d'enseignement supérieur fixent le règlement des études, ainsi que les règles particulières de fonctionnement des jurys. Ces dispositions sont annexées au règlement des études. Sous réserve des autres dispositions légales, ce règlement de jury fixe notamment :
                                     […]
@@ -138,7 +138,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-10 col-xs-offset-1">
+                                <div class="col-10 col-offset-1">
                                     <u>Article 26 de l’annexe 4 du Règlement des études (présent sur le site internet de l’école :</u>
                                     « […] Tout recours relatif à une quelconque irrégularité, autre que la tricherie ou le plagiat, dans le déroulement des évaluations est adressé, sous pli recommandé, au secrétaire du jury, au plus tard dans les trois jours ouvrables qui suivent la notification des résultats des évaluations.
                                     L'introduction du recours peut également être faite par la remise d'un écrit au secrétaire. Dans ce cas, un accusé de réception est délivré.
@@ -148,15 +148,15 @@
                                 </div>
                             </div>
                             <div class="row" style="margin-top:20px;margin-bottom:120px;">
-                                <div class="col-xs-4 col-xs-offset-1">
+                                <div class="col-4 col-offset-1">
                                     Le Directeur,
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-4">
                                     Le Secrétaire du Jury,
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-9 col-xs-offset-1">
+                                <div class="col-9 col-offset-1">
                                     Imprimé le <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y à %H:%M:%S')"/>
                                 </div>
                             </div>

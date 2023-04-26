@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -38,7 +38,7 @@ class AddDocuments(models.TransientModel):
     def default_get(self, fields):
         res = super(AddDocuments, self).default_get(fields)
         document_type_ids = self.env['school.official_document_type'].search([('default_add','=',True)]).mapped('id')
-        res['document_type_ids'] = document_type_ids
+        res['document_type_ids'] = [[6, _, document_type_ids]]
         return res
         
     

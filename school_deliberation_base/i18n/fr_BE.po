@@ -1,0 +1,447 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* school_deliberation_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-15 06:43+0000\n"
+"PO-Revision-Date: 2022-06-15 06:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,help:school_deliberation_base.field_school_deliberation__state
+msgid ""
+" * The 'Draft' status is used when a new deliberation is created and not running yet.\n"
+" * The 'Active' status is when a deliberation is ready to be processed.\n"
+" * The 'Archived' status is used when a deliberation is obsolete and shall be archived."
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,help:school_deliberation_base.field_school_bloc_deliberation__state
+msgid ""
+" * The 'Draft' status is used when results are not confirmed yet.\n"
+" * The 'In Progress' status is used during the courses.\n"
+" * The 'Postponed' status is used when a second session is required.\n"
+" * The 'Awarded' status is used when the bloc is awarded in either first or second session.\n"
+" * The 'Failed' status is used when the bloc is definitively considered as failed.\n"
+" * The 'Abandoned' status is when the student abandoned his bloc.\n"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_kanban_view
+msgid "<b>Blocs : </b>"
+msgstr "<b>PAE : </b>"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_kanban_view
+msgid "<b>Programs : </b>"
+msgstr "<b>Cycles : </b>"
+
+#. module: school_deliberation_base
+#: model:ir.model,name:school_deliberation_base.model_ir_actions_act_window_view
+msgid "Action Window View"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_form
+msgid "Activate Deliberation"
+msgstr "Activer la délibération"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields.selection,name:school_deliberation_base.selection__school_deliberation__state__active
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.view_deliberation_filter
+msgid "Active"
+msgstr "Actif"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_individual_bloc__all_responsible_ids
+msgid "All Responsible"
+msgstr "Tous les responsables"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_form
+msgid "Archive Deliberation"
+msgstr "Archiver la délibération"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields.selection,name:school_deliberation_base.selection__school_deliberation__state__archived
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.view_deliberation_filter
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.bloc_deliberation_form
+msgid "Awarded"
+msgstr "Réussi"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__bloc_id
+msgid "Bloc"
+msgstr "PAE"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.bloc_deliberation_form
+msgid "Bloc Deliberation"
+msgstr "Délibération de PAE"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__individual_bloc_ids
+msgid "Blocs"
+msgstr "PAE"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__individual_bloc_count
+msgid "Blocs Count"
+msgstr "Nombre de PAE"
+
+#. module: school_deliberation_base
+#: model_terms:ir.actions.act_window,help:school_deliberation_base.action_deliberation_form
+msgid "Click to add a deliberation."
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__comments
+msgid "Comments"
+msgstr "Commentaire"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__course_group_id
+msgid "Course Group"
+msgstr "Unité d'enseignement"
+
+#. module: school_deliberation_base
+#: model:ir.actions.act_window,name:school_deliberation_base.action_course_group_deliberation_form_view
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.course_group_deliberation_form
+msgid "Course Group Deliberation"
+msgstr "Délibération d'unité"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__course_ids
+msgid "Courses"
+msgstr "Activité d'apprentissage"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__create_uid
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__create_uid
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__create_date
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__create_date
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.view_deliberation_filter
+msgid "Current Year"
+msgstr "Année en cours"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__date
+msgid "Date"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__decision
+msgid "Decision"
+msgstr "Décision"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_form
+msgid "Deliberate Blocs"
+msgstr "Délibérer les PAEs"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__deliberation_id
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__deliberation_id
+#: model:ir.model.fields.selection,name:school_deliberation_base.selection__ir_actions_act_window_view__view_mode__deliberation
+#: model:ir.model.fields.selection,name:school_deliberation_base.selection__ir_ui_view__type__deliberation
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_form
+msgid "Deliberation"
+msgstr "Délibération"
+
+#. module: school_deliberation_base
+#: model:ir.actions.act_window,name:school_deliberation_base.action_deliberation_form
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_individual_bloc__deliberation_ids
+#: model:ir.ui.menu,name:school_deliberation_base.menu_deliberation_tree
+msgid "Deliberations"
+msgstr "Déliberations"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_ir_actions_act_window_view__display_name
+#: model:ir.model.fields,field_description:school_deliberation_base.field_ir_ui_view__display_name
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__display_name
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__display_name
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__display_name
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_individual_bloc__display_name
+msgid "Display Name"
+msgstr "Afficher le nom"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields.selection,name:school_deliberation_base.selection__school_deliberation__state__draft
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.view_deliberation_filter
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__evaluation
+msgid "Evaluation"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__excused_participant_ids
+msgid "Excused Particpants"
+msgstr "Excusés"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.course_group_deliberation_form
+msgid "FR"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.bloc_deliberation_form
+msgid "Failed"
+msgstr "Echec"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__final_result_disp
+msgid "Final Result Display"
+msgstr "Résultat final"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields.selection,name:school_deliberation_base.selection__school_deliberation__session__first
+msgid "First"
+msgstr "Première"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_ir_actions_act_window_view__id
+#: model:ir.model.fields,field_description:school_deliberation_base.field_ir_ui_view__id
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__id
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__id
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__id
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_individual_bloc__id
+msgid "ID"
+msgstr "Identifiant"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__image
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__image_medium
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__image_small
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__image
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__image_medium
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__image_small
+msgid "Image"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model,name:school_deliberation_base.model_school_individual_bloc
+msgid "Individual Bloc"
+msgstr "Bloc individuel"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__is_deliberated_to_acquiered
+msgid "Is deliberated to acquiered"
+msgstr "Est délibéré"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_ir_actions_act_window_view____last_update
+#: model:ir.model.fields,field_description:school_deliberation_base.field_ir_ui_view____last_update
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation____last_update
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation____last_update
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation____last_update
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_individual_bloc____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__write_uid
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__write_uid
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__write_date
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__write_date
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model,name:school_deliberation_base.model_school_bloc_deliberation
+msgid "Manage deliberation of a bloc"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model,name:school_deliberation_base.model_school_course_group_deliberation
+msgid "Manage deliberation of a course group"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model,name:school_deliberation_base.model_school_deliberation
+msgid "Manage deliberation process"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__name
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.view_deliberation_filter
+msgid "Next Year"
+msgstr "Année suivante"
+
+#. module: school_deliberation_base
+#: model_terms:ir.actions.act_window,help:school_deliberation_base.action_deliberation_form
+msgid "Odoo helps you easily track all activities related to a deliberation."
+msgstr ""
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.course_group_deliberation_form
+msgid "PR"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__participant_ids
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__participant_ids
+msgid "Particpants"
+msgstr "Participants"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_form
+msgid "Populate Participants"
+msgstr "Mettre à jour les participants"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.bloc_deliberation_form
+msgid "Postponed"
+msgstr "Ajourné"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.view_deliberation_filter
+msgid "Previous Year"
+msgstr "Année précédente"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__private_comments
+msgid "Private Comments"
+msgstr "Commentaires privés"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__individual_program_ids
+msgid "Programs"
+msgstr "Cycles"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__individual_program_count
+msgid "Programs Count"
+msgstr "Nombre de cycles"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__public_comments
+msgid "Public Comments"
+msgstr "Commentaires publics"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.course_group_deliberation_form
+msgid "SR"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.view_deliberation_bloc_filter
+msgid "Search Blocs"
+msgstr "Chercher les blocs"
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.view_deliberation_filter
+msgid "Search Deliberation"
+msgstr "Rechercher une délibération"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields.selection,name:school_deliberation_base.selection__school_deliberation__session__sec
+msgid "Second"
+msgstr "Deuxième"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__secretary_id
+msgid "Secretary"
+msgstr "Secrétaire"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__session
+msgid "Session"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model_terms:ir.ui.view,arch_db:school_deliberation_base.deliberation_form
+msgid "Set to Draft"
+msgstr "Mettre en brouillon"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__state
+msgid "State"
+msgstr "Status"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__state
+msgid "Status"
+msgstr "Etat"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__student_name
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_course_group_deliberation__student_name
+msgid "Student"
+msgstr "Etudiant"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields.selection,name:school_deliberation_base.selection__school_deliberation__session__third
+msgid "Third"
+msgstr "Troisième"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__name
+msgid "Title"
+msgstr "Titre"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__total_acquiered_credits
+msgid "Total Acquiered Credits"
+msgstr "ECTS Acquis"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_bloc_deliberation__total_not_acquiered_credits
+msgid "Total Not Acquiered Credits"
+msgstr "ECTS Non-Acquis"
+
+#. module: school_deliberation_base
+#: model:ir.model,name:school_deliberation_base.model_ir_ui_view
+msgid "View"
+msgstr ""
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_ir_actions_act_window_view__view_mode
+#: model:ir.model.fields,field_description:school_deliberation_base.field_ir_ui_view__type
+msgid "View Type"
+msgstr "Type de Vue"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__year_id
+msgid "Year"
+msgstr "Année"
+
+#. module: school_deliberation_base
+#: model:ir.model.fields,field_description:school_deliberation_base.field_school_deliberation__year_sequence
+msgid "Year Sequence"
+msgstr ""

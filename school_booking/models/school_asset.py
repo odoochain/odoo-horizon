@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -28,7 +28,7 @@ class Asset(models.Model):
     '''School Asset'''
     _name = 'school.asset'
     _description = 'School Asset'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread','image.mixin']
     _order = 'sequence'
     
     booking_policy = fields.Selection([
@@ -39,7 +39,7 @@ class Asset(models.Model):
         help=" * The 'Available' available to all users.\n"
              " * The 'Preserved' only employee can book.\n"
              " * The 'Out' no one can book.\n"
-             ,track_visibility='onchange')
+             ,tracking=True)
     
     abandonned_date = fields.Date('Abandonned Date')
     
@@ -70,23 +70,12 @@ class Asset(models.Model):
     linked_to_room = fields.Boolean(related='asset_type_id.linked_to_room', default=False)
     is_room = fields.Boolean(related='asset_type_id.is_room', store=True)
     room_id = fields.Many2one('school.asset', string='Linked Room', domain="[('is_room','=',True)]")
-    
-    # image: all image fields are base64 encoded and PIL-supported
-    image = fields.Binary("Photo", attachment=True,
-        help="This field holds the image used as photo for the employee, limited to 1024x1024px.")
-    image_medium = fields.Binary("Medium-sized photo", attachment=True,
-        help="Medium-sized photo of the employee. It is automatically "
-             "resized as a 128x128px image, with aspect ratio preserved. "
-             "Use this field in form views or some kanban views.")
-    image_small = fields.Binary("Small-sized photo", attachment=True,
-        help="Small-sized photo of the employee. It is automatically "
-             "resized as a 64x64px image, with aspect ratio preserved. "
-             "Use this field anywhere a small image is required.")
-
+             
 class AssetCategory(models.Model):
     _name = "school.asset.category"
     _description = "Asset Category"
     _order = "sequence, name"
+    _inherit = ['image.mixin']
 
     @api.constrains('parent_id')
     def _check_category_recursion(self):
@@ -98,20 +87,6 @@ class AssetCategory(models.Model):
     child_ids = fields.One2many('school.asset.category', 'parent_id', string='Children Categories')
     is_leaf = fields.Boolean('Is Leaf', compute='_compute_is_leaf')
     sequence = fields.Integer(help="Gives the sequence order when displaying a list of asset categories.")
-    # NOTE: there is no 'default image', because by default we don't show
-    # thumbnails for categories. However if we have a thumbnail for at least one
-    # category, then we display a default image on the other, so that the
-    # buttons have consistent styling.
-    image = fields.Binary(attachment=True,
-        help="This field holds the image used as image for the cateogry, limited to 1024x1024px.")
-    image_medium = fields.Binary(string="Medium-sized image", attachment=True,
-        help="Medium-sized image of the category. It is automatically "
-             "resized as a 128x128px image, with aspect ratio preserved. "
-             "Use this field in form views or some kanban views.")
-    image_small = fields.Binary(string="Small-sized image", attachment=True,
-        help="Small-sized image of the category. It is automatically "
-             "resized as a 64x64px image, with aspect ratio preserved. "
-             "Use this field anywhere a small image is required.")
 
     def _compute_is_leaf(self):
         for rec in self:
@@ -151,6 +126,7 @@ class AssetType(models.Model):
     """ Asset Type """
     _name = 'school.asset_type'
     _description = 'Asset Type'
+    _inherit = ['image.mixin']
 
     name = fields.Char('Name', required=True, translate=True)
     require_validation = fields.Boolean(string="Require validation")
@@ -167,6 +143,7 @@ class Building(models.Model):
     """ Asset Type """
     _name = 'school.building'
     _description = 'Building'
+    _inherit = ['image.mixin']
 
     name = fields.Char('Name', required=True, translate=True)
     location = fields.Char('Location', translate=True)
@@ -198,15 +175,3 @@ class Building(models.Model):
     sunday = fields.Boolean(string="Sunday", default=False)
     sunday_from = fields.Float(string="Sunday From", default=0.0)
     sunday_to = fields.Float(string="Sunday From", default=0.0)
-    
-    # image: all image fields are base64 encoded and PIL-supported
-    image = fields.Binary("Photo", attachment=True,
-        help="This field holds the image used as photo for the employee, limited to 1024x1024px.")
-    image_medium = fields.Binary("Medium-sized photo", attachment=True,
-        help="Medium-sized photo of the employee. It is automatically "
-             "resized as a 128x128px image, with aspect ratio preserved. "
-             "Use this field in form views or some kanban views.")
-    image_small = fields.Binary("Small-sized photo", attachment=True,
-        help="Small-sized photo of the employee. It is automatically "
-             "resized as a 64x64px image, with aspect ratio preserved. "
-             "Use this field anywhere a small image is required.")

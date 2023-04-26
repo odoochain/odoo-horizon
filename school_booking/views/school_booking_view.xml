@@ -2,8 +2,8 @@
 <!--
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -60,7 +60,7 @@
     </record>
 
     <!-- Top menu item -->
-    <menuitem name="Booking" id="menu_main_booking" web_icon="calendar,static/description/icon.png" sequence="90" groups="school_booking.group_booking_manager"/>
+    <menuitem name="Booking" id="menu_main_booking" web_icon="calendar,static/description/icon.png" sequence="20" groups="school_booking.group_booking_manager"/>
 
     <!-- Booking Tree View -->
     <record id="view_booking_tree" model="ir.ui.view">

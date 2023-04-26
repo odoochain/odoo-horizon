@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--<template id="assets_backend" name="deliberations assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/school_deliberation_base/static/src/css/deliberation.css"/>
+            <script type="text/javascript" src="/school_deliberation_base/static/src/js/deliberation_controller.js"/>
+            <script type="text/javascript" src="/school_deliberation_base/static/src/js/deliberation_model.js"/>
+            <script type="text/javascript" src="/school_deliberation_base/static/src/js/deliberation_renderer.js"/>
+            <script type="text/javascript" src="/school_deliberation_base/static/src/js/deliberation_view.js"/>
+        </xpath>
+    </template>-->
+</odoo>

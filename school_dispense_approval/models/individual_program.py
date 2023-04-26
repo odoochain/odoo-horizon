@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -41,7 +41,7 @@ _logger = logging.getLogger(__name__)
 #     '''Individual Course'''
 #     _inherit = ['school.individual_course']
 
-#     is_dispense_approved = fields.Boolean(string="Is Dispense Approved", default=False, track_visibility='onchange')
+#     is_dispense_approved = fields.Boolean(string="Is Dispense Approved", default=False, tracking=True)
 #     dispense_approval_comment = fields.Text(string="Dispense Approval Comment")
     
 #     dispense_char = fields.Char(string="Is Dispensed Text", compute="_compute_char", store=True)

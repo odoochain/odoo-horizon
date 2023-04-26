@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,11 +19,14 @@
 #
 ##############################################################################
 import logging
+import collections
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, AccessError
 
 _logger = logging.getLogger(__name__)
+
+from odoo.exceptions import ValidationError
 
 class IndividualProgram(models.Model):
     '''Individual Program'''
@@ -40,11 +43,13 @@ class IndividualProgram(models.Model):
             ('progress','In Progress'),
             ('awarded', 'Awarded'),
             ('abandonned', 'Abandonned'),
+            ('irregular', 'Irregular'),
         ], string='Status', index=True, default='draft',copy=False,
         help=" * The 'Draft' status is used when results are not confirmed yet.\n"
              " * The 'In Progress' status is used during the cycle.\n"
              " * The 'Awarded' status is used when the cycle is awarded.\n"
              " * The 'Abandonned' status is used if a student leave the program.\n"
+             " * The 'Irregular' status is used if a student is in an irreular administrative state.\n"
              ,track_visibility='onchange')
     
     abandonned_date = fields.Date('Abandonned Date')
@@ -64,26 +69,30 @@ class IndividualProgram(models.Model):
         if(grade):
             self.write({'state': 'awarded',
                            'grade' : grade,
-                           'grade_year_id' : grade_year_id,
+                           'grade_year_id' : grade_year_id or self.env.user.current_year_id,
                            'grade_comments' : grade_comments,
                            'graduation_date' : fields.Date.today(),
             })
         else:
             self.write({'state': 'awarded',
-                        'grade_year_id' : grade_year_id,
+                        'grade_year_id' : grade_year_id or self.env.user.current_year_id,
                         'graduation_date' : fields.Date.today(),
             })
+            
+    def set_to_irregular(self):
+        # TODO use a workflow to make sure only valid changes are used.
+        return self.write({'state': 'irregular'})
 
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
-    year_id = fields.Many2one('school.year', string='Registration Year', default=lambda self: self.env.user.current_year_id)
+    year_id = fields.Many2one('school.year', string='Registration Year', default=lambda self: self.env.user.current_year_id, readonly=True, states={'draft': [('readonly', False)]})
     
     student_id = fields.Many2one('res.partner', string='Student', domain="[('student', '=', '1')]", required=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_512= fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_128= fields.Binary('Image', attachment=True, related='student_id.image_128')
     
     source_program_id = fields.Many2one('school.program', string="Source Program", ondelete="restrict", readonly=True, states={'draft': [('readonly', False)]}, domain="[('year_id', '=', year_id)]")
     
@@ -122,25 +131,22 @@ class IndividualProgram(models.Model):
         
     bloc_ids = fields.One2many('school.individual_bloc', 'program_id', string='Individual Blocs')
     
-    highest_level =  fields.Integer(compute='_compute_highest_level',string='Highest Level', store=True)
-
-    @api.depends('bloc_ids.source_bloc_level')
-    def _compute_highest_level(self):
-        for rec in self:
-            levels = rec.bloc_ids.mapped('source_bloc_level')
-            if levels:
-                rec.highest_level = max(levels)
-            else:
-                rec.highest_level = 0
+    def get_all_tearchers(self):
+        return self.bloc_ids.course_group_ids.course_ids.teacher_id
+        
+    def get_all_responsibles(self):
+        return self.bloc_ids.course_group_ids.source_course_group_responsible_id
 
 class IndividualCourseSummary(models.Model):
     '''IndividualCourse Summary'''
     _name='school.individual_course_summary'
     _inherit = ['school.open.form.mixin']
     
-    _order = 'level,sequence'
-    
     program_id = fields.Many2one('school.individual_program', string='Individual Program')
+    
+    image_1920 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_1920')
+    image_512= fields.Binary('Image', attachment=True, related='program_id.student_id.image_512')
+    image_128 = fields.Binary('Image', attachment=True, related='program_id.student_id.image_128')
     
     course_group_id = fields.Many2one('school.course_group', string='Course Group')
     
@@ -158,7 +164,6 @@ class IndividualCourseSummary(models.Model):
         for rec in self:
             rec.ind_course_group_ids = self.env['school.individual_course_group'].search([('bloc_id','in',self.program_id.bloc_ids.ids),('source_course_group_id','=',rec.course_group_id.id)])
     
-
 class IndividualBloc(models.Model):
     '''Individual Bloc'''
     _name='school.individual_bloc'
@@ -171,11 +176,58 @@ class IndividualBloc(models.Model):
     
     name = fields.Char(compute='_compute_name',string='Name', readonly=True, store=True)
     
+    state = fields.Selection([
+            ('irregular','Irregular'),
+            ('draft','Draft'),
+            ('progress','In Progress'),
+            ('postponed', 'Postponed'),
+            ('awarded_first_session', 'Awarded in First Session'),
+            ('awarded_second_session', 'Awarded in Second Session'),
+            ('failed', 'Failed'),
+            ('abandoned','Abandoned'),
+        ], string='Status', index=True, default='draft',
+        copy=False,
+        help=" * The 'Draft' status is used when results are not confirmed yet.\n"
+             " * The 'In Progress' status is used during the courses.\n"
+             " * The 'Postponed' status is used when a second session is required.\n"
+             " * The 'Awarded' status is used when the bloc is awarded in either first or second session.\n"
+             " * The 'Failed' status is used when the bloc is definitively considered as failed.\n"
+             " * The 'Abandoned' status is when the student abandoned his bloc.\n"
+             ,tracking=True)
+    
     program_id = fields.Many2one('school.individual_program', string='Individual Program', required=True)
     
     year_id = fields.Many2one('school.year', string='Year')
     
-    is_final_bloc = fields.Boolean(string='Is final bloc')
+    level = fields.Selection(
+        [
+            ('1A1C','Bac 1'),
+            ('>45','Bac 2'),
+            ('DC1C','Bac 3'),
+            ('1A2C','Master 1'),
+            ('DC2C','Master 2'),
+            ('AG','Agregation'),
+            ('JT','Jeune talent'),
+            ('EL','Elève libre'),
+        ], string='Level', index=True, default='1A1C',
+        tracking=True,
+        copy=False,
+        help=
+        " * Agregation: Agregation.\n"
+        " * Master 2:DC2C (Derniers crédits de deuxième cycle).\n"
+        " * Master 1:1A2C (Premiers année de deuxième cycle).\n"
+        " * Bac 3:DC1C (Derniers crédits de premier cycle).\n"
+        " * Bac 2:>45 (Poursuite d'études).\n"
+        " * Jeune talent:Jeune talent.\n"
+        " * Bac 1:1A1C (Première année de premier cycle).\n"
+        " * Elève libre:Elève libre.\n"
+    )
+    
+    is_final_bloc = fields.Boolean(string='Is final bloc',tracking=True)
+    
+    is_light_bloc = fields.Boolean(string='Is a light bloc',tracking=True)
+    
+    tag_ids = fields.Many2many('school.individual_bloc.tag', 'school_individual_bloc_tag_rel', 'individual_bloc_id', 'tag_id', string='Tags', copy=False)
     
     student_id = fields.Many2one(related='program_id.student_id', string='Student', domain="[('student', '=', '1')]", readonly=True, store=True)
     student_name = fields.Char(related='student_id.name', string="Student Name", readonly=True, store=True)
@@ -191,43 +243,42 @@ class IndividualBloc(models.Model):
     source_bloc_track_id = fields.Many2one('school.track',compute='compute_speciality', string='Track', readonly=True, store=True)
     source_bloc_cycle_id = fields.Many2one('school.cycle',compute='compute_speciality', string='Cycle', readonly=True, store=True)
     
+    @api.onchange('source_bloc_id')
+    def onchange_source_bloc_id(self):
+        self.ensure_one()
+        self.course_group_ids.unlink()
+        for group in self.source_bloc_id.course_group_ids:
+            _logger.debug('Assign course groups : ' + group.uid + ' - ' +group.name)
+            cg = self.course_group_ids.create({'bloc_id': self.id,'source_course_group_id': group.id, 'acquiered' : 'NA'})
+            courses = []
+            for course in group.course_ids:
+                _logger.debug('Assign course : ' + course.name)
+                courses.append((0,0,{'source_course_id': course.id}))
+            cg.write({'course_ids': courses})
+    
     @api.depends('source_bloc_id.speciality_id','program_id.speciality_id')
     def compute_speciality(self):
         for bloc in self:
             if bloc.source_bloc_id.speciality_id :
                 bloc.source_bloc_speciality_id = bloc.source_bloc_id.speciality_id
-                bloc.source_bloc_domain_id = bloc.source_bloc_id.domain_id
-                bloc.source_bloc_section_id = bloc.source_bloc_id.section_id
-                bloc.source_bloc_track_id = bloc.source_bloc_id.track_id
+                bloc.source_bloc_domain_id = bloc.source_bloc_id.speciality_id.domain_id
+                bloc.source_bloc_section_id = bloc.source_bloc_id.speciality_id.section_id
+                bloc.source_bloc_track_id = bloc.source_bloc_id.speciality_id.track_id
             elif bloc.program_id.speciality_id :
                 bloc.source_bloc_speciality_id = bloc.program_id.speciality_id
-                bloc.source_bloc_domain_id = bloc.program_id.domain_id
-                bloc.source_bloc_section_id = bloc.program_id.section_id
-                bloc.source_bloc_track_id = bloc.program_id.track_id
+                bloc.source_bloc_domain_id = bloc.program_id.speciality_id.domain_id
+                bloc.source_bloc_section_id = bloc.program_id.speciality_id.section_id
+                bloc.source_bloc_track_id = bloc.program_id.speciality_id.track_id
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_512= fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
     
-    course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', track_visibility='onchange')
+    course_group_ids = fields.One2many('school.individual_course_group', 'bloc_id', string='Courses Groups', tracking=True)
     
-    total_credits = fields.Integer(compute='_get_courses_total', string='Credits')
-    total_hours = fields.Integer(compute='_get_courses_total', string='Hours')
-    total_weight = fields.Float(compute='_get_courses_total', string='Weight')
-
-    # @api.onchange('source_bloc_id')
-    # @api.depends('course_group_ids')
-    # def assign_source_bloc(self):
-    #     cg_ids = []
-    #     for group in self.source_bloc_id.course_group_ids:
-    #         _logger.info('assign course groups : ' + group.name)
-    #         cg = self.course_group_ids.create({'bloc_id': self.id,'source_course_group_id': group.id, 'acquiered' : 'NA'}) # TODO FIX DEPENDENCIE TO EVALUATION
-    #         courses = []
-    #         for course in group.course_ids:
-    #             _logger.info('assign course : ' + course.name)
-    #             courses.append((0,0,{'source_course_id': course.id}))
-    #         _logger.info(courses)
-    #         cg.write({'course_ids': courses})
+    total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)
+    total_weight = fields.Float(compute='_get_courses_total', string='Weight', store=True)
 
     @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight','course_group_ids.is_ghost_cg')
     def _get_courses_total(self):
@@ -259,7 +310,6 @@ class IndividualBloc(models.Model):
           
     course_count = fields.Integer(compute='_compute_course_count', string="Course")
 
-    
     def _compute_course_count(self):
         for bloc in self:
             bloc.course_count = self.env['school.individual_course'].search_count([('bloc_id', '=', bloc.id)])
@@ -277,6 +327,58 @@ class IndividualBloc(models.Model):
             'view_type': 'form',
         }
 
+    def get_all_tearchers(self):
+        return self.course_group_ids.course_ids.teacher_id
+        
+    def get_all_responsibles(self):
+        return self.course_group_ids.source_course_group_responsible_id
+
+    ##############################################################################
+    #
+    # Constraints
+    #
+    
+    @api.constrains('course_group_ids')
+    def _check_individual_block(self):
+        for rec in self:
+            scg_ids = list(map(lambda cg : cg.source_course_group_id.uid,rec.program_id.all_ind_course_group_ids.filtered(lambda ic: ic.state != '7_failed')))
+            duplicates = [item for item, count in collections.Counter(scg_ids).items() if count > 1]
+            if len(duplicates) > 0 :
+                raise ValidationError("Cannot have duplicated UE in a program : %s." % duplicates)
+
+    ##############################################################################
+    #
+    # UX/UI Helpers
+    #
+
+    def _domain_source_course_group_id(self):
+        return []
+    
+    new_source_course_group_id = fields.Many2one('school.course_group', string="New Source Course Group", domain=lambda self: self._domain_source_course_group_id())
+    
+    @api.onchange('new_source_course_group_id')
+    def _on_change_new_source_course_group_id(self):
+        for rec in self:
+            _logger.info('Assign course group : ' + rec.new_source_course_group_id.uid + ' - ' +rec.new_source_course_group_id.name)
+            courses = []
+            for course in rec.new_source_course_group_id.course_ids:
+                _logger.info('Assign course : ' + course.name)
+                courses.append((0,0,{'source_course_id': course.id}))
+            cg = self.env['school.individual_course_group'].create({'bloc_id': self.id,'source_course_group_id': rec.new_source_course_group_id.id, 'acquiered' : 'NA', 'course_ids' : courses})
+            rec.course_group_ids |= cg
+            rec.new_source_course_group_id = False
+
+
+class IndividualBlocTag(models.Model):
+    _name = 'school.individual_bloc.tag'
+    _description = 'Individual Bloc Tags'
+    name = fields.Char(string='Asset Tag', index=True, required=True)
+    color = fields.Integer('Color Index')
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Tag name already exists !"),
+    ]
+
 class IndividualCourseGroup(models.Model):
     '''Individual Course Group'''
     _name='school.individual_course_group'
@@ -290,19 +392,54 @@ class IndividualCourseGroup(models.Model):
     
     sequence = fields.Integer(related="source_course_group_id.sequence", readonly=True, store=True)
     
+    state = fields.Selection([
+            ('10_irregular','Irregular'),
+            ('9_draft','Draft'),
+            ('7_failed', 'Failed'),
+            ('6_success', 'Success'),
+            ('5_progress','In Progress'),
+            ('3_rejected','Rejected'),
+            ('2_candidate','Candidate'),
+            ('1_confirmed','Confirmed'),
+            ('1_1_checked','Checked'),
+            ('0_valuated', 'Valuated'),
+        ], string='Status', index=True, default='9_draft',
+        tracking=True,
+        copy=False,
+        help=" * The 'Draft' status is used when course group is only plan.\n"
+             " * The 'Irregular' status is used when course group is in an irregular program.\n"
+             " * The 'In Progress' status is used when results are not confirmed yet.\n"
+             " * The 'Confirmed' status is when restults are confirmed.\n"
+             " * The 'Success' status is when delibration has confirmed success.\n"
+             " * The 'Failed' status is when delibration has confirmed failure.\n"
+             " * The 'Rejected' status is used when the course group is rejected for valuation.\n"
+             " * The 'Candidate' status is used when the course group is candidate for valuation.\n"
+             " * The 'Confirmed' status is used when the course group is confirmed for valuation.\n"
+             " * The 'Valuated' status is used when the course group is confirmed for valuation.")
+    
     year_id = fields.Many2one(related="bloc_id.year_id", string='Year', store=True)
-    student_id = fields.Many2one(related="bloc_id.student_id", string='Student', store=True, domain=[('student', '=', True)])
-    teacher_id = fields.Many2one('res.partner', string='Teacher', store=True, domain=[('teacher', '=', True)])
+    student_id = fields.Many2one('res.partner', string='Student', store=True, compute='_compute_student_id')
     
-    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    @api.depends('bloc_id.student_id')
+    def _compute_student_id(self):
+        for rec in self:
+            rec.student_id = rec.bloc_id.student_id
     
-    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict")
+    responsible_id = fields.Many2one('res.partner', related="source_course_group_id.responsible_id")
     
-    source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID")
+    image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_512 = fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    
+    def _domain_source_course_group_id(self):
+        return []
+    
+    source_course_group_id = fields.Many2one('school.course_group', string="Source Course Group", ondelete="restrict", domain=lambda self: self._domain_source_course_group_id())
+    source_course_group_uid = fields.Char(related='source_course_group_id.uid', string="Source Course Group UID", store=True)
+    source_course_group_responsible_id = fields.Many2one('res.partner', related='source_course_group_id.responsible_id', string="Source Course Group Responsible")
     
     bloc_id = fields.Many2one('school.individual_bloc', string="Bloc", ondelete='cascade', readonly=True)
+    program_id = fields.Many2one(string="Program", related='bloc_id.program_id', readonly=True, store=True)
 
     source_bloc_id = fields.Many2one('school.bloc', string="Source Bloc", related='bloc_id.source_bloc_id', readonly=True, store=True)
     source_bloc_name = fields.Char(related='bloc_id.source_bloc_name', string="Source Course Bloc Name", readonly=True, store=True)
@@ -314,22 +451,19 @@ class IndividualCourseGroup(models.Model):
     source_bloc_track_id = fields.Many2one(related='bloc_id.source_bloc_track_id', string='Track', readonly=True, store=True)
     source_bloc_cycle_id = fields.Many2one(related='bloc_id.source_bloc_cycle_id', string='Cycle', readonly=True, store=True)
 
-    course_ids = fields.One2many('school.individual_course', 'course_group_id', string='Courses',track_visibility='onchange')
+    course_ids = fields.One2many('school.individual_course', 'course_group_id', string='Courses',tracking=True)
     
     is_ghost_cg = fields.Boolean(string='Is Ghost Course Group', default=False)
     
-    total_credits = fields.Integer(compute='_get_courses_total', string='Credits', store=True)
-    total_hours = fields.Integer(compute='_get_courses_total', string='Hours', store=True)
+    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits', store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours', store=True)
     total_weight = fields.Float(compute='_get_courses_total', string='Total Weight', store=True)
-    weight = fields.Integer(related="source_course_group_id.weight",string='Weight', store=True)
     
     @api.onchange('source_course_group_id')
     def onchange_source_cg(self):
         courses = []
         for course in self.source_course_group_id.course_ids:
-            _logger.info('assign course : ' + course.name)
             courses.append((0,0,{'source_course_id':course.id}))
-        _logger.info(courses)
         self.update({'course_ids': courses})
 
     @api.depends('course_ids.hours','course_ids.credits','course_ids.weight')
@@ -339,12 +473,25 @@ class IndividualCourseGroup(models.Model):
             rec.total_hours = sum(course.hours for course in rec.course_ids)
             rec.total_credits = sum(course.credits for course in rec.course_ids)
             rec.total_weight = sum(course.weight for course in rec.course_ids)
+            
+    def get_all_tearchers(self):
+        return self.course_ids.teacher_id
+            
+    def action_open_source_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Course Group',
+            'res_model': 'school.course_group',
+            'res_id': self.source_course_group_id.id,
+            'view_mode': 'form',
+        }
 
 class IndividualCourse(models.Model):
     '''Individual Course'''
     _name = 'school.individual_course'
     _description = 'Individual Course'
-    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','mail.activity.mixin']
+    _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','mail.activity.mixin','school.open.form.mixin']
     
     _order = 'sequence'
     
@@ -376,9 +523,9 @@ class IndividualCourse(models.Model):
             if len(old_course) == 1 and old_course.teacher_id:
                 rec.teacher_id = old_course.teacher_id
 
-    image = fields.Binary('Image', attachment=True, related='student_id.image_1920')
-    image_medium = fields.Binary('Image', attachment=True, related='student_id.image_512')
-    image_small = fields.Binary('Image', attachment=True, related='student_id.image_128')
+    image_1920 = fields.Binary('Image', attachment=True, related='student_id.image_1920')
+    image_512 = fields.Binary('Image', attachment=True, related='student_id.image_512')
+    image_128 = fields.Binary('Image', attachment=True, related='student_id.image_128')
 
     url_ref = fields.Char(related="source_course_id.url_ref", readonly=True)
 

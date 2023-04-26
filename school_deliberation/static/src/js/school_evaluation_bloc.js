@@ -2,8 +2,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -393,7 +393,7 @@ return Widget.extend({
         self.student_image = session.url('/web/image', {
             model: 'res.partner',
             id: self.bloc.student_id[0],
-            field: 'image_medium',
+            field: 'image_128',
             unique: (self.datarecord.__last_update || '').replace(/[^0-9]/g, '')
         });
         

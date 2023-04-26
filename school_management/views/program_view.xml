@@ -2,8 +2,8 @@
 <!--
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -48,11 +48,11 @@
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
-                      <div class="col-xs-6 o_kanban_primary_left">
+                      <div class="col-6 o_kanban_primary_left">
                         <b>Credits : </b>
                         <field name="total_credits" />
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-6">
                         <b>Hours : </b>
                         <field name="total_hours" />
                       </div>
@@ -108,7 +108,7 @@
                  <field name="name"/>
                 </h1>
                 <div class="oe_fade">
-                    <field name="uid"/>
+                    <field name="uid" readonly="1"/>
                 </div>
               </div>
             </group>
@@ -117,8 +117,9 @@
               <field name="responsible_id" colspan="4"/>
               <field name="sequence" />
               <field name="level" />
-              <field name="period" />
+              <field name="quadri" />
               <field name="mandatory" />
+              <field name="cg_grouping" create="0"/>
               <field name="total_hours" />
               <field name="total_credits" />
               <field name="total_weight" />
@@ -138,6 +139,7 @@
                   <tree string="Blocs">
                     <field name="uid" />
                     <field name="name" />
+                    
                     <field name="year_id" />
                   </tree>
                 </field>
@@ -163,8 +165,8 @@
       <field name="model">school.course_group</field>
       <field name="arch" type="xml">
         <search string="Search Course Group">
-          <field name="name" filter_domain="[( 'name', 'ilike', self)]" />
           <field name="uid" filter_domain="[( 'uid', 'ilike', self)]"/>
+          <field name="name" filter_domain="[( 'name', 'ilike', self)]" />
         </search>
       </field>
     </record>
@@ -230,15 +232,15 @@
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
-                      <div class="col-xs-4 o_kanban_primary_left">
+                      <div class="col-4 o_kanban_primary_left">
                         <b>Credits : </b>
                         <field name="credits" />
                       </div>
-                      <div class="col-xs-4 o_kanban_primary_right">
+                      <div class="col-4 o_kanban_primary_right">
                         <b>Hours : </b>
                         <field name="hours" />
                       </div>
-                      <div class="col-xs-4 o_kanban_primary_right">
+                      <div class="col-4 o_kanban_primary_right">
                         <b>Weight : </b>
                         <field name="weight" />
                       </div>
@@ -263,8 +265,7 @@
           <field name="name" />
           <field name="hours" />
           <field name="credits" />
-          <field name="weight" />
-          <field name="has_second_session" />
+          <field name="bloc_ids" widget="many2many_tags"/>
         </tree>
       </field>
     </record>
@@ -287,23 +288,38 @@
                <field name="name"/>
               </h1>
               <div class="oe_fade">
-                  <field name="uid"/>
+                  <field name="uid" readonly="1"/>
               </div>
             </div>
-            <group col="4">
+            <group col="2">
               <!--<field name="course_group_id" colspan="4" readonly="1"/>
               <field name="name" colspan="4" />-->
               <field name="sequence" />
               <field name="title" colspan="4"/>
+              <field name="course_group_id" colspan="4"/>
               <field name="hours" />
               <field name="credits" />
               <field name="weight" />
+              <field name="course_organization" />
+              <field name="course_type" />
+              <field name="quadri" />
+            </group>
+            <group col="4">
               <field name="has_second_session" />
-              <field name="url_ref" widget="url" text="Description"/>
-              <field name="course_group_id" colspan="4"/>
+              <field name="is_annual" />
+              <field name="url_ref" widget="url" text="Description" invisible="1" />
               <field name="level" invisible="1" />
             </group>
             <notebook>
+              <page string="Blocs">
+                <field name="bloc_ids" readonly="1">
+                  <tree string="Blocs">
+                    <field name="uid" />
+                    <field name="name" />
+                    <field name="year_id" />
+                  </tree>
+                </field>
+              </page>
               <page string="Description">
                 <field name="description" placeholder="Vade mecum..." colspan="4" />
               </page>
@@ -332,7 +348,7 @@
       <field name="model">school.course</field>
       <field name="arch" type="xml">
         <search string="Search Course">
-          <field name="name" filter_domain="[('name','ilike',self)]" />
+          <field name="name" filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"/>
         </search>
       </field>
     </record>
@@ -426,11 +442,11 @@
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
-                      <div class="col-xs-6 o_kanban_primary_left">
+                      <div class="col-6 o_kanban_primary_left">
                         <b>Credits : </b>
                         <field name="total_credits" />
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-6">
                         <b>Hours : </b>
                         <field name="total_hours" />
                       </div>
@@ -453,6 +469,7 @@
         <tree string="Blocs">
           <field name="uid" />
           <field name="name" />
+          <field name="bloc_group" />
           <field name="total_hours" />
           <field name="total_credits" />
         </tree>
@@ -472,13 +489,14 @@
                <field name="name"/>
               </h1>
               <div class="oe_fade">
-                  <field name="uid"/>
+                  <field name="uid" readonly="1"/>
               </div>
             </div>
             <group col="4">
               <field name="title" colspan="4"/>
               <field name="sequence" />
               <field name="level" />
+              <field name="bloc_group" />
               <field name="total_hours" />
               <field name="total_credits" />
               <field name="program_id" />
@@ -486,36 +504,48 @@
             </group>
             
             
-            <field name="course_group_ids" widget="many2many_kanban">
-              <kanban quick_create="false" create="true" delete="true">
+            <field name="course_group_ids" widget="many2many_kanban" class="o_kanban_mobile">
+              <kanban quick_create="false" create="true" delete="true" default_order="cg_grouping_sequence">
                 <field name="uid"/>
                 <field name="name" />
                 <field name="total_hours" />
                 <field name="total_credits" />
+                <field name="cg_grouping_sequence" />
                 <templates>
                     <t t-name="kanban-box">
-                          <div style="position: relative;width:100%;">
-                              <div class="o_kanban_record_top">
-                                <div class="row o_kanban_record_headings">
-                                  <div class="col-12 col-md-2">
-                                    <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
-                                  </div>
-                                  <div class="col-12 col-md-7">
-                                    <field name="name"/><br/>
-                                    <i><field name="responsible_id"/></i>
-                                  </div>
-                                  
-                                  <div class="col-2">
-                                    Heures : <field name="total_hours"/>
-                                    <br/>
-                                    ECTS : <field name="total_credits"/>
-                                  </div>
-                                  <div class="col-1">
-                                    <a class="oe_edit_only fa fa-trash" type="delete"></a>
-                                  </div>
+                        <t t-js="ctx">
+                          
+                          ctx['new_group'] = ctx['record'].cg_grouping.raw_value != this.horizon_group;
+                          this.horizon_group = ctx['record'].cg_grouping.raw_value
+                          
+                        </t>
+                        <t t-if="new_group">
+                          <div>
+                            <h3><field name="cg_grouping"/></h3>
+                          </div>
+                        </t>
+                        <div style="position: relative;width:100%">
+                            <div class="o_kanban_record_top">
+                              <div class="row o_kanban_record_headings">
+                                <div class="col-12 col-md-2">
+                                  <a type="object" name="action_open_form" class="oe_highlight btn btn-primary"><field name="uid"/></a>
+                                </div>
+                                <div class="col-12 col-md-7">
+                                  <field name="name"/><br/>
+                                  <i><field name="responsible_id"/></i>
+                                </div>
+                                
+                                <div class="col-2">
+                                  Heures : <field name="total_hours"/>
+                                  <br/>
+                                  ECTS : <field name="total_credits"/>
+                                </div>
+                                <div class="col-1">
+                                  <a class="oe_edit_only fa fa-trash" type="delete"/>
                                 </div>
                               </div>
-                          </div>
+                            </div>
+                        </div>
                       </t>
                 </templates>
               </kanban>
@@ -542,6 +572,7 @@
       <field name="model">school.bloc</field>
       <field name="arch" type="xml">
         <search string="Search Bloc">
+          <field name="uid" filter_domain="[( 'uid', 'ilike', self)]"/>
           <field name="title" filter_domain="[('title', 'ilike',self)]" />
           <filter string="Current Year" name="current" domain="[('year_sequence','=','current')]" />
           <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
@@ -616,11 +647,11 @@
                   </div>
                   <div class="container o_kanban_card_content o_visible">
                     <div class="row">
-                      <div class="col-xs-6 o_kanban_primary_left">
+                      <div class="col-6 o_kanban_primary_left">
                         <b>Credits : </b>
                         <field name="total_credits" />
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-6">
                         <b>Hours : </b>
                         <field name="total_hours" />
                       </div>
@@ -671,13 +702,17 @@
                <field name="title"/>
               </h1>
               <div class="oe_fade">
-                  <field name="uid"/>
+                  <field name="uid" readonly="1"/>
               </div>
             </div>
             <group col="4">
               <field name="year_id" />
               <field name="cycle_id" />
               <field name="speciality_id"/>
+              <field name="ares_code"/>
+              <field name="graca_code"/>
+              <field name="habilitation_code"/>
+              <field name="cycle_required_credits"/>
               <field name="total_hours" />
               <field name="total_credits" />
             </group>
@@ -779,6 +814,7 @@
       <field name="model">school.program</field>
       <field name="arch" type="xml">
         <search string="Search Program">
+          <field name="uid" filter_domain="[( 'uid', 'ilike', self)]"/>
           <field name="title" filter_domain="[('title', 'ilike',self)]" />
           <filter string="Current Year" name="current" domain="[('year_sequence','=','current')]" />
           <filter string="Next Year" name="next" domain="[('year_sequence','=','next')]" />
@@ -851,14 +887,14 @@
             <field name="inherit_id" ref="base.view_users_form" />
             <field eval="18" name="priority"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='partner_id']" position="after">
+                <xpath expr="//group//field[@name='partner_id']" position="after">
                     <field name="current_year_id" placeholder="Current Year" />
                 </xpath>
             </field>
         </record>
   
     <!-- Top menu item -->
-    <menuitem name="Programs" id="menu_main_program" web_icon="school_management,static/description/icon.png" sequence="60"  groups="school_management.group_program_management"/>
+    <menuitem name="Programs" id="menu_main_program" web_icon="school_management,static/description/icon.png" sequence="5"  groups="school_management.group_program_management"/>
 
     <!-- <menuitem name="Programs" parent="menu_main_program" id="menu_program" sequence="5" /> -->
     

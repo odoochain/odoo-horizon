@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -35,23 +35,23 @@ class CourseDocumentation(models.Model):
             ('published', 'Published'),
             ('archived', 'Archived'),
         ], string='Status', index=True, readonly=True, default='draft',
-        track_visibility='onchange',
+        tracking=True,
         copy=False,
         help=" * The 'Draft' status is used when a new program is created and not published yet.\n"
              " * The 'Published' status is when a program is published and available for use.\n"
              " * The 'Archived' status is used when a program is obsolete and not publihed anymore.")
     
-    course_id = fields.Many2one('school.course', string='Course', required=True)
+    course_id = fields.Many2one('school.course', string='Course')
     
-    course_ids = fields.Many2many('school.course', 'school_doc_course_rel', 'doc_id', 'course_id', string='All Courses')
+    course_ids = fields.Many2many('school.course', 'school_doc_course_rel', 'doc_id', 'course_id', string='All Courses', copy=False)
     
     name = fields.Char(related='course_id.name')
     
     remarks = fields.Char(string="Remarks")
     
-    cycle_id = fields.Many2one(related='course_id.cycle_id')
+    cycle_id = fields.Many2one('school.cycle',related='course_id.cycle_id')
     level = fields.Integer(related='course_id.level')
-    course_group_id = fields.Many2one(related='course_id.course_group_id')
+    course_group_id = fields.Many2one('school.course_group',related='course_id.course_group_id')
     
     @api.model
     def _needaction_domain_get(self):
@@ -60,7 +60,7 @@ class CourseDocumentation(models.Model):
     @api.onchange('course_id')
     def _onchange_course_id(self):
         self.write({
-            'course_ids' : [(4,self.course_id)]
+            'course_ids' : [(4,self.course_id.id)]
         })
     
     
@@ -79,6 +79,8 @@ class CourseDocumentation(models.Model):
         return self.write({'state': 'archived'})
 
     author_id = fields.Many2one('res.users', string='Author')
+    
+    partner_id = fields.Many2one('res.partner', related="author_id.partner_id", store=True)
 
     staff_ids = fields.Many2many('res.partner', 'school_desc_res_partner_rel', 'desc_id', 'res_partner_id', string='Teachers', domain=[('teacher', '=', 1)])
     credits = fields.Integer(related='course_id.credits', 
@@ -150,7 +152,7 @@ class Course(models.Model):
     
     documentation_ids = fields.Many2many('school.course_documentation', 'school_doc_course_rel', 'course_id', 'doc_id', string='All Docs')
     
-    all_documentation_ids = fields.One2many('school.course_documentation', 'course_id', string='All Documentations')
+    all_documentation_ids = fields.One2many('school.course_documentation', 'course_id', string='All Documentations') # TODO affiner ce champs
 
     all_documentation_count = fields.Integer(string="Documentation Count", compute="_compute_count")
     

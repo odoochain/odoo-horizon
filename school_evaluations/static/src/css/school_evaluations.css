@@ -1,23 +1,118 @@
-.horizon_cgs_success {
+.horizon_cgs_6_success {
     border-left : 10px solid #28a745 !important;
 }
 
-.horizon_cgs_progress {
+.horizon_cgs_5_progress {
     border-left : 10px solid #ffc107 !important;
 }
 
-.horizon_cgs_failed {
+.horizon_cgs_7_failed {
     border-left : 10px solid red !important;
 }
 
-.horizon_cgs_valuated {
-    border-left : 10px solid #0000FF !important;
+.horizon_cgs_1_confirmed {
+    border-left : 10px solid #00BFFF !important;
 }
 
-.horizon_cgs_candidate {
+.horizon_cgs_1_1_checked {
+    border-left : 10px solid #0095FF !important;
+}
+
+.horizon_cgs_0_valuated {
+    border-left : 10px solid blue !important;
+}
+
+.horizon_cgs_2_candidate {
     border-left : 10px solid #ADD8E6 !important;
 }
 
-.horizon_cgs_draft {
+.horizon_cgs_9_draft {
     border-left : 10px solid grey !important;
+}
+
+.horizon_cgs_10_irregular {
+    border-left : 10px solid black !important;
+}
+
+.horizon_eval_cell {
+    border-left : 1px solid lightgrey !important;
+    border-right : 1px solid lightgrey !important;
+    width: 70px;
+    text-align:center;
+}
+
+.o_readonly_modifier.horizon_eval_cell {
+    background-color: #eeeeee !important;
+}
+
+.horizon_btn_eval_6_success {
+    color: #ffffff !important;
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_5_progress {
+    color: #ffffff !important;
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_7_failed {
+    color: #ffffff !important;
+    background-color: red !important;
+    border-color: red !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_1_confirmed {
+    color: #ffffff !important;
+    background-color: #00BFFF !important;
+    border-color: #00BFFF !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_1_1_checked {
+    color: #ffffff !important;
+    background-color: #0095FF !important;
+    border-color: #00BFFF !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_0_valuated {
+    color: #ffffff !important;
+    background-color: blue !important;
+    border-color: blue !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_2_candidate {
+    color: #ffffff !important;
+    background-color: #ADD8E6 !important;
+    border-color: #ADD8E6 !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_9_draft {
+    color: #ffffff !important;
+    background-color: grey !important;
+    border-color: grey !important;
+    padding: 10px !important;
+    width: 110px !important;
+}
+
+.horizon_btn_eval_10_irregular {
+    color: #ffffff !important;
+    background-color: black !important;
+    border-color: black !important;
+    padding: 10px !important;
+    width: 110px !important;
 }

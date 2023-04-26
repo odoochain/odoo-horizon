@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -49,7 +49,7 @@ class CovidFollowup(models.Model):
             ('end_quar', 'Fin quarantaine'),
             ('other', 'Autre'),
         ], string='Reporting Type', index=True, default='nothing',
-        track_visibility='onchange',
+        tracking=True,
         copy=False,
         help="")
     

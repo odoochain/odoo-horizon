@@ -226,7 +226,7 @@ var BrowserEditor = BrowserWidget.extend({
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:00',
-            'maxTime': '19:30',
+            'maxTime': '21:30',
             'step' : 60,
             disableTextInput: true,
             disableTouchKeyboard: true,
@@ -238,7 +238,7 @@ var BrowserEditor = BrowserWidget.extend({
         self.$('#to_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:30',
-            'maxTime': '20:00',
+            'maxTime': '22:00',
             'showDuration': true,
             'step' : 60,
             disableTextInput: true,

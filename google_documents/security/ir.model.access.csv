@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+google_drive_file.group_user,google_drive_file.group_user,model_google_drive_file,base.group_user,1,1,1,1
+google_drive_service.group_user,google_drive_service.group_user,model_google_drive_service,base.group_user,1,1,1,1

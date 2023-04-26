@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -42,7 +42,23 @@ class open_form_mixin(models.AbstractModel):
 class uid_mixin(models.AbstractModel):
     _name = "school.uid.mixin"
     
-    uid = fields.Char(string="UID",copy=False,readonly=True,default=lambda self: self.env['ir.sequence'].next_by_code(self._name))
+    uid = fields.Char(string="UID",copy=False)
+    
+    @api.model
+    def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
+        args = list(args or [])
+        if name:
+            args += ['|', ('name', operator, name),
+                     ('uid', operator, name)]
+        return self._search(args, limit=limit, access_rights_uid=name_get_uid)
+    
+    @api.model
+    def create(self, vals):
+        # take UID from sequence if not provided at creation time
+        rec = super(uid_mixin, self).create(vals)
+        if not rec.uid :
+            rec.uid = self.env['ir.sequence'].next_by_code(self._name)
+        return rec
 
 class Program(models.Model):
     '''Program'''
@@ -50,7 +66,7 @@ class Program(models.Model):
     _description = 'Program made of several Blocs'
     _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
-    @api.depends('bloc_ids')
+    @api.depends('bloc_ids.total_hours','bloc_ids.total_credits')
     def _get_courses_total(self):
         for rec in self:
             total_hours = 0.0
@@ -66,7 +82,7 @@ class Program(models.Model):
             ('published', 'Published'),
             ('archived', 'Archived'),
         ], string='Status', index=True, readonly=True, default='draft',
-        #track_visibility='onchange', TODO : is this useful for this case ?
+        #tracking=True, TODO : is this useful for this case ?
         copy=False,
         help=" * The 'Draft' status is used when a new program is created and not published yet.\n"
              " * The 'Published' status is when a program is published and available for use.\n"
@@ -80,21 +96,30 @@ class Program(models.Model):
         for prog in self:
             prog.name = "%s - %s" % (prog.year_id.short_name, prog.title)
     
-    domain = fields.Selection([
-            ('musique','Musique'),
-            ('theatre', 'Théatre')
-        ], string='Domaine')
-    
     year_id = fields.Many2one('school.year', required=True, string="Year")
     
     description = fields.Text(string='Description')
         
     cycle_id = fields.Many2one('school.cycle', string='Cycle', required=True, domain=[('type', '!=', False)])
     
+    cycle_required_credits = fields.Integer(related='cycle_id.required_credits', string='Required Credits')
+
+    domain_name = fields.Char(related='speciality_id.domain_id.name', string='Domain Name',store=True)
+    cycle_type = fields.Char(related='cycle_id.short_name', string="Cycle Type", store=True)
+    cycle_code = fields.Char(related='cycle_id.code', string="Cycle Code", store=True)
+    
+    year_short_name = fields.Char(related='year_id.short_name', string='Year Name',store=True)
+    
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
     
-    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
-    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
+    ares_code = fields.Char(required=True, string='ARES Code', size=10)
+    
+    graca_code = fields.Char(required=True, string='GRACA Code', size=10)
+    
+    habilitation_code = fields.Char(required=True, string='Habilitation Code', size=10)
+    
+    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits',store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours',store=True)
 
     notes = fields.Text(string='Notes')
     
@@ -145,7 +170,7 @@ class Bloc(models.Model):
     _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     _order = 'program_id,sequence'
     
-    @api.depends('course_group_ids')
+    @api.depends('course_group_ids.total_hours','course_group_ids.total_credits','course_group_ids.total_weight')
     def _get_courses_total(self):
         for rec in self :
             total_hours = 0.0
@@ -168,12 +193,16 @@ class Bloc(models.Model):
     
     level = fields.Selection([('0','Free'),('1','Bac 1'),('2','Bac 2'),('3','Bac 3'),('4','Master 1'),('5','Master 2'),('6','Agregation'),],string='Level')
  
-    domain = fields.Selection(related='program_id.domain', string='Domain',store=True)   
+    domain_name = fields.Char(related='program_id.domain_name', string='Domain Name',store=True)
+    cycle_type = fields.Char(related='program_id.cycle_type', string='Cycle Type',store=True)
+    
     speciality_id = fields.Many2one(related='program_id.speciality_id', string='Speciality',store=True)
  
-    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
-    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
-    total_weight = fields.Float(compute='_get_courses_total', string='Total Weight')
+    bloc_group = fields.Char(string='Bloc Group', size=10)
+ 
+    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits',store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours',store=True)
+    total_weight = fields.Float(compute='_get_courses_total', string='Total Weight',store=True)
 
     notes = fields.Text(string='Notes')
     
@@ -209,7 +238,13 @@ class CourseGroup(models.Model):
   
     level = fields.Integer(string='Level')
     
-    period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period')
+    period = fields.Selection([('0','Annual'),('1','Q1'),('2','Q2'),('3','Q1 and/or Q2'),('4','Q1 and/or Q2 and/or Q3'),],string='Period', readonly=True) # For backup only
+    
+    quadri = fields.Selection([('Q1&Q2','Q1&Q2'),('Q1','Q1'),('Q2','Q2')],string='Quadri', compute='_compute_quadri', store=True)
+    
+    cg_grouping = fields.Many2one('school.course_group_group',string='Group', copy=True)
+    
+    cg_grouping_sequence = fields.Integer('Group Sequence',related="cg_grouping.sequence")
     
     mandatory = fields.Boolean(string='Mandatory', default=True)
     
@@ -220,6 +255,15 @@ class CourseGroup(models.Model):
     default_responsible_id = fields.Many2one('res.partner',compute="compute_default_responsible_id")
     
     course_ids = fields.One2many('school.course', 'course_group_id', domain=['|',('active','=',False),('active','=',True)], string='Courses', copy=True, ondelete="cascade")
+
+    @api.depends('course_ids','course_ids.quadri')
+    def _compute_quadri(self):
+        for rec in self:
+            vals = list(set(rec.course_ids.mapped('quadri')))
+            if len(vals) == 1 :
+                rec.quadri = vals[0]
+            else:
+                rec.quadri = 'Q1&Q2'
 
     @api.depends('course_ids.teacher_ids')
     def compute_default_responsible_id(self):
@@ -250,13 +294,13 @@ class CourseGroup(models.Model):
                 course_g.name = course_g.title
             course_g.ue_id = "UE-%s" % course_g.id
             
-    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits')
-    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours')
-    total_weight = fields.Float(compute='_get_courses_total', string='Total Weight')
+    total_credits = fields.Integer(compute='_get_courses_total', string='Total Credits',store=True)
+    total_hours = fields.Integer(compute='_get_courses_total', string='Total Hours',store=True)
+    total_weight = fields.Float(compute='_get_courses_total', string='Total Weight',store=True)
 
     weight = fields.Integer(string='Weight')
 
-    @api.depends('course_ids')
+    @api.depends('course_ids.hours','course_ids.credits','course_ids.weight')
     def _get_courses_total(self):
         for rec in self :
             total_hours = 0.0
@@ -284,6 +328,18 @@ class CourseGroup(models.Model):
                 args = ['|'] + (args or []) + [('uid', 'ilike', name)]
         return super(CourseGroup, self).name_search(name=name, args=args, operator=operator, limit=limit)
         
+class CourseGroupGroup(models.Model):
+    '''Courses Group Group'''
+    _name = 'school.course_group_group'
+    _description = 'Courses Group Group'
+    _order = 'sequence'
+
+    sequence = fields.Integer(string='Sequence')
+    
+    active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
+    
+    name = fields.Char(required=True, string='Name')
+        
 class Course(models.Model):
     '''Course'''
     _name = 'school.course'
@@ -307,6 +363,11 @@ class Course(models.Model):
     
     level = fields.Integer(related='course_group_id.level',string='Level', readonly=True)
     
+    course_organization = fields.Selection([('col','Collectif'),('semi','Semi-Collectif'),('ind','Individual')],string='Organization')
+    course_type = fields.Selection([('A','Artistic'),('G','General'),('T','Technic')],string='Type')
+    
+    quadri = fields.Selection([('Q1&Q2','Q1&Q2'),('Q1','Q1'),('Q2','Q2')],string='Quadri')
+    
     hours = fields.Integer(string = 'Hours')
     credits = fields.Integer(string = 'Credits')
     weight =  fields.Float(string = 'Weight',digits=(6,2))
@@ -315,7 +376,10 @@ class Course(models.Model):
     
     name = fields.Char(string='Name', compute='compute_name', store=True)
     
+    is_annual = fields.Boolean(string="Is Annual", default=False)
     has_second_session = fields.Boolean(string="Has a second session", default=True)
+    
+    bloc_ids = fields.Many2many('school.bloc',related="course_group_id.bloc_ids")
     
     @api.depends('title','level')
     def compute_name(self):
@@ -325,6 +389,7 @@ class Course(models.Model):
             else:
                 course.name = course.title
 
+    responsible_id = fields.Many2one('res.partner',related='course_group_id.responsible_id', store=True)
     teacher_ids = fields.Many2many('res.partner','course_id','teacher_id',string='Teachers',domain="[('teacher', '=', '1')]") # TODO RENAME RELATION TABLE
     
     @api.onchange('hours','credits')
@@ -351,6 +416,7 @@ class Cycle(models.Model):
     _name = 'school.cycle'
     
     name = fields.Char(required=True, string='Name', size=60)
+    code = fields.Char(string='Code', size=5)
     short_name = fields.Char(string='Short Name', size=2)
     description = fields.Text(string='Description')
     required_credits = fields.Integer(string='Required Credits')
@@ -358,7 +424,12 @@ class Cycle(models.Model):
             ('long','Long'),
             ('short', 'Short'),
         ], string='Type')
+    certification_profile = fields.Selection([
+            ('master','Master'),
+            ('bachelor', 'Bachelor'),
+        ], string='Certification Profile')
     grade = fields.Char(required=True, string='Grade', size=60)
+    grade_code = fields.Char(required=True, string='Grade Code', size=10)
 
 class Domain(models.Model):
     '''Domain'''

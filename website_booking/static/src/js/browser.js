@@ -1,17 +1,15 @@
 odoo.define('website_booking.browser', function (require) {
 "use strict";
 
-/* global moment, Materialize, $, location, odoo, gapi */
+/* global moment, Materialize, $, location, odoo, gapi, FullCalendar */
 
 var core = require('web.core');
 var ajax = require('web.ajax');
 var rpc = require('web.rpc')
-var session = require('web.session');
+var Session = require('web.Session');
 var Widget = require('web.Widget');
 var time = require('web.time');
-var fieldutils = require('web.field_utils');
 
-var _t = core._t;
 var qweb = core.qweb;
 
 ajax.loadXML('/website_booking/static/src/xml/browser.xml', qweb);
@@ -21,12 +19,32 @@ var CalendarWidget = Widget.extend({
     
     get_fc_init_options: function() {
         return {
-            header : {
+            timeZone: 'local',
+            themeSystem: 'bootstrap5',
+            header: {
+                left:   'prev',
+                center: 'title,today',
+                right:  'next'
+            },
+            weekNumbers: true,
+            eventLimit: true, // allow "more" link when too many events
+            locale: 'fr',
+            height: 755,
+            initialView: 'resourceTimeGridDay',
+            slotMinTime: "08:00:00",
+    		slotMaxTime: "22:00:00",
+    		titleFormat: { // will produce something like "Tuesday, September 18, 2018"
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long'
+            },
+            /*header : {
                  left:   'prev',
                  center: 'title,today',
                  right:  'next'
              },
-            themeSystem : 'bootstrap3',
+            plugins: [ 'dayGrid', 'timeGrid', 'list', 'bootstrap', 'resourceTimeGrid' ],
+            themeSystem : 'bootstrap',
     		allDaySlot : false,
     		locale: moment.locale,
     		timezone: "local",
@@ -35,12 +53,12 @@ var CalendarWidget = Widget.extend({
     		locale: 'fr',
     		titleFormat: 'dddd D MMMM YYYY',
     		defaultDate: moment(),
-    		defaultView: 'agendaDay',
+    		defaultView: 'resourceTimeGridDay',
     		minTime: "08:00:00",
-    		maxTime: "20:00:00",
+    		maxTime: "22:00:00",
     		navLinks: true, // can click day/week names to navigate views
     		eventLimit: true, // allow "more" link when too many events
-    		refetchResourcesOnNavigate : false,
+    		refetchResourcesOnNavigate : false,*/
     		resourceRender: function(resourceObj, labelTds, bodyTds) {
     		    if(resourceObj.booking_policy === 'preserved' || resourceObj.booking_policy === 'out') {
     		        labelTds.css('background', '#cccccc');    
@@ -49,17 +67,25 @@ var CalendarWidget = Widget.extend({
         }
     },
     
-    renderElement: function() {
-        this._super.apply(this, arguments);
-        var self = this;
-        self.$calendar = this.$el;
-        self.$calendar.fullCalendar(
-		    self.get_fc_init_options()
-		);
+    /**
+     * @override
+     */
+    start: function () {
+        var def = this._super.apply(this, arguments);
+        
+        //this.calendar = new FullCalendar.Calendar(this.$el, this.get_fc_init_options());
+    
+        this.calendar = new FullCalendar.Calendar(this.el, this.get_fc_init_options());
+    
+        this.calendar.render();
+
+        return def;
     },
     
     refetch_events: function() {
-        this.$calendar.fullCalendar('refetchEvents');
+        if(this.calendar) {
+            this.calendar.refetchEvents();
+        }
     },
 
 });
@@ -93,15 +119,17 @@ var Schedule =  CalendarWidget.extend({
         this.trigger_up('click_scheduler', {'date' : date, 'jsEvent' : jsEvent, 'view' : view});
     },
     
-    fetch_events: function(start, end, timezone, callback) {
+    fetch_events: function(fetchInfo, successCallback, failureCallback) {
         var self = this;
+        var start = fetchInfo.start;
+        var end = fetchInfo.end;
         // Ambuigus time moment are confusing for Odoo, needs UTC
         try {
             if(!start.hasTime()) {
-                start = moment(start.format())        
+                start = moment(start).toDate();    
             }
             if(!end.hasTime()) {
-                end = moment(end.format())        
+                end = moment(end).toDate();        
             }
         } catch(e) {}
         if(self.asset_id) {
@@ -110,14 +138,14 @@ var Schedule =  CalendarWidget.extend({
                 route: '/booking/events',
                 params: {
     	    		'asset_id':this.asset_id,
-    				'start' : fieldutils.format.datetime(start),
-    				'end' : fieldutils.format.datetime(end),
+    				'start' : time.datetime_to_str(start.toDate()),
+    				'end' : time.datetime_to_str(end.toDate()),
     	    	},
             }).then(events => {
                     events.forEach(function(evt) {
                         self.events.push({
-                            'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
-                            'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
+                            'start': moment.utc(evt.start).toDate(),
+                            'end': moment.utc(evt.stop).toDate(),
                             'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                             'allDay': evt.allday,
                             'id': evt.id,
@@ -128,7 +156,7 @@ var Schedule =  CalendarWidget.extend({
                         });
                     });
                     //console.log([start, end, events])
-                    callback(self.events);
+                    successCallback(self.events);
                 }
             );
         }
@@ -155,6 +183,10 @@ var NewBookingDialog = Widget.extend({
     template: 'website_booking.new_booking_dialog',
     
     events: {
+        "click .cancel-modal" : function (event) {
+            var self = this;
+            self.parent.main_modal.modal('close');
+        },
         "click .request-booking": function (event) {
             var self = this;
             var fromTime = self.$('#from_hour').timepicker('getTime');
@@ -181,7 +213,7 @@ var NewBookingDialog = Widget.extend({
                         model: 'calendar.event',
                         method: 'write',
                         args: [
-                            [self.event.id], 
+                            [parseInt(self.event.id)], 
                             {
                                 'name' : self.$('#description').val(),
                                 'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
@@ -192,13 +224,16 @@ var NewBookingDialog = Widget.extend({
                         ],
                     }).then(id => {
                         self.trigger_up('updateEvent', {'id': id});
+                        self.parent.main_modal.modal('close');
+                    }).catch(error => {
+                        Materialize.toast(error.message.data.message, 4000)
+                        self.parent.main_modal.modal('close');
                     });
                 } else {
                     rpc.query({
                         model: 'calendar.event',
                         method: 'create',
                         args: [
-                            [self.event.id], 
                             {
                                 'name' : self.$('#description').val(),
                                 'start': start.utc().format('YYYY-MM-DD HH:mm:ss'),
@@ -209,10 +244,10 @@ var NewBookingDialog = Widget.extend({
                         ],
                     }).then(id => {
                         self.trigger_up('newEvent', {'id': id});
-                    }).fail(error => {
-                        if(error.data.exception_type == "validation_error"){
-                            Materialize.toast(error.data.arguments[0], 4000)
-                        }
+                        self.parent.main_modal.modal('close');
+                    }).catch(error => {
+                        Materialize.toast(error.message.data.message, 4000)
+                        self.parent.main_modal.modal('close');
                     });
                 }
             });
@@ -223,10 +258,11 @@ var NewBookingDialog = Widget.extend({
                 model: 'calendar.event',
                 method: 'unlink',
                 args: [
-                    self.event.id
+                    parseInt(self.event.id)
                 ]
             }).then(function () {
                 self.trigger_up('deleteEvent', self.event.id);
+                self.parent.main_modal.modal('close');
             });
         },
         "change .select-asset-id": function (event) {
@@ -235,7 +271,7 @@ var NewBookingDialog = Widget.extend({
         },
         "change #from_hour": function (event) {
             var self = this;
-            var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
+            var fromTime = self.$('#from_hour').timepicker('getTime',this.date)
             var events = this.schedule.events;
             self.$('#from_hour').removeClass('invalid');
             self.$('#from_hour').addClass('valid');
@@ -252,8 +288,8 @@ var NewBookingDialog = Widget.extend({
         },
         "change #to_hour": function (event) {
             var self = this;
-            var fromTime = self.$('#from_hour').timepicker('getTime', this.date.toDate());
-            var toTime = self.$('#to_hour').timepicker('getTime', this.date.toDate());
+            var fromTime = self.$('#from_hour').timepicker('getTime',this.date)
+            var toTime = self.$('#to_hour').timepicker('getTime',this.date)
             var events = this.schedule.events;
             self.$('#to_hour').removeClass('invalid');
             self.$('#to_hour').addClass('valid');
@@ -298,7 +334,7 @@ var NewBookingDialog = Widget.extend({
             this.edit_mode = true;
         } else {
             this.ressources = parent.cal.ressources;
-            this.date = parent.cal.$calendar.fullCalendar( 'getDate' );
+            this.date = parent.cal.calendar.getDate();
             this.edit_mode = false;
         }
     },
@@ -318,7 +354,7 @@ var NewBookingDialog = Widget.extend({
         self.$('#from_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:00',
-            'maxTime': '19:30',
+            'maxTime': '21:30',
             'step' : 60,
         });
         self.$('#from_hour').on('change', function() {
@@ -328,15 +364,15 @@ var NewBookingDialog = Widget.extend({
         self.$('#to_hour').timepicker({
             'timeFormat': 'H:i',
             'minTime': '8:30',
-            'maxTime': '20:00',
+            'maxTime': '22:00',
             'showDuration': true,
             'step' : 60,
         });
         if(self.edit_mode) {
-            self.$('#from_hour').val(self.event.start.format('H:mm'));
+            self.$('#from_hour').val(moment(self.event.start).format('H:mm'));
             self.$('#from_hour').removeClass('invalid');
             self.$('#from_hour').addClass('valid');
-            self.$('#to_hour').val(self.event.end.format('H:mm'));
+            self.$('#to_hour').val(moment(self.event.end).format('H:mm'));
             self.$('#to_hour').removeClass('invalid');
             self.$('#to_hour').addClass('valid');
             self.$('#description').val(self.event.title);
@@ -346,7 +382,7 @@ var NewBookingDialog = Widget.extend({
             self.$('.delete-booking').show();
             self.hasChanged = false;
         } else {
-            self.$('#description').val(session.partner.name);
+            self.$('#description').val(self.parent.session.user.name);
         }
         Materialize.updateTextFields();
         self.hasChanged = false;
@@ -385,9 +421,9 @@ var NewBookingDialog = Widget.extend({
             rpc.query({
                 route: '/booking/rooms',
                 params: {
-        				'start' : fieldutils.format.datetime(start),
-        				'end' : fieldutils.format.datetime(stop),
-        				'self_id' : self.event ? self.event.id : '',
+        				'start' : start.format('YYYY-MM-DD HH:mm:ss'),
+        				'end' : stop.format('YYYY-MM-DD HH:mm:ss'),
+        				'self_id' : self.event ? parseInt(self.event.id) : '',
     	    	},
             }).then(rooms => {
                 var roomSelect = self.$('select.select-asset-id').empty().html(' ');
@@ -425,7 +461,7 @@ var NavigationCard = Widget.extend({
         "click .cat_button": function (event) {
             event.preventDefault();
             var self = this;
-            self.getParent().$('.navbar-card.active').removeClass('active');
+            self.parent.$('.navbar-card.active').removeClass('active');
             self.$(event.currentTarget).addClass('active');
             var category_id = self.$(event.currentTarget).data('category-id');
             if(self.to_parent) {
@@ -439,6 +475,7 @@ var NavigationCard = Widget.extend({
     init: function(parent, category, to_parent, is_active) {
         this._super(parent);
         this.category = category;
+        this.parent = parent;
         this.to_parent = to_parent;
         this.is_active = is_active;
     },
@@ -626,23 +663,24 @@ var Calendar = CalendarWidget.extend({
         return $.extend(this._super(),{
             events: self.fetch_events.bind(this),
     		resources: self.fetch_resources.bind(this),
-    		viewRender: function(view,element){
-    		     self.trigger_up('switch_date', {'date' : self.$calendar.fullCalendar( 'getDate' )});
-    		},
+    		/*viewRender: function(view,element){
+    		     self.trigger_up('switch_date', {'date' : self.calendar.getDate()});
+    		},*/
     		eventClick: function(calEvent, jsEvent, view) {
     		    var now = moment();
-    		    if(session.user.in_group_14 || session.uid == calEvent.user_id) {
-    		        if (moment(calEvent.start) > now) {
-            		    var dialog = new NewBookingDialog(self.getParent(), {'event' : calEvent});
-                        dialog.appendTo(self.getParent().main_modal.empty());
-                        self.getParent().main_modal.modal('open');
+    		    var event = calEvent.event;
+    		    if(self.parent.session.user.in_group_14 || self.parent.session.uid == event.user_id) {
+    		        if (moment(event.start) > now) {
+            		    var dialog = new NewBookingDialog(self.parent, {'event' : event});
+                        dialog.appendTo(self.parent.main_modal.empty());
+                        self.parent.main_modal.modal('open');
     		        } else {
     		            Materialize.toast('You cannot edit booking in the past', 2000);
     		        }
     		    } else {
-    		        var details_dialog = new DetailsDialog(self.getParent(), {'event' : calEvent});
-    		        details_dialog.appendTo(self.getParent().details_modal.empty());
-    		        self.getParent().details_modal.modal('open');
+    		        var details_dialog = new DetailsDialog(self.parent, {'event' : event});
+    		        details_dialog.appendTo(self.parent.details_modal.empty());
+    		        self.parent.details_modal.modal('open');
     		    }
             },
             header : {
@@ -653,17 +691,24 @@ var Calendar = CalendarWidget.extend({
         });
     },
     
+    init: function (parent, value) {
+        this._super(parent);
+        this.parent = parent;
+    },
+    
     start: function() {
-        this._super.apply(this, arguments);
-        this.init_state = this.getParent()._current_state;
-        if(this.init_state.date) {
-            this.$calendar.fullCalendar( 'gotoDate', moment(this.init_state.date));
-        } else {
-            this.$calendar.fullCalendar( 'gotoDate', moment());
-        }
+        var self = this;
+        return this._super.apply(this, arguments).then(function() {
+            self.init_state = self.parent._current_state;
+            if(self.init_state.date) {
+                self.calendar.gotoDate(moment(self.init_state.date).toDate());
+            } else {
+                self.calendar.gotoDate(moment().toDate());
+            }
+        });
     },
            
-    fetch_resources : function(callback) {
+    fetch_resources: function(fetchInfo, successCallback, failureCallback) {
         var self = this;
         self.ressources = [];
         
@@ -680,15 +725,16 @@ var Calendar = CalendarWidget.extend({
                         'booking_policy' : asset.booking_policy,
                     });
                 });
-                callback(self.ressources);
+                successCallback(self.ressources);
                 self.trigger_up('switch_ressources', {'ressources' : self.ressources});
             }
         );
     },
     
-    fetch_events: function(start, end, timezone, callback) {
+    fetch_events: function(fetchInfo, successCallback, failureCallback) {
         var self = this;
-		self.events = [];
+        var start = moment(fetchInfo.start);
+        var end = moment(fetchInfo.end);
 		// Ambuigus time moment are confusing for Odoo, needs UTC
         try {
             if(!start.hasTime()) {
@@ -702,10 +748,11 @@ var Calendar = CalendarWidget.extend({
             route: "/booking/events",
             params: {
     		    'category_id':self.category_id,
-				'start' : fieldutils.format.datetime(start),
-				'end' : fieldutils.format.datetime(end),
+				'start' : time.datetime_to_str(start.toDate()),
+				'end' : time.datetime_to_str(end.toDate()),
 	    	},
         }).then(events => {
+                self.events = [];
 	    	    events.forEach(function(evt) {
                     var color = '#ff4355';
     	    	    if (evt.categ_ids.includes(9)) {
@@ -717,15 +764,16 @@ var Calendar = CalendarWidget.extend({
     	    	            if(evt.categ_ids.includes(8)) {
         	    	            color = '#e65100';
         	    	        } else {
-        	    	            if (session.uid == evt.user_id[0]) {
+        	    	            /*if (session.uid == evt.user_id[0]) {
         	    	                color = '#ffc107';
-        	    	            }
+        	    	            }*/
+        	    	            color = '#ffc107';
         	    	        }
     	    	        }
     	    	    } 
                     self.events.push({
-                        'start': moment.utc(evt.start).local().format('YYYY-MM-DD HH:mm:ss'),
-                        'end': moment.utc(evt.stop).local().format('YYYY-MM-DD HH:mm:ss'),
+                        'start': moment.utc(evt.start).toDate(),
+                        'end': moment.utc(evt.stop).toDate(),
                         'title': /*evt.partner_id[1] + " - " +*/ evt.name,
                         'allDay': evt.allday,
                         'id': evt.id,
@@ -736,24 +784,24 @@ var Calendar = CalendarWidget.extend({
                     });
                 });
                 //console.log([start, end, events])
-                callback(self.events);
+                successCallback(self.events);
             }
         );
     },
     
     switch_category : function(category) {
         this.category_id = category.id;
-        this.$calendar.fullCalendar( 'refetchResources' );
+        this.calendar.refetchResources();
     },
     
     switch_resource : function(resource) {
         this.category_id = resource.id;
-        this.$calendar.fullCalendar( 'refetchResources' );
-        this.$calendar.fullCalendar( 'refetchEvents' );
+        this.calendar.refetchResources();
+        this.calendar.refetchEvents();
     },
     
     goto_date : function(d) {
-        this.$calendar.fullCalendar('gotoDate', d);
+        this.calendar.gotoDate(d);
     },
     
 });
@@ -771,7 +819,6 @@ var Toolbar = Widget.extend({
             }).then(providers => {
                 if(providers.length > 0) {
                     var provider = providers[0];
-                    var link = provider.auth_link
                     window.location.replace(provider.auth_link);
                 }
             });    
@@ -800,6 +847,7 @@ var Toolbar = Widget.extend({
         this._super.apply(this, arguments);
         var self = this;
         self.parent = parent;
+        var session = new Session(undefined, undefined, {use_cors: false});
         session.session_bind().then(function(){
             if (session.uid) {
                 self.is_logged = true;
@@ -850,7 +898,7 @@ var Browser = Widget.extend({
         
         "click #goto-date-button": function (event) {
             var self = this;
-            this.cal.goto_date(moment(this.$('.datepicker').val(),'DD/MM/YYYY'));
+            this.cal.goto_date(moment(this.$('#datepicker').val()).toDate());
         },
         
     },
@@ -892,7 +940,6 @@ var Browser = Widget.extend({
         this.cal = new Calendar(this);
         this.cal.appendTo(this.$(".calendar"));
         this.cal.tb = this.tb;
-        this.$('.datepicker').datepicker($.datepicker.regional[ "fr" ]);
         this.$('.collapsible').collapsible();
     },
     

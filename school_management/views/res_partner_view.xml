@@ -2,8 +2,8 @@
 <!--
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -29,50 +29,50 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field eval="18" name="priority" />
             <field name="arch" type="xml">
-                <xpath expr="//sheet" position="replace">
-                <sheet>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div style="margin: 0 auto">
-                                <field name="image_1920" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="oe_title">
-                                <h1>
-                                    <field name="name" default_focus="1" placeholder="Nom" on_change="1" class="oe_inline"/> <field name='initials' placeholder="I.,J.,F." class="oe_inline"/>
-                                </h1>
-                                <span class="oe_fade">
-                                      Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
-                                </span>
-                                <group>
-                                    <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
-                                    <field name="user_ids" invisible="1"/>
-                                    <field name="email" widget="email" attrs="{'required': [('user_ids','!=', [])]}" placeholder="Email"/>
-                                </group>
-                                <div class="oe_edit_only">
-                    		        <group>
-                    				    <field name='student' />
-                                        <field name='teacher' />
-                                        <field name='employee' />
-                                        <field name="lastname"/>
-                    					<field name="firstname"/>
-                    				</group>
-                    			</div>
-                    			<field name="function" placeholder="e.g. Sales Director" />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div name="button_box" class="oe_button_box">
-                                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                                </button>
-                            </div>         
-                        </div>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="toggle_active"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-archive">
+                        Archiver
+                    </button>
+                </xpath>
+                <xpath expr="//field[contains(@name, 'image_1920')]" position="replace">
+                    <field name="image_1920" widget="image" class="oe_left oe_inline" style="max-width:128px;max_height:128px;margin: 15px;" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
+                </xpath>
+                <xpath expr="//div[contains(@class, 'oe_title')]/following-sibling::group" position="replace">
+                </xpath>
+                <xpath expr="//div[contains(@class, 'oe_title')]" position="replace">
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Nom" class="oe_inline"/> 
+                            <field name='initials' placeholder="I.,J.,F." class="oe_inline"/>
+                        </h1>
+                        <span class="oe_fade">
+                              Id : <field name="id" options="{&quot;no_open&quot;:True}" class="oe_inline"/>
+                        </span>
+                        <group>
+                            <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
+                            <field name="user_ids" invisible="1"/>
+                            <field name="email" widget="email" placeholder="Email"/>
+                        </group>
+                        <div class="oe_edit_only">
+            		        <group>
+            				    <field name='student' />
+                                <field name='teacher' />
+                                <field name='employee' />
+                                <field name="lastname"/>
+            					<field name="firstname"/>
+            				</group>
+            			</div>
+            			<field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': ['|',('is_company','=', True),('student','=',True)]}"/>
+            			<field name="active" invisible="1"/>
                     </div>
-                    <notebook colspan="4">
-                        <page name="cycles_page" string="Cycles" autofocus="autofocus" >
-            				<field name="student_program_ids" attrs="{'invisible': [('student','=',False)]}">
+                </xpath>
+                <xpath expr="//notebook" position="replace">
+                    <notebook>
+                        <page name="cycles_page" string="Cycles" attrs="{'invisible': [('student','=',False)]}">
+            				<field name="student_program_ids">
                                 <kanban quick_create="false" create="false">
                                     <field name="uid"/>
                                     <field name="year_id"/>
@@ -115,8 +115,8 @@
                                 </kanban>
                             </field>
             			</page>
-                        <page name="program_page" string="PAEs" >
-            				<field name="student_bloc_ids" attrs="{'invisible': [('student','=',False)]}">
+                        <page name="program_page" string="PAEs" attrs="{'invisible': [('student','=',False)]}">
+            				<field name="student_bloc_ids">
                                 <kanban quick_create="false" create="false">
                                     <field name="uid"/>
                                     <field name="year_id"/>
@@ -164,7 +164,7 @@
                             <field name="parent_id" invisible="1"/>
                             <field name="type" attrs="{'invisible': [('parent_id','=', False)]}" groups="base.group_no_one"/>
                             <div class="row" groups="school_management.group_employee">
-                                <div class="col-md-3 mb16">
+                                <div class="col-3 mb16">
                                     <label for="street" string="Main Address"/>
                                     <div class="o_address_format">
                                         <div class="oe_edit_only">
@@ -178,7 +178,7 @@
                                         <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb16 ">
+                                <div class="col-3 mb16 ">
                                     <label for="secondary_street" string="Alternative Address"/>
                                     <div class="o_address_format">
                                         <field name="secondary_street" placeholder="Street..." class="o_address_street" />
@@ -189,7 +189,7 @@
                                         <field name="secondary_country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb16">
+                                <div class="col-6 mb16">
                                     <group col="2">
                                         <field name='email_personnel' />
                                         <field name="phone" widget="phone"/>
@@ -211,14 +211,13 @@
                                 <field name="mat_number"/>
             				</group>
             			</page>
-                    </notebook>
-                </sheet>
+            		</notebook>
                 </xpath>
             </field>
         </record>
 
         <!-- Top menu item -->
-        <menuitem name="Contacts" id="menu_contacts" web_icon="school_management,static/description/icon_contact.png" sequence="40" />
+        <menuitem name="Contacts" id="menu_contacts" web_icon="school_management,static/description/icon_contact.png" sequence="0" />
 
         <!-- <menuitem name="Contacts" parent="menu_main_contacts" id="menu_contacts" sequence="1" /> -->
 
@@ -232,10 +231,10 @@
                     <filter string="Persons" name="type_person" domain="[('is_company','=',0)]" />
                     <filter string="Companies" name="type_company" domain="[('is_company','=',1)]" />
                     <separator/>
-                    <filter string="Employees" name="employee" domain="[('employee','=',1), ('parent_id', '=', False)]" />
-                    <filter string="Teachers" name="teacher" domain="[('teacher','=',1), ('parent_id', '=', False)]" />
-                    <filter string="Students" name="student" domain="[('student','=',1), ('parent_id', '=', False)]" />
-                    <filter string="Others" name="other" domain="[('employee','=',0),('teacher','=',0),('student','=',0), ('parent_id', '=', False)]" />
+                    <filter string="Employees" name="employee" domain="[('employee','=',1)]" />
+                    <filter string="Teachers" name="teacher" domain="[('teacher','=',1)]" />
+                    <filter string="Students" name="student" domain="[('student','=',1)]" />
+                    <filter string="Others" name="other" domain="[('employee','=',0),('teacher','=',0),('student','=',0)]" />
                     <filter string="Archived" name="archived" domain="[('active','=',False),('type','=','contact')]" />
                     <separator/>
                     <filter string="Registered current" name="registered_cur" domain="[('year_sequence','=','current')]" />

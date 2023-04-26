@@ -2,8 +2,8 @@
 <!--
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -30,6 +30,7 @@
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//group/field[@name='total_weight']" position="after">
+                    <field name="type"/>
                     <field name="is_choice_course_group"/>
                     <field name="total_credits_to_select" attrs="{'invisible': [('is_choice_course_group','=',False)]}"/>
                     <field name="total_hours_to_select" attrs="{'invisible': [('is_choice_course_group','=',False)]}"/>

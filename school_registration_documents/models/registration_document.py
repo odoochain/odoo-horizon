@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2015 be-cloud.be
-#                       Jerome Sonnet <jerome.sonnet@be-cloud.be>
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -34,8 +34,6 @@ class Partner(models.Model):
     official_document_ids = fields.One2many('school.official_document', 'student_id', string="Official Documents")
     official_document_count = fields.Integer(string='Missing Official Documents Count', compute="_compute_official_document_missing_count")
     official_document_missing_count = fields.Integer(string='Missing Official Documents Count', compute="_compute_official_document_missing_count")
-    
-    google_drive_folder = fields.Char(string="Google Drive Folder")
     
     @api.depends('official_document_ids','official_document_ids.is_available')
     
