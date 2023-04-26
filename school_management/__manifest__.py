@@ -41,8 +41,12 @@
         'school_data_demo.xml'
     ],
     'assets': {
-        'web.assets_backend': [
+        'web._assets_primary_variables': [
             'school_management/static/src/scss/primary_variables.scss'
+        ],
+        'web.report_assets_common': [
+            'school_management/static/src/css/pure-nr.css',
+            'school_management/static/src/css/reports.css',
         ],
     },
     'description': '''
