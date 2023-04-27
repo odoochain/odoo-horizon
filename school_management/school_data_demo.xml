@@ -140,6 +140,7 @@
 
     <record id="school_bloc_1" model="school.bloc">
         <field name="title">Bloc Number 1</field>
+        <field name="sequence">1</field>
         <field name="course_group_ids" eval="[(4, ref('school_management.school_course_group_1')), (4, ref('school_management.school_course_group_2'))]"/>
     </record>
 
@@ -147,6 +148,7 @@
         <field name="title">Program Number 1</field>
         <field name="year_id" ref="school_management.year_2023_2024"/>
         <field name="cycle_id" ref="school_management.cycle_1"/>
+        <field name="speciality_id" ref="school_management.spec_1"/>
         <field name="bloc_ids" eval="[(4, ref('school_management.school_bloc_1'))]"/>
         <field name="ares_code">456</field>
         <field name="graca_code">123</field>
