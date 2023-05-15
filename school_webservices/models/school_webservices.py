@@ -141,26 +141,26 @@ class WebService(models.Model):
 
         return [wsa_action, wsa_from, wsa_message_id, wsa_to]
 
-    def _get_WSSE_Headers(self):
-        timestamp = datetime.now()
-        expires = timestamp + timedelta(minutes=10)
+    # def _get_WSSE_Headers(self):
+    #     timestamp = datetime.now()
+    #     expires = timestamp + timedelta(minutes=10)
 
-        wsse_security = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}Security")
-        wsse_security.set("{http://www.w3.org/2003/05/soap-envelope}mustUnderstand", "1")
+    #     wsse_security = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}Security")
+    #     wsse_security.set("{http://www.w3.org/2003/05/soap-envelope}mustUnderstand", "1")
 
-        wsu_timestamp = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp")
-        wsu_timestamp.set("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Id", 'id-%s' % uuid.uuid4())
+    #     wsu_timestamp = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp")
+    #     wsu_timestamp.set("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Id", 'id-%s' % uuid.uuid4())
 
-        wsu_created = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Created")
-        wsu_created.text = timestamp.strftime("%Y-%m-%dT%H:%M:%SZ")
-        wsu_expires = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Expires")
-        wsu_expires.text = expires.strftime("%Y-%m-%dT%H:%M:%SZ")
-        wsu_timestamp.append(wsu_created)
-        wsu_timestamp.append(wsu_expires)
+    #     wsu_created = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Created")
+    #     wsu_created.text = timestamp.strftime("%Y-%m-%dT%H:%M:%SZ")
+    #     wsu_expires = etree.Element("{http://docs.oasisopen.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Expires")
+    #     wsu_expires.text = expires.strftime("%Y-%m-%dT%H:%M:%SZ")
+    #     wsu_timestamp.append(wsu_created)
+    #     wsu_timestamp.append(wsu_expires)
 
-        wsse_security.append(wsu_timestamp)
+    #     wsse_security.append(wsu_timestamp)
 
-        return [wsse_security]
+    #     return [wsse_security]
 
 class FaseService(models.Model):
     '''Fase Web Service'''
@@ -191,9 +191,9 @@ class FaseService(models.Model):
             res = client.service.obtenirOrganisation(
                 Organisation=[fase.OrganisationCT(
                     Type=fase_cfwb.OrganisationST('ETAB'),
-                    Identifiant=record.fase_code
-                )], 
-                Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
+                    Identifiant=2066
+                )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
+            _logger.info('FASE Response : %s' % res)
         else:
             self.super(client, record)
 
