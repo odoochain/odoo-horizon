@@ -80,9 +80,9 @@ class WebService(models.Model):
     def _getCertificate(self):
         res_company = self.env['res.company'].browse(self.env.context['allowed_company_ids'][0])
         return {
-            'webservices_key': io.BytesIO(base64.decodestring(res_company.webservices_key)).read().decode('utf-8'),
+            'webservices_key': io.BytesIO(base64.decodebytes(res_company.webservices_key)).read().decode('utf-8'),
             'webservices_key_passwd': res_company.webservices_key_passwd,
-            'webservices_certificate': io.BytesIO(base64.decodestring(res_company.webservices_certificate)).read().decode('utf-8'),
+            'webservices_certificate': io.BytesIO(base64.decodebytes(res_company.webservices_certificate)).read().decode('utf-8'),
         }
 
     @api.model
@@ -141,7 +141,8 @@ class WebService(models.Model):
 
         return [wsa_action, wsa_from, wsa_message_id, wsa_to]
 
-    # def _get_WSSE_Headers(self):
+    def _get_WSSE_Headers(self):
+        return []
     #     timestamp = datetime.now()
     #     expires = timestamp + timedelta(minutes=10)
 
