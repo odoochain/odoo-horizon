@@ -236,7 +236,7 @@ class PersonService(models.Model):
             return super().action_test_service()
     
     def __callOperation(self, client, record=False):
-        if self.name == 'person':
+        if self.name == 'bced_personne':
             # create the types
             person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
             id_ns = "http://soa.spw.wallonie.be/common/identification/v1"
