@@ -26,6 +26,11 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
+class ResUser(models.Model):
+    _inherit = 'res.users'
+
+    national_id = fields.Char(string='National ID')
+
 class ResCompany(models.Model):
     _inherit = 'res.company'
 

@@ -27,4 +27,16 @@
         <field name="wsa_action">fase:organisationV2?mode=sync</field>
         <field name="wsa_to">http://www.etnic.be/services/fase</field>
     </record>
+    <record id="bced_personne_group" model="res.groups">
+        <field name="name">BCED Personne</field>
+        <field name="description">User is allowed to use BCED Personne service</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+    <record id="bced_personne" model="school.webservice">
+        <field name="name">bced_personne</field>
+        <field name="wsdl_url">/wsdl/bced_personne/BCEDPersonService_v3.wsdl</field>
+        <field name="wsa_action">bced_personne</field>
+        <field name="wsa_to">http://soa.spw.wallonie.be/services/person/messages/v3</field>
+        <field name="group_id" ref="bced_personne_group"/>
+    </record>
 </odoo>
