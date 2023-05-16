@@ -21,6 +21,7 @@
 import logging
 import logging.config
 import base64
+import os
 import io
 from datetime import datetime, timedelta
 import uuid
@@ -33,8 +34,9 @@ from odoo.tools.safe_eval import safe_eval
 from zeep.transports import Transport
 from zeep import CachingClient
 from zeep.wsse.signature import MemorySignature
-import os
 from zeep.plugins import HistoryPlugin
+from zeep.wsse.username import UsernameToken
+from zeep.wsse.utils import WSU
 
 _logger = logging.getLogger(__name__)
 
@@ -91,14 +93,27 @@ class WebService(models.Model):
         }
 
     @api.model
+    def _getUserNameToken(self):
+        timestamp_token = WSU.Timestamp()
+        today_datetime = datetime.today()
+        expires_datetime = today_datetime + timedelta(minutes=10)
+        timestamp_elements = [
+            WSU.Created(today_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")),
+            WSU.Expires(expires_datetime.strftime("%Y-%m-%dT%H:%M:%SZ"))
+        ]
+        timestamp_token.extend(timestamp_elements)
+        return UsernameToken('none', 'none', timestamp_token=timestamp_token)
+
+    @api.model
     def _getClient(self):
         if not self._soapClientsCache.get(self.name):
             cert = self._getCertificate()
             transport = Transport(timeout=TIMEOUT)
             dirname = os.path.dirname(__file__)
             filename = os.path.join(dirname, '../static' + self.wsdl_url)
+            
             client = CachingClient(filename, transport=transport,
-                wsse=MemorySignatureNoResponseValidation(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd']), plugins=[_history])
+                wsse=[self._getUserNameToken(), MemorySignatureNoResponseValidation(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd'])], plugins=[_history])
             self._soapClientsCache[self.name] = client
         return self._soapClientsCache[self.name]
 
