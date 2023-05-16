@@ -191,7 +191,7 @@ class FaseService(models.Model):
                 }
             }
         else:
-            super().action_test_service()
+            return super().action_test_service()
 
     def _callOperation(self, client, record=False):
         if self.name == 'fase':
@@ -233,7 +233,7 @@ class PersonService(models.Model):
                 }
             }
         else:
-            super().action_test_service()
+            return super().action_test_service()
     
     def __callOperation(self, client, record=False):
         if self.name == 'person':
