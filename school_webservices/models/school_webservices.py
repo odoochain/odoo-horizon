@@ -115,9 +115,8 @@ class WebService(models.Model):
             if not self.env.user.has_group(self.group_id.id):
                 raise UserError(_('You are not allowed to use the service %s.' % self.name))
         client = self._getClient()
-        result = self._callOperation(client, record)
-        self._applyChanges(result, record)
-
+        return self._callOperation(client, record)
+        
     def _callOperation(self, record=False):
         raise NotImplementedError('__callOperation not implemted for service %s' % self.name)
 
