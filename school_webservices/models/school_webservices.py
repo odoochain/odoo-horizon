@@ -203,7 +203,7 @@ class FaseService(models.Model):
             res = client.service.obtenirOrganisation(
                 Organisation=[fase.OrganisationCT(
                     Type=fase_cfwb.OrganisationST('ETAB'),
-                    Identifiant=record.fase_id,
+                    Identifiant=record.fase_code,
                 )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
             _logger.info('FASE Response : %s' % res)
             return res
