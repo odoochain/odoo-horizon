@@ -207,7 +207,7 @@ class FaseService(models.Model):
             _logger.info('FASE Response : %s' % res)
             return res
         else:
-            return super(client, record)
+            return super().__callOperation(client, record)
 
     def _applyChanges(self, result, record=False):
         if self.name == 'fase':
@@ -274,7 +274,7 @@ class PersonService(models.Model):
             )
             return res
         else:
-            return super(client, record)
+            return super().__callOperation(client, record)
 
     def _applyChanges(self, result, record=False):
         if self.name == 'fase':
