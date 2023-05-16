@@ -207,7 +207,7 @@ class FaseService(models.Model):
             _logger.info('FASE Response : %s' % res)
             return res
         else:
-            return super().__callOperation(client, record)
+            return super()._callOperation(client, record)
 
     def _applyChanges(self, result, record=False):
         if self.name == 'fase':
@@ -235,7 +235,7 @@ class PersonService(models.Model):
         else:
             return super().action_test_service()
     
-    def __callOperation(self, client, record=False):
+    def _callOperation(self, client, record=False):
         if self.name == 'bced_personne':
             # create the types
             person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
@@ -274,7 +274,7 @@ class PersonService(models.Model):
             )
             return res
         else:
-            return super().__callOperation(client, record)
+            return super()._callOperation(client, record)
 
     def _applyChanges(self, result, record=False):
         if self.name == 'fase':
