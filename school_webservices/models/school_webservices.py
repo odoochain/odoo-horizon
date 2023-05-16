@@ -221,7 +221,7 @@ class PersonService(models.Model):
     def action_test_service(self):
         _logger.info('PersonService action_test_service')
         if self.name == 'bced_personne':
-            resp = self.doRequest(self.env['res.partner'].browse(self.env.context['active_id']))
+            resp = self.doRequest(self.env.user)
             return {
                 'type': 'ir.actions.client',
                 'tag': 'display_notification',
