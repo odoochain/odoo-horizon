@@ -118,13 +118,13 @@ class WebService(models.Model):
         return self._callOperation(client, record)
         
     def _callOperation(self, record=False):
-        raise NotImplementedError('__callOperation not implemted for service %s' % self.name)
+        raise NotImplementedError('__callOperation not implemented for service %s' % self.name)
 
     def _applyChanges(self, record=False):
-        raise NotImplementedError('_applyChanges not implemted for service %s' % self.name)
+        raise NotImplementedError('_applyChanges not implemented for service %s' % self.name)
 
     def action_test_service(self):
-        raise NotImplementedError('action_test_service not implemted for service %s' % self.name)
+        raise NotImplementedError('action_test_service not implemented for service %s' % self.name)
 
     def _get_Headers(self):
         return self._get_WSA_Headers() + self._get_WSSE_Headers()
@@ -220,7 +220,7 @@ class PersonService(models.Model):
 
     def action_test_service(self):
         _logger.info('PersonService action_test_service')
-        if self.name == 'personne':
+        if self.name == 'bced_personne':
             resp = self.doRequest(self.env['res.partner'].browse(self.env.context['active_id']))
             return {
                 'type': 'ir.actions.client',
