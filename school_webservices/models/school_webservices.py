@@ -199,7 +199,7 @@ class FaseService(models.Model):
                 'type': 'ir.actions.client',
                 'tag': 'display_notification',
                 'params': {
-                    'message': _('Web Service response : %s' % etree.tostring(_history.last_received["envelope"], encoding="unicode", pretty_print=True)),
+                    'message': _('Web Service response : %s' % resp),
                     'next': {'type': 'ir.actions.act_window_close'},
                     'sticky': False,
                     'type': 'warning',
@@ -241,7 +241,7 @@ class PersonService(models.Model):
                 'type': 'ir.actions.client',
                 'tag': 'display_notification',
                 'params': {
-                    'message': _('Web Service response : %s' % etree.tostring(_history.last_received["envelope"], encoding="unicode", pretty_print=True)),
+                    'message': _('Web Service response : %s' % resp),
                     'next': {'type': 'ir.actions.act_window_close'},
                     'sticky': False,
                     'type': 'warning',
