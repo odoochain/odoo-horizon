@@ -32,7 +32,7 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
 
 from zeep.transports import Transport
-from zeep import CachingClient
+from zeep import Client
 from zeep.wsse.signature import MemorySignature
 from zeep.plugins import HistoryPlugin
 from zeep.wsse.username import UsernameToken
@@ -111,8 +111,7 @@ class WebService(models.Model):
             transport = Transport(timeout=TIMEOUT)
             dirname = os.path.dirname(__file__)
             filename = os.path.join(dirname, '../static' + self.wsdl_url)
-            
-            client = CachingClient(filename, transport=transport,
+            client = Client(filename, transport=transport,
                 wsse=[self._getUserNameToken(), MemorySignatureNoResponseValidation(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd'])], plugins=[_history])
             self._soapClientsCache[self.name] = client
         return self._soapClientsCache[self.name]
