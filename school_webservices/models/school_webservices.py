@@ -178,6 +178,7 @@ class FaseService(models.Model):
     _inherit = 'school.webservice'
 
     def action_test_service(self):
+        _logger.info('FaseService action_test_service')
         if self.name == 'fase':
             resp = self.doRequest(self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]))
             return {
@@ -191,7 +192,7 @@ class FaseService(models.Model):
                 }
             }
         else:
-            self.super()
+            self.super().action_test_service()
 
     def _callOperation(self, client, record=False):
         if self.name == 'fase':
@@ -219,7 +220,8 @@ class PersonService(models.Model):
     _inherit = 'school.webservice'
 
     def action_test_service(self):
-        if self.name == 'person':
+        _logger.info('PersonService action_test_service')
+        if self.name == 'personne':
             resp = self.doRequest(self.env['res.partner'].browse(self.env.context['active_id']))
             return {
                 'type': 'ir.actions.client',
@@ -232,7 +234,7 @@ class PersonService(models.Model):
                 }
             }
         else:
-            self.super()
+            self.super().action_test_service()
     
     def __callOperation(self, client, record=False):
         if self.name == 'person':
