@@ -251,7 +251,7 @@ class PersonService(models.Model):
                     ticket=uuid.uuid4(),
                     timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
                     customerIdentification={
-                        'organisationId' : self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]).fase_id
+                        'organisationId' : self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]).fase_code
                     }
                 )],
                 privacyLog={
