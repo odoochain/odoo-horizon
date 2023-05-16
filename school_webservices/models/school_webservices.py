@@ -192,7 +192,7 @@ class FaseService(models.Model):
                 }
             }
         else:
-            self.super().action_test_service()
+            super().action_test_service()
 
     def _callOperation(self, client, record=False):
         if self.name == 'fase':
@@ -208,13 +208,13 @@ class FaseService(models.Model):
             _logger.info('FASE Response : %s' % res)
             return res
         else:
-            return self.super(client, record)
+            return super(client, record)
 
     def _applyChanges(self, result, record=False):
         if self.name == 'fase':
             _logger.info('FASE Info : %s' % result)
         else:
-            self.super(result, record)
+            super(result, record)
 
 class PersonService(models.Model):
     _inherit = 'school.webservice'
@@ -234,7 +234,7 @@ class PersonService(models.Model):
                 }
             }
         else:
-            self.super().action_test_service()
+            super().action_test_service()
     
     def __callOperation(self, client, record=False):
         if self.name == 'person':
@@ -275,10 +275,10 @@ class PersonService(models.Model):
             )
             return res
         else:
-            return self.super(client, record)
+            return super(client, record)
 
     def _applyChanges(self, result, record=False):
         if self.name == 'fase':
             _logger.info('FASE Info : %s' % result)
         else:
-            self.super(result, record)
+            super(result, record)
