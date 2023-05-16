@@ -67,7 +67,7 @@ TIMEOUT = 30
 
 class MemorySignatureNoResponseValidation(MemorySignature):
     # Skip response validation as it is not working with the current version of zeep
-    def verify(self, envelope, headers):
+    def verify(self, envelope, headers=None):
         return envelope
 
 class WebService(models.Model):
