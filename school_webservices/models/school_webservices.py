@@ -127,7 +127,7 @@ class WebService(models.Model):
     def doRequest(self, record=False):
         self.ensure_one()
         if self.group_id :
-            if not self.env.user.has_group(self.group_id.id):
+            if not self.env.user.has_group([self.group_id.id]):
                 raise UserError(_('You are not allowed to use the service %s.' % self.name))
         client = self._getClient()
         return self._callOperation(client, record)
