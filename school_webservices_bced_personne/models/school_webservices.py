@@ -36,10 +36,6 @@ _logger = logging.getLogger(__name__)
 class PersonService(models.Model):
     _inherit = 'school.webservice'
 
-    def getWSLDFile(self):
-        dirname = os.path.dirname(__file__)
-        return os.path.join(dirname, '../static' + self.wsdl_url)
-
     def action_test_service(self):
         _logger.info('PersonService action_test_service')
         if self.name == 'bced_personne':

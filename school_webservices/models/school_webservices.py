@@ -110,7 +110,8 @@ class WebService(models.Model):
         if not self._soapClientsCache.get(self.name):
             cert = self._getCertificate()
             transport = Transport(timeout=TIMEOUT)
-            filename = self.getWSLDFile()
+            dirname = os.path.dirname(__file__)
+            filename = os.path.join(dirname, '../../', self.wsdl_url)
             client = CachingClient(filename, transport=transport,
                 wsse=Compose([self._getUserNameToken(), MemorySignatureNoResponseValidation(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd'])]), plugins=[_history])
             self._soapClientsCache[self.name] = client
@@ -140,9 +141,6 @@ class WebService(models.Model):
 
     def action_test_service(self):
         raise NotImplementedError('action_test_service not implemented for service %s' % self.name)
-
-    def getWSLDFile(self):
-        raise NotImplementedError('getWSLDFile not implemented for service %s' % self.name)
 
     def _get_Headers(self):
         return self._get_WSA_Headers() + self._get_WSSE_Headers()
@@ -193,10 +191,6 @@ class WebService(models.Model):
 class FaseService(models.Model):
     '''Fase Web Service'''
     _inherit = 'school.webservice'
-
-    def getWSLDFile(self):
-        dirname = os.path.dirname(__file__)
-        return os.path.join(dirname, '../static' + self.wsdl_url)
         
     def action_test_service(self):
         _logger.info('FaseService action_test_service')
