@@ -1,0 +1,20 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pro="http://soa.spw.wallonie.be/data/entity/person/profession/v1" xmlns:cod="http://soa.spw.wallonie.be/data/common/code/v1" xmlns:lab="http://soa.spw.wallonie.be/data/common/label/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/entity/person/profession/v1" version="1.00">
+<xs:annotation>
+<xs:documentation>Definitions of profession-related types.</xs:documentation>
+</xs:annotation>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/code/v1" schemaLocation="code_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/label/v1" schemaLocation="label_v1.xsd"></xs:import>
+<xs:complexType name="ProfessionType">
+<xs:annotation>
+<xs:documentation>The name of a person consists of zero or more first names, and one or more last names.
+				There is an optional indicator stating which of the first names is the used one. (Some
+				people use their second - or other - name as a first name.)</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element minOccurs="0" name="occupation" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element minOccurs="0" name="socialcategory" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element minOccurs="0" name="comment1" nillable="true" type="lab:CommentType"></xs:element>
+<xs:element minOccurs="0" name="comment2" nillable="true" type="lab:CommentType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

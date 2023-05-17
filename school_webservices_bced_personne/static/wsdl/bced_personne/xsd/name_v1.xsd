@@ -1,0 +1,82 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dat="http://soa.spw.wallonie.be/data/common/date/v1" xmlns:nam="http://soa.spw.wallonie.be/data/entity/person/name/v1" xmlns:cod="http://soa.spw.wallonie.be/data/common/code/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/entity/person/name/v1" version="1.00">
+<xs:annotation>
+<xs:documentation>Definitions of name-related types.</xs:documentation>
+</xs:annotation>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/code/v1" schemaLocation="code_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/date/v1" schemaLocation="date_v1.xsd"></xs:import>
+<xs:complexType name="BasicNameType">
+<xs:annotation>
+<xs:documentation>The name of a person consists of zero or more first names, and one or more last names.
+				There is an optional indicator stating which of the first names is the used one. (Some
+				people use their second - or other - name as a first name.)</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element maxOccurs="3" minOccurs="0" name="firstName" nillable="true" type="xs:string"></xs:element>
+<xs:element maxOccurs="unbounded" name="lastName" nillable="true" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="NameType">
+<xs:annotation>
+<xs:documentation>The name of a person consists of zero or more first names, and one or more last names.
+				There is an optional indicator stating which of the first names is the used one. (Some
+				people use their second - or other - name as a first name.)</xs:documentation>
+</xs:annotation>
+<xs:complexContent>
+<xs:extension base="nam:BasicNameType">
+<xs:sequence>
+<xs:element minOccurs="0" name="usedFirstName" nillable="true" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="NobilityTitleType">
+<xs:annotation>
+<xs:documentation>The nobility title of a person, and the declaration date of it.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="title" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element name="declarationDate" nillable="true" type="dat:DateType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PseudonymType">
+<xs:annotation>
+<xs:documentation>The pseudonym of a person, and the declaration date of it. Pseudonyms only exist for
+				people who are known by a pseudonym because of their profession, such as writers, actors, ...</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="name" nillable="true" type="nam:NameType"></xs:element>
+<xs:element name="declarationDate" nillable="true" type="dat:DateType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="NameBaseDeclarationType">
+<xs:sequence>
+<xs:element maxOccurs="3" minOccurs="0" name="firstName" type="nam:FirstNameDeclarationType"></xs:element>
+<xs:element name="lastName" type="nam:LastNameDeclarationType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="LastNameDeclarationType">
+<xs:restriction base="xs:string">
+<xs:minLength value="1"></xs:minLength>
+<xs:maxLength value="128"></xs:maxLength>
+</xs:restriction>
+</xs:simpleType>
+<xs:complexType name="FirstNameDeclarationType">
+<xs:simpleContent>
+<xs:extension base="nam:FirstNameValueDeclarationType">
+<xs:attribute name="sequence" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:unsignedShort">
+<xs:maxInclusive value="3"></xs:maxInclusive>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:simpleType name="FirstNameValueDeclarationType">
+<xs:restriction base="xs:string">
+<xs:minLength value="1"></xs:minLength>
+<xs:maxLength value="48"></xs:maxLength>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

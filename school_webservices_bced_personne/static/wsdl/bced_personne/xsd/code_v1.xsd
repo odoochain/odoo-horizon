@@ -1,0 +1,179 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cod="http://soa.spw.wallonie.be/data/common/code/v1" xmlns:lab="http://soa.spw.wallonie.be/data/common/label/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/common/code/v1" version="1.03">
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/label/v1" schemaLocation="label_v1.xsd"></xs:import>
+<xs:simpleType name="SimpleCodeType">
+<xs:annotation>
+<xs:documentation>A simple code type consists of a string, which is
+				at least one character long, and cannot
+				start with whitespace.
+			</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:string">
+<xs:pattern value="[^\s].*"></xs:pattern>
+</xs:restriction>
+</xs:simpleType>
+<xs:complexType name="DescriptiveCodeType">
+<xs:annotation>
+<xs:documentation>A descriptive code type consists of a simple code,
+				and zero or more descriptions for that
+				code. If more than one
+				description is provided, each should be in a different language,
+				although
+				this is not enforced in the schema.
+			</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="code" nillable="true" type="cod:SimpleCodeType">
+<xs:annotation>
+<xs:documentation>A code should have a simple code which identifies
+						it. However, if this code is
+						unknown, for whatever reason, it
+						should be explicitly set to nill.
+					</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="description" type="lab:DescriptionType">
+<xs:annotation>
+<xs:documentation>The description of a code is not always known, or
+						required. In many cases, the simple
+						code is sufficient, and the
+						description can be omitted.
+					</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CodeType">
+<xs:annotation>
+<xs:documentation>A code type is the generally reusable code which
+				equals a descriptive code, with the
+				addition of an attribute which
+				defines the origin, or source, of the code. This is
+				useful when
+				passing on codes defined by service providers, and which need to be
+				identified
+				as such.
+			</xs:documentation>
+</xs:annotation>
+<xs:complexContent>
+<xs:extension base="cod:DescriptiveCodeType">
+<xs:attribute name="codeSource" use="optional">
+<xs:simpleType>
+<xs:restriction base="cod:CodeSourceType"></xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:simpleType name="CodeSourceType">
+<xs:annotation>
+<xs:documentation>A code-source type is a simple code which is
+				restricted to known code sources.</xs:documentation>
+</xs:annotation>
+<xs:restriction base="cod:SimpleCodeType">
+<xs:enumeration value="ISO-639-1">
+<xs:annotation>
+<xs:documentation>ISO two-letter language code</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="ISO-3166">
+<xs:annotation>
+<xs:documentation>ISO two-letter country code</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="ISO-4217">
+<xs:annotation>
+<xs:documentation>ISO currency code</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="ISO-5218">
+<xs:annotation>
+<xs:documentation>ISO gender code</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="INS/NIS">
+<xs:annotation>
+<xs:documentation>A code defined by the
+						Institut National de
+						Statistique (fr) / Nationaal Instituut Statistiek (nl)
+					</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="RN/RR">
+<xs:annotation>
+<xs:documentation>A code defined by the
+						Registre National (fr) / Rijksregister (nl)
+					</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="BCSS/KSZ">
+<xs:annotation>
+<xs:documentation>A code defined by the
+						Banque Carrefour de la
+						Securite Sociale (fr) / Kruispuntbank der Sociale Zekerheid (nl)
+					</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="BCE/KBO">
+<xs:annotation>
+<xs:documentation>A code defined by the
+						Banque Carrefour des
+						Entreprises (fr) / Kruispuntbank der Ondernemingen (nl)
+					</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="BCED"></xs:enumeration>
+<xs:enumeration value="DIV"></xs:enumeration>
+<xs:enumeration value="SPW/RSPW"></xs:enumeration>
+<xs:enumeration value="RSZ/ONSS"></xs:enumeration>
+<xs:enumeration value="DIBISS/ORPSS"></xs:enumeration>
+<xs:enumeration value="SCNM"></xs:enumeration>
+<xs:enumeration value="NISSE/INASTI"></xs:enumeration>
+<xs:enumeration value="FOREM"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="TrustType">
+<xs:annotation>
+<xs:documentation>An trust type is a simple code which indicates how
+				trustworthy an object is.</xs:documentation>
+</xs:annotation>
+<xs:restriction base="cod:SimpleCodeType">
+<xs:enumeration value="CONSUMER">
+<xs:annotation>
+<xs:documentation>The value is consumer supplied</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="AUTHENTIC_SOURCE">
+<xs:annotation>
+<xs:documentation>The value comes from an authentic source
+					</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="BEST_EFFORT">
+<xs:annotation>
+<xs:documentation>The value is a best-effort construction of
+						ambiguous data</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="UNKNOWN">
+<xs:annotation>
+<xs:documentation>It is unkown how trustworthy the value is.
+					</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+<xs:complexType name="CodeValueType">
+<xs:annotation>
+<xs:documentation>a code-value type is the generally reusable code
+				which equals a descriptive code, enriched with a value element
+			</xs:documentation>
+</xs:annotation>
+<xs:complexContent>
+<xs:extension base="cod:DescriptiveCodeType">
+<xs:sequence>
+<xs:element name="value" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:schema>
