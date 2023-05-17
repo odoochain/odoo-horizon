@@ -30,6 +30,7 @@
     'init_xml': [],
     'data': [
         'school_webservices_data.xml',
+        'views/configuration_view.xml',
         'views/res_company_view.xml',
         'security/ir.model.access.csv',
     ],
