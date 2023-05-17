@@ -127,7 +127,8 @@ class WebService(models.Model):
     def doRequest(self, record=False):
         self.ensure_one()
         if self.group_id :
-            if not self.env.user.has_group(self.env['ir.model.data'].xmlid_from_record('res.groups', self.group_id.id)):
+            group_xml_id = self.group_id.get_external_id().get(self.group_id.id)
+            if not self.env.user.has_group(group_xml_id):
                 raise UserError(_('You are not allowed to use the service %s.' % self.name))
         client = self._getClient()
         return self._callOperation(client, record)
