@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!--
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2023 ito-invest.lu
@@ -19,18 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
--->
-<odoo>
-        <record id="view_partners_form_school" model="ir.ui.view">
-            <field name="name">view.res.partner.form.school</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="school_management.view_partners_form_school" />
-            <field eval="25" name="priority" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='mat_number']" position="after">
-                    <button states="active" string="Retrieve info" />
-                    <!--name="action_retrieve_contact" type="object"-->
-                </xpath>
-            </field>
-        </record>
-</odoo>
+from . import models

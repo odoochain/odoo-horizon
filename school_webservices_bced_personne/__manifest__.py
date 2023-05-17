@@ -19,18 +19,17 @@
 #
 ##############################################################################
 {
-    'name': 'School webservices',
+    'name': 'School webservices BCED Personne',
     'version': '0.1',
     'license': 'AGPL-3',
     'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': ['school_management'],
-    "external_dependencies": {"python": ["zeep", "xmlsec"]},
+    'depends': ['school_webservices'],
     'init_xml': [],
     'data': [
         'school_webservices_data.xml',
-        'views/res_company_view.xml',
+        'views/res_partner_view.xml',
         'security/ir.model.access.csv',
     ],
     'demo_xml': [],

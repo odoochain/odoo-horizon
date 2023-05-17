@@ -18,23 +18,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import logging
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.safe_eval import safe_eval
 
+_logger = logging.getLogger(__name__)
 
-class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
+class ResUser(models.Model):
+    _inherit = 'res.users'
 
-    pass
-
-    # registration_open_year_id = fields.Many2one(
-    #     comodel_name='school.year',
-    #     string='Current Year for Registrations',
-    #     readonly=False,
-    #     help='Only registration in selected year is allowed.', config_parameter='school.registration_open_year_id')
-
-    # registration_employee_id = fields.Many2one(
-    #     comodel_name='res.partner',
-    #     string='Employee Managing Registrations',
-    #     readonly=False,
-    #     help='The employee that manage/dispatch registrations.', config_parameter='school.registration_employee_id')
+    national_id = fields.Char(string='National ID')

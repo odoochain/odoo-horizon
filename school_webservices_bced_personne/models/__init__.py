@@ -18,26 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School webservices',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'ito-invest (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['school_management'],
-    "external_dependencies": {"python": ["zeep", "xmlsec"]},
-    'init_xml': [],
-    'data': [
-        'school_webservices_data.xml',
-        'views/res_company_view.xml',
-        'security/ir.model.access.csv',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules manage access to e-Paysage webservices.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+#from . import res_config_settings
+from . import res_company
+from . import school_webservices

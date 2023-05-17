@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2023 ito-invest.lu
@@ -18,26 +19,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School webservices',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'ito-invest (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['school_management'],
-    "external_dependencies": {"python": ["zeep", "xmlsec"]},
-    'init_xml': [],
-    'data': [
-        'school_webservices_data.xml',
-        'views/res_company_view.xml',
-        'security/ir.model.access.csv',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules manage access to e-Paysage webservices.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+-->
+<odoo noupdate="1">
+    <record id="bced_allowed_group" model="res.groups">
+        <field name="name">BCED Access Allowed</field>
+    </record>
+    <record id="bced_personne" model="school.webservice">
+        <field name="name">bced_personne</field>
+        <field name="wsdl_url">/wsdl/bced_personne/BCEDPersonService_v3.wsdl</field>
+        <field name="wsa_action">bced_personne</field>
+        <field name="wsa_to">http://soa.spw.wallonie.be/services/person/messages/v3</field>
+        <field name="group_id" ref="bced_allowed_group"/>
+    </record>
+</odoo>
