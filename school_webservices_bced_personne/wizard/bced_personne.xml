@@ -61,7 +61,7 @@
 
     <record id="action_bced_personne_view" model="ir.actions.act_window">
         <field name="name">BCED Personne Wizard</field>
-        <field name="res_model">school.bcde_personne_wizard</field>
+        <field name="res_model">school.bced_personne_wizard</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="bced_personne_view"/>
