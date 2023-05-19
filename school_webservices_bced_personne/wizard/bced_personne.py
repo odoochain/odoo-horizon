@@ -26,9 +26,9 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
-class BCDEPersonne(models.TransientModel):
-    _name = "school.bcde_personne_wizard"
-    _description = "BCDE Personne Wizard"
+class BCEDPersonne(models.TransientModel):
+    _name = "school.bced_personne_wizard"
+    _description = "BCED Personne Wizard"
     
     student_id = fields.Many2one('res.partner', string='Student', required=True)
 
@@ -40,7 +40,7 @@ class BCDEPersonne(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(BCDEPersonne, self).default_get(fields)
+        res = super(BCEDPersonne, self).default_get(fields)
         student_id = self.env['res.partner'].browse(self.env.context.get('active_id'))
         if student_id:
             ws = self.env['school.webservices'].search([('name', '=', 'bced_personne')], limit=1)
