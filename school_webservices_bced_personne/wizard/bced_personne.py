@@ -51,7 +51,7 @@ class BCEDPersonne(models.TransientModel):
                 res['has_record_in_bced'] = True
         return res
         
-    def action_open_year(self):
+    def action_open_bced_personne(self):
         self.ensure_one()
        
         return True
