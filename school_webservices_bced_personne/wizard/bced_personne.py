@@ -44,8 +44,8 @@ class BCEDPersonne(models.TransientModel):
         student_id = self.env['res.partner'].browse(self.env.context.get('active_id'))
         if student_id:
             ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
-            res = ws.doRequest(student_id)
-            if res.status and res.status['code'] == 'SOA5100000':
+            data = ws.doRequest(student_id)
+            if data.status and data.status['code'] == 'SOA5100000':
                 res['has_record_in_bced'] = False
             else:
                 res['has_record_in_bced'] = True
