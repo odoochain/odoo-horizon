@@ -30,7 +30,7 @@ class BCDEPersonne(models.TransientModel):
     _name = "school.bcde_personne_wizard"
     _description = "BCDE Personne Wizard"
     
-    student_id = fields.Many2one('school.student', string='Student', required=True)
+    student_id = fields.Many2one('res.partner', string='Student', required=True)
 
     student_name = fields.Char(related='student_id.name', string='Name', readonly=True)
     student_image_512 = fields.Binary('Image', attachment=True, related='student_id.image_512', readonly=True)
