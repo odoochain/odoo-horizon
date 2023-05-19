@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+##############################################################################
+#
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<odoo>
+    <record id="bced_personne_view" model="ir.ui.view">
+        <field name="name">BCED Personne Wizard</field>
+        <field name="model">school.bced_personne_wizard</field>
+        <field name="arch" type="xml">
+            <form string="BCED Personne Wizard">
+                <sheet>
+                    <div class="container" style="margin-left:0px;">
+                        <div class="row">
+                            <div class="h-100 d-inline-block" style="width: 150px;">
+                                <field name="student_image_512" readonly="1" widget="image" class="oe_left oe_inline" options="{&quot;preview_image&quot;: &quot;image_128&quot;, &quot;size&quot;: [150, 150]}"/>
+                            </div>
+                            <div class="col-8">
+                                <h2>
+                                    <field name="student_id"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <t t-if="has_record_in_bced">
+                        <div class="alert alert-info" role="alert">
+                            <strong>Great!</strong> This student has a record in BCED.
+                        </div>
+                    </t>
+                    <t t-if="!has_record_in_bced">
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Warning!</strong> This student has no record in BCED.
+                        </div>
+                    </t>
+                </sheet>
+                <footer>
+                    <button name="action_open_bced_personne" string="Open BCED Personne" type="object" default_focus="1" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bced_personne_view" model="ir.actions.act_window">
+        <field name="name">BCED Personne Wizard</field>
+        <field name="res_model">school.bcde_personne_wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bced_personne_view"/>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+    
+    <!-- Add button to the partner view to open the wizard -->
+    <record id="view_partner_form_inherit_bced_personne" model="ir.ui.view">
+        <field name="name">view.partner.form.inherit.bced_personne</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_bced_personne_view" type="object"
+                        class="oe_stat_button" icon="fa-address-book">BCED</button>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

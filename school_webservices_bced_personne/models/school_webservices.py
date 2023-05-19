@@ -87,7 +87,7 @@ class PersonService(models.Model):
                     }
                 },
                 request={
-                    'personNumber' : record.national_id
+                    'personNumber' : record.reg_number,
                 }
             )
             return res

@@ -27,7 +27,7 @@
         <field name="model">school.webservice</field>
         <field eval="8" name="priority" />
         <field name="arch" type="xml">
-            <tree string="webservice">
+            <tree>
                 <field name="name" />
                 <field name="wsdl_url" />
                 <field name="wsa_action"/>
