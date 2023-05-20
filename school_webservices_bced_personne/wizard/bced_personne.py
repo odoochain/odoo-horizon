@@ -35,6 +35,7 @@ class BCEDPersonne(models.TransientModel):
     student_name = fields.Char(related='student_id.name', string='Name', readonly=True)
     student_image_512 = fields.Binary('Image', attachment=True, related='student_id.image_512', readonly=True)
     student_niss = fields.Char(related='student_id.reg_number', string='Niss', readonly=True)
+    student_firstname = fields.Char(related='student_id.firstname', string='First Name', readonly=True)
     student_lastname = fields.Char(related='student_id.lastname', string='Last Name', readonly=True)
     student_birthdate_date = fields.Date(related='student_id.birthdate_date', string='Birth Date', readonly=True)
 

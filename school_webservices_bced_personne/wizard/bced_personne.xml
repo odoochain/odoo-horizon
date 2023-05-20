@@ -33,7 +33,7 @@
                                 <group>
                                     <field name="student_lastname" readonly="1"/>
                                     <field name="student_firstname" readonly="1"/>
-                                    <field name="student_birthdate" readonly="1"/>
+                                    <field name="student_birthdate_date" readonly="1"/>
                                     <field name="student_niss" readonly="1"/>
                                 </group>
                             </div>
