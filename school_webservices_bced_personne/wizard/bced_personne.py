@@ -38,39 +38,28 @@ class BCEDPersonne(models.TransientModel):
     student_lastname = fields.Char(related='student_id.lastname', string='Last Name', readonly=True)
     student_birthdate_date = fields.Date(related='student_id.birthdate_date', string='Birth Date', readonly=True)
 
-    state = fields.Selection([('no_bced', 'No BCED'), ('candidate_bced', 'Candidate BCED'), ('bced', 'Has BCED')], string='State', default='draft')
+    state = fields.Selection([('draft','Draft'),('no_bced', 'No BCED'), ('candidate_bced', 'Candidate BCED'), ('bced', 'Has BCED')], string='State', default='draft')
 
     candidate_person_ids = fields.One2many('school.bced_personne_summary', 'wizard_id', string='Candidate Persons')
-
-    @api.model
-    def default_get(self, rec_fields):
-        res = super(BCEDPersonne, self).default_get(rec_fields)
-        student_id = self.env['res.partner'].browse(self.env.context.get('active_id'))
-        if student_id:
-            ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
-            data = ws.searchPersonByName(student_id)
-            if data.status and data.status['code'] == 'SOA5100000':
-                res['state'] = 'no_bced'
-            elif data.status and data.status['code'] == 'SOA0000000':
-                res['state'] = 'candidate_bced'
-                if data.persons and data.persons.person:
-                    candidate_persons = []
-                    for person in data.persons.person:
-                        candidate_persons.append([0, 0, {
-                            'firstname': ' '.join(person.name.firstName),
-                            'lastname': ' '.join(person.name.lastName),
-                            # parse birthdate
-                            'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
-                            'niss': person.personNumber,
-                            'wizard_id': self.id,
-                        }])
-                    res['candidate_person_ids'] = candidate_persons
-        return res
-        
+       
     def action_retrieve_bced_personne(self):
         self.ensure_one()
-       
-        return True
+        ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
+        data = ws.searchPersonByName(self.student_id)
+        if data.status and data.status['code'] == 'SOA5100000':
+            self.state = 'no_bced'
+        elif data.status and data.status['code'] == 'SOA0000000':
+            self.state = 'candidate_bced'
+            if data.persons and data.persons.person:
+                for person in data.persons.person:
+                    self.candidate_person_ids |= self.candidate_person_ids.create({
+                        'firstname': ' '.join(person.name.firstName),
+                        'lastname': ' '.join(person.name.lastName),
+                        # parse birthdate
+                        'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
+                        'niss': person.personNumber,
+                        'wizard_id': self.id,
+                    })
 
     def action_create_bced_personne(self):
         self.ensure_one()
