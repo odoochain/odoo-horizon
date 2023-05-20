@@ -38,7 +38,9 @@ class BCEDPersonne(models.TransientModel):
     student_lastname = fields.Char(related='student_id.lastname', string='Last Name', readonly=True)
     student_birthdate_date = fields.Date(related='student_id.birthdate_date', string='Birth Date', readonly=True)
 
-    state = fields.Selection([('no_bced', 'No BCED'), ('bced', 'Has BCED')], string='State', default='draft')
+    state = fields.Selection([('no_bced', 'No BCED'), ('candidate_bced', 'Candidate BCED'), ('bced', 'Has BCED')], string='State', default='draft')
+
+    candidate_persons_ids = fields.One2many('school.bced_personne_summary', 'wizard_id', string='Candidate Persons')
 
     @api.model
     def default_get(self, fields):
@@ -46,11 +48,23 @@ class BCEDPersonne(models.TransientModel):
         student_id = self.env['res.partner'].browse(self.env.context.get('active_id'))
         if student_id:
             ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
-            data = ws.getPerson(student_id)
+            data = ws.searchPersonByName(student_id)
             if data.status and data.status['code'] == 'SOA5100000':
                 res['state'] = 'no_bced'
             else:
-                res['state'] = 'bced'
+                res['state'] = 'candidate_bced'
+                persons = data.get('persons', []).get('person', [])
+                candidate_persons = []
+                for person in persons:
+                    candidate_persons.append({
+                        'firstname': person.get('name', '').get('firstName', ''),
+                        'lastname': person.get('name', '').get('lastName', ''),
+                        # parse birthdate
+                        'birthdate': fields.Date.to_date(person.get('birth', '').get('officialBirthDate', '')),
+                        'niss': person.get('personNumber', ''),
+                        'wizard_id': self.id,
+                    })
+                res['candidate_persons_ids'] = [0, 0, candidate_persons]
         return res
         
     def action_retrieve_bced_personne(self):
@@ -62,3 +76,14 @@ class BCEDPersonne(models.TransientModel):
         self.ensure_one()
        
         return True
+
+class BCEDPersonneSummary(models.TransientModel):
+    _name = "school.bced_personne_summary"
+    _description = "BCED Personne Summary"
+
+    firstname = fields.Char(string='First Name')
+    lastname = fields.Char(string='Last Name')
+    birthdate = fields.Date(string='Birth Date')
+    niss = fields.Char(string='Niss')
+
+    wizard_id = fields.Many2one('school.bced_personne_wizard', string='Wizard')

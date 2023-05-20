@@ -88,6 +88,52 @@ class PersonService(models.Model):
             }
         else:
             return super().action_test_service()
+
+    def searchPersonByName(self, record):
+        client = self._getClient()
+        if record :
+            # create the types
+            person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
+            id_ns = "http://soa.spw.wallonie.be/common/identification/v1"
+            priv_ns = "http://soa.spw.wallonie.be/common/privacylog/v1"
+
+            person = client.type_factory(person_ns)
+            id = client.type_factory(id_ns)
+            priv = client.type_factory(priv_ns)
+
+            res = client.service.searchPersonByName(
+                customerInformations=[id.CustomerInformationType(
+                    ticket=uuid.uuid4(),
+                    timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    customerIdentification={
+                        'organisationId' : self.env.user.company_id.fase_code
+                    }
+                )],
+                privacyLog={
+                    'context' : 'HIGH_SCHOOL_CAREER',
+                    'treatmentManagerIdentifier' : {
+                        '_value_1' : self.env.user.national_id,
+                        'identityManager' : 'RN/RBis'
+                    },
+                    'dossier' : {
+                        'dossierId' : {
+                            # TODO : what are the information to provide here ?
+                            '_value_1' : '0',
+                            'source' : 'CRLg'
+                        }
+                    }
+                },
+                request={
+                    'personName' :{
+                        'lastName' : record.lastname,
+                    },
+                    'birthDate' : record.birthdate_date.strftime("%Y-%m-%d"),
+                    'birthDateTolerance' : 0,
+                }
+            )
+            return res
+        else:
+            raise ValidationError(_('No record provided'))
     
     def getPerson(self, record):
         client = self._getClient()
