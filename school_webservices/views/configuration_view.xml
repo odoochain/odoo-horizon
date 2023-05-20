@@ -37,10 +37,11 @@
                     </group>
                     <notebook>
                         <page string="History">
+                            <h3>History</h3>
+                            <button type="object" icon="fa-folder-open" name="action_update_history" string="Refresh" />
                             <group>
-                                <button type="object" icon="fa-folder-open" name="action_update_history" string="Refresh" />
-                                <field name="last_send" widget="ace" />
-                                <field name="last_response" widget="ace" />
+                                <field name="last_send" widget="ace" class="oe_inline"/>
+                                <field name="last_response" widget="ace" class="oe_inline"/>
                             </group>
                         </page>
                     </notebook>
