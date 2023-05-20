@@ -90,7 +90,7 @@ class PersonService(models.Model):
             return super().action_test_service()
     
     def getPerson(self, record):
-        client = self.get_client()
+        client = self._get_client()
         if record :
             # create the types
             person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
