@@ -40,7 +40,7 @@ class BCEDPersonne(models.TransientModel):
 
     state = fields.Selection([('no_bced', 'No BCED'), ('candidate_bced', 'Candidate BCED'), ('bced', 'Has BCED')], string='State', default='draft')
 
-    candidate_persons_ids = fields.One2many('school.bced_personne_summary', 'wizard_id', string='Candidate Persons')
+    candidate_person_ids = fields.One2many('school.bced_personne_summary', 'wizard_id', string='Candidate Persons')
 
     @api.model
     def default_get(self, fields):
@@ -64,7 +64,7 @@ class BCEDPersonne(models.TransientModel):
                         'niss': person.get('personNumber', ''),
                         'wizard_id': self.id,
                     })
-                res['candidate_persons_ids'] = [0, 0, candidate_persons]
+                res['candidate_person_ids'] = [0, 0, candidate_persons]
         return res
         
     def action_retrieve_bced_personne(self):

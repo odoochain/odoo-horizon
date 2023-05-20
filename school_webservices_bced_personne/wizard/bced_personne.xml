@@ -43,6 +43,17 @@
                         </div>
                     </div>
                     <field name="state" invisible="1"/>
+                    <div attrs="{'invisible': [('state', '!=', 'candidate_bced')]}">
+                        <field name="candidate_person_ids">
+                            <tree>
+                                <field name="firstname"/>
+                                <field name="lastname"/>
+                                <field name="birthdate"/>
+                                <field name="niss"/>
+                            </tree>
+                        </field>
+                    </div>
+                    </div>
                     <div attrs="{'invisible': [('state', '!=', 'bced')]}">
                         <div class="alert alert-info" role="alert">
                             <strong>Great!</strong> This student has a record in BCED.
