@@ -61,6 +61,11 @@ class BCEDPersonne(models.TransientModel):
                         'wizard_id': self.id,
                     })
 
+    def action_retrieve_bced_personne(self):
+        self.ensure_one()
+
+        return True
+
     def action_create_bced_personne(self):
         self.ensure_one()
        
