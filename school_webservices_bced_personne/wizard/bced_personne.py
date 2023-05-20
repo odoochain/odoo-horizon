@@ -54,7 +54,7 @@ class BCEDPersonne(models.TransientModel):
             else:
                 res['state'] = 'candidate_bced'
                 candidate_persons = []
-                for person in res.persons.person:
+                for person in data.persons.person:
                     candidate_persons.append({
                         'firstname': ' '.join(person.name.firstName),
                         'lastname': person.name.lastName,
