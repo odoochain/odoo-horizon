@@ -20,7 +20,7 @@
 ##############################################################################
 import logging
 
-from odoo import api, fields, models, _, Command
+from odoo import api, fields, models, _
 from odoo.exceptions import MissingError
 from odoo.tools.safe_eval import safe_eval
 
