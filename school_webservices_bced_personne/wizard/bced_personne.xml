@@ -46,10 +46,11 @@
                     <div attrs="{'invisible': [('state', '!=', 'candidate_bced')]}">
                         <field name="candidate_person_ids">
                             <tree>
-                                <field name="firstname"/>
                                 <field name="lastname"/>
+                                <field name="firstname"/>
                                 <field name="birthdate"/>
                                 <field name="niss"/>
+                                <button type="object" icon="fa-folder-open" name="action_use_person" string="" />
                             </tree>
                         </field>
                     </div>

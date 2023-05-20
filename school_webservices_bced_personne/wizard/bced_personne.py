@@ -77,6 +77,11 @@ class BCEDPersonne(models.TransientModel):
        
         return True
 
+    def action_use_person(self):
+        self.ensure_one()
+       
+        return True
+
 class BCEDPersonneSummary(models.TransientModel):
     _name = "school.bced_personne_summary"
     _description = "BCED Personne Summary"
