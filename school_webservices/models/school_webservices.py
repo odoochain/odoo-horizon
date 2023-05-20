@@ -130,14 +130,14 @@ class WebService(models.Model):
             try:
                 record.last_send = etree.tostring(_history.last_sent.envelope, pretty_print=True,encoding='unicode')
             except Exception as e:
-                record.last_send = ''
+                record.last_send = e.__traceback__
 
     def _compute_last_response(self):
         for record in self:
             try:
                 record.last_response = etree.tostring(_history.last_received.envelope, pretty_print=True,encoding='unicode')
             except Exception as e:
-                record.last_response = ''
+                record.last_response = e.__traceback__
 
     def action_update_history(self):
         for record in self:
