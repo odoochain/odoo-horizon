@@ -53,7 +53,6 @@
                             </tree>
                         </field>
                     </div>
-                    </div>
                     <div attrs="{'invisible': [('state', '!=', 'bced')]}">
                         <div class="alert alert-info" role="alert">
                             <strong>Great!</strong> This student has a record in BCED.
