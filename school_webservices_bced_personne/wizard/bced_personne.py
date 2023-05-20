@@ -51,19 +51,20 @@ class BCEDPersonne(models.TransientModel):
             data = ws.searchPersonByName(student_id)
             if data.status and data.status['code'] == 'SOA5100000':
                 res['state'] = 'no_bced'
-            else:
+            elif data.status and data.status['code'] == 'SOA0000000':
                 res['state'] = 'candidate_bced'
-                candidate_persons = []
-                for person in data.persons.person:
-                    candidate_persons.append({
-                        'firstname': ' '.join(person.name.firstName),
-                        'lastname': person.name.lastName,
-                        # parse birthdate
-                        'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
-                        'niss': person.personNumber,
-                        'wizard_id': self.id,
-                    })
-                res['candidate_person_ids'] = [0, 0, candidate_persons]
+                if data.persons and data.persons.person:
+                    candidate_persons = []
+                    for person in data.persons.person:
+                        candidate_persons.append({
+                            'firstname': ' '.join(person.name.firstName),
+                            'lastname': person.name.lastName,
+                            # parse birthdate
+                            'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
+                            'niss': person.personNumber,
+                            'wizard_id': self.id,
+                        })
+                    res['candidate_person_ids'] = [0, 0, candidate_persons]
         return res
         
     def action_retrieve_bced_personne(self):
