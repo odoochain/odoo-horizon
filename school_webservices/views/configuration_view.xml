@@ -40,7 +40,7 @@
                             <group>
                                 <button type="object" icon="fa-folder-open" name="action_update_history" string="Refresh" />
                                 <field name="last_send" widget="ace" />
-                                <field name="last_received" widget="ace" />
+                                <field name="last_response" widget="ace" />
                             </group>
                         </page>
                     </notebook>
