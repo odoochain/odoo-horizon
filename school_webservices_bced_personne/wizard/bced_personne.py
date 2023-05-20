@@ -20,7 +20,7 @@
 ##############################################################################
 import logging
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models, _, Command
 from odoo.exceptions import MissingError
 from odoo.tools.safe_eval import safe_eval
 
@@ -60,14 +60,7 @@ class BCEDPersonne(models.TransientModel):
                         'niss': person.personNumber,
                         'wizard_id': self.id,
                     })
-        return { 
-            'type': 'ir.actions.act_window',
-            'name': 'BCED Personne',
-            'view_mode': 'form',
-            'res_model': 'school.bced_personne_wizard',
-            'res_id': self.id,
-            'target': 'new',
-        }
+        return False
 
     def action_retrieve_bced_personne(self):
         self.ensure_one()
