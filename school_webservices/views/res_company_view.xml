@@ -29,10 +29,12 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='general_info']" position="after">
                     <page string="ARES Web Services" name="webservices">
-                        <field name="webservices_key"/>
-                        <field name="webservices_key_passwd"/>
-                        <field name="webservices_certificate"/>
-                        <field name="fase_code"/>
+                        <group>
+                            <field name="webservices_key"/>
+                            <field name="webservices_key_passwd"/>
+                            <field name="webservices_certificate"/>
+                            <field name="fase_code"/>
+                        </group>
                     </page>
                 </xpath>
             </field>
