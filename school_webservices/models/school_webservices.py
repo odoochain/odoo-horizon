@@ -122,6 +122,22 @@ class WebService(models.Model):
     wsa_action = fields.Char('Action WS-Addressing')
     wsa_to = fields.Char('Destination (To) WS-Addressing')
 
+    last_send = fields.Text('Last Send',compute='_compute_last_send')
+    last_response = fields.Text('Last Response',compute='_compute_last_response')
+
+    def _compute_last_send(self):
+        for record in self:
+            record.last_send = etree.tostring(_history.last_sent.envelope, pretty_print=True,encoding='unicode')
+
+    def _compute_last_response(self):
+        for record in self:
+            record.last_response = etree.tostring(_history.last_received.envelope, pretty_print=True,encoding='unicode')
+
+    def action_update_history(self):
+        for record in self:
+            record._compute_last_send()
+            record._compute_last_response()
+
     group_id = fields.Many2one('res.groups', string='Group')
 
     def doRequest(self, record=False):
