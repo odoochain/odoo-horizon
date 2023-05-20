@@ -36,7 +36,7 @@ class BCEDPersonne(models.TransientModel):
     student_image_512 = fields.Binary('Image', attachment=True, related='student_id.image_512', readonly=True)
     student_niss = fields.Char(related='student_id.reg_number', string='Niss', readonly=True)
     student_lastname = fields.Char(related='student_id.lastname', string='Last Name', readonly=True)
-    student_birthdate = fields.Date(related='student_id.birthdate', string='Birth Date', readonly=True)
+    student_birthdate_date = fields.Date(related='student_id.birthdate_date', string='Birth Date', readonly=True)
 
     state = fields.Selection([('no_bced', 'No BCED'), ('bced', 'Has BCED')], string='State', default='draft')
 
