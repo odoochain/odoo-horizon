@@ -60,7 +60,14 @@ class BCEDPersonne(models.TransientModel):
                         'niss': person.personNumber,
                         'wizard_id': self.id,
                     })
-        return False
+        return { 
+            'type': 'ir.actions.act_window',
+            'name': 'BCED Personne',
+            'view_mode': 'form',
+            'res_model': 'school.bced_personne_wizard',
+            'res_id': self.id,
+            'target': 'new',
+        }
 
     def action_retrieve_bced_personne(self):
         self.ensure_one()
