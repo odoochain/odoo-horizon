@@ -39,20 +39,20 @@
                             </div>
                         </div>
                     </div>
-                    <t t-if="has_record_in_bced">
+                    <div attrs="{'invisible': [('state', '!=', 'bced')]}">
                         <div class="alert alert-info" role="alert">
                             <strong>Great!</strong> This student has a record in BCED.
                         </div>
-                    </t>
-                    <t t-if="!has_record_in_bced">
+                        <button name="action_retrieve_bced_personne" string="Retrieve BCED Personne" type="object" default_focus="1" class="oe_highlight"/>
+                    </div>
+                    <div attrs="{'invisible': [('state', '!=', 'no_bced')]}">
                         <div class="alert alert-warning" role="alert">
                             <strong>Warning!</strong> This student has no record in BCED.
                         </div>
-                    </t>
+                        <button name="action_create_bced_personne" string="Create BCED Personne" type="object" default_focus="1" class="oe_highlight"/>
+                    </div>
                 </sheet>
                 <footer>
-                    <button name="action_open_bced_personne" string="Open BCED Personne" type="object" default_focus="1" class="oe_highlight"/>
-                    or
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>

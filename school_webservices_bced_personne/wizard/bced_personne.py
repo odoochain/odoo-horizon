@@ -36,7 +36,7 @@ class BCEDPersonne(models.TransientModel):
     student_image_512 = fields.Binary('Image', attachment=True, related='student_id.image_512', readonly=True)
     student_niss = fields.Char(related='student_id.reg_number', string='Niss', readonly=True)
 
-    has_record_in_bced = fields.Boolean(string='Has record in BCED', readonly=True)
+    state = fields.Selection([('no_bced', 'No BCED'), ('bced', 'Has BCED')], string='State', default='draft')
 
     @api.model
     def default_get(self, fields):
@@ -46,12 +46,17 @@ class BCEDPersonne(models.TransientModel):
             ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
             data = ws.doRequest(student_id)
             if data.status and data.status['code'] == 'SOA5100000':
-                res['has_record_in_bced'] = False
+                res['state'] = 'no_bced'
             else:
-                res['has_record_in_bced'] = True
+                res['state'] = 'bced'
         return res
         
-    def action_open_bced_personne(self):
+    def action_retrieve_bced_personne(self):
+        self.ensure_one()
+       
+        return True
+
+    def action_create_bced_personne(self):
         self.ensure_one()
        
         return True
