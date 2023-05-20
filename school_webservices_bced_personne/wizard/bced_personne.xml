@@ -34,8 +34,11 @@
                             </div>
                             <div class="col-8">
                                 <h2>
-                                    <field name="student_id"/>
+                                    <field name="student_id" readonly="1"/>
                                 </h2>
+                                <group>
+                                    <field name="student_niss" readonly="1"/>
+                                </group>
                             </div>
                         </div>
                     </div>
