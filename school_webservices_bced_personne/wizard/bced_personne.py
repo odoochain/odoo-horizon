@@ -42,7 +42,7 @@ class BCEDPersonne(models.TransientModel):
 
     candidate_person_ids = fields.One2many('school.bced_personne_summary', 'wizard_id', string='Candidate Persons')
        
-    def action_retrieve_bced_personne(self):
+    def action_retrieve_bced_persons(self):
         self.ensure_one()
         ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
         data = ws.searchPersonByName(self.student_id)
