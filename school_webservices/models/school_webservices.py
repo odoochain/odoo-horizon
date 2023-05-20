@@ -127,11 +127,13 @@ class WebService(models.Model):
 
     def _compute_last_send(self):
         for record in self:
-            record.last_send = etree.tostring(_history.last_sent.envelope, pretty_print=True,encoding='unicode')
+            if _history.last_sent:
+                record.last_send = etree.tostring(_history.last_sent.envelope, pretty_print=True,encoding='unicode')
 
     def _compute_last_response(self):
         for record in self:
-            record.last_response = etree.tostring(_history.last_received.envelope, pretty_print=True,encoding='unicode')
+            if _history.last_received:
+                record.last_response = etree.tostring(_history.last_received.envelope, pretty_print=True,encoding='unicode')
 
     def action_update_history(self):
         for record in self:
