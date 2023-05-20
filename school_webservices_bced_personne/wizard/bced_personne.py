@@ -53,15 +53,14 @@ class BCEDPersonne(models.TransientModel):
                 res['state'] = 'no_bced'
             else:
                 res['state'] = 'candidate_bced'
-                persons = data.get('persons', []).get('person', [])
                 candidate_persons = []
-                for person in persons:
+                for person in res.persons.person:
                     candidate_persons.append({
-                        'firstname': person.get('name', '').get('firstName', ''),
-                        'lastname': person.get('name', '').get('lastName', ''),
+                        'firstname': ' '.join(person.name.firstName),
+                        'lastname': person.name.lastName,
                         # parse birthdate
-                        'birthdate': fields.Date.to_date(person.get('birth', '').get('officialBirthDate', '')),
-                        'niss': person.get('personNumber', ''),
+                        'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
+                        'niss': person.personNumber,
                         'wizard_id': self.id,
                     })
                 res['candidate_person_ids'] = [0, 0, candidate_persons]
