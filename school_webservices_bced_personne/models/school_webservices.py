@@ -40,7 +40,7 @@ class PersonService(models.Model):
         if self.name == 'bced_personne':
             _logger.info('PersonService action_test_service')
 
-            client = self._get_client()
+            client = self._getClient()
 
             person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
             id_ns = "http://soa.spw.wallonie.be/common/identification/v1"
@@ -90,7 +90,7 @@ class PersonService(models.Model):
             return super().action_test_service()
     
     def getPerson(self, record):
-        client = self._get_client()
+        client = self._getClient()
         if record :
             # create the types
             person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
