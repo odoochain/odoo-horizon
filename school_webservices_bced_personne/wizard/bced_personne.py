@@ -56,15 +56,15 @@ class BCEDPersonne(models.TransientModel):
                 if data.persons and data.persons.person:
                     candidate_persons = []
                     for person in data.persons.person:
-                        candidate_persons.append({
+                        candidate_persons.append([0, 0, {
                             'firstname': ' '.join(person.name.firstName),
                             'lastname': person.name.lastName,
                             # parse birthdate
                             'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
                             'niss': person.personNumber,
                             'wizard_id': self.id,
-                        })
-                    res['candidate_person_ids'] = [[0, 0, candidate_persons]]
+                        }])
+                    res['candidate_person_ids'] = candidate_persons
         return res
         
     def action_retrieve_bced_personne(self):
