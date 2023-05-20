@@ -41,28 +41,28 @@ from zeep.wsse.utils import WSU
 
 _logger = logging.getLogger(__name__)
 
-logging.config.dictConfig({
-    'version': 1,
-    'formatters': {
-        'verbose': {
-            'format': '%(name)s: %(message)s'
-        }
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'zeep.transports': {
-            'level': 'DEBUG',
-            'propagate': True,
-            'handlers': ['console'],
-        },
-    }
-})
+# logging.config.dictConfig({
+#     'version': 1,
+#     'formatters': {
+#         'verbose': {
+#             'format': '%(name)s: %(message)s'
+#         }
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'loggers': {
+#         'zeep.transports': {
+#             'level': 'DEBUG',
+#             'propagate': True,
+#             'handlers': ['console'],
+#         },
+#     }
+# })
 
 _history = HistoryPlugin()
 
@@ -70,6 +70,7 @@ TIMEOUT = 30
 
 class MemorySignatureNoResponseValidation(MemorySignature):
     # Skip response validation as it is not working with the current version of zeep
+    # TODO : remove this when zeep is fixed
     def verify(self, envelope, headers=None):
         return envelope
 
@@ -105,8 +106,13 @@ class WebService(models.Model):
         timestamp_token.extend(timestamp_elements)
         return UsernameToken('none', 'none', timestamp_token=timestamp_token)
 
-    @api.model
+    group_id = fields.Many2one('res.groups', string='Group')
+
     def _getClient(self):
+        if self.group_id :
+            group_xml_id = self.group_id.get_external_id().get(self.group_id.id)
+            if not self.env.user.has_group(group_xml_id):
+                raise UserError(_('You are not allowed to use the service %s.' % self.name))
         if not self._soapClientsCache.get(self.name):
             cert = self._getCertificate()
             transport = Transport(timeout=TIMEOUT)
@@ -143,23 +149,6 @@ class WebService(models.Model):
         for record in self:
             record._compute_last_send()
             record._compute_last_response()
-
-    group_id = fields.Many2one('res.groups', string='Group')
-
-    def doRequest(self, record=False):
-        self.ensure_one()
-        if self.group_id :
-            group_xml_id = self.group_id.get_external_id().get(self.group_id.id)
-            if not self.env.user.has_group(group_xml_id):
-                raise UserError(_('You are not allowed to use the service %s.' % self.name))
-        client = self._getClient()
-        return self._callOperation(client, record)
-        
-    def _callOperation(self, record=False):
-        raise NotImplementedError('__callOperation not implemented for service %s' % self.name)
-
-    def _applyChanges(self, record=False):
-        raise NotImplementedError('_applyChanges not implemented for service %s' % self.name)
 
     def action_test_service(self):
         raise NotImplementedError('action_test_service not implemented for service %s' % self.name)
@@ -215,14 +204,23 @@ class FaseService(models.Model):
     _inherit = 'school.webservice'
         
     def action_test_service(self):
-        _logger.info('FaseService action_test_service')
         if self.name == 'fase':
-            resp = self.doRequest(self.env['res.company'].browse(self.env.context['allowed_company_ids'][0]))
+            _logger.info('FaseService action_test_service')
+            client = self._getClient()
+            fase_ns = 'http://www.etnic.be/services/fase/organisation/v2'
+            fase_cfwb_ns = 'http://www.cfwb.be/enseignement/fase'
+            fase = client.type_factory(fase_ns)
+            fase_cfwb = client.type_factory(fase_cfwb_ns)
+            res = client.service.obtenirOrganisation(
+                Organisation=[fase.OrganisationCT(
+                    Type=fase_cfwb.OrganisationST('ETAB'),
+                    Identifiant=self.env.user.company_id.fase_code,
+                )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
             return {
                 'type': 'ir.actions.client',
                 'tag': 'display_notification',
                 'params': {
-                    'message': _('Web Service response : %s' % resp),
+                    'message': _('Web Service response : %s' % res),
                     'next': {'type': 'ir.actions.act_window_close'},
                     'sticky': False,
                     'type': 'warning',
@@ -231,8 +229,9 @@ class FaseService(models.Model):
         else:
             return super().action_test_service()
 
-    def _callOperation(self, client, record=False):
-        if self.name == 'fase':
+    def getOrganisationDetails(self, record=False):
+        client = self._getClient()
+        if record:
             fase_ns = 'http://www.etnic.be/services/fase/organisation/v2'
             fase_cfwb_ns = 'http://www.cfwb.be/enseignement/fase'
             fase = client.type_factory(fase_ns)
@@ -242,13 +241,15 @@ class FaseService(models.Model):
                     Type=fase_cfwb.OrganisationST('ETAB'),
                     Identifiant=record.fase_code,
                 )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
-            _logger.info('FASE Response : %s' % res)
             return res
         else:
-            return super()._callOperation(client, record)
-
-    def _applyChanges(self, result, record=False):
-        if self.name == 'fase':
-            _logger.info('FASE Info : %s' % result)
-        else:
-            super(result, record)
+            fase_ns = 'http://www.etnic.be/services/fase/organisation/v2'
+            fase_cfwb_ns = 'http://www.cfwb.be/enseignement/fase'
+            fase = client.type_factory(fase_ns)
+            fase_cfwb = client.type_factory(fase_cfwb_ns)
+            res = client.service.obtenirOrganisation(
+                Organisation=[fase.OrganisationCT(
+                    Type=fase_cfwb.OrganisationST('ETAB'),
+                    Identifiant=self.env.user.company_id.fase_code,
+                )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
+            return res

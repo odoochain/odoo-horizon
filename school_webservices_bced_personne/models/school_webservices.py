@@ -37,14 +37,50 @@ class PersonService(models.Model):
     _inherit = 'school.webservice'
 
     def action_test_service(self):
-        _logger.info('PersonService action_test_service')
         if self.name == 'bced_personne':
-            resp = self.doRequest(self.env.user)
+            _logger.info('PersonService action_test_service')
+
+            client = self.get_client()
+
+            person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
+            id_ns = "http://soa.spw.wallonie.be/common/identification/v1"
+            priv_ns = "http://soa.spw.wallonie.be/common/privacylog/v1"
+
+            person = client.type_factory(person_ns)
+            id = client.type_factory(id_ns)
+            priv = client.type_factory(priv_ns)
+
+            res = client.service.getPerson(
+                customerInformations=[id.CustomerInformationType(
+                    ticket=uuid.uuid4(),
+                    timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    customerIdentification={
+                        'organisationId' : self.env.user.company_id.fase_code
+                    }
+                )],
+                privacyLog={
+                    'context' : 'HIGH_SCHOOL_CAREER',
+                    'treatmentManagerIdentifier' : {
+                        '_value_1' : self.env.user.national_id,
+                        'identityManager' : 'RN/RBis'
+                    },
+                    'dossier' : {
+                        'dossierId' : {
+                            # TODO : what are the information to provide here ?
+                            '_value_1' : '0',
+                            'source' : 'CRLg'
+                        }
+                    }
+                },
+                request={
+                    'personNumber' : self.env.user.national_id,
+                }
+            )
             return {
                 'type': 'ir.actions.client',
                 'tag': 'display_notification',
                 'params': {
-                    'message': _('Web Service response : %s' % resp),
+                    'message': _('Web Service response : %s' % res),
                     'next': {'type': 'ir.actions.act_window_close'},
                     'sticky': False,
                     'type': 'warning',
@@ -53,8 +89,9 @@ class PersonService(models.Model):
         else:
             return super().action_test_service()
     
-    def _callOperation(self, client, record=False):
-        if self.name == 'bced_personne':
+    def getPerson(self, record):
+        client = self.get_client()
+        if record :
             # create the types
             person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
             id_ns = "http://soa.spw.wallonie.be/common/identification/v1"
@@ -92,10 +129,4 @@ class PersonService(models.Model):
             )
             return res
         else:
-            return super()._callOperation(client, record)
-
-    def _applyChanges(self, result, record=False):
-        if self.name == 'fase':
-            _logger.info('FASE Info : %s' % result)
-        else:
-            super(result, record)
+            raise ValidationError(_('No record provided'))

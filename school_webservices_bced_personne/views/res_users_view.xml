@@ -27,7 +27,7 @@
             <field name="inherit_id" ref="base.view_users_form" />
             <field name="priority">110</field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='partner_id']" position="before">
+                <xpath expr="//field[@name='current_year_id']" position="after">
                     <field name="national_id"/>
                 </xpath>
             </field>
