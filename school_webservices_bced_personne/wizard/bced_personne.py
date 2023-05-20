@@ -58,7 +58,7 @@ class BCEDPersonne(models.TransientModel):
                     for person in data.persons.person:
                         candidate_persons.append([0, 0, {
                             'firstname': ' '.join(person.name.firstName),
-                            'lastname': ' '.person.name.lastName,
+                            'lastname': ' '.join(person.name.lastName),
                             # parse birthdate
                             'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
                             'niss': person.personNumber,
