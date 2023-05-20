@@ -128,14 +128,14 @@ class WebService(models.Model):
     def _compute_last_send(self):
         for record in self:
             try:
-                record.last_send = etree.tostring(_history.last_sent.envelope, pretty_print=True,encoding='unicode')
+                record.last_send = etree.tostring(_history.last_sent['envelope'], pretty_print=True,encoding='unicode')
             except Exception as e:
                 record.last_send = str(e)
 
     def _compute_last_response(self):
         for record in self:
             try:
-                record.last_response = etree.tostring(_history.last_received.envelope, pretty_print=True,encoding='unicode')
+                record.last_response = etree.tostring(_history.last_received['envelope'], pretty_print=True,encoding='unicode')
             except Exception as e:
                 record.last_response = str(e)
 
