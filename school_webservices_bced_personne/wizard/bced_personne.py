@@ -60,6 +60,9 @@ class BCEDPersonne(models.TransientModel):
                         'niss': person.personNumber,
                         'wizard_id': self.id,
                     })
+        return { 
+            'type' : 'ir.actions.do_nothing'
+        }
 
     def action_retrieve_bced_personne(self):
         self.ensure_one()
