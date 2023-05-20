@@ -64,7 +64,7 @@ class BCEDPersonne(models.TransientModel):
                             'niss': person.personNumber,
                             'wizard_id': self.id,
                         })
-                    res['candidate_person_ids'] = [0, 0, candidate_persons]
+                    res['candidate_person_ids'] = [[0, 0, candidate_persons]]
         return res
         
     def action_retrieve_bced_personne(self):
