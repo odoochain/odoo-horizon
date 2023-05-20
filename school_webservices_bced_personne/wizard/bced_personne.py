@@ -43,8 +43,8 @@ class BCEDPersonne(models.TransientModel):
     candidate_person_ids = fields.One2many('school.bced_personne_summary', 'wizard_id', string='Candidate Persons')
 
     @api.model
-    def default_get(self, fields):
-        res = super(BCEDPersonne, self).default_get(fields)
+    def default_get(self, rec_fields):
+        res = super(BCEDPersonne, self).default_get(rec_fields)
         student_id = self.env['res.partner'].browse(self.env.context.get('active_id'))
         if student_id:
             ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
