@@ -26,6 +26,11 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
+class Partner(models.Model):
+    _inherit = 'res.partner'
+
+    is_linked_to_bced_personne = fields.Boolean(string='Is linked to BCED Personne', default=False)
+
 class BCEDPersonne(models.TransientModel):
     _name = "school.bced_personne_wizard"
     _description = "BCED Personne Wizard"
@@ -42,6 +47,8 @@ class BCEDPersonne(models.TransientModel):
     state = fields.Selection([('draft','Draft'),('no_bced', 'No BCED'), ('candidate_bced', 'Candidate BCED'), ('bced', 'Has BCED')], string='State', default='draft')
 
     candidate_person_ids = fields.One2many('school.bced_personne_summary', 'wizard_id', string='Candidate Persons')
+
+    selected_person_id = fields.Many2one('school.bced_personne_summary', string='Selected Person')
        
     def action_retrieve_bced_persons(self):
         self.ensure_one()
@@ -70,9 +77,9 @@ class BCEDPersonne(models.TransientModel):
             'target': 'new',
         }
 
-    def action_retrieve_bced_personne(self):
+    def action_link_bced_personne(self):
         self.ensure_one()
-
+        self.student_id.is_linked_to_bced_personne = True
         return True
 
     def action_create_bced_personne(self):
@@ -93,5 +100,13 @@ class BCEDPersonneSummary(models.TransientModel):
 
     def action_use_person(self):
         self.ensure_one()
-       
-        return True
+        self.wizard_id.selected_person_id = self.id
+        self.wizard_id.state = 'bced'
+        return { 
+            'type': 'ir.actions.act_window',
+            'name': 'BCED Personne',
+            'view_mode': 'form',
+            'res_model': 'school.bced_personne_wizard',
+            'res_id': self.wizard_id.id,
+            'target': 'new',
+        }
