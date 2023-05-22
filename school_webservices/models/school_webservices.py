@@ -113,15 +113,13 @@ class WebService(models.Model):
             group_xml_id = self.group_id.get_external_id().get(self.group_id.id)
             if not self.env.user.has_group(group_xml_id):
                 raise UserError(_('You are not allowed to use the service %s.' % self.name))
-        if not self._soapClientsCache.get(self.name):
-            cert = self._getCertificate()
-            transport = Transport(timeout=TIMEOUT)
-            dirname = os.path.dirname(__file__)
-            filename = os.path.join(dirname, '../../', self.wsdl_url)
-            client = CachingClient(filename, transport=transport,
-                wsse=Compose([self._getUserNameToken(), MemorySignatureNoResponseValidation(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd'])]), plugins=[_history])
-            self._soapClientsCache[self.name] = client
-        return self._soapClientsCache[self.name]
+        cert = self._getCertificate()
+        transport = Transport(timeout=TIMEOUT)
+        dirname = os.path.dirname(__file__)
+        filename = os.path.join(dirname, '../../', self.wsdl_url)
+        client = CachingClient(filename, transport=transport,
+            wsse=Compose([self._getUserNameToken(), MemorySignatureNoResponseValidation(cert['webservices_key'], cert['webservices_certificate'], cert['webservices_key_passwd'])]), plugins=[_history])
+        return client
 
     name = fields.Char('name')
     wsdl_url = fields.Char('WSDL Url')
