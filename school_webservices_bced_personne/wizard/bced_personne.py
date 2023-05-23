@@ -80,13 +80,10 @@ class BCEDPersonne(models.TransientModel):
     def action_link_bced_personne(self):
         for rec in self :
             try :
-                rec.update_contact_information(rec.student_id, rec.selected_person_id.data)
                 current_inscr = self.env['school.bced.inscription'].search([('partner_id', '=', rec.student_id.id)])
                 if current_inscr :
-                    # TODO : update inscription information from BCED Web Service
-                    pass
+                    current_inscr.action_update_partner_information()
                 else :
-                    # TODO : create inscription information from BCED Web Service
                     new_inscription = self.env['school.bced.inscription'].create({
                         'partner_id': rec.student_id.id,
                         'start_date': fields.Date.today(),
