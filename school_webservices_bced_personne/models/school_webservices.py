@@ -33,6 +33,16 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
+
+class BCEDInscription(models.Model):
+    _inherit = 'school.webservice'
+
+    def action_test_service(self):
+        if self.name == 'bced_inscription':
+            pass
+
+    
+
 class PersonService(models.Model):
     _inherit = 'school.webservice'
 
