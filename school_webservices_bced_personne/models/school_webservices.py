@@ -367,8 +367,8 @@ class PersonService(models.Model):
                                 'municipality' : {
                                     'description' : partner_id.birthplace,
                                 } if partner_id.birthplace else None,
-                            }
-                        } if partner_id.birthcountry else None,
+                            } if partner_id.birthcountry else None,
+                        },
                     }
                 }
             )
