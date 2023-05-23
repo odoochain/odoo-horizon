@@ -40,6 +40,7 @@
                         <field name="end_date"/>
                     </group>
                 </sheet>
+            </form>
         </field>
     </record>
 
@@ -74,5 +75,5 @@
     <!-- a menu item for the school.bced.inscription model -->
 
     <menuitem id="menu_bced_inscription" name="BCED Inscriptions" parent="school.menu_school" sequence="10"/>
-    
+
 </odoo>
