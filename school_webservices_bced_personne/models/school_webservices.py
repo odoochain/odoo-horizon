@@ -88,7 +88,7 @@ class BCEDInscription(models.Model):
             }
         else:
             return super().action_test_service()
-            
+
     def publishInscription(self, inscription):
         client = self._getClient()
         if inscription :
@@ -103,7 +103,7 @@ class BCEDInscription(models.Model):
             # Create the request objects
             res = client.service.publishInscription(
                 requestIdentification={
-                    'ticket' : uuid.uuidv4(),
+                    'ticket' : uuid.uuid4(),
                     'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
                 },
                 privacyLog=priv.PrivacyLogType(
