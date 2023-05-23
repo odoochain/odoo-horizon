@@ -113,4 +113,4 @@ class BCEDInscription(models.Model):
                 self.partner_id.birthdate_date = fields.Date.to_date(data['birth']['officialBirthDate'])
                 if data['birth']['birthPlace'] :
                     self.partner_id.birthplace = getFRDescription(data['birth']['birthPlace'])
-                self.partner_id.is_linked_to_bced_personne = True
+            
