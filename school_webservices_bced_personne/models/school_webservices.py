@@ -46,6 +46,9 @@ class BCEDInscription(models.Model):
 
             priv = client.type_factory(priv_ns)
 
+            if not self.env.user.national_id:
+                raise UserError(_('You must have a national id on current user to test this service'))
+
             # Create the request objects
             res = client.service.closeInscription(
                 requestIdentification={
@@ -103,6 +106,12 @@ class PersonService(models.Model):
             person = client.type_factory(person_ns)
             id = client.type_factory(id_ns)
             priv = client.type_factory(priv_ns)
+
+            if not self.env.user.national_id:
+                raise UserError(_('You must have a national id on current user to test this service'))
+
+            if not self.env.user.company_id.fase_code:
+                raise UserError(_('You must have a fase code on current company to test this service'))
 
             res = client.service.getPerson(
                 customerInformations=[id.CustomerInformationType(
