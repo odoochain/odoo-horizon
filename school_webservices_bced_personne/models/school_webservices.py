@@ -42,23 +42,27 @@ class BCEDInscription(models.Model):
             _logger.info('PersonService action_test_service')
             client = self._getClient()
 
+            priv_ns = "http://bced.wallonie.be/common/privacylog/v5"
+
+            priv = client.type_factory(priv_ns)
+
             # Create the request objects
             res = client.service.closeInscription(
                 requestIdentification={
                     'ticket' : 'edd90daf-a72f-4585-acee-0f9da279f8d0',
                     'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
                 },
-                privacyLog={
-                    'context' : 'HIGH_SCHOOL_CAREER',
-                    'civilServantNumber' : self.env.user.national_id,
-                    'dossier' : {
+                privacyLog=priv.PrivacyLog(
+                    context='HIGH_SCHOOL_CAREER',
+                    treatementManagerNumber=self.env.user.national_id,
+                    dossier={
                         'dossierId' : {
                             # TODO : what are the information to provide here ?
                             '_value_1' : '0',
                             'source' : 'CRLg'
                         }
                     }
-                },
+                ),
                 request={
                     'inscription' : {
                         'personNumber' : '00010226601',
