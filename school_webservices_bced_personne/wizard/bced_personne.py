@@ -125,7 +125,7 @@ class BCEDPersonne(models.TransientModel):
 
     @api.model
     def getFRDescription(self, value):
-        return [x for x in value['description'] if x['language']['code']['_value_1'] == 'fr'][0]['_value_1']
+        return [x for x in value['description'] if x['language'] == 'fr'][0]['_value_1']
     
     @api.model
     def update_contact_information(self, partner_id, data) :
