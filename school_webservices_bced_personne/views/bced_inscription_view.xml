@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+##############################################################################
+#
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<odoo>
+    <!-- a form view for the school.bced.inscription model -->
+    <record id="view_bced_inscription_form" model="ir.ui.view">
+        <field name="name">view.bced.inscription.form</field>
+        <field name="model">school.bced.inscription</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_revoke" string="Revoke" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="reference"/>
+                        <field name="legal_context"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+        </field>
+    </record>
+
+    <!-- a tree view for the school.bced.inscription model -->
+    <record id="view_bced_inscription_tree" model="ir.ui.view">
+        <field name="name">view.bced.inscription.tree</field>
+        <field name="model">school.bced.inscription</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="reference"/>
+                <field name="legal_context"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- a search view for the school.bced.inscription model -->
+    <record id="view_bced_inscription_search" model="ir.ui.view">
+        <field name="name">view.bced.inscription.search</field>
+        <field name="model">school.bced.inscription</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- a menu item for the school.bced.inscription model -->
+
+    <menuitem id="menu_bced_inscription" name="BCED Inscriptions" parent="school.menu_school" sequence="10"/>
+    
+</odoo>
