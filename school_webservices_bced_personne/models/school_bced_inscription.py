@@ -40,7 +40,7 @@ class BCEDInscription(models.Model):
     _name = 'school.bced.inscription'
     _description = 'BCED Inscription'
 
-    partner_id = fields.Many2one('res.partner', string='Partner', required=True, ondelete='set null')
+    partner_id = fields.Many2one('res.partner', string='Partner', required=True, ondelete='restrict')
     reference = fields.Char(string='Reference')
     legal_context = fields.Char(string='Legal Context', required=True)
     start_date = fields.Date(string='Start Date')
