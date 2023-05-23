@@ -145,6 +145,7 @@ class BCEDPersonne(models.TransientModel):
                     partner_id.street2 = ''
                     partner_id.zip = ''
                     partner_id.city = ''
+                    partner_id.state_id = False
                     partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
                 if address['addressType'] == 'Residential':
                     street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
@@ -155,6 +156,7 @@ class BCEDPersonne(models.TransientModel):
                     partner_id.street2 = ''
                     partner_id.zip = address['postCode']['code']['_value_1']
                     partner_id.city = address['municipality']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                    partner_id.state_id = False
                     partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
                 elif address['addressType'] == 'PostAddress':
                     street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
@@ -165,6 +167,7 @@ class BCEDPersonne(models.TransientModel):
                     partner_id.secondary_street2 = ''
                     partner_id.secondary_zip = address['postCode']['code']['_value_1']
                     partner_id.secondary_city = address['municipality']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                    partner_id.secondary_state_id = False
                     partner_id.secondary_country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
             partner_id.birthdate_date = fields.Date.to_date(data['birth']['officialBirthDate'])
             if data['birth']['birthPlace'] :
