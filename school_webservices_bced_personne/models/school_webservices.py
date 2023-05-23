@@ -241,9 +241,9 @@ class PersonService(models.Model):
         else:
             raise ValidationError(_('No record provided'))
     
-    def getPerson(self, record):
+    def getPerson(self, reference):
         client = self._getClient()
-        if record :
+        if reference :
             # create the types
             person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
             id_ns = "http://soa.spw.wallonie.be/common/identification/v1"
@@ -276,9 +276,10 @@ class PersonService(models.Model):
                     }
                 },
                 request={
-                    'personNumber' : record.reg_number,
+                    'personNumber' : reference,
                 }
             )
+            # TODO : handle business errors
             return res
         else:
             raise ValidationError(_('No record provided'))

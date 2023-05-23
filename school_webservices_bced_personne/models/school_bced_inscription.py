@@ -65,7 +65,7 @@ class BCEDInscription(models.Model):
             if not rec.reference:
                 raise UserError(_('No reference found for this partner, please submit first to BCDE service.'))
             # We are registered so we can proceed with data usage
-            data = ws.getPersonne(rec.reference)
+            data = ws.getPerson(rec.reference)
             if data :
                 self.partner_id.reg_number = data['personNumber']
                 self.partner_id.firstname = data['name']['firstName'][0]
