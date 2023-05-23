@@ -34,6 +34,25 @@ class Partner(models.Model):
 
     is_linked_to_bced_personne = fields.Boolean(string='Is linked to BCED Personne', default=False)
 
+    def action_update_bced_personne(self):
+        for rec in self :
+            if rec.is_linked_to_bced_personne :
+                try :
+                    # TODO : update contact information from BCED Web Service
+                    rec.update_contact_information(rec, None)
+                except Exception as e :
+                    _logger.error('Error while updating contact information : %s', e)
+                    return {
+                        'type': 'ir.actions.client',
+                        'tag': 'display_notification',
+                        'params': {
+                            'message': _('Error while updating contact information : %s<br/>%s' % (e, None)),
+                            'next': {'type': 'ir.actions.act_window_close'},
+                            'sticky': False,
+                            'type': 'warning',
+                        }
+                    }
+
 class BCEDPersonne(models.TransientModel):
     _name = "school.bced_personne_wizard"
     _description = "BCED Personne Wizard"
@@ -88,9 +107,13 @@ class BCEDPersonne(models.TransientModel):
             except Exception as e :
                 _logger.error('Error while updating contact information : %s', e)
                 return {
-                    'warning': {
-                        'title': _('Error while updating contact information'),
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
                         'message': _('Error while updating contact information : %s<br/>%s' % (e,rec.selected_person_id.data)),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'warning',
                     }
                 }
 
