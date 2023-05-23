@@ -45,19 +45,23 @@ class Partner(models.Model):
 
     def action_update_bced_personne(self):
         for rec in self :
-            if rec.inscription_id :
-                try :
-                    # TODO : update contact information from BCED Web Service
-                    rec.inscription_id.action_update_partner_information()
-                except Exception as e :
-                    _logger.error('Error while updating contact information : %s', e)
-                    return {
-                        'type': 'ir.actions.client',
-                        'tag': 'display_notification',
-                        'params': {
-                            'message': _('Error while updating contact information : %s' % traceback.format_exc()),
-                            'next': {'type': 'ir.actions.act_window_close'},
-                            'sticky': False,
-                            'type': 'warning',
-                        }
+            if rec.inscription_ids :
+                ex = None
+                for ins in rec.inscription_ids :
+                    try :
+                        # TODO : update contact information from BCED Web Service
+                        ins.action_update_partner_information()
+                        return True
+                    except Exception as e :
+                        ex = e
+                _logger.error('Error while updating contact information : %s', ex)
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Error while updating contact information : %s' % traceback.format_exc()),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'warning',
                     }
+                }
