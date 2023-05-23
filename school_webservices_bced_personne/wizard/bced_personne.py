@@ -130,7 +130,7 @@ class BCEDPersonne(models.TransientModel):
             partner_id.reg_number = data['personNumber']
             partner_id.firstname = data['name']['firstName'][0]
             partner_id.lastname = ' '.join(data['name']['lastName'])
-            partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName']))
+            partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName'].slice(1)))
             partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
             if data['nationalities'] :
                 # TODO : no nationality in BCDE for now
@@ -138,7 +138,7 @@ class BCEDPersonne(models.TransientModel):
             for address in data['addresses']['address']:
                 # Diplomatic is for foreigner
                 if address['addressType'] == 'Diplomatic':
-                    street_name = address['plainText'][0]['_value_1']
+                    partner_id.street = address['plainText'][0]['_value_1']
                     partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
                 if address['addressType'] == 'Residential':
                     street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
