@@ -130,7 +130,10 @@ class BCEDPersonne(models.TransientModel):
             partner_id.reg_number = data['personNumber']
             partner_id.firstname = data['name']['firstName'][0]
             partner_id.lastname = ' '.join(data['name']['lastName'])
-            partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName'][1:]))
+            if len(data['name']['firstName'] > 1) :
+                partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName'][1:]))
+            else:
+                partner_id.initials = ''
             partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
             if data['nationalities'] :
                 # TODO : no nationality in BCDE for now
@@ -139,6 +142,9 @@ class BCEDPersonne(models.TransientModel):
                 # Diplomatic is for foreigner
                 if address['addressType'] == 'Diplomatic':
                     partner_id.street = address['plainText'][0]['_value_1']
+                    partner_id.street2 = ''
+                    partner_id.zip = ''
+                    partner_id.city = ''
                     partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
                 if address['addressType'] == 'Residential':
                     street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
@@ -146,6 +152,7 @@ class BCEDPersonne(models.TransientModel):
                         partner_id.street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
                     else :
                         partner_id.street = ' '.join([street_name,address['houseNumber']])
+                    partner_id.street2 = ''
                     partner_id.zip = address['postCode']['code']['_value_1']
                     partner_id.city = address['municipality']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
                     partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
@@ -155,6 +162,7 @@ class BCEDPersonne(models.TransientModel):
                         partner_id.secondary_street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
                     else :
                         partner_id.secondary_street = ' '.join([street_name,address['houseNumber']])
+                    partner_id.secondary_street2 = ''
                     partner_id.secondary_zip = address['postCode']['code']['_value_1']
                     partner_id.secondary_city = address['municipality']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
                     partner_id.secondary_country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
