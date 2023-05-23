@@ -105,6 +105,18 @@ class BCEDPersonne(models.TransientModel):
         for rec in self :
             try :
                 rec.update_contact_information(rec.student_id, rec.selected_person_id.data)
+                current_inscr = self.env['school.bced.inscription'].search([('student_id', '=', rec.student_id.id)])
+                if current_inscr :
+                    # TODO : update inscription information from BCED Web Service
+                    pass
+                else :
+                    # TODO : create inscription information from BCED Web Service
+                    new_inscription = self.env['school.bced.inscription'].create({
+                        'partner_id': rec.student_id.id,
+                        'start_date': fields.Date.today(),
+                        'legal_context': 'TBD',
+                    })
+                    new_inscription.action_submit()
             except Exception as e :
                 _logger.error('Error while updating contact information : %s', e)
                 return {
