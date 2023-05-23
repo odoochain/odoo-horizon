@@ -36,6 +36,12 @@ class Partner(models.Model):
     _inherit = 'res.partner'
 
     inscription_ids = fields.One2many('school.bced.inscription', 'partner_id', string='BCED Inscriptions', ondelete='restrict')
+    inscription_count = fields.Integer(compute='_compute_inscription_count', string='BCED Inscription Count')
+
+    @api.depends('inscription_ids')
+    def _compute_inscription_count(self):
+        for rec in self :
+            rec.inscription_count = len(rec.inscription_ids)
 
     def action_update_bced_personne(self):
         for rec in self :
