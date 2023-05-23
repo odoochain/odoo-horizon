@@ -77,8 +77,7 @@ class BCEDInscription(models.Model):
                 if data['gender'] :
                     self.partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
                 if data['nationalities'] :
-                    # TODO : no nationality in BCDE for now
-                    pass
+                    self.partner_id.nationality_ids = self.env['res.country'].search([('code', 'in', [x['code']['_value_1'] for x in data['nationalities']['nationality']])])
                 for address in data['addresses']['address']:
                     # Diplomatic is for foreigner
                     if address['addressType'] == 'Diplomatic':
@@ -113,4 +112,4 @@ class BCEDInscription(models.Model):
                 self.partner_id.birthdate_date = fields.Date.to_date(data['birth']['officialBirthDate'])
                 if data['birth']['birthPlace'] :
                     self.partner_id.birthplace = getFRDescription(data['birth']['birthPlace'])
-            
+
