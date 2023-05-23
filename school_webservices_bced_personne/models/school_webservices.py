@@ -207,6 +207,12 @@ class PersonService(models.Model):
             id = client.type_factory(id_ns)
             priv = client.type_factory(priv_ns)
 
+            if not record.lastname:
+                raise UserError(_('You must have a lastname on the partner to search for a person'))
+
+            if not record.birthdate_date:
+                raise UserError(_('You must have a birthdate on the partner to search for a person'))
+
             res = client.service.searchPersonByName(
                 customerInformations=[id.CustomerInformationType(
                     ticket=uuid.uuid4(),
