@@ -74,7 +74,8 @@ class BCEDInscription(models.Model):
                     self.partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName'][1:]))
                 else:
                     self.partner_id.initials = ''
-                self.partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
+                if data['gender'] :
+                    self.partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
                 if data['nationalities'] :
                     # TODO : no nationality in BCDE for now
                     pass
