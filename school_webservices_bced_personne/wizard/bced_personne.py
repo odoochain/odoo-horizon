@@ -130,7 +130,7 @@ class BCEDPersonne(models.TransientModel):
             partner_id.reg_number = data['personNumber']
             partner_id.firstname = data['name']['firstName'][0]
             partner_id.lastname = ' '.join(data['name']['lastName'])
-            if len(data['name']['firstName'] > 1) :
+            if len(data['name']['firstName']) > 1 :
                 partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName'][1:]))
             else:
                 partner_id.initials = ''
