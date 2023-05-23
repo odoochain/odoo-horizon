@@ -35,7 +35,7 @@ class ResUser(models.Model):
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    inscription_id = fields.Many2one('school.bced.inscription', string='BCED Inscription', ondelete='set null')
+    inscription_ids = fields.One2many('school.bced.inscription', 'partner_id', string='BCED Inscriptions', ondelete='set null')
 
     def action_update_bced_personne(self):
         for rec in self :
