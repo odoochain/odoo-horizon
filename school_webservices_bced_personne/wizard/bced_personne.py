@@ -53,9 +53,7 @@ class BCEDPersonne(models.TransientModel):
         self.ensure_one()
         ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
         data = ws.searchPersonByName(self.student_id)
-        if data.status and data.status['code'] == 'SOA5100000':
-            self.state = 'no_bced'
-        elif data.status and data.status['code'] == 'SOA0000000':
+        if data.status and data.status['code'] == 'SOA0000000':
             self.state = 'candidate_bced'
             if data.persons and data.persons.person:
                 for person in data.persons.person:
@@ -68,6 +66,8 @@ class BCEDPersonne(models.TransientModel):
                         'wizard_id': self.id,
                         'data': json.dumps(helpers.serialize_object(person, dict)),
                     })
+        else :
+            self.state = 'no_bced'
         return { 
             'type': 'ir.actions.act_window',
             'name': 'BCED Personne',
