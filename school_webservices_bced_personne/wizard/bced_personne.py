@@ -78,36 +78,57 @@ class BCEDPersonne(models.TransientModel):
         }
 
     def action_link_bced_personne(self):
-        for rec in self :
-            try :
-                current_inscr = self.env['school.bced.inscription'].search([('partner_id', '=', rec.student_id.id)])
-                if current_inscr :
-                    current_inscr.action_update_partner_information()
-                else :
-                    new_inscription = self.env['school.bced.inscription'].create({
-                        'partner_id': rec.student_id.id,
-                        'start_date': fields.Date.today(),
-                        'legal_context': 'TBD',
-                    })
-                    new_inscription.action_submit()
-                    new_inscription.action_update_partner_information()
-            except Exception as e :
-                _logger.error('Error while updating contact information : %s', e)
-                return {
-                    'type': 'ir.actions.client',
-                    'tag': 'display_notification',
-                    'params': {
-                        'message': _('Error while updating contact information : %s' % traceback.format_exc()),
-                        'next': {'type': 'ir.actions.act_window_close'},
-                        'sticky': False,
-                        'type': 'warning',
-                    }
+        self.ensure_one()
+        try :
+            current_inscr = self.env['school.bced.inscription'].search([('partner_id', '=', self.student_id.id)])
+            if current_inscr :
+                current_inscr.action_update_partner_information()
+            else :
+                new_inscription = self.env['school.bced.inscription'].create({
+                    'partner_id': self.student_id.id,
+                    'start_date': fields.Date.today(),
+                    'legal_context': 'TBD',
+                })
+                new_inscription.action_submit()
+                new_inscription.action_update_partner_information()
+        except Exception as e :
+            _logger.error('Error while updating contact information : %s', e)
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'message': _('Error while updating contact information : %s' % traceback.format_exc()),
+                    'next': {'type': 'ir.actions.act_window_close'},
+                    'sticky': False,
+                    'type': 'warning',
                 }
+            }
 
     def action_create_bced_personne(self):
         self.ensure_one()
-       
-        return True
+        try :
+            ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
+            bisNumber = ws.publishPerson(self.student_id)
+            if bisNumber :
+                self.student_id.reg_number = bisNumber
+                new_inscription = self.env['school.bced.inscription'].create({
+                    'partner_id': self.student_id.id,
+                    'start_date': fields.Date.today(),
+                    'legal_context': 'TBD',
+                })
+                new_inscription.action_submit()
+        except Exception as e :
+            _logger.error('Error while creating a bis number : %s', e)
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'message': _('Error while creating a bis number : %s' % traceback.format_exc()),
+                    'next': {'type': 'ir.actions.act_window_close'},
+                    'sticky': False,
+                    'type': 'warning',
+                }
+            }
         
             
 class BCEDPersonneSummary(models.TransientModel):

@@ -303,11 +303,13 @@ class PersonService(models.Model):
             id = client.type_factory(id_ns)
             priv = client.type_factory(priv_ns)
 
+            # We make the choice to ask at least for the firstname, lastname and birthdate to get a bis number
+            if not partner_id.firstname:
+                raise UserError(_('You must have a firstname on the partner to get a bis number'))
             if not partner_id.lastname:
-                raise UserError(_('You must have a lastname on the partner to search for a person'))
-
+                raise UserError(_('You must have a lastname on the partner to get a bis number'))
             if not partner_id.birthdate_date:
-                raise UserError(_('You must have a birthdate on the partner to search for a person'))
+                raise UserError(_('You must have a birthdate on the partner to get a bis number'))
 
             inceptionDate = partner_id.birthdate_date.strftime("%Y-%m-%d")
 
@@ -344,14 +346,34 @@ class PersonService(models.Model):
                             },
                             'lastName' : partner_id.lastname,
                         },
-                        'gender':{
+                        'gender': {
                             'inceptionDate' : inceptionDate,
                             'code': 'M' if partner_id.gender == 'male' else 'F',
-                        },
+                        } if partner_id.gender else None,
                         'nationalities':{
+                            'nationality': [
+                                [{
+                                    'inceptionDate' : inceptionDate,
+                                    'code' : c.nis_code
+                                } for c in partner_id.nationality_ids]
+                            ]
+                        } if partner_id.nationality_ids else None,
+                        'birth':{
+                            'officialBirthDate' : inceptionDate,
+                            'birthPlace' : {
+                                'country' : {
+                                    'code' : partner_id.birthcountry.nis_code,
+                                } if partner_id.birthcountry else None,
+                                'municipality' : {
+                                    'description' : partner_id.birthplace,
+                                } if partner_id.birthcountry else None,
+                            }
+                        },
                     }
                 }
             )
-            return res
+            if res['status']['code'] != 'SOA0000000':
+                raise ValidationError(_('Error while publishing person : %s' % res['status']))
+            return res['result']['personNumber']
         else:
             raise ValidationError(_('No partner provided'))

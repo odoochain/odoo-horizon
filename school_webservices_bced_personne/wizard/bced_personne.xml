@@ -66,6 +66,9 @@
                         <div class="alert alert-warning" role="alert">
                             <strong>Warning!</strong> This student has no record in BCED.
                         </div>
+                        <group>
+                            <span>By clicking on the button below, a new record will be created in BCED and the numero bis will be used for the student.</span>
+                        </group>
                         <button name="action_create_bced_personne" string="Create BCED Personne" type="object" default_focus="1" class="oe_highlight"/>
                     </div>
                 </sheet>
