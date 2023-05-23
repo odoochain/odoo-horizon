@@ -57,7 +57,9 @@
                         <div class="alert alert-info" role="alert">
                             <strong>Great!</strong> This student has a record in BCED.
                         </div>
-                        <span>By clicking on the button below, the student will be linked to the BCED record and its information updated accordingly.</span>
+                        <group>
+                            <span>By clicking on the button below, the student will be linked to the BCED record and its information updated accordingly.</span>
+                        </group>
                         <button name="action_link_bced_personne" string="Link to BCED Personne" type="object" default_focus="1" class="oe_highlight"/>
                     </div>
                     <div attrs="{'invisible': [('state', '!=', 'no_bced')]}">

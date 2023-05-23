@@ -24,6 +24,9 @@ from odoo import api, fields, models, _
 from odoo.exceptions import MissingError
 from odoo.tools.safe_eval import safe_eval
 
+import json
+from zeep import helpers
+
 _logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
@@ -67,6 +70,7 @@ class BCEDPersonne(models.TransientModel):
                         'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
                         'niss': person.personNumber,
                         'wizard_id': self.id,
+                        'data': helpers.serialize_object(person, dict),
                     })
         return { 
             'type': 'ir.actions.act_window',
@@ -79,7 +83,7 @@ class BCEDPersonne(models.TransientModel):
 
     def action_link_bced_personne(self):
         self.ensure_one()
-        self.student_id.is_linked_to_bced_personne = True
+        self.update_contact_information(self.student_id, self.selected_person_id.data)
         return True
 
     def action_create_bced_personne(self):
@@ -87,6 +91,52 @@ class BCEDPersonne(models.TransientModel):
        
         return True
 
+    @api.model
+    def update_contact_information(self, partner_id, data) :
+        try :
+            if partner_id and data :
+                data = json.loads(data)
+                partner_id.reg_number = data['personNumber']
+                partner_id.firstname = data['name']['firstName'][0]
+                partner_id.lastname = ' '.join(data['name']['lastName'])
+                partner_id.initials = ','.join(data['name']['firstName'].map(lambda x: x[0]))
+                partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
+                if data['nationalities'] :
+                    # TODO : no nationality in BCDE for now
+                    pass
+                for address in data['addresses']['address']:
+                    # Diplomatic is for foreigner
+                    if address['addressType'] in ['Residential','Diplomatic']:
+                        street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                        if address['boxNumber'] :
+                            partner_id.street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
+                        else :
+                            partner_id.street = ' '.join([street_name,address['houseNumber']])
+                        partner_id.zip = address['postCode']['code']['_value_1']
+                        partner_id.city = address['municipality']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                        partner_id.country_id = self.env['res.country'].search([('code', '=', address['country']['code']['_value_1'])], limit=1).id
+                    elif address['addressType'] == 'PostAddress':
+                        street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                        if address['boxNumber'] :
+                            partner_id.secondary_street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
+                        else :
+                            partner_id.secondary_street = ' '.join([street_name,address['houseNumber']])
+                        partner_id.secondary_zip = address['postCode']['code']['_value_1']
+                        partner_id.secondary_city = address['municipality']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                        partner_id.secondary_country_id = self.env['res.country'].search([('code', '=', address['country']['code']['_value_1'])], limit=1).id
+                partner_id.birthdate_date = fields.Date.to_date(data['birth']['officialBirthDate'])
+                if data['birth']['birthPlace'] :
+                    partner_id.birthplace = data['birth']['birthPlace']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                partner_id.is_linked_to_bced_personne = True
+        except Exception as e :
+            _logger.error('Error while updating contact information : %s', e)
+            return {
+                'warning': {
+                    'title': _('Error while updating contact information'),
+                    'message': _('Error while updating contact information : %s %s') % [e , data],
+                }
+            }
+            
 class BCEDPersonneSummary(models.TransientModel):
     _name = "school.bced_personne_summary"
     _description = "BCED Personne Summary"
@@ -95,6 +145,8 @@ class BCEDPersonneSummary(models.TransientModel):
     lastname = fields.Char(string='Last Name')
     birthdate = fields.Date(string='Birth Date')
     niss = fields.Char(string='Niss')
+
+    data = fields.Text(string='Data')
 
     wizard_id = fields.Many2one('school.bced_personne_wizard', string='Wizard')
 
