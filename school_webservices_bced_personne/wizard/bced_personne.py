@@ -70,7 +70,7 @@ class BCEDPersonne(models.TransientModel):
                         'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
                         'niss': person.personNumber,
                         'wizard_id': self.id,
-                        'data': helpers.serialize_object(person, dict),
+                        'data': json.dumps(helpers.serialize_object(person, dict)),
                     })
         return { 
             'type': 'ir.actions.act_window',
