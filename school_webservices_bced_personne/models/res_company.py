@@ -51,7 +51,19 @@ class Partner(models.Model):
                     try :
                         # TODO : update contact information from BCED Web Service
                         ins.action_update_partner_information()
-                        return True
+                        if self.env.context.get('params', {}).get('view_type') == 'list':
+                            next_action = {'type': 'ir.actions.client', 'tag': 'reload'}
+                        else:
+                            next_action = {'type': 'ir.actions.act_window_close'}
+                        return {
+                            'type': 'ir.actions.client',
+                            'tag': 'display_notification',
+                            'params': {
+                                'type': 'success',
+                                'message': _('Information updated from BCED'),
+                                'next': next_action,
+                            }
+                        }
                     except Exception as e :
                         ex = e
                 _logger.error('Error while updating contact information : %s', ex)
