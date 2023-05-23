@@ -42,12 +42,6 @@ class BCEDInscription(models.Model):
             _logger.info('PersonService action_test_service')
             client = self._getClient()
 
-            # Define the Type Factories
-            v1 = client.type_factory('v1')
-            v11 = client.type_factory('v11')
-            v3 = client.type_factory('v3')
-            v5 = client.type_factory('v5')
-
             # Create the request objects
             res = client.service.closeInscription(
                 requestIdentification={
