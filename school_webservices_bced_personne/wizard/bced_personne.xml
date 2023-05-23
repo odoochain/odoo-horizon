@@ -97,7 +97,7 @@
                 <button name="%(action_bced_personne_view)d" type="action" attrs="{'invisible': [('inscription_count', '>', 0)]}"
                         class="oe_stat_button" icon="fa-search" groups="school_webservices_bced_personne.bced_allowed_group">BCED</button>
                 <button name="action_update_bced_personne" type="object" attrs="{'invisible': [('inscription_count', '=', 0)]}"
-                        class="oe_stat_button" icon="fa-update" groups="school_webservices_bced_personne.bced_allowed_group">BCED</button>
+                        class="oe_stat_button" icon="fa-refresh" groups="school_webservices_bced_personne.bced_allowed_group">BCED</button>
             </xpath>
         </field>
     </record>

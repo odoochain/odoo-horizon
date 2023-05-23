@@ -195,9 +195,9 @@ class PersonService(models.Model):
         else:
             return super().action_test_service()
 
-    def searchPersonByName(self, record):
+    def searchPersonByName(self, partner_id):
         client = self._getClient()
-        if record :
+        if partner_id :
             # create the types
             person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
             id_ns = "http://soa.spw.wallonie.be/common/identification/v1"
@@ -207,10 +207,10 @@ class PersonService(models.Model):
             id = client.type_factory(id_ns)
             priv = client.type_factory(priv_ns)
 
-            if not record.lastname:
+            if not partner_id.lastname:
                 raise UserError(_('You must have a lastname on the partner to search for a person'))
 
-            if not record.birthdate_date:
+            if not partner_id.birthdate_date:
                 raise UserError(_('You must have a birthdate on the partner to search for a person'))
 
             res = client.service.searchPersonByName(
@@ -237,15 +237,15 @@ class PersonService(models.Model):
                 },
                 request={
                     'personName' :{
-                        'lastName' : record.lastname,
+                        'lastName' : partner_id.lastname,
                     },
-                    'birthDate' : record.birthdate_date.strftime("%Y-%m-%d"),
+                    'birthDate' : partner_id.birthdate_date.strftime("%Y-%m-%d"),
                     'birthDateTolerance' : 0,
                 }
             )
             return res
         else:
-            raise ValidationError(_('No record provided'))
+            raise ValidationError(_('No partner provided'))
     
     def getPerson(self, reference):
         client = self._getClient()
@@ -290,3 +290,68 @@ class PersonService(models.Model):
             return res['person']
         else:
             raise ValidationError(_('No record provided'))
+
+    def publishPerson(self, partner_id):
+        client = self._getClient()
+        if partner_id :
+            # create the types
+            person_ns = "http://soa.spw.wallonie.be/services/person/messages/v3"
+            id_ns = "http://soa.spw.wallonie.be/common/identification/v1"
+            priv_ns = "http://soa.spw.wallonie.be/common/privacylog/v1"
+
+            person = client.type_factory(person_ns)
+            id = client.type_factory(id_ns)
+            priv = client.type_factory(priv_ns)
+
+            if not partner_id.lastname:
+                raise UserError(_('You must have a lastname on the partner to search for a person'))
+
+            if not partner_id.birthdate_date:
+                raise UserError(_('You must have a birthdate on the partner to search for a person'))
+
+            inceptionDate = partner_id.birthdate_date.strftime("%Y-%m-%d")
+
+            res = client.service.publishPerson(
+                customerInformations=[id.CustomerInformationType(
+                    ticket=uuid.uuid4(),
+                    timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    customerIdentification={
+                        'organisationId' : self.env.user.company_id.fase_code
+                    }
+                )],
+                privacyLog={
+                    'context' : 'HIGH_SCHOOL_CAREER',
+                    'treatmentManagerIdentifier' : {
+                        '_value_1' : self.env.user.national_id,
+                        'identityManager' : 'RN/RBis'
+                    },
+                    'dossier' : {
+                        'dossierId' : {
+                            # TODO : what are the information to provide here ?
+                            '_value_1' : '0',
+                            'source' : 'CRLg'
+                        }
+                    }
+                },
+                request={
+                    'person' : {
+                        'register':'Bis',
+                        'name' :{
+                            'inceptionDate' : inceptionDate,
+                            'fistName' : {
+                                'sequence' : 1,
+                                '_value_1' : partner_id.firstname,
+                            },
+                            'lastName' : partner_id.lastname,
+                        },
+                        'gender':{
+                            'inceptionDate' : inceptionDate,
+                            'code': 'M' if partner_id.gender == 'male' else 'F',
+                        },
+                        'nationalities':{
+                    }
+                }
+            )
+            return res
+        else:
+            raise ValidationError(_('No partner provided'))
