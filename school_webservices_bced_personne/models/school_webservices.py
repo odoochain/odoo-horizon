@@ -52,7 +52,7 @@ class BCEDInscription(models.Model):
                     'ticket' : 'edd90daf-a72f-4585-acee-0f9da279f8d0',
                     'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
                 },
-                privacyLog=priv.PrivacyLog(
+                privacyLog=priv.PrivacyLogType(
                     context='HIGH_SCHOOL_CAREER',
                     treatementManagerNumber=self.env.user.national_id,
                     dossier={
