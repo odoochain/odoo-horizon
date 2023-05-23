@@ -39,9 +39,58 @@ class BCEDInscription(models.Model):
 
     def action_test_service(self):
         if self.name == 'bced_inscription':
-            pass
+            _logger.info('PersonService action_test_service')
+            client = self._getClient()
 
-    
+            # Define the Type Factories
+            v1 = client.type_factory('v1')
+            v11 = client.type_factory('v11')
+            v3 = client.type_factory('v3')
+            v5 = client.type_factory('v5')
+
+            # Create the request objects
+            res = client.service.closeInscription(
+                requestIdentification={
+                    'ticket' : 'edd90daf-a72f-4585-acee-0f9da279f8d0',
+                    'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+                },
+                privacyLog={
+                    'context' : 'HIGH_SCHOOL_CAREER',
+                    'treatmentManagerIdentifier' : {
+                        '_value_1' : self.env.user.national_id,
+                        'identityManager' : 'RN/RBis'
+                    },
+                    'dossier' : {
+                        'dossierId' : {
+                            # TODO : what are the information to provide here ?
+                            '_value_1' : '0',
+                            'source' : 'CRLg'
+                        }
+                    }
+                },
+                request={
+                    'inscription' : {
+                        'personNumber' : '00010226601',
+                        'period' : {
+                            'beginDate' : datetime.now().strftime("%Y-%m-%d")
+                        }
+                    }
+                }
+            )
+
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'message': _('Web Service response : %s' % res),
+                    'next': {'type': 'ir.actions.act_window_close'},
+                    'sticky': False,
+                    'type': 'warning',
+                }
+            }
+        else:
+            return super().action_test_service()
+
 
 class PersonService(models.Model):
     _inherit = 'school.webservice'
