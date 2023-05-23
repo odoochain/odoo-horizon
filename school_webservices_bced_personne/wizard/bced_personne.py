@@ -130,7 +130,7 @@ class BCEDPersonne(models.TransientModel):
             partner_id.reg_number = data['personNumber']
             partner_id.firstname = data['name']['firstName'][0]
             partner_id.lastname = ' '.join(data['name']['lastName'])
-            partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName'].slice(1)))
+            partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName'][1:]))
             partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
             if data['nationalities'] :
                 # TODO : no nationality in BCDE for now
