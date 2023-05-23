@@ -67,6 +67,7 @@ class BCEDInscription(models.Model):
             # We are registered so we can proceed with data usage
             data = ws.getPerson(rec.partner_id.reg_number)
             if data :
+                self.partner_id.reg_number = data['personNumber']
                 self.partner_id.firstname = data['name']['firstName'][0]
                 self.partner_id.lastname = ' '.join(data['name']['lastName'])
                 if len(data['name']['firstName']) > 1 :
