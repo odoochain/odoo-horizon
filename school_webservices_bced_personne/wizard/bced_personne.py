@@ -124,6 +124,10 @@ class BCEDPersonne(models.TransientModel):
         return True
 
     @api.model
+    def getFRDescription(self, value):
+        return [x for x in value['description'] if x['language']['code']['_value_1'] == 'fr'][0]['_value_1']
+    
+    @api.model
     def update_contact_information(self, partner_id, data) :
         if partner_id and data :
             data = json.loads(data)
@@ -148,30 +152,30 @@ class BCEDPersonne(models.TransientModel):
                     partner_id.state_id = False
                     partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
                 if address['addressType'] == 'Residential':
-                    street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                    street_name = self.getFRDescription(address['street'])
                     if address['boxNumber'] :
                         partner_id.street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
                     else :
                         partner_id.street = ' '.join([street_name,address['houseNumber']])
                     partner_id.street2 = ''
                     partner_id.zip = address['postCode']['code']['_value_1']
-                    partner_id.city = address['municipality']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                    partner_id.city = self.getFRDescription(address['municipality'])
                     partner_id.state_id = False
                     partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
                 elif address['addressType'] == 'PostAddress':
-                    street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                    street_name = self.getFRDescription(address['street'])
                     if address['boxNumber'] :
                         partner_id.secondary_street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
                     else :
                         partner_id.secondary_street = ' '.join([street_name,address['houseNumber']])
                     partner_id.secondary_street2 = ''
                     partner_id.secondary_zip = address['postCode']['code']['_value_1']
-                    partner_id.secondary_city = address['municipality']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                    partner_id.secondary_city = self.getFRDescription(address['municipality'])
                     partner_id.secondary_state_id = False
                     partner_id.secondary_country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
             partner_id.birthdate_date = fields.Date.to_date(data['birth']['officialBirthDate'])
             if data['birth']['birthPlace'] :
-                partner_id.birthplace = data['birth']['birthPlace']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
+                partner_id.birthplace = self.getFRDescription(data['birth']['birthPlace'])
             partner_id.is_linked_to_bced_personne = True
         
             
