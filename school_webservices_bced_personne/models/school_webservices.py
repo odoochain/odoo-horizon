@@ -354,7 +354,7 @@ class PersonService(models.Model):
                             'nationality': [
                                 [{
                                     'inceptionDate' : inceptionDate,
-                                    'code' : c.nis_code
+                                    'code' : c.nis_code,
                                 } for c in partner_id.nationality_ids]
                             ]
                         } if partner_id.nationality_ids else None,
@@ -363,12 +363,12 @@ class PersonService(models.Model):
                             'birthPlace' : {
                                 'country' : {
                                     'code' : partner_id.birthcountry.nis_code,
-                                } if partner_id.birthcountry else None,
+                                },
                                 'municipality' : {
                                     'description' : partner_id.birthplace,
-                                } if partner_id.birthcountry else None,
+                                } if partner_id.birthplace else None,
                             }
-                        },
+                        } if partner_id.birthcountry else None,
                     }
                 }
             )
