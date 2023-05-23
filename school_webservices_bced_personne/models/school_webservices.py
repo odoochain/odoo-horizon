@@ -50,7 +50,7 @@ class BCEDInscription(models.Model):
                 },
                 privacyLog={
                     'context' : 'HIGH_SCHOOL_CAREER',
-                    'treatmentManagerNumber' : self.env.user.national_id,
+                    'civilServantNumber' : self.env.user.national_id,
                     'dossier' : {
                         'dossierId' : {
                             # TODO : what are the information to provide here ?
