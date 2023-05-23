@@ -138,7 +138,7 @@ class BCEDPersonne(models.TransientModel):
             for address in data['addresses']['address']:
                 # Diplomatic is for foreigner
                 if address['addressType'] == 'Diplomatic':
-                    street_name = address['plainText']['_value_1']
+                    street_name = address['plainText'][0]['_value_1']
                     partner_id.country_id = self.env['res.country'].search([('code', '=', address['country']['code']['_value_1'])], limit=1).id
                 if address['addressType'] == 'Residential':
                     street_name = address['street']['description'].filter(lambda x: x['language']['code']['_value_1'] == 'fr')[0]['_value_1']
