@@ -133,7 +133,7 @@ class BCEDPersonne(models.TransientModel):
             return {
                 'warning': {
                     'title': _('Error while updating contact information'),
-                    'message': _('Error while updating contact information : %s %s') % [e , data],
+                    'message': _('Error while updating contact information : %s<br/>%s' % (e,data)),
                 }
             }
             
