@@ -30,6 +30,7 @@
     'data': [
         'school_webservices_data.xml',
         'views/res_users_view.xml',
+        'views/bced_inscription_view.xml',
         'wizard/bced_personne.xml',
         'security/ir.model.access.csv',
     ],
