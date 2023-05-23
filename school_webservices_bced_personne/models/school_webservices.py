@@ -340,7 +340,7 @@ class PersonService(models.Model):
                         'register':'Bis',
                         'name' :{
                             'inceptionDate' : inceptionDate,
-                            'fisrtName' : {
+                            'firstName' : {
                                 'sequence' : 1,
                                 '_value_1' : partner_id.firstname,
                             },
