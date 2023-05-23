@@ -19,6 +19,7 @@
 #
 ##############################################################################
 import logging
+import traceback
 
 from odoo import api, fields, models, _
 from odoo.exceptions import MissingError
@@ -46,7 +47,7 @@ class Partner(models.Model):
                         'type': 'ir.actions.client',
                         'tag': 'display_notification',
                         'params': {
-                            'message': _('Error while updating contact information : %s<br/>%s' % (e, None)),
+                            'message': _('Error while updating contact information : %s' % traceback.format_exc()),
                             'next': {'type': 'ir.actions.act_window_close'},
                             'sticky': False,
                             'type': 'warning',
@@ -110,7 +111,7 @@ class BCEDPersonne(models.TransientModel):
                     'type': 'ir.actions.client',
                     'tag': 'display_notification',
                     'params': {
-                        'message': _('Error while updating contact information : %s<br/>%s' % (e,rec.selected_person_id.data)),
+                        'message': _('Error while updating contact information : %s' % traceback.format_exc()),
                         'next': {'type': 'ir.actions.act_window_close'},
                         'sticky': False,
                         'type': 'warning',
