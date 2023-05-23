@@ -74,6 +74,6 @@
 
     <!-- a menu item for the school.bced.inscription model -->
 
-    <menuitem id="menu_bced_inscription" name="BCED Inscriptions" parent="school_webservices.menu_webservice" sequence="60"/>
+    <menuitem id="menu_bced_inscription" name="BCED Inscriptions" parent="school_webservices.menu_webservice" sequence="60" groups="school_webservices_bced_personne.bced_allowed_group"/>
 
 </odoo>
