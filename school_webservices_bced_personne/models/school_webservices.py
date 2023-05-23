@@ -50,7 +50,7 @@ class BCEDInscription(models.Model):
                 },
                 privacyLog={
                     'context' : 'HIGH_SCHOOL_CAREER',
-                    'treatmentManagerIdentifier' : {
+                    'treatmentManagerNumber' : {
                         '_value_1' : self.env.user.national_id,
                         'identityManager' : 'RN/RBis'
                     },
