@@ -281,6 +281,6 @@ class PersonService(models.Model):
             )
             if res['status']['code'] != 'SOA0000000':
                 raise ValidationError(_('Error while getting person : %s' % res['status']))
-            return res['person'][0]
+            return res['person']
         else:
             raise ValidationError(_('No record provided'))
