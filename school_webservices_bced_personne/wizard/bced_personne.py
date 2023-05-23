@@ -83,8 +83,7 @@ class BCEDPersonne(models.TransientModel):
 
     def action_link_bced_personne(self):
         self.ensure_one()
-        self.update_contact_information(self.student_id, self.selected_person_id.data)
-        return True
+        return self.update_contact_information(self.student_id, self.selected_person_id.data)
 
     def action_create_bced_personne(self):
         self.ensure_one()
