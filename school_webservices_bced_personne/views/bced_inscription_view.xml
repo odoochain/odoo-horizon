@@ -76,7 +76,6 @@
     <record id="action_bced_inscription" model="ir.actions.act_window">
         <field name="name">BCED Inscriptions</field>
         <field name="res_model">school.bced.inscription</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
