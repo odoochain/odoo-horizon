@@ -33,6 +33,9 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
+def getFRDescription(value):
+    return [x for x in value['description'] if x['language'] == 'fr'][0]['_value_1']
+
 class BCEDInscription(models.Model):
     _name = 'school.bced.inscription'
     _description = 'BCED Inscription'
@@ -49,8 +52,64 @@ class BCEDInscription(models.Model):
             res = ws.publishInscription(rec)
             if res:
                 rec.reference = res['inscriptionReference']
+                rec.partner_id.inscription_id = rec.id
             
     def action_revoke(self):
         for rec in self:
             # TODO : implement revoke
             pass
+
+    def action_update_partner_information(self):
+        ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
+        for rec in self:
+            if not rec.reference:
+                raise UserError(_('No reference found for this partner, please submit first to BCDE service.'))
+            # We are registered so we can proceed with data usage
+            data = ws.getPersonne(rec.reference)
+            if data :
+                self.partner_id.reg_number = data['personNumber']
+                self.partner_id.firstname = data['name']['firstName'][0]
+                self.partner_id.lastname = ' '.join(data['name']['lastName'])
+                if len(data['name']['firstName']) > 1 :
+                    self.partner_id.initials = ','.join(map(lambda x: x[0], data['name']['firstName'][1:]))
+                else:
+                    self.partner_id.initials = ''
+                self.partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
+                if data['nationalities'] :
+                    # TODO : no nationality in BCDE for now
+                    pass
+                for address in data['addresses']['address']:
+                    # Diplomatic is for foreigner
+                    if address['addressType'] == 'Diplomatic':
+                        self.partner_id.street = address['plainText'][0]['_value_1']
+                        self.partner_id.street2 = ''
+                        self.partner_id.zip = ''
+                        self.partner_id.city = ''
+                        self.partner_id.state_id = False
+                        self.partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
+                    if address['addressType'] == 'Residential':
+                        street_name = getFRDescription(address['street'])
+                        if address['boxNumber'] :
+                            self.partner_id.street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
+                        else :
+                            self.partner_id.street = ' '.join([street_name,address['houseNumber']])
+                        self.partner_id.street2 = ''
+                        self.partner_id.zip = address['postCode']['code']['_value_1']
+                        self.partner_id.city = getFRDescription(address['municipality'])
+                        self.partner_id.state_id = False
+                        self.partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
+                    elif address['addressType'] == 'PostAddress':
+                        street_name = getFRDescription(address['street'])
+                        if address['boxNumber'] :
+                            self.partner_id.secondary_street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
+                        else :
+                            self.partner_id.secondary_street = ' '.join([street_name,address['houseNumber']])
+                        self.partner_id.secondary_street2 = ''
+                        self.partner_id.secondary_zip = address['postCode']['code']['_value_1']
+                        self.partner_id.secondary_city = getFRDescription(address['municipality'])
+                        self.partner_id.secondary_state_id = False
+                        self.partner_id.secondary_country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
+                self.partner_id.birthdate_date = fields.Date.to_date(data['birth']['officialBirthDate'])
+                if data['birth']['birthPlace'] :
+                    self.partner_id.birthplace = getFRDescription(data['birth']['birthPlace'])
+                self.partner_id.is_linked_to_bced_personne = True

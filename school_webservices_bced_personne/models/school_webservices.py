@@ -124,12 +124,14 @@ class BCEDInscription(models.Model):
                     }
                 }
             )
+            if res['error']:
+                if res['error']['cause']:
+                    raise UserError(_('Error while publishing inscription with code %s : %s ' % (res['error']['code'],res['error']['cause'])))
+                else:
+                    raise UserError(_('Error while publishing inscription with code %s' % res['error']['code']))
             return res
         else:
             raise UserError(_('You must provide an inscription to publish'))
-
-
-
 
 class PersonService(models.Model):
     _inherit = 'school.webservice'

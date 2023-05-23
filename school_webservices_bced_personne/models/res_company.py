@@ -19,6 +19,7 @@
 #
 ##############################################################################
 import logging
+import traceback
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
@@ -30,3 +31,27 @@ class ResUser(models.Model):
     _inherit = 'res.users'
 
     national_id = fields.Char(string='National ID')
+
+class Partner(models.Model):
+    _inherit = 'res.partner'
+
+    inscription_id = fields.Many2one('school.bced.inscription', string='BCED Inscription', ondelete='set null')
+
+    def action_update_bced_personne(self):
+        for rec in self :
+            if rec.inscription_id :
+                try :
+                    # TODO : update contact information from BCED Web Service
+                    rec.inscription_id.action_update_partner_information()
+                except Exception as e :
+                    _logger.error('Error while updating contact information : %s', e)
+                    return {
+                        'type': 'ir.actions.client',
+                        'tag': 'display_notification',
+                        'params': {
+                            'message': _('Error while updating contact information : %s' % traceback.format_exc()),
+                            'next': {'type': 'ir.actions.act_window_close'},
+                            'sticky': False,
+                            'type': 'warning',
+                        }
+                    }
