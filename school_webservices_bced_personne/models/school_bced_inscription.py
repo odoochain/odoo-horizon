@@ -44,10 +44,12 @@ class BCEDInscription(models.Model):
     end_date = fields.Date(string='End Date')
 
     def action_submit(self):
+        ws = self.env['school.webservice'].search([('name', '=', 'bced_inscription')], limit=1)
         for rec in self:
-            # TODO : implement submit
-            pass
-
+            res = ws.publishInscription(rec)
+            if res:
+                rec.reference = res['inscriptionReference']
+            
     def action_revoke(self):
         for rec in self:
             # TODO : implement revoke
