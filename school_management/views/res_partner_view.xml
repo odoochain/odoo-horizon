@@ -360,6 +360,7 @@
             <field eval="20" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//notebook[last()]" position="inside">
+                    <field name="teacher" invisible="1"/>
                     <page name="course_session_list" string="Current Course Session" attrs="{'invisible': [('teacher','=',False)]}">
                         <field name="teacher_current_course_ids">
                             <tree string="Current Course">
