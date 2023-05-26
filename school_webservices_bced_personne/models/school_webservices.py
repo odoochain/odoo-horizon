@@ -124,11 +124,12 @@ class BCEDInscription(models.Model):
                     }
                 }
             )
-            if res['error']:
-                if res['error']['cause']:
-                    raise UserError(_('Error while publishing inscription with code %s : %s ' % (res['error']['code'],res['error']['cause'])))
+            res = res['publishInscriptionResponse']
+            if res['code'].startWith('BCED'):
+                if res['description']:
+                    raise UserError(_('Error while publishing inscription with code  %s : %s ' % (res['code'], res['description'])))
                 else:
-                    raise UserError(_('Error while publishing inscription with code %s' % res['error']['code']))
+                    raise UserError(_('Error while publishing inscription with code %s : %s' % (res['code'],res)))
             return res
         else:
             raise UserError(_('You must provide an inscription to publish'))

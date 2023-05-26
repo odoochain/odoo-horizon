@@ -156,3 +156,5 @@ class BCEDPersonneSummary(models.TransientModel):
             'res_id': self.wizard_id.id,
             'target': 'new',
         }
+
+type.2.4.a: Invalid content was found starting with element 'ns0:period'. One of '{"http://bced.wallonie.be/services/inscription/messages/v1":personNumber, "http://bced.wallonie.be/services/inscription/messages/v1":enterpriseNumber}' is expected.
