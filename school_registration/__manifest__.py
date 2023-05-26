@@ -34,6 +34,11 @@
         'views/registration_view.xml',
         'wizard/year_opening.xml',
     ],
+    'assets': {
+        'web.web_assets_common': [
+            'school_registration/static/src/css/school_registration.css',
+        ],
+    },
     'demo_xml': [],
     'description': '''
         This modules add registration tools for a school.
