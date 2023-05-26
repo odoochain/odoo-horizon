@@ -25,7 +25,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import MissingError
 from odoo.tools.safe_eval import safe_eval
 
-import json
+from odoo.tools import json
 from zeep import helpers
 
 _logger = logging.getLogger(__name__)
@@ -138,7 +138,6 @@ class BCEDPersonne(models.TransientModel):
                     'type': 'warning',
                 }
             }
-        
             
 class BCEDPersonneSummary(models.TransientModel):
     _name = "school.bced_personne_summary"
