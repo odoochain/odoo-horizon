@@ -52,10 +52,11 @@ class BCEDPersonne(models.TransientModel):
        
     legal_context = fields.Selection(
         [
+            ('empty','Please select a legal context'),
             ('student','This partner applies to become a student'),
             ('teacher','This partner applies to become a teacher'),
             ('employee','This partner applies to become an employee'),
-        ], required=True, string='Legal Context', states={'draft': [('required', False)],'candidate_bced': [('required', False)]})
+        ], required=True, string='Legal Context', default='empty')
 
     def action_retrieve_bced_persons(self):
         self.ensure_one()
