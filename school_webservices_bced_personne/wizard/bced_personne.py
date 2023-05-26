@@ -25,7 +25,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import MissingError
 from odoo.tools.safe_eval import safe_eval
 
-from odoo.tools import json
+import json
 from zeep import helpers
 
 _logger = logging.getLogger(__name__)
@@ -71,7 +71,7 @@ class BCEDPersonne(models.TransientModel):
                         'birthdate': fields.Date.to_date(person.birth.officialBirthDate),
                         'niss': person.personNumber,
                         'wizard_id': self.id,
-                        'data': json.dumps(helpers.serialize_object(person, dict)),
+                        'data': json.dumps(helpers.serialize_object(person, dict), separators=(',', ':'), default=date_utils.json_default),
                     })
         else :
             self.state = 'no_bced'
