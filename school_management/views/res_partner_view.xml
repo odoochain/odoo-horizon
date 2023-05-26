@@ -61,8 +61,8 @@
             				    <field name='student' />
                                 <field name='teacher' />
                                 <field name='employee' />
-                                <field name="lastname"/>
-            					<field name="firstname"/>
+                                <field name='lastname' />
+            					<field name='firstname' />
             				</group>
             			</div>
             			<field name="function" placeholder="e.g. Sales Director"/>
@@ -356,8 +356,8 @@
         <record id="view_teacher_form_school" model="ir.ui.view">
             <field name="name">view.res.partner.form.school</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form" />
-            <field eval="15" name="priority" />
+            <field name="inherit_id" ref="school_management.view_partners_form_school" />
+            <field eval="20" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//notebook[last()]" position="inside">
                     <page name="course_session_list" string="Current Course Session" attrs="{'invisible': [('teacher','=',False)]}">
