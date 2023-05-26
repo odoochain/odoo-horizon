@@ -63,7 +63,7 @@
                         <group>
                            <field name="legal_context"/>
                         </group>
-                        <div  class="mb-2">
+                        <div class="mb-2">
                             <span>
                                 By clicking on the button below, we will register to the BCED for the use of this file.
                                 The student will be linked to the BCED record and its information updated accordingly. An update 
@@ -71,7 +71,7 @@
                             </span>
                         </div>
                         <button name="action_link_bced_personne" string="Link to BCED Personne" type="object" default_focus="1" class="oe_highlight"/>
-                        <div class="alert alert-warning" role="alert" class="mt-2">
+                        <div class="alert alert-warning mt-2" role="alert">
                             Be aware that you should be authorized to make use of this information and that all usage of 
                             BCED data and services is under strict regulation and is logged for use control.
                         </div>
