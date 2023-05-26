@@ -1,0 +1,44 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:num="http://bced.wallonie.be/data/entity/enteprise/number/v1" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://bced.wallonie.be/data/entity/enteprise/number/v1" vc:minVersion="1.1" version="1.1">
+<xs:annotation>
+<xs:documentation>Version 1.1  : ajout de l'immatriculation ONSS</xs:documentation>
+</xs:annotation>
+<xs:simpleType name="CbeEntityNumber">
+<xs:annotation>
+<xs:documentation>Crossroad Bank of Enterprise number, used to identify an
+				unique enterprise or businessUnit. It is composed by 10
+				digits (the first one could be avoided if equal to 0). A
+				0 on the first of the 10 digits reprensents an
+				enterprise and a 2 represents a business unit.</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:long"></xs:restriction>
+</xs:simpleType>
+<xs:complexType name="NOSSRegistrationNumberType">
+<xs:annotation>
+<xs:documentation xml:lang="FR">Numero d'immatriculation employeur (ONSS ou ONSS-APL), temporaire ou dÃ©finitif</xs:documentation>
+</xs:annotation>
+<xs:simpleContent>
+<xs:extension base="num:String10Type">
+<xs:attribute name="type" type="num:PLAIndicatorType"></xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:simpleType name="String10Type">
+<xs:restriction base="xs:string">
+<xs:maxLength value="10"></xs:maxLength>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="PLAIndicatorType">
+<xs:annotation>
+<xs:documentation>ONSS ou ONSS-APL</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:string">
+<xs:enumeration value="noss"></xs:enumeration>
+<xs:enumeration value="noss_pla"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="noss">
+<xs:restriction base="xs:string">
+<xs:maxLength value="10"></xs:maxLength>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

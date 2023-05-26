@@ -18,28 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'School registration',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'ito-invest (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': ['base_automation','formio','formio_data_api'],
-    'init_xml': [],
-    'data': [
-        'registration_data.xml',
-        'security/ir.model.access.csv',
-        'views/configuration_view.xml',
-        'views/registration_view.xml',
-        'wizard/year_opening.xml',
-    ],
-    'demo_xml': [],
-    'description': '''
-        This modules add registration tools for a school.
-    ''',
-    'qweb': ['static/src/xml/*.xml'],
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+import logging
+
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.safe_eval import safe_eval
+
+_logger = logging.getLogger(__name__)
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    webservices_key = fields.Binary(string='Web Services Keys')
+    # TODO : store encoded ?
+    webservices_key_passwd = fields.Char(string='Web Services Key Password')
+    webservices_certificate = fields.Binary(string='Web Services Certificate')
+
+    fase_code = fields.Char('FASE code')

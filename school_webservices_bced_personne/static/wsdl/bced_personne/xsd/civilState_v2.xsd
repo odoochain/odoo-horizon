@@ -1,0 +1,161 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dat="http://soa.spw.wallonie.be/data/common/date/v1" xmlns:num="http://soa.spw.wallonie.be/data/entity/person/number/v2" xmlns:nam="http://soa.spw.wallonie.be/data/entity/person/name/v1" xmlns:cod="http://soa.spw.wallonie.be/data/common/code/v2" xmlns:civ="http://soa.spw.wallonie.be/data/entity/person/civilstate/v2" xmlns:addr="http://soa.spw.wallonie.be/data/entity/address/address/v2" xmlns:lab="http://soa.spw.wallonie.be/data/common/label/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/entity/person/civilstate/v2" version="2.1">
+<xs:annotation>
+<xs:documentation>Definitions of name-related types.</xs:documentation>
+</xs:annotation>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/code/v2" schemaLocation="code_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/label/v1" schemaLocation="label_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/address/address/v2" schemaLocation="address_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/date/v1" schemaLocation="date_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/name/v1" schemaLocation="name_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/number/v2" schemaLocation="personNumber_v2.xsd"></xs:import>
+<xs:complexType name="JudgementType">
+<xs:annotation>
+<xs:documentation>In case of a divorce or a separation, a judgement is associated with it</xs:documentation>
+</xs:annotation>
+<xs:choice>
+<xs:element name="belgianJudgement" nillable="true" type="civ:BelgianJudgementType"></xs:element>
+<xs:element name="foreignJudgement" nillable="true" type="civ:ForeignJudgementType"></xs:element>
+</xs:choice>
+</xs:complexType>
+<xs:complexType name="BelgianJudgementType">
+<xs:annotation>
+<xs:documentation>In case of a divorce or a separation, a judgement is associated with it</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="tribunal" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element name="date" nillable="true" type="dat:DateType"></xs:element>
+<xs:element name="place" nillable="true" type="cod:CodeType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ForeignJudgementType">
+<xs:annotation>
+<xs:documentation>In case of a divorce or a separation, a judgement is associated with it</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="country" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element minOccurs="0" name="date" nillable="true" type="dat:DateType"></xs:element>
+<xs:element name="comment" nillable="true" type="lab:CommentType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="TranscriptionType">
+<xs:annotation>
+<xs:documentation>A transcription of a document</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="place" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element name="date" nillable="true" type="dat:DateType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CivilStatePlaceType">
+<xs:annotation>
+<xs:documentation>A civil-state place is generally defined as a municipality and a country.
+				
+				For Belgian citizens, the municipality is generally known, and should be filled in accordingly.
+				The country should be set to Belgium in this case.
+				
+				For foreigners, the municipality is not always known, but at least the country should be filled in.
+				
+				If the municipality is not known, it is ommitted.
+				
+				If the country is not known, for whatever reason, it should be explicitly set to nill. This should be
+				an exceptional case.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element minOccurs="0" name="municipality" type="cod:CodeType">
+<xs:annotation>
+<xs:documentation>The municipality is defined as a code type, which holds a simple code and a description.
+						
+						For Belgian municipalities, the simple code will be the INS/NIS code, and language-dependent
+						descriptions providing the name of the municipality may be added.
+						
+						For foreign municipalities, the simple code will generally not be defined, and it is set
+						to nill.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="country" nillable="true" type="cod:CodeType">
+<xs:annotation>
+<xs:documentation>The country is defined as a code type, which holds a simple code and a description.
+						In general, the ISO country code is used as the simple code, and language-dependent
+						descriptions providing the name of the country may be added.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element minOccurs="0" name="comment" type="lab:CommentType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CivilStateActType">
+<xs:annotation>
+<xs:documentation>A civil-state act contains a number, plus an identifier defining the suppletory register where
+				the act is held.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="actNumber" nillable="true" type="xs:string"></xs:element>
+<xs:element minOccurs="0" name="suppletoryRegistery" nillable="true" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CivilStateDocumentsType">
+<xs:annotation>
+<xs:documentation>Container for civil-state-related documents. For documents that do not exist, the corresponding element
+				is simply omitted.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element minOccurs="0" name="civilStateAct" type="civ:CivilStateActType"></xs:element>
+<xs:element minOccurs="0" name="judgement" type="civ:JudgementType"></xs:element>
+<xs:element minOccurs="0" name="transcription" type="civ:TranscriptionType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CivilStateInformationType">
+<xs:sequence>
+<xs:element minOccurs="0" name="civilStateStatus" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element minOccurs="0" name="civilStatePlace" nillable="true" type="addr:PlaceType"></xs:element>
+<xs:element minOccurs="0" name="partner" nillable="true" type="civ:PartnerType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PartnerType">
+<xs:sequence>
+<xs:choice minOccurs="0">
+<xs:element name="personNumber" type="num:PersonNumberType"></xs:element>
+<xs:element name="partnerReference">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:minLength value="1"></xs:minLength>
+<xs:maxLength value="11"></xs:maxLength>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:choice>
+<xs:element minOccurs="0" name="officialBirthDate" type="dat:IncompleteDateType"></xs:element>
+<xs:element minOccurs="0" name="name" type="nam:NameType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CivilStateBaseDeclarationType">
+<xs:sequence>
+<xs:element name="civilStateStatus" type="civ:CivilStateStatusType"></xs:element>
+<xs:element minOccurs="0" name="partner">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="personNumber" type="num:PersonNumberType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="location" type="addr:PlaceDeclarationIsoType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CivilStateDeclarationType">
+<xs:complexContent>
+<xs:extension base="civ:CivilStateBaseDeclarationType">
+<xs:attribute name="inceptionDate" type="xs:date" use="required"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="CivilStateStatusType">
+<xs:sequence>
+<xs:element name="civilCode" type="civ:CivilStateCodeType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="CivilStateCodeType">
+<xs:restriction base="xs:unsignedShort">
+<xs:minInclusive value="0"></xs:minInclusive>
+<xs:maxInclusive value="99"></xs:maxInclusive>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

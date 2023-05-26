@@ -19,26 +19,25 @@
 #
 ##############################################################################
 {
-    'name': 'School registration',
+    'name': 'School webservices',
     'version': '0.1',
     'license': 'AGPL-3',
     'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': ['base_automation','formio','formio_data_api'],
+    'depends': ['school_management'],
+    "external_dependencies": {"python": ["zeep", "xmlsec"]},
     'init_xml': [],
     'data': [
-        'registration_data.xml',
-        'security/ir.model.access.csv',
+        'school_webservices_data.xml',
         'views/configuration_view.xml',
-        'views/registration_view.xml',
-        'wizard/year_opening.xml',
+        'views/res_company_view.xml',
+        'security/ir.model.access.csv',
     ],
     'demo_xml': [],
     'description': '''
-        This modules add registration tools for a school.
+        This modules manage access to e-Paysage webservices.
     ''',
-    'qweb': ['static/src/xml/*.xml'],
     'active': False,
     'installable': True,
     'application': True,

@@ -227,15 +227,7 @@ class Registration(models.Model):
     _sql_constraints = [
         ('registration_uniq', 'unique (registration_form_id)', "Registration already exists for that registration !"),
     ]
-        
-class Country(models.Model):
-    '''Country'''
-    _inherit = 'res.country'
-    
-    nis_code = fields.Char(string="NIS-code")
-    
-    in_use = fields.Boolean(string="In Use")
-        
+         
 class Form(models.Model):
     '''Form'''
     _inherit = 'formio.form'

@@ -1,0 +1,38 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dat="http://soa.spw.wallonie.be/data/common/date/v1" xmlns:nam="http://soa.spw.wallonie.be/data/entity/person/nationality/v1" xmlns:cod="http://soa.spw.wallonie.be/data/common/code/v1" xmlns:lab="http://soa.spw.wallonie.be/data/common/label/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/entity/person/nationality/v1" version="1.00">
+<xs:annotation>
+<xs:documentation>Definitions of nationality-related types.</xs:documentation>
+</xs:annotation>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/code/v1" schemaLocation="code_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/date/v1" schemaLocation="date_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/label/v1" schemaLocation="label_v1.xsd"></xs:import>
+<xs:complexType name="NationalityReasonType">
+<xs:annotation>
+<xs:documentation>The reason why a person has a certain nationality.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element minOccurs="0" name="date" type="dat:DateType"></xs:element>
+<xs:element minOccurs="0" name="comment" type="lab:CommentType"></xs:element>
+<xs:element minOccurs="0" name="justification" type="cod:CodeType"></xs:element>
+<xs:element minOccurs="0" name="place" type="cod:CodeType"></xs:element>
+<xs:element minOccurs="0" name="country" type="cod:CodeType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="NationalityBaseDeclarationType">
+<xs:sequence>
+<xs:element name="code" type="nam:NationalityCodeType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="NationalityDeclarationType">
+<xs:complexContent>
+<xs:extension base="nam:NationalityBaseDeclarationType">
+<xs:attribute name="inceptionDate" type="xs:date" use="required"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:simpleType name="NationalityCodeType">
+<xs:restriction base="xs:unsignedShort">
+<xs:minInclusive value="0"></xs:minInclusive>
+<xs:maxInclusive value="999"></xs:maxInclusive>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

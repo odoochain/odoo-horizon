@@ -1,0 +1,54 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.etnic.be/services/commun/message/statut/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.etnic.be/services/commun/message/statut/v1" version="1.0">
+<xsd:element name="BlocRetour" type="tns:ServiceMessageCT">
+<xsd:annotation>
+<xsd:documentation>Bloc de retour du service</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="ServiceMessageCT">
+<xsd:sequence>
+<xsd:element name="CodeRetour" type="tns:CodeRetourST">
+<xsd:annotation>
+<xsd:documentation>-1 erreur technique, 0 erreur, 1 ok
+					</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="Message">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Type" type="tns:TypeMessageST"></xsd:element>
+<xsd:element name="Code">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="10"></xsd:maxLength>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Libelle" type="xsd:string"></xsd:element>
+<xsd:element name="Zone" type="xsd:string"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="CodeRetourST">
+<xsd:annotation>
+<xsd:documentation>Type Code retour (-1 erreur technique, 0 erreur, 1
+				ok)
+			</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:short">
+<xsd:minInclusive value="-1"></xsd:minInclusive>
+<xsd:maxInclusive value="1"></xsd:maxInclusive>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TypeMessageST">
+<xsd:annotation>
+<xsd:documentation>Type de message</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="information"></xsd:enumeration>
+<xsd:enumeration value="avertissement"></xsd:enumeration>
+<xsd:enumeration value="erreur"></xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>
