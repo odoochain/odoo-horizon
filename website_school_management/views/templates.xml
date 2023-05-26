@@ -94,10 +94,10 @@
                     <t t-set="c" t-value="False"/>
                     <t t-foreach="program_list" t-as="program_item">
                         <t t-set="program" t-value="program_item['program']"/>
-                        <t t-if="d != program.domain_id"> 
+                        <t t-if="d != program.domain_name"> 
                             <div class="clearfix"></div>
-                            <h3><t t-esc="program.domain_id.name" /></h3>
-                            <t t-set="d" t-value="program.domain_id"/>
+                            <h3><t t-esc="program.domain_name" /></h3>
+                            <t t-set="d" t-value="program.domain_name"/>
                             <t t-set="c" t-value="False"/>
                         </t>
                         <t t-if="c != program.cycle_id">

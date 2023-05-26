@@ -198,3 +198,4 @@ class Company(models.Model):
     director_signature = fields.Binary(string="Director Signature")
     
     secretary_signature = fields.Binary(string="Secretarty Signature")
+
