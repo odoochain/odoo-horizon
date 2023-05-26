@@ -124,9 +124,8 @@ class BCEDInscription(models.Model):
                     }
                 }
             )
-            res = res['publishInscriptionResponse']
             if res['code'].startWith('BCED'):
-                if res['description']:
+                if res.has_key['description']:
                     raise UserError(_('Error while publishing inscription with code  %s : %s ' % (res['code'], res['description'])))
                 else:
                     raise UserError(_('Error while publishing inscription with code %s : %s' % (res['code'],res)))
