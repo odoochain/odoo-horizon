@@ -727,13 +727,8 @@ class IndividualCourse(models.Model):
     
     ## First Session ##
     
-<<<<<<< HEAD
     first_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='First Session Exception', store=True)
     first_session_result = fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
-=======
-    first_session_exception = fiels.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),string='First Session Exception')
-    first_session_result= fields.Float(compute='compute_results', string='First Session Result', store=True, group_operator='avg',digits=dp.get_precision('Evaluation'))
->>>>>>> 1752b485 (implement evaluation exception)
     first_session_result_bool = fields.Boolean(compute='compute_results', string='First Session Active', store=True)
     first_session_note = fields.Text(string='First Session Notes')
 
@@ -741,16 +736,11 @@ class IndividualCourse(models.Model):
 
     ## Second Session ##
     
-<<<<<<< HEAD
     second_session_exception = fields.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),compute='compute_results',string='Second Session Exception', store=True)
-=======
-    second_session_exception = fiels.Selection(([('NP','NP'),('AB','AB'),('TP','TP')]),string='Second Session Exception')
->>>>>>> 1752b485 (implement evaluation exception)
     second_session_result= fields.Float(compute='compute_results', string='Second Session Result', store=True, group_operator='avg', digits=dp.get_precision('Evaluation'))
     second_session_result_bool = fields.Boolean(compute='compute_results', string='Second Session Active', store=True)
     second_session_note = fields.Text(string='Second Session Notes')
 
-<<<<<<< HEAD
     second_session_result_disp = fields.Char(string='Second Session Result Display', compute='compute_session_result_disp')
 
     final_result_disp = fields.Char(string='Final Result Display', compute='compute_session_result_disp')
@@ -807,9 +797,6 @@ class IndividualCourse(models.Model):
             
 
     @api.depends('partial_result','final_result','second_result')
-=======
-    @api.depends('jun_result','sept_result')
->>>>>>> 1752b485 (implement evaluation exception)
     def compute_results(self):
         for rec in self : #.filtered(lambda r: r.course_group_id.state in ['7_failed','5_progress']) :
             rec.first_session_result = 0
@@ -820,7 +807,6 @@ class IndividualCourse(models.Model):
             rec.second_session_exception = False
             if rec.partial_result :
                 try:
-<<<<<<< HEAD
                     if rec.partial_result == "NP":
                         pass
                     elif rec.partial_result == "AB":
@@ -867,30 +853,12 @@ class IndividualCourse(models.Model):
                                 rec.is_danger = True
                             else:
                                 rec.is_danger = False
-=======
-                    if rec.jun_result == "NP":
-                        rec.first_session_exception = 'NP'
-                        rec.first_session_result_bool = True
-                    if rec.jun_result == "AB":
-                        rec.first_session_exception = 'AB'
-                        rec.first_session_result_bool = True
-                    if rec.jun_result == "TP":
-                        rec.first_session_exception = 'TP'
-                        rec.first_session_result_bool = True
-                    f = float(rec.jun_result)
-                    if(f < 0 or f > 20):
-                        raise ValidationError("Evaluation shall be between 0 and 20")
-                    else:
-                        rec.first_session_result = f
-                        rec.first_session_result_bool = True
->>>>>>> 1752b485 (implement evaluation exception)
                 except ValueError:
                     rec.first_session_result = 0
                     rec.first_session_exception = None
                     rec.first_session_result_bool = False
                     raise UserError(_('Cannot decode %s in June Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.jun_result))
 
-<<<<<<< HEAD
             if rec.second_result :
                 try:
                     if rec.second_result == "NP":
@@ -921,31 +889,8 @@ class IndividualCourse(models.Model):
                                 rec.is_danger = True
                             else:
                                 rec.is_danger = False
-=======
-            if rec.sept_result :
-                try:
-                    if rec.sept_result == "NP":
-                        rec.second_session_exception = 'NP'
-                        rec.first_session_result_bool = True
-                    if rec.sept_result == "AB":
-                        rec.second_session_exception = 'AB'
-                        rec.first_session_result_bool = True
-                    if rec.sept_result == "TP":
-                        rec.second_session_exception = 'TP'
-                        rec.first_session_result_bool = True
-                    f = float(rec.sept_result)
-                    if(f < 0 or f > 20):
-                        raise ValidationError("Evaluation shall be between 0 and 20")
-                    else:
-                        rec.second_session_result = f
-                        rec.second_session_result_bool = True
->>>>>>> 1752b485 (implement evaluation exception)
                 except ValueError:
                     rec.second_session_result = 0
                     rec.second_session_exception = None
                     rec.second_session_result_bool = False
-<<<<<<< HEAD
                     raise UserError(_('Cannot decode %s in September Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.sept_result))
-=======
-                    raise UserError(_('Cannot decode %s in September Result, please encode a Float eg "12.00" or "NP" or "AB" or "TP".' % rec.sept_result))
->>>>>>> 1752b485 (implement evaluation exception)
