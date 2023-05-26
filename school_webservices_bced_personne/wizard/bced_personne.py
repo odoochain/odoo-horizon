@@ -54,7 +54,7 @@ class BCEDPersonne(models.TransientModel):
             ('student','This partner applies to become a student'),
             ('teacher','This partner applies to become a teacher'),
             ('employee','This partner applies to become an employee'),
-        ], required=True, string='Legal Context')
+        ], required=True, string='Legal Context', states={'draft': [('required', False)],'candidate_bced': [('required', False)]})
 
     def action_retrieve_bced_persons(self):
         self.ensure_one()
