@@ -77,37 +77,38 @@ class BCEDInscription(models.Model):
             partner_id.gender = 'male' if data['gender']['code']['_value_1'] == 'M' else 'female'
         if data['nationalities'] :
             partner_id.nationality_ids = self.env['res.country'].search([('code', 'in', [x['code']['_value_1'] for x in data['nationalities']['nationality']])])
-        for address in data['addresses']['address']:
-            # Diplomatic is for foreigner
-            if address['addressType'] == 'Diplomatic':
-                partner_id.street = address['plainText'][0]['_value_1']
-                partner_id.street2 = ''
-                partner_id.zip = ''
-                partner_id.city = ''
-                partner_id.state_id = False
-                partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
-            if address['addressType'] == 'Residential':
-                street_name = getFRDescription(address['street'])
-                if address['boxNumber'] :
-                    partner_id.street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
-                else :
-                    partner_id.street = ' '.join([street_name,address['houseNumber']])
-                partner_id.street2 = ''
-                partner_id.zip = address['postCode']['code']['_value_1']
-                partner_id.city = getFRDescription(address['municipality'])
-                partner_id.state_id = False
-                partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
-            elif address['addressType'] == 'PostAddress':
-                street_name = getFRDescription(address['street'])
-                if address['boxNumber'] :
-                    partner_id.secondary_street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
-                else :
-                    partner_id.secondary_street = ' '.join([street_name,address['houseNumber']])
-                partner_id.secondary_street2 = ''
-                partner_id.secondary_zip = address['postCode']['code']['_value_1']
-                partner_id.secondary_city = getFRDescription(address['municipality'])
-                partner_id.secondary_state_id = False
-                partner_id.secondary_country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
+        if data['addresses'] :
+            for address in data['addresses']['address']:
+                # Diplomatic is for foreigner
+                if address['addressType'] == 'Diplomatic':
+                    partner_id.street = address['plainText'][0]['_value_1']
+                    partner_id.street2 = ''
+                    partner_id.zip = ''
+                    partner_id.city = ''
+                    partner_id.state_id = False
+                    partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
+                if address['addressType'] == 'Residential':
+                    street_name = getFRDescription(address['street'])
+                    if address['boxNumber'] :
+                        partner_id.street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
+                    else :
+                        partner_id.street = ' '.join([street_name,address['houseNumber']])
+                    partner_id.street2 = ''
+                    partner_id.zip = address['postCode']['code']['_value_1']
+                    partner_id.city = getFRDescription(address['municipality'])
+                    partner_id.state_id = False
+                    partner_id.country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
+                elif address['addressType'] == 'PostAddress':
+                    street_name = getFRDescription(address['street'])
+                    if address['boxNumber'] :
+                        partner_id.secondary_street = ' '.join([street_name,address['houseNumber'],address['boxNumber']])
+                    else :
+                        partner_id.secondary_street = ' '.join([street_name,address['houseNumber']])
+                    partner_id.secondary_street2 = ''
+                    partner_id.secondary_zip = address['postCode']['code']['_value_1']
+                    partner_id.secondary_city = getFRDescription(address['municipality'])
+                    partner_id.secondary_state_id = False
+                    partner_id.secondary_country_id = self.env['res.country'].search([('code', '=', address['country'][0]['code']['_value_1'])], limit=1).id
         partner_id.birthdate_date = fields.Date.to_date(data['birth']['officialBirthDate'])
         if data['birth']['birthPlace'] :
             partner_id.birthplace = getFRDescription(data['birth']['birthPlace'])
