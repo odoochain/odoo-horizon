@@ -46,13 +46,19 @@ class BCEDInscription(models.Model):
     start_date = fields.Date(string='Start Date')
     end_date = fields.Date(string='End Date')
 
+    legal_context = fields.Selection(
+        [
+            ('student','This partner applies to become a student'),
+            ('teacher','This partner applies to become a teacher'),
+            ('employee','This partner applies to become an employee'),
+        ], required=True, string='Legal Context')
+
     def action_submit(self):
         ws = self.env['school.webservice'].search([('name', '=', 'bced_inscription')], limit=1)
         for rec in self:
             res = ws.publishInscription(rec)
             if res:
                 rec.reference = res['inscriptionReference']
-                rec.partner_id.inscription_id = rec.id
             
     def action_revoke(self):
         for rec in self:
