@@ -59,12 +59,6 @@
             </field>
         </record>
     
-        <template id="assets_common" inherit_id="web.assets_common" name="Horizon Evaluations Assets">
-            <xpath expr="." position="inside">
-                <link rel="stylesheet" type="text/css" href="/school_evaluations/static/src/css/school_evaluations.css"/>
-            </xpath>
-        </template>
-    
         <!-- Add evaluation to Individual Program form view -->
         <record id="individual_program_eval_form" model="ir.ui.view">
             <field name="name">school.individual_program.eval.view</field>
