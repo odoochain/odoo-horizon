@@ -49,6 +49,13 @@ class BCEDPersonne(models.TransientModel):
 
     selected_person_id = fields.Many2one('school.bced_personne_summary', string='Selected Person')
        
+    legal_context = fields.Selection(
+        [
+            ('student','This partner applies to become a student'),
+            ('teacher','This partner applies to become a teacher'),
+            ('employee','This partner applies to become an employee'),
+        ], required=True, string='Legal Context')
+
     def action_retrieve_bced_persons(self):
         self.ensure_one()
         ws = self.env['school.webservice'].search([('name', '=', 'bced_personne')], limit=1)
@@ -87,7 +94,7 @@ class BCEDPersonne(models.TransientModel):
                 new_inscription = self.env['school.bced.inscription'].create({
                     'partner_id': self.student_id.id,
                     'start_date': fields.Date.today(),
-                    'legal_context': 'TBD',
+                    'legal_context': self.legal_context,
                 })
                 new_inscription.action_submit()
                 new_inscription.action_update_partner_information()
