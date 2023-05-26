@@ -97,7 +97,7 @@ class BCEDPersonne(models.TransientModel):
                     'legal_context': self.legal_context,
                 })
                 # We update based on information retrieved from BCED on search niss and gender
-                new_inscription.update_partner_information(self.student_id, self.selected_person_id.data)
+                new_inscription.update_partner_information(self.student_id, json.loads(self.selected_person_id.data))
                 new_inscription.action_submit()
                 new_inscription.action_update_partner_information()
         except Exception as e :
