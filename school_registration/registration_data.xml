@@ -3928,7 +3928,7 @@
                                 "value":""
                             }
                         ],
-                        "content":"<h4>IMPORTANT</h4>\n<p>Les candidats ayant finalis\u00e9 la pr\u00e9sente fiche de contact doivent imp\u00e9rativement compl\u00e9ter ensuite  une fiche d\u2019admission pour voir leur inscription prise en compte.</p>\n<a href=\"https://horizon.student-crlg.be/my/formio/form/create/new_registration\" target=\"new\">Ouvrir le formulaire</a>",
+                        "content":"<h4>IMPORTANT</h4>\n<p>Les candidats ayant finalis\u00e9 la pr\u00e9sente fiche de contact doivent imp\u00e9rativement compl\u00e9ter ensuite  une fiche d\u2019admission pour voir leur inscription prise en compte.</p>\n<a href='https://horizon.student-crlg.be/my/formio/form/create/new_registration' target='new'>Ouvrir le formulaire</a>",
                         "refreshOnChange":false,
                         "customClass":"",
                         "hidden":false,
