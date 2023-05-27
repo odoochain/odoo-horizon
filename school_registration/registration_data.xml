@@ -3299,7 +3299,7 @@
                                 "value":""
                             }
                         ],
-                        "content":"<p>Les candidats qui ne seraient pas en mesure d'apporter de justificatif pour une des ann\u00e9es concern\u00e9es peuvent remplir une <a target=\"new\" href=\"https://drive.google.com/file/d/1boDpS_C8jGskaNr5kRX_ESUnO7EsvO--/view?usp=share_link\">d\u00e9claration sur l'honneur</a> et la t\u00e9l\u00e9charger en lieu et place du justificatif absent.</p>\n<p>Les documents doivent \u00eatre traduits en fran\u00e7ais ou anglais par un traducteur asserment\u00e9.</p>",
+                        "content":"<p>Les candidats qui ne seraient pas en mesure d'apporter de justificatif pour une des ann\u00e9es concern\u00e9es peuvent remplir une <a target='new' href='https://drive.google.com/file/d/1boDpS_C8jGskaNr5kRX_ESUnO7EsvO--/view?usp=share_link'>d\u00e9claration sur l'honneur</a> et la t\u00e9l\u00e9charger en lieu et place du justificatif absent.</p>\n<p>Les documents doivent \u00eatre traduits en fran\u00e7ais ou anglais par un traducteur asserment\u00e9.</p>",
                         "refreshOnChange":false,
                         "customClass":"",
                         "hidden":false,
