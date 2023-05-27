@@ -1253,7 +1253,7 @@
                                                 "selectFields":"",
                                                 "searchField":"",
                                                 "minSearch":0,
-                                                "filter":"api=getData&apm;model=res.country&amp;label=name&amp;domain_fields=in_use&amp;in_use=1",
+                                                "filter":"api=getData&amp;model=res.country&amp;label=name&amp;domain_fields=in_use&amp;in_use=1",
                                                 "limit":100,
                                                 "redrawOn":"",
                                                 "input":true,
