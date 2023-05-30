@@ -60,6 +60,7 @@
         <field name="wizard_on_next_page_save_draft">True</field>
         <field name="portal">True</field>
         <field name="portal_submit_done_url">/my/formio</field>
+        <field name="formio_version_id" ref="formio_builder_version"/>
         <field name="formio_js_options_id" ref="formio_builder_js_options"/>
         <field name="schema">
         {}
