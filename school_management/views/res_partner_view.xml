@@ -161,7 +161,9 @@
                             </kanban>
                         </field>
                     </page>
-                    <page string="Contacts &amp; Addresses">
+                </xpath>
+                <xpath expr="//page[@name='contact_addresses']" position="replace">
+                    <page string="Contacts &amp; Addresses" name="contact_addresses">
                         <field name="type" invible="1"/>
                         <div class="row">
                             <div class="col-3 mb16">
