@@ -23,7 +23,7 @@
 <odoo>
     
         <!-- Add boolean for teacher, student, employee on partner form view -->
-        <record id="view_partners_form_school_mod" model="ir.ui.view">
+        <record id="view_partners_form_school" model="ir.ui.view">
             <field name="name">view.res.partner.form.school</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
