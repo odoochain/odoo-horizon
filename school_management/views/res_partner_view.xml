@@ -162,7 +162,7 @@
                     </page>
                     <page string="Contacts &amp; Addresses">
                         <field name="type" invible="1"/>
-                        <div class="row" groups="school_management.group_employee">
+                        <div class="row">
                             <div class="col-3 mb16">
                                 <label for="street" string="Main Address"/>
                                 <div class="o_address_format">
