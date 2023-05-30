@@ -23,7 +23,7 @@
 <odoo>
     
         <!-- Add boolean for teacher, student, employee on partner form view -->
-        <record id="view_partners_form_school" model="ir.ui.view">
+        <record id="view_partners_form_school_mod" model="ir.ui.view">
             <field name="name">view.res.partner.form.school</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
@@ -160,8 +160,8 @@
                             </kanban>
                         </field>
                     </page>
-                    <page string="Contacts &amp; Addresses" groups="school_management.group_employee">
-                        <field name="type" attrs="{'invisible': [('parent_id','=', False)]}" groups="base.group_no_one"/>
+                    <page string="Contacts &amp; Addresses">
+                        <field name="type" invible="1"/>
                         <div class="row" groups="school_management.group_employee">
                             <div class="col-3 mb16">
                                 <label for="street" string="Main Address"/>
