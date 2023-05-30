@@ -70,6 +70,8 @@
                     </div>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
+                    <field name="is_company" invisible="1"/>
+                    <field name="parent_id" invisible="1"/>
                     <page name="cycles_page" string="Cycles" attrs="{'invisible': [('student','=',False)]}">
                         <field name="student_program_ids">
                             <kanban quick_create="false" create="false">
@@ -159,8 +161,6 @@
                         </field>
                     </page>
                     <page string="Contacts &amp; Addresses" groups="school_management.group_employee">
-                        <field name="is_company" invisible="1"/>
-                        <field name="parent_id" invisible="1"/>
                         <field name="type" attrs="{'invisible': [('parent_id','=', False)]}" groups="base.group_no_one"/>
                         <div class="row" groups="school_management.group_employee">
                             <div class="col-3 mb16">
