@@ -69,6 +69,7 @@
             			<field name="function" placeholder="e.g. Sales Director"/>
             			<field name="active" invisible="1"/>
                     </div>
+                    <group/>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
                     <field name="is_company" invisible="1"/>
