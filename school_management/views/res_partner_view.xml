@@ -62,14 +62,13 @@
             				    <field name='student' />
                                 <field name='teacher' />
                                 <field name='employee' />
-                                <field name='lastname' />
-            					<field name='firstname' />
+                                <field name='lastname' invisible="1"/>
+            					<field name='firstname' invisible="1"/>
             				</group>
             			</div>
             			<field name="function" placeholder="e.g. Sales Director"/>
             			<field name="active" invisible="1"/>
                     </div>
-                    <group/>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
                     <field name="is_company" invisible="1"/>
