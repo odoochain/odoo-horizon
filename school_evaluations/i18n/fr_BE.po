@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-31 08:38+0000\n"
-"PO-Revision-Date: 2023-05-31 11:34+0000\n"
+"PO-Revision-Date: 2023-05-31 11:52+0000\n"
 "Last-Translator: Weblate Admin <weblate@ito-invest.lu>\n"
 "Language-Team: French (Belgium) <https://weblate.ito-invest.lu/projects/"
 "horizon-16-0/horizon-16-0-school_evaluations/fr_BE/>\n"
@@ -34,6 +34,22 @@ msgid ""
 "            \n"
 "        "
 msgstr ""
+"\n"
+"            \n"
+"                <div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, "
+"Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-"
+"color: #FFF; \">\n"
+"                    <p>Bonjour ${object.student_id.name},</p>\n"
+"                    <br/>\n"
+"                    <p>Votre rapport d'évaluation est attaché à cet email. "
+"</p>\n"
+"                    <br/>\n"
+"                    <p>Si vous avez la moindre question, merci de contacter "
+"le secrétariat.</p>\n"
+"                    <br/>\n"
+"                </div>\n"
+"            \n"
+"        "
 
 #. module: school_evaluations
 #: model:mail.template,body_html:school_evaluations.email_template_success_certificate
@@ -52,6 +68,22 @@ msgid ""
 "            \n"
 "        "
 msgstr ""
+"\n"
+"            \n"
+"                <div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, "
+"Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-"
+"color: #FFF; \">\n"
+"                    <p>Bonjour ${object.student_id.name},</p>\n"
+"                    <br/>\n"
+"                    <p>Votre attestation de réussite à attachée à cet email. "
+"</p>\n"
+"                    <br/>\n"
+"                    <p>Si vous avez la moindre question, merci de contacter "
+"le secrétariat.</p>\n"
+"                    <br/>\n"
+"                </div>\n"
+"            \n"
+"        "
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
@@ -86,12 +118,13 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Display Results</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Affichage des résultats</span>"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Open year for encoding</span>"
 msgstr ""
+"<span class=\"o_form_label\">Ouverture de l'année pour l'encodage</span>"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
@@ -152,51 +185,51 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 msgid "Abandoned"
-msgstr ""
+msgstr "Abandonné"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
 msgid "Abandonned"
-msgstr ""
+msgstr "Abandonné"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_tree
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_summary_eval_form
 msgid "Acq"
-msgstr ""
+msgstr "Acq"
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__acquiered__a
 msgid "Acquiered"
-msgstr ""
+msgstr "Acquis"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__acquired_ind_course_group_ids
 msgid "Acquiered Courses Groups"
-msgstr ""
+msgstr "Unités acqises"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__total_acquiered_credits
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__total_acquiered_credits
 msgid "Acquiered Credits"
-msgstr ""
+msgstr "ECTS acquis"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__total_acquiered_hours
 msgid "Acquiered Hours"
-msgstr ""
+msgstr "Heures acquises"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__acquiered
 msgid "Acquired Credits"
-msgstr ""
+msgstr "ECTS acquis"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
 msgid "Acquis"
-msgstr ""
+msgstr "Acquis"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
@@ -216,22 +249,22 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__all_ind_course_group_ids
 msgid "All Courses Groups"
-msgstr ""
+msgstr "Toutes les unités d'enseignement"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
 msgid "Ann"
-msgstr ""
+msgstr "Ann"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__ann_result
 msgid "Annual Result"
-msgstr ""
+msgstr "Résultat d'année"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_form
 msgid "Archive"
-msgstr ""
+msgstr "Archive"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
@@ -244,7 +277,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_bloc_filter_eval
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
 msgid "Awarded"
-msgstr ""
+msgstr "Attribué"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
@@ -269,7 +302,7 @@ msgstr "Annuler"
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__2_candidate
 msgid "Candidate"
-msgstr ""
+msgstr "Candidat"
 
 #. module: school_evaluations
 #. odoo-python
@@ -280,6 +313,8 @@ msgid ""
 "Cannot decode %s in June Result, please encode a Float eg \"12.00\" or "
 "\"NP\" or \"AB\" or \"TP\"."
 msgstr ""
+"Impossible de décoder %s dans le résultat de juin, merci d'encoder un "
+"chiffre \"12.00\" ou \"NP ou \"AB\" ou \"TP\"."
 
 #. module: school_evaluations
 #. odoo-python
@@ -289,6 +324,8 @@ msgid ""
 "Cannot decode %s in September Result, please encode a Float eg \"12.00\" or "
 "\"NP\" or \"AB\" or \"TP\"."
 msgstr ""
+"Impossible de décoder %s dans le résultat de septembre, merci d'encoder un "
+"chiffre \"12.00\" ou \"NP ou \"AB\" ou \"TP\"."
 
 #. module: school_evaluations
 #. odoo-python
@@ -296,17 +333,17 @@ msgstr ""
 #: code:addons/school_evaluations/models/evaluation.py:0
 #, python-format
 msgid "Cannot decode %s, please encode a Float eg \"12.00\"."
-msgstr ""
+msgstr "Impossible de décoder %s , merci d'encoder un chiffre \"12.00\"."
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__1_1_checked
 msgid "Checked"
-msgstr ""
+msgstr "Vérifié"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_wizard_view
 msgid "Close"
-msgstr ""
+msgstr "Fermé"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
@@ -316,24 +353,24 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
 msgid "Comments"
-msgstr ""
+msgstr "Commentaires"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
 msgid "Completed"
-msgstr ""
+msgstr "Complété"
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__type__c
 msgid "Complex"
-msgstr ""
+msgstr "Complexe"
 
 #. module: school_evaluations
 #. odoo-python
 #: code:addons/school_evaluations/models/evaluation.py:0
 #, python-format
 msgid "Compose Email"
-msgstr ""
+msgstr "Rédiger un email"
 
 #. module: school_evaluations
 #: model:ir.model,name:school_evaluations.model_res_config_settings
@@ -344,16 +381,17 @@ msgstr "Paramètres de configuration"
 #: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
 msgid "Configure evaluation that can be encoded by teachers."
 msgstr ""
+"Configure les évaluations qui peuvent être encodées par les enseignants."
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
 msgid "Confirm valuation"
-msgstr ""
+msgstr "Confirmer la valorisation"
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__1_confirmed
 msgid "Confirmed"
-msgstr ""
+msgstr "Confirmée"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
@@ -398,7 +436,7 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_res_config_settings__evaluation_open_year_id
 msgid "Current Year for Evaluations"
-msgstr ""
+msgstr "Année en cours pour les évaluations"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
@@ -413,47 +451,47 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__decision
 msgid "Decision"
-msgstr ""
+msgstr "Décision"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 msgid "Decision :"
-msgstr ""
+msgstr "Décision :"
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__type__d
 msgid "Deferred"
-msgstr ""
+msgstr "Reporté"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
 msgid "Deliberated"
-msgstr ""
+msgstr "Délibérer"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
 msgid "Deliberated Result"
-msgstr ""
+msgstr "Résultat de délibération"
 
 #. module: school_evaluations
 #: model:ir.actions.report,name:school_evaluations.report_deliberation_annexe
 msgid "Deliberation Report Annexes"
-msgstr ""
+msgstr "Annexe du rapport de délibération"
 
 #. module: school_evaluations
 #: model:ir.actions.report,name:school_evaluations.report_deliberation_program_annexe
 msgid "Deliberation Report Program"
-msgstr ""
+msgstr "Rapport de délibération"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__display_results
 msgid "Display Current Results"
-msgstr ""
+msgstr "Affichage des résultats"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__display_name
@@ -464,12 +502,12 @@ msgstr "Nom affiché"
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_res_config_settings__display_results
 msgid "Display Results"
-msgstr ""
+msgstr "Affichage des résultats"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
 msgid "Display results in student portal."
-msgstr ""
+msgstr "Affichage des résultats dans le portail des étudiants."
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_program__grade__distinction
@@ -479,7 +517,7 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__domain_id
 msgid "Domain"
-msgstr ""
+msgstr "Domaine"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
@@ -537,7 +575,7 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
 msgid "Email Report"
-msgstr ""
+msgstr "Rapport d'email"
 
 #. module: school_evaluations
 #: model:ir.actions.act_window,name:school_evaluations.action_individual_course_form
@@ -560,12 +598,12 @@ msgstr ""
 #: model:mail.template,report_name:school_evaluations.email_template_evaluation_for_student
 #: model:mail.template,subject:school_evaluations.email_template_evaluation_for_student
 msgid "Evaluation Report"
-msgstr ""
+msgstr "Rapport d'évaluation"
 
 #. module: school_evaluations
 #: model:mail.template,name:school_evaluations.email_template_evaluation_for_student
 msgid "Evaluation Report - Send by Email"
-msgstr ""
+msgstr "Rapport d'évaluation - Envoyer par email"
 
 #. module: school_evaluations
 #: model:ir.actions.act_window,name:school_evaluations.school_evaluation_summary_wizard_action
