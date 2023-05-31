@@ -7,13 +7,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-31 08:38+0000\n"
-"PO-Revision-Date: 2023-05-31 08:38+0000\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2023-05-31 11:34+0000\n"
+"Last-Translator: Weblate Admin <weblate@ito-invest.lu>\n"
+"Language-Team: French (Belgium) <https://weblate.ito-invest.lu/projects/"
+"horizon-16-0/horizon-16-0-school_evaluations/fr_BE/>\n"
+"Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: school_evaluations
 #: model:mail.template,body_html:school_evaluations.email_template_evaluation_for_student
@@ -261,7 +264,7 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.school_evaluation_report_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__2_candidate
@@ -456,7 +459,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__display_name
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_res_config_settings__display_results
@@ -489,7 +492,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_bloc_filter_eval
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
@@ -829,7 +832,7 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__5_progress
 msgid "In Progress"
-msgstr ""
+msgstr "En cours"
 
 #. module: school_evaluations
 #: model:ir.model,name:school_evaluations.model_school_individual_bloc
@@ -1089,7 +1092,7 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
 msgid "Open Year"
-msgstr ""
+msgstr "Année ouverte"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
@@ -1151,7 +1154,7 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__valuated_program_id
 msgid "Program"
-msgstr ""
+msgstr "Cycle"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__program_completed
@@ -1534,7 +1537,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__year_id
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__year_id
 msgid "Year"
-msgstr ""
+msgstr "Année"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
@@ -1586,7 +1589,7 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.school_evaluation_report_view
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
