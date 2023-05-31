@@ -7,13 +7,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-31 08:54+0000\n"
-"PO-Revision-Date: 2023-05-31 08:54+0000\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2023-05-31 10:40+0000\n"
+"Last-Translator: Weblate Admin <weblate@ito-invest.lu>\n"
+"Language-Team: French (Belgium) <https://weblate.ito-invest.lu/projects/"
+"horizon-16-0/horizon-16-0-school_registration/fr_BE/>\n"
+"Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: school_registration
 #: model:ir.model.fields,help:school_registration.field_school_registration__state
@@ -58,7 +61,7 @@ msgstr "Archivé"
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.registration_form
 msgid "Attachements"
-msgstr ""
+msgstr "Fichiers attachés"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__message_attachment_count
