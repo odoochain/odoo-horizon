@@ -1,0 +1,152 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* school_webservices
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-31 11:55+0000\n"
+"PO-Revision-Date: 2023-05-31 11:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: school_webservices
+#: model_terms:ir.ui.view,arch_db:school_webservices.view_res_company_form_webservices
+msgid "ARES Web Services"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__wsa_action
+msgid "Action WS-Addressing"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model,name:school_webservices.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__wsa_to
+msgid "Destination (To) WS-Addressing"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_res_company__fase_code
+msgid "FASE code"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__group_id
+msgid "Group"
+msgstr ""
+
+#. module: school_webservices
+#: model_terms:ir.ui.view,arch_db:school_webservices.view_webservice_form
+msgid "History"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__id
+msgid "ID"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__last_response
+msgid "Last Response"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__last_send
+msgid "Last Send"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: school_webservices
+#: model_terms:ir.ui.view,arch_db:school_webservices.view_webservice_form
+msgid "Refresh"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__wsdl_url
+msgid "WSDL Url"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model,name:school_webservices.model_school_webservice
+msgid "Web Service"
+msgstr ""
+
+#. module: school_webservices
+#. odoo-python
+#: code:addons/school_webservices/models/school_webservices.py:0
+#, python-format
+msgid "Web Service response : %s"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.actions.act_window,name:school_webservices.action_webservice_list
+#: model:ir.ui.menu,name:school_webservices.menu_webservice
+#: model:ir.ui.menu,name:school_webservices.menu_webservice_list
+msgid "Web Services"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_res_company__webservices_certificate
+msgid "Web Services Certificate"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_res_company__webservices_key_passwd
+msgid "Web Services Key Password"
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_res_company__webservices_key
+msgid "Web Services Keys"
+msgstr ""
+
+#. module: school_webservices
+#. odoo-python
+#: code:addons/school_webservices/models/school_webservices.py:0
+#, python-format
+msgid "You are not allowed to use the service %s."
+msgstr ""
+
+#. module: school_webservices
+#: model:ir.model.fields,field_description:school_webservices.field_school_webservice__name
+msgid "name"
+msgstr ""
