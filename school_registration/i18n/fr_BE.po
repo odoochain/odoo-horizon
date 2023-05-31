@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-31 08:54+0000\n"
-"PO-Revision-Date: 2023-05-31 10:40+0000\n"
+"PO-Revision-Date: 2023-05-31 11:34+0000\n"
 "Last-Translator: Weblate Admin <weblate@ito-invest.lu>\n"
 "Language-Team: French (Belgium) <https://weblate.ito-invest.lu/projects/"
 "horizon-16-0/horizon-16-0-school_registration/fr_BE/>\n"
@@ -29,17 +29,17 @@ msgstr ""
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Employee managing registrations</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Employé qui gère les inscriptions</span>"
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Open year for registration</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Année ouverte pour les inscriptions</span>"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Nécessite une action"
 
 #. module: school_registration
 #: model:ir.model.fields.selection,name:school_registration.selection__school_registration__state__active
@@ -50,7 +50,7 @@ msgstr "En cours"
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.registration_form
 msgid "Archive Registration"
-msgstr ""
+msgstr "Archiver l'inscription"
 
 #. module: school_registration
 #: model:ir.model.fields.selection,name:school_registration.selection__school_registration__state__archived
@@ -66,12 +66,12 @@ msgstr "Fichiers attachés"
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Nombre de fichiers attachés"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__forms_attachment_ids
 msgid "Attachments"
-msgstr ""
+msgstr "Fichiers attachés"
 
 #. module: school_registration
 #: model:ir.model.fields.selection,name:school_registration.selection__school_registration__kanban_state__blocked
@@ -81,12 +81,12 @@ msgstr "Bloqué"
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.year_opening_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: school_registration
 #: model_terms:ir.actions.act_window,help:school_registration.action_registration_form
 msgid "Click to add a registration."
-msgstr ""
+msgstr "Cliquez pour ajouter une inscription."
 
 #. module: school_registration
 #: model:ir.model,name:school_registration.model_res_config_settings
@@ -96,22 +96,22 @@ msgstr "Paramètres de configuration"
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.res_config_settings_view_form
 msgid "Configure employee that manage/dispatch registrations."
-msgstr ""
+msgstr "Configurer l'employé en charge des inscriptions."
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.res_config_settings_view_form
 msgid "Configure registration that can be accessed by students."
-msgstr ""
+msgstr "Configurer l'année ouverte pour les inscriptions."
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.registration_form
 msgid "Confirm Registration"
-msgstr ""
+msgstr "Confirmer l'inscription"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__contact_form_id
 msgid "Contact Form"
-msgstr ""
+msgstr "Formulaire de contact"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__contact_form_iframe
@@ -121,7 +121,7 @@ msgstr ""
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.registration_form
 msgid "Contact information"
-msgstr ""
+msgstr "Informations de contact"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__create_uid
@@ -138,26 +138,26 @@ msgstr ""
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_res_config_settings__registration_open_year_id
 msgid "Current Year for Registrations"
-msgstr ""
+msgstr "Année disponible pour les inscriptions"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__contact_form_data
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__registration_form_data
 msgid "Data"
-msgstr ""
+msgstr "Données"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_formio_form__submission_data_pretty
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__contact_form_data_pretty
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__registration_form_data_pretty
 msgid "Data Pretty Print"
-msgstr ""
+msgstr "Données mise en forme"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__display_name
 #: model:ir.model.fields,field_description:school_registration.field_school_year_opening__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: school_registration
 #: model:ir.model.fields.selection,name:school_registration.selection__school_registration__state__draft
@@ -178,12 +178,12 @@ msgstr ""
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.res_config_settings_view_form
 msgid "Employee"
-msgstr ""
+msgstr "Employé"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_res_config_settings__registration_employee_id
 msgid "Employee Managing Registrations"
-msgstr ""
+msgstr "Employé qui gère les inscriptions"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__message_follower_ids
@@ -198,12 +198,12 @@ msgstr ""
 #. module: school_registration
 #: model:ir.model,name:school_registration.model_formio_form
 msgid "Form"
-msgstr ""
+msgstr "De"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Message"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__id
@@ -269,7 +269,7 @@ msgstr ""
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Attachement principal"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__message_has_error
@@ -309,12 +309,12 @@ msgstr ""
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Nombre d'actions"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Nombre d'erreurs"
 
 #. module: school_registration
 #: model:ir.model.fields,help:school_registration.field_school_registration__message_needaction_counter
@@ -335,18 +335,20 @@ msgstr ""
 #: model:ir.model.fields,help:school_registration.field_res_config_settings__registration_open_year_id
 msgid "Only registration in selected year is allowed."
 msgstr ""
+"Seule les inscriptions dans l'année configurée sont possible. Voir avec "
+"votre administrateur."
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:school_registration.year_opening_view
 msgid "Open Year"
-msgstr ""
+msgstr "Année ouverte"
 
 #. module: school_registration
 #: model:ir.ui.menu,name:school_registration.menu_year_opening
 #: model_terms:ir.ui.view,arch_db:school_registration.year_opening_view
 msgid "Open a new Year"
-msgstr ""
+msgstr "Démarrer une nouvelle année"
 
 #. module: school_registration
 #. odoo-python
@@ -360,17 +362,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_registration.field_formio_form__program_id
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__program_id
 msgid "Program"
-msgstr ""
+msgstr "Cycle"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_year_opening__program_to_duplicate_ids
 msgid "Program to Duplicate"
-msgstr ""
+msgstr "Cycle à dupliquer"
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.year_opening_view
 msgid "Program to duplicate"
-msgstr ""
+msgstr "Cycle à dupliquer"
 
 #. module: school_registration
 #: model:ir.model.fields.selection,name:school_registration.selection__school_registration__kanban_state__done
@@ -380,7 +382,7 @@ msgstr "Prêt"
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.view_program_form_school
 msgid "Register PAE"
-msgstr ""
+msgstr "Inscription d'un PAE"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_formio_form__registration_id
@@ -393,7 +395,7 @@ msgstr "Inscriptions"
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__registration_form_id
 msgid "Registration Form"
-msgstr ""
+msgstr "Formulaire d'inscription"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__registration_form_iframe
@@ -403,12 +405,12 @@ msgstr ""
 #. module: school_registration
 #: model:ir.model.constraint,message:school_registration.constraint_school_registration_registration_uniq
 msgid "Registration already exists for that registration !"
-msgstr ""
+msgstr "L'inscription existe déjà !"
 
 #. module: school_registration
 #: model:ir.model,name:school_registration.model_school_registration
 msgid "Registration of new/existing students"
-msgstr ""
+msgstr "Inscription de nouveaux étudiants"
 
 #. module: school_registration
 #: model:ir.actions.act_window,name:school_registration.action_registration_form
@@ -427,51 +429,51 @@ msgstr ""
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.view_registration_filter
 msgid "Search registration"
-msgstr ""
+msgstr "Recherche d'inscriptions"
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.registration_form
 msgid "Set to Draft"
-msgstr ""
+msgstr "Remettre en brouillon"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__speciality_id
 msgid "Speciality"
-msgstr ""
+msgstr "Spécialités"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__kanban_state
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__state
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__student_id
 #: model_terms:ir.ui.view,arch_db:school_registration.registration_form
 msgid "Student"
-msgstr ""
+msgstr "Etudiant"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_individual_bloc__student_signature
 #: model:ir.model.fields,field_description:school_registration.field_school_individual_program__student_signature
 msgid "Student Signature"
-msgstr ""
+msgstr "Signature de l'étudiant"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_individual_bloc__student_signature_date
 #: model:ir.model.fields,field_description:school_registration.field_school_individual_program__student_signature_date
 msgid "Student Signature Date"
-msgstr ""
+msgstr "Date de signature de l'étudiant"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__student_user_id
 msgid "Student User"
-msgstr ""
+msgstr "Utilisateur correspondant à l'étudiant"
 
 #. module: school_registration
 #: model:ir.model.fields,help:school_registration.field_res_config_settings__registration_employee_id
 msgid "The employee that manage/dispatch registrations."
-msgstr ""
+msgstr "L'employé qui gère les inscriptions."
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.year_opening_view
@@ -479,22 +481,24 @@ msgid ""
 "This wizard will duplicate all programs into the new year and enable it as "
 "the default year.\""
 msgstr ""
+"L'outil va dupliquer tous les cycles de l'année dans une nouvelle année et "
+"les rendre disponibles.\""
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__uid
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__contact_form_uuid
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__registration_form_uuid
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.registration_form
 msgid "Update"
-msgstr ""
+msgstr "Mise à jour"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__website_message_ids
@@ -510,26 +514,26 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__year_id
 #: model:ir.model.fields,field_description:school_registration.field_school_year_opening__year_id
 msgid "Year"
-msgstr ""
+msgstr "Année"
 
 #. module: school_registration
 #: model:ir.actions.act_window,name:school_registration.action_year_opening_view
 #: model:ir.model,name:school_registration.model_school_year_opening
 #: model_terms:ir.ui.view,arch_db:school_registration.year_opening_view
 msgid "Year Opening Wizard"
-msgstr ""
+msgstr "Ouverture d'une année"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__year_sequence
 msgid "Year Sequence"
-msgstr ""
+msgstr "Séquence d'année"
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.year_opening_view
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #. module: school_registration
 #: model_terms:ir.ui.view,arch_db:school_registration.registration_form
 msgid "registration"
-msgstr ""
+msgstr "inscription"
