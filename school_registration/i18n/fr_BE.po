@@ -163,7 +163,7 @@ msgstr "Nom affiché"
 #: model:ir.model.fields.selection,name:school_registration.selection__school_registration__state__draft
 #: model_terms:ir.ui.view,arch_db:school_registration.view_registration_filter
 msgid "Draft"
-msgstr "Brouillon"
+msgstr "Brouillons"
 
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__email
@@ -294,7 +294,7 @@ msgstr ""
 #. module: school_registration
 #: model:ir.model.fields,field_description:school_registration.field_school_registration__name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: school_registration
 #: model:mail.activity.type,name:school_registration.mail_activity_type_alert_new_contact_data
