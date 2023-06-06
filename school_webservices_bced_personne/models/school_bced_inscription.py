@@ -65,6 +65,7 @@ class BCEDInscription(models.Model):
             res = ws.closeInscription(rec)
             if res:
                 rec.reference = None
+                rec.end_date = fields.Date.today()
 
     @api.model
     def update_partner_information(self, partner_id, data):
