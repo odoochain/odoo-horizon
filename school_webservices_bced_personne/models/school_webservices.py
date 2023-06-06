@@ -215,7 +215,7 @@ class BCEDInscription(models.Model):
                             'beginDate' : inscription.start_date.strftime("%Y-%m-%d"),
                         }
                     },
-                    'duration' : 'P1Y',
+                    'duration' : 'D180',
                 }
             )
             if res['code'].startswith('BCED'):
