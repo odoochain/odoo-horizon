@@ -161,10 +161,12 @@ class BCEDInscription(models.Model):
                         }
                     }
                 ),
-                inscription={
-                    'personNumber' : inscription.partner_id.reg_number,
-                    'period' : {
-                        'beginDate' : inscription.start_date.strftime("%Y-%m-%d")
+                request={
+                    'inscription' : {
+                        'personNumber' : inscription.partner_id.reg_number,
+                        'period' : {
+                            'beginDate' : inscription.start_date.strftime("%Y-%m-%d")
+                        }
                     }
                 }
             )
