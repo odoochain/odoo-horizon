@@ -86,6 +86,18 @@ class BCEDPersonne(models.TransientModel):
             'target': 'new',
         }
 
+    def action_no_bced_personne(self):
+        self.ensure_one()
+        self.state = 'no_bced'
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'BCED Personne',
+            'view_mode': 'form',
+            'res_model': 'school.bced_personne_wizard',
+            'res_id': self.id,
+            'target': 'new',
+        }
+
     def action_link_bced_personne(self):
         self.ensure_one()
         try :
