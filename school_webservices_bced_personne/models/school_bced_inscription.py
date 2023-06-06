@@ -64,8 +64,14 @@ class BCEDInscription(models.Model):
         for rec in self:
             res = ws.closeInscription(rec)
             if res:
-                rec.reference = None
                 rec.end_date = fields.Date.today()
+
+    def action_extend(self):
+        ws = self.env['school.webservice'].search([('name', '=', 'bced_inscription')], limit=1)
+        for rec in self:
+            res = ws.extendInscription(rec)
+            if res:
+                rec.end_date =fields.date.strftime(res['inscription']['period']['endDate'], "%Y-%m-%d")
 
     @api.model
     def update_partner_information(self, partner_id, data):

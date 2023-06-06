@@ -180,6 +180,53 @@ class BCEDInscription(models.Model):
             raise UserError(_('You must provide an inscription to close'))
 
 
+    def extendInscription(self, inscription):
+        client = self._getClient()
+        if inscription :
+            
+            priv_ns = "http://bced.wallonie.be/common/privacylog/v5"
+
+            priv = client.type_factory(priv_ns)
+
+            if not self.env.user.national_id:
+                raise UserError(_('You must have a national id on current user to test this service'))
+            
+            # Create the request objects
+            res = client.service.extendInscription(
+                requestIdentification={
+                    'ticket' : uuid.uuid4(),
+                    'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+                },
+                privacyLog=priv.PrivacyLogType(
+                    context='HIGH_SCHOOL_CAREER',
+                    treatmentManagerNumber=self.env.user.national_id,
+                    dossier={
+                        'dossierId' : {
+                            # TODO : what are the information to provide here ?
+                            '_value_1' : '0',
+                            'source' : 'CRLg'
+                        }
+                    }
+                ),
+                request={
+                    'inscription' : {
+                        'personNumber' : inscription.partner_id.reg_number,
+                        'period' : {
+                            'beginDate' : inscription.start_date.strftime("%Y-%m-%d"),
+                        }
+                    },
+                    'duration' : 'P1Y',
+                }
+            )
+            if res['code'].startswith('BCED'):
+                if res['description']:
+                    raise UserError(_('Error while extending inscription with code  %s : %s ' % (res['code'], res['description'])))
+                else:
+                    raise UserError(_('Error while extending inscription with code %s : %s' % (res['code'],res)))
+            return res
+        else:
+            raise UserError(_('You must provide an inscription to extend'))
+
 class PersonService(models.Model):
     _inherit = 'school.webservice'
 

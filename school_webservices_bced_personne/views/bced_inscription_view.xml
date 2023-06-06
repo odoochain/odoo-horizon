@@ -31,6 +31,7 @@
                 <header>
                     <button name="action_submit" string="Publish" type="object" class="oe_highlight"/>
                     <button name="action_revoke" string="Revoke" type="object" class="oe_highlight"/>
+                    <button name="action_extend" string="Extend" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <group>
