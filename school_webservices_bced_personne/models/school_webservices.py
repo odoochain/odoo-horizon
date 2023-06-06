@@ -34,6 +34,7 @@ from odoo.tools.safe_eval import safe_eval
 _logger = logging.getLogger(__name__)
 
 
+
 class BCEDInscription(models.Model):
     _inherit = 'school.webservice'
 

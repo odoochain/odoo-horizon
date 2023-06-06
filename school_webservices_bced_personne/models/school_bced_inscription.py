@@ -33,6 +33,29 @@ from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
+logging.config.dictConfig({
+    'version': 1,
+    'formatters': {
+        'verbose': {
+            'format': '%(name)s: %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'zeep.transports': {
+            'level': 'DEBUG',
+            'propagate': True,
+            'handlers': ['console'],
+        },
+    }
+})
+
 def getFRDescription(value):
     return [x for x in value['description'] if x['language'] == 'fr'][0]['_value_1']
 
