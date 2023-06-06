@@ -52,7 +52,7 @@
                                 <button type="object" icon="fa-folder-open" name="action_use_person" string="" />
                             </tree>
                         </field>
-                        <div>
+                        <div class="p-4">
                             If none of those entries match the student, please click on the button below to create a new entry to obtain a bis number.
                         </div>
                         <button name="action_no_bced_personne" string="Not Found..." type="object" default_focus="1" class="oe_highlight"/>
