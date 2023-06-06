@@ -41,7 +41,7 @@ class Partner(models.Model):
     @api.depends('inscription_ids')
     def _compute_inscription_count(self):
         for rec in self :
-            rec.inscription_count = len(rec.inscription_ids)
+            rec.inscription_count = len(rec.inscription_ids.filtered(lambda inscription: inscription.reference != False))
 
     def action_update_bced_personne(self):
         for rec in self :
