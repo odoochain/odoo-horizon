@@ -216,7 +216,7 @@ class BCEDInscription(models.Model):
                         }
                     },
                     'duration' : {
-                        '_value_1 : 'P1Y',
+                        '_value_1' : 'P1Y',
                     },
                 }
             )
