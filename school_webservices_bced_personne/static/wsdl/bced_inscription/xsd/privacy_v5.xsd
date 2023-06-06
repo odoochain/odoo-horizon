@@ -1,0 +1,80 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://bced.wallonie.be/common/privacylog/v5" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://bced.wallonie.be/common/privacylog/v5" version="1.00">
+<xsd:complexType name="PrivacyLogType">
+<xsd:sequence>
+<xsd:element name="context">
+<xsd:annotation>
+<xsd:documentation>Context linked to the request : In which case the civil servant send the request</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="64"></xsd:maxLength>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="treatmentManagerNumber">
+<xsd:annotation>
+<xsd:documentation>The national number (or NISS) of the treatment responsible civil servant.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="11"></xsd:maxLength>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="civilServantNumber">
+<xsd:annotation>
+<xsd:documentation>The national number of the agent who is  executing the request</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="11"></xsd:maxLength>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+</xsd:choice>
+<xsd:element minOccurs="0" name="dossier" type="tns:DossierType">
+<xsd:annotation>
+<xsd:documentation>The folder linked to the request : For witch administrative folder the request is done.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="privacyLog" type="tns:PrivacyLogType">
+<xsd:annotation>
+<xsd:documentation>PrivacyLog is used to achieve CPVP requirements.
+Inscription and tracing is covered by that Types.
+A final usage is authorization at the context level.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="DossierType">
+<xsd:annotation>
+<xsd:documentation>A dossier is a collection of documents about a particular person, event, or subject. This type identify the dossier that would be treated.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element minOccurs="0" name="dossierId">
+<xsd:annotation>
+<xsd:documentation>The folder identifier</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="source" type="xsd:string"></xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element minOccurs="0" name="dossierType" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>The type of the folder.
+Could be, for example : inspection, bonus request, ...</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element minOccurs="0" name="inscriptionDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The inscription date is the date of the event that trigger the folder creation.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

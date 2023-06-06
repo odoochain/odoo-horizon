@@ -1,0 +1,17 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.etnic.be/janus/ow" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.etnic.be/janus/ow">
+<element name="StatutMsg" type="tns:StatutMsgCT"></element>
+<complexType name="MessageCT">
+<sequence>
+<element name="ID" type="string"></element>
+</sequence>
+</complexType>
+<complexType name="StatutMsgCT">
+<sequence>
+<element name="message" type="tns:MessageCT"></element>
+<element minOccurs="0" name="communication" type="tns:CommunicationST"></element>
+</sequence>
+</complexType>
+<simpleType name="CommunicationST">
+<restriction base="string"></restriction>
+</simpleType>
+</schema>

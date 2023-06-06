@@ -33,7 +33,6 @@
         'views/program_view.xml',
         'views/individual_program_view.xml',
         'views/configuration_view.xml',
-        'views/ir_assets.xml',
         'report/report_program.xml',
         'sequences/school_sequence.xml',
         'security/ir.model.access.csv',
@@ -41,6 +40,15 @@
     'demo': [
         'school_data_demo.xml'
     ],
+    'assets': {
+        'web._assets_primary_variables': [
+            'school_management/static/src/scss/primary_variables.scss'
+        ],
+        'web.report_assets_common': [
+            'school_management/static/src/css/pure-nr.css',
+            'school_management/static/src/css/reports.css',
+        ],
+    },
     'description': '''
         This modules add management tools for a school.
     ''',

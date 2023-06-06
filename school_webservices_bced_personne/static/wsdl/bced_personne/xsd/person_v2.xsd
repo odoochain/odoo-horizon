@@ -1,0 +1,311 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dat="http://soa.spw.wallonie.be/data/common/date/v1" xmlns:num="http://soa.spw.wallonie.be/data/entity/person/number/v2" xmlns:nam="http://soa.spw.wallonie.be/data/entity/person/name/v1" xmlns:dec="http://soa.spw.wallonie.be/data/entity/person/decease/v2" xmlns:per="http://soa.spw.wallonie.be/data/entity/person/v2" xmlns:cod="http://soa.spw.wallonie.be/data/common/code/v2" xmlns:civ="http://soa.spw.wallonie.be/data/entity/person/civilstate/v2" xmlns:bir="http://soa.spw.wallonie.be/data/entity/person/birth/v2" xmlns:pro="http://soa.spw.wallonie.be/data/entity/person/profession/v1" xmlns:nat="http://soa.spw.wallonie.be/data/entity/person/nationality/v1" xmlns:addr="http://soa.spw.wallonie.be/data/entity/address/address/v2" xmlns:photo="http://soa.spw.wallonie.be/data/entity/photo/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/entity/person/v2" version="2.1">
+<xs:annotation>
+<xs:documentation>Definitions of person types.</xs:documentation>
+</xs:annotation>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/name/v1" schemaLocation="name_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/address/address/v2" schemaLocation="address_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/number/v2" schemaLocation="personNumber_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/date/v1" schemaLocation="date_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/code/v2" schemaLocation="code_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/birth/v2" schemaLocation="birth_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/decease/v2" schemaLocation="decease_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/civilstate/v2" schemaLocation="civilState_v2.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/profession/v1" schemaLocation="profession_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/person/nationality/v1" schemaLocation="nationality_v1.xsd"></xs:import>
+<xs:import namespace="http://soa.spw.wallonie.be/data/entity/photo/v1" schemaLocation="photo_v1.xsd"></xs:import>
+<xs:element name="personNumber" nillable="true" type="num:PersonNumberType"></xs:element>
+<xs:element name="name" nillable="true" type="nam:NameType"></xs:element>
+<xs:element name="gender" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element name="nationality" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element name="birthPlace" nillable="true" type="addr:PlaceType"></xs:element>
+<xs:element name="officialBirthDate" nillable="true" type="dat:IncompleteDateType"></xs:element>
+<xs:element name="deceasePlace" nillable="true" type="addr:PlaceType"></xs:element>
+<xs:element name="officialDeceaseDate" nillable="true" type="dat:IncompleteDateType"></xs:element>
+<xs:element name="civilState" nillable="true" type="cod:CodeType"></xs:element>
+<xs:complexType name="PersonType">
+<xs:annotation>
+<xs:documentation>A detailed person is a simple person, with additional, optional information.
+The detailed person is modelled after the information present in the Belgian National Register.
+Information that is not relevant to certain applications/services may be omitted.
+All fields are nillable, but fields should only be set to nil if the information is deliberately witheld.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="personNumber" type="num:PersonNumberType"></xs:element>
+<xs:element name="name" type="nam:NameType"></xs:element>
+<xs:element minOccurs="0" name="gender">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="cod:CodeType">
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="nationalities">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="20" name="nationality">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="cod:CodeType">
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="addresses">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="address" type="addr:AddressType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="diplomaticPost">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="diplomaticPlace" type="addr:PlaceType"></xs:element>
+<xs:element minOccurs="0" name="diplomaticCode" type="cod:CodeType"></xs:element>
+</xs:sequence>
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="nobilityTitle">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="cod:CodeType">
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="professions" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="profession" type="pro:ProfessionType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="civilStates">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="20" name="civilState" nillable="true">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="civ:CivilStateInformationType">
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="legalCohabitation">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="partner" type="civ:PartnerType"></xs:element>
+<xs:element name="registration">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="registrationDate" type="xs:date"></xs:element>
+<xs:element name="registrationPlace" type="addr:PlaceType"></xs:element>
+<xs:element minOccurs="0" name="registrationBailiff">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="bailiffName" type="xs:string"></xs:element>
+<xs:element minOccurs="0" name="bailiffPlace" type="addr:PlaceType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="birth">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="birthPlace" type="addr:PlaceType"></xs:element>
+<xs:element name="officialBirthDate" type="dat:IncompleteDateType"></xs:element>
+<xs:element minOccurs="0" name="birthAct" nillable="true" type="bir:BirthActType"></xs:element>
+</xs:sequence>
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="decease">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="deceasePlace" type="addr:PlaceType"></xs:element>
+<xs:element minOccurs="0" name="officialDeceaseDate" type="dat:IncompleteDateType"></xs:element>
+<xs:element minOccurs="0" name="deceaseAct" nillable="true" type="dec:DeceaseActType"></xs:element>
+</xs:sequence>
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="administrator">
+<xs:complexType>
+<xs:choice>
+<xs:element name="location" type="addr:PlaceType"></xs:element>
+<xs:element name="specialNotion" type="cod:CodeType"></xs:element>
+</xs:choice>
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="photo" type="photo:PhotoType"></xs:element>
+</xs:sequence>
+<xs:attribute name="source" type="xs:string"></xs:attribute>
+<xs:attribute name="register">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="Population"></xs:enumeration>
+<xs:enumeration value="Stranger"></xs:enumeration>
+<xs:enumeration value="Diplomatic"></xs:enumeration>
+<xs:enumeration value="Bis"></xs:enumeration>
+<xs:enumeration value="Ter"></xs:enumeration>
+<xs:enumeration value="Radiation"></xs:enumeration>
+<xs:enumeration value="Birth"></xs:enumeration>
+<xs:enumeration value="Stranger_familyMembers"></xs:enumeration>
+<xs:enumeration value="EuropeanFunctionary"></xs:enumeration>
+<xs:enumeration value="Waiting"></xs:enumeration>
+<xs:enumeration value="Waiting_EU"></xs:enumeration>
+<xs:enumeration value="Waiting_Asylum"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+<xs:attribute name="inceptionDate" type="xs:date"></xs:attribute>
+<xs:attribute name="modificationDate" type="xs:date"></xs:attribute>
+</xs:complexType>
+<xs:element name="person" type="per:PersonType">
+<xs:annotation>
+<xs:documentation>Root element holding a person of one of the subtypes.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="PersonDeclarationType">
+<xs:sequence>
+<xs:element name="person" type="per:PersonDeclarationRequestType">
+<xs:annotation>
+<xs:documentation>Element containing the person information to be used to register a person</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PersonDeclarationRequestType">
+<xs:complexContent>
+<xs:extension base="per:PersonBaseDeclarationRequestType">
+<xs:attribute name="register" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="Bis"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="PersonBaseDeclarationRequestType">
+<xs:annotation>
+<xs:documentation>Type containing the data necessary to create a new person or update person data</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element minOccurs="0" name="name">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="per:NameDeclarationType"></xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="gender" type="per:GenderDeclarationType"></xs:element>
+<xs:choice>
+<xs:element minOccurs="0" name="foreignAddress" type="addr:ForeignAddressDeclarationType"></xs:element>
+<xs:element minOccurs="0" name="belgianAddress" type="addr:BelgianAddressDeclarationType"></xs:element>
+</xs:choice>
+<xs:element minOccurs="0" name="nationalities" type="per:NationalitiesDeclarationType"></xs:element>
+<xs:element minOccurs="0" name="civilStates" type="per:CivilStatesDeclarationType"></xs:element>
+<xs:element minOccurs="0" name="birth" type="per:BirthIsoDeclarationType"></xs:element>
+<xs:element minOccurs="0" name="decease" type="per:DeceaseIsoDeclarationType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="NameDeclarationType">
+<xs:complexContent>
+<xs:extension base="nam:NameBaseDeclarationType">
+<xs:attribute name="inceptionDate" type="xs:date" use="required"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="NationalitiesBaseDeclarationType">
+<xs:sequence>
+<xs:element maxOccurs="10" name="nationality" type="nat:NationalityDeclarationType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="NationalitiesDeclarationType">
+<xs:complexContent>
+<xs:extension base="per:NationalitiesBaseDeclarationType"></xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="BirthDeclarationType">
+<xs:sequence>
+<xs:element name="officialBirthDate" type="dat:IncompleteDateType"></xs:element>
+<xs:element minOccurs="0" name="birthPlace" type="addr:PlaceDeclarationType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BirthIsoDeclarationType">
+<xs:sequence>
+<xs:element name="officialBirthDate" type="dat:IncompleteDateType"></xs:element>
+<xs:element minOccurs="0" name="birthPlace" type="addr:PlaceDeclarationIsoType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DeceaseDeclarationType">
+<xs:sequence>
+<xs:element minOccurs="0" name="deceasePlace" type="addr:PlaceDeclarationType"></xs:element>
+<xs:element name="officialDeceaseDate" type="dat:IncompleteDateType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DeceaseIsoDeclarationType">
+<xs:sequence>
+<xs:element minOccurs="0" name="deceasePlace" type="addr:PlaceDeclarationIsoType"></xs:element>
+<xs:element name="officialDeceaseDate" type="dat:IncompleteDateType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GenderBaseDeclarationType">
+<xs:sequence>
+<xs:element name="code" type="per:GenderCodeType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GenderDeclarationType">
+<xs:complexContent>
+<xs:extension base="per:GenderBaseDeclarationType">
+<xs:attribute name="inceptionDate" type="xs:date" use="required"></xs:attribute>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="CivilStatesDeclarationType">
+<xs:sequence>
+<xs:element maxOccurs="10" name="civilState" type="civ:CivilStateDeclarationType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="RegisterPersonResultType">
+<xs:sequence>
+<xs:element name="personNumber" type="num:PersonNumberType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="GenderCodeType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="M"></xs:enumeration>
+<xs:enumeration value="F"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

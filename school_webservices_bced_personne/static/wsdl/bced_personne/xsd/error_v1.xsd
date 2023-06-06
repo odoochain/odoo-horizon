@@ -1,0 +1,22 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:err="http://soa.spw.wallonie.be/data/common/error/v1" xmlns:cod="http://soa.spw.wallonie.be/data/common/code/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/common/error/v1" version="1.00">
+<xs:annotation>
+<xs:documentation>Definitions of error and warning types.
+		</xs:documentation>
+</xs:annotation>
+<xs:import namespace="http://soa.spw.wallonie.be/data/common/code/v1" schemaLocation="code_v1.xsd"></xs:import>
+<xs:complexType name="ErrorOrWarningType">
+<xs:annotation>
+<xs:documentation>Definition of a business error or warning. I
+				consists of a code, including optional
+				language-dependent
+				description, and a possible cause.
+			</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="code" nillable="true" type="cod:CodeType"></xs:element>
+<xs:element minOccurs="0" name="cause" type="err:ErrorOrWarningType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="warning" type="err:ErrorOrWarningType"></xs:element>
+<xs:element name="error" type="err:ErrorOrWarningType"></xs:element>
+</xs:schema>

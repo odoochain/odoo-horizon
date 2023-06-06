@@ -103,6 +103,8 @@ class Partner(models.Model):
     
     nationality_id = fields.Many2one("res.country", "Nationality")
 
+    nationality_ids = fields.Many2many("res.country", "res_partner_nationalities", "partner_id", "country_id", string="Nationalities")
+
     @api.constrains('initials')
     def _check_initials(self):
         for rec in self:
@@ -112,7 +114,6 @@ class Partner(models.Model):
     birthplace = fields.Char('Birthplace')
     birthcountry = fields.Many2one('res.country', 'Birth Country', ondelete='restrict')
     phone2 = fields.Char('Phone2')
-    title = fields.Selection([('Mr', 'Monsieur'),('Mme', 'Madame'),('Mlle', 'Mademoiselle')])
     marial_status = fields.Selection([('M', 'Maried'),('S', 'Single')])
     registration_date = fields.Date('Registration Date')
     email_personnel = fields.Char('Email personnel')
@@ -199,3 +200,11 @@ class Company(models.Model):
     director_signature = fields.Binary(string="Director Signature")
     
     secretary_signature = fields.Binary(string="Secretarty Signature")
+
+class Country(models.Model):
+    '''Country'''
+    _inherit = 'res.country'
+    
+    nis_code = fields.Char(string="NIS-code")
+    
+    in_use = fields.Boolean(string="In Use")

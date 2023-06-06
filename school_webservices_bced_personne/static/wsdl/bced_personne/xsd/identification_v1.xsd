@@ -1,0 +1,66 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:id="http://soa.spw.wallonie.be/common/identification/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/common/identification/v1" version="1.00">
+<xsd:complexType name="CustomerInformationType">
+<xsd:sequence>
+<xsd:element name="ticket">
+<xsd:annotation>
+<xsd:documentation>A unique request identification, created by the
+						consumer of the service. The main use is for logging and auditing.
+					</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"></xsd:pattern>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="timestampSent" type="xsd:dateTime"></xsd:element>
+<xsd:element name="customerIdentification">
+<xsd:annotation>
+<xsd:documentation>node that identity the organisation/application
+						that produce the request</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="organisationId">
+<xsd:annotation>
+<xsd:documentation>This node is used to identify the
+									organisation that produce the request.
+									In case of extra-SPW organisation, organisationId is the CBE
+									Number.
+									In cas of intra-SPW organisation, organisationId is the LDAP ID.
+								</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="collapse"></xsd:whiteSpace>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element minOccurs="0" name="applicationId" type="xsd:positiveInteger">
+<xsd:annotation>
+<xsd:documentation>In case of intra-SPW application, the URBI
+									application identifier.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element minOccurs="0" name="applicationName">
+<xsd:annotation>
+<xsd:documentation>This node is used to identify the application
+									that produce the request.
+									Name of the client application.
+								</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:whiteSpace value="collapse"></xsd:whiteSpace>
+<xsd:minLength value="0"></xsd:minLength>
+<xsd:maxLength value="32"></xsd:maxLength>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="customerInformations" type="id:CustomerInformationType"></xsd:element>
+</xsd:schema>

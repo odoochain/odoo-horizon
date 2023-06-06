@@ -1,0 +1,22 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dec="http://soa.spw.wallonie.be/data/entity/person/decease/v2" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://soa.spw.wallonie.be/data/entity/person/decease/v2" version="2.00">
+<xs:annotation>
+<xs:documentation>Definitions of decease-related types.</xs:documentation>
+</xs:annotation>
+<xs:complexType name="DeceaseActType">
+<xs:annotation>
+<xs:documentation>A decease act contains a number, plus an identifier defining the suppletory register where the act is held.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="actNumber" nillable="true" type="xs:string"></xs:element>
+<xs:element minOccurs="0" name="suppletoryRegistery" nillable="true" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DeceaseDocumentsType">
+<xs:annotation>
+<xs:documentation>Container for decease-related documents. For documents that do not exist, the corresponding element is simply omitted.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element minOccurs="0" name="deceaseAct" type="dec:DeceaseActType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

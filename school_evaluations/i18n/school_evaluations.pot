@@ -1,0 +1,1620 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* school_evaluations
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-31 08:38+0000\n"
+"PO-Revision-Date: 2023-05-31 08:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: school_evaluations
+#: model:mail.template,body_html:school_evaluations.email_template_evaluation_for_student
+msgid ""
+"\n"
+"            \n"
+"                <div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"                    <p>Hello ${object.student_id.name},</p>\n"
+"                    <br/>\n"
+"                    <p>Your Evaluation Report is attached to this email. </p>\n"
+"                    <br/>\n"
+"                    <p>If you have any question, do not hesitate to contact us.</p>\n"
+"                    <br/>\n"
+"                </div>\n"
+"            \n"
+"        "
+msgstr ""
+
+#. module: school_evaluations
+#: model:mail.template,body_html:school_evaluations.email_template_success_certificate
+#: model:mail.template,body_html:school_evaluations.email_template_success_certificate_prog
+msgid ""
+"\n"
+"            \n"
+"                <div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"                    <p>Hello ${object.student_id.name},</p>\n"
+"                    <br/>\n"
+"                    <p>Your Success Certificate is attached to this email. </p>\n"
+"                    <br/>\n"
+"                    <p>If you have any question, do not hesitate to contact us.</p>\n"
+"                    <br/>\n"
+"                </div>\n"
+"            \n"
+"        "
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "* Pas de seconde session possible pour cette activité."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid ""
+"<br/>\n"
+"                                <br/>\n"
+"                                A réussi en l’année académique"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid ""
+"<br/>\n"
+"                                <br/>\n"
+"                                Né"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+msgid ""
+"<br/>\n"
+"                                son programme en"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Display Results</span>"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Open year for encoding</span>"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+msgid ""
+"<u>Article 134 du Décret définissant le paysage de l'enseignement supérieur et l'organisation académique des études du 7-11-2013</u>\n"
+"                                    Les autorités de l'établissement d'enseignement supérieur fixent le règlement des études, ainsi que les règles particulières de fonctionnement des jurys. Ces dispositions sont annexées au règlement des études. Sous réserve des autres dispositions légales, ce règlement de jury fixe notamment :\n"
+"                                    […]\n"
+"                                    8° les modes d'introduction, d'instruction et de règlement des plaintes d'étudiants relatives à des irrégularités dans le déroulement des évaluations ou du traitement des dossiers."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+msgid ""
+"<u>Article 26 de l’annexe 4 du Règlement des études (présent sur le site internet de l’école :</u>\n"
+"                                    « […] Tout recours relatif à une quelconque irrégularité, autre que la tricherie ou le plagiat, dans le déroulement des évaluations est adressé, sous pli recommandé, au secrétaire du jury, au plus tard dans les trois jours ouvrables qui suivent la notification des résultats des évaluations.\n"
+"                                    L'introduction du recours peut également être faite par la remise d'un écrit au secrétaire. Dans ce cas, un accusé de réception est délivré.\n"
+"                                    Le secrétaire du jury instruit le recours et, au plus tard dans les deux jours ouvrables de sa réception, fait rapport au président du jury.\n"
+"                                    Dans le jour ouvrable suivant la réception du rapport, le président du jury réunit valablement des membres de la Commission des Études non mis en cause dans l'irrégularité invoquée.\n"
+"                                    La Commission des Études statue séance tenante sur la régularité du déroulement des épreuves, par décision formellement motivée et notifiée au(x) plaignant(s) dans les deux jours ouvrables. »"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "A acquis ou valorisé"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "A réussi l'ensemble de son PAE."
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__first_session_exception__ab
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__second_session_exception__ab
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__final_result_exception__ab
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__first_session_computed_exception__ab
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__first_session_exception__ab
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__second_session_computed_exception__ab
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__second_session_exception__ab
+msgid "AB"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+msgid "ATTESTATION DE RÉUSSITE"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "ATTESTATION DE RÉUSSITE DE CYCLE"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
+msgid "Abandon"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Abandoned"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
+msgid "Abandonned"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_tree
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_summary_eval_form
+msgid "Acq"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__acquiered__a
+msgid "Acquiered"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__acquired_ind_course_group_ids
+msgid "Acquiered Courses Groups"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__total_acquiered_credits
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__total_acquiered_credits
+msgid "Acquiered Credits"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__total_acquiered_hours
+msgid "Acquiered Hours"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__acquiered
+msgid "Acquired Credits"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Acquis"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Acquis :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "Affichage dans Responsive"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "Afficher"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__all_ind_course_group_ids
+msgid "All Courses Groups"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
+msgid "Ann"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__ann_result
+msgid "Annual Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_form
+msgid "Archive"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Attente"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_bloc_filter_eval
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
+msgid "Awarded"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "CODE UE"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "CRÉDITS OBTENUS :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "CRÉDITS À ACQUÉRIR :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.school_evaluation_report_view
+msgid "Cancel"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__2_candidate
+msgid "Candidate"
+msgstr ""
+
+#. module: school_evaluations
+#. odoo-python
+#: code:addons/school_evaluations/models/evaluation.py:0
+#: code:addons/school_evaluations/models/evaluation.py:0
+#, python-format
+msgid ""
+"Cannot decode %s in June Result, please encode a Float eg \"12.00\" or "
+"\"NP\" or \"AB\" or \"TP\"."
+msgstr ""
+
+#. module: school_evaluations
+#. odoo-python
+#: code:addons/school_evaluations/models/evaluation.py:0
+#, python-format
+msgid ""
+"Cannot decode %s in September Result, please encode a Float eg \"12.00\" or "
+"\"NP\" or \"AB\" or \"TP\"."
+msgstr ""
+
+#. module: school_evaluations
+#. odoo-python
+#: code:addons/school_evaluations/models/evaluation.py:0
+#: code:addons/school_evaluations/models/evaluation.py:0
+#, python-format
+msgid "Cannot decode %s, please encode a Float eg \"12.00\"."
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__1_1_checked
+msgid "Checked"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_wizard_view
+msgid "Close"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Commentaire"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
+msgid "Comments"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
+msgid "Completed"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__type__c
+msgid "Complex"
+msgstr ""
+
+#. module: school_evaluations
+#. odoo-python
+#: code:addons/school_evaluations/models/evaluation.py:0
+#, python-format
+msgid "Compose Email"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "Configure evaluation that can be encoded by teachers."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Confirm valuation"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__1_confirmed
+msgid "Confirmed"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "Conservatoire royal de Liège<br/>Boulevard Piercot, 29, 4000 LIÈGE"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__create_uid
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__create_date
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Crédits"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+msgid "Crédits du PAE obtenus ("
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+msgid "Crédits du cycle obtenus ("
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid ""
+"Crédits<br/>\n"
+"                          (année académique"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_res_config_settings__evaluation_open_year_id
+msgid "Current Year for Evaluations"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Cycle :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "Cycle non réussi, actuellement au stade de :"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__decision
+msgid "Decision"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Decision :"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__type__d
+msgid "Deferred"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Delete"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Deliberated"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Deliberated Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.report,name:school_evaluations.report_deliberation_annexe
+msgid "Deliberation Report Annexes"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.report,name:school_evaluations.report_deliberation_program_annexe
+msgid "Deliberation Report Program"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__display_results
+msgid "Display Current Results"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__display_name
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_res_config_settings__display_results
+msgid "Display Results"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "Display results in student portal."
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_program__grade__distinction
+msgid "Distinction"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__domain_id
+msgid "Domain"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "Domaine :"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__9_draft
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_bloc_filter_eval
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
+msgid "Draft"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+msgid "Décision"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+msgid "Décision du jury :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "ECTS"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+msgid "ECTS Acquis"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+msgid "ECTS Non-Acquis"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "ECTS acquis"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "ECTS."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
+msgid "Email Report"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.act_window,name:school_evaluations.action_individual_course_form
+#: model:ir.actions.act_window,name:school_evaluations.action_individual_course_form_teacher
+#: model:ir.ui.menu,name:school_evaluations.menu_individual_course_form
+#: model:ir.ui.menu,name:school_evaluations.menu_individual_course_form_teacher
+msgid "Encodage Résultats AA"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__evaluation
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__first_session_result
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__second_session_result
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__evaluation
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "Evaluation"
+msgstr ""
+
+#. module: school_evaluations
+#: model:mail.template,report_name:school_evaluations.email_template_evaluation_for_student
+#: model:mail.template,subject:school_evaluations.email_template_evaluation_for_student
+msgid "Evaluation Report"
+msgstr ""
+
+#. module: school_evaluations
+#: model:mail.template,name:school_evaluations.email_template_evaluation_for_student
+msgid "Evaluation Report - Send by Email"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.act_window,name:school_evaluations.school_evaluation_summary_wizard_action
+#: model:ir.ui.menu,name:school_evaluations.menu_report_evaluation_summary_wizard
+msgid "Evaluation Summary Wizard"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.report,name:school_evaluations.report_evaluation_by_teacher
+#: model:ir.ui.menu,name:school_evaluations.menu_evaluation_report_by_teacher
+msgid "Evaluation by Teacher"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.ui.menu,name:school_evaluations.menu_main_evaluation
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "Evaluations"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_school_evaluations_report_evaluation_by_teacher
+msgid "Evaluations by Teacher Report"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.act_window,name:school_evaluations.action_evaluation_report_by_teacher
+#: model_terms:ir.ui.view,arch_db:school_evaluations.school_evaluation_report_view
+msgid "Evaluations by teatcher"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.report,name:school_evaluations.report_evaluation_for_student
+msgid "Evaluations for student"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "FICHE DE CYCLE INDIVIDUEL DE L'ÉTUDIANT·E"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__7_failed
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
+msgid "Failed"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "Fiche de résultats -"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_tree
+msgid "Fin"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__res_config_settings__evaluation_open_session__fin
+msgid "Final"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__final_result_bool
+msgid "Final Active"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__final_result_exception
+msgid "Final Exception"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__final_note
+msgid "Final Notes"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__final_result
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__open_final_result
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__final_result
+msgid "Final Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__final_result_disp
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__final_result_disp
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_summary__final_result_disp
+msgid "Final Result Display"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Final Results"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_program__grade__first_class
+msgid "First Class Honor"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
+msgid "First Name"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_evaluation_summary_wizard__session__first
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "First Session"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__first_session_result_bool
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_result_bool
+msgid "First Session Active"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_computed_result_bool
+msgid "First Session Computed Active"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_computed_exception
+msgid "First Session Computed Exception"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_computed_result
+msgid "First Session Computed Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_deliberated_result_bool
+msgid "First Session Deliberated Active"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_deliberated_result
+msgid "First Session Deliberated Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__first_session_exception
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_exception
+msgid "First Session Exception"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__first_session_note
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_note
+msgid "First Session Notes"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__first_session_result
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_result
+msgid "First Session Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__first_session_result_disp
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__first_session_result_disp
+msgid "First Session Result Display"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__freeze_first_session
+msgid "Freeze First Session"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_wizard_view
+msgid "Generate"
+msgstr ""
+
+#. module: school_evaluations
+#: model:res.groups,name:school_evaluations.group_evaluations
+msgid "Gestion des évaluations"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__grade
+msgid "Grade"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__grade_comments
+msgid "Grade Comments"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+msgid "Grade obtenu :"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__graduation_date
+msgid "Graduation Date"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__grade_year_id
+msgid "Graduation year"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "HEURES"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Heures"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Heures :"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__historical_bloc_1_credits
+msgid "Hist Bloc 1 ECTS"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__historical_bloc_1_eval
+msgid "Hist Bloc 1 Eval"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__historical_bloc_2_credits
+msgid "Hist Bloc 2 ECTS"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__historical_bloc_2_eval
+msgid "Hist Bloc 2 Eval"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__id
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__id
+msgid "ID"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Identifiant de cycle individuel :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "Imprimé le"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__5_progress
+msgid "In Progress"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_school_individual_bloc
+msgid "Individual Bloc"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.report,name:school_evaluations.report_individual_bloc_definition
+msgid "Individual Bloc Definition Report"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_school_individual_course
+msgid "Individual Course"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_school_individual_course_group
+msgid "Individual Course Group"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_school_individual_program
+msgid "Individual Program"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "Intitulé du cours"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__10_irregular
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Irregular"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__is_annual
+msgid "Is Annual"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__is_danger
+msgid "Is Danger"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
+msgid "Jan"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__jan_result
+msgid "January Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid ""
+"Je, sousigné, NATHANAËL HARCQ, Directeur du Conservatoire Royal de Liège, "
+"certifie que"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
+msgid "Jun"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__jun_result
+msgid "June Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_form
+msgid "Justify the evaluation here."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Justify the final evaluation here."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "L'étudiant, pour réception,"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid ""
+"La présente attestation est délivrée pour renseignements administratifs."
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard____last_update
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
+msgid "Last Name"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__write_uid
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__write_date
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "Le Directeur"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "Le Directeur,"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+msgid "Le Secrétaire du Jury,"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "Madame"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__message
+#: model_terms:ir.ui.view,arch_db:school_evaluations.school_evaluation_report_view
+msgid "Message"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "Monsieur"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Moyenne :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "NATHANAËL HARCQ"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__first_session_exception__np
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__second_session_exception__np
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__final_result_exception__np
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__first_session_computed_exception__np
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__first_session_exception__np
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__second_session_computed_exception__np
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__second_session_exception__np
+msgid "NP"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+msgid "Name"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_courses_filter_eval
+msgid "No result for S1"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_courses_filter_eval
+msgid "No result for S2"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Nom"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "Non Acquis"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Non-Acquis"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__res_config_settings__evaluation_open_session__none
+msgid "None"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__acquiered__na
+msgid "Not Acquiered"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__not_acquired_ind_course_group_ids
+msgid "Not Acquiered Courses Groups"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__total_not_acquiered_credits
+msgid "Not Acquiered Credits"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_bloc__total_not_acquiered_hours
+msgid "Not Acquiered Hours"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,help:school_evaluations.field_res_config_settings__evaluation_open_year_id
+msgid "Only courses in current year could be evaluated."
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,help:school_evaluations.field_res_config_settings__display_results
+#: model:ir.model.fields,help:school_evaluations.field_res_config_settings__evaluation_open_session
+msgid "Only evaluation for current session can be encoded."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Open"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_res_config_settings__evaluation_open_session
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "Open Session"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.res_config_settings_view_form
+msgid "Open Year"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Origine"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "PAE"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "PAE EN COURS :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_tree
+msgid "Par"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__res_config_settings__evaluation_open_session__part
+msgid "Partial"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__open_partial_result
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__partial_result
+msgid "Partial Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.actions.act_window,help:school_evaluations.action_individual_course_form
+#: model_terms:ir.actions.act_window,help:school_evaluations.action_individual_course_form_teacher
+msgid "Please add individual program from Student view."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_wizard_view
+msgid "Policy Sheet Wizard"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
+msgid "Postpone"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_bloc_filter_eval
+msgid "Postponed"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.school_evaluation_report_view
+msgid "Print"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__valuated_program_id
+msgid "Program"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__program_completed
+msgid "Program Completed"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+msgid "Programme non réussi, actuellement au stade de :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
+msgid "Progress"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+msgid "Rapport de délibération de cycle"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+msgid "Rapport de délibération du programme annuel de l'étudiant"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__total_registered_credits
+msgid "Registered Credits"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__3_rejected
+msgid "Rejected"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__remaining_course_group_ids
+msgid "Remaining Courses Groups"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__remaining_not_planned_course_group_ids
+msgid "Remaining and Not Planned Courses Groups"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "Remarques :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_tree
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_summary_eval_form
+msgid "Res"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Reset to Draft"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Result Bool"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_form
+msgid "Results"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
+msgid "Row"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Résultat final"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "Résultats"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+msgid "Réussi en"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_tree
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_tree
+msgid "S1"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_tree
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_tree
+msgid "S2"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_program__grade__satisfaction
+msgid "Satisfaction"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_school_evaluation_summary_wizard
+msgid "School Evaluation Summary Wizard"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_tree
+msgid "Sec"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__res_config_settings__evaluation_open_session__sec
+msgid "Second"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_program__grade__second_class
+msgid "Second Class Honor"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__open_second_result
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__second_result
+msgid "Second Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_evaluation_summary_wizard__session__second
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Second Session"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__second_session_result_bool
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_result_bool
+msgid "Second Session Active"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_computed_result_bool
+msgid "Second Session Computed Active"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_computed_exception
+msgid "Second Session Computed Exception"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_computed_result
+msgid "Second Session Computed Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_deliberated_result_bool
+msgid "Second Session Deliberated Active"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_deliberated_result
+msgid "Second Session Deliberated Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__second_session_exception
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_exception
+msgid "Second Session Exception"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__second_session_note
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_note
+msgid "Second Session Notes"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__second_session_result
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_result
+msgid "Second Session Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__second_session_result_disp
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__second_session_result_disp
+msgid "Second Session Result Display"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__send_as_email
+msgid "Send as email"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
+msgid "Sept"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__sept_result
+msgid "September Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__session
+msgid "Session"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Session Result"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Session Result Bool"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__type__s
+msgid "Simple"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
+msgid "Spécialité"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_summary__state
+msgid "State"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__6_success
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+msgid "Success"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.report,name:school_evaluations.action_report_evaluation_summary
+#: model:ir.actions.report,name:school_evaluations.report_success_certificate
+#: model:ir.actions.report,name:school_evaluations.report_success_certificate_prog
+msgid "Success Certificate"
+msgstr ""
+
+#. module: school_evaluations
+#: model:mail.template,report_name:school_evaluations.email_template_success_certificate
+#: model:mail.template,report_name:school_evaluations.email_template_success_certificate_prog
+#: model:mail.template,subject:school_evaluations.email_template_success_certificate
+#: model:mail.template,subject:school_evaluations.email_template_success_certificate_prog
+msgid "Sucess Certificate"
+msgstr ""
+
+#. module: school_evaluations
+#: model:mail.template,name:school_evaluations.email_template_success_certificate
+#: model:mail.template,name:school_evaluations.email_template_success_certificate_prog
+msgid "Sucess Certificate - Send by Email"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__first_session_exception__tp
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__second_session_exception__tp
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__final_result_exception__tp
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__first_session_computed_exception__tp
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__first_session_exception__tp
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__second_session_computed_exception__tp
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__second_session_exception__tp
+msgid "TP"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "TYPE DE VALORISATION"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__teacher_id
+msgid "Teacher"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__teacher_ids
+msgid "Teachers"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Total :"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_summary__trials
+msgid "Trials"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__type
+msgid "Type"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "UE Id"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "UNITéS D'ENSEIGNEMENT"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+msgid "Un complément de"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "VALORISATION(S) ACCORDÉE(S) :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Valorisation"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
+#: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
+msgid "Valuate"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__0_valuated
+msgid "Valuated"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__valuated_course_group_ids
+msgid "Valuated Courses Groups"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__total_valuated_credits
+msgid "Valuated Credits"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_program__grade__without
+msgid "Without Grade"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__year_id
+#: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__year_id
+msgid "Year"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "au motif de"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "avec"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "crédits ECTS."
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "de"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "en"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "le"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.report,print_report_name:school_evaluations.report_success_certificate
+#: model:ir.actions.report,print_report_name:school_evaluations.report_success_certificate_prog
+msgid "object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.actions.report,print_report_name:school_evaluations.report_evaluation_for_student
+msgid "object.name+'-RES-'+time.strftime('%d-%m-%Y')+'.pdf'"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+msgid "option"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.school_evaluation_report_view
+msgid "or"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "pour un total de"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_report_school_evaluations_evaluation_summary_content
+msgid "report.school_evaluations.evaluation_summary_content"
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_report_school_evaluations_report_evaluation_by_teacher_content
+msgid "report.school_evaluations.report_evaluation_by_teacher_content"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+msgid "reste(nt) à obtenir pour compléter le programme."
+msgstr ""
+
+#. module: school_evaluations
+#: model:ir.model,name:school_evaluations.model_school_individual_course_summary
+msgid "school.individual_course_summary"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Étudiant·e :"
+msgstr ""

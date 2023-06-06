@@ -26,12 +26,6 @@
           Registration
           
           -->
-          
-    <template id="assets_common" inherit_id="web.assets_common" name="Horizon Registration Assets">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" type="text/css" href="/school_registration/static/src/css/school_registration.css"/>
-        </xpath>
-    </template>
   
     <!-- Registration Kanban View 
     <record model="ir.ui.view" id="registration_kanban_view">
