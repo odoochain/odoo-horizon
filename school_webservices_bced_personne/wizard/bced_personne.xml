@@ -53,6 +53,9 @@
                             </tree>
                         </field>
                         <button name="action_no_bced_personne" string="Not Found..." type="object" default_focus="1" class="oe_highlight"/>
+                        <div class="alert alert-warning mt-2" role="alert">
+                            This will continue to create a Bis entry in BCED. Please check the information provided by the student.
+                        </div>
                     </div>
                     <div attrs="{'invisible': [('state', '!=', 'bced')]}" class="border p-4">
                         <div class="alert alert-info" role="alert">
