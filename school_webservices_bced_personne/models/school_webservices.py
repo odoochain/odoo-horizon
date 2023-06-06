@@ -26,6 +26,7 @@ import io
 from datetime import datetime, timedelta
 import uuid
 from lxml import etree
+import isodate
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
@@ -216,7 +217,7 @@ class BCEDInscription(models.Model):
                             'beginDate' : inscription.start_date.strftime("%Y-%m-%d"),
                         }
                     },
-                    'duration' : 'P1Y',
+                    'duration' : isodate.Duration(year=1),
                 }
             )
             if res['code'].startswith('BCED'):
