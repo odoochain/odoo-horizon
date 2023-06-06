@@ -288,13 +288,7 @@
 <xs:complexType>
 <xs:sequence>
 <xs:element name="inscription" type="tns:InscriptionRequestType"></xs:element>
-<xs:element name="duration">
-<xs:simpleType>
-<xs:restriction base="xs:duration">
-<xs:pattern value="[^DT]*"></xs:pattern>
-</xs:restriction>
-</xs:simpleType>
-</xs:element>
+<xs:element name="duration" type="xs:duration"/>
 </xs:sequence>
 </xs:complexType>
 </xs:element>
