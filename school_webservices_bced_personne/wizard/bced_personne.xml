@@ -40,6 +40,7 @@
                             </div>
                         </div>
                     </div>
+                    <separator/>
                     <field name="state" invisible="1"/>
                     <div attrs="{'invisible': [('state', '!=', 'draft')]}">
                         <button type="object" icon="fa-search" name="action_retrieve_bced_persons" string="Search BCED" />
