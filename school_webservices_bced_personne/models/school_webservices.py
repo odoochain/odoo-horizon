@@ -125,7 +125,7 @@ class BCEDInscription(models.Model):
                 }
             )
             if res['code'].startswith('BCED'):
-                if res.has_key['description']:
+                if res['description']:
                     raise UserError(_('Error while publishing inscription with code  %s : %s ' % (res['code'], res['description'])))
                 else:
                     raise UserError(_('Error while publishing inscription with code %s : %s' % (res['code'],res)))
@@ -171,7 +171,7 @@ class BCEDInscription(models.Model):
                 }
             )
             if res['code'].startswith('BCED'):
-                if res.has_key['description']:
+                if res['description']:
                     raise UserError(_('Error while closing inscription with code  %s : %s ' % (res['code'], res['description'])))
                 else:
                     raise UserError(_('Error while closing inscription with code %s : %s' % (res['code'],res)))
