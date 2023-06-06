@@ -60,9 +60,11 @@ class BCEDInscription(models.Model):
                 rec.reference = res['inscriptionReference']
             
     def action_revoke(self):
+        ws = self.env['school.webservice'].search([('name', '=', 'bced_inscription')], limit=1)
         for rec in self:
-            # TODO : implement revoke
-            pass
+            res = ws.closeInscription(rec)
+            if res:
+                rec.reference = None
 
     @api.model
     def update_partner_information(self, partner_id, data):

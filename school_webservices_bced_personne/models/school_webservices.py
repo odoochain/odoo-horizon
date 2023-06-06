@@ -133,6 +133,51 @@ class BCEDInscription(models.Model):
         else:
             raise UserError(_('You must provide an inscription to publish'))
 
+    def closeInscription(self, inscription):
+        client = self._getClient()
+        if inscription :
+            
+            priv_ns = "http://bced.wallonie.be/common/privacylog/v5"
+
+            priv = client.type_factory(priv_ns)
+
+            if not self.env.user.national_id:
+                raise UserError(_('You must have a national id on current user to test this service'))
+            
+            # Create the request objects
+            res = client.service.closeInscription(
+                requestIdentification={
+                    'ticket' : uuid.uuid4(),
+                    'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+                },
+                privacyLog=priv.PrivacyLogType(
+                    context='HIGH_SCHOOL_CAREER',
+                    treatmentManagerNumber=self.env.user.national_id,
+                    dossier={
+                        'dossierId' : {
+                            # TODO : what are the information to provide here ?
+                            '_value_1' : '0',
+                            'source' : 'CRLg'
+                        }
+                    }
+                ),
+                request={
+                    'personNumber' : inscription.partner_id.reg_number,
+                    'period' : {
+                        'beginDate' : inscription.start_date.strftime("%Y-%m-%d")
+                    }
+                }
+            )
+            if res['code'].startswith('BCED'):
+                if res.has_key['description']:
+                    raise UserError(_('Error while closing inscription with code  %s : %s ' % (res['code'], res['description'])))
+                else:
+                    raise UserError(_('Error while closing inscription with code %s : %s' % (res['code'],res)))
+            return res
+        else:
+            raise UserError(_('You must provide an inscription to close'))
+
+
 class PersonService(models.Model):
     _inherit = 'school.webservice'
 
