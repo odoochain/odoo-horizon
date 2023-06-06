@@ -137,7 +137,7 @@ class BCEDPersonne(models.TransientModel):
                 new_inscription = self.env['school.bced.inscription'].create({
                     'partner_id': self.student_id.id,
                     'start_date': fields.Date.today(),
-                    'legal_context': 'TBD',
+                    'legal_context': self.legal_context,
                 })
                 new_inscription.action_submit()
         except Exception as e :
