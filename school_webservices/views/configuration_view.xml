@@ -86,7 +86,34 @@
         <field name="view_id" ref="view_webservice_form" />
         <field name="act_window_id" ref="action_webservice_list" />
     </record>
-    
+
+    <!-- Webservice Access Log Tree View -->
+    <record id="view_webservice_access_log_tree" model="ir.ui.view">
+        <field name="name">school.webservice.access.log.tree</field>
+        <field name="model">school.webservice.access.log</field>
+        <field eval="8" name="priority" />
+        <field name="arch" type="xml">
+            <tree>
+                <field name="webservice_id" />
+                <field name="date" />
+                <field name="user_id" />
+                <field name="access_info" />
+                <field name="is_error" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Webservice Access Log Action -->
+    <record id="action_webservice_access_log" model="ir.actions.act_window">
+        <field name="name">Web Services Access Log</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.webservice.access.log</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Webservice Access Log Menu -->
     <menuitem id="menu_webservice" name="Web Services" sequence="100" web_icon="school_webservices,static/description/icon.png" />
     <menuitem id="menu_webservice_list" parent="menu_webservice" action="action_webservice_list" sequence="40" />
+    <menuitem id="menu_webservice_access_log" parent="menu_webservice" action="action_webservice_access_log" sequence="41" />
+
 </odoo>

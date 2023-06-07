@@ -143,6 +143,16 @@ class WebService(models.Model):
             except Exception as e:
                 record.last_response = str(e)
 
+    def action_log_access(self, access_info, is_error=False):
+        self.ensure_one()
+        self.env['school.webservice.access.log'].create({
+            'webservice_id': self.id,
+            'date': fields.Datetime.now(),
+            'user_id': self.env.user.id,
+            'access_info': access_info,
+            'is_error': is_error,
+        })
+
     def action_update_history(self):
         for record in self:
             record._compute_last_send()
@@ -197,6 +207,18 @@ class WebService(models.Model):
 
     #     return [wsse_security]
 
+class WebServiceAccessLog(models.Model):
+    '''Web Service Access Log'''
+    _name = 'school.webservice.access.log'
+    _description = 'Web Service Access Log'
+
+    name = fields.Char('Name', related='webservice_id.name')
+    webservice_id = fields.Many2one('school.webservice', 'Web Service')
+    date = fields.Datetime('Date')
+    user_id = fields.Many2one('res.users', 'User')    
+    access_info = fields.Text('Access Info')
+    is_error = fields.Boolean('Is Error')
+
 class FaseService(models.Model):
     '''Fase Web Service'''
     _inherit = 'school.webservice'
@@ -209,21 +231,35 @@ class FaseService(models.Model):
             fase_cfwb_ns = 'http://www.cfwb.be/enseignement/fase'
             fase = client.type_factory(fase_ns)
             fase_cfwb = client.type_factory(fase_cfwb_ns)
-            res = client.service.obtenirOrganisation(
-                Organisation=[fase.OrganisationCT(
-                    Type=fase_cfwb.OrganisationST('ETAB'),
-                    Identifiant=self.env.user.company_id.fase_code,
-                )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params': {
-                    'message': _('Web Service response : %s' % res),
-                    'next': {'type': 'ir.actions.act_window_close'},
-                    'sticky': False,
-                    'type': 'warning',
+            try:
+                res = client.service.obtenirOrganisation(
+                    Organisation=[fase.OrganisationCT(
+                        Type=fase_cfwb.OrganisationST('ETAB'),
+                        Identifiant=self.env.user.company_id.fase_code,
+                    )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
+                self.action_log_access('Access ObtenirOrganisation on code %s' % self.env.user.company_id.fase_code)
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Web Service response : %s' % res),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'warning',
+                    }
                 }
-            }
+            except Exception as e:
+                self.action_log_access('Access ObtenirOrganisation on code %s' % self.env.user.company_id.fase_code,True)
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Web Service error : %s' % e),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'danger',
+                    }
+                }
         else:
             return super().action_test_service()
 
@@ -234,20 +270,49 @@ class FaseService(models.Model):
             fase_cfwb_ns = 'http://www.cfwb.be/enseignement/fase'
             fase = client.type_factory(fase_ns)
             fase_cfwb = client.type_factory(fase_cfwb_ns)
-            res = client.service.obtenirOrganisation(
-                Organisation=[fase.OrganisationCT(
-                    Type=fase_cfwb.OrganisationST('ETAB'),
-                    Identifiant=record.fase_code,
-                )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
-            return res
+            try:
+                res = client.service.obtenirOrganisation(
+                    Organisation=[fase.OrganisationCT(
+                        Type=fase_cfwb.OrganisationST('ETAB'),
+                        Identifiant=record.fase_code,
+                    )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
+                self.action_log_access('Access ObtenirOrganisation on code %s' % record.fase_code)
+                return res
+            except Exception as e:
+                self.action_log_access('Access ObtenirOrganisation on code %s' % record.fase_code,True)
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Web Service error : %s' % e),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'danger',
+                    }
+                }
         else:
             fase_ns = 'http://www.etnic.be/services/fase/organisation/v2'
             fase_cfwb_ns = 'http://www.cfwb.be/enseignement/fase'
             fase = client.type_factory(fase_ns)
             fase_cfwb = client.type_factory(fase_cfwb_ns)
-            res = client.service.obtenirOrganisation(
-                Organisation=[fase.OrganisationCT(
-                    Type=fase_cfwb.OrganisationST('ETAB'),
-                    Identifiant=self.env.user.company_id.fase_code,
-                )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
-            return res
+            try:
+                res = client.service.obtenirOrganisation(
+                    Organisation=[fase.OrganisationCT(
+                        Type=fase_cfwb.OrganisationST('ETAB'),
+                        Identifiant=self.env.user.company_id.fase_code,
+                    )],Dmd=fase_cfwb.DmdST('FICHE'), _soapheaders=self._get_Headers())
+                self.action_log_access('Access ObtenirOrganisation on code %s' % self.env.user.company_id.fase_code)
+                return res
+            except Exception as e:
+                self.action_log_access('Access ObtenirOrganisation on code %s' % self.env.user.company_id.fase_code,True)
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Web Service error : %s' % e),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'danger',
+                    }
+                }
+
