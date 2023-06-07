@@ -52,42 +52,55 @@ class BCEDInscription(models.Model):
                 raise UserError(_('You must have a national id on current user to test this service'))
 
             # Create the request objects
-            res = client.service.closeInscription(
-                requestIdentification={
-                    'ticket' : 'edd90daf-a72f-4585-acee-0f9da279f8d0',
-                    'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-                },
-                privacyLog=priv.PrivacyLogType(
-                    context='HIGH_SCHOOL_CAREER',
-                    treatmentManagerNumber=self.env.user.national_id,
-                    dossier={
-                        'dossierId' : {
-                            # TODO : what are the information to provide here ?
-                            '_value_1' : '0',
-                            'source' : 'CRLg'
+            try:
+                res = client.service.closeInscription(
+                    requestIdentification={
+                        'ticket' : 'edd90daf-a72f-4585-acee-0f9da279f8d0',
+                        'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+                    },
+                    privacyLog=priv.PrivacyLogType(
+                        context='HIGH_SCHOOL_CAREER',
+                        treatmentManagerNumber=self.env.user.national_id,
+                        dossier={
+                            'dossierId' : {
+                                # TODO : what are the information to provide here ?
+                                '_value_1' : '0',
+                                'source' : 'CRLg'
+                            }
+                        }
+                    ),
+                    request={
+                        'inscription' : {
+                            'personNumber' : '00010226601',
+                            'period' : {
+                                'beginDate' : datetime.now().strftime("%Y-%m-%d")
+                            }
                         }
                     }
-                ),
-                request={
-                    'inscription' : {
-                        'personNumber' : '00010226601',
-                        'period' : {
-                            'beginDate' : datetime.now().strftime("%Y-%m-%d")
-                        }
+                )
+                self.action_log_access('Test Service')
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Web Service response : %s' % res),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'warning',
                     }
                 }
-            )
-
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params': {
-                    'message': _('Web Service response : %s' % res),
-                    'next': {'type': 'ir.actions.act_window_close'},
-                    'sticky': False,
-                    'type': 'warning',
+            except Exception as e:
+                self.action_log_access('Test Service',True)
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Error while testing service : %s' % e),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'error',
+                    }
                 }
-            }
         else:
             return super().action_test_service()
 
@@ -102,36 +115,42 @@ class BCEDInscription(models.Model):
             if not self.env.user.national_id:
                 raise UserError(_('You must have a national id on current user to test this service'))
 
-            # Create the request objects
-            res = client.service.publishInscription(
-                requestIdentification={
-                    'ticket' : uuid.uuid4(),
-                    'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-                },
-                privacyLog=priv.PrivacyLogType(
-                    context='HIGH_SCHOOL_CAREER',
-                    treatmentManagerNumber=self.env.user.national_id,
-                    dossier={
-                        'dossierId' : {
-                            # TODO : what are the information to provide here ?
-                            '_value_1' : '0',
-                            'source' : 'CRLg'
+            try:
+                # Create the request objects
+                res = client.service.publishInscription(
+                    requestIdentification={
+                        'ticket' : uuid.uuid4(),
+                        'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+                    },
+                    privacyLog=priv.PrivacyLogType(
+                        context='HIGH_SCHOOL_CAREER',
+                        treatmentManagerNumber=self.env.user.national_id,
+                        dossier={
+                            'dossierId' : {
+                                # TODO : what are the information to provide here ?
+                                '_value_1' : '0',
+                                'source' : 'CRLg'
+                            }
+                        }
+                    ),
+                    request={
+                        'personNumber' : inscription.partner_id.reg_number,
+                        'period' : {
+                            'beginDate' : inscription.start_date.strftime("%Y-%m-%d")
                         }
                     }
-                ),
-                request={
-                    'personNumber' : inscription.partner_id.reg_number,
-                    'period' : {
-                        'beginDate' : inscription.start_date.strftime("%Y-%m-%d")
-                    }
-                }
-            )
-            if res['code'].startswith('BCED'):
-                if res['description']:
-                    raise UserError(_('Error while publishing inscription with code  %s : %s ' % (res['code'], res['description'])))
-                else:
-                    raise UserError(_('Error while publishing inscription with code %s : %s' % (res['code'],res)))
-            return res
+                )
+                if res['code'].startswith('BCED'):
+                    self.action_log_access('Publish Inscription for %s' % inscription.partner_id.reg_number,True)
+                    if res['description']:
+                        raise UserError(_('Error while publishing inscription with code  %s : %s ' % (res['code'], res['description'])))
+                    else:
+                        raise UserError(_('Error while publishing inscription with code %s : %s' % (res['code'],res)))
+                self.action_log_access('Publish Inscription for %s' % inscription.partner_id.reg_number)
+                return res
+            except Exception as e:
+                self.action_log_access('Publish Inscription',True)
+                raise UserError(_('Error while publishing inscription with code %s : %s' % (inscription.partner_id.reg_number,e)))
         else:
             raise UserError(_('You must provide an inscription to publish'))
 
@@ -146,38 +165,44 @@ class BCEDInscription(models.Model):
             if not self.env.user.national_id:
                 raise UserError(_('You must have a national id on current user to test this service'))
             
-            # Create the request objects
-            res = client.service.closeInscription(
-                requestIdentification={
-                    'ticket' : uuid.uuid4(),
-                    'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-                },
-                privacyLog=priv.PrivacyLogType(
-                    context='HIGH_SCHOOL_CAREER',
-                    treatmentManagerNumber=self.env.user.national_id,
-                    dossier={
-                        'dossierId' : {
-                            # TODO : what are the information to provide here ?
-                            '_value_1' : '0',
-                            'source' : 'CRLg'
+            try:
+                # Create the request objects
+                res = client.service.closeInscription(
+                    requestIdentification={
+                        'ticket' : uuid.uuid4(),
+                        'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+                    },
+                    privacyLog=priv.PrivacyLogType(
+                        context='HIGH_SCHOOL_CAREER',
+                        treatmentManagerNumber=self.env.user.national_id,
+                        dossier={
+                            'dossierId' : {
+                                # TODO : what are the information to provide here ?
+                                '_value_1' : '0',
+                                'source' : 'CRLg'
+                            }
+                        }
+                    ),
+                    request={
+                        'inscription' : {
+                            'personNumber' : inscription.partner_id.reg_number,
+                            'period' : {
+                                'beginDate' : inscription.start_date.strftime("%Y-%m-%d")
+                            }
                         }
                     }
-                ),
-                request={
-                    'inscription' : {
-                        'personNumber' : inscription.partner_id.reg_number,
-                        'period' : {
-                            'beginDate' : inscription.start_date.strftime("%Y-%m-%d")
-                        }
-                    }
-                }
-            )
-            if res['code'].startswith('BCED'):
-                if res['description']:
-                    raise UserError(_('Error while closing inscription with code  %s : %s ' % (res['code'], res['description'])))
-                else:
-                    raise UserError(_('Error while closing inscription with code %s : %s' % (res['code'],res)))
-            return res
+                )
+                if res['code'].startswith('BCED'):
+                    self.action_log_access('Closing Inscription for %s' % inscription.partner_id.reg_number,True)
+                    if res['description']:
+                        raise UserError(_('Error while closing inscription with code  %s : %s ' % (res['code'], res['description'])))
+                    else:
+                        raise UserError(_('Error while closing inscription with code %s : %s' % (res['code'],res)))
+                self.action_log_access('Closing Inscription for %s' % inscription.partner_id.reg_number)
+                return res
+            except Exception as e:
+                self.action_log_access('Close Inscription for %s' % inscription.partner_id.reg_number,True)
+                raise UserError(_('Error while closing inscription with code %s : %s' % (inscription.partner_id.reg_number,e)))
         else:
             raise UserError(_('You must provide an inscription to close'))
 
@@ -193,39 +218,45 @@ class BCEDInscription(models.Model):
             if not self.env.user.national_id:
                 raise UserError(_('You must have a national id on current user to test this service'))
             
-            # Create the request objects
-            res = client.service.extendInscription(
-                requestIdentification={
-                    'ticket' : uuid.uuid4(),
-                    'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-                },
-                privacyLog=priv.PrivacyLogType(
-                    context='HIGH_SCHOOL_CAREER',
-                    treatmentManagerNumber=self.env.user.national_id,
-                    dossier={
-                        'dossierId' : {
-                            # TODO : what are the information to provide here ?
-                            '_value_1' : '0',
-                            'source' : 'CRLg'
-                        }
-                    }
-                ),
-                request={
-                    'inscription' : {
-                        'personNumber' : inscription.partner_id.reg_number,
-                        'period' : {
-                            'beginDate' : inscription.start_date.strftime("%Y-%m-%d"),
-                        }
+            try:
+                # Create the request objects
+                res = client.service.extendInscription(
+                    requestIdentification={
+                        'ticket' : uuid.uuid4(),
+                        'timestampSent' : datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
                     },
-                    'duration' : isodate.Duration(years=1),
-                }
-            )
-            if res['code'].startswith('BCED'):
-                if res['description']:
-                    raise UserError(_('Error while extending inscription with code  %s : %s ' % (res['code'], res['description'])))
-                else:
-                    raise UserError(_('Error while extending inscription with code %s : %s' % (res['code'],res)))
-            return res
+                    privacyLog=priv.PrivacyLogType(
+                        context='HIGH_SCHOOL_CAREER',
+                        treatmentManagerNumber=self.env.user.national_id,
+                        dossier={
+                            'dossierId' : {
+                                # TODO : what are the information to provide here ?
+                                '_value_1' : '0',
+                                'source' : 'CRLg'
+                            }
+                        }
+                    ),
+                    request={
+                        'inscription' : {
+                            'personNumber' : inscription.partner_id.reg_number,
+                            'period' : {
+                                'beginDate' : inscription.start_date.strftime("%Y-%m-%d"),
+                            }
+                        },
+                        'duration' : isodate.Duration(years=1),
+                    }
+                )
+                if res['code'].startswith('BCED'):
+                    self.action_log_access('Extend Inscription for %s' % inscription.partner_id.reg_number,True)
+                    if res['description']:
+                        raise UserError(_('Error while extending inscription with code  %s : %s ' % (res['code'], res['description'])))
+                    else:
+                        raise UserError(_('Error while extending inscription with code %s : %s' % (res['code'],res)))
+                self.action_log_access('Extend Inscription for %s' % inscription.partner_id.reg_number)
+                return res
+            except Exception as e:
+                self.action_log_access('Extend Inscription for %s' % inscription.partner_id.reg_number,True)
+                raise UserError(_('Error while extending inscription with code %s : %s' % (inscription.partner_id.reg_number,e)))
         else:
             raise UserError(_('You must provide an inscription to extend'))
 
@@ -252,42 +283,56 @@ class PersonService(models.Model):
             if not self.env.user.company_id.fase_code:
                 raise UserError(_('You must have a fase code on current company to test this service'))
 
-            res = client.service.getPerson(
-                customerInformations=[id.CustomerInformationType(
-                    ticket=uuid.uuid4(),
-                    timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
-                    customerIdentification={
-                        'organisationId' : self.env.user.company_id.fase_code
-                    }
-                )],
-                privacyLog={
-                    'context' : 'HIGH_SCHOOL_CAREER',
-                    'treatmentManagerIdentifier' : {
-                        '_value_1' : self.env.user.national_id,
-                        'identityManager' : 'RN/RBis'
-                    },
-                    'dossier' : {
-                        'dossierId' : {
-                            # TODO : what are the information to provide here ?
-                            '_value_1' : '0',
-                            'source' : 'CRLg'
+            try:
+                res = client.service.getPerson(
+                    customerInformations=[id.CustomerInformationType(
+                        ticket=uuid.uuid4(),
+                        timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        customerIdentification={
+                            'organisationId' : self.env.user.company_id.fase_code
                         }
+                    )],
+                    privacyLog={
+                        'context' : 'HIGH_SCHOOL_CAREER',
+                        'treatmentManagerIdentifier' : {
+                            '_value_1' : self.env.user.national_id,
+                            'identityManager' : 'RN/RBis'
+                        },
+                        'dossier' : {
+                            'dossierId' : {
+                                # TODO : what are the information to provide here ?
+                                '_value_1' : '0',
+                                'source' : 'CRLg'
+                            }
+                        }
+                    },
+                    request={
+                        'personNumber' : self.env.user.national_id,
                     }
-                },
-                request={
-                    'personNumber' : self.env.user.national_id,
+                )
+                self.action_log_access('GetPerson for %s' % self.env.user.national_id)
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Web Service response : %s' % res),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'warning',
+                    }
                 }
-            )
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params': {
-                    'message': _('Web Service response : %s' % res),
-                    'next': {'type': 'ir.actions.act_window_close'},
-                    'sticky': False,
-                    'type': 'warning',
+            except Exception as e:
+                self.action_log_access('GetPerson for %s' % self.env.user.national_id,True)
+                return {
+                    'type': 'ir.actions.client',
+                    'tag': 'display_notification',
+                    'params': {
+                        'message': _('Error while testing service : %s' % e),
+                        'next': {'type': 'ir.actions.act_window_close'},
+                        'sticky': False,
+                        'type': 'warning',
+                    }
                 }
-            }
         else:
             return super().action_test_service()
 
@@ -309,37 +354,42 @@ class PersonService(models.Model):
             if not partner_id.birthdate_date:
                 raise UserError(_('You must have a birthdate on the partner to search for a person'))
 
-            res = client.service.searchPersonByName(
-                customerInformations=[id.CustomerInformationType(
-                    ticket=uuid.uuid4(),
-                    timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
-                    customerIdentification={
-                        'organisationId' : self.env.user.company_id.fase_code
-                    }
-                )],
-                privacyLog={
-                    'context' : 'HIGH_SCHOOL_CAREER',
-                    'treatmentManagerIdentifier' : {
-                        '_value_1' : self.env.user.national_id,
-                        'identityManager' : 'RN/RBis'
-                    },
-                    'dossier' : {
-                        'dossierId' : {
-                            # TODO : what are the information to provide here ?
-                            '_value_1' : '0',
-                            'source' : 'CRLg'
+            try:
+                res = client.service.searchPersonByName(
+                    customerInformations=[id.CustomerInformationType(
+                        ticket=uuid.uuid4(),
+                        timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        customerIdentification={
+                            'organisationId' : self.env.user.company_id.fase_code
                         }
-                    }
-                },
-                request={
-                    'personName' :{
-                        'lastName' : partner_id.lastname,
+                    )],
+                    privacyLog={
+                        'context' : 'HIGH_SCHOOL_CAREER',
+                        'treatmentManagerIdentifier' : {
+                            '_value_1' : self.env.user.national_id,
+                            'identityManager' : 'RN/RBis'
+                        },
+                        'dossier' : {
+                            'dossierId' : {
+                                # TODO : what are the information to provide here ?
+                                '_value_1' : '0',
+                                'source' : 'CRLg'
+                            }
+                        }
                     },
-                    'birthDate' : partner_id.birthdate_date.strftime("%Y-%m-%d"),
-                    'birthDateTolerance' : 0,
-                }
-            )
-            return res
+                    request={
+                        'personName' :{
+                            'lastName' : partner_id.lastname,
+                        },
+                        'birthDate' : partner_id.birthdate_date.strftime("%Y-%m-%d"),
+                        'birthDateTolerance' : 0,
+                    }
+                )
+                self.action_log_access('SearchPersonByName for %s' % partner_id.lastname)
+                return res
+            except Exception as e:
+                self.action_log_access('SearchPersonByName for %s' % partner_id.lastname,True)
+                raise UserError(_('Error while searching person %s : %s' % (partner_id.lastname,e)))
         else:
             raise ValidationError(_('No partner provided'))
     
@@ -354,36 +404,42 @@ class PersonService(models.Model):
             person = client.type_factory(person_ns)
             id = client.type_factory(id_ns)
             priv = client.type_factory(priv_ns)
+            try:
 
-            res = client.service.getPerson(
-                customerInformations=[id.CustomerInformationType(
-                    ticket=uuid.uuid4(),
-                    timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
-                    customerIdentification={
-                        'organisationId' : self.env.user.company_id.fase_code
-                    }
-                )],
-                privacyLog={
-                    'context' : 'HIGH_SCHOOL_CAREER',
-                    'treatmentManagerIdentifier' : {
-                        '_value_1' : self.env.user.national_id,
-                        'identityManager' : 'RN/RBis'
-                    },
-                    'dossier' : {
-                        'dossierId' : {
-                            # TODO : what are the information to provide here ?
-                            '_value_1' : '0',
-                            'source' : 'CRLg'
+                res = client.service.getPerson(
+                    customerInformations=[id.CustomerInformationType(
+                        ticket=uuid.uuid4(),
+                        timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        customerIdentification={
+                            'organisationId' : self.env.user.company_id.fase_code
                         }
+                    )],
+                    privacyLog={
+                        'context' : 'HIGH_SCHOOL_CAREER',
+                        'treatmentManagerIdentifier' : {
+                            '_value_1' : self.env.user.national_id,
+                            'identityManager' : 'RN/RBis'
+                        },
+                        'dossier' : {
+                            'dossierId' : {
+                                # TODO : what are the information to provide here ?
+                                '_value_1' : '0',
+                                'source' : 'CRLg'
+                            }
+                        }
+                    },
+                    request={
+                        'personNumber' : reference,
                     }
-                },
-                request={
-                    'personNumber' : reference,
-                }
-            )
-            if res['status']['code'] != 'SOA0000000':
-                raise ValidationError(_('Error while getting person : %s' % res['status']))
-            return res['person']
+                )
+                if res['status']['code'] != 'SOA0000000':
+                    self.action_log_access('GetPerson for %s' % reference,True)
+                    raise ValidationError(_('Error while getting person : %s' % res['status']))
+                self.action_log_access('GetPerson for %s' % reference)
+                return res['person']
+            except Exception as e:
+                self.action_log_access('GetPerson for %s' % reference,True)
+                raise UserError(_('Error while getting person %s : %s' % (reference,e)))
         else:
             raise ValidationError(_('No record provided'))
 
@@ -409,67 +465,73 @@ class PersonService(models.Model):
 
             inceptionDate = partner_id.birthdate_date.strftime("%Y-%m-%d")
 
-            res = client.service.publishPerson(
-                customerInformations=[id.CustomerInformationType(
-                    ticket=uuid.uuid4(),
-                    timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
-                    customerIdentification={
-                        'organisationId' : self.env.user.company_id.fase_code
-                    }
-                )],
-                privacyLog={
-                    'context' : 'HIGH_SCHOOL_CAREER',
-                    'treatmentManagerIdentifier' : {
-                        '_value_1' : self.env.user.national_id,
-                        'identityManager' : 'RN/RBis'
+            try:
+                res = client.service.publishPerson(
+                    customerInformations=[id.CustomerInformationType(
+                        ticket=uuid.uuid4(),
+                        timestampSent=datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        customerIdentification={
+                            'organisationId' : self.env.user.company_id.fase_code
+                        }
+                    )],
+                    privacyLog={
+                        'context' : 'HIGH_SCHOOL_CAREER',
+                        'treatmentManagerIdentifier' : {
+                            '_value_1' : self.env.user.national_id,
+                            'identityManager' : 'RN/RBis'
+                        },
+                        'dossier' : {
+                            'dossierId' : {
+                                # TODO : what are the information to provide here ?
+                                '_value_1' : '0',
+                                'source' : 'CRLg'
+                            }
+                        }
                     },
-                    'dossier' : {
-                        'dossierId' : {
-                            # TODO : what are the information to provide here ?
-                            '_value_1' : '0',
-                            'source' : 'CRLg'
+                    request={
+                        'person' : {
+                            'register':'Bis',
+                            'name' :{
+                                'inceptionDate' : inceptionDate,
+                                'firstName' : {
+                                    'sequence' : 1,
+                                    '_value_1' : partner_id.firstname,
+                                },
+                                'lastName' : partner_id.lastname,
+                            },
+                            'gender': {
+                                'inceptionDate' : inceptionDate,
+                                'code': 'M' if partner_id.gender == 'male' else 'F',
+                            } if partner_id.gender else None,
+                            'nationalities':{
+                                'nationality': [
+                                    [{
+                                        'inceptionDate' : inceptionDate,
+                                        'code' : c.nis_code,
+                                    } for c in partner_id.nationality_ids]
+                                ]
+                            } if partner_id.nationality_ids else None,
+                            'birth':{
+                                'officialBirthDate' : inceptionDate,
+                                'birthPlace' : {
+                                    'country' : {
+                                        'code' : partner_id.birthcountry.nis_code,
+                                    },
+                                    'municipality' : {
+                                        'description' : partner_id.birthplace,
+                                    } if partner_id.birthplace else None,
+                                } if partner_id.birthcountry else None,
+                            },
                         }
                     }
-                },
-                request={
-                    'person' : {
-                        'register':'Bis',
-                        'name' :{
-                            'inceptionDate' : inceptionDate,
-                            'firstName' : {
-                                'sequence' : 1,
-                                '_value_1' : partner_id.firstname,
-                            },
-                            'lastName' : partner_id.lastname,
-                        },
-                        'gender': {
-                            'inceptionDate' : inceptionDate,
-                            'code': 'M' if partner_id.gender == 'male' else 'F',
-                        } if partner_id.gender else None,
-                        'nationalities':{
-                            'nationality': [
-                                [{
-                                    'inceptionDate' : inceptionDate,
-                                    'code' : c.nis_code,
-                                } for c in partner_id.nationality_ids]
-                            ]
-                        } if partner_id.nationality_ids else None,
-                        'birth':{
-                            'officialBirthDate' : inceptionDate,
-                            'birthPlace' : {
-                                'country' : {
-                                    'code' : partner_id.birthcountry.nis_code,
-                                },
-                                'municipality' : {
-                                    'description' : partner_id.birthplace,
-                                } if partner_id.birthplace else None,
-                            } if partner_id.birthcountry else None,
-                        },
-                    }
-                }
-            )
-            if res['status']['code'] != 'SOA0000000':
-                raise ValidationError(_('Error while publishing person : %s' % res['status']))
-            return res['result']['personNumber']
+                )
+                if res['status']['code'] != 'SOA0000000':
+                    self.action_log_access('PublishPerson for %s' % partner_id.lastname,True)
+                    raise ValidationError(_('Error while publishing person : %s' % res['status']))
+                self.action_log_access('PublishPerson for %s' % partner_id.lastname)
+                return res['result']['personNumber']
+            except Exception as e:
+                self.action_log_access('PublishPerson for %s' % partner_id.lastname,True)
+                raise UserError(_('Error while publishing person %s : %s' % (partner_id.lastname,e)))
         else:
             raise ValidationError(_('No partner provided'))
