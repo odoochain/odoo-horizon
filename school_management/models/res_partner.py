@@ -103,6 +103,8 @@ class Partner(models.Model):
     
     nationality_id = fields.Many2one("res.country", "Nationality")
 
+    nationality_ids = fields.Many2many("res.country", "res_partner_nationalities", "partner_id", "country_id", string="Nationalities")
+
     @api.constrains('initials')
     def _check_initials(self):
         for rec in self:
