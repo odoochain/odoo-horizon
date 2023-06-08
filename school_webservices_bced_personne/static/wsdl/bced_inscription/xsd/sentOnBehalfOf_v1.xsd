@@ -1,7 +1,0 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sob="http://bced.wallonie.be/common/sentOnBehalfOf/v1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://bced.wallonie.be/common/sentOnBehalfOf/v1">
-<xs:element name="sentOnBehalfOf" type="xs:string">
-<xs:annotation>
-<xs:documentation>The organistaion ID for who the request is sent</xs:documentation>
-</xs:annotation>
-</xs:element>
-</xs:schema>

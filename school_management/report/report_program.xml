@@ -254,7 +254,17 @@
             </table>
         </div>
     </template>
-      
+    
+    <template id="report_assets_common" inherit_id="web.report_assets_common">
+        <xpath expr="(//link)[last()]" position="after">
+            <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/pure-nr.css"/>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+            <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&amp;family=Fira+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&amp;family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+            <link rel="stylesheet" type="text/css" href="/school_management/static/src/css/reports.css"/>        
+        </xpath>
+    </template>
+    
     <template id="report_individual_bloc_content">
         <t t-set="company" t-value="docs.env.company"/>
         <t t-call="web.report_layout">

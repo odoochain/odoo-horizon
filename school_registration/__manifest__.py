@@ -25,7 +25,7 @@
     'author': 'ito-invest (Jerome Sonnet)',
     'website': '',
     'category': 'School Management',
-    'depends': ['base_automation','formio','formio_data_api'],
+    'depends': ['base_automation','school_dispense_approval','formio','formio_data_api'],
     'init_xml': [],
     'data': [
         'registration_data.xml',
@@ -34,11 +34,6 @@
         'views/registration_view.xml',
         'wizard/year_opening.xml',
     ],
-    'assets': {
-        'web.web_assets_common': [
-            'school_registration/static/src/css/school_registration.css',
-        ],
-    },
     'demo_xml': [],
     'description': '''
         This modules add registration tools for a school.

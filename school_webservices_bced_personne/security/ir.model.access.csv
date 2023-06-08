@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-school_bced_employee,school_webservice_bced,model_school_bced_personne_wizard,school_webservices_bced_personne.bced_allowed_group,1,1,1,1
-school_bced_sum_employee,school_webservice_bced_sum,model_school_bced_personne_summary,school_webservices_bced_personne.bced_allowed_group,1,1,1,1
-school_bced_insc_employee,school_webservice_bced_insc,model_school_bced_inscription,school_webservices_bced_personne.bced_allowed_group,1,1,1,1
