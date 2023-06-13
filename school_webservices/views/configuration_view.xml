@@ -96,7 +96,7 @@
             <tree>
                 <field name="webservice_id" />
                 <field name="date" />
-                <field name="user_id" />
+                <field name="user_id" widget="many2one_avatar_user"/>
                 <field name="access_info" />
                 <field name="is_error" />
             </tree>
@@ -112,7 +112,7 @@
     </record>
 
     <!-- Webservice Access Log Menu -->
-    <menuitem id="menu_webservice" name="Web Services" sequence="100" web_icon="school_webservices,static/description/icon.png" />
+    <menuitem id="menu_webservice" name="Web Services" sequence="20" web_icon="school_webservices,static/description/icon.png" />
     <menuitem id="menu_webservice_list" parent="menu_webservice" action="action_webservice_list" sequence="40" />
     <menuitem id="menu_webservice_access_log" parent="menu_webservice" action="action_webservice_access_log" sequence="41" />
 

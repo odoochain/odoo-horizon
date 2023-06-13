@@ -57,7 +57,12 @@ _logger = logging.getLogger(__name__)
 # })
 
 def getFRDescription(value):
-    return [x for x in value['description'] if x['language'] == 'fr'][0]['_value_1']
+    for x in value['description']:
+        if x['language'] == 'fr':
+            return x['_value_1']
+        else :
+            ret = x['_value_1']
+    return ret
 
 class BCEDInscription(models.Model):
     _name = 'school.bced.inscription'
