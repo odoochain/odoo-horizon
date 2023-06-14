@@ -47,6 +47,6 @@ class Http(models.AbstractModel):
 
         session_info.update({
             'horizon_state': val,
-            'horizon_user_forms': [[f.id, f.name, f.state] for f in all_forms_ids.filtered(lambda f : f.name == 'new_contact')],
+            'horizon_user_forms': [[f.id, f.name, f.state, f.uuid] for f in all_forms_ids.filtered(lambda f : f.name == 'new_contact')],
         })
         return session_info
