@@ -20,7 +20,7 @@
 ##############################################################################
 
 from odoo import api, fields, models, _
-
+from odoo.http import request
 
 
 class Http(models.AbstractModel):
