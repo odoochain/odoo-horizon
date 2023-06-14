@@ -30,7 +30,7 @@ class Http(models.AbstractModel):
     def get_frontend_session_info(self):
         session_info = super(Http, self).get_frontend_session_info()
 
-        all_forms_ids = self.env['formio.form'].search([['submission_partner_id','=',request.env.user.partner_id.id])
+        all_forms_ids = self.env['formio.form'].search([['submission_partner_id','=',request.env.user.partner_id.id]])
 
         if request.env.user.partner_id.student :
             val = 'student'
