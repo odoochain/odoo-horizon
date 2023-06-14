@@ -38,7 +38,7 @@ class Http(models.AbstractModel):
             val = 'teacher'
         elif request.env.user.partner_id.employee :
             val = 'employee'
-        elif all_forms_ids.filtered(lambda f : f.name == 'new_contact' and f.state == 'DRAFT'):
+        elif all_forms_ids.filtered(lambda f : f.name == 'new_contact' and f.state in ['DRAFT','PENDING']):
             val = 'info-form'
         elif all_forms_ids.filtered(lambda f : f.name == 'new_contact' and f.state == 'COMPLETE'):
             val = 'info-form-complete'
