@@ -28,7 +28,6 @@
     'depends': ['school_evaluations'],
     'init_xml': [],
     'data': [
-        'views/assets.xml',
         'views/deliberation_base_view.xml',
         'security/ir.model.access.csv',
     ],
