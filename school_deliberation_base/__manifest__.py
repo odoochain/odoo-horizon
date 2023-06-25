@@ -36,6 +36,12 @@
     'description': '''
         This modules add deliberation management for a school.
     ''',
+    'assets': {
+        'web.assets_backend': [
+            'school_deliberation_base/static/src/scss/*.scss',
+            'school_deliberation_base/static/src/js/*.js',
+        ],
+    },
     'qweb': ['static/src/xml/*.xml'],
     'active': False,
     'installable': True,
