@@ -170,7 +170,7 @@ class IndividualBloc(models.Model):
     _description='Individual Bloc'
     _inherit = ['mail.thread','school.year_sequence.mixin','school.uid.mixin','school.open.form.mixin']
     
-    _order = 'year_id, source_bloc_level desc, source_bloc_name'
+    _order = 'year_id, name'
     
     active = fields.Boolean(string='Active', help="The active field allows you to hide the course group without removing it.", default=True, copy=False)
     

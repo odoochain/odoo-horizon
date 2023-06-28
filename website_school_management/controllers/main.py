@@ -399,7 +399,7 @@ class website_portal_school_management(http.Controller):
 
     @http.route(['/program'], type='http', auth='public')
     def program(self, redirect=None, **post):
-        programs = request.env['school.program'].sudo().search([('state', '=', 'published')],order="domain_id, cycle_id, name ASC")
+        programs = request.env['school.program'].sudo().search([('state', '=', 'published')],order="domain_name, cycle_id, name ASC")
         program_list = []
         for program in programs:
             program_list.append({
@@ -414,7 +414,7 @@ class website_portal_school_management(http.Controller):
     @http.route(['/program/domain/<domain_id>'], type='http', auth='public')
     def program_domain(self, domain_id, redirect=None, **post):
         _, domain_id = unslug(domain_id)
-        programs = request.env['school.program'].sudo().search([('state', '=', 'published'),('domain_id','=',domain_id)],order="domain_id, cycle_id, name ASC")
+        programs = request.env['school.program'].sudo().search([('state', '=', 'published'),('domain_name','=',domain_id)],order="domain_name, cycle_id, name ASC")
         program_list = []
         for program in programs:
             program_list.append({
