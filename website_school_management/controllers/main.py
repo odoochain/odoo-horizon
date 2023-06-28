@@ -48,7 +48,7 @@ class csv_school_management(CSVExport):
               "label": "External ID"
             },
             {
-              "name": "domain_id/id",
+              "name": "domain_name",
               "label": "Domaine/Identifiant"
             },
             {
@@ -141,7 +141,7 @@ class csv_school_management(CSVExport):
                       "label": "Créé le"
                     },
                     {
-                      "name": "domain_id/name",
+                      "name": "domain_name",
                       "label": "Domaine/Nom"
                     },
                     {
@@ -227,7 +227,7 @@ class csv_school_management(CSVExport):
                       "label": "Année scolaire/Nom"
                     },
                     {
-                      "name": "domain_id/name",
+                      "name": "domain_name",
                       "label": "Domaine/Nom"
                     },
                     {
@@ -325,12 +325,8 @@ class csv_school_management(CSVExport):
                 "label": "Dernière modification le"
               },
               {
-                "name": "domain_id/name",
+                "name": "domain_name",
                 "label": "Domaine/Nom"
-              },
-              {
-                "name": "domain_id/long_name",
-                "label": "Domaine/Nom Long"
               },
               {
                 "name": "name",
