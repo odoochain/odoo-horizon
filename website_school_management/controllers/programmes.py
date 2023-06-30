@@ -36,3 +36,27 @@ class programmes(http.Controller):
             'param' : param
         }
         return request.render("website_school_management.programmes", values)
+    
+    @http.route(['/programmes/<string:annee>/<string:specialite>','/programmes/<string:annee>'], type='http', auth='public', website = True)
+    def programmes_specialite(self, annee, specialite = None, **post):
+
+        searchParams = [
+            ('state', '=', 'published'), 
+            ('year_name', '=', annee)
+        ]
+        if (specialite):
+            searchParams.append(('speciality_name', '=ilike', specialite))
+
+        programs = request.env['school.program'].sudo().search(searchParams,order="domain_name, cycle_id, name ASC")
+        program_list = []
+
+        for program in programs:
+            program_list.append({
+                'program' : program,
+                'slug_id' : slug(program),
+            })
+        values = {
+            'program_list': program_list,
+            'root': '/programmes'
+        }
+        return request.render("website_school_management.programmes", values)

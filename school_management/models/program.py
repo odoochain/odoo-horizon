@@ -109,8 +109,10 @@ class Program(models.Model):
     cycle_code = fields.Char(related='cycle_id.code', string="Cycle Code", store=True)
     
     year_short_name = fields.Char(related='year_id.short_name', string='Year Name',store=True)
+    year_name = fields.Char(related='year_id.name', string='Year Full Name',store=False)
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
+    speciality_name = fields.Char(related='speciality_id.name', string='Speciality Name',store=False)
     
     ares_code = fields.Char(required=True, string='ARES Code', size=10)
     
