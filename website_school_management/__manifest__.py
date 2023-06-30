@@ -27,9 +27,11 @@
     'category': 'School Management',
     'depends': [
         'web',
+        'website',
     ],
     'data': [
         'views/templates.xml',
+        'views/programmes.xml',
     ],
     'description': '''
         This module adds web portal access for a school.

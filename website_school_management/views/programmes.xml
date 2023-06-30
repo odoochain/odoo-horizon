@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="programmes">
+        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <div id="container mt64 mb64">
+                <t t-set="title">Programmes</t>
+                <h1 t-esc="'Programmes'"/>
+                <div class="oe_structure" />
+                <form id="search" t-attf-action="programmes/" method="GET">
+                    <input name="s" t-att-value="param" type="text"/>
+                    <button type="submit" t-esc="'Rechercher'"/>
+                    <button name="operation" value="clear" type="submit" t-esc="'Réinitialiser'"/>
+                </form>
+                <t t-if="not program_list">
+                    <p t-esc="'Aucun résultat pour votre recherche.'"/>
+                </t>
+                <t t-else="1"> 
+                    <div class="row">
+                        <t t-set="d" t-value="False"/>
+                        <t t-set="c" t-value="False"/>
+                        <t t-foreach="program_list" t-as="program_item">
+                            <div class="col-12">
+                                <t t-set="program" t-value="program_item['program']"/>
+                                <t t-if="d != program.domain_name"> 
+                                    <div class="clearfix"></div> <!-- clearfix ????? -->
+                                    <h3><t t-esc="program.domain_name" /></h3>
+                                    <t t-set="d" t-value="program.domain_name"/>
+                                    <t t-set="c" t-value="False"/>
+                                </t>
+                                <t t-if="c != program.cycle_id">
+                                    <div class="clearfix"></div> <!-- clearfix ????? -->
+                                    <h4><t t-esc="program.cycle_id.name" /></h4>
+                                    <t t-set="c" t-value="program.cycle_id"/>
+                                </t>
+                                <div class="thumbnail oe_school_program">
+                                    <div class="caption" t-if="not is_clean"> <!-- is_clean ????? -->
+                                        <a itemprop="url" t-att-href="'/program/%s' % program_item['slug_id']"><t t-esc="program.name" /></a>
+                                    </div>
+                                    <div class="caption" t-if="is_clean"> <!-- is_clean ????? -->
+                                        <a itemprop="url" t-att-href="'/program_clean/%s' % program_item['slug_id']"><t t-esc="program.name" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div> 
+                </t> 
+            </div>
+        </t>
+    </template>
+  
+</odoo>
