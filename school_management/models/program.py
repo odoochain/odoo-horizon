@@ -23,6 +23,7 @@ import logging
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
+from odoo.addons.http_routing.models.ir_http import slugify_one
 
 _logger = logging.getLogger(__name__)
 
@@ -109,10 +110,8 @@ class Program(models.Model):
     cycle_code = fields.Char(related='cycle_id.code', string="Cycle Code", store=True)
     
     year_short_name = fields.Char(related='year_id.short_name', string='Year Name',store=True)
-    year_name = fields.Char(related='year_id.name', string='Year Full Name',store=False)
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
-    speciality_name = fields.Char(related='speciality_id.name', string='Speciality Name',store=False)
     
     ares_code = fields.Char(required=True, string='ARES Code', size=10)
     
@@ -164,6 +163,28 @@ class Program(models.Model):
 
     def archive(self):
         return self.write({'state': 'archived'})
+
+    # Neodiensis
+    domain_slug = fields.Char(related='speciality_id.domain_id.slug', string='Domain Slug',store=False)
+    year_name = fields.Char(related='year_id.name', string='Year Full Name',store=False)
+    speciality_slug = fields.Char(related='speciality_id.slug', string='Speciality Slug',store=False)
+    speciality_name = fields.Char(related='speciality_id.name', string='Speciality Name',store=False)
+    cycle_grade_slug = fields.Char(related='cycle_id.slug_grade', string='Cycle Grade Slug',store=False)
+    cycle_grade = fields.Char(related='cycle_id.grade', string='Cycle Grade',store=False)
+    cycle_name_slug = fields.Char(related='cycle_id.slug_name', string='Cycle Name Slug',store=False)
+    cycle_name = fields.Char(related='cycle_id.name', string='Cycle Name',store=False)
+    title_slug = fields.Char(string='Title Slug', compute='compute_slug', store=True)
+    @api.depends('title')
+    def compute_slug(self):
+        for prog in self:
+            prog.title_slug = slugify_one(prog.title)
+
+    # computed uri
+    program_uri = fields.Char(string='Program URI', compute='compute_uri', store=False)
+    @api.depends('domain_slug', 'year_name', 'speciality_slug', 'cycle_grade_slug', 'cycle_name_slug', 'title_slug')
+    def compute_uri(self):
+        for prog in self:
+            prog.program_uri = prog.domain_slug + "/" + prog.speciality_slug + "/" + prog.year_name + "/" + prog.cycle_grade_slug + "/" + prog.cycle_name_slug + "/" + prog.title_slug
 
 class Bloc(models.Model):
     '''Bloc'''
@@ -433,6 +454,19 @@ class Cycle(models.Model):
     grade = fields.Char(required=True, string='Grade', size=60)
     grade_code = fields.Char(required=True, string='Grade Code', size=10)
 
+    # Neodiensis
+    slug_grade = fields.Char(string='Grade Slug', compute='compute_slug_grade', store=True)
+    @api.depends('grade')
+    def compute_slug_grade(self):
+        for cycle in self:
+            cycle.slug_grade = slugify_one(cycle.grade)
+
+    slug_name = fields.Char(string='Name Slug', compute='compute_slug_name', store=True)
+    @api.depends('name')
+    def compute_slug_name(self):
+        for cycle in self:
+            cycle.slug_name = slugify_one(cycle.name)
+
 class Domain(models.Model):
     '''Domain'''
     _order = 'name'
@@ -440,6 +474,13 @@ class Domain(models.Model):
     name = fields.Char(required=True, string='Name', size=40)
     description = fields.Text(string='Description')
     long_name = fields.Char(required=True, string='Long Name', size=40)
+
+    # Neodiensis
+    slug = fields.Char(string='Domain Slug', compute='compute_slug', store=True)
+    @api.depends('name')
+    def compute_slug(self):
+        for dom in self:
+            dom.slug = slugify_one(dom.name)
 
 class Section(models.Model):
     '''Section'''
@@ -464,6 +505,13 @@ class Speciality(models.Model):
     domain_id = fields.Many2one('school.domain', string='Domain')
     section_id = fields.Many2one('school.section', string='Section')
     track_id = fields.Many2one('school.track', string='Track')
+
+    # Neodiensis
+    slug = fields.Char(string='Speciality Slug', compute='compute_slug', store=True)
+    @api.depends('name')
+    def compute_slug(self):
+        for spec in self:
+            spec.slug = slugify_one(spec.name)
     
     _sql_constraints = [
 	        ('uniq_speciality', 'unique(domain_id, name)', 'There shall be only one speciality in a domain'),

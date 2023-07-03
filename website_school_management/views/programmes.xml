@@ -3,15 +3,19 @@
 
     <template id="programmes">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <div id="container mt64 mb64">
+            <div id="container" style="margin:60px 200px"> <!-- Style temporaire -->
                 <t t-set="title">Programmes</t>
                 <h1 t-esc="'Programmes'"/>
                 <div class="oe_structure" />
-                <form id="search" t-attf-action="programmes/" method="GET">
-                    <input name="s" t-att-value="param" type="text"/>
-                    <button type="submit" t-esc="'Rechercher'"/>
-                    <button name="operation" value="clear" type="submit" t-esc="'Réinitialiser'"/>
-                </form>
+                <t t-foreach="breadcrumb" t-as="breadcrumb_item">
+                    <a t-att-href="'/programmes/%s' % breadcrumb_item['uri']"><t t-esc="breadcrumb_item['name']" /></a><span> &gt; </span>
+                </t>
+                <br/>
+                <div class="my-2">
+                <t t-foreach="options" t-as="option">
+                    <a class="btn btn-primary my-1" t-att-href="'/programmes/'+option['uri']"><t t-esc="option['name']" /></a>
+                </t>
+                </div>
                 <t t-if="not program_list">
                     <p t-esc="'Aucun résultat pour votre recherche.'"/>
                 </t>
@@ -34,11 +38,8 @@
                                     <t t-set="c" t-value="program.cycle_id"/>
                                 </t>
                                 <div class="thumbnail oe_school_program">
-                                    <div class="caption" t-if="not is_clean"> <!-- is_clean ????? -->
-                                        <a itemprop="url" t-att-href="'/program/%s' % program_item['slug_id']"><t t-esc="program.name" /></a>
-                                    </div>
-                                    <div class="caption" t-if="is_clean"> <!-- is_clean ????? -->
-                                        <a itemprop="url" t-att-href="'/program_clean/%s' % program_item['slug_id']"><t t-esc="program.name" /></a>
+                                    <div class="caption">
+                                        <a t-att-href="'/programmes/%s' % program.program_uri"><t t-esc="program.name" /></a>
                                     </div>
                                 </div>
                             </div>
