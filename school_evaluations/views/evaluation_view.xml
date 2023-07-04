@@ -99,7 +99,7 @@
                     <field name="state"/>
                     <field name="decision"/>
                 </xpath>
-                <xpath expr="//field[@name='bloc_ids']//div[@class='oe_module_vignette']" position="replace">
+                <xpath expr="//field[@name='bloc_ids']//div[contains(@class, 'oe_module_vignette')]" position="replace">
                     <div class="oe_module_vignette container">
                       <div class="row mb-2">
                         <div class="col-6">
