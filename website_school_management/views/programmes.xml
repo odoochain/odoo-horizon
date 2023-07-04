@@ -3,58 +3,85 @@
 
     <template id="programmes">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <div id="container" style="margin:60px 200px"> <!-- Style temporaire -->
-                <t t-set="title">Programmes</t>
-                <h1 t-esc="'Programmes'"/>
-                <div class="oe_structure" />
-                <t t-set="count" t-value="1" />
-                <t t-foreach="breadcrumb" t-as="breadcrumb_item">
-                    <t t-if="count &lt; len(breadcrumb)">
-                        <a t-att-href="'/programmes/%s' % breadcrumb_item['uri']"><t t-esc="breadcrumb_item['name']" /></a>
-                        <t t-if="len(breadcrumb) != 1"><span> &gt; </span></t>
-                        <t t-set="count" t-value="count + 1" />
-                    </t>
-                    <t t-else="1">
-                        <span><t t-esc="breadcrumb_item['name']" /></span>
-                    </t>
+            <div class="container">
+                <t t-if="len(program_list) == 1">
+                    <t t-call="website_school_management.programmes_fiche"/>
                 </t>
-                <br/>
-                <div class="my-2">
-                <t t-foreach="options" t-as="option">
-                    <a class="btn btn-primary my-1" t-att-href="'/programmes/'+option['uri']"><t t-esc="option['name']" /></a>
+                <t t-elif="len(program_list) == 0">
+                    <t t-call="website_school_management.programmes_pas_de_resultats"/>
                 </t>
-                </div>
-                <t t-if="not program_list">
-                    <p t-esc="'Aucun résultat pour votre recherche.'"/>
+                <t t-else="1">
+                    <t t-call="website_school_management.programmes_liste"/>
                 </t>
-                <t t-else="1"> 
-                    <div class="row">
-                        <t t-set="d" t-value="False"/>
-                        <t t-set="c" t-value="False"/>
-                        <t t-foreach="program_list" t-as="program_item">
-                            <div class="col-12">
-                                <t t-set="program" t-value="program_item['program']"/>
-                                <t t-if="d != program.domain_name"> 
-                                    <div class="clearfix"></div> <!-- clearfix ????? -->
-                                    <h3><t t-esc="program.domain_name" /></h3>
-                                    <t t-set="d" t-value="program.domain_name"/>
-                                    <t t-set="c" t-value="False"/>
-                                </t>
-                                <t t-if="c != program.cycle_id">
-                                    <div class="clearfix"></div> <!-- clearfix ????? -->
-                                    <h4><t t-esc="program.cycle_id.name" /></h4>
-                                    <t t-set="c" t-value="program.cycle_id"/>
-                                </t>
-                                <div class="thumbnail oe_school_program">
-                                    <div class="caption">
-                                        <a t-att-href="'/programmes/%s' % program.program_uri"><t t-esc="program.name" /></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </t>
-                    </div> 
-                </t> 
             </div>
+        </t>
+    </template>
+
+    <!-- TODO à adapter -->
+    <template id="programmes_liste">
+        <t t-set="title">Programmes</t>
+        <h1 t-esc="'Programmes'"/>
+        <div class="oe_structure" />
+        <t t-call="website_school_management.programmes_breadcrumb"/>
+        <br/>
+        <div class="my-2">
+        <t t-foreach="options" t-as="option">
+            <a class="btn btn-primary my-1" t-att-href="'/programmes/'+option['uri']"><t t-esc="option['name']" /></a>
+        </t>
+        </div>
+        <t t-if="not program_list">
+            <p t-esc="'Aucun résultat pour votre recherche.'"/>
+        </t>
+        <t t-else="1"> 
+            <div class="row">
+                <t t-set="d" t-value="False"/>
+                <t t-set="c" t-value="False"/>
+                <t t-foreach="program_list" t-as="program_item">
+                    <div class="col-12">
+                        <t t-set="program" t-value="program_item['program']"/>
+                        <t t-if="d != program.domain_name"> 
+                            <h3><t t-esc="program.domain_name" /></h3>
+                            <t t-set="d" t-value="program.domain_name"/>
+                            <t t-set="c" t-value="False"/>
+                        </t>
+                        <t t-if="c != program.cycle_id">
+                            <h4><t t-esc="program.cycle_id.name" /></h4>
+                            <t t-set="c" t-value="program.cycle_id"/>
+                        </t>
+                        <div class="thumbnail oe_school_program">
+                            <div class="caption">
+                                <a t-att-href="program.program_uri"><t t-esc="program.name" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div> 
+        </t> 
+    </template>
+
+    <!-- TODO à adapter -->
+    <template id="programmes_fiche">
+        <t t-call="website_school_management.programmes_breadcrumb"/>
+        <t t-call="website_school_management.program_details_content_global"/>
+    </template>
+
+    <!-- TODO à adapter -->
+    <template id="programmes_pas_de_resultats">
+        <h1 t-esc="'Programmes'"/>
+        <p t-esc="message" />
+    </template>
+
+    <template id="programmes_breadcrumb">
+        <t t-set="count" t-value="1" />
+        <t t-foreach="breadcrumb" t-as="breadcrumb_item">
+            <t t-if="count &lt; len(breadcrumb)">
+                <a t-att-href="'/programmes/%s' % breadcrumb_item['uri']"><t t-esc="breadcrumb_item['name']" /></a>
+                <t t-if="len(breadcrumb) != 1"><span> &gt; </span></t>
+                <t t-set="count" t-value="count + 1" />
+            </t>
+            <t t-else="1">
+                <span><t t-esc="breadcrumb_item['name']" /></span>
+            </t>
         </t>
     </template>
   

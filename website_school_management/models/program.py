@@ -23,7 +23,7 @@ class ProgramWeb(models.Model):
     @api.depends('domain_slug', 'year_name', 'speciality_slug', 'cycle_grade_slug', 'cycle_name_slug', 'title_slug')
     def compute_uri(self):
         for prog in self:
-            prog.program_uri = prog.domain_slug + "/" + prog.speciality_slug + "/" + prog.year_name + "/" + prog.cycle_grade_slug + "/" + prog.cycle_name_slug + "/" + prog.title_slug
+            prog.program_uri = "/programmes/" + prog.domain_slug + "/" + prog.speciality_slug + "/" + prog.year_name + "/" + prog.cycle_grade_slug + "/" + prog.cycle_name_slug + "/" + prog.title_slug
 
 
 class CycleWeb(models.Model):

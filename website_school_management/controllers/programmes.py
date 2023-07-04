@@ -4,7 +4,6 @@ import logging
 
 from odoo import http
 from odoo.http import request
-from odoo.addons.http_routing.models.ir_http import slug, unslug
 
 _logger = logging.getLogger(__name__)
 
@@ -19,7 +18,7 @@ class programmes(http.Controller):
         '/programmes/<string:domain>/<string:speciality>/<string:year>/<string:cycle_type>/<string:cycle>/<string:title>',
         ], type='http', auth='public', website = True)
     def programmes_list(self, domain = None, speciality = None, year = None, cycle_type = None, cycle = None, title = None, **post):
-        
+        # Préparation des paramètres de recherche
         searchParams = [('state', '=', 'published'), ('domain_name', '!=', None)]
         segment = 0
 
@@ -41,78 +40,104 @@ class programmes(http.Controller):
                             if (title):
                                 searchParams.append(('title_slug', '=', title))
                                 segment = 6
-
+        # Requête
         programs = request.env['school.program'].sudo().search(searchParams,order="domain_name, cycle_id, name ASC")
 
+        # Si un seul résultat
         if (len(programs) == 1):
-            # TODO à adapter
-            # TODO redirect si URI courant <> URI du programme
+            route = request.httprequest.path
             program = programs[0]
+
+            # Si la route ne correspond pas à celle du programme : redirection
+            if (route != program.program_uri):
+                return request.redirect(program.program_uri)
+
+            # Récupération du breadcrump
+            breadcrumb = self.get_breadcrumb(program, segment)
+
             values = {
                 'program': program,
                 'slug_id' : program.id,
+                'program_list': programs,
+                'breadcrumb' : breadcrumb,
             }
-            return request.render("website_school_management.program_details", values)
+        # Si plusieurs résultats
         elif (len(programs) > 0):
-            breadcrumb = [{'uri' : "",'name' : "Tous les programmes"}]
-            if (domain):
-                breadcrumb.append({'uri' : programs[0].domain_slug,'name' : programs[0].domain_name})
-                if (speciality):
-                    breadcrumb.append({'uri' : programs[0].domain_slug + "/" + programs[0].speciality_slug,'name' : programs[0].speciality_name})
-                    if (year):
-                        breadcrumb.append({'uri' : programs[0].domain_slug + "/" + programs[0].speciality_slug + "/" + programs[0].year_name,'name' : programs[0].year_name})
-                        if (cycle_type):
-                            breadcrumb.append({'uri' : programs[0].domain_slug + "/" + programs[0].speciality_slug + "/" + programs[0].year_name + "/" + programs[0].cycle_grade_slug,'name' : programs[0].cycle_grade},)
-                            if (cycle):
-                                breadcrumb.append({'uri' : programs[0].domain_slug + "/" + programs[0].speciality_slug + "/" + programs[0].year_name + "/" + programs[0].cycle_grade_slug + "/" + programs[0].cycle_name_slug,'name' : programs[0].cycle_name})
-                                if (title):
-                                    breadcrumb.append({'uri' : programs[0].program_uri,'name' : programs[0].title})
-
-            options = []
-            
-            if (segment == 0):
-                for program in programs:
-                    option = {'uri' : program.domain_slug, 'name' : program.domain_name}
-                    if (option not in options):
-                        options.append(option)
-            elif (segment == 1):
-                for program in programs:
-                    option = {'uri' : domain + '/' + program.speciality_slug, 'name' : program.speciality_name}
-                    if (option not in options):
-                        options.append(option)            
-            elif (segment == 2):
-                for program in programs:
-                    option = {'uri' : domain + '/' + speciality + '/' + program.year_name, 'name' : program.year_name}
-                    if (option not in options):
-                        options.append(option)            
-            elif (segment == 3):
-                for program in programs:
-                    option = {'uri' : domain + '/' + speciality + '/' + year + '/' +program.cycle_grade_slug, 'name' : program.cycle_grade}
-                    if (option not in options):
-                        options.append(option) 
-            elif (segment == 4):
-                for program in programs:
-                    option = {'uri' : domain + '/' + speciality + '/' + year + '/' + cycle_type + '/' + program.cycle_name_slug, 'name' : program.cycle_name}
-                    if (option not in options):
-                        options.append(option)             
-            elif (segment == 5):
-                for program in programs:
-                    option = {'uri' : domain + '/' + speciality + '/' + year + '/' + cycle_type + '/' + cycle + '/' + program.title_slug, 'name' : program.title}
-                    if (option not in options):
-                        options.append(option)             
+            # Récupération du breadcrump
+            breadcrumb = self.get_breadcrumb(programs[0], segment)
+            # Récupération des options
+            options = self.get_options(programs, segment)             
 
             program_list = []
             for program in programs:
                 program_list.append({
                     'program' : program,
                 })
+
             values = {
                 'program_list': program_list,
-                'root': '/programmes',
                 'breadcrumb' : breadcrumb,
-                'options' : options
+                'options' : options,
             }
-            return request.render("website_school_management.programmes", values)
-        else:
-            # TODO à adapter
-            return request.redirect("/error")
+        # Si 0 résultat
+        else :
+            values = {
+                'program_list': [],
+                'message' : 'Aucun résultat pour cette recherche.'
+            }
+
+        return request.render("website_school_management.programmes", values)
+        
+    def get_breadcrumb (self, program, segment):
+        breadcrumb = [{'uri' : "",'name' : "Tous les programmes"}]
+        if (segment >= 1):
+            breadcrumb.append({'uri' : program.domain_slug,'name' : program.domain_name})
+            if (segment >= 2):
+                breadcrumb.append({'uri' : program.domain_slug + "/" + program.speciality_slug,'name' : program.speciality_name})
+                if (segment >= 3):
+                    breadcrumb.append({'uri' : program.domain_slug + "/" + program.speciality_slug + "/" + program.year_name,'name' : program.year_name})
+                    if (segment >= 4):
+                        breadcrumb.append({'uri' : program.domain_slug + "/" + program.speciality_slug + "/" + program.year_name + "/" + program.cycle_grade_slug,'name' : program.cycle_grade},)
+                        if (segment >= 5):
+                            breadcrumb.append({'uri' : program.domain_slug + "/" + program.speciality_slug + "/" + program.year_name + "/" + program.cycle_grade_slug + "/" + program.cycle_name_slug,'name' : program.cycle_name})
+                            if (segment >= 6):
+                                breadcrumb.append({'uri' : program.program_uri,'name' : program.title})
+        return breadcrumb
+    
+    def get_options (self, programs, segment):
+        options = []
+        if (segment == 0):
+            for program in programs:
+                option = {'uri' : program.domain_slug, 'name' : program.domain_name}
+                if (option not in options):
+                    options.append(option)
+        elif (segment == 1):
+            for program in programs:
+                option = {'uri' : program.domain_slug + '/' + program.speciality_slug, 'name' : program.speciality_name}
+                if (option not in options):
+                    options.append(option)            
+        elif (segment == 2):
+            for program in programs:
+                option = {'uri' : program.domain_slug + '/' + program.speciality_slug + '/' + program.year_name, 'name' : program.year_name}
+                if (option not in options):
+                    options.append(option)            
+        elif (segment == 3):
+            for program in programs:
+                option = {'uri' : program.domain_slug + '/' + program.speciality_slug + '/' + program.year_name + '/' + program.cycle_grade_slug, 'name' : program.cycle_grade}
+                if (option not in options):
+                    options.append(option) 
+        elif (segment == 4):
+            for program in programs:
+                option = {'uri' : program.domain_slug + '/' + program.speciality_slug + '/' + program.year_name + '/' + program.cycle_grade_slug + '/' + program.cycle_name_slug, 'name' : program.cycle_name}
+                if (option not in options):
+                    options.append(option)             
+        elif (segment == 5):
+            for program in programs:
+                option = {'uri' : program.domain_slug + '/' + program.speciality_slug + '/' + program.year_name + '/' + program.cycle_grade_slug + '/' + program.cycle_name_slug + '/' + program.title_slug, 'name' : program.title}
+                if (option not in options):
+                    options.append(option)
+        return options
+    
+    
+
+        
