@@ -19,7 +19,7 @@ class programmes(http.Controller):
         '/programmes/<string:domain>/<string:speciality>/<string:year>/<string:cycle_type>/<string:cycle>/<string:title>',
         ], type='http', auth='public', website = True)
     def programmes_list(self, domain = None, speciality = None, year = None, cycle_type = None, cycle = None, title = None, **post):
-
+        
         searchParams = [('state', '=', 'published'), ('domain_name', '!=', None)]
         segment = 0
 
@@ -53,7 +53,7 @@ class programmes(http.Controller):
                 'slug_id' : program.id,
             }
             return request.render("website_school_management.program_details", values)
-        else:
+        elif (len(programs) > 0):
             breadcrumb = [{'uri' : "",'name' : "Tous les programmes"}]
             if (domain):
                 breadcrumb.append({'uri' : programs[0].domain_slug,'name' : programs[0].domain_name})
@@ -113,3 +113,6 @@ class programmes(http.Controller):
                 'options' : options
             }
             return request.render("website_school_management.programmes", values)
+        else:
+            # TODO à adapter
+            return request.redirect("/error")
