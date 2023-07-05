@@ -39,9 +39,9 @@ class IrActionsReport(models.Model):
     google_drive_patner_field = fields.Char(string='Partner property to save into',
                              help='This field name is the Partner to which the Google Drive Forlder to save to.')
 
-    def _render_qweb_pdf(self, res_ids=None, data=None):
+    def _render_qweb_pdf(self, report_ref, res_ids=None, data=None):
         
-        pdf_content, type = super(IrActionsReport, self)._render_qweb_pdf(res_ids=res_ids, data=data)
+        pdf_content, type = super(IrActionsReport, self)._render_qweb_pdf(report_ref=report_ref,res_ids=res_ids, data=data)
         
         content = io.BytesIO(pdf_content)
         
