@@ -32,6 +32,7 @@
     'data': [
         'views/templates.xml',
         'views/programmes.xml',
+        'report/programme_report.xml',
     ],
     'description': '''
         This module adds web portal access for a school.

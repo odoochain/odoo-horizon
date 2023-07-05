@@ -138,6 +138,33 @@ class programmes(http.Controller):
                     options.append(option)
         return options
     
+    ##############
+    # TEMPORAIRE #
+    ##############
+
+    @http.route('/impression_programme/<int:id>', type='http', auth="public", website=True, sitemap=False)
+    def print_program_pdf(self, id, **kw):
+        if id:
+            try:
+                id = int(id) # Conversion en int obligatoire car variable get de type str
+                if (not self.program_exists(id)):
+                    return request.redirect('/error')
+                else:
+                    pdf = request.env.ref('website_school_management.action_impression_programme_id')._render_qweb_pdf("website_school_management.action_impression_programme_id", [id])[0]
+            except ValueError:
+                return request.redirect('/error')
+
+        pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', u'%s' % len(pdf))]
+        return http.request.make_response(pdf, headers=pdfhttpheaders)
+    
+    # Vérifie si un programme en particulier existe
+    def program_exists(self, id):
+        program = request.env['school.program'].sudo().search([('id','=',id)])
+        if program is None or program.id != id:
+            return False
+        else:
+            return True
+    
     
 
         

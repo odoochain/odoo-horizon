@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+      
+      <!-- Création action report pdf -->
+      <record id="action_impression_programme_id" model="ir.actions.report">
+            <field name="name">Programme de cours PDF</field>
+            <field name="model">school.program</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">website_school_management.report_program</field>
+            <field name="report_file">website_school_management.report_program</field>
+            <field name="print_report_name">'Programme de cours'</field>
+            <field name="binding_model_id" ref="model_school_program"/>
+            <field name="binding_type">report</field>
+      </record>   
+
+      <!-- Tempate PDF report -->
+      <template id="report_program">
+            <t t-call="web.html_container">
+                  <xpath expr="//head" position="inside">
+                        <meta charset="utf-8"/>
+                  </xpath>
+                  <xpath expr="//title" position="replace">
+                        <title><t t-esc="docs[0].title or 'Odoo Report'"/></title>
+                  </xpath>
+                  <t t-foreach="docs" t-as="program">
+                        <t t-call="website_school_management.program_details_content"/>
+                  </t>
+            </t>
+      </template>
+   
+</odoo>
