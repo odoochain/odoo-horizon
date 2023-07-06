@@ -31,7 +31,7 @@
         <br/>
         <div class="my-2">
         <t t-foreach="options" t-as="option">
-            <a class="btn btn-primary my-1" t-att-href="'/programmes/'+option['uri']"><t t-esc="option['name']" /></a>
+            <a class="btn btn-primary my-1" t-att-href="option['uri']"><t t-esc="option['name']" /></a>
         </t>
         </div>
         <t t-if="not program_list">
@@ -519,7 +519,7 @@
         <t t-set="count" t-value="1" />
         <t t-foreach="breadcrumb" t-as="breadcrumb_item">
             <t t-if="count &lt; len(breadcrumb)">
-                <a t-att-href="'/programmes/%s' % breadcrumb_item['uri']"><t t-esc="breadcrumb_item['name']" /></a>
+                <a t-att-href="breadcrumb_item['uri']"><t t-esc="breadcrumb_item['name']" /></a>
                 <t t-if="len(breadcrumb) != 1"><span> &gt; </span></t>
                 <t t-set="count" t-value="count + 1" />
             </t>
