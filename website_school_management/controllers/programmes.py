@@ -4,9 +4,11 @@ import logging
 
 from odoo import http
 from odoo.http import request
+from odoo.addons.http_routing.models.ir_http import slug, unslug
 
 _logger = logging.getLogger(__name__)
 
+# Gestion des différentes routes pour les programmes de cours
 class programmes(http.Controller):
     @http.route([
         '/programmes',
@@ -87,7 +89,8 @@ class programmes(http.Controller):
             }
 
         return request.render("website_school_management.programmes", values)
-        
+    
+    # Génération du breadcrumb
     def get_breadcrumb (self, program, segment):
         breadcrumb = [{'uri' : "",'name' : "Tous les programmes"}]
         if (segment >= 1):
@@ -104,6 +107,7 @@ class programmes(http.Controller):
                                 breadcrumb.append({'uri' : program.program_uri,'name' : program.title})
         return breadcrumb
     
+    # Génération des options
     def get_options (self, programs, segment):
         options = []
         if (segment == 0):
@@ -142,6 +146,7 @@ class programmes(http.Controller):
     # TEMPORAIRE #
     ##############
 
+    # Gestion de la génération du PDF d'un programme de cours
     @http.route('/impression_programme/<int:id>', type='http', auth="public", website=True, sitemap=False)
     def print_program_pdf(self, id, **kw):
         if id:
@@ -164,6 +169,32 @@ class programmes(http.Controller):
             return False
         else:
             return True
+        
+    # Gestion de la route d'un cours
+    @http.route(['/cours/<string:course_slug>'], type='http', auth='public',  website=True)
+    def cours(self, course_slug, redirect=None, **post):
+        _, course_id = unslug(course_slug)
+        course_docs = request.env['school.course_documentation'].sudo().search([('state', '=', 'published'),'|',('course_ids','=',course_id),('course_id','=',course_id)],order="author_id")
+        if course_docs:
+            values = {
+                'course_docs': course_docs,
+            }
+            return request.render("website_school_management.cours_fiche", values)
+        else:
+            return request.render("website_school_management.cours_fiche_vide", [])
+            
+    # Gestion de la route d'un groupe de cours    
+    @http.route(['/groupe_de_cours/<string:course_group_slug>'], type='http', auth='public', website=True)
+    def groupe_de_cours(self, course_group_slug, redirect=None, **post):
+        _, course_group_id = unslug(course_group_slug)
+        course_group = request.env['school.course_group'].sudo().search([('id', '=', course_group_id)])
+        if course_group:
+            values = {
+                'course_group': course_group,
+            }
+            return request.render("website_school_management.groupe_de_cours_fiche", values)
+        else:
+            return request.render("website_school_management.groupe_de_cours_fiche_vide", [])
     
     
 
