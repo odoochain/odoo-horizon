@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
+    <!-- //////////////////////////////////////////////////////////////// -->
+    <!-- //                       PROGRAMMES                           // -->
+    <!-- //////////////////////////////////////////////////////////////// -->
+
     <template id="programmes">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <t t-set="title">Programmes</t>
             <div class="container">
-                <t t-if="len(program_list) == 1">
-                    <t t-call="website_school_management.programme_fiche"/>
-                </t>
-                <t t-elif="len(program_list) == 0">
-                    <t t-call="website_school_management.programmes_pas_de_resultats"/>
+                <t t-if="len(program_list) == 0">
+                    <t t-call="website_school_management.programmes_vide"/>
                 </t>
                 <t t-else="1">
                     <t t-call="website_school_management.programmes_liste"/>
@@ -23,7 +25,6 @@
 
     <!-- TODO à adapter -->
     <template id="programmes_liste">
-        <t t-set="title">Programmes</t>
         <h1 t-esc="'Programmes'"/>
         <div class="oe_structure" />
         <t t-call="website_school_management.programmes_breadcrumb"/>
@@ -64,31 +65,45 @@
     </template>
 
     <!-- //////////////////////////////////////////////////////////////// -->
+    <!-- //                PAS DE RESULTATS (PROGRAMMES)               // -->
+    <!-- //////////////////////////////////////////////////////////////// -->
+
+    <!-- TODO à adapter -->
+    <template id="programmes_vide">
+        <h1 t-esc="'Programmes'"/>
+        <p t-esc="message" />
+    </template>
+
+    <!-- //////////////////////////////////////////////////////////////// -->
     <!-- //                     FICHE PROGRAMME                        // -->
     <!-- //////////////////////////////////////////////////////////////// -->
 
     <!-- TODO à adapter -->
     <template id="programme_fiche">
+    <t t-call="website.layout">
         <t t-set="title">Détails du programme</t>
-        <div class="oe_structure"/>
-        <article class="container oe_school_program_details">
-            <section class="row text-center">
-                <div class="col-md-10"><h2>Détails du programme</h2></div>
-                <div class="col-md-2">
-                    <span class="row">
-                        <a class="btn btn-default" t-att-href="'/impression_programme/%s' % slug_id" target="new">
-                          <i class="fa fa-print fa-2x" title="Settings" aria-hidden="true"></i>
-                          <span class="sr-only">Print</span>
-                        </a>
-                    </span>
-                </div>
-                <div class="col-12">
-                    <t t-call="website_school_management.programmes_breadcrumb"/>
-                </div>
-            </section>
-            <hr/>
-            <t t-call="website_school_management.programme_details_contenu"/>
-        </article>
+        <div class="container">
+            <div class="oe_structure"/>
+            <article class="container oe_school_program_details">
+                <section class="row text-center">
+                    <div class="col-md-10"><h2>Détails du programme</h2></div>
+                    <div class="col-md-2">
+                        <span class="row">
+                            <a class="btn btn-default" t-att-href="'/impression_programme/%s' % program.id" target="new">
+                            <i class="fa fa-print fa-2x" title="Settings" aria-hidden="true"></i>
+                            <span class="sr-only">Print</span>
+                            </a>
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <t t-call="website_school_management.programmes_breadcrumb"/>
+                    </div>
+                </section>
+                <hr/>
+                <t t-call="website_school_management.programme_details_contenu"/>
+            </article>
+        </div>
+    </t>
     </template>
 
     <!-- TODO à adapter -->
@@ -228,6 +243,7 @@
     <!-- TODO à adapter -->
     <template id="groupe_de_cours_fiche">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <t t-set="title">Groupe de cours</t>
             <div class="container">
                 <t t-set="desc" t-value="course_group"/>
                 <section>
@@ -340,6 +356,7 @@
     <!-- TODO à adapter -->
     <template id="groupe_de_cours_fiche_vide">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <t t-set="title">Groupe de cours</t>
             <div class="container">
                 <h1>Pas de description</h1>      
                 <p>Veuillez contacter le secrétariat ou votre professeur pour obtenir plus d'informations sur cette activité.</p>
@@ -353,6 +370,7 @@
 
     <template id="cours_fiche">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <t t-set="title">Cours</t>
             <div class="container">
                 <t t-foreach="course_docs" t-as="course_doc">
                     <t t-set="desc" t-value="course_doc"/>
@@ -485,21 +503,12 @@
 
     <template id="cours_fiche_vide">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <t t-set="title">Cours</t>
             <div class="container">
                 <h1>Pas de description</h1>      
                 <p>Veuillez contacter le secrétariat ou votre professeur pour obtenir plus d'informations sur cette activité.</p>
             </div>
         </t>
-    </template>
-
-    <!-- //////////////////////////////////////////////////////////////// -->
-    <!-- //                PAS DE RESULTATS (PROGRAMMES)               // -->
-    <!-- //////////////////////////////////////////////////////////////// -->
-
-    <!-- TODO à adapter -->
-    <template id="programmes_pas_de_resultats">
-        <h1 t-esc="'Programmes'"/>
-        <p t-esc="message" />
     </template>
     
     <!-- //////////////////////////////////////////////////////////////// -->

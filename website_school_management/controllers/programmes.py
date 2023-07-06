@@ -57,10 +57,9 @@ class programmes(http.Controller):
             # Récupération du breadcrump
             breadcrumb = self.get_breadcrumb(program, segment)
 
+            template = "website_school_management.programme_fiche"
             values = {
                 'program': program,
-                'slug_id' : program.id,
-                'program_list': programs,
                 'breadcrumb' : breadcrumb,
             }
         # Si plusieurs résultats
@@ -76,6 +75,7 @@ class programmes(http.Controller):
                     'program' : program,
                 })
 
+            template = "website_school_management.programmes"
             values = {
                 'program_list': program_list,
                 'breadcrumb' : breadcrumb,
@@ -83,12 +83,13 @@ class programmes(http.Controller):
             }
         # Si 0 résultat
         else :
+            template = "website_school_management.programmes"
             values = {
                 'program_list': [],
                 'message' : 'Aucun résultat pour cette recherche.'
             }
 
-        return request.render("website_school_management.programmes", values)
+        return request.render(template, values)
     
     # Génération du breadcrumb
     def get_breadcrumb (self, program, segment):
