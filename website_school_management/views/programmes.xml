@@ -25,7 +25,7 @@
 
     <!-- TODO à adapter -->
     <template id="programmes_liste">
-        <h1 t-esc="'Programmes'"/>
+        <h1 t-esc="title"/>
         <div class="oe_structure" />
         <t t-call="website_school_management.programmes_breadcrumb"/>
         <br/>
@@ -70,8 +70,12 @@
 
     <!-- TODO à adapter -->
     <template id="programmes_vide">
-        <h1 t-esc="'Programmes'"/>
-        <p t-esc="message" />
+        <h1 t-esc="title"/>
+        <div class="oe_structure">
+            <p>Aucun programme de cours correspondant.</p>
+            <hr/>
+            <p style="text-align: center;"><a href="/programmes">Retour à la recherche</a></p>
+        </div>        
     </template>
 
     <!-- //////////////////////////////////////////////////////////////// -->
@@ -81,7 +85,7 @@
     <!-- TODO à adapter -->
     <template id="programme_fiche">
     <t t-call="website.layout">
-        <t t-set="title">Détails du programme</t>
+        <t t-set="title" t-value="program.name" />
         <div class="container">
             <div class="oe_structure"/>
             <article class="container oe_school_program_details">
