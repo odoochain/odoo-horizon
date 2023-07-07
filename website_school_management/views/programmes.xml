@@ -41,10 +41,9 @@
             <div class="row">
                 <t t-set="d" t-value="False"/>
                 <t t-set="c" t-value="False"/>
-                <t t-foreach="program_list" t-as="program_item">
+                <t t-foreach="program_list" t-as="program">
                     <div class="col-12">
-                        <t t-set="program" t-value="program_item['program']"/>
-                        <t t-if="d != program.domain_name"> 
+                        <t t-if="d != program.domain_name">
                             <h3><t t-esc="program.domain_name" /></h3>
                             <t t-set="d" t-value="program.domain_name"/>
                             <t t-set="c" t-value="False"/>
@@ -87,156 +86,130 @@
     <t t-call="website.layout">
         <t t-set="title" t-value="program.name" />
         <div class="container">
-            <div class="oe_structure"/>
-            <article class="container oe_school_program_details">
-                <section class="row text-center">
-                    <div class="col-md-10"><h2>Détails du programme</h2></div>
-                    <div class="col-md-2">
-                        <span class="row">
-                            <a class="btn btn-default" t-att-href="'/impression_programme/%s' % program.id" target="new">
-                            <i class="fa fa-print fa-2x" title="Settings" aria-hidden="true"></i>
-                            <span class="sr-only">Print</span>
-                            </a>
-                        </span>
-                    </div>
-                    <div class="col-12">
-                        <t t-call="website_school_management.programmes_breadcrumb"/>
-                    </div>
-                </section>
-                <hr/>
-                <t t-call="website_school_management.programme_details_contenu"/>
-            </article>
+            <h2>Détails du programme</h2>
+            <div>  
+                <a class="btn btn-default" t-att-href="'/impression_programme/%s' % program.id" target="new">
+                    <i class="fa fa-print fa-2x" title="Imprimer" aria-hidden="true"></i>
+                    <span class="sr-only">Imprimer</span>
+                </a> 
+            </div>
+            <hr/>
+            <t t-call="website_school_management.programmes_breadcrumb"/>
+            <hr/>
+            <t t-call="website_school_management.programme_details_contenu"/>
         </div>
     </t>
     </template>
 
     <!-- TODO à adapter -->
    <template id="programme_details_contenu" name="Program Details Content">
-        <section class="row">
-            <div class="col-md-4"><h4>PROFIL D’ENSEIGNEMENT</h4></div>
-            <div class="col-md-6"><h4><t t-esc="program.name" /></h4></div>
-            <!--<div class="col-md-2"><h4><t t-esc="program.year_id.name" /></h4></div>-->
-        </section>
+        <div>
+            <h4>PROFIL D’ENSEIGNEMENT</h4>
+            <h4><t t-esc="program.name" /></h4>
+        </div>
         <hr/>
-        <section>
-            <div class="row">
-                <div class="col-md-2"><font color="grey">DOMAINE</font></div>
-                <div class="col-md-10"><t t-esc="program.domain_name" /></div>
+        <div>
+            <div>
+                <p>DOMAINE</p>
+                <p><t t-esc="program.domain_name" /></p>
             </div>
-            <div class="row">
-                <div class="col-md-2"><font color="grey">CYCLE</font></div>
-                <div class="col-md-10"><t t-esc="program.cycle_id.name" /></div>
+            <div>
+                <p>CYCLE</p>
+                <p><t t-esc="program.cycle_id.name" /></p>
             </div>
-            <div class="row">
-                <div class="col-md-2"><font color="grey">SECTION</font></div>
-                <div class="col-md-10"><t t-esc="program.speciality_id.section_id.name" /></div>
+            <div>
+                <p>SECTION</p>
+                <p><t t-esc="program.speciality_id.section_id.name" /></p>
             </div>
-            <div class="row">
-                <div class="col-md-2"><font color="grey">ORIENTATION</font></div>
-                <div class="col-md-10"><t t-esc="program.speciality_id.track_id.name" /></div>
+            <div>
+                <p>ORIENTATION</p>
+                <p><t t-esc="program.speciality_id.track_id.name" /></p>
             </div>
-            <div class="row">
-                <div class="col-md-2"><font color="grey">SPÉCIALITÉ</font></div>
-                <div class="col-md-10"><t t-esc="program.speciality_id.name" /></div>
+            <div>
+                <p>SPÉCIALITÉ</p>
+                <p><t t-esc="program.speciality_id.name" /></p>
             </div>
-        </section>
+        </div>
         <hr/>
-        <section class="row" t-if="program.description">
-            <div class="col-md-12"><h4>VADE MECUM</h4></div>
-            <div class="col-md-12" style='white-space: pre-wrap;'><t t-esc="program.description"/></div>
+        <div t-if="program.description">
+            <h4>VADE MECUM</h4>
+            <p><t t-esc="program.description"/></p>
             <hr/>
-        </section>
-        <!--<section class="row" t-if="program.competency_ids">
-            <div class="col-md-12"><h4>RÉFÉRENTIELS DE COMPÉTENCES ATTENDUES</h4></div>
-            <div class="col-md-12">
-                <table class="table table-striped">
-                    <caption>A la fin du cycle, l’étudiant doit être capable :</caption>
-                    <col width='50px'/>
-                    <col width="100%"/><t t-set="comp_cnt" t-value="0"/>
-                    <tr t-foreach="program.competency_ids" t-as="comp"><t t-set="comp_cnt" t-value="comp_cnt+1"/>
-                        <th scope="row"><bold><t t-esc="comp_cnt"/></bold></th><td><t t-esc="comp.description"/></td>
-                    </tr>
-                </table>
+        </div>
+        <div>
+            <h4>PROGRAMME DES COURS</h4>
+            <div t-foreach="program.bloc_ids" t-as="bloc">
+                <t t-call="website_school_management.school_bloc_contenu"/>
             </div>
-            <hr/>
-        </section>-->
-        <section class="row">
-            <div class="col-md-12">
-                <h4>PROGRAMME DES COURS</h4>
-            </div>
-        </section>
-        <section class="row" t-foreach="program.bloc_ids" t-as="bloc">
-            <t t-call="website_school_management.school_bloc_contenu"/>
-        </section>
+        </div>
         <hr/>
     </template>
 
     <!-- TODO à adapter -->
     <template id="school_bloc_contenu" name="Bloc">
-        <div class="col-md-12">
-            <table class="table table-condensed oe_school_program_table">
-                <caption style="font-size: 100%;">Grille du bloc - <t t-esc="bloc.name"/></caption>
-                <colgroup>
-                    <col style="width:75px"/>
-                    <col style="width:400px"/>
-                    <col style="width:60px"/>
-                    <col style="width:60px"/>
-                    <col style="width:60px"/>
-                    <col style="width:150px"/>
-                    <col style="width:150px"/>
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>UID</th> 
-                        <th>Unités d’enseignement</th> 
-                        <th class="text-center">Heures</th> 
-                        <th class="text-center">ECTS</th>
-                        <th class="text-center">Pond</th>
-                        <th>Pré-requis</th>
-                        <th>Co-requis</th>
-                    </tr> 
-                </thead>
-                <tbody>
+        <div>
+            <h5>Grille du bloc - <t t-esc="bloc.name"/></h5>
+            <div>
+                <div>
                     <t t-set="group" t-value=""/>
+                    <!-- Groupes de cours -->
                     <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">
-                    <t t-if="course_group.cg_grouping.id != group">
-                        <tr>
-                            <td colspan="7"><t t-esc="course_group.cg_grouping.name"/></td>
-                        </tr>
+                        <!-- Groupe du groupe de cours -->
+                        <t t-if="course_group.cg_grouping.id != group">
+                            <hr/>
+                            <h6><t t-esc="course_group.cg_grouping.name"/></h6>
+                            <hr/>
+                        </t>
+                        <ul>
+                            <!-- Groupe de cours -->
+                            <t t-set="group" t-value="course_group.cg_grouping.id"/>
+                            <li>Code : <t t-esc="course_group.ue_id"/></li>
+                            <li> Unités d’enseignement : <a t-esc="course_group.title" t-att-href="'/groupe_de_cours/%s' % slug(course_group)" target="_self"/></li>
+                            <li>Professeur : <t t-esc="course_group.responsible_id.name"/></li>
+                            <li>Heures : <t t-esc="course_group.total_hours"/></li>
+                            <li>ECTS : <t t-esc="course_group.total_credits"/></li>
+                            <li>
+                                Pré-requis : 
+                                <t t-if="course_group.pre_requisit_ids">
+                                    <span t-esc="', '.join(map( lambda x: str(x.preriquisit_id.uid), course_group.pre_requisit_ids))"/>
+                                </t>
+                                <t t-else="">
+                                    <span>/</span>
+                                </t>
+                            </li>
+                            <li>
+                                Co-requis : 
+                                <t t-if="course_group.co_requisit_ids">
+                                    <span t-esc="', '.join(map( lambda x: str(x.coriquisit_id.uid), course_group.co_requisit_ids))"/>
+                                </t>
+                                <t t-else="">
+                                    <span>/</span>
+                                </t>
+                            </li>
+                            <!-- Cours -->
+                            <li> Cours: 
+                                <t t-foreach="course_group.course_ids" t-as="course">
+                                    <ul>
+                                        <li>Nom : <t t-esc="course.title"/></li>
+                                        <li>ECTS : <t t-esc="course.credits"/></li>
+                                        <li>Pondération : <t t-esc="course.weight"/></li>
+                                        <li>Quadri : <t t-esc="course.quadri"/></li>
+                                    </ul>
+                                    <br/>
+                                </t>
+                            </li>
+                            <hr/>
+                        </ul>
                     </t>
-                    <t t-set="group" t-value="course_group.cg_grouping.id"/>
-                    <tr class="oe_school_course_group" style="font-weight: 600;">
-                        <td style="font-size: x-small;"><t t-esc="course_group.ue_id"/></td>
-                        <td><a t-esc="course_group.title" t-att-href="'/groupe_de_cours/%s' % slug(course_group)" target="_self" style="cursor: pointer;"/><br/><i style="color:grey;"><t t-esc="course_group.responsible_id.name"/></i></td>
-                        <td class="text-center"><t t-esc="course_group.total_hours"/></td>
-                        <td class="text-center"><t t-esc="course_group.total_credits"/></td>
-                        <td></td>
-                        <td style="font-size: x-small;"><t t-if="course_group.pre_requisit_ids"><span t-esc="', '.join(map( lambda x: str(x.preriquisit_id.uid), course_group.pre_requisit_ids))"/></t></td>
-                        <td style="font-size: x-small;"><t t-if="course_group.co_requisit_ids"><span t-esc="', '.join(map( lambda x: str(x.coriquisit_id.uid), course_group.co_requisit_ids))"/></t></td>
-                    </tr>
-                    <tr t-foreach="course_group.course_ids" t-as="course">
-                        <td></td>
-                        <td><t t-esc="course.title"/></td>
-                        <td class="text-center"><t t-esc="course.hours"/></td>
-                        <td class="text-center"><t t-esc="course.credits"/></td>
-                        <td class="text-center"><t t-esc="course.weight"/></td>
-                        <!--<td></td>-->
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </t>
-                    <tr style="font-weight: 800;">
-                        <td></td>
-                        <td class="text-right">Total :</td>
-                        <td class="text-center"><t t-esc="bloc.total_hours"/></td>
-                        <td class="text-center"><t t-esc="bloc.total_credits"/></td>
-                        <td></td>
-                        <!--<td></td>-->
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+                    <!-- Total -->
+                    <p>Total :</p>
+                    <ul>
+                        <li>Heures : <t t-esc="bloc.total_hours"/></li>
+                        <li>ECTS : <t t-esc="bloc.total_credits"/></li>
+                    </ul>
+                    <hr/>  
+                </div>
+            </div>    
         </div>
     </template>
 

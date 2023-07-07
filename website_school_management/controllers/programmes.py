@@ -22,6 +22,7 @@ class programmes(http.Controller):
     def programmes_list(self, domain = None, speciality = None, year = None, cycle_type = None, cycle = None, title = None, **post):
         # Préparation des paramètres de recherche
         searchParams = [('state', '=', 'published'), ('domain_name', '!=', None)]
+        # searchParams = [('domain_name', '!=', None)]
         segment = 0
 
         if (domain):
@@ -72,15 +73,9 @@ class programmes(http.Controller):
             if (len(options) == 1):
                 return request.redirect(options[0]['uri'])
 
-            program_list = []
-            for program in programs:
-                program_list.append({
-                    'program' : program,
-                })
-
             template = "website_school_management.programmes"
             values = {
-                'program_list': program_list,
+                'program_list': programs,
                 'breadcrumb' : breadcrumb,
                 'options' : options,
             }
