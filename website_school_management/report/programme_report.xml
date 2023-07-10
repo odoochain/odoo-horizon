@@ -23,7 +23,7 @@
                         <title><t t-esc="docs[0].title or 'Odoo Report'"/></title>
                   </xpath>
                   <t t-foreach="docs" t-as="program">
-                        <t t-call="website_school_management.program_details_content"/>
+                        <t t-call="website_school_management.programme_details_contenu"/>
                   </t>
             </t>
       </template>
