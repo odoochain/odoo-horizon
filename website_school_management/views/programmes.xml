@@ -34,9 +34,6 @@
             <a class="btn btn-primary my-1" t-att-href="option['uri']"><t t-esc="option['name']" /></a>
         </t>
         </div>
-        <t t-if="not program_list">
-            <p t-esc="'Aucun résultat pour votre recherche.'"/>
-        </t>
         <t t-else="1"> 
             <div class="row">
                 <t t-set="d" t-value="False"/>
