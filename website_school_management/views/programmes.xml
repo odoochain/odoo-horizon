@@ -2,62 +2,47 @@
 <odoo>
 
     <!-- //////////////////////////////////////////////////////////////// -->
-    <!-- //                       PROGRAMMES                           // -->
-    <!-- //////////////////////////////////////////////////////////////// -->
-
-    <template id="programmes">
-        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <t t-set="title">Programmes</t>
-            <div class="container">
-                <t t-if="len(program_list) == 0">
-                    <t t-call="website_school_management.programmes_vide"/>
-                </t>
-                <t t-else="1">
-                    <t t-call="website_school_management.programmes_liste"/>
-                </t>
-            </div>
-        </t>
-    </template>
-
-    <!-- //////////////////////////////////////////////////////////////// -->
     <!-- //                     LISTE PROGRAMMES                       // -->
     <!-- //////////////////////////////////////////////////////////////// -->
 
     <!-- TODO à adapter -->
     <template id="programmes_liste">
-        <h1 t-esc="title"/>
-        <div class="oe_structure" />
-        <t t-call="website_school_management.programmes_breadcrumb"/>
-        <br/>
-        <div class="my-2">
-        <t t-foreach="options" t-as="option">
-            <a class="btn btn-primary my-1" t-att-href="option['uri']"><t t-esc="option['name']" /></a>
-        </t>
-        </div>
-        <t t-else="1"> 
-            <div class="row">
-                <t t-set="d" t-value="False"/>
-                <t t-set="c" t-value="False"/>
-                <t t-foreach="program_list" t-as="program">
-                    <div class="col-12">
-                        <t t-if="d != program.domain_name">
-                            <h3><t t-esc="program.domain_name" /></h3>
-                            <t t-set="d" t-value="program.domain_name"/>
-                            <t t-set="c" t-value="False"/>
-                        </t>
-                        <t t-if="c != program.cycle_id">
-                            <h4><t t-esc="program.cycle_id.name" /></h4>
-                            <t t-set="c" t-value="program.cycle_id"/>
-                        </t>
-                        <div class="thumbnail oe_school_program">
-                            <div class="caption">
-                                <a t-att-href="program.program_uri"><t t-esc="program.name" /></a>
+        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <t t-set="title">Programmes</t>
+            <div class="container">
+                <h1 t-esc="title"/>
+                <div class="oe_structure" />
+                <t t-call="website_school_management.programmes_breadcrumb"/>
+                <br/>
+                <div class="my-2">
+                <t t-foreach="options" t-as="option">
+                    <a class="btn btn-primary my-1" t-att-href="option['uri']"><t t-esc="option['name']" /></a>
+                </t>
+                </div>
+                <div class="row">
+                    <t t-set="d" t-value="False"/>
+                    <t t-set="c" t-value="False"/>
+                    <t t-foreach="program_list" t-as="program">
+                        <div class="col-12">
+                            <t t-if="d != program.domain_name">
+                                <h3><t t-esc="program.domain_name" /></h3>
+                                <t t-set="d" t-value="program.domain_name"/>
+                                <t t-set="c" t-value="False"/>
+                            </t>
+                            <t t-if="c != program.cycle_id">
+                                <h4><t t-esc="program.cycle_id.name" /></h4>
+                                <t t-set="c" t-value="program.cycle_id"/>
+                            </t>
+                            <div class="thumbnail oe_school_program">
+                                <div class="caption">
+                                    <a t-att-href="program.program_uri"><t t-esc="program.name" /></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </t>
-            </div> 
-        </t> 
+                    </t>
+                </div> 
+            </div>
+        </t>
     </template>
 
     <!-- //////////////////////////////////////////////////////////////// -->
@@ -66,12 +51,17 @@
 
     <!-- TODO à adapter -->
     <template id="programmes_vide">
-        <h1 t-esc="title"/>
-        <div class="oe_structure">
-            <p>Aucun programme de cours correspondant.</p>
-            <hr/>
-            <p style="text-align: center;"><a href="/programmes">Retour à la recherche</a></p>
-        </div>        
+        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <t t-set="title">Programmes</t>
+            <div class="container">
+                <h1 t-esc="title"/>
+                <div class="oe_structure">
+                    <p>Aucun programme de cours correspondant.</p>
+                    <hr/>
+                    <p style="text-align: center;"><a href="/programmes">Retour à la recherche</a></p>
+                </div>        
+            </div>
+        </t>
     </template>
 
     <!-- //////////////////////////////////////////////////////////////// -->
@@ -253,7 +243,7 @@
 
     <template id="cours_fiche">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <t t-set="title">Cours</t>
+            <t t-set="title" t-value="course_docs[0].name"/>
             <div class="container">
                 <t t-foreach="course_docs" t-as="course_doc"> <!-- Problème car avec plusieurs course_doc, potentielle répétition -->
                     <t t-call="website_school_management.cours_fiche_details" />

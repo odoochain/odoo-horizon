@@ -73,7 +73,7 @@ class programmes(http.Controller):
             if (len(options) == 1):
                 return request.redirect(options[0]['uri'])
 
-            template = "website_school_management.programmes"
+            template = "website_school_management.programmes_liste"
             values = {
                 'program_list': programs,
                 'breadcrumb' : breadcrumb,
@@ -81,7 +81,7 @@ class programmes(http.Controller):
             }
         # Si 0 résultat
         else :
-            template = "website_school_management.programmes"
+            template = "website_school_management.programmes_vide"
             values = {
                 'program_list': [],
                 'message' : 'Aucun résultat pour cette recherche.'
