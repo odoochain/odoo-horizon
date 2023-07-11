@@ -34,6 +34,11 @@
         'views/programmes.xml',
         'report/programme_report.xml',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'website_school_management/static/src/scss/base.scss',
+        ]
+    },
     'description': '''
         This module adds web portal access for a school.
     ''',

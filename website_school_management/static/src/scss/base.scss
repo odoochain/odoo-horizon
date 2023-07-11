@@ -1,0 +1,79 @@
+
+
+.breadcrumb {
+    display: inline-flex;
+    padding: 0;
+    gap: 0.5em calc(1.5em - 2px);
+    
+    .breadcrumb-elem {
+        border-top-left-radius: $btn-border-radius;
+        border-bottom-left-radius: $btn-border-radius;
+        background: var(--body-bg);
+        color: var(--body-color);
+        font-weight: 600;
+        font-size: 0.8em;
+        outline: none;
+        padding: 0.2em 1em 0.2em 0.75em;
+        margin-bottom: 4px;
+        position: relative;
+        text-decoration: underline;
+        text-decoration-color: var(--o-cc1-btn-primary);
+        transition: background 0.2s linear, color 0.2s linear;
+        text-align: center;
+
+        &:after,
+        &:before {
+            background: var(--body-bg);
+            bottom: 0;
+            clip-path: polygon(50% 50%, -50% -50%, 0 100%);
+            content: "";
+            left: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            transition: background 0.2s linear;
+            width: 1.5em;
+            z-index: 1;
+        }
+
+        &:before {
+            background: var(--o-cc1-btn-primary);
+            margin-left: 1px;
+        }
+        
+     
+        &:hover:after,
+        &:hover {
+            background: var(--o-cc1-btn-primary);
+            color: var(--o-cc1-btn-primary-text);
+            text-decoration: none;
+            &:before {
+                background: var(--body-bg);
+            }
+        }
+        &:last-child {
+            border-right: none;
+        }
+    
+        &.-active {
+            background: var(--body-bg);
+            color: var(--body-color);
+            border: none;
+            text-decoration: none;
+            margin-top: 1px;
+            padding: 0.2em 0.75em 0.2em 0.75em;
+            border-top-right-radius: $btn-border-radius;
+            border-bottom-right-radius: $btn-border-radius;
+            &:before,
+            &:after {
+                clip-path: none;
+                background: unset;
+            }
+        }
+    }
+}
+.breadcrumb_next_step {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em 0.6em;
+}

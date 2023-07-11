@@ -8,40 +8,74 @@
     <!-- TODO à adapter -->
     <template id="programmes_liste">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <t t-set="title">Programmes</t>
-            <div class="container">
-                <h1 t-esc="title"/>
-                <div class="oe_structure" />
-                <t t-call="website_school_management.programmes_breadcrumb"/>
-                <br/>
-                <div class="my-2">
-                <t t-foreach="options" t-as="option">
-                    <a class="btn btn-primary my-1" t-att-href="option['uri']"><t t-esc="option['name']" /></a>
-                </t>
-                </div>
+            <div class="container my-5">
                 <div class="row">
-                    <t t-set="d" t-value="False"/>
-                    <t t-set="c" t-value="False"/>
-                    <t t-foreach="program_list" t-as="program">
-                        <div class="col-12">
-                            <t t-if="d != program.domain_name">
-                                <h3><t t-esc="program.domain_name" /></h3>
-                                <t t-set="d" t-value="program.domain_name"/>
-                                <t t-set="c" t-value="False"/>
-                            </t>
-                            <t t-if="c != program.cycle_id">
-                                <h4><t t-esc="program.cycle_id.name" /></h4>
-                                <t t-set="c" t-value="program.cycle_id"/>
-                            </t>
-                            <div class="thumbnail oe_school_program">
-                                <div class="caption">
-                                    <a t-att-href="program.program_uri"><t t-esc="program.name" /></a>
-                                </div>
+                    <div class="col-12">
+                        <t t-set="title">Programmes</t>
+                        <h1 t-esc="title"/>
+                        <div class="my-4">
+                            <div class="oe_structure" />
+                            <t t-call="website_school_management.programmes_breadcrumb"/>
+                            <div class="breadcrumb_next_step">
+                                <span class="fw-bold">Aller à :</span>
+                                <t t-foreach="options" t-as="option">
+                                    <a t-att-title="'Aller à ' + option['name']" class="btn btn-outline-primary btn-sm" t-att-href="option ['uri']"><t t-esc="option['name']" /></a>
+                                </t>
                             </div>
+                            <hr/>
                         </div>
-                    </t>
-                </div> 
-            </div>
+                    </div> 
+                    <div class="col-12">
+                        <t t-set="current_cycle" t-value="False"/>
+                        <t t-set="d" t-value="False"/>
+                        <t t-set="c" t-value="False"/>
+                        <!--<t t-foreach="program_list" t-as="program">
+                            <h3 t-if="d != program.domain_name"><t t-esc="program.domain_name" /></h3>
+                            <t t-if="d != program.domain_name" t-call="open_accordion" />
+                            <a class="d-block ps-5" t-att-href="program.program_uri"><t t-esc="program.name" /></a>
+                            <t t-if="d != program.domain_name" t-call="close_accordion" />
+                            <t t-set="d" t-value="program.domain_name"/>
+                        </t>
+                        <hr/>-->
+                        <div class="accordion">
+                            <t t-foreach="program_list" t-as="program">
+                                <t t-if="(((current_cycle != False) and (current_cycle != program.cycle_id.id)))">
+                                    <p>fin liste</p>
+                                    <!--</div>-->
+                                    &lt;/div &gt;
+                                    &lt;/div &gt;
+                                </t>
+                                <t t-if="d != program.domain_name">
+                                    <h3><t t-esc="program.domain_name" /></h3>
+                                    <t t-set="d" t-value="program.domain_name"/>
+                                    <t t-set="c" t-value="False"/>
+                                </t>
+                                <t t-if="c != program.cycle_id">
+                                &lt;div class="accordion-item" &gt;
+                                    <h4 class="accordion-header ps-3">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <t t-esc="program.cycle_id.name" />
+      </button></h4>
+                                    <t t-set="c" t-value="program.cycle_id"/>
+                                </t>
+                                <t t-if="(current_cycle == False) or (current_cycle != program.cycle_id.id)">
+                                    &lt;div class="accordion-collapse collapse" &gt;
+                                    <p>Début liste</p>
+                                    <!--<div class="accordion-collapse collapse">-->
+                                </t>
+                                <a class="d-block ps-5" t-att-href="program.program_uri"><t t-esc="program.name" /></a>
+                                <t t-set="current_cycle" t-value="program.cycle_id.id"/>
+                                <t t-if="program_index == (len(program_list) - 1)">
+                                    <p>fin liste</p>
+                                    <!--</div>-->
+                                    &lt;/div &gt;
+                                    &lt;/div &gt;
+                                </t>
+                            </t>
+                        </div> 
+                    </div> 
+                </div>    
+            </div>    
         </t>
     </template>
 
@@ -52,15 +86,21 @@
     <!-- TODO à adapter -->
     <template id="programmes_vide">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <t t-set="title">Programmes</t>
-            <div class="container">
-                <h1 t-esc="title"/>
-                <div class="oe_structure">
-                    <p>Aucun programme de cours correspondant.</p>
-                    <hr/>
-                    <p style="text-align: center;"><a href="/programmes">Retour à la recherche</a></p>
-                </div>        
-            </div>
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col-12">
+                        <t t-set="title">Programmes</t>
+                        <div class="container">
+                            <h1 t-esc="title"/>
+                            <div class="oe_structure">
+                                <p class="my-3">Aucun programme de cours correspondant à vos critères n'a été trouvé.</p>
+                                <hr/>
+                                <p class="text-center"><a href="/programmes">Retour à la recherche</a></p>
+                            </div>        
+                        </div>
+                    </div> 
+                </div>    
+            </div>   
         </t>
     </template>
 
@@ -316,17 +356,21 @@
     <!-- //////////////////////////////////////////////////////////////// -->
 
     <template id="programmes_breadcrumb">
-        <t t-set="count" t-value="1" />
-        <t t-foreach="breadcrumb" t-as="breadcrumb_item">
-            <t t-if="count &lt; len(breadcrumb)">
-                <a t-att-href="breadcrumb_item['uri']"><t t-esc="breadcrumb_item['name']" /></a>
-                <t t-if="len(breadcrumb) != 1"><span> &gt; </span></t>
-                <t t-set="count" t-value="count + 1" />
-            </t>
-            <t t-else="1">
-                <span><t t-esc="breadcrumb_item['name']" /></span>
-            </t>
+        <t t-if="len(breadcrumb) != 1">
+            <div class="breadcrumb">
+                <t t-set="count" t-value="1" />
+                <t t-foreach="breadcrumb" t-as="breadcrumb_item">
+                    <t t-if="count &lt; len(breadcrumb)">
+                        <a t-att-title="'Retourner à ' + breadcrumb_item['name']" class="breadcrumb-elem" t-att-href="breadcrumb_item['uri']"><t t-esc="breadcrumb_item['name']" /></a>
+                        <t t-set="count" t-value="count + 1" />
+                    </t>
+                    <t t-else="1">
+                        <span class="breadcrumb-elem -active" ><t t-esc="breadcrumb_item['name']" /></span>
+                    </t>
+                </t>
+            </div>
         </t>
     </template>
-  
+    
+    
 </odoo>
