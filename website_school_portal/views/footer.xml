@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+##############################################################################
+#
+#    Copyright (c) 2023 ito-invest.lu
+#                       Jerome Sonnet <jerome.sonnet@ito-invest.lu>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<odoo>
+    <template id="copyright" inherit_id="website.layout" name="School Portal Copyright">
+        <xpath expr="//footer//div[hasclass('o_footer_copyright')]" position="replace">
+            <div t-if="not no_copyright" class="o_footer_copyright">
+                <div class="container py-3">
+                    <div class="row">
+                        <div class="col-sm text-center text-sm-end text-muted">
+                            <span class="me-2">Copyright &amp;copy; <span t-esc="time.strftime('%Y')" /> Ito-Invest &amp; Neodiensis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="footer" inherit_id="website.layout" name="School Portal Footer">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" t-if="not no_footer">
+                <section class="s_text_block pt40 pb16" data-snippet="s_text_block" data-name="Text">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 pt24 pb24">
+                                <h5 class="mb-3">Useful Links</h5>
+                                <ul class="list-unstyled">
+                                    <t t-set="configurator_footer_links" t-value="[]"/>
+                                    <li t-foreach="configurator_footer_links" t-as="link">
+                                        <a t-att-href="link['href']" t-esc="link['text']"/>
+                                    </li>
+                                    <li><a href="/contactus">Contact us</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-5 pt24 pb24">
+                                <t t-call="website_school_portal.custom_footer_description" />
+                            </div>
+                            <div id="connect" class="col-lg-4 offset-lg-1 pt24 pb24">
+                                <h5 class="mb-3"><t t-esc="res_company.name"/></h5>
+
+                                <ul class="list-unstyled">
+                                    <li><i class="fa fa-map-signs fa-fw me-2 mt-2 align-top"/><div class="d-inline-block">
+                                        <t t-esc="res_company.street" /><br/>
+                                        <t t-esc="res_company.zip" />&amp;nbsp;<t t-esc="res_company.city" /><br/>
+                                        <t t-esc="res_company.country_id.name" />
+                                    </div></li>
+                                    <!--<li><i class="fa fa-comment fa-fw me-2"/><span><a href="/contactus">Contact us</a></span></li>-->
+                                    <li><i class="fa fa-envelope fa-fw me-2"/><span><a t-att-href="'mailto:'+res_company.email"><t t-esc="res_company.email" /></a></span></li>
+                                    <li><i class="fa fa-phone fa-fw me-2"/><span class="o_force_ltr"><a t-att-href="'tel:'+res_company.phone"><t t-esc="res_company.phone" /></a></span></li>
+                                </ul>
+                                <div class="s_social_media text-start o_not_editable" data-snippet="s_social_media" data-name="Social Media" contenteditable="false">
+                                    <h5 class="s_social_media_title d-none" contenteditable="true">Follow us</h5>
+                                    <a href="/website/social/facebook" class="s_social_media_facebook" target="_blank">
+                                        <i class="fa fa-facebook rounded-circle shadow-sm"/>
+                                    </a>
+                                    <a href="/website/social/twitter" class="s_social_media_twitter" target="_blank">
+                                        <i class="fa fa-twitter rounded-circle shadow-sm"/>
+                                    </a>
+                                    <a href="/website/social/linkedin" class="s_social_media_linkedin" target="_blank">
+                                        <i class="fa fa-linkedin rounded-circle shadow-sm"/>
+                                    </a>
+                                    <a href="/" class="text-800">
+                                        <i class="fa fa-home rounded-circle shadow-sm"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Zones éditables -->
+    <template id="website_school_portal.custom_footer_description" name="Scool Footer Description"> 
+        <div class="oe_structure">
+            <h5>Presentation</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, tellus porta gravida sodales, nibh felis sagittis massa, at gravida quam nisi et tortor. <br/>Etiam interdum elit velit, vel convallis augue porttitor et. In in metus tempus nulla venenatis pharetra ut ac urna. In hac habitasse platea dictumst. Morbi facilisis id tellus a tempus. Vivamus fringilla at urna eu tempor. Sed ac ultrices erat. Nullam vitae molestie sem, vel aliquet quam. Curabitur augue dui, scelerisque a neque id, iaculis suscipit orci. Suspendisse potenti. Cras hendrerit felis vel feugiat pharetra. <br/>Curabitur vestibulum nunc at varius fermentum. In at lacinia enim, vel blandit ligula.</p>
+        </div>
+    </template>
+    
+</odoo>
+
+
+
