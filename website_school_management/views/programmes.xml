@@ -5,28 +5,21 @@
     <!-- //                     LISTE PROGRAMMES                       // -->
     <!-- //////////////////////////////////////////////////////////////// -->
 
-    <template id="open_accordion">
-    </template>
-    <template id="close_accordion">
-    </template>
-    <!-- TODO à adapter -->
     <template id="programmes_liste">
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
             <div class="container my-5">
                 <div class="row">
                     <div class="col-12">
-                        <t t-set="title">Programmes</t>
-                        <h1 class="mb-3" t-esc="title"/>
+                        <h1 class="mb-3">Programmes</h1>
                         <div class="mt-4">
-                            <div class="oe_structure" />
                             <t t-call="website_school_management.programmes_breadcrumb"/>
                             <div class="breadcrumb_next_step">
-                                <span class="fw-bold">Filtrer :</span>
+                                <span class="fw-bold">Sélectionner :</span>
                                 <t t-foreach="options" t-as="option">
-                                    <a t-att-title="'Filtrer ' + option['name']" class="btn btn-outline-primary btn-sm fw-bold" t-att-href="option ['uri']"><t t-esc="option['name']" /></a>
+                                    <a t-att-title="'Sélectionner ' + option['name']" class="btn btn-outline-primary btn-sm fw-bold" t-att-href="option ['uri']"><t t-esc="option['name']" /></a>
                                 </t>
                             </div>
-                            <hr class="mt-5 mb-0"/>
+                            <hr class="mt-4 mb-0"/>
                         </div>
                     </div> 
                     <div class="col-12">
@@ -34,9 +27,9 @@
                         <t t-set="d" t-value="False"/>
                         <t t-set="c" t-value="False"/>
                         <t t-foreach="program_list" t-as="program">
-                            <t t-if="(((current_cycle != False) and (current_cycle != program.cycle_id.id)))" t-call="website_school_management.close_list" />
+                            <t t-if="(current_cycle != False) and (current_cycle != program.cycle_id.id)" t-call="website_school_management.close_list" />
                             <t t-if="d != program.domain_name">
-                                <h3 class="mt-5" t-esc="program.domain_name" />
+                                <h3 class="mt-4" t-esc="program.domain_name" />
                                 <t t-set="d" t-value="program.domain_name"/>
                                 <t t-set="c" t-value="False"/>
                             </t>
@@ -61,20 +54,17 @@
     <!-- //                PAS DE RESULTATS (PROGRAMMES)               // -->
     <!-- //////////////////////////////////////////////////////////////// -->
 
-    <!-- TODO à adapter -->
     <template id="programmes_vide">
-        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+        <t t-call="website.layout">
             <div class="container my-5">
                 <div class="row">
                     <div class="col-12">
                         <t t-set="title">Programmes</t>
                         <div class="container">
                             <h1 t-esc="title"/>
-                            <div class="oe_structure">
-                                <p class="my-3">Aucun programme de cours correspondant à vos critères n'a été trouvé.</p>
-                                <hr/>
-                                <p class="text-center"><a href="/programmes">Retour à la recherche</a></p>
-                            </div>        
+                            <p class="my-3">Aucun programme de cours correspondant à vos critères n'a été trouvé.</p>
+                            <hr/>
+                            <p class="text-center"><a href="/programmes">Retour à la recherche</a></p>
                         </div>
                     </div> 
                 </div>    
@@ -86,68 +76,66 @@
     <!-- //                     FICHE PROGRAMME                        // -->
     <!-- //////////////////////////////////////////////////////////////// -->
 
-    <!-- TODO à adapter -->
     <template id="programme_fiche">
-    <t t-call="website.layout">
-        <t t-set="title" t-value="program.name" />
-        <div class="container">
-            <h2>Détails du programme</h2>
-            <div>  
-                <a class="btn btn-default" t-att-href="'/impression_programme/%s' % program.id" target="new">
-                    <i class="fa fa-print fa-2x" title="Imprimer" aria-hidden="true"></i>
-                    <span class="sr-only">Imprimer</span>
-                </a> 
-            </div>
-            <hr/>
-            <t t-call="website_school_management.programmes_breadcrumb"/>
-            <hr/>
-            <t t-call="website_school_management.programme_details_contenu"/>
-        </div>
-    </t>
+        <t t-call="website.layout">
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex flex-column-reverse flex-sm-row align-items-center align-items-sm-start justify-content-sm-between gap-4">
+                            <h1 t-esc="program.name" />
+                            <a class="d-flex gap-3 align-items-center justify-content-center btn btn-primary h-fit-content w-fit-content" t-att-href="'/impression_programme/%s' %program.id" target="new" title="Imprimer le programme de cours" >
+                                <span class="d-sm-none fw-bold">Imprimer le programme</span>
+                                <i class="fa fa-print fs-3" aria-hidden="true"></i>
+                                <span class="sr-only">Imprimer le programme de cours</span>
+                            </a> 
+                        </div>
+                        <div class="mt-4">
+                            <t t-call="website_school_management.programmes_breadcrumb"/>
+                            <hr class="mt-0 mb-4"/>
+                        </div>
+                        <t t-call="website_school_management.programme_details_contenu"/>
+                    </div> 
+                </div>    
+            </div>    
+        </t>
     </template>
 
     <!-- TODO à adapter -->
    <template id="programme_details_contenu" name="Program Details Content">
-        <div>
-            <h4>PROFIL D’ENSEIGNEMENT</h4>
-            <h4><t t-esc="program.name" /></h4>
-        </div>
-        <hr/>
-        <div>
-            <div>
-                <p>DOMAINE</p>
-                <p><t t-esc="program.domain_name" /></p>
+        <dl class="d-flex flex-wrap pt-2 mb-5">
+            <div class="flex-grow-1">
+                <dt class="border text-center d-block w-100 py-2 px-3 o_cc5">DOMAINE</dt>
+                <dd class="border text-center border-top-0 d-block w-100 py-2 px-3 mb-3" t-esc="program.domain_name" />
             </div>
-            <div>
-                <p>CYCLE</p>
-                <p><t t-esc="program.cycle_id.name" /></p>
+            <div class="flex-grow-1">
+                <dt class="border text-center d-block w-100 py-2 px-3 o_cc5">CYCLE</dt>
+                <dd class="border text-center border-top-0 d-block w-100 py-2 px-3 mb-3" t-esc="program.cycle_id.name" />
             </div>
-            <div>
-                <p>SECTION</p>
-                <p><t t-esc="program.speciality_id.section_id.name" /></p>
+            <div class="flex-grow-1">
+                <dt class="border text-center d-block w-100 py-2 px-3 o_cc5">SECTION</dt>
+                <dd class="border text-center border-top-0 d-block w-100 py-2 px-3 mb-3" t-esc="program.speciality_id.section_id.name" />
             </div>
-            <div>
-                <p>ORIENTATION</p>
-                <p><t t-esc="program.speciality_id.track_id.name" /></p>
+            <div class="flex-grow-1">
+                <dt class="border text-center d-block w-100 py-2 px-3 o_cc5">ORIENTATION</dt>
+                <dd class="border text-center border-top-0 d-block w-100 py-2 px-3 mb-3" t-esc="program.speciality_id.track_id.name" />
             </div>
-            <div>
-                <p>SPÉCIALITÉ</p>
-                <p><t t-esc="program.speciality_id.name" /></p>
+            <div class="flex-grow-1">
+                <dt class="border text-center d-block w-100 py-2 px-3 o_cc5">SPÉCIALITÉ</dt>
+                <dd class="border text-center border-top-0 d-block w-100 py-2 px-3 mb-3" t-esc="program.speciality_id.name" />
             </div>
-        </div>
-        <hr/>
+        </dl>
         <div t-if="program.description">
-            <h4>VADE MECUM</h4>
+            <h2 class="mb-4">Vade-mecum</h2>
             <p><t t-esc="program.description"/></p>
             <hr/>
         </div>
         <div>
-            <h4>PROGRAMME DES COURS</h4>
+            <h2 class="mb-4">Programme des cours</h2>
             <div t-foreach="program.bloc_ids" t-as="bloc">
                 <t t-call="website_school_management.school_bloc_contenu"/>
             </div>
         </div>
-        <hr/>
+        <hr class="my-5"/>
     </template>
 
     <!-- TODO à adapter -->
@@ -245,12 +233,10 @@
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
             <t t-set="title">Groupe de cours</t>
             <div class="container">
-                <div class="oe_structure">
-                    <h1>Pas de description</h1>      
-                    <p>Veuillez contacter le secrétariat ou votre professeur pour obtenir plus d'informations sur cette activité.</p>
-                    <hr/>
-                    <p style="text-align: center;"><a href="/programmes">Retour à la recherche</a></p>
-                </div>
+                <h1>Pas de description</h1>      
+                <p>Veuillez contacter le secrétariat ou votre professeur pour obtenir plus d'informations sur cette activité.</p>
+                <hr/>
+                <p style="text-align: center;"><a href="/programmes">Retour à la recherche</a></p>
             </div>
         </t>
     </template>

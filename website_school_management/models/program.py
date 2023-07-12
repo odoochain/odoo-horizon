@@ -5,6 +5,8 @@ class ProgramWeb(models.Model):
     _inherit = 'school.program'
 
     domain_slug = fields.Char(related='speciality_id.domain_id.slug', string='Domain Slug',store=False)
+    track_slug = fields.Char(related='speciality_id.track_id.slug', string='Track Slug',store=False)
+    track_name = fields.Char(related='speciality_id.track_id.name', string='Track Name',store=False)
     year_name = fields.Char(related='year_id.name', string='Year Full Name',store=False)
     speciality_slug = fields.Char(related='speciality_id.slug', string='Speciality Slug',store=False)
     speciality_name = fields.Char(related='speciality_id.name', string='Speciality Name',store=False)
@@ -23,7 +25,7 @@ class ProgramWeb(models.Model):
     @api.depends('domain_slug', 'year_name', 'speciality_slug', 'cycle_grade_slug', 'cycle_name_slug', 'title_slug')
     def compute_uri(self):
         for prog in self:
-            prog.program_uri = "/programmes/" + prog.domain_slug + "/" + prog.speciality_slug + "/" + prog.year_name + "/" + prog.cycle_grade_slug + "/" + prog.cycle_name_slug + "/" + prog.title_slug
+            prog.program_uri = "/programmes/" + prog.domain_slug + "/" + prog.track_slug + "/" + prog.speciality_slug + "/" + prog.year_name + "/" + prog.cycle_grade_slug + "/" + prog.cycle_name_slug + "/" + prog.title_slug
 
 
 class CycleWeb(models.Model):
@@ -49,6 +51,15 @@ class DomainWeb(models.Model):
     def compute_slug(self):
         for dom in self:
             dom.slug = slugify_one(dom.name)
+
+class TrackWeb(models.Model):
+    _inherit = 'school.track'
+
+    slug = fields.Char(string='Track Slug', compute='compute_slug', store=True)
+    @api.depends('name')
+    def compute_slug(self):
+        for track in self:
+            track.slug = slugify_one(track.name)
 
 class SpecialityWeb(models.Model):
     _inherit = 'school.speciality'
