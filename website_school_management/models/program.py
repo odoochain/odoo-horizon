@@ -4,10 +4,10 @@ from odoo.addons.http_routing.models.ir_http import slugify_one
 class ProgramWeb(models.Model):
     _inherit = 'school.program'
 
+    year_name = fields.Char(related='year_id.name', string='Year Full Name',store=False)
     domain_slug = fields.Char(related='speciality_id.domain_id.slug', string='Domain Slug',store=False)
     track_slug = fields.Char(related='speciality_id.track_id.slug', string='Track Slug',store=False)
     track_name = fields.Char(related='speciality_id.track_id.name', string='Track Name',store=False)
-    year_name = fields.Char(related='year_id.name', string='Year Full Name',store=False)
     speciality_slug = fields.Char(related='speciality_id.slug', string='Speciality Slug',store=False)
     speciality_name = fields.Char(related='speciality_id.name', string='Speciality Name',store=False)
     cycle_grade_slug = fields.Char(related='cycle_id.slug_grade', string='Cycle Grade Slug',store=False)
@@ -22,10 +22,10 @@ class ProgramWeb(models.Model):
 
     # computed uri
     program_uri = fields.Char(string='Program URI', compute='compute_uri', store=False) # store=False : not used for search
-    @api.depends('domain_slug', 'year_name', 'speciality_slug', 'cycle_grade_slug', 'cycle_name_slug', 'title_slug')
+    @api.depends('year_name', 'domain_slug', 'track_slug', 'speciality_slug', 'cycle_grade_slug', 'cycle_name_slug', 'title_slug')
     def compute_uri(self):
         for prog in self:
-            prog.program_uri = "/programmes/" + prog.domain_slug + "/" + prog.track_slug + "/" + prog.speciality_slug + "/" + prog.year_name + "/" + prog.cycle_grade_slug + "/" + prog.cycle_name_slug + "/" + prog.title_slug
+            prog.program_uri = "/programmes/" + prog.year_name + "/" + prog.domain_slug + "/" + prog.track_slug + "/" + prog.speciality_slug + "/" + prog.cycle_grade_slug + "/" + prog.cycle_name_slug + "/" + prog.title_slug
 
 
 class CycleWeb(models.Model):

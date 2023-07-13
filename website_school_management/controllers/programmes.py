@@ -12,33 +12,33 @@ _logger = logging.getLogger(__name__)
 class programmes(http.Controller):
     @http.route([
         '/programmes',
-        '/programmes/<string:domain>',
-        '/programmes/<string:domain>/<string:track>',
-        '/programmes/<string:domain>/<string:track>/<string:speciality>',
-        '/programmes/<string:domain>/<string:track>/<string:speciality>/<string:year>',
-        '/programmes/<string:domain>/<string:track>/<string:speciality>/<string:year>/<string:cycle_type>',
-        '/programmes/<string:domain>/<string:track>/<string:speciality>/<string:year>/<string:cycle_type>/<string:cycle>',
-        '/programmes/<string:domain>/<string:track>/<string:speciality>/<string:year>/<string:cycle_type>/<string:cycle>/<string:title>',
+        '/programmes/<string:year>',
+        '/programmes/<string:year>/<string:domain>',
+        '/programmes/<string:year>/<string:domain>/<string:track>',
+        '/programmes/<string:year>/<string:domain>/<string:track>/<string:speciality>',
+        '/programmes/<string:year>/<string:domain>/<string:track>/<string:speciality>/<string:cycle_type>',
+        '/programmes/<string:year>/<string:domain>/<string:track>/<string:speciality>/<string:cycle_type>/<string:cycle>',
+        '/programmes/<string:year>/<string:domain>/<string:track>/<string:speciality>/<string:cycle_type>/<string:cycle>/<string:title>',
         ], type='http', auth='public', website = True)
-    def programmes_list(self, domain = None, track = None, speciality = None, year = None, cycle_type = None, cycle = None, title = None, **post):
+    def programmes_list(self, year = None, domain = None, track = None, speciality = None, cycle_type = None, cycle = None, title = None, **post):
         # Préparation des paramètres de recherche
         searchParams = [('state', '=', 'published'), ('domain_name', '!=', None), ('track_name', '!=', None)]
         # searchParams = [('domain_name', '!=', None)]
         segment = 0
 
-        if (domain):
-            searchParams.append(('domain_slug', '=', domain))
+        if (year):
+            searchParams.append(('year_name', '=', year))
             segment = 1
-            if (track):
-                searchParams.append(('track_slug', '=', track))
+            if (domain):
+                searchParams.append(('domain_slug', '=', domain))
                 segment = 2
-                if (speciality):
-                   searchParams.append(('speciality_slug', '=', speciality))
-                   segment = 3
-                   if (year):
-                       searchParams.append(('year_name', '=', year))
-                       segment = 4
-                       if (cycle_type):
+                if (track):
+                    searchParams.append(('track_slug', '=', track))
+                    segment = 3
+                    if (speciality):
+                        searchParams.append(('speciality_slug', '=', speciality))
+                        segment = 4
+                        if (cycle_type):
                            searchParams.append(('cycle_grade_slug', '=', cycle_type))
                            segment = 5
                            if (cycle):
@@ -97,57 +97,58 @@ class programmes(http.Controller):
     def get_breadcrumb (self, program, segment):
         breadcrumb = [{'uri' : "/programmes/", 'name' : "Tous les programmes"}]
         if (segment >= 1):
-            breadcrumb.append({'uri' : '/programmes/' + program.domain_slug, 'name' : program.domain_name})
+            breadcrumb.append({'uri' : '/programmes/' + program.year_name, 'name' : program.year_name})
             if (segment >= 2):
-                breadcrumb.append({'uri' : '/programmes/' + program.domain_slug + "/" + program.track_slug, 'name' : program.track_name})
+                breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug, 'name' : program.domain_name})
                 if (segment >= 3):
-                    breadcrumb.append({'uri' : '/programmes/' + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug, 'name' : program.speciality_name})
+                    breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug, 'name' : program.track_slug})
                     if (segment >= 4):
-                        breadcrumb.append({'uri' : '/programmes/' + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug + "/" + program.year_name, 'name' : program.year_name})
+                        breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug, 'name' : program.speciality_name})
                         if (segment >= 5):
-                            breadcrumb.append({'uri' : '/programmes/' + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug + "/" + program.year_name + "/" + program.cycle_grade_slug, 'name' : program.   cycle_grade},)
+                            breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug + "/" + program.cycle_grade_slug, 'name' : program.cycle_grade},)
                             if (segment >= 6):
-                                breadcrumb.append({'uri' : '/programmes/' + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug + "/" + program.year_name + "/" + program.cycle_grade_slug + "/" + program. cycle_name_slug, 'name' : program.cycle_name})
+                                breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug + "/" + program.cycle_grade_slug + "/" + program. cycle_name_slug, 'name' : program.cycle_name})
                                 if (segment >= 7):
                                     breadcrumb.append({'uri' : '/programmes/' + program.program_uri, 'name' : program.title})
         return breadcrumb
     
+
     # Génération des options
     def get_options (self, programs, segment):
         options = []
         if (segment == 0):
             for program in programs:
-                option = {'uri' : '/programmes/' + program.domain_slug, 'name' : program.domain_name}
+                option = {'uri' : '/programmes/' + program.year_name, 'name' : program.year_name}
                 if (option not in options):
                     options.append(option)
         if (segment == 1):
             for program in programs:
-                option = {'uri' : '/programmes/' + program.domain_slug + '/' + program.track_slug, 'name' : program.track_name}
+                option = {'uri' : '/programmes/' + program.year_name + '/' + program.domain_slug, 'name' : program.domain_name}
                 if (option not in options):
                     options.append(option)
         elif (segment == 2):
             for program in programs:
-                option = {'uri' : '/programmes/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug, 'name' : program.speciality_name}
+                option = {'uri' : '/programmes/' + program.year_name + '/' + program.domain_slug + '/' + program.track_slug, 'name' : program.track_name}
                 if (option not in options):
                     options.append(option)            
         elif (segment == 3):
             for program in programs:
-                option = {'uri' : '/programmes/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug + '/' + program.year_name, 'name' : program.year_name}
+                option = {'uri' : '/programmes/' + program.year_name + '/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug, 'name' : program.speciality_slug}
                 if (option not in options):
                     options.append(option)            
         elif (segment == 4):
             for program in programs:
-                option = {'uri' : '/programmes/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug + '/' + program.year_name + '/' + program.cycle_grade_slug, 'name' : program.cycle_grade}
+                option = {'uri' : '/programmes/' + program.year_name + '/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug + '/' + program.cycle_grade_slug, 'name' : program.cycle_grade}
                 if (option not in options):
                     options.append(option) 
         elif (segment == 5):
             for program in programs:
-                option = {'uri' : '/programmes/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug + '/' + program.year_name + '/' + program.cycle_grade_slug + '/' + program.cycle_name_slug, 'name' : program.cycle_name}
+                option = {'uri' : '/programmes/' + program.year_name + '/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug + '/' + program.cycle_grade_slug + '/' + program.cycle_name_slug, 'name' : program.cycle_name}
                 if (option not in options):
                     options.append(option)             
         elif (segment == 6):
             for program in programs:
-                option = {'uri' : '/programmes/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug + '/' + program.year_name + '/' + program.cycle_grade_slug + '/' + program.cycle_name_slug + '/' + program.title_slug, 'name' : program.title}
+                option = {'uri' : '/programmes/' + program.year_name + '/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug + '/' + program.cycle_grade_slug + '/' + program.cycle_name_slug + '/' + program.title_slug, 'name' : program.title}
                 if (option not in options):
                     options.append(option)
         return options
