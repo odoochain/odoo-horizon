@@ -21,7 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <template id="header_language_selector" inherit_id="website.placeholder_header_language_selector" name="School Portal Language Selector">
+    <template id="hz_header_language_selector" inherit_id="website.placeholder_header_language_selector" name="Horizon Header Language Selector">
         <xpath expr="." position="inside">
             <t t-set="flags" t-value="True"/>
             <t id="header_language_selector_call" t-call="portal.language_selector">
@@ -30,7 +30,7 @@
         </xpath>
     </template>
 
-    <template id="no_header_call_to_action" inherit_id="website.placeholder_header_call_to_action" name="Header Call to Action">
+    <template id="no_header_call_to_action" inherit_id="website.placeholder_header_call_to_action" name="Horizon No Header CTA">
         <xpath expr="." position="inside" />
     </template>
 </odoo>

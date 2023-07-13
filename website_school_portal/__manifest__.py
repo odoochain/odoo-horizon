@@ -34,6 +34,7 @@
         'views/main.xml',
         'views/footer.xml',
         'views/header.xml',
+        'views/custom.xml',
     ],
     'description': '''
         This module defines default page rendering for School Portal based on Horizon School Management.
