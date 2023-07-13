@@ -238,9 +238,9 @@
                             </div>
                             <hr class="d-md-none mb-5" />
                             <div class="block-cours">
-                                <h6 class="fs-5">Cours</h6>
+                                <h6 class="fs-5 -cours">Cours</h6>
                                 <div class="table-responsive mb-3">
-                                    <div class="table-row header o_cc5">
+                                    <div class="table-row -cours header o_cc5">
                                         <div class="cell border">
                                             Nom
                                         </div>
@@ -258,7 +258,7 @@
                                         </div>
                                     </div>
                                     <t t-foreach="course_group.course_ids" t-as="course">
-                                        <div class="table-row">
+                                        <div class="table-row -cours">
                                             <div class="cell border" data-title="Nom">
                                                 <span class="cell-value">
                                                     <a class="link-primary p-0" t-esc="course.title" t-att-href="'/cours/%s' % slug(course)" target="new"/>

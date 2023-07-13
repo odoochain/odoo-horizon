@@ -101,11 +101,13 @@
             padding: 0.8em 0 0.65em;
             display: block;
             margin-bottom: $spacer;
-            padding-top: calc(($spacer * .25) + 0.6em);
-            padding-bottom: $spacer * .25;
-            padding-left: $spacer;
-            padding-right: $spacer;
-            border: 1px solid $border-color !important;
+            &.-cours {
+                padding-top: calc(($spacer * .25) + 0.6em);
+                padding-bottom: $spacer * .25;
+                padding-left: $spacer;
+                padding-right: $spacer;
+                border: 1px solid $border-color !important;
+            }
             &:not(.header):nth-of-type(odd) {
                 background: unset;
             }
@@ -196,5 +198,8 @@
     @include media-breakpoint-down(lg) {
         padding-left: 0;
         padding-right: 0;
+        h6.-cours {
+            padding-left: $spacer;
+        }
     }
 }
