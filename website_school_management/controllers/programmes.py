@@ -23,7 +23,7 @@ class programmes(http.Controller):
     def programmes_list(self, year = None, domain = None, track = None, speciality = None, cycle_type = None, cycle = None, title = None, **post):
         # Préparation des paramètres de recherche
         searchParams = [('state', '=', 'published'), ('domain_name', '!=', None), ('track_name', '!=', None)]
-        # searchParams = [('domain_name', '!=', None)]
+        # searchParams = [('domain_name', '!=', None), ('track_name', '!=', None)]
         segment = 0
 
         if (year):
@@ -101,7 +101,7 @@ class programmes(http.Controller):
             if (segment >= 2):
                 breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug, 'name' : program.domain_name})
                 if (segment >= 3):
-                    breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug, 'name' : program.track_slug})
+                    breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug, 'name' : program.track_name})
                     if (segment >= 4):
                         breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug, 'name' : program.speciality_name})
                         if (segment >= 5):
@@ -133,7 +133,7 @@ class programmes(http.Controller):
                     options.append(option)            
         elif (segment == 3):
             for program in programs:
-                option = {'uri' : '/programmes/' + program.year_name + '/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug, 'name' : program.speciality_slug}
+                option = {'uri' : '/programmes/' + program.year_name + '/' + program.domain_slug + '/' + program.track_slug + '/' + program.speciality_slug, 'name' : program.speciality_name}
                 if (option not in options):
                     options.append(option)            
         elif (segment == 4):
