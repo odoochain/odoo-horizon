@@ -102,7 +102,8 @@
             display: block;
             margin-bottom: $spacer;
             &.-cours {
-                padding-top: calc(($spacer * .25) + 0.6em);
+                //padding-top: calc(($spacer * .25) + 0.6em);
+                padding-top: 0;
                 padding-bottom: $spacer * .25;
                 padding-left: $spacer;
                 padding-right: $spacer;
@@ -119,7 +120,6 @@
             }
             .cell {
                 margin-bottom: 0.6em;
-                border: none !important;
                 padding: 0;
                 display: flex;
                 justify-content: space-between;
@@ -133,6 +133,9 @@
                     background: var(--body-bg);
                     z-index: 1;
                     padding-left: $spacer;
+                }
+                &:not(.cell-name) {
+                    border: none !important;
                 }
                 &:before {
                     margin-bottom: 0.2em;
@@ -155,9 +158,42 @@
                     top: calc(50% - 1px);
                     z-index: 0;
                 }
+                &.cell-teacher {
+                    flex-direction: column;
+                    .cell-value {
+                        padding-left: 0;
+                    }
+                    &:after {
+                        border-bottom: none;
+                    }
+                }
+                &.cell-name {
+                    margin-bottom: $spacer;
+                    margin-left: -$spacer;
+                    margin-right: -$spacer;
+                    padding-top: $spacer * .25;
+                    padding-bottom: $spacer * .25;
+                    padding-left: $spacer;
+                    padding-right: $spacer;
+                    border-top: none !important;
+                    border-left: none !important;
+                    border-right: none !important;
+                    justify-content: flex-start;
+                    .cell-value{
+                        padding-left: 0;
+                    }
+                    &:before {
+                        content: "";
+                        margin-bottom: 0;
+                        padding-right: 0;
+                    }
+                    &:after {
+                        border-bottom: none;
+                    }
+                }
             }
         }
-        @media (max-width: 420px) {
+        @media (max-width: 360px) {
             .cell {
                 flex-direction: column;
                 .cell-value {
@@ -185,9 +221,22 @@
 .accordion {
     background: var(--body-bg);
     color: var(--body-color);
+    .group-title {
+        position: relative;
+        bottom: -1px;
+        padding-top : $spacer !important;
+        padding-bottom : $spacer !important;
+    }
     @include media-breakpoint-down(lg) {
         .group-title {
             width: 100%;
+        }
+    }
+    .accordion-body {
+        background: #00000005;
+        & > div,
+        h5 {
+            background: var(--body-bg);
         }
     }
 }

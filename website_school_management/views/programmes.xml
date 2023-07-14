@@ -168,18 +168,26 @@
                             <h4 class="mt-5" t-esc="course_group.cg_grouping.name"/>
                         </t>
                         <t t-set="course_group_group" t-value="course_group.cg_grouping.id"/>
-                        <h5 class="group-title w-fit-content border border-bottom-0 d-flex flex-wrap gap-2 mt-5 mb-0 py-2 px-4">
-                            Unités d’enseignement&amp;nbsp;: <a class="link-primary d-block p-0" t-esc="course_group.title" t-att-href="'/groupe_de_cours/%s' % slug(course_group)" target="_self"/>
+                        <h5 class="group-title w-fit-content border border-bottom-0 d-flex flex-column gap-2 mt-5 mb-0 py-2 px-4">
+                            <span class="d-flex flex-wrap gap-2">
+                            Unité d’enseignement&amp;nbsp;: <a class="link-primary d-block p-0" t-esc="course_group.title" t-att-href="'/groupe_de_cours/%s' % slug(course_group)" target="_self"/>
+                            </span>
+                            <span class="d-flex flex-wrap gap-2 fs-6">
+                                Professeur&amp;nbsp;:
+                                <span class="fw-normal fst-italic">
+                                    <t t-esc="course_group.responsible_id.name"/>
+                                </span>
+                            </span>
                         </h5>
                         <div class="p-3 mb-4 border">
                             <div class="px-3">
                                 <div class="table-responsive mt-3 mb-4">
                                     <div class="table-row header o_cc5">
+                                        <!--<div class="cell border">
+                                            Professeur
+                                        </div>-->
                                         <div class="cell border">
                                             Code
-                                        </div>
-                                        <div class="cell border">
-                                            Professeur
                                         </div>
                                         <div class="cell border">
                                             Heures
@@ -198,14 +206,14 @@
                                         </div>
                                     </div>
                                     <div class="table-row">
+                                        <!--<div class="cell cell-teacher border" data-title="Professeur">
+                                            <span class="cell-value">
+                                                <t t-esc="course_group.responsible_id.name"/>
+                                            </span>
+                                        </div>-->
                                         <div class="cell border" data-title="Code">
                                             <span class="cell-value">
                                                 <t t-esc="course_group.ue_id"/>
-                                            </span>
-                                        </div>
-                                        <div class="cell border" data-title="Professeur">
-                                            <span class="cell-value">
-                                                <t t-esc="course_group.responsible_id.name"/>
                                             </span>
                                         </div>
                                         <div class="cell border" data-title="Heures">
@@ -259,7 +267,7 @@
                                     </div>
                                     <t t-foreach="course_group.course_ids" t-as="course">
                                         <div class="table-row -cours">
-                                            <div class="cell border" data-title="Nom">
+                                            <div class="cell cell-name border" data-title="Nom">
                                                 <span class="cell-value">
                                                     <a class="link-primary p-0" t-esc="course.title" t-att-href="'/cours/%s' % slug(course)" target="new"/>
                                                 </span>
