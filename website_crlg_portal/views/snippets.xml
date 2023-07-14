@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Template générique du snippet -->
+    <template id="hz_generic_insert_snippet" name="Snippet générique">
+        <section class="hz_generic_insert_snippet" data-template-name="hz_connexion_snippet">
+            <div class="container">
+                <div class="dynamic_snippet_template"/>
+            </div>
+        </section>
+    </template>
+
+    <!-- Template snippet connexion -->
+    <template id="hz_connexion_snippet">
+            <div class="row" t-ignore="true">
+                <t t-if="request.env.user == request.website.user_id">
+                    <div class="col-lg-3 o_colored_level">
+                        <p style="text-align: center;">
+                            <br/>
+                        </p>
+                    </div>
+                    <div class="col-lg-3 o_colored_level">
+                        <p style="text-align: center;">
+                            <strong>
+                                <em t-esc="'Déjà inscrit ?'" />
+                            </strong>
+                        </p>
+                        <p style="text-align: center;">
+                            <a href="/my/home" class="btn btn-primary rounded-circle o_we_force_no_transition" data-bs-original-title="" title="" aria-describedby="popover707520" t-esc="'Se connecter'"/>
+                            <br/>
+                        </p>
+                    </div>
+                    <div class="col-lg-3 o_colored_level">
+                        <p style="text-align: center;">
+                            <strong>
+                                <em t-esc="'Pas encore de compte ?'" />
+                            </strong>
+                        </p>
+                        <p style="text-align: center;">
+                            <a href="/web/signup" class="btn btn-fill-secondary rounded-circle" data-bs-original-title="" title="">
+                                <font class="text-white" t-esc="'S\'inscrir​​​​​​e'">​</font>
+                            </a>
+                        </p>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="row">
+                        <div class="o_colored_level col-lg-12">
+                            <p style="text-align: center;">
+                                <a href="/my/home" class="btn btn-primary rounded-circle" data-bs-original-title="" title="" t-esc="'Voir mon compte'"/>
+                                <br/>
+                            </p>
+                        </div>
+                    </div>
+                </t>
+            </div>
+    </template>
+
+    <!-- Ajout du snippet aux blocks de l'éditeur -->
+    <template id="hz_snippets_horizon" inherit_id="website.snippets" name="Snippets Horizon">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="hz_snippets_horizon_custom_horizon" class="o_panel">
+                <div class="o_panel_header">Horizon</div>
+                <div class="o_panel_body">
+                    <t t-snippet="website_crlg_portal.hz_generic_insert_snippet" t-thumbnail=""/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Options permettant de sélectionner le template à afficher dans le snippet générique -->
+    <template id="s_generic_insert_options" inherit_id="website.snippet_options" name="Snippet options">
+        <xpath expr="//div[@data-js='Box']" position="after">
+            <div data-js="s_generic_insert_options" data-selector=".hz_generic_insert_snippet" data-no-preview="true">
+                <we-select string="Snippet" data-attribute-name="templateName" data-no-preview="true">
+                    <we-button data-select-data-attribute="hz_connexion_snippet">Boutons de connexion</we-button>
+                </we-select>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

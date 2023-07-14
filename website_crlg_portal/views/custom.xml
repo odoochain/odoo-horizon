@@ -41,47 +41,7 @@
                                     <br/>
                                 </p>
                                 <hr />
-                                <p style="text-align: center;">[À remplacer par le snippet]</p>
-                                <div class="o_text_columns">
-                                    <div class="row">
-                                        <div class="col-lg-3 o_colored_level">
-                                            <p style="text-align: center;">
-                                                <br/>
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-3 o_colored_level">
-                                            <p style="text-align: center;">
-                                                <strong>
-                                                    <em>Déjà inscrit ?</em>
-                                                </strong>
-                                            </p>
-                                            <p style="text-align: center;">
-                                                <a href="/my/home" class="btn btn-primary rounded-circle o_we_force_no_transition" data-bs-original-title="" title="" aria-describedby="popover707520">Se connecter</a>
-                                                <br/>
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-3 o_colored_level">
-                                            <p style="text-align: center;">
-                                                <strong>
-                                                    <em>Pas encore de compte ?</em>
-                                                </strong>
-                                            </p>
-                                            <p style="text-align: center;">
-                                                <a href="/web/signup" class="btn btn-fill-secondary rounded-circle" data-bs-original-title="" title="">
-                                                    <font class="text-white">S'inscrir​​​​​​e​​​​​​</font>
-                                                </a>
-                                            </p>
-                                        </div>
-                                        <div class="row">
-                                            <div class="o_colored_level col-lg-12">
-                                                <p style="text-align: center;">
-                                                    <a href="/my/home" class="btn btn-primary rounded-circle" data-bs-original-title="" title="">Voir mon compte</a>
-                                                    <br/>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="oe_structure oe_empty" id="oe_structure_login_buttons"/>
                             </div>
                         </div>
                     </div>

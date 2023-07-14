@@ -30,6 +30,7 @@
     ],
     'data': [
         'views/custom.xml',
+        'views/snippets.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [
@@ -37,6 +38,7 @@
         ],
         'web.assets_frontend': [
             'website_crlg_portal/static/src/scss/main.scss',
+            'website_crlg_portal/static/src/js/snippet.js',
         ]
     },
     'description': '''
