@@ -1,5 +1,5 @@
 // Affiche dynamiquement un snippet
-odoo.define('website_crlg_portal.snippet', function (require) {
+odoo.define('website_school_portal.snippet', function (require) {
     'use strict';
     const publicWidget = require('web.public.widget');
     const DynamicSnippet = require('website.s_dynamic_snippet');

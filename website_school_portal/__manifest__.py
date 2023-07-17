@@ -35,7 +35,13 @@
         'views/footer.xml',
         'views/header.xml',
         'views/custom.xml',
+        'views/snippets.xml',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'website_school_portal/static/src/js/snippet.js',
+        ]
+    },
     'description': '''
         This module defines default page rendering for School Portal based on Horizon School Management.
     ''',

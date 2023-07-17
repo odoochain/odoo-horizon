@@ -62,7 +62,7 @@
             <div id="hz_snippets_horizon_custom_horizon" class="o_panel">
                 <div class="o_panel_header">Horizon</div>
                 <div class="o_panel_body">
-                    <t t-snippet="website_crlg_portal.hz_generic_insert_snippet" t-thumbnail=""/>
+                    <t t-snippet="website_school_portal.hz_generic_insert_snippet" t-thumbnail=""/>
                 </div>
             </div>
         </xpath>
