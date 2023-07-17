@@ -6,8 +6,6 @@
     .breadcrumb-elem {
         border-top-left-radius: $btn-border-radius;
         border-bottom-left-radius: $btn-border-radius;
-        background: var(--body-bg);
-        color: var(--body-color);
         font-weight: 600;
         font-size: 0.8em;
         outline: none;
@@ -21,7 +19,6 @@
 
         &:after,
         &:before {
-            background: var(--body-bg);
             bottom: 0;
             clip-path: polygon(50% 50%, -50% -50%, 0 100%);
             content: "";
@@ -34,6 +31,9 @@
             z-index: 1;
         }
 
+        &:after {
+            background: var(--o-cc1-bg);
+        }
         &:before {
             background: var(--o-cc1-btn-primary);
             margin-left: 1px;
@@ -43,19 +43,14 @@
         &:hover:after,
         &:hover {
             background: var(--o-cc1-btn-primary);
-            color: var(--o-cc1-btn-primary-text);
+            color: var(--o-cc1-btn-primary-text) !important;
             text-decoration: none;
-            &:before {
-                background: var(--body-bg);
-            }
         }
         &:last-child {
             border-right: none;
         }
     
         &.-active {
-            background: var(--body-bg);
-            color: var(--body-color);
             border: none;
             text-decoration: none;
             margin-top: 1px;
@@ -65,7 +60,7 @@
             &:before,
             &:after {
                 clip-path: none;
-                background: unset;
+                background: unset !important;
             }
         }
     }
@@ -85,7 +80,7 @@
 .table-responsive {
     width: 100%;
     display: table;
-    background: var(--body-bg);
+
     @include media-breakpoint-down(lg) {
         display: block;
     }
@@ -102,7 +97,6 @@
             display: block;
             margin-bottom: $spacer;
             &.-cours {
-                //padding-top: calc(($spacer * .25) + 0.6em);
                 padding-top: 0;
                 padding-bottom: $spacer * .25;
                 padding-left: $spacer;
@@ -130,9 +124,10 @@
                 }
                 .cell-value {
                     padding: 0;
-                    background: var(--body-bg);
                     z-index: 1;
                     padding-left: $spacer;
+                    background: var(--o-cc1-bg);
+
                 }
                 &:not(.cell-name) {
                     border: none !important;
@@ -140,17 +135,16 @@
                 &:before {
                     margin-bottom: 0.2em;
                     content: attr(data-title);
-                    background: var(--body-bg);
-                    color: var(--o-cc1-link);
                     font-weight: bold;
                     text-transform: uppercase;
                     display: block;
                     padding-right: $spacer;
                     z-index: 1;
+                    background: var(--o-cc1-bg);
+
                 }
                 &:after {
                     content: "";
-                    background: var(--body-bg);
                     border-bottom: 1px solid var(--o-cc1-btn-primary);
                     width: 100%;
                     position: absolute;
@@ -188,7 +182,7 @@
                         padding-right: 0;
                     }
                     &:after {
-                        border-bottom: none;
+                        border-bottom: none !important;
                     }
                 }
             }
@@ -218,14 +212,17 @@
     }
 }
 
+
 .accordion {
-    background: var(--body-bg);
-    color: var(--body-color);
     .group-title {
         position: relative;
         bottom: -1px;
         padding-top : $spacer !important;
         padding-bottom : $spacer !important;
+    }
+    .group-title,
+    .group-content {
+        background: var(--o-cc1-bg);
     }
     @include media-breakpoint-down(lg) {
         .group-title {
@@ -233,11 +230,7 @@
         }
     }
     .accordion-body {
-        background: #00000005;
-        & > div,
-        h5 {
-            background: var(--body-bg);
-        }
+        background: #00000010;
     }
 }
 
@@ -249,6 +242,239 @@
         padding-right: 0;
         h6.-cours {
             padding-left: $spacer;
+        }
+    }
+}
+
+/* ***************** */
+/* COLOR VARIATIONS */
+/* ***************** */
+
+.accented-color {
+    color: var(--o-cc1-btn-primary);
+}
+.list-group-item {
+    background: var(--o-cc1-bg);
+}
+
+.o_cc2 {
+    .accented-color {
+        color: var(--o-cc2-btn-primary);
+    }
+    .list-group-item {
+        background: var(--o-cc2-bg);
+    }
+    .group-title,
+    .group-content {
+        background: var(--o-cc2-bg);
+    }
+    .table-responsive {
+        .table-row {
+            @include media-breakpoint-down(lg) {
+                .cell {
+                    &:after {
+                        border-bottom: 1px solid var(--o-cc2-btn-primary);
+                    }
+                }
+            }
+        }
+        .cell {
+            &:before {
+                background: var(--o-cc2-bg);
+                color: var(--o-cc2-link);
+            }
+            .cell-value {
+                background: var(--o-cc2-bg);
+            }
+        }
+    }
+
+
+    .breadcrumb {
+        .breadcrumb-elem {
+            text-decoration-color: var(--o-cc2-btn-primary);
+            &:before {
+                background: var(--o-cc2-btn-primary);
+            }
+            &:hover:after,
+            &:hover {
+                background: var(--o-cc2-btn-primary);
+                color: var(--o-cc2-btn-primary-text) !important;
+            }
+            &:after {
+                background: var(--o-cc2-bg);
+            }
+            &:hover {
+                background: var(--o-cc2-btn-primary);
+                &:after {
+                    background: var(--o-cc2-btn-primary);
+                }
+            }
+        }
+    }
+}
+.o_cc3 {
+    .accented-color {
+        color: var(--o-cc3-btn-primary);
+    }
+    .list-group-item {
+        background: var(--o-cc3-bg);
+    }
+    .group-title,
+    .group-content {
+        background: var(--o-cc3-bg);
+    }
+    .table-responsive {
+        .table-row {
+            @include media-breakpoint-down(lg) {
+                .cell {
+                    &:after {
+                        border-bottom: 1px solid var(--o-cc3-btn-primary);
+                    }
+                }
+            }
+        }
+        .cell {
+            &:before {
+                background: var(--o-cc3-bg);
+                color: var(--o-cc3-link);
+            }
+            .cell-value {
+                background: var(--o-cc3-bg);
+            }
+        }
+    }
+    .breadcrumb {
+        .breadcrumb-elem {
+            text-decoration-color: var(--o-cc3-btn-primary);
+            &:before {
+                background: var(--o-cc3-btn-primary);
+            }
+            &:hover:after,
+            &:hover {
+                background: var(--o-cc3-btn-primary);
+                color: var(--o-cc3-btn-primary-text) !important;
+            }
+            &:after {
+                background: var(--o-cc3-bg);
+            }
+            &:hover {
+                background: var(--o-cc3-btn-primary);
+                &:after {
+                    background: var(--o-cc3-btn-primary);
+                }
+            }
+        }
+    }
+}
+.o_cc4 {
+    .accented-color {
+        color: var(--o-cc4-btn-primary);
+    }
+    .list-group-item {
+        background: var(--o-cc4-bg);
+    }
+    .group-title,
+    .group-content {
+        background: var(--o-cc4-bg);
+    }
+    .table-responsive {
+        .table-row {
+            @include media-breakpoint-down(lg) {
+                .cell {
+                    &:after {
+                        border-bottom: 1px solid var(--o-cc4-btn-primary);
+                    }
+                }
+            }
+        }
+        .cell {
+            &:before {
+                background: var(--o-cc4-bg);
+                color: var(--o-cc4-link);
+            }
+            .cell-value {
+                background: var(--o-cc4-bg);
+            }
+        }
+    }
+    .breadcrumb {
+        .breadcrumb-elem {
+            text-decoration-color: var(--o-cc4-btn-primary);
+            &:before {
+                background: var(--o-cc4-btn-primary);
+            }
+            &:hover:after,
+            &:hover {
+                background: var(--o-cc4-btn-primary);
+                color: var(--o-cc4-btn-primary-text) !important;
+            }
+            &:after {
+                background: var(--o-cc4-bg);
+            }
+            &:hover {
+                background: var(--o-cc4-btn-primary);
+                &:after {
+                    background: var(--o-cc4-btn-primary);
+                }
+            }
+        }
+    }
+}
+.o_cc5 {
+    .o_cc5 {
+        @extend .o_cc1;
+    }
+    .accented-color {
+        color: var(--o-cc5-btn-primary);
+    }
+    .list-group-item {
+        background: var(--o-cc5-bg);
+    }
+    .group-title,
+    .group-content {
+        background: var(--o-cc5-bg);
+    }
+    .table-responsive {
+        .table-row {
+            @include media-breakpoint-down(lg) {
+                .cell {
+                    &:after {
+                        border-bottom: 1px solid var(--o-cc5-btn-primary);
+                    }
+                }
+            }
+        }
+        .cell {
+            &:before {
+                background: var(--o-cc5-bg);
+                color: var(--o-cc5-link);
+            }
+            .cell-value {
+                background: var(--o-cc5-bg);
+            }
+        }
+    }
+    .breadcrumb {
+        .breadcrumb-elem {
+            text-decoration-color: var(--o-cc5-btn-primary);
+            &:before {
+                background: var(--o-cc5-btn-primary);
+            }
+            &:hover:after,
+            &:hover {
+                background: var(--o-cc5-btn-primary);
+                color: var(--o-cc5-btn-primary-text) !important;
+            }
+            &:after {
+                background: var(--o-cc5-bg);
+            }
+            &:hover {
+                background: var(--o-cc5-btn-primary);
+                &:after {
+                    background: var(--o-cc5-btn-primary);
+                }
+            }
         }
     }
 }

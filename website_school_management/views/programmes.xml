@@ -14,7 +14,7 @@
                         <div class="mt-4">
                             <t t-call="website_school_management.programmes_breadcrumb"/>
                             <div class="breadcrumb_next_step">
-                                <span class="fw-bold d-flex align-items-center"><i class="fa fa-filter fs-4 me-1 text-primary" aria-hidden="true"></i>Sélectionner :</span>
+                                <span class="fw-bold d-flex align-items-center"><i class="fa fa-filter fs-4 me-1 accented-color" aria-hidden="true"></i>Sélectionner :</span>
                                 <t t-foreach="options" t-as="option">
                                     <a t-att-title="'Sélectionner ' + option['name']" class="btn btn-outline-primary btn-sm fw-bold" t-att-href="option ['uri']"><t t-esc="option['name']" /></a>
                                 </t>
@@ -147,12 +147,12 @@
                             <div class="mt-2 d-flex gap-2">
                                 <span>
                                     Heures&amp;nbsp;: 
-                                    <span class="fw-bold text-primary" t-esc="bloc.total_hours"/>
+                                    <span class="fw-bold accented-color" t-esc="bloc.total_hours"/>
                                 </span>
                                 <span>|</span>
                                 <span>
                                     ECTS&amp;nbsp;: 
-                                    <span class="fw-bold text-primary" t-esc="bloc.total_credits"/>
+                                    <span class="fw-bold accented-color" t-esc="bloc.total_credits"/>
                                 </span>
                             </div>
                         </div>
@@ -179,7 +179,7 @@
                                 </span>
                             </span>
                         </h5>
-                        <div class="p-3 mb-4 border">
+                        <div class="group-content p-3 mb-4 border">
                             <div class="px-3">
                                 <div class="table-responsive mt-3 mb-4">
                                     <div class="table-row header o_cc5">
@@ -221,11 +221,13 @@
                                         <div class="cell border" data-title="Pré-requis">
                                             <span class="cell-value">
                                                 <t t-if="course_group.pre_requisit_ids"><span t-esc="', '.join(map( lambda x: str(x.preriquisit_id.uid), course_group.pre_requisit_ids))"/></t>
+                                                <t t-if="not(course_group.pre_requisit_ids)">/</t>
                                             </span>
                                         </div>
                                         <div class="cell border" data-title="Co-requis">
                                             <span class="cell-value">
                                                 <t t-if="course_group.co_requisit_ids"><span t-esc="', '.join(map( lambda x: str(x.coriquisit_id.uid), course_group.co_requisit_ids))"/></t>
+                                                <t t-if="not(course_group.co_requisit_ids)">/</t>
                                             </span>
                                         </div>
                                         <div class="cell border" data-title="Obligatoire">
@@ -236,7 +238,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="block-cours">
+                            <t t-if="course_group.course_ids">
+                                <div class="block-cours">
                                 <h6 class="fs-5 -cours">Cours</h6>
                                 <div class="table-responsive mb-3">
                                     <div class="table-row -cours header o_cc5">
@@ -279,14 +282,22 @@
                                                 </span>
                                             </div>
                                             <div class="cell border" data-title="Quadri">
-                                                <span class="cell-value">
-                                                    <t t-esc="course.quadri"/>
-                                                </span>
+                                                <t t-if="course_group.co_requisit_ids">
+                                                    <span class="cell-value">
+                                                        <t t-esc="course.quadri"/>
+                                                    </span>
+                                                </t>
+                                                <t t-if="not(course_group.co_requisit_ids)">
+                                                    <span class="cell-value">
+                                                    /
+                                                    </span>
+                                                </t>
                                             </div>
                                         </div>
                                     </t>
                                 </div>
-                            </div>    
+                                </div>    
+                            </t>
                         </div>
                     </t>
                 </div>
