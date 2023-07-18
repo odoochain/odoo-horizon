@@ -282,12 +282,12 @@
                                                 </span>
                                             </div>
                                             <div class="cell border" data-title="Quadri">
-                                                <t t-if="course_group.co_requisit_ids">
+                                                <t t-if="course.quadri">
                                                     <span class="cell-value">
                                                         <t t-esc="course.quadri"/>
                                                     </span>
                                                 </t>
-                                                <t t-if="not(course_group.co_requisit_ids)">
+                                                <t t-else="">
                                                     <span class="cell-value">
                                                     /
                                                     </span>
