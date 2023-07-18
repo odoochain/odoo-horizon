@@ -12,48 +12,54 @@
 
     <!-- Template snippet connexion -->
     <template id="hz_connexion_snippet">
-            <div class="row" t-ignore="true">
-                <t t-if="request.env.user == request.website.user_id">
-                    <div class="col-lg-3 o_colored_level">
+        <t t-set="translatable" t-value="true" />
+        <div class="row o_not_editable" t-ignore="true">
+            <t t-if="request.env.user == request.website.user_id">
+                <div class="col-lg-3 o_colored_level">
+                    <p style="text-align: center;">
+                        <strong>
+                            <em>Déjà inscrit ?</em>
+                        </strong>
+                    </p>
+                    <p style="text-align: center;">
+                        <a href="/my/home" class="btn btn-primary rounded-circle o_we_force_no_transition" data-bs-original-title="" title="" aria-describedby="popover707520" t-esc="'Se connecter'"/>
+                        <br/>
+                    </p>
+                </div>
+                <div class="col-lg-3 o_colored_level">
+                    <p style="text-align: center;">
+                        <strong>
+                            <em>Pas encore de compte ?</em>
+                        </strong>
+                    </p>
+                    <p style="text-align: center;">
+                        <a href="/web/signup" class="btn btn-fill-secondary rounded-circle" data-bs-original-title="" title="">
+                            <font class="text-white" t-esc="'S\'inscrir​​​​​​e'">​</font>
+                        </a>
+                    </p>
+                </div>
+            </t>
+            <t t-elif="request.env.user.partner_id.teacher == True">
+                <div class="row">
+                    <div class="o_colored_level col-lg-12">
                         <p style="text-align: center;">
+                            <a href="/my/home" class="btn btn-primary rounded-circle" data-bs-original-title="" title="" t-esc="'Voir mon profil enseignant'"/>
                             <br/>
                         </p>
                     </div>
-                    <div class="col-lg-3 o_colored_level">
+                </div>
+            </t>
+            <t t-else="">
+                <div class="row">
+                    <div class="o_colored_level col-lg-12">
                         <p style="text-align: center;">
-                            <strong>
-                                <em t-esc="'Déjà inscrit ?'" />
-                            </strong>
-                        </p>
-                        <p style="text-align: center;">
-                            <a href="/my/home" class="btn btn-primary rounded-circle o_we_force_no_transition" data-bs-original-title="" title="" aria-describedby="popover707520" t-esc="'Se connecter'"/>
+                            <a href="/my/home" class="btn btn-primary rounded-circle" data-bs-original-title="" title="" t-esc="'Voir mon compte'"/>
                             <br/>
                         </p>
                     </div>
-                    <div class="col-lg-3 o_colored_level">
-                        <p style="text-align: center;">
-                            <strong>
-                                <em t-esc="'Pas encore de compte ?'" />
-                            </strong>
-                        </p>
-                        <p style="text-align: center;">
-                            <a href="/web/signup" class="btn btn-fill-secondary rounded-circle" data-bs-original-title="" title="">
-                                <font class="text-white" t-esc="'S\'inscrir​​​​​​e'">​</font>
-                            </a>
-                        </p>
-                    </div>
-                </t>
-                <t t-else="">
-                    <div class="row">
-                        <div class="o_colored_level col-lg-12">
-                            <p style="text-align: center;">
-                                <a href="/my/home" class="btn btn-primary rounded-circle" data-bs-original-title="" title="" t-esc="'Voir mon compte'"/>
-                                <br/>
-                            </p>
-                        </div>
-                    </div>
-                </t>
-            </div>
+                </div>
+            </t>
+        </div>
     </template>
 
     <!-- Ajout du snippet aux blocks de l'éditeur -->

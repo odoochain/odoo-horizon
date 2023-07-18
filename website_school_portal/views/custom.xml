@@ -34,6 +34,10 @@
                             <p class="lead" style="text-align: right;"><a href="https://www.youtube.com/watch?v=JgJRM_8GWHg" target="_blank" class="btn btn-primary">Cliquez ici...</a><br/></p>
                         </div>
                     </div>
+                    <div class="oe_structure">
+                        <section class="hz_generic_insert_snippet o_colored_level o_dynamic_empty" data-template-name="hz_connexion_snippet" data-snippet="hz_generic_insert_snippet" data-name="Snippet générique" style="background-image: none;">
+                        </section>
+                    </div>
                 </div>
             </section>            
         </div>

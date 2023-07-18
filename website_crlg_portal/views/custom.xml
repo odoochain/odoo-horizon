@@ -36,12 +36,12 @@
                                     <font style="font-size: 62px;">Espace CRLG</font>
                                     <br/>
                                 </h1>
-                                <p class="lead" style="text-align: center;">Espace CRLG est le portail des services en ligne à l'attention<br/>de la communauté du Conservatoire royal de Liège<br/>(Ecole supérieure des Arts de Wallonie Bruxelles Enseignement)</p>
-                                <p class="lead" style="text-align: center;">
-                                    <br/>
-                                </p>
+                                <p class="lead" style="text-align: center;">Espace CRLG est le portail des services en ligne à l'attention<br/>de la communauté du Conservatoire royal de Liège<br/>(École supérieure des Arts de Wallonie Bruxelles Enseignement)</p>
                                 <hr />
-                                <div class="oe_structure oe_empty" id="oe_structure_login_buttons"/>
+                                <div class="oe_structure">
+                                    <section class="hz_generic_insert_snippet o_colored_level o_dynamic_empty" data-template-name="hz_connexion_snippet" data-snippet="hz_generic_insert_snippet" data-name="Snippet générique" style="background-image: none;">
+                                    </section>
+                                </div>
                             </div>
                         </div>
                     </div>
