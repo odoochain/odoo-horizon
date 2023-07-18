@@ -30,8 +30,8 @@
                     <span class="s_parallax_bg oe_img_bg o_bg_img_center" style="background-image: url(&quot;/website_crlg_portal/static/img/banner.jpg&quot;); background-position: 50% 0px; top: -190.71px; bottom: -190.71px; transform: translateY(49px);"/>
                     <div class="o_we_bg_filter bg-black-50"/>
                     <div class="s_allow_columns container">
-                        <div class="row">
-                            <div class="o_colored_level text-o-color-4 col-lg-12 o_anim_fade_in o_animate o_visible">
+                        <div class="row justify-content-center">
+                            <div class="o_colored_level text-o-color-4 col-lg-8 o_anim_fade_in o_animate o_visible">
                                 <h1 style="text-align: center;">
                                     <font style="font-size: 62px;">Espace CRLG</font>
                                     <br/>
