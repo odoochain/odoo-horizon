@@ -29,6 +29,7 @@
         'website_school_portal'
     ],
     'data': [
+        'init_crlg.xml',
         'views/custom.xml',
     ],
     'assets': {
