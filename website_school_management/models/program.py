@@ -22,6 +22,10 @@ class ProgramWeb(models.Model):
         for prog in self:
             prog.specialization_slug = slugify_one(prog.specialization)
 
+    def data_init(self):
+        for prog in self:
+            prog.specialization = 'test'+prog.id        
+
 class CycleWeb(models.Model):
     _inherit = 'school.cycle'
 
@@ -51,6 +55,10 @@ class CycleWeb(models.Model):
                 cycle.slug_subtype = slugify_one(cycle.subtype)
             else:
                 cycle.slug_subtype = None    
+
+    def data_init(self):
+        for cycle in self:
+            cycle.subtype = 'test'+cycle.id  
     
 class DomainWeb(models.Model):
     _inherit = 'school.domain'
