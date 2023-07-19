@@ -1,3 +1,5 @@
+import re
+
 from odoo import api, fields, models
 from odoo.addons.http_routing.models.ir_http import slugify_one
 
@@ -20,11 +22,17 @@ class ProgramWeb(models.Model):
     @api.depends('specialization')
     def compute_specialization_slug(self):
         for prog in self:
-            prog.specialization_slug = slugify_one(prog.specialization)
-
+            if (prog.specialization):
+                prog.specialization_slug = slugify_one(prog.specialization)
+            else:
+                prog.specialization_slug = None    
+    
+    @api.model
     def data_init(self):
-        for prog in self:
-            prog.specialization = 'test'+prog.id        
+        for prog in self.search([('specialization','=',None),('title','like','%(%)')]):
+            match = re.match(r".*\((.*)\)$", prog.title)
+            if match and match.group(1):
+                prog.specialization = match.group(1).capitalize()
 
 class CycleWeb(models.Model):
     _inherit = 'school.cycle'
@@ -54,11 +62,19 @@ class CycleWeb(models.Model):
             if (cycle.subtype):
                 cycle.slug_subtype = slugify_one(cycle.subtype)
             else:
-                cycle.slug_subtype = None    
+                cycle.slug_subtype = None
 
+    @api.model
     def data_init(self):
-        for cycle in self:
-            cycle.subtype = 'test'+cycle.id  
+        
+        for cycle in self.search([('subtype','=',None),('name','ilike','%'+'générique')]):
+            cycle.subtype = 'Générique'
+        for cycle in self.search([('subtype','=',None),('name','ilike','%'+'approfondie')]):
+            cycle.subtype = 'À finalité approfondie'
+        for cycle in self.search([('subtype','=',None),('name','ilike','%'+'didactique%')]):
+            cycle.subtype = 'À finalité didactique'
+        for cycle in self.search([('subtype','=',None),('name','ilike','%'+'spécialisé%')]):
+            cycle.subtype = 'À finalité spécialisée'  
     
 class DomainWeb(models.Model):
     _inherit = 'school.domain'

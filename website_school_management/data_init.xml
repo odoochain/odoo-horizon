@@ -21,7 +21,6 @@
 ##############################################################################
 -->
 <odoo>
-    <data>
-        <function model="website" name="init_crlg" />
-    </data>
+    <function model="school.program" name="data_init" />
+    <function model="school.cycle" name="data_init" />
 </odoo>
