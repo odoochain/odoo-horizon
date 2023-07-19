@@ -39,7 +39,7 @@
                             </t>
                             <t t-if="(current_cycle == False) or (current_cycle != program.cycle_id.id)" t-call="website_school_management.open_list" />
                             <li class="list-group-item">
-                                <a t-att-href="program.program_uri" t-esc="program.name" />
+                                <a t-att-href="'/programme/%s' %slug(program)" t-esc="program.name" />
                             </li>
                             <t t-set="current_cycle" t-value="program.cycle_id.id"/>
                             <t t-if="program_index == (len(program_list) - 1)" t-call="website_school_management.close_list" />
@@ -47,28 +47,6 @@
                     </div> 
                 </div>    
             </div>    
-        </t>
-    </template>
-
-    <!-- //////////////////////////////////////////////////////////////// -->
-    <!-- //                PAS DE RESULTATS (PROGRAMMES)               // -->
-    <!-- //////////////////////////////////////////////////////////////// -->
-
-    <template id="programmes_vide">
-        <t t-call="website.layout">
-            <div class="container my-5">
-                <div class="row">
-                    <div class="col-12">
-                        <t t-set="title">Programmes</t>
-                        <div class="container">
-                            <h1 t-esc="title"/>
-                            <p class="my-3">Aucun programme de cours correspondant à vos critères n'a été trouvé.</p>
-                            <hr class="mt-4"/>
-                            <p class="text-center"><a href="/programmes">Retour à la liste des programmes</a></p>
-                        </div>
-                    </div> 
-                </div>    
-            </div>   
         </t>
     </template>
 
@@ -83,7 +61,7 @@
                     <div class="col-12">
                         <div class="d-flex flex-column-reverse flex-sm-row align-items-center align-items-sm-start justify-content-sm-between gap-4">
                             <h1 t-esc="program.name" />
-                            <a class="d-flex gap-3 align-items-center justify-content-center btn btn-primary h-fit-content w-fit-content" t-att-href="'/impression_programme/%s' %program.id" target="new" title="Imprimer le programme de cours" >
+                            <a class="d-flex gap-3 align-items-center justify-content-center btn btn-primary h-fit-content w-fit-content" t-att-href="'/impression_programme/%s' %slug(program)" target="new" title="Imprimer le programme de cours" >
                                 <span class="d-sm-none fw-bold">Imprimer le programme</span>
                                 <i class="fa fa-print fs-3" aria-hidden="true"></i>
                                 <span class="sr-only">Imprimer le programme de cours</span>
