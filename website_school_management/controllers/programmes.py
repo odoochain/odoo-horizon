@@ -4,6 +4,7 @@ import logging
 
 from odoo import http
 from odoo.http import request
+from odoo.http import (Response)
 from odoo.addons.http_routing.models.ir_http import slug, unslug
 
 _logger = logging.getLogger(__name__)
@@ -23,8 +24,8 @@ class programmes(http.Controller):
                         breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug, 'name' : program.speciality_name})
                         if (segment >= 5 and program.cycle_grade):
                             breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug + "/" + program.cycle_grade_slug, 'name' : program.cycle_grade},)
-                            if (segment >= 6 and program.cycle_name):
-                                breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug + "/" + program.cycle_grade_slug + "/" + program. cycle_name_slug, 'name' : program.cycle_name})
+                            if (segment >= 6 and program.cycle_subtype):
+                                breadcrumb.append({'uri' : '/programmes/' + program.year_name + "/" + program.domain_slug + "/" + program.track_slug + "/" + program.speciality_slug + "/" + program.cycle_grade_slug + "/" + program. cycle_subtype_slug, 'name' : program.cycle_subtype})
                                 if (segment >= 7 and program.specialization):
                                     breadcrumb.append({'uri' : '/programme/' + slug(program), 'name' : program.specialization})
         return breadcrumb
@@ -60,7 +61,10 @@ class programmes(http.Controller):
                     options.append(option) 
         elif (segment == 5):
             for program in programs:
-                option = {'uri' : actual + '/' + program.cycle_name_slug, 'name' : program.cycle_name}
+                if (program.cycle_subtype_slug and program.cycle_subtype):
+                    option = {'uri' : actual + '/' + program.cycle_subtype_slug, 'name' : program.cycle_subtype}
+                else:
+                    option = '-'   
                 if (option not in options):
                     options.append(option)             
         elif (segment == 6):
@@ -112,13 +116,13 @@ class programmes(http.Controller):
                            searchParams.append(('cycle_grade_slug', '=', cycle_type))
                            segment = 5
                            if (cycle_subtype):
-                               searchParams.append(('cycle_name_slug', '=', cycle_subtype))  
+                               searchParams.append(('cycle_subtype_slug', '=', cycle_subtype))  
                                segment = 6
                                if (specialization):
                                    searchParams.append(('specialization_slug', '=', specialization))
                                    segment = 7
         # Requête
-        programs = request.env['school.program'].sudo().search(searchParams,order='year_short_name ASC, domain_name ASC, cycle_grade_order ASC, cycle_name ASC, name ASC')
+        programs = request.env['school.program'].sudo().search(searchParams,order='year_short_name ASC, domain_name ASC, cycle_grade_order ASC, cycle_subtype ASC, name ASC')
 
         # Si un seul résultat
         if (len(programs) == 1):
@@ -145,7 +149,7 @@ class programmes(http.Controller):
             return request.render(template, values)
         # Si 0 résultat
         else :
-            return request.render('website.404')
+            return Response(template='website.page_404', status=404)
 
     @http.route(['/programme/<string:program_slug>'], type='http', auth='public',  website=True, sitemap=_sitemap_programs)
     def programme(self, program_slug, redirect=None, **post):
@@ -161,7 +165,7 @@ class programmes(http.Controller):
             }
             return request.render(template, values)
         else:
-            return request.render('website.404')
+            return Response(template='website.page_404', status=404)
 
     ##############
     # TEMPORAIRE #
@@ -177,7 +181,8 @@ class programmes(http.Controller):
             pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', u'%s' % len(pdf))]
             return http.request.make_response(pdf, headers=pdfhttpheaders)
         else:
-            return request.render('website.404')
+            return Response(template='website.page_404', status=404)
+            
     
     # Gestion de la route d'un cours
     @http.route(['/cours/<string:course_slug>'], type='http', auth='public',  website=True, sitemap=True)

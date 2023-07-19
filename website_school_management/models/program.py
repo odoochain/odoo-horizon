@@ -13,8 +13,8 @@ class ProgramWeb(models.Model):
     cycle_grade_slug = fields.Char(related='cycle_id.slug_grade', string='Cycle Grade Slug',store=False)
     cycle_grade = fields.Char(related='cycle_id.grade', string='Cycle Grade',store=False)
     cycle_grade_order = fields.Integer(related='cycle_id.grade_order', string='Cycle Grade Order',store=True) # store=True : necessary for order by
-    cycle_name_slug = fields.Char(related='cycle_id.slug_name', string='Cycle Name Slug',store=False)
-    cycle_name = fields.Char(related='cycle_id.name', string='Cycle Name',store=True) # store=True : necessary for order by
+    cycle_subtype_slug = fields.Char(related='cycle_id.slug_subtype', string='Cycle Sub-type Slug',store=False)
+    cycle_subtype = fields.Char(related='cycle_id.subtype', string='Cycle Sub-type',store=True) # store=True : necessary for order by
     specialization = fields.Char(required=False, string='Specialization', size=40)
     specialization_slug = fields.Char(string='Specialization', compute='compute_specialization_slug', store=True) # store=True : necessary for search
     @api.depends('specialization')
@@ -52,12 +52,6 @@ class CycleWeb(models.Model):
             else:
                 cycle.slug_subtype = None    
     
-    slug_name = fields.Char(string='Name Slug', compute='compute_slug_name', store=True)
-    @api.depends('name')
-    def compute_slug_name(self):
-        for cycle in self:
-            cycle.slug_name = slugify_one(cycle.name)
-
 class DomainWeb(models.Model):
     _inherit = 'school.domain'
 
