@@ -74,8 +74,16 @@ class programmes(http.Controller):
         # Si 0 résultat
         else :
             return request.render('website.404')
+
+    def _sitemap_programs(env, rule, qs):
+        searchParams = [('state', '=', 'published'), ('domain_name', '!=', None), ('track_name', '!=', None)]
+        programs = env['school.program'].search(searchParams)
+        for prog in programs:
+            loc = '/programme/%s' % slug(prog)
+            if not qs or qs.lower() in loc:
+                yield {'loc': loc}
     
-    @http.route(['/programme/<string:program_slug>'], type='http', auth='public',  website=True, sitemap=True)
+    @http.route(['/programme/<string:program_slug>'], type='http', auth='public',  website=True, sitemap=_sitemap_programs)
     def programme(self, program_slug, redirect=None, **post):
         _, program_id = unslug(program_slug)
         program = request.env['school.program'].sudo().search([('state', '=', 'published'),('id', '=', program_id)])
