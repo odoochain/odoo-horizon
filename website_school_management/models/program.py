@@ -37,7 +37,7 @@ class ProgramWeb(models.Model):
 class CycleWeb(models.Model):
     _inherit = 'school.cycle'
 
-    grade_order = fields.Integer(string='Grade Order', compute='compute_grade_order', store=True) # store=True : necessary for order by
+    grade_order = fields.Integer(string='Grade Order', compute='compute_grade_order', store=True)
     @api.depends('short_name')
     def compute_grade_order(self):
         for cycle in self:

@@ -139,7 +139,7 @@
                 </button>
             </h3>
             <div t-attf-id="collapse{{bloc.id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#program_detail">
-                <div class="accordion-body border-top pt-0">
+                <div class="accordion-body border-top pt-2 pt-lg-0">
                     <t t-set="course_group_group" t-value=""/>
                     <!-- Groupes de cours -->
                     <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">
@@ -148,12 +148,13 @@
                             <h4 class="mt-5" t-esc="course_group.cg_grouping.name"/>
                         </t>
                         <t t-set="course_group_group" t-value="course_group.cg_grouping.id"/>
-                        <h5 class="group-title w-fit-content border border-bottom-0 d-flex flex-column gap-2 mt-5 mb-0 py-2 px-4">
+                        <h5 class="group-title w-fit-content border border-bottom-0 d-flex flex-column gap-2 mt-3 mt-lg-5 mb-0 py-2 px-4">
                             <span class="d-flex flex-wrap gap-2">
-                            Unité d’enseignement&amp;nbsp;: <a class="link-primary d-block p-0" t-esc="course_group.title" t-att-href="'/groupe_de_cours/%s' % slug(course_group)" target="_self"/>
+                            <span class="d-none d-lg-inline">Unité d’enseignement&amp;nbsp;: </span><a class="link-primary d-block p-0" t-esc="course_group.title" t-att-href="'/groupe_de_cours/%s' % slug(course_group)" target="_self"/>
                             </span>
                             <span class="d-flex flex-wrap gap-2 fs-6">
-                                Professeur&amp;nbsp;:
+                                <span class="d-none d-lg-inline">Responsable&amp;nbsp;:</span>
+                                <span class="d-inline d-lg-none">Resp.:</span>
                                 <span class="fw-normal fst-italic">
                                     <t t-esc="course_group.responsible_id.name"/>
                                 </span>
@@ -161,7 +162,7 @@
                         </h5>
                         <div class="group-content p-3 mb-4 border">
                             <div class="px-3">
-                                <div class="table-responsive mt-3 mb-4">
+                                <div class="table-responsive mt-3 mb-2 mb-lg-4">
                                     <div class="table-row header o_cc5">
                                         <div class="cell border">
                                             Code
@@ -221,7 +222,7 @@
                             <t t-if="course_group.course_ids">
                                 <div class="block-cours">
                                 <h6 class="fs-5 -cours">Cours</h6>
-                                <div class="table-responsive mb-3">
+                                <div class="table-responsive mb-lg-3">
                                     <div class="table-row -cours header o_cc5">
                                         <div class="cell border">
                                             Nom
