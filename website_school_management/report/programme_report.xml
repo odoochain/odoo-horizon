@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-      
-      <!-- Création action report pdf -->
+      <record id="programme_page" model="report.paperformat">
+            <field name="name">Custom Paper</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">50</field>
+            <field name="dpi">80</field>
+      </record>
+
+    <!-- Création action report pdf -->
       <record id="action_impression_programme_id" model="ir.actions.report">
             <field name="name">Programme de cours PDF</field>
             <field name="model">school.program</field>
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">website_school_management.report_program</field>
-            <field name="report_file">website_school_management.report_program</field>
             <field name="print_report_name">'Programme de cours'</field>
             <field name="binding_model_id" ref="model_school_program"/>
             <field name="binding_type">report</field>
-      </record>   
-
-      <!-- Tempate PDF report -->
+            <field name="paperformat_id" ref="programme_page"/>
+      </record>  
+      
+     <!-- Tempate PDF report -->
       <template id="report_program">
             <t t-call="web.html_container">
                   <xpath expr="//head" position="inside">
@@ -22,10 +37,162 @@
                   <xpath expr="//title" position="replace">
                         <title><t t-esc="docs[0].title or 'Odoo Report'"/></title>
                   </xpath>
+                  <t t-set="font" t-value="'env.company.font' or 'Lato'" />
+                  <t t-set="primary" t-value="env.company.primary_color or 'black'" />
+                  <t t-set="secondary" t-value="env.company.secondary_color or 'black'" />
+                  <style>
+                        * {
+                              font-family: <t t-esc="font" />; // Ne marche pas
+                        }
+             
+                  </style>
+
+                  <div class="header" style="padding-top: 10mm;">
+                        <div class="row" t-attf-style="padding-bottom: 10mm; border-bottom: 1px solid {{secondary}};">
+                              <div class="col-6">
+                                    <img style="max-height: 25mm;" t-if="env.company.logo" t-att-src="image_data_uri(env.company.logo)" alt="Logo"/>
+                              </div>
+                              <div class="col-6 text-end">
+                                    <p t-esc="env.company.company_details"/>
+                              </div>
+                        </div>
+                  </div>
                   <t t-foreach="docs" t-as="program">
-                        <t t-call="website_school_management.programme_details_contenu"/>
+                        <h1 style="margin-bottom: 32px" t-esc="program.name" />
+                        <table class="table-center">
+                              <thead>
+                                    <tr>
+                                          <th scope="col">Domaine</th>
+                                          <th scope="col">Cycle</th>
+                                          <th scope="col">Section</th>
+                                          <th scope="col">Orientation</th>
+                                          <th scope="col">Spécialité</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr>
+                                          <td t-esc="program.domain_name" />
+                                          <td t-esc="program.cycle_id.name" />
+                                          <td t-esc="program.speciality_id.section_id.name" />
+                                          <td t-esc="program.speciality_id.track_id.name" />
+                                          <td t-esc="program.speciality_id.name" />
+                                    </tr>
+                              </tbody>
+                        </table>
+                        <div t-if="program.description">
+                              <h2 style="margin-top: 32px">Vade-mecum</h2>
+                              <p t-esc="program.description"/>
+                        </div>
+                        <h2 style="margin-top: 32px">Programme des cours</h2>
+                        <div style="padding-left : 16px;">
+                              <t t-foreach="program.bloc_ids" t-as="bloc">
+                                    <h3>
+                                          <span style="font-style: italic;">
+                                                <t t-esc="bloc.name"/>
+                                          </span>
+                                          <span style="padding-left : 16px; padding-right : 16px;">|</span>
+                                          <span style="font-weight: 400;">
+                                                <span style="color: #505050;">
+                                                Heures&amp;nbsp;: 
+                                                </span>
+                                                <span style="font-weight: 600; padding-right : 16px;" t-esc="bloc.total_hours"/>
+                                                <span style="color: #505050;">
+                                                ECTS&amp;nbsp;: 
+                                                </span>
+                                                <span style="font-weight: 600" t-esc="bloc.total_credits"/>
+                                          </span>
+                                    </h3>
+                        
+                                    <div style="padding-left : 32px;">
+                                          <t t-set="course_group_group" t-value=""/>
+                                          <!-- Groupes de cours -->
+                                          <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">
+                                                <div style="padding-left : 32px;">
+                                                      <div style="padding-left : 32px; margin-bottom: 2500px;">
+                                                            <table class="table-center">
+                                                                  <thead>
+                                                                        <tr>
+                                                                              <th colspan="2">
+                                                                                    <t t-if="course_group.cg_grouping.id and course_group.cg_grouping.id != course_group_group">
+                                                                                          <t t-esc="course_group.cg_grouping.name"/>
+                                                                                    </t>
+                                                                                    <t t-set="course_group_group" t-value="course_group.cg_grouping.id"/>
+                                                                              </th>
+                                                                              <th style="font-size:10px;">Professeur</th>
+                                                                              <th style="font-size:10px;">Heures</th>
+                                                                              <th style="font-size:10px;">ECTS</th>
+                                                                              <th style="font-size:10px;">Pondération</th>
+                                                                              <th style="font-size:10px;">Pré-requis</th>
+                                                                              <th style="font-size:10px;">Co-requis</th>
+                                                                              <th style="font-size:10px;">Quadri</th>
+                                                                        </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                        <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">
+                                                                              <tr>
+                                                                                    <td t-esc="course_group.ue_id"/>
+                                                                                    <td t-esc="course_group.title"/>
+                                                                                    <td t-esc="course_group.responsible_id.name"/>
+                                                                                    <td t-esc="course_group.total_hours"/>
+                                                                                    <td t-esc="course_group.total_credits"/>
+                                                                                    <td></td>
+                                                                                    <td>
+                                                                                          <t t-if="course_group.pre_requisit_ids">
+                                                                                                <span t-esc="', '.join(map( lambda x: str(x.preriquisit_id.uid), course_group.pre_requisit_ids))"/>
+                                                                                          </t>
+                                                                                          <t t-if="not(course_group.pre_requisit_ids)">
+                                                                                                /
+                                                                                          </t>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                          <t t-if="course_group.co_requisit_ids">
+                                                                                                <span t-esc="', '.join(map( lambda x: str(x.coriquisit_id.uid), course_group.co_requisit_ids))"/>
+                                                                                          </t>
+                                                                                          <t t-if="not(course_group.co_requisit_ids)">
+                                                                                                /
+                                                                                          </t>
+                                                                                    </td>
+                                                                                    <td></td>
+                                                                              </tr>
+                                                                        </t>
+                                                                        <!--
+                                                                        <t t-foreach="course_group.course_ids" t-as="course">
+                                                                              <tr>
+                                                                                          <td></td>
+                                                                                          <td t-esc="course.title" t-att-href="'/cours/%s' % slug(course)" target="new"/>
+                                                                                          <td></td>
+                                                                                          <td t-esc="course.hours"/>
+                                                                                          <td t-esc="course.credits"/>
+                                                                                          <td t-esc="course.weight"/>
+                                                                                          <td></td>
+                                                                                          <td></td>
+                                                                                          <td>
+                                                                                          <t t-if="course.quadri">
+                                                                                                <t t-esc="course.quadri"/>
+                                                                                          </t>
+                                                                                          <t t-else="">
+                                                                                                /
+                                                                                          </t>
+                                                                                          </td>
+                                                                              </tr>
+                                                                        </t>-->
+                                                                  </tbody>
+                                                            </table>
+                                                      </div>
+                                                </div>
+                                          </t>
+                                    </div>
+                                    <t t-if="bloc_index != (bloc_size - 1)">
+                                          <hr style="margin-top: 48px; margin-bottom: 48px;"/>
+                                    </t>
+                              </t>
+                        </div>
                   </t>
+                  <div class="footer" >
+                        <div class="text-end">
+                              Page: <span class="page"/> / <span class="topage"/>
+                      </div>
+                  </div>
             </t>
       </template>
-   
 </odoo>

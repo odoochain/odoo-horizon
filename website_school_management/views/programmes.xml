@@ -139,7 +139,7 @@
                 </button>
             </h3>
             <div t-attf-id="collapse{{bloc.id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#program_detail">
-                <div class="accordion-body border-top pt-2 pt-lg-0">
+                <div class="accordion-body border-top pt-2 pt-lg-0 px-2 px-lg-4">
                     <t t-set="course_group_group" t-value=""/>
                     <!-- Groupes de cours -->
                     <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">

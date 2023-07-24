@@ -16,7 +16,6 @@
         text-decoration-color: var(--o-cc1-btn-primary);
         transition: background 0.2s linear, color 0.2s linear;
         text-align: center;
-
         &:after,
         &:before {
             bottom: 0;
@@ -61,6 +60,10 @@
             &:after {
                 clip-path: none;
                 background: unset !important;
+            }
+            &:hover {
+                background: unset;
+                color: var(--o-cc1-text) !important;
             }
         }
     }
@@ -310,6 +313,12 @@
                     background: var(--o-cc2-btn-primary);
                 }
             }
+            &.-active {
+                &:hover {
+                    background: unset;
+                    color: var(--o-cc2-text) !important;
+                }
+            }
         }
     }
 }
@@ -364,6 +373,12 @@
                     background: var(--o-cc3-btn-primary);
                 }
             }
+            &.-active {
+                &:hover {
+                    background: unset;
+                    color: var(--o-cc3-text) !important;
+                }
+            }
         }
     }
 }
@@ -416,6 +431,12 @@
                 background: var(--o-cc4-btn-primary);
                 &:after {
                     background: var(--o-cc4-btn-primary);
+                }
+            }
+            &.-active {
+                &:hover {
+                    background: unset;
+                    color: var(--o-cc4-text) !important;
                 }
             }
         }
@@ -475,6 +496,14 @@
                     background: var(--o-cc5-btn-primary);
                 }
             }
+            &.-active {
+                &:hover {
+                    background: unset;
+                    color: var(--o-cc5-text) !important;
+                }
+            }
         }
     }
 }
+
+
