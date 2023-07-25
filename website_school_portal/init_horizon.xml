@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2023 ito-invest.lu
@@ -18,38 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Website School Portal',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'ito-invest (Jerome Sonnet) & Neodiensis',
-    'website': '',
-    'category': 'School Management',
-    'depends': [
-        'web',
-        'website',
-        'website_school_management'
-    ],
-    'data': [
-        'init_horizon.xml',
-        'views/main.xml',
-        'views/footer.xml',
-        'views/header.xml',
-        'views/custom.xml',
-        'views/snippets.xml',
-    ],
-    'assets': {
-        'web.assets_frontend': [
-            'website_school_portal/static/src/js/snippet.js',
-        ]
-    },
-    'description': '''
-        This module defines default page rendering for School Portal based on Horizon School Management.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-    'images': [
-        'static/description/icon.png',
-    ],
-}
+-->
+<odoo>
+    <function model="website" name="init_horizon" />
+</odoo>

@@ -21,18 +21,7 @@
 ##############################################################################
 -->
 <odoo>
-    <template id="hz_header_language_selector" inherit_id="website.placeholder_header_language_selector" name="Horizon Header Language Selector">
-        <xpath expr="." position="inside">
-            <t t-set="flags" t-value="True"/>
-            <t id="header_language_selector_call" t-call="portal.language_selector">
-                <t t-set="_div_classes" t-value="(_div_classes or '') + ' dropdown'"/>
-            </t>
-        </xpath>
-    </template>
-
-    <template id="no_header_call_to_action" inherit_id="website.placeholder_header_call_to_action" name="Horizon No Header CTA">
-        <xpath expr="." position="inside" />
-    </template>
+    
 </odoo>
 
 
