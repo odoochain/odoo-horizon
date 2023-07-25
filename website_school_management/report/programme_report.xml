@@ -196,8 +196,8 @@
                                                 <t t-set="display_header" t-value="True"/>
                                                 <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">
                                                       <t t-if="(course_group.cg_grouping.id and course_group.cg_grouping.id != course_group_group) or display_header == True">
-                                                            <thead style="border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea;">
-                                                                  <tr class="table-row-title">
+                                                            <!--<thead>-->
+                                                                  <tr style="border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea;" class="table-row-title">
                                                                         <th style="color: #6e6e6e; font-size: 0.9em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; font-weight: 400; padding-bottom: 2mm; text-align: left;" colspan="2">
                                                                               <t t-if="course_group.cg_grouping.id">
                                                                                     <t t-out="course_group.cg_grouping.name"/>
@@ -211,7 +211,7 @@
                                                                         <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Co-requis</th>
                                                                         <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Quadri</th>
                                                                   </tr>
-                                                            </thead>
+                                                            <!--</thead>-->
                                                             <t t-if="(course_group.cg_grouping.id and course_group.cg_grouping.id != course_group_group) or (course_group.cg_grouping.id == False and display_header == True)">
                                                                   <t t-set="display_header" t-value="False"/>
                                                             </t>
