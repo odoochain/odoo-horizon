@@ -9,8 +9,6 @@ from odoo.modules.module import get_resource_path
 class WebsiteHorizon(models.Model):
     _inherit = 'website'
     
-
-
     @api.model
     def init_horizon(self):
         _logger.info('Init Horizon...')
@@ -47,7 +45,13 @@ class WebsiteHorizon(models.Model):
         toggle_view('website.option_footer_scrolltop', True)
         # Language Selector
         toggle_view('website.header_language_selector', True)
-        
 
 # is_crm_installed = self.pool.get('ir.module.module').search(cr,uid,[('state','=','installed'), ('name','=','crm'])
 #_logger.info('CTA : %s' % cta.key)
+
+    def _search_get_details(self, search_type, order, options):
+        result = []
+        result.append(self.env['school.program']._search_get_detail(self, order, options))
+        if search_type in ['pages', 'all']:
+            result.append(self.env['website.page']._search_get_detail(self, order, options))
+        return result

@@ -37,6 +37,7 @@
         'views/header.xml',
         'views/custom.xml',
         'views/snippets.xml',
+        'views/page_404.xml',
     ],
     'assets': {
         'web.assets_frontend': [
