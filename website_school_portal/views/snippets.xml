@@ -3,7 +3,7 @@
 
     <!-- Template générique du snippet -->
     <template id="hz_generic_insert_snippet" name="Snippet générique Horizon">
-        <section class="hz_generic_insert_snippet" data-template-name="hz_connexion_snippet">
+        <section class="hz_generic_insert_snippet" data-template-name="hz_horizon_access">
             <div class="container">
                 <div class="dynamic_snippet_template"/>
             </div>
@@ -11,7 +11,7 @@
     </template>
 
     <!-- Template snippet connexion -->
-    <template id="hz_connexion_snippet">
+    <template id="hz_horizon_access">
         <t t-set="translatable" t-value="true" />
         <div class="row justify-content-center o_not_editable" t-ignore="true">
             <t t-if="request.env.user == request.website.user_id">
@@ -68,7 +68,7 @@
         <xpath expr="//div[@data-js='Box']" position="after">
             <div data-js="s_generic_insert_options" data-selector=".hz_generic_insert_snippet" data-no-preview="true">
                 <we-select string="Snippet" data-attribute-name="templateName" data-no-preview="true">
-                    <we-button data-select-data-attribute="hz_connexion_snippet">Boutons de connexion</we-button>
+                    <we-button data-select-data-attribute="hz_horizon_access">Horizon Access</we-button>
                 </we-select>
             </div>
         </xpath>

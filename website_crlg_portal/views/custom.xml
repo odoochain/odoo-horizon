@@ -39,7 +39,7 @@
                                 <p class="lead" style="text-align: center;">Espace CRLG est le portail des services en ligne à l'attention de la communauté du Conservatoire royal de Liège (École supérieure des Arts de Wallonie Bruxelles Enseignement)</p>
                                 <hr />
                                 <div class="oe_structure">
-                                    <section class="hz_generic_insert_snippet o_colored_level o_dynamic_empty" data-template-name="hz_connexion_snippet" data-snippet="hz_generic_insert_snippet" data-name="Snippet générique" style="background-image: none;">
+                                    <section class="hz_generic_insert_snippet o_colored_level o_dynamic_empty" data-template-name="hz_horizon_access" data-snippet="hz_generic_insert_snippet" data-name="Snippet générique" style="background-image: none;">
                                     </section>
                                 </div>
                             </div>

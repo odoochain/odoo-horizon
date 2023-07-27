@@ -18,7 +18,7 @@ class WebSchoolPortalController(http.Controller):
     # Renvoie les données à afficher dans un template
     def get_data_for_template(self, template):
         data = None
-        if template == "hz_connexion_snippet":
+        if template == "hz_horizon_access":
             data = {
                 'request': http.request
             }
