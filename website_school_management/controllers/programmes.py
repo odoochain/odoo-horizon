@@ -188,27 +188,14 @@ class programmes(http.Controller):
     @http.route(['/cours/<string:course_slug>'], type='http', auth='public',  website=True, sitemap=True)
     def cours(self, course_slug, redirect=None, **post):
         _, course_id = unslug(course_slug)
-        course_docs = request.env['school.course_documentation'].sudo().search([('state', '=', 'published'),'|',('course_ids','=',course_id),('course_id','=',course_id)],order="author_id")
-        if course_docs:
+        course = request.env['school.course'].sudo().search([('id','=',course_id)])
+        if course:
             values = {
-                'course_docs': course_docs,
+                'course' : course,
             }
             return request.render("website_school_management.cours_fiche", values)
         else:
-            return request.render("website_school_management.cours_fiche_vide", [])
-            
-    # Gestion de la route d'un groupe de cours    
-    @http.route(['/groupe_de_cours/<string:course_group_slug>'], type='http', auth='public', website=True)
-    def groupe_de_cours(self, course_group_slug, redirect=None, **post):
-        _, course_group_id = unslug(course_group_slug)
-        course_group = request.env['school.course_group'].sudo().search([('id', '=', course_group_id)])
-        if course_group:
-            values = {
-                'course_group': course_group,
-            }
-            return request.render("website_school_management.groupe_de_cours_fiche", values)
-        else:
-            return request.render("website_school_management.groupe_de_cours_fiche_vide", [])
+            return Response(template='website.page_404', status=404)
     
     
 

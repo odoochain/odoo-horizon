@@ -150,7 +150,7 @@
                         <t t-set="course_group_group" t-value="course_group.cg_grouping.id"/>
                         <h5 class="group-title w-fit-content border border-bottom-0 d-flex flex-column gap-2 mt-3 mt-lg-5 mb-0 py-2 px-4">
                             <span class="d-flex flex-wrap gap-2">
-                            <span class="d-none d-lg-inline">Unité d’enseignement&amp;nbsp;: </span><a class="link-primary d-block p-0" t-esc="course_group.title" t-att-href="'/groupe_de_cours/%s' % slug(course_group)" target="_self"/>
+                            <span class="d-none d-lg-inline">Unité d’enseignement&amp;nbsp;: </span><t class="d-block p-0" t-esc="course_group.title" />
                             </span>
                             <span class="d-flex flex-wrap gap-2 fs-6">
                                 <span class="d-none d-lg-inline">Responsable&amp;nbsp;:</span>
@@ -287,66 +287,15 @@
     </template>
 
     <!-- //////////////////////////////////////////////////////////////// -->
-    <!-- //                   FICHE GROUPE DE COURS                    // -->
-    <!-- //////////////////////////////////////////////////////////////// -->
-
-    <!-- TODO à adapter -->
-    <template id="groupe_de_cours_fiche">
-        <t t-set="additional_title" t-value="course_group.title" />
-        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <div class="container">
-                <h1>Groupe de cours : <t t-esc="course_group.title"/></h1>
-                <ul>
-                    <li>Code : <span t-field="course_group.uid"/></li>
-                    <li>Cycle : <span t-field="course_group.cycle_id.grade"/></li>
-                    <li>Professeur : <span t-field="course_group.responsible_id"/></li>
-                    <li>Période : <span t-field="course_group.period"/></li>
-                    <li>Crédits : <span t-field="course_group.total_credits"/></li>
-                    <li>Heures : <span t-field="course_group.total_hours"/></li>
-                    <li>Obligatoire : <t t-if="course_group.mandatory">Oui</t><t t-if="not(course_group.mandatory)">Non</t></li>
-                    <li>Cours : 
-                        <t t-foreach="course_group.course_ids" t-as="course">
-                            <ul>
-                                <li>Nom : <a t-esc="course.title" t-att-href="'/cours/%s' % slug(course)" target="new"/></li>
-                                <li>Heures : <t t-esc="course.hours"/></li>
-                                <li>ECTS : <t t-esc="course.credits"/></li>
-                                <li>Pondération : <t t-esc="course.weight"/></li>
-                                <li>Quadri : <t t-esc="course.quadri"/></li>
-                                <li>Professeurs : <span t-esc="', '.join(map( lambda x: x.name, course.teacher_ids))"/></li>
-                            </ul>
-                            <br/>
-                        </t>
-                    </li>
-                </ul>                           
-            </div>
-        </t>
-    </template>
-
-    <!-- TODO à adapter -->
-    <template id="groupe_de_cours_fiche_vide">
-        <t t-set="additional_title">Groupe de cours</t>
-        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <t t-set="title">Groupe de cours</t>
-            <div class="container">
-                <h1>Pas de description</h1>      
-                <p>Veuillez contacter le secrétariat ou votre professeur pour obtenir plus d'informations sur cette activité.</p>
-                <hr/>
-                <p style="text-align: center;"><a href="/programmes">Retour à la recherche</a></p>
-            </div>
-        </t>
-    </template>
-
-    <!-- //////////////////////////////////////////////////////////////// -->
     <!-- //                        FICHE COURS                         // -->
     <!-- //////////////////////////////////////////////////////////////// -->
 
     <template id="cours_fiche">
-        <t t-set="additional_title" t-value="course_docs[0].name" />
+        <t t-set="additional_title" t-value="course.name" />
         <t t-call="website.layout"> <!-- Affiche le layout du site web -->
             <div class="container">
-                <t t-foreach="course_docs" t-as="course_doc"> <!-- Problème car avec plusieurs course_doc, potentielle répétition -->
-                    <t t-call="website_school_management.cours_fiche_details" />
-                </t>
+                <t t-set="course_doc" t-value="course.documentation_id" />
+                <t t-call="website_school_management.cours_fiche_details" t-if="not(course_group_id) or course_doc.course_group_id.id == course_group_id" />
             </div>
         </t>      
     </template>
@@ -355,17 +304,17 @@
   
     <template id="cours_fiche_details">
         <div>
-            <h1><t t-if="course_doc.state == 'draft'">Brouillon - </t>Détails du cours : <span t-field="course_doc.name"/></h1>
+            <h1>Détails du cours : <span t-field="course.name"/></h1>
             <h3>par <span t-field="course_doc.author_id"/></h3>
         </div>
         <div>
             <ul>
-                <li>Cycle : <span t-field="course_doc.cycle_id"/></li>
-                <li>Groupe de cours : <span t-field="course_doc.course_group_id.ue_id"/> - <span t-field="course_doc.course_group_id"/></li>
-                <li>Niveau : <span t-field="course_doc.level"/></li>
-                <li>Crédits : <span t-field="course_doc.credits"/></li>
-                <li>Heures : <span t-field="course_doc.hours"/></li>
-                <li>Pondération : <span t-field="course_doc.weight"/></li>
+                <li>Cycle : <span t-field="course.cycle_id"/></li>
+                <li>Groupe de cours : <span t-field="course.course_group_id.ue_id"/> - <span t-field="course.course_group_id"/></li>
+                <li>Niveau : <span t-field="course.level"/></li>
+                <li>Crédits : <span t-field="course.credits"/></li>
+                <li>Heures : <span t-field="course.hours"/></li>
+                <li>Pondération : <span t-field="course.weight"/></li>
                 <li>Obligatoire : <t t-if="course_doc.mandatory">Oui</t><t t-if="not(course_doc.mandatory)">Non</t></li>
                 <li>Langue : <span t-field="course_doc.language"/></li>
                 <li>Professeurs : <span t-esc="', '.join(map( lambda x: x.name, course_doc.staff_ids))"/></li>
@@ -400,16 +349,6 @@
             <h3 class="panel-title">Méthode d'évaluation</h3>
             <span t-raw="course_doc.evaluation_method"/>
         </div>
-    </template>
-
-    <template id="cours_fiche_vide">
-        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
-            <t t-set="title">Cours</t>
-            <div class="container">
-                <h1>Pas de description</h1>      
-                <p>Veuillez contacter le secrétariat ou votre professeur pour obtenir plus d'informations sur cette activité.</p>
-            </div>
-        </t>
     </template>
     
     <!-- //////////////////////////////////////////////////////////////// -->
