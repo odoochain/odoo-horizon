@@ -308,7 +308,7 @@
         <div>
             <h1 t-out="course.name"/>
             <t t-if="course_doc.author_id">
-                <span class="d-block h3 text-muted">Par <span class="fst-italic" t-field="course_doc.author_id"/></span>
+                <span class="d-block h5 text-muted">Par <span class="fst-italic" t-field="course_doc.author_id"/></span>
             </t>
         </div>
         <dl class="d-flex flex-wrap pt-2 mt-3 mb-4">
