@@ -30,4 +30,61 @@
             </div>
         </xpath>
     </template>
+
+    
+
+    <template id="hz_account" inherit_id="portal.portal_my_home" name="Horizon Account Page" priority="32">
+        <xpath expr="//div[@id='oe_structure_portal_my_home_1']" position="replace"/>
+        <xpath expr="//div[@id='oe_structure_portal_my_home_2']" position="replace"/>
+
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
+            <style>
+            div.hz-editor-mode-only {display: none;}
+            body.editor_enable div.hz-editor-mode-only {display: block !important;}
+            </style>
+            <h1 t-out="user_id.partner_id.name" />
+            <ul>
+                <li t-if="user_id.partner_id.student == True">Étudiant</li>
+                <li t-if="user_id.partner_id.teacher == True">Enseignant</li>
+                <li t-if="user_id.partner_id.employee == True">Employé</li>
+                <li t-if="user_id._is_admin()">Administrateur du système</li>
+            </ul>
+            <t t-call="website_school_portal.hz_account_student" t-if="user_id.partner_id.student == True" />
+            <t t-call="website_school_portal.hz_account_teacher" t-if="user_id.partner_id.teacher == True" />
+            <t t-call="website_school_portal.hz_account_employee" t-if="user_id.partner_id.employee == True" />
+            <t t-if="user_id._is_admin()">
+                <div class="hz-editor-mode-only mt-5">
+                    <div class="alert alert-warning">
+                        <i class="fa fa-warning"/>
+                        <span>Vous ne voyez cette section que pour pouvoir l'éditer !</span>
+                    </div>
+                
+                    <h2>Section étudiant</h2>
+                    <t t-call="website_school_portal.hz_account_student" />
+                    <h2>Section enseignant</h2>
+                    <t t-call="website_school_portal.hz_account_teacher" />
+                    <h2>Section employé</h2>
+                    <t t-call="website_school_portal.hz_account_employee" />
+                </div>
+            </t>
+
+        </xpath>
+    </template>
+
+    <template id="hz_account_student" name="Horizon Student Account Page" priority="32">
+        <p>...</p>
+    </template>
+
+    <template id="hz_account_teacher" name="Horizon Teacher Account Page" priority="32">
+        <p>...</p>
+
+    </template>
+
+    <template id="hz_account_employee" name="Horizon Employee Account Page" priority="32">
+        <p>...</p>
+
+    </template>
+
+   
+
 </odoo>
