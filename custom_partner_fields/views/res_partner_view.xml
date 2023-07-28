@@ -48,7 +48,9 @@
                 >
                     <group>
                         <field name="memoir_titles_ids">
-                            <field name="name"/>
+                            <tree>
+                                <field name="name"/>
+                            </tree>
                         </field>
                         <field name="internships_ids">
                             <tree>

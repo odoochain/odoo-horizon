@@ -82,7 +82,7 @@
                                     <templates>
                                       <t t-name="kanban-box">
                                           <div style="position: relative; border-top : 10px solid #ffc107;">
-                                              <div class="oe_module_vignette">
+                                              <div class="oe_module_vignette container">
                                                 <div class="row">
                                                   <div class="col-12">
                                                     <field name="uid"/>
@@ -126,7 +126,7 @@
                                     <templates>
                                       <t t-name="kanban-box">
                                           <div style="position: relative; border-top : 10px solid #28a745;">
-                                              <div class="oe_module_vignette">
+                                              <div class="oe_module_vignette container">
                                                 <div class="row">
                                                   <div class="col-12">
                                                     <field name="uid"/>

@@ -104,7 +104,7 @@
                     <templates>
                         <t t-name="kanban-box">
                             <div style="position: relative; border-top : 10px solid #28a745;">
-                                <div class="oe_module_vignette">
+                                <div class="oe_module_vignette container">
                                   <div class="row">
                                     <div class="col-6">
                                       <h5><field name="uid" /></h5>

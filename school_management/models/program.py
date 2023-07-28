@@ -104,11 +104,11 @@ class Program(models.Model):
     
     cycle_required_credits = fields.Integer(related='cycle_id.required_credits', string='Required Credits')
 
+    year_short_name = fields.Char(related='year_id.short_name', string='Year Name',store=True)
+
     domain_name = fields.Char(related='speciality_id.domain_id.name', string='Domain Name',store=True)
     cycle_type = fields.Char(related='cycle_id.short_name', string="Cycle Type", store=True)
     cycle_code = fields.Char(related='cycle_id.code', string="Cycle Code", store=True)
-    
-    year_short_name = fields.Char(related='year_id.short_name', string='Year Name',store=True)
     
     speciality_id = fields.Many2one('school.speciality', string='Speciality')
     
@@ -162,6 +162,7 @@ class Program(models.Model):
 
     def archive(self):
         return self.write({'state': 'archived'})
+
 
 class Bloc(models.Model):
     '''Bloc'''

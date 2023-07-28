@@ -50,7 +50,7 @@
         ],
     },
     'description': '''
-        This modules add management tools for a school.
+        This module adds management tools for a school.
     ''',
     'active': False,
     'installable': True,
