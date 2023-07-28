@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="program_form" model="ir.ui.view">
+        <field name="name">Program form extension for Website</field>
+        <field name="inherit_id" ref="school_management.program_form" />
+        <field name="model">school.program</field>
+        <field name="type">form</field>
+        <field eval="17" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='speciality_id']" position="after">
+                <field name="specialization" placeholder="If needed for the cycle type..."/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
