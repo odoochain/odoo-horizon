@@ -8,7 +8,7 @@
             <field name="page_width">210</field>
             <field name="orientation">Portrait</field>
             <field name="margin_top">30</field>
-            <field name="margin_bottom">15</field>
+            <field name="margin_bottom">13</field>
             <field name="margin_left">10</field>
             <field name="margin_right">10</field>
             <field name="header_line" eval="False"/>
@@ -42,7 +42,7 @@
                   <t t-set="secondary" t-value="env.company.secondary_color or 'black'" />
                   <style>
                         * {
-                              font-family: <t t-out="font" />; // Ne marche pas
+                              font-family: <t t-out="font" />; // Ne marche pas ?
                         }
                         .row {
                             display: -webkit-box; /* wkhtmltopdf uses this one */
@@ -167,13 +167,13 @@
                               </div>
                         </div>
                         <div t-if="program.description" style="margin-top: 6mm;">
-                              <p style="font-size: 0.9em; margin-top: 2mm;" t-out="program.description"/>
+                              <p style="font-size: 0.8em; margin-top: 2mm;" t-out="program.description"/>
                         </div>
                         <h3 t-attf-style="padding-top: 1mm; margin-bottom: 0; color: {{primary}}; font-weight: 400;">
                               Programme des cours
                         </h3>
                         <t t-foreach="program.bloc_ids" t-as="bloc">
-                              <h3>
+                              <h4>
                                     <span style="font-size: 1.6em; font-style: italic; font-weight: 400; color: #6e6e6e;">
                                           <t t-out="bloc.name"/>
                                     </span>
@@ -187,31 +187,34 @@
                                           </span>
                                           <span t-attf-style="color: {{secondary}}" t-out="bloc.total_credits"/>
                                     </span>
-                              </h3>
+                              </h4>
                               <div style="padding-left : 5mm;">
                                     <t t-set="course_group_group" t-value=""/>
                                     <!-- Groupes de cours -->
                                     <div style="padding-left : 5mm;">
-                                          <table class="table-program" style="width: 100%">
+                                          <table class="table-program" style="width: 100%; font-size: 0.9em;">
+                                                <thead>
+                                                      <tr style="border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea;" class="table-row-title">
+                                                            <th colspan="2"></th>
+                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Professeur</th>
+                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Heures</th>
+                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">ECTS</th>
+                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Pondération</th>
+                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Pré-requis</th>
+                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Co-requis</th>
+                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Quadri</th>
+                                                      </tr>
+                                                </thead>
                                                 <t t-set="display_header" t-value="True"/>
                                                 <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">
                                                       <t t-if="(course_group.cg_grouping.id and course_group.cg_grouping.id != course_group_group) or display_header == True">
-                                                            <!--<thead>-->
-                                                                  <tr style="border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea;" class="table-row-title">
-                                                                        <th style="color: #6e6e6e; font-size: 0.9em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; font-weight: 400; padding-bottom: 2mm; text-align: left;" colspan="2">
-                                                                              <t t-if="course_group.cg_grouping.id">
-                                                                                    <t t-out="course_group.cg_grouping.name"/>
-                                                                              </t>
-                                                                        </th>
-                                                                        <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Professeur</th>
-                                                                        <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Heures</th>
-                                                                        <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">ECTS</th>
-                                                                        <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Pondération</th>
-                                                                        <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Pré-requis</th>
-                                                                        <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Co-requis</th>
-                                                                        <th style="color: #6e6e6e; font-size: 0.5em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Quadri</th>
-                                                                  </tr>
-                                                            <!--</thead>-->
+                                                            <tr style="border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea;" class="table-row-title">
+                                                                  <th style="color: #6e6e6e; font-size: 0.9em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; font-weight: 400; padding-bottom: 2mm; text-align: left;" colspan="9">
+                                                                        <t t-if="course_group.cg_grouping.id">
+                                                                              <t t-out="course_group.cg_grouping.name"/>
+                                                                        </t>
+                                                                  </th>
+                                                            </tr>
                                                             <t t-if="(course_group.cg_grouping.id and course_group.cg_grouping.id != course_group_group) or (course_group.cg_grouping.id == False and display_header == True)">
                                                                   <t t-set="display_header" t-value="False"/>
                                                             </t>
@@ -269,14 +272,18 @@
                                     </div>
                               </div>
                               <t t-if="bloc_index != (bloc_size - 1)">
-                                    <hr style="margin-top: 10mm; margin-bottom: 10mm;"/>
+                                    <hr style="margin-top: 7mm; margin-bottom: 7mm;"/>
                               </t>
                         </t>
                   </t>
-                  <div class="footer" t-attf-style="border-top: 1px solid {{secondary}}; padding-top: 4mm; font-size: 0.8em; color: #6e6e6e;">
+                  <div class="footer" t-attf-style="border-top: 1px solid {{secondary}}; padding-top: 4mm; font-size: 0.7em; color: #6e6e6e;">
                         <div class="row">
-                              <div class="col-10">
+                              <div class="col-11">
                                     <p>
+                                          <t t-out="env.company.website"/>
+                                          <span t-attf-style="color: {{primary}}; padding-left: 1mm; padding-right: 1mm;">|</span>
+                                          <t t-out="env.company.email"/>
+                                          <span t-attf-style="color: {{primary}}; padding-left: 1mm; padding-right: 1mm;">|</span>
                                           <t t-out="env.company.street"/>
                                           <t t-out="env.company.street2"/>
                                           -
@@ -284,8 +291,8 @@
                                           <t t-out="env.company.city"/>
                                     </p>
                               </div>
-                              <div class="col-2 text-end">
-                                    Page: <span class="page"/> / <span class="topage"/>
+                              <div class="col-1 text-end">
+                                    Page : <span class="page"/> / <span class="topage"/>
                               </div>
                         </div>
                   </div>
