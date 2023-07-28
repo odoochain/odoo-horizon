@@ -196,7 +196,7 @@
                                                 <thead>
                                                       <tr style="border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea;" class="table-row-title">
                                                             <th colspan="2"></th>
-                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Professeur</th>
+                                                            <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Responsable</th>
                                                             <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Heures</th>
                                                             <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">ECTS</th>
                                                             <th style="color: #6e6e6e; font-size: 0.7em; padding-top: 2mm; padding-left: 2mm; padding-right: 2mm; padding-bottom: 2mm; text-align: left; white-space: nowrap;">Pondération</th>
