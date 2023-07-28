@@ -14,7 +14,7 @@
     <template id="hz_horizon_access">
         <t t-set="translatable" t-value="true" />
         <div class="row justify-content-center o_not_editable" t-ignore="true">
-            <t t-if="request.env.user == request.website.user_id">
+            <t t-if="website.user_id == user_id">
                 <div class="col-lg-3 o_colored_level">
                     <p class="text-center">
                         <span class="d-block fw-bold fst-italic mb-3">
@@ -34,7 +34,7 @@
                     </p>
                 </div>
             </t>
-            <t t-elif="request.env.user.partner_id.teacher == True">
+            <t t-elif="website.partner_id.teacher == True">
                 <div class="o_colored_level col-lg-12">
                     <p class="text-center">
                         <a href="/my/home" class="btn btn-primary rounded-circle">Voir mon profil enseignant</a>

@@ -27,9 +27,9 @@ class WebsiteHorizon(models.Model):
         def toggle_view(viewkey: str, active: bool, like: bool=False):
             View = self.env['ir.ui.view'].sudo().with_context(active_test=False)
             if (like) : 
-                views = View.search([('website_id','=',website.id),('key','like',viewkey)])
+                views = View.search([('key','like',viewkey)])
             else:    
-                views = View.search([('website_id','=',website.id),('key','=',viewkey)])
+                views = View.search([('key','=',viewkey)])
             if not active:
                views.reset_arch(mode='hard')
             views.write({'active': active})
