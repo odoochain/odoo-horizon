@@ -12,19 +12,19 @@ class Program(models.Model):
     @api.model
     def _search_get_detail(self, website, order, options):
 
-        domain = [] #[website.website_domain()]
+        domain = []
         domain.append([('state', '=', 'published')])
 
         return {
             'model': 'school.program',
-            'base_domain': domain, # ('state', '=', 'published')
-            'search_fields': ['name', 'domain_name'],
+            'base_domain': domain,
+            'search_fields': ['name', 'domain_name', 'specialization'],
             'fetch_fields': ['name','id'],
             'mapping': {
                 'name': {'name': 'name', 'type': 'text', 'match': True},
                 'website_url': {'name': 'url', 'type': 'text', 'truncate': False},
             },
-            'icon': 'fa-check-square-o',
+            'icon': 'fa-folder-o',
             'order': 'name asc, id desc',
         }
     
