@@ -26,12 +26,16 @@
 
         <!-- Template page  -->
 		<template id="valves_etudiants_crlg" name="Valves Étudiants">
-            <t t-call="website.default_page"/>
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty"/>
+            </t>
         </template>
 
         <!-- Template page  -->
 		<template id="valves_professeurs_crlg" name="Valves Professeurs">
-            <t t-call="website.default_page"/>
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty"/>
+            </t>
         </template>
 
         <!-- Création page Valves Étudiants en db  -->
