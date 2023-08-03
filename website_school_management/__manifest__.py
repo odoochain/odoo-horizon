@@ -31,7 +31,6 @@
     ],
     'data': [
         'data_init.xml',
-        'views/templates.xml',
         'views/programmes.xml',
         'views/backoffice.xml',
         'report/programme_report.xml',
