@@ -1,4 +1,5 @@
 from odoo import http
+from odoo.http import request
 
 import logging
 
@@ -23,3 +24,27 @@ class WebSchoolPortalController(http.Controller):
                 'request': http.request
             }
         return data
+    
+    ###########################################################
+    #                     RESPONSIVE                          #
+    ###########################################################
+
+    @http.route('/mes-donnees/mon-programme', type='http', auth='user', website=True) # TODO >>> website_school_portal >>> controller mes-donnees >>> route /mes-donnees/mon-programme
+    def responsive_blocs(self, debug=False, **k):
+        values = {
+            'user': request.env.user,
+            'blocs': request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)]),
+            'display_results': request.env['ir.config_parameter'].sudo().get_param('school.display.results', '0'),
+        }
+        return request.render('website_school_portal.hz_blocs', values)
+    
+    @http.route('/mes-donnees/mes-documents', type='http', auth='user', website=True) # TODO >>> website_school_portal >>> controller mes-donnees >>> route /mes-donnees/mes-documents
+    def responsive_documents(self, debug=False, **k):
+        user = request.env.user
+        partner_id = user.partner_id
+        values = {
+            'user': user,
+            'official_document_ids' : partner_id.official_document_ids,
+            'blocs' : request.env['school.individual_bloc'].search([('student_id','=',request.env.user.partner_id.id),('year_id','=',request.env.user.current_year_id.id)]),
+        }
+        return request.render('website_school_portal.hz_documents', values)
