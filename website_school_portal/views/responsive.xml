@@ -22,7 +22,7 @@
 <odoo>
 
     <template id="hz_blocs" name="Horizon Responsive Blocs">
-        <t t-call="website_school_management.layout">
+        <t t-call="website.layout">
                 <div class="container">
                     <span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">PROGRAMME ANNUEL</span>
                     <!-- accordion section -->
@@ -115,7 +115,7 @@
     </template>
 
     <template id="hz_documents" name="Horizon Responsive Documents">
-            <t t-call="website_school_management.layout">
+            <t t-call="website.layout">
                 <div class="container">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">DOCUMENTS</span>
 						<!-- accordion section -->
