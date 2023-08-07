@@ -17,7 +17,7 @@ _logger = logging.getLogger(__name__)
 
 # Gestion des différentes routes pour les programmes de cours
 class reservations(http.Controller):
-    @http.route('/responsive/booking_new', type='http', auth='user', website=True)
+    @http.route('/reservations/creation', type='http', auth='user', website=True)
     def responsive_booking_new(self, debug=False, **k):
 
         from_hours = []
@@ -35,7 +35,7 @@ class reservations(http.Controller):
         }
         return request.render('website_school_management.hz_booking_new', values)
     
-    @http.route('/responsive/booking_search', type='http', auth='user', website=True)
+    @http.route('/reservations/recherche', type='http', auth='user', website=True)
     def responsive_booking_search(self, debug=False, **k):
         values = {
             'user': request.env.user,
@@ -44,7 +44,7 @@ class reservations(http.Controller):
         }
         return request.render('website_school_management.hz_booking_search', values)
     
-    @http.route('/responsive/bookings', type='http', auth='user', website=True)
+    @http.route('/reservations/mes-reservations', type='http', auth='user', website=True)
     def responsive_bookings(self, debug=False, **k):
         start = fields.Datetime.to_string(datetime.today().replace(hour=0, minute=0, second=0))
         end = fields.Datetime.to_string(datetime.today().replace(hour=23, minute=59, second=59))
@@ -66,8 +66,8 @@ class reservations(http.Controller):
         }
         return request.render('website_school_management.hz_bookings', values)
     
-    @http.route('/responsive/delete/<int:booking_id>', type='http', auth='user', website=True)
+    @http.route('/reservations/suppression/<int:booking_id>', type='http', auth='user', website=True)
     def responsive_delete_booking(self, booking_id, debug=False, **k):
         booking = request.env['calendar.event'].browse(booking_id)
         booking.unlink()
-        return werkzeug.utils.redirect('/responsive/bookings')
+        return werkzeug.utils.redirect('/reservations/mes-reservations')

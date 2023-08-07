@@ -210,7 +210,7 @@
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><span t-field="book.start" t-options='{"widget": "datetime", "time_only": True, "hide_seconds": True}'/><span class="mx-1">›</span>  <span t-field="book.stop" t-options='{"widget": "datetime", "time_only": True, "hide_seconds": True}'/></span>
 									<span><t t-esc="book.room_id.name"/></span>
-									<a t-att-href="'/responsive/delete/%s' % book.id"><i class="fa fa-trash d-inline-block"></i></a>
+									<a t-att-href="'/reservations/suppression/%s' % book.id"><i class="fa fa-trash d-inline-block"></i></a>
 								</div>
 							</li>
 						</ul>
@@ -221,13 +221,13 @@
 								<div class="d-flex justify-content-between">
 									<span class="pr-3"><span t-field="book.start" t-options='{"widget": "datetime", "time_only": True, "hide_seconds": True}'/><span class="mx-1">›</span>  <span t-field="book.stop" t-options='{"widget": "datetime", "time_only": True, "hide_seconds": True}'/></span>
 									<span><t t-esc="book.room_id.name"/></span>
-									<a t-att-href="'/responsive/delete/%s' % book.id"><i class="fa fa-trash d-inline-block"></i></a>
+									<a t-att-href="'/reservations/suppression/%s' % book.id"><i class="fa fa-trash d-inline-block"></i></a>
 								</div>
 							</li>
 						</ul>
 						<div>
-							<a class="btn btn-danger" href="/responsive/booking_new" style="margin: 10px;">Réserver une salle</a>
-							<a class="btn btn-danger" href="/responsive/booking_search" style="margin: 10px;">Rechercher</a>
+							<a class="btn btn-danger" href="/reservations/creation" style="margin: 10px;">Réserver une salle</a>
+							<a class="btn btn-danger" href="/reservations/recherche" style="margin: 10px;">Rechercher</a>
 							<a class="btn btn-danger" href="/booking#category_id=16" style="margin: 10px;" target="_blank">Planning des réservations</a>
 						</div>
 					</div>

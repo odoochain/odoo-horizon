@@ -195,7 +195,7 @@ $(document).ready(function(){
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut",
                         "onHidden": function () {
-                            window.location.href = "/responsive/bookings";
+                            window.location.href = "/reservations/mes-reservations";
                         }
                     };
                     toastr["success"]("Votre réservation pour le " + start.format('L') + " à " + fromTime + " a bien été enregistrée.");
