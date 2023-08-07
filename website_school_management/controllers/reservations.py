@@ -19,10 +19,19 @@ _logger = logging.getLogger(__name__)
 class reservations(http.Controller):
     @http.route('/responsive/booking_new', type='http', auth='user', website=True)
     def responsive_booking_new(self, debug=False, **k):
+
+        from_hours = []
+        to_hours = []
+        for i in range(8, 23):
+            from_hours.append(str(i).zfill(2) + ":00")
+            to_hours.append(str(i + 1).zfill(2) + ":00")
+
         values = {
             'user': request.env.user,
             'today' : datetime.today(),
-            'tomorrow' : datetime.today() + timedelta(days=1)
+            'tomorrow' : datetime.today() + timedelta(days=1),
+            'from_hours' : from_hours,
+            'to_hours' : to_hours
         }
         return request.render('website_school_management.hz_booking_new', values)
     

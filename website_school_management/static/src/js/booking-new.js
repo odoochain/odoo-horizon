@@ -26,21 +26,22 @@ $(document).ready(function(){
     
     function updateRoomList() {
         var self = this;
-        var fromTime = $('#from_hour').timepicker('getTime');
-        var toTime = $('#to_hour').timepicker('getTime');
+        var fromTime = $('#from_hour').val();
+        var toTime = $('#to_hour').val();
+        $('#room').val(0);
         if (fromTime < toTime) {
-            var start = date_today.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-            var stop = date_today.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            var start = date_today.clone().set('hour',fromTime.slice(0,2)).set('minutes',fromTime.slice(-2)).set('seconds',0).set('milliseconds',0);
+            var stop = date_today.clone().set('hour',toTime.slice(0,2)).set('minutes',toTime.slice(-2)).set('seconds',0).set('milliseconds',0);
             var selected_date = $('#selected_date').attr('value');
             if( selected_date == 0 ) {
                 var day = $('#day').attr('value');
                 if( day == 1 ) {
-                    start = date_tomorrow.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-                    stop = date_tomorrow.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                    start = date_tomorrow.clone().set('hour',fromTime.slice(0,2)).set('minutes',fromTime.slice(-2)).set('seconds',0).set('milliseconds',0);
+                    stop = date_tomorrow.clone().set('hour',toTime.slice(0,2)).set('minutes',toTime.slice(-2)).set('seconds',0).set('milliseconds',0);
                 }
             } else {
-                start = moment(selected_date).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-                stop = moment(selected_date).set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                start = moment(selected_date).set('hour',fromTime.slice(0,2)).set('minutes',fromTime.slice(-2)).set('seconds',0).set('milliseconds',0);
+                stop = moment(selected_date).set('hour',toTime.slice(0,2)).set('minutes',toTime.slice(-2)).set('seconds',0).set('milliseconds',0);
             }
             $.ajax({
               type: "POST",
@@ -82,21 +83,19 @@ $(document).ready(function(){
             });
         }
     }
+
+    function updateSelectHours() {
+        var from_hour_select = document.querySelector('#from_hour');
+        var to_hour_select = document.querySelector('#to_hour');
+
+        for (var i = 0; i < from_hour_select.options.length; i++) {
+            to_hour_select[i].disabled = from_hour_select.selectedIndex > i;
+        }
     
-	$('#from_hour').timepicker({
-        'timeFormat': 'H:i',
-        'minTime': '8:00',
-        'maxTime': '21:30',
-        'step': 60,
-    });
-    
-    $('#to_hour').timepicker({
-        'timeFormat': 'H:i',
-        'minTime': '9:00',
-        'maxTime': '22:00',
-        'step': 60,
-        'showDuration': true,
-    });
+        if (from_hour_select.selectedIndex < from_hour_select.options.length && from_hour_select.selectedIndex >= to_hour_select.selectedIndex) {
+            to_hour_select.selectedIndex = from_hour_select.selectedIndex;
+        }
+    }
     
     $('#today').on('click',function() {
         $('#today').addClass("bg-danger border border-danger border-0")
@@ -115,15 +114,13 @@ $(document).ready(function(){
     });
     
     $('#from_hour').on('change', function() {
-        var fromTime = $('#from_hour').timepicker('getTime');
-        var toTime = $('#to_hour').timepicker('getTime');
-        $('#to_hour').timepicker('option', 'minTime', fromTime);
-        $('#to_hour').timepicker('setTime', moment(fromTime).add(moment.duration(1, 'hours')).toDate());
+        updateSelectHours();
         updateRoomList();
         updateSendButton();
     });
     
     $('#to_hour').on('change', function() {
+        updateSelectHours();
         updateRoomList();
         updateSendButton();
     });
@@ -134,24 +131,26 @@ $(document).ready(function(){
     
     $('#request-booking').on('click',function(event) {
         event.preventDefault();
-        var fromTime = $('#from_hour').timepicker('getTime');
-        var toTime = $('#to_hour').timepicker('getTime');
-        var start = date_today.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-        var stop = date_today.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+        var fromTime = $('#from_hour').val();
+        var toTime = $('#to_hour').val();
+        var start = date_today.clone().set('hour',fromTime.slice(0,2)).set('minutes',fromTime.slice(-2)).set('seconds',0).set('milliseconds',0);
+        var stop = date_today.clone().set('hour',toTime.slice(0,2)).set('minutes',toTime.slice(-2)).set('seconds',0).set('milliseconds',0);
         var selected_date = $('#selected_date').attr('value');
         if( selected_date == 0 ) {
             var day = $('#day').attr('value');
             if( day == 1 ) {
-                start = date_tomorrow.clone().set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-                stop = date_tomorrow.clone().set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+                start = date_tomorrow.clone().set('hour',fromTime.slice(0,2)).set('minutes',fromTime.slice(-2)).set('seconds',0).set('milliseconds',0);
+                stop = date_tomorrow.clone().set('hour',toTime.slice(0,2)).set('minutes',toTime.slice(-2)).set('seconds',0).set('milliseconds',0);
             }
         } else {
-            start = moment(selected_date).set('hour',fromTime.getHours()).set('minutes',fromTime.getMinutes()).set('seconds',0).set('milliseconds',0);
-            stop = moment(selected_date).set('hour',toTime.getHours()).set('minutes',toTime.getMinutes()).set('seconds',0).set('milliseconds',0);
+            start = moment(selected_date).set('hour',fromTime.slice(0,2)).set('minutes',fromTime.slice(-2)).set('seconds',0).set('milliseconds',0);
+            stop = moment(selected_date).set('hour',toTime.slice(0,2)).set('minutes',toTime.slice(-2)).set('seconds',0).set('milliseconds',0);
         }
         var room = $('#room').val();
         var description  = $('#description').val();
         var event_type = $('#event_type').val();
+
+        start.locale("fr");
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -199,7 +198,7 @@ $(document).ready(function(){
                             window.location.href = "/responsive/bookings";
                         }
                     };
-                    toastr["success"]("Your booking for " + start.locale('fr').format('ddd DD at HH:MI') + " is successfull.");
+                    toastr["success"]("Votre réservation pour le " + start.format('L') + " à " + fromTime + " a bien été enregistrée.");
                 }
             },    
         });

@@ -23,16 +23,8 @@
 <odoo>
 
     <template id="assets" name="website_school_management assets">
-        <!-- include google fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap" rel="stylesheet"/>
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="/website_school_management/static/src/css/bootstrap.css"/>
-        <link rel="stylesheet" href="/web/static/lib/fontawesome/css/font-awesome.css"/>
-        <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
-		<link rel="stylesheet" href="/website_booking/static/lib/timepicker/jquery.timepicker.css"/>
 		
         <link rel="stylesheet" href="/website_school_management/static/src/css/toastr.css"/>
-        <link rel="stylesheet" href="/website_school_management/static/src/css/main.css"/>
         
         <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
         <script type="text/javascript" src="/web/static/lib/jquery.ui/jquery-ui.js"></script>
@@ -40,26 +32,22 @@
         <script type="text/javascript" src="/web/static/lib/moment/moment.js"></script>
         <script type="text/javascript" src="/web/static/lib/moment/locale/fr.js"></script>
         <script type="text/javascript" src="/website_school_management/static/src/js/toastr.js"></script>
-        <script type="text/javascript" src="/website_school_management/static/src/js/main-template.js" defer=""></script>
-        <script type="text/javascript" src="/website_booking/static/lib/timepicker/jquery.timepicker.js"/>
 		
-    </template>
-
-    <template id="layout" inherit_id="website.layout" name="website_school_management layout">
-        <xpath expr="//head" position="inside">
-            <t t-call="website_school_management.assets" />
-        </xpath>
     </template>
 
     <template id="hz_booking_new" name="Horizon Responsive Bookings">
     		<t t-call="website.layout">
+
+				<xpath expr="//head" position="inside">
+            		<t t-call="website_school_management.assets" />
+        		</xpath>
     			
     			<script type="text/javascript">
     				var date_today = moment('<t t-esc="today"/>');
     				var date_tomorrow = moment('<t t-esc="tomorrow"/>');
     			</script>
 
-                <script type="text/javascript" src="/website_school_management/static/src/js/booking-new.js" defer=""></script>
+				<script type="text/javascript" src="/website_school_management/static/src/js/booking-new.js" defer=""></script>
     			
     			<div id="content" class="container">
 					<div class="content-body">
@@ -131,11 +119,22 @@
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6 d-flex">
 									<div class="form-group mr-4 ml-md-auto ml-lg-0">
 										<label class="d-block text-uppercase font-weight-bold" for="beginningHour">Heure début</label>
-										<input id="from_hour" type="text" data-length="10" class="invalid form-control no-appearance time-select input-sm input-font-lg text-center"/>
+										<select id="from_hour" name="from_hour">
+											<option t-att-value="" t-att-hidden="True" t-att-selected="True" t-att-disabled="True">Heure de début...</option>
+											<t t-foreach="from_hours" t-as="from_hour">
+												<option t-att-value="from_hour"><t t-esc="from_hour"/></option>
+											</t>
+										</select>
 									</div>
 									<div class="form-group">
 										<label class="d-block text-uppercase font-weight-bold" for="endTime">Heure fin</label>
-										<input id="to_hour" type="text" data-length="10" class="invalid form-control no-appearance time-select input-sm input-font-lg text-center"/>
+										<select id="to_hour" name="to_hour">
+											<option t-att-value="" t-att-hidden="True" t-att-selected="True" t-att-disabled="True">Heure de fin...</option>
+											<t t-foreach="to_hours" t-as="to_hour">
+												<option t-att-value="to_hour"><t t-esc="to_hour"/></option>
+											</t>
+										</select>
+										<!-- <input id="to_hour" type="text" data-length="10" class="invalid form-control no-appearance time-select input-sm input-font-lg text-center"/> -->
 									</div>
 								</div>
 							</div>
@@ -156,7 +155,11 @@
     	</template>
 
         <template id="hz_booking_search" name="Horizon Responsive Bookings Search">
-    		<t t-call="website_school_management.layout">
+    		<t t-call="website.layout">
+
+				<xpath expr="//head" position="inside">
+            		<t t-call="website_school_management.assets" />
+        		</xpath>
     			
     			<script type="text/javascript" src="/website_school_management/static/src/js/booking-search.js" defer=""></script>
     			
@@ -195,7 +198,7 @@
     	</template>
 
         <template id="hz_bookings" name="Horizon Responsive Bookings">
-            <t t-call="website_school_management.layout">
+            <t t-call="website.layout">
     			<div id="content" class="container">
 					<div class="content-body">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-4 pb-md-0 mb-xl-4 pb-xl-3">BOOKING</span>
