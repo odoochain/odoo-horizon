@@ -20,4 +20,3 @@
 ##############################################################################
 from . import main
 from . import programmes
-from . import reservations

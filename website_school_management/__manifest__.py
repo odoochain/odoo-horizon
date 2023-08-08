@@ -35,7 +35,6 @@
         'views/templates.xml',
         'views/programmes.xml',
         'views/backoffice.xml',
-        'views/responsive.xml',
         'report/programme_report.xml',
     ],
     'assets': {

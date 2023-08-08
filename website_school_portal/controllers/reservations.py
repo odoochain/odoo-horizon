@@ -33,7 +33,7 @@ class reservations(http.Controller):
             'from_hours' : from_hours,
             'to_hours' : to_hours
         }
-        return request.render('website_school_management.hz_booking_new', values)
+        return request.render('website_school_portal.hz_booking_new', values)
     
     @http.route('/reservations/recherche', type='http', auth='user', website=True)
     def responsive_booking_search(self, debug=False, **k):
@@ -42,7 +42,7 @@ class reservations(http.Controller):
             'today' : fields.Datetime.to_string(datetime.today()),
             'tomorrow' : fields.Datetime.to_string(datetime.today() + timedelta(days=1))
         }
-        return request.render('website_school_management.hz_booking_search', values)
+        return request.render('website_school_portal.hz_booking_search', values)
     
     @http.route('/reservations/mes-reservations', type='http', auth='user', website=True)
     def responsive_bookings(self, debug=False, **k):
@@ -64,7 +64,7 @@ class reservations(http.Controller):
             'bookings': request.env['calendar.event'].sudo().with_context({'virtual_id': True, 'tz':request.env.user.tz}).search(domain,order='start asc'),
             'bookings_next': request.env['calendar.event'].sudo().with_context({'virtual_id': True,'tz':request.env.user.tz}).search(domain_next,order='start asc'),
         }
-        return request.render('website_school_management.hz_bookings', values)
+        return request.render('website_school_portal.hz_bookings', values)
     
     @http.route('/reservations/suppression/<int:booking_id>', type='http', auth='user', website=True)
     def responsive_delete_booking(self, booking_id, debug=False, **k):
