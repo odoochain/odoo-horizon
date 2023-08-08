@@ -1,5 +1,6 @@
 from odoo import http
 from odoo.http import request
+from odoo.http import (Response)
 
 import logging
 
@@ -16,4 +17,4 @@ class WebCRLGController(http.Controller):
         if (request.env.user.teacher or request.env.is_admin()):
             return request.render("website_crlg_portal.valves_professeurs_crlg")
         else :
-            return request.redirect('/')
+            return Response(template='website_school_portal.hz_page_403', status=403)
