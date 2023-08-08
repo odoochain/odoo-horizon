@@ -35,7 +35,7 @@
 		
     </template>
 
-    <template id="hz_booking_new" name="Horizon Responsive Bookings">
+    <template id="hz_booking_new" name="Nouvelle réservation">
     		<t t-call="website.layout">
 
 				<xpath expr="//head" position="inside">
@@ -154,7 +154,7 @@
     		</t>
     	</template>
 
-        <template id="hz_booking_search" name="Horizon Responsive Bookings Search">
+        <template id="hz_booking_search" name="Recherche réservation">
     		<t t-call="website.layout">
 
 				<xpath expr="//head" position="inside">
@@ -197,7 +197,7 @@
     		</t>
     	</template>
 
-        <template id="hz_bookings" name="Horizon Responsive Bookings">
+        <template id="hz_bookings" name="Mes réservations">
             <t t-call="website.layout">
     			<div id="content" class="container">
 					<div class="content-body">

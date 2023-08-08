@@ -21,7 +21,7 @@
 -->
 <odoo>
 
-    <template id="hz_blocs" name="Horizon Responsive Blocs">
+    <template id="hz_blocs" name="Mon programme individuel">
         <t t-call="website.layout">
                 <div class="container">
                     <span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">PROGRAMME ANNUEL</span>
@@ -114,7 +114,7 @@
         </t>
     </template>
 
-    <template id="hz_documents" name="Horizon Responsive Documents">
+    <template id="hz_documents" name="Mes documents">
             <t t-call="website.layout">
                 <div class="container">
 						<span class="subheading-span d-block text-danger text-uppercase font-weight-bold mb-3 mb-md-4 pb-md-2 mb-xl-4 pb-xl-2">DOCUMENTS</span>
