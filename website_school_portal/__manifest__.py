@@ -38,6 +38,7 @@
         'views/custom.xml',
         'views/snippets.xml',
         'views/page_404.xml',
+        'views/page_403.xml',
         'views/responsive.xml',
     ],
     'assets': {
