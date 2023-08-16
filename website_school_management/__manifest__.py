@@ -28,6 +28,7 @@
     'depends': [
         'web',
         'website',
+        'school_booking',
     ],
     'data': [
         'data_init.xml',
