@@ -21,6 +21,44 @@
 ##############################################################################
 -->
 <odoo>
+
+
+        <record id="school_individual_course_form_inherited" model="ir.ui.view">
+            <field name="name">school.individual_course.form.inherited</field>
+            <field name="model">school.individual_course</field>
+            <field name="inherit_id" ref="school_management.view_school_individual_course_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Results" name="results">
+                    <group>
+                      <group>
+                        <field name="partial_result"/>
+                        <field name="second_result"/>
+                        <field name="final_result"/>
+                      </group>
+                    </group>
+                </page>
+                <page string="Archive" name="archive">
+                    <group>
+                      <group>
+                        <field name="jun_result"/>
+                        <field name="sept_result"/>
+                      </group>
+                    </group>
+                    <group>
+                      <group string="First Session">
+                        <field name="first_session_result"/>
+                        <field name="first_session_note"/>
+                      </group>
+                      <group string="Second Session">
+                        <field name="second_session_result"/>
+                        <field name="second_session_note"/>
+                      </group>
+                    </group>
+                </page>
+                </xpath>
+            </field>
+        </record>
     
     
         <!-- Top menu item -->
@@ -85,22 +123,30 @@
                             </button>
                     </div>
                 </xpath>-->
-                <xpath expr="//field[@name='required_credits']" position="after">         
+                <xpath expr="//group[@name='required_credits_section']" position="inside">
                     <field name="total_registered_credits" />
                     <field name="total_acquiered_credits" />
-                    <field name="evaluation" />
-                    <field name="grade" />
-                    <field name="grade_year_id" />
-                    <newline/>
-                    <field name="grade_comments" colspan="4"/>
                 </xpath>
+                <xpath expr="//group[@name='required_credits_section']" position="after">
+                    <group>
+                        <field name="evaluation" />
+                        <field name="grade"/>
+                        <field name="grade_year_id"/>
+                    </group>
+                    <group style="width:100%;">
+                        <field name="grade_comments"/>
+                    </group>
+                </xpath>
+<!--                    <newline/>-->
+<!--                    <field name="grade_comments"/>-->
+<!--                </xpath>-->
                 <xpath expr="//field[@name='bloc_ids']/kanban/field[@name='total_credits']" position="after">
                     <field name="evaluation"/>
                     <field name="state"/>
                     <field name="decision"/>
                 </xpath>
-                <xpath expr="//field[@name='bloc_ids']//div[@class='oe_module_vignette']" position="replace">
-                    <div class="oe_module_vignette">
+                <xpath expr="//field[@name='bloc_ids']//div[contains(@class, 'oe_module_vignette')]" position="replace">
+                    <div class="oe_module_vignette container">
                       <div class="row mb-2">
                         <div class="col-6">
                           <h5><field name="uid" /></h5>
@@ -139,25 +185,23 @@
                       </div>
                     </div>
                 </xpath>
-                <xpath expr="//field[@name='course_group_summaries']/kanban" position="attributes">
-                  <attribute name="default_order">state,uid</attribute>
-                </xpath>
                 <xpath expr="//field[@name='course_group_summaries']/kanban/field[@name='total_credits']" position="after">
                     <field name="state"/>
                     <field name="trials"/>
                     <field name="final_result_disp"/>
                 </xpath>
-                <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="attributes">
-                    <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
+                <xpath expr="//field[@name='course_group_summaries']/kanban" position="attributes">
+                  <attribute name="default_order">state,uid</attribute>
                 </xpath>
-                <xpath expr="//div[contains(@class, 'horizon_cgs_evals')]" position="inside">
-                  <div class="col-12">
-                    <a type="object" name="action_delete_course_group" class="oe_highlight btn btn-primary float-right mr8 ml8" states="9_draft">Delete</a>
-                    <a type="object" name="action_candidate_valuate_course_group" class="oe_highlight btn btn-primary float-right mr8 ml8" states="9_draft,7_failed">Valuate</a>
-                    <!--<a type="object" name="action_confirm_valuate_course_group" class="oe_highlight btn btn-primary float-right mr8 ml8" states="2_candidate">Confirm</a>
-                    <a type="object" name="action_valuate_course_group" class="oe_highlight btn btn-primary float-right mr8 ml8" states="1_confirmed">Validate</a>-->
-                  </div>
-                </xpath>
+<!--                <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="attributes">-->
+<!--                    <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//div[contains(@class, 'horizon_cgs_evals')]" position="inside">-->
+<!--                  <div class="col-12">-->
+<!--                    <a type="object" name="action_delete_course_group" class="oe_highlight btn btn-primary float-right mr8 ml8" states="9_draft">Delete</a>-->
+<!--                    <a type="object" name="action_candidate_valuate_course_group" class="oe_highlight btn btn-primary float-right mr8 ml8" states="9_draft,7_failed">Valuate</a>-->
+<!--                  </div>-->
+<!--                </xpath>-->
             </field>
         </record>
         
@@ -230,11 +274,10 @@
                         <field name="state" widget="statusbar" states="awarded_first_session,awarded_second_session,failed,abandoned" statusbar_visible="awarded_first_session,awarded_second_session,failed,abandoned" />
                     </header>
                 </xpath>
-                <xpath expr="//field[@name='total_credits']" position="after">
-                    <newline/>
+                <xpath expr="//group[@name='fields_second_group']" position="inside">
                     <field name="total_acquiered_credits"/>
                     <field name="evaluation"/>
-                    <field name="decision" colspan="4"/>
+                    <field name="decision"/>
                 </xpath>
                 <xpath expr="//field[@name='course_group_ids']/kanban/field[@name='total_credits']" position="after">
                     <field name="state"/>
@@ -245,16 +288,16 @@
                     <field name="final_result_disp"/>
                     <field name="final_result_bool"/>
                 </xpath>
-                <xpath expr="//div[contains(@t-attf-class, 'horizon_cgs')]" position="attributes">
+                <xpath expr="//div[@class='horizon_cgs_evals']" position="attributes">
                     <attribute name="t-attf-class">horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
                 </xpath>
-                <xpath expr="//div[contains(@class, 'horizon_cgs_evals')]" position="inside">
-                    <div class="row m-2" t-if="record.final_result_bool.raw_value">
-                        <button t-attf-class="btn horizon_btn_eval_{{record.state.raw_value}}" type="button" name="res_button" style="padding:10px;">
-                          <h1><field name="final_result_disp"/></h1>
-                        </button>
-                    </div>
-                </xpath>
+<!--                <xpath expr="//a[@name='action_open_form']" position="before">-->
+<!--                    <button t-attf-class="btn horizon_btn_eval_{{record.state.raw_value}}" type="button" name="res_button" style="margin-right:15px;height:35px;margin-top:5px;padding:10px;">-->
+<!--                      <h5>-->
+<!--                          <field name="final_result_disp"/>-->
+<!--                      </h5>-->
+<!--                    </button>-->
+<!--                </xpath>-->
             </field>
         </record>
 
@@ -323,8 +366,8 @@
                     <field name="second_result" string="S2" />
                 </xpath>
                 <xpath expr="//field[@name='total_credits']//ancestor::group" position="after">
-                    <group col="4">
-                        <group col="2" colspan="2" string="First Session">
+                    <group>
+                        <group string="First Session">
                             <field name="first_session_computed_result_bool" invisible="1" />
                             <field name="first_session_computed_result" widget="statinfo" string="Result" />
                             <field name="first_session_computed_result_bool" string="Result Bool" groups="base.group_configuration"/>
@@ -334,7 +377,7 @@
                             <field name="first_session_result_bool" string="Session Result Bool" groups="base.group_configuration"/>
                             <field name="first_session_result_bool" invisible="1" />
                         </group>
-                        <group col="2" colspan="2" string="Second Session">
+                        <group string="Second Session">
                             <field name="second_session_computed_result_bool" invisible="1" />
                             <field name="second_session_computed_result" widget="statinfo" string="Result" />
                             <field name="second_session_computed_result_bool" string="Result Bool" groups="base.group_configuration"/>
