@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+<?xml version="1.0" encoding="utf-8"?>
+<!--
 ##############################################################################
 #
 #    Copyright (c) 2023 ito-invest.lu
@@ -18,30 +19,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Website Booking Interface',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': 'ito-invest (Jerome Sonnet)',
-    'website': '',
-    'category': 'School Management',
-    'depends': [
-        'website',
-        'school_booking',
-    ],
-    'data': [
-        'views/website_booking.xml',
-        'views/snippets.xml',
-    ],
-    'assets': {
-        'website.assets_wysiwyg': [
-            '/website_booking/static/src/snippets/s_bookings/options.js',
-        ],  
-    },
-    'description': '''
-        This module adds an interface for Booking management on the web site.
-    ''',
-    'active': False,
-    'installable': True,
-    'application': True,
-}
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="website_booking.browser_calendar">
+        <div id='fc_calendar'/>
+    </t>
+    <t t-name="website_booking.browser_navigation">
+        <table>
+            <tr class="categories"/>
+        </table>
+    </t>
+    <t t-name="website_booking.browser_navigation_card">
+        <td class="nav-wrapper">
+            <t t-if="!widget.to_parent">
+            <a t-att-class="(widget.is_active ? 'cat_button btn btn-primary active' : 'cat_button btn btn-primary')" t-att-data-category-id="widget.category.id"><span t-esc="widget.category.name"/></a>
+            </t>
+            <t t-if="widget.to_parent">
+            <a class="cat_button btn btn-secondary" t-att-data-category-id="widget.category.id">Retour...</a>
+            </t>
+        </td>
+    </t>
+</templates>
