@@ -254,6 +254,16 @@
         </field>
     </record>
 
+    <!-- Deliberation Bloc Action -->
+
+    <record model="ir.actions.act_window" id="deliberation_bloc_action">
+        <field name="name">Deliberation Bloc</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.individual_bloc</field>
+        <field name="view_mode">deliberation</field>
+        <field name="view_id" ref="deliberation_bloc_view" />
+    </record>
+
     <record id="view_deliberation_filter" model="ir.ui.view">
       <field name="name">deliberation.select</field>
       <field name="model">school.deliberation</field>
@@ -499,7 +509,7 @@
       <field name="name">school.deliberation.bloc.kanban</field>
       <field name="model">school.individual_bloc</field>
       <field name="arch" type="xml">
-        <kanban class="o_deliberation_bloc_kanban">
+        <kanban class="o_deliberation_bloc_kanban" action="%(deliberation_bloc_action)d" type="action">
           <field name="name" />
           <field name="student_id" />
           <field name="uid" />

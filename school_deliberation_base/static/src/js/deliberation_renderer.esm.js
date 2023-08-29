@@ -1,15 +1,15 @@
 /** @odoo-module **/
 
-import { _lt } from "@web/core/l10n/translation";
-
+import { Component } from "@odoo/owl";
 
 export class DeliberationRenderer extends Component {
 
     setup() {
+        console.log('DeliberationRenderer setup');
     }
 }
 
-KanbanRecord.template = "chool_deliberation_base.DeliberationRenderer";
+DeliberationRenderer.template = "school_deliberation_base.DeliberationRenderer";
 
     /*
 

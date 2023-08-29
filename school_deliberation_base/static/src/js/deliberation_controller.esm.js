@@ -14,10 +14,17 @@ import { Component, useRef } from "@odoo/owl";
 export class DeliberationController extends Component {
 
     setup() {
-        this.model = useModel(this.props.Model, this.props.modelParams);
     }
 
 }
+
+DeliberationController.template = "school_deliberation_base.DeliberationController";
+
+DeliberationController.props = {
+    ...standardViewProps,
+    Renderer: Function,
+    Model: Function,
+};
 
 /*
 odoo.define("deliberation.DeliberationController", function (require) {

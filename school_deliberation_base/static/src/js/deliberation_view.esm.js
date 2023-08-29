@@ -22,10 +22,14 @@ export const deliberationView = {
     
     withControlPanel: false,
     groupable: false,
-    init: function () {
-        this._super.apply(this, arguments);
+    
+    props: (genericProps, view) => {
+        return {
+            ...genericProps,
+            Renderer: view.Renderer,
+            Model: view.Model,
+        };
     }
-
 };
     
 viewRegistry.add("deliberation", deliberationView);

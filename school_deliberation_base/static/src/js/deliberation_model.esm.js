@@ -1,6 +1,8 @@
 /** @odoo-module **/
 
-export class GraphModel extends Model {
+import { Model } from "@web/views/model";
+
+export class DeliberationModel extends Model {
 
 }
 
