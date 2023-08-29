@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="school_deliberation_base.DeliberationRenderer" owl="1">
+        <div t-att-class="'o_deliberation_bloc o_renderer h-100 ' + props.class" t-ref="root">
+            <div class="o_deliberation_container h-100 position-relative" t-ref="container">
+                <div class="row bloc_header mt-4">
+                    <div class="col-2">
+                        <img class="img img-fluid img-thumbnail ml16" src="https://horizon.student-crlg.be/web/image?model=res.partner&amp;field=image_1920&amp;id=9806" style="min-height: 256px;">
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <span class="col-md-10">
+                                <h1 class="display-4">AZZAOUI-IHDA Elias, Mehdi</h1>
+                                <span class="text-muted">(PAE-100312)</span>
+                            </span>
+                            <span class="col-md-10">
+                                <h1 class="display-5">Bachelier en théâtre et arts de la parole : art dramatique - 3</h1>
+                            </span>
+                            <span class="col-md-2 refresh_button">
+                                <button class="btn btn-default o_reload_bloc" type="button">
+                                    <i class="fa fa-refresh fa-fw fa-2x"></i>
+                                </button>
+                                <button class="btn btn-default deliberation_close_button" type="button">
+                                    <i class="fa fa-window-close fa-fw fa-2x"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="row d-flex align-items-center" style="margin-bottom: 15px;">
+                            <div class="col-md-2">
+                                <button class="btn btn_credits" type="button">
+                                    PAE<br><span class="score_value">60/60</span>
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="alert alert-success mb-0" role="alert" style="font-size: larger;">A validé tous les ECTS et est autorisé(e) à poursuivre son parcours sans restriction.</div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-lg bloc_award ">Réussi</button>
+                            </div>
+                        </div>
+                
+                        <div class="row vertical-align justify-content-center" style="margin-bottom: 15px;">
+                            <div class="progress col-10" style="height: 40px;">
+                                <div class="progress-bar bg-info" style="width:100%">
+                                    180
+                                </div>
+                                <div class="progress-bar bg-success" style="width:33.33333333333333%">
+                                    60
+                                </div>
+                                <div class="progress-bar bg-warning" style="width:0%">
+                                    0
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <h2 class="row justify-content-center">
+                            <div class="col-10">
+                                <span class="badge rounded-pill bg-primary">GYSELINX Isabelle</span>
+                                <span class="badge rounded-pill bg-primary">MAUGER Nathalie</span>
+                                <span class="badge rounded-pill bg-primary">VARRASSO Pietro</span>
+                                <span class="badge rounded-pill bg-primary">BRICHART Saskia</span>
+                                <span class="badge rounded-pill bg-primary">PARFONDRY Olivier</span>
+                            </div>
+                        </h2>
+                    </div>
+                </div>
+                <div class="row bloc_content mt-4">
+                    <span>Content</span>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

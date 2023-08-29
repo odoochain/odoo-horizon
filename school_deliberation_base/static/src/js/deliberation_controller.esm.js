@@ -1,4 +1,25 @@
-/* global odoo */
+/** @odoo-module **/
+
+import { Dropdown } from "@web/core/dropdown/dropdown";
+import { DropdownItem } from "@web/core/dropdown/dropdown_item";
+import { useService } from "@web/core/utils/hooks";
+import { Layout } from "@web/search/layout";
+import { GroupByMenu } from "@web/search/group_by_menu/group_by_menu";
+import { useModel } from "@web/views/model";
+import { standardViewProps } from "@web/views/standard_view_props";
+import { useSetupView } from "@web/views/view_hook";
+
+import { Component, useRef } from "@odoo/owl";
+
+export class DeliberationController extends Component {
+
+    setup() {
+        this.model = useModel(this.props.Model, this.props.modelParams);
+    }
+
+}
+
+/*
 odoo.define("deliberation.DeliberationController", function (require) {
     "use strict";
 
@@ -7,10 +28,7 @@ odoo.define("deliberation.DeliberationController", function (require) {
     const KanbanController = require("web.KanbanController");
 
     KanbanController.include({
-        /**
-         * @override
-         * @private
-         */
+
         _onOpenRecord(ev) {
             if (
                 this.actionViews.length > 1 &&
@@ -167,7 +185,7 @@ odoo.define("deliberation.DeliberationController", function (require) {
                 self.do_action(result, {on_close: self._onReloadBloc.bind(self)});
             });
 
-            /* This.do_action({
+            / * This.do_action({
                 type: 'ir.actions.act_window',
                 name: 'Deliberate Course Group',
                 target: 'new',
@@ -178,9 +196,9 @@ odoo.define("deliberation.DeliberationController", function (require) {
                     default_deliberation_id: parseInt(this.initialState.context['deliberation_id']),
                 },
                 views: [[false, 'form']],
-            });*/
+            });* /
         },
     });
 
     return DeliberationController;
-});
+});*/

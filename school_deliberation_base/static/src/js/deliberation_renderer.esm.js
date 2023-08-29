@@ -1,14 +1,18 @@
-/* global odoo, _, $ */
-odoo.define("deliberation.DeliberationRenderer", function (require) {
-    "use strict";
+/** @odoo-module **/
 
-    var BasicRenderer = require("web.BasicRenderer");
-    var utils = require("web.utils");
+import { _lt } from "@web/core/l10n/translation";
 
-    // Var core = require('web.core');
-    // var qweb = core.qweb;
 
-    var DeliberationRenderer = BasicRenderer.extend({
+export class DeliberationRenderer extends Component {
+
+    setup() {
+    }
+}
+
+KanbanRecord.template = "chool_deliberation_base.DeliberationRenderer";
+
+    /*
+
         events: _.extend({}, BasicRenderer.prototype.events, {
             "click .action_deliberate": "_onActionDeliberate",
             "click .o_reload_bloc": "_onReloadBloc",
@@ -405,63 +409,6 @@ odoo.define("deliberation.DeliberationRenderer", function (require) {
             this.trigger_up("award_program");
         },
 
-        // --------------------------------------------------------------------------
-        // Utilities
-        // --------------------------------------------------------------------------
+        */
 
-        /**
-         * @private -- FROM KANBAN SOURCE COPYRIGHT ODOO
-         * @param {String} model the name of the model
-         * @param {String} field the name of the field
-         * @param {integer} id the id of the resource
-         * @param {String} placeholder
-         * @returns {String} the url of the image
-         */
-        _getImageURL: function (model, field, id, placeholder) {
-            id = (_.isArray(id) ? id[0] : id) || null;
-            var isCurrentRecord =
-                this.modelName === model &&
-                (this.recordData.id === id || (!this.recordData.id && !id));
-            var url = null;
-            if (
-                isCurrentRecord &&
-                this.record[field] &&
-                this.record[field].raw_value &&
-                !utils.is_bin_size(this.record[field].raw_value)
-            ) {
-                // Use magic-word technique for detecting image type
-                url =
-                    "data:image/" +
-                    this.file_type_magic_word[this.record[field].raw_value[0]] +
-                    ";base64," +
-                    this.record[field].raw_value;
-            } else if (
-                placeholder &&
-                (!model ||
-                    !field ||
-                    !id ||
-                    (isCurrentRecord &&
-                        this.record[field] &&
-                        !this.record[field].raw_value))
-            ) {
-                url = placeholder;
-            } else {
-                var session = this.getSession();
-                var params = {
-                    model: model,
-                    field: field,
-                    id: id,
-                };
-                if (isCurrentRecord) {
-                    params.unique =
-                        this.record.__last_update &&
-                        this.record.__last_update.value.replace(/[^0-9]/g, "");
-                }
-                url = session.url("/web/image", params);
-            }
-            return url;
-        },
-    });
-
-    return DeliberationRenderer;
-});
+    
