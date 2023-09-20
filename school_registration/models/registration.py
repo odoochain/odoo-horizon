@@ -23,7 +23,7 @@ import logging
 import requests
 from requests.exceptions import Timeout
 
-from odoo import fields, models, tools
+from odoo import fields, models, tools, api, _
 
 _logger = logging.getLogger(__name__)
 
