@@ -143,24 +143,21 @@ class Registration(models.Model):
                                                           width: 100%;
                                                           height: 1200px;" title="Contact Form"></iframe>"""
             else:
-                rec.registration_form_iframe = """<h4>No registration form</h4>"""
+                rec.registration_form_iframe = f'''<h4>No registration form</h4>'''
+                
+    program_id = fields.Many2one('school.program', string='Program', domain="[['year_id','=',year_id]]")
+    
+    speciality_id = speciality_id = fields.Many2one('school.speciality', related='program_id.speciality_id', string='Speciality', store=True, readonly=True)
+    
+    forms_attachment_ids = fields.Many2many('ir.attachment', string='Attachments', compute='_compute_forms_attachment_ids')
 
-    program_id = fields.Many2one(
-        "school.program", string="Program", domain="[['year_id','=',year_id]]"
-    )
+    forms_attachment_ids_count = fields.Integer(compute='_compute_forms_attachment_ids_count', string='Attachments Count')
 
-    speciality_id = speciality_id = fields.Many2one(
-        "school.speciality",
-        related="program_id.speciality_id",
-        string="Speciality",
-        store=True,
-        readonly=True,
-    )
-
-    forms_attachment_ids = fields.Many2many(
-        "ir.attachment", string="Attachments", compute="_compute_forms_attachment_ids"
-    )
-
+    @api.depends('forms_attachment_ids')
+    def _compute_forms_attachment_ids_count(self):
+        for rec in self:
+            rec.forms_attachment_ids_count = len(rec.forms_attachment_ids)
+    
     def _compute_forms_attachment_ids(self):
         for rec in self:
             rec.forms_attachment_ids = self.env["ir.attachment"].search(
