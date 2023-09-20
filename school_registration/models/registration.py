@@ -19,8 +19,8 @@
 ##############################################################################
 import json
 import logging
-
 from io import BytesIO
+
 import requests
 from requests.exceptions import Timeout
 
