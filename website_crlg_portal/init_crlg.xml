@@ -51,7 +51,7 @@
         </record>
 
         <!-- Ajout des droits de la page Valves Étudiants en db  -->
-        <record id="website_crlg_portal.valves_etudiants_crlg" model="ir.ui.view">
+        <record id="valves_etudiants_crlg" model="ir.ui.view">
             <field name="visibility">restricted_group</field>
             <field
             name="groups_id"
@@ -69,7 +69,7 @@
         </record>
 
         <!-- Ajout des droits de la page Valves Professeurs en db  -->
-        <record id="website_crlg_portal.valves_professeurs_crlg" model="ir.ui.view">
+        <record id="valves_professeurs_crlg" model="ir.ui.view">
             <field name="visibility">restricted_group</field>
             <field
             name="groups_id"

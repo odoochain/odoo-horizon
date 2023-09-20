@@ -137,7 +137,7 @@
             <field name="name">school.individual_program.eval.view</field>
             <field name="model">school.individual_program</field>
             <field name="inherit_id" ref="school_management.individual_program_form" />
-            <field eval="25" name="priority" />
+            <field eval="100" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="before">
                     <header>
