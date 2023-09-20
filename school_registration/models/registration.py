@@ -20,7 +20,7 @@
 import json
 import logging
 
-import BytesIO
+from io import BytesIO
 import requests
 from requests.exceptions import Timeout
 
