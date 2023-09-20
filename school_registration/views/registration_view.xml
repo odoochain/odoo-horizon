@@ -130,9 +130,12 @@
                     </div>
                   </div>
                   <div class="col-4">
-                    <div class="row mt-4">
+                    <div class="row mt-4" t-if="record.forms_attachment_ids_count.raw_value > 0">
                       <div class="col-2 text-center"><button name="action_fill_google_drive" type="object" class="btn btn-primary" icon="fa-refresh">Update</button></div>
                       <div class="col-10"><h4>Envoyer les documents vers Google Drive</h4></div>
+                    </div>
+                    <div class="row mt-4" t-else="">
+                      <h4>Pas d'attachement à importer</h4>
                     </div>
                   </div>
                 </div>
