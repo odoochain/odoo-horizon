@@ -262,24 +262,58 @@ class Registration(models.Model):
                                 student_id.image_1920 = attachment.datas
             except BaseException as e:
                 # We do our best here
-                _logger.info("Error while updating photo %s" % e)
-            student_id.street = contact_data.get("adresseLigne", False)
-            student_id.city = contact_data.get("ville", False)
-            student_id.zip = contact_data.get("codePostal", False)
-            if contact_data.get("country", False):
-                student_id.country_id = self.env["res.country"].browse(
-                    contact_data.get("country")
-                )
-            student_id.secondary_street = contact_data.get("adresseLigne1", False)
-            student_id.secondary_city = contact_data.get("ville1", False)
-            student_id.secondary_zip = contact_data.get("codePostal1", False)
-            if contact_data.get("country1", False):
-                student_id.secondary_country_id = self.env["res.country"].browse(
-                    contact_data.get("country1")
-                )
-            student_id.phone = contact_data.get("telephonePortab", False)
-            student_id.email_personnel = contact_data.get("email", False)
-            student_id.reg_number = contact_data.get("numeroDeRegistreNational", False)
+                pass
+            student_id.street = contact_data.get('adresseLigne',False)
+            student_id.city = contact_data.get('ville',False)
+            student_id.zip= contact_data.get('codePostal',False)
+            if contact_data.get('country',False):
+                student_id.country_id = self.env['res.country'].browse(contact_data.get('country'))
+            student_id.secondary_street = contact_data.get('adresseLigne1',False)
+            student_id.secondary_city = contact_data.get('ville1',False)
+            student_id.secondary_zip= contact_data.get('codePostal1',False)
+            if contact_data.get('country1',False):
+                student_id.secondary_country_id = self.env['res.country'].browse(contact_data.get('country1'))
+            student_id.phone = contact_data.get('telephonePortab',False)
+            student_id.email_personnel = contact_data.get('email',False)
+            student_id.reg_number = contact_data.get('numeroDeRegistreNational',False)
+        
+    def action_fill_google_drive(self):
+        for rec in self:
+            rec.sudo().message_post(
+                body=f"Update Google Drive Documents by {self.env.user.name}"
+            )
+            if not self.student_id.google_drive_folder_id:
+                raise UserError(_("No Google Drive Folder found for this student !"))
+            google_service = self.env.company.google_drive_id
+            if not google_service:
+                raise UserError(_("No Google Drive Service found please contact your Administrator !"))
+
+            existing_file_list = google_service.get_files_from_folder_id(self.student_id.google_drive_folder_id)
+            existing_file_name_list = [file['name'] for file in existing_file_list]
+
+            new_file_count = 0
+
+            for attachment in self.forms_attachment_ids:
+                if attachment.name not in existing_file_name_list and attachment.type == 'binary' :
+                    google_service.create_file(
+                        BytesIO(attachment.raw), 
+                        attachment.name, 
+                        attachment.mimetype, 
+                        self.student_id.google_drive_folder_id
+                    )
+                    new_file_count += 1
+            
+            self.student_id.action_refresh_google_drive_files()
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'message': _("{} new files have been uploaded to Google Drive !".format(new_file_count)),
+                    'type': 'success',
+                    'sticky': False,
+                }
+            }
+
 
     def action_open_student(self):
         self.ensure_one()
