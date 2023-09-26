@@ -95,15 +95,14 @@
                     <div class="container">
                         <div class="row row-reverse align-items-center">
                             <div
-                                class="o_colored_level col-lg-6 o_animate o_anim_slide_in o_anim_from_left o_visible"
+                                class="o_colored_level col-lg-6 o_animate o_anim_slide_in o_anim_from_left o_visible mb-4"
                             >
                                 <img
                                     src="/website_crlg_portal/static/img/musique.svg"
                                     alt=""
                                     class="img img-fluid mx-auto o_we_custom_image"
                                     data-shape="web_editor/float/flt_square_2"
-                                    data-shape-colors=";#E47C7C;;;#DB0707"
-                                    data-original-id="972"
+                                    data-shape-colors=";#3297C2;;;#BCE4FC"
                                     data-original-src="/website_crlg_portal/static/img/musique.jpg"
                                     data-mimetype="image/svg+xml"
                                     data-original-mimetype="image/jpeg"
@@ -113,7 +112,7 @@
                                 />
                             </div>
                             <div
-                                class="o_colored_level o_animate o_anim_slide_in o_visible shadow o_anim_from_left pt16 pb16 col-lg-5"
+                                class="o_colored_level o_animate o_anim_slide_in o_visible shadow o_anim_from_left pt16 pb16 col-lg-5 mb-4"
                                 style="box-shadow: rgba(0, 0, 0, 0.15) 0px 6px 37px -8px !important;"
                             >
                                 <h2>
@@ -146,7 +145,7 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div
-                                class="o_colored_level shadow col-lg-5 o_animate o_anim_slide_in o_visible o_anim_from_right pt16 pb16"
+                                class="o_colored_level shadow col-lg-5 o_animate o_anim_slide_in o_visible o_anim_from_right pt16 pb16 mb-4"
                                 style="box-shadow: rgba(0, 0, 0, 0.15) 0px 6px 37px -8px !important;"
                             >
                                 <h2 style="text-align: right;">
@@ -162,7 +161,7 @@
                                 </p>
                             </div>
                             <div
-                                class="o_colored_level col-lg-6 o_anim_fade_in o_animate o_anim_from_right o_visible"
+                                class="o_colored_level col-lg-6 o_anim_fade_in o_animate o_anim_from_right o_visible mb-4"
                             >
                                 <img
                                     src="/website_crlg_portal/static/img/theatre.svg"
@@ -177,7 +176,7 @@
                                     aria-describedby="tooltip930600"
                                     data-shape="web_editor/float/flt_square_3"
                                     data-file-name="theatre.svg"
-                                    data-shape-colors="#DB0707;;;;#E47C7C"
+                                    data-shape-colors="#BCE4FC;;;;#3297C2"
                                     data-original-mimetype="image/jpeg"
                                     loading="eager"
                                 />

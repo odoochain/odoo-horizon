@@ -66,16 +66,34 @@
         search();
 
         $("#today").on("click", function () {
-            $("#today").addClass("bg-danger border border-danger border-0");
-            $("#tomorrow").removeClass("bg-danger border border-danger border-0");
+            $("#todayLabel").removeClass("fw-light").addClass("font-weight-bold");
+            $("#tomorrowLabel").removeClass("font-weight-bold").addClass("fw-light");
+
+            $("#today")
+                .removeClass("btn-outline-primary")
+                .addClass("btn-primary")
+                .addClass("active");
+            $("#tomorrow")
+                .removeClass("btn-primary")
+                .removeClass("active")
+                .addClass("btn-outline-primary");
             $("#day").prop("value", "0");
 
             search();
         });
 
         $("#tomorrow").on("click", function () {
-            $("#today").removeClass("bg-danger border border-danger border-0");
-            $("#tomorrow").addClass("bg-danger border border-danger border-0");
+            $("#todayLabel").addClass("fw-light").removeClass("font-weight-bold");
+            $("#tomorrowLabel").addClass("font-weight-bold").removeClass("fw-light");
+
+            $("#today")
+                .removeClass("btn-primary")
+                .removeClass("active")
+                .addClass("btn-outline-primary");
+            $("#tomorrow")
+                .removeClass("btn-outline-primary")
+                .addClass("btn-primary")
+                .addClass("active");
             $("#day").prop("value", "1");
 
             search();
