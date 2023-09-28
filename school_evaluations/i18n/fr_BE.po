@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-31 08:38+0000\n"
-"PO-Revision-Date: 2023-05-31 12:25+0000\n"
-"Last-Translator: Weblate Admin <weblate@ito-invest.lu>\n"
-"Language-Team: French (Belgium) <https://weblate.ito-invest.lu/projects/"
-"horizon-16-0/horizon-16-0-school_evaluations/fr_BE/>\n"
+"PO-Revision-Date: 2023-09-28 09:59+0000\n"
+"Last-Translator: Weblate Admin <jerome.sonnet@ito-invest.lu>\n"
+"Language-Team: French (Belgium) <http://weblate.ito-invest.lu/projects/"
+"horizon/school-evaluation/fr_BE/>\n"
 "Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.0.2\n"
 
 #. module: school_evaluations
 #: model:mail.template,body_html:school_evaluations.email_template_evaluation_for_student
@@ -403,13 +403,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__create_uid
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluation_summary_wizard__create_date
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
@@ -648,7 +648,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__7_failed
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
 msgid "Failed"
-msgstr ""
+msgstr "Echec"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
@@ -779,7 +779,7 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_wizard_view
 msgid "Generate"
-msgstr ""
+msgstr "Générer"
 
 #. module: school_evaluations
 #: model:res.groups,name:school_evaluations.group_evaluations
@@ -906,7 +906,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__10_irregular
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 msgid "Irregular"
-msgstr ""
+msgstr "Irrégulier"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__is_annual
@@ -1083,7 +1083,7 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__res_config_settings__evaluation_open_session__none
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__acquiered__na
@@ -1119,7 +1119,7 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 msgid "Open"
-msgstr ""
+msgstr "Ouvert"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_res_config_settings__evaluation_open_session
@@ -1155,7 +1155,7 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__res_config_settings__evaluation_open_session__part
 msgid "Partial"
-msgstr ""
+msgstr "Partiel"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__open_partial_result
@@ -1177,17 +1177,17 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_bloc_eval_form
 msgid "Postpone"
-msgstr ""
+msgstr "Ajourner"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_bloc_filter_eval
 msgid "Postponed"
-msgstr ""
+msgstr "Ajourné"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.school_evaluation_report_view
 msgid "Print"
-msgstr ""
+msgstr "Imprimer"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_group__valuated_program_id
@@ -1210,7 +1210,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
 msgid "Progress"
-msgstr ""
+msgstr "En cours"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
@@ -1230,7 +1230,7 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__3_rejected
 msgid "Rejected"
-msgstr ""
+msgstr "Rejeté"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__remaining_course_group_ids
@@ -1263,7 +1263,7 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
 msgid "Result"
-msgstr ""
+msgstr "Résultat"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
@@ -1273,12 +1273,12 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_form
 msgid "Results"
-msgstr ""
+msgstr "Résultats"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_by_teacher_content
 msgid "Row"
-msgstr ""
+msgstr "Ligne"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
@@ -1454,7 +1454,7 @@ msgstr "Etat"
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__6_success
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
 msgid "Success"
-msgstr ""
+msgstr "Réussi"
 
 #. module: school_evaluations
 #: model:ir.actions.report,name:school_evaluations.action_report_evaluation_summary
@@ -1496,12 +1496,12 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__teacher_id
 msgid "Teacher"
-msgstr ""
+msgstr "Enseignant"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_evaluations_report_evaluation_by_teacher__teacher_ids
 msgid "Teachers"
-msgstr ""
+msgstr "Enseignants"
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
@@ -1511,7 +1511,7 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course_summary__trials
 msgid "Trials"
-msgstr ""
+msgstr "Essais"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_course__type
@@ -1549,12 +1549,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 msgid "Valuate"
-msgstr ""
+msgstr "Valoriser"
 
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__0_valuated
 msgid "Valuated"
-msgstr ""
+msgstr "Valorisé"
 
 #. module: school_evaluations
 #: model:ir.model.fields,field_description:school_evaluations.field_school_individual_program__valuated_course_group_ids
