@@ -6,13 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-09-28 13:29+0000\n"
+"Last-Translator: Weblate Admin <jerome.sonnet@ito-invest.lu>\n"
+"Language-Team: English (United States) <http://weblate.ito-invest.lu/"
+"projects/horizon/school-portal/en_US/>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0.2\n"
 
 #. module: website_school_portal
 #: model_terms:ir.ui.view,arch_db:website_school_portal.hz_footer
@@ -25,16 +28,18 @@ msgid ""
 "<font style=\"font-size: 48px;\" class=\"o_default_snippet_text\">La suite "
 "de la page</font>"
 msgstr ""
+"<font style=\"font-size: 48px;\" class=\"o_default_snippet_text\">Next "
+"page</font>"
 
 #. module: website_school_portal
 #: model_terms:ir.ui.view,arch_db:website_school_portal.hz_default_page_snippet
 msgid "<font style=\"font-size: 62px;\">Le titre de votre page</font>"
-msgstr ""
+msgstr "<font style=\"font-size: 62px;\">Page title</font>"
 
 #. module: website_school_portal
 #: model_terms:ir.ui.view,arch_db:website_school_portal._hz_custom_home_banner
 msgid "<font style=\"font-size: 62px;\">Notre école</font><br/>"
-msgstr ""
+msgstr "<font style=\"font-size: 62px;\">Our school</font><br/>"
 
 #. module: website_school_portal
 #: model_terms:ir.ui.view,arch_db:website_school_portal.hz_account_student
@@ -42,6 +47,9 @@ msgid ""
 "<i class=\"fa fa-info\"/>\n"
 "                    <span>Section pour les utilisateurs devant poursuivre leur inscription.</span>"
 msgstr ""
+"<i class=\"fa fa-info\"/>\n"
+"                    <span>Section for users to continue their "
+"registration.</span>"
 
 #. module: website_school_portal
 #: model_terms:ir.ui.view,arch_db:website_school_portal.hz_account_student
