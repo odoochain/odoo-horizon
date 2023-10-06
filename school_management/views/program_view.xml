@@ -317,6 +317,10 @@
                 <field name="hours" />
                 <field name="credits" />
                 <field name="teacher_ids" widget="many2many_tags" />
+                <field name="weight" />
+                <field name="is_annual" />
+                <field name="quadri" />
+                <field name="has_second_session" />
             </tree>
         </field>
     </record>

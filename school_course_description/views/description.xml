@@ -334,7 +334,39 @@
             </field>
         </record>
 
-        <!-- Add evaluation to Individual Course form view -->
+        <!-- Add evaluation to Course tree view -->
+        <record id="course_doc_tree" model="ir.ui.view">
+            <field name="name">school.course.doc.tree</field>
+            <field name="model">school.course</field>
+            <field
+            name="inherit_id"
+            ref="school_management.view_course_tree"
+        />
+            <field eval="25" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr='//field[@name="has_second_session"]' position="after">
+                  <field name="has_documentation" invisible="1" />
+                  <button
+                    type="object"
+                    icon="fa-list-alt"
+                    class="btn-success"
+                    name="open_description"
+                    string=" Description"
+                    attrs="{'invisible': [('has_documentation', '=', False)]}"
+                />
+                  <button
+                    type="object"
+                    icon="fa-times"
+                    class="btn-warning"
+                    name="open_description"
+                    string="No Description"
+                    attrs="{'invisible': [('has_documentation', '!=', False)]}"
+                />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add evaluation to Individual Course tree view -->
         <record id="individual_course_eval_tree" model="ir.ui.view">
             <field name="name">school.individual_course.eval.tree</field>
             <field name="model">school.individual_course</field>
