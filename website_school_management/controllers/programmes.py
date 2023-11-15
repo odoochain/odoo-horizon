@@ -1,4 +1,5 @@
 import logging
+import datetime;
 
 from odoo import http
 from odoo.http import Response, request
@@ -380,7 +381,38 @@ class programmes(http.Controller):
             values = {
                 "main_object": course,
                 "course": course,
+                "success" : post.get("email")
             }
+
+            # Si demande de détails pour un cours
+            if post.get("email"):
+                emailResponsible = course.course_group_id.responsible_id.email
+                email = post.get("email")
+                first_name = post.get("first_name")
+                last_name = post.get("last_name")
+                if email and first_name and last_name:
+                    vals = {
+                        "emailResponsible": emailResponsible,
+                        "email": email,
+                        "first_name": first_name,
+                        "last_name": last_name,
+                        "course": course
+                    }
+                    self.send_request_course_details_email(vals)
+
             return request.render("website_school_management.cours_fiche", values)
         else:
             return Response(template="website.page_404", status=404)
+        
+    def send_request_course_details_email(self, vals):
+        mail_body = request.env['ir.qweb']._render("website_school_management.cours_details_request", vals)
+        
+        mail = request.env['mail.mail'].sudo().create({
+            'subject': 'Demande de détails de cours',
+            'email_from': vals["email"],
+            'author_id': request.env.user.partner_id.id,
+            'email_to': vals["emailResponsible"],
+            'body_html': mail_body,
+        })
+        mail.send()
+
