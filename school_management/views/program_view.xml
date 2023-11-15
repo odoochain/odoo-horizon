@@ -429,7 +429,7 @@
                     domain="[('bloc_ids.year_sequence','=','previous')]"
                 />
                 <separator />
-                <filter
+                <!-- <filter
                     string="Is Described"
                     name="described"
                     domain="[('documentation_id','!=',False)]"
@@ -438,7 +438,7 @@
                     string="Is Not Described"
                     name="described"
                     domain="[('documentation_id','=',False)]"
-                />
+                /> -->
             </search>
         </field>
     </record>
