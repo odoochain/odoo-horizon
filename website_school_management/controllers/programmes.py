@@ -397,7 +397,7 @@ class programmes(http.Controller):
             last_name = post.get("last_name")
             if email and first_name and last_name:
                 vals = {
-                        "emailObject" : "Demande de détails de cours",
+                        "emailObject" : "Demande de description de cours",
                         "emailResponsible": emailResponsible,
                         "email": email,
                         "first_name": first_name,

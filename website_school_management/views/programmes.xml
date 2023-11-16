@@ -928,8 +928,9 @@
 
     <template id="cours_details_request">
         <p>Bonjour,</p>
-        <p>L'utilisateur <t t-esc="first_name + ' ' + last_name" /> a envoyé une demande afin d'obtenir les informations concernant le cours <t t-esc="course.name" />.</p>
-        <p>Vous pouvez retrouver la fiche du cours <a t-att-href="url">ici</a>.</p>
+        <p><t t-esc="first_name + ' ' + last_name" /> vous a envoyé une demande afin d'obtenir les informations concernant le cours <b><t t-esc="course.name" /></b>.</p>
+        <p>Vous pouvez recontacter cette personne via <a t-att-href="'mailto:%s' %email">son adresse email</a>.</p>
+        <p>La fiche du cours est disponible à <a t-att-href="url">cette adresse</a>.</p>
         <hr/>
         <p>Cet email a été envoyé automatiquement.</p>
     </template>
