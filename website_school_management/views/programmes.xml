@@ -571,28 +571,30 @@
         </dl>
         <div class="accordion" id="course_detail">
             <t t-if="not (course_doc.schedule_text and course_doc.content and course_doc.method and course_doc.learning_outcomes and course_doc.references and course_doc.pre_co_requiered and course_doc.evaluation_method )">
-                <t t-if="success">
-                    <p>Votre demande a bien été envoyée.</p>
-                </t>
-                <t t-else="">
+                <div id="form_request_course_details">
                     <p>La description de ce cours n'est pas disponible. Vous pouvez contacter le responsable pour lui demander de l'encoder.</p>
-                    <form t-att-action="'/cours/' + slug(course)">
-                        <div class="form-group">
-                            <label for="first_name">Prénom :</label>
-                            <input type="text" class="form-control" name="first_name" id="first_name" required="true" />    
+                    <form>
+                    <div class="row">
+                        <div class="col-12 col-lg-4 mt-2">
+                            <label for="request_first_name">Prénom :</label>
+                            <input id="request_first_name" type="text" class="form-control" name="first_name" required="true" />    
                         </div>
-                        <div class="form-group mt-2">
-                            <label for="last_name">Nom :</label>
-                            <input type="text" class="form-control" name="last_name" id="last_name" required="true" />    
+                        <div class="col-12 col-lg-4 mt-2">
+                            <label for="request_last_name">Nom :</label>
+                            <input id="request_last_name" type="text" class="form-control" name="last_name" required="true" />    
                         </div>
-                        <div class="form-group mt-2">
-                            <label for="email">Email :</label>
-                            <input type="email" class="form-control" name="email" 
-                                id="email" required="true" />
+                        <div class="col-12 col-lg-4 mt-2">
+                            <label for="request_email">Email :</label>
+                            <input id="request_email" type="email" class="form-control" name="email" required="true" />
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Demander</button>
+                        <div class="col-12">
+                            <input id="request_course_id" type="hidden" t-att-value="course.id" />
+                            <button id="btn_request_course_details" type="submit" class="btn btn-primary mt-3">Demander</button>
+                            <p class="mt-3 error_request_course_details"></p>
+                        </div>
+                    </div>
                     </form>
-                </t>
+                </div>
             </t>
             <t t-else="">
                 <t t-if="course_doc.schedule_text">
@@ -927,6 +929,7 @@
     <template id="cours_details_request">
         <p>Bonjour,</p>
         <p>L'utilisateur <t t-esc="first_name + ' ' + last_name" /> a envoyé une demande afin d'obtenir les informations concernant le cours <t t-esc="course.name" />.</p>
+        <p>Vous pouvez retrouver la fiche du cours <a t-att-href="url">ici</a>.</p>
         <hr/>
         <p>Cet email a été envoyé automatiquement.</p>
     </template>

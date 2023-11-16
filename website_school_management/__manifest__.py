@@ -39,6 +39,7 @@
     "assets": {
         "web.assets_frontend": [
             "website_school_management/static/src/scss/base.scss",
+            "website_school_management/static/src/js/cours_demande_description.js",
         ]
     },
     "installable": True,
