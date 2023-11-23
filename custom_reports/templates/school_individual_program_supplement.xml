@@ -413,7 +413,9 @@
                             class="text--special"
                         >Given name(s)</span><span class="info__value"> : <t
                                 t-esc="student_first_name"
-                            /></span></li>
+                            /><t
+                                t-if="doc.student_id.initials and doc.student_id.initials[0]"
+                            > <t t-esc="doc.student_id.initials[0]" />.</t></span></li>
                   <li class="info__item"><span
                             class="info__number"
                         >1.3.</span> Date (jour / mois / année) et lieu de naissance (pays) / <span
@@ -467,7 +469,7 @@
                             class="info__number"
                         >2.4.</span>(Si différent du 2.3.) Nom et statut de l’/des établissement(s) ayant dispensé les cours  / <span
                             class="text--special"
-                        >If different from 2.3.) Name and status of institution(s) administering studies</span><span
+                        >(If different from 2.3.) Name and status of institution(s) administering studies</span><span
                             class="info__value"
                         > : <br />Non applicable</span></li>
                   <li class="info__item"><span
@@ -519,15 +521,17 @@
                                 t-if="doc.student_id.admission_exam_date"
                             ><t
                                     t-esc="doc.student_id.admission_exam_date.strftime('%d-%m-%Y')"
-                                /></t>, prévue par l’article 110 du décret du 07 novembre 2013 pour l’accès dans une École supérieure des Arts. <br
-                            /><br />Condition remplie par l’étudiant<t
+                                /></t>, prévue par l’article 110 du décret du 07 novembre 2013 pour l’accès dans une École supérieure des Arts.
+                    <br /><br />Condition remplie par l’étudiant<t
                                 t-if="not student_gender"
                             >e</t> conformément à l’article <t t-if="bac">107</t><t
                                 t-else=""
                             >111</t> du décret du 07 novembre 2013:
                     <t t-foreach="doc.student_id.access_titles_ids" t-as="at">
                       <!-- <t t-if="(('CESS' in at.name or 'equivalence' in at.name) and bac)"> -->
-                        <br /><t t-esc="at.title" /> - <t
+                        <br /><t t-if="at.name">- <t t-esc="at.name" /></t><t
+                                    t-if="at.title"
+                                > - <t t-esc="at.title" /></t> - <t
                                     t-esc="at.establishment"
                                 /> - <t t-esc="at.city" /> (<t
                                     t-esc="at.country"
@@ -537,6 +541,9 @@
                         <br/><t t-esc="at.title"/> - <t t-esc="at.establishment"/> - <t t-esc="at.city"/> (<t t-esc="at.country"/>) - <t t-esc="at.date.strftime('%d/%m/%Y')"/>
                       </t> -->
                     </t>
+                    <t t-if="master_dict"><br
+                                />Conformément à l’article 113 du décret du 07 novembre 2013, l’étudiante a apporté une preuve de la maitrise suffisante de la langue française :
+                    <br />à venir...</t>
                     </span></li>
                 </ul>
 
@@ -1006,7 +1013,6 @@
                 <!-- <p class="footer__page">Page 5 sur 5</p> -->
               </div>
             </div>
-
 
 
 
