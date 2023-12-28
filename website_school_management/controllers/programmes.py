@@ -1,4 +1,3 @@
-import datetime
 import logging
 
 from odoo import http
