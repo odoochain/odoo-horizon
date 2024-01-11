@@ -553,7 +553,12 @@
                                 /> / <t
                                     t-esc="o.source_program_id.total_credits"
                                 />)</h5>
-                  <h5>Grade obtenu : <t t-esc="o.grade" /></h5>
+                    <t
+                                t-if="o.grade"
+                                t-set="student_success_grade"
+                                t-value="dict(o.fields_get(allfields=['grade'])['grade']['selection'])[o.grade]"
+                            />
+                  <h5>Grade obtenu : <t t-esc="student_success_grade" /></h5>
                 </div>
                 <div class="container">
                   <table class="table table-sm">
