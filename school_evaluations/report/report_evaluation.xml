@@ -759,7 +759,6 @@
                     style="margin: 0cm 1.5cm;"
                 >
                     <h1>FICHE DE CYCLE INDIVIDUEL DE L'ÉTUDIANT·E</h1>
-                    <h1><t t-esc="program.cycle_id" /></h1>
                     <h2>Étudiant·e : <t t-esc="program.student_id.name" /></h2>
                     <h4>Cycle : <t t-esc="program.source_program_id.name" /></h4>
                     <h5>Identifiant de cycle individuel : <t t-esc="program.uid" /></h5>
@@ -1199,6 +1198,7 @@
         <field name="user_signature" eval="False"/>
     </record> -->
 
+<!--
     <record id="report_evaluation_by_teacher" model="ir.actions.report">
         <field name="name">Evaluation by Teacher</field>
         <field name="model">school.individual_course</field>
@@ -1212,7 +1212,7 @@
         <field name="binding_model_id" ref="model_school_individual_course" />
         <field name="binding_type">report</field>
         <field name="attachment_use">True</field>
-    </record>
+    </record> -->
 
     <record id="action_evaluation_report_by_teacher" model="ir.actions.act_window">
         <field name="name">Evaluations by teatcher</field>
