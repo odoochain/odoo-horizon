@@ -512,13 +512,13 @@
                         <hr />
                         <div style="font-size:20px;">
                           <section
-                                class="col-10 col-offset-1"
+                                class="col-12"
                                 style="margin-top:180px;"
                             >
                                 Je soussigné, Nathanaël HARCQ, Directeur du CONSERVATOIRE ROYAL DE LIEGE certifie par la présente que
                           </section>
                           <section style="margin-top:40px;">
-                              <div class="col-9 col-offset-2">
+                              <div class="col-12 text-center">
                                   <b><span t-field="o.student_id.name" />, né<t
                                             t-if="o.student_id.gender == 'female'"
                                         >e</t> le <span
@@ -528,13 +528,13 @@
                                         /></b>
                               </div>
                           </section>
-                          <section style="margin-top:40px;">
-                              <div class="col-10 col-offset-1">
+                          <section style="margin-top:40px;padding-right:100px;padding-left:100px;">
+                              <div class="col-12 text-center">
                                   est régulièrement inscrit<t
                                         t-if="o.student_id.gender == 'female'"
                                     >e</t> aux cours du jour de l'Enseignement Supérieur Artistique de type
                                   <span><t
-                                            t-esc="o.source_bloc_id.cycle_id.type.lower()"
+                                            t-esc="'long' if o.source_bloc_id.cycle_id.type=='long' else 'court'"
                                         /></span> pour l'année <span
                                         t-field="o.year_id"
                                     />.
@@ -543,14 +543,14 @@
                                   </p>
                               </div>
                           </section>
-                          <section style="margin-top:20px;">
-                              <div class="col-10 col-offset-1">
+                          <section style="margin-top:20px;padding-right:100px;padding-left:100px;">
+                              <div class="col-12 text-center">
                                   <u>Cours suivis dans la nouvelle structure:</u>
                               </div>
                           </section>
-                          <section style="margin-top:20px;">
-                              <div class="col-8 col-offset-2">
-                                  <b><span t-field="o.source_bloc_cycle_id" /> - <span
+                          <section style="margin-top:20px;padding-right:100px;padding-left:100px;">
+                              <div class="col-12 text-center">
+                                  <b><span t-field="o.source_bloc_id.cycle_id" /> - <span
                                             t-field="o.source_bloc_id.level"
                                         /> du domaine <span
                                             t-field="o.source_bloc_domain_id"
@@ -564,19 +564,19 @@
                               </div>
                           </section>
                           <section style="margin-top:50px;">
-                              <div class="col-10 col-offset-1">
+                              <div class="col-12">
                                   La présente attestation est délivrée pour renseignements administratifs.
                               </div>
                           </section>
                           <section style="margin-top:80px;">
-                              <div class="col-4 col-offset-7">
+                              <div class="col-4">
                                   LIEGE, le <span
                                         t-esc="datetime.datetime.now().strftime('%d-%m-%Y')"
                                     />
                               </div>
                           </section>
                           <section style="margin-top:80px;">
-                              <div class="col-4 col-offset-7">
+                              <div class="col-4">
                                   Le Directeur,<br />
                                   Nathanaël HARCQ
                               </div>

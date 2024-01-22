@@ -79,7 +79,7 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                   <div class="page">
-                    <div class="container" style="">
+                    <div class="container" style="padding-right:50px;padding-left:50px;">
                         <div class="row" style="margin-bottom:30px;">
                             <div class="col-12 text-center">
                                 <h3>ATTESTATION DE RÉUSSITE</h3>
@@ -101,7 +101,7 @@
                           </t>
                           <div class="row" style="margin-top:200px;">
                               <div class="col-12">
-                                  Je, sousigné, NATHANAËL HARCQ, Directeur du Conservatoire Royal de Liège, certifie que
+                                  Je soussigné, NATHANAËL HARCQ, Directeur du Conservatoire Royal de Liège, certifie que
                               </div>
                           </div>
                           <div class="row" style="margin-top:60px;">
@@ -225,7 +225,7 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                 <div class="page">
-                    <div class="container">
+                    <div class="container" style="padding-right:50px;padding-left:50px;">
                         <div class="row" style="margin-bottom:30px;">
                             <div class="col-12 text-center">
                                 <h3>ATTESTATION DE RÉUSSITE DE CYCLE</h3>
@@ -247,7 +247,7 @@
                           </t>
                           <div class="row" style="margin-top:200px;">
                               <div class="col-12">
-                                  Je, sousigné, NATHANAËL HARCQ, Directeur du Conservatoire Royal de Liège, certifie que:
+                                  Je soussigné, NATHANAËL HARCQ, Directeur du Conservatoire Royal de Liège, certifie que
                               </div>
                           </div>
                           <div class="row" style="margin-top:60px;">
@@ -270,10 +270,8 @@
                                   A réussi en l’année académique <span
                                             t-field="o.grade_year_id"
                                         /> le <span
-                                            t-field="o.cycle_id.grade"
-                                        /> en <span
-                                            t-field="o.domain_id.long_name"
-                                        /> : <span t-field="o.speciality_id" />
+                                            t-esc="o.source_program_id.title.lower()"
+                                        />
                                   <br /><t t-if="o.grade == 'without'"><span
                                                 t-field="o.grade"
                                             /></t><t
