@@ -449,7 +449,7 @@
                         <td colspan="2" rowspan="1">
                           <p>Avis de la commission des études</p>
                           <p>
-                              Programme annuel approuvé par la commission des études (séance(s) :
+                              Programme annuel approuvé par la commission des études (séance(s) : ....................................
                               <!-- <t t-foreach="bloc.approuval_ids" t-as="app">
                                   <t t-esc="app.date.strftime('%d-%m-%Y')"/>
                                   <t t-if="not app_first and not app_last">
@@ -511,10 +511,7 @@
                         </section>
                         <hr />
                         <div style="font-size:20px;">
-                          <section
-                                class="col-12 text-center"
-                                style="margin-top:180px;"
-                            >
+                          <section class="col-12 text-center" style="margin-top:180px;">
                                 Je soussigné, Nathanaël HARCQ, Directeur du CONSERVATOIRE ROYAL DE LIEGE certifie par la présente que
                           </section>
                           <section style="margin-top:40px;">
@@ -528,7 +525,9 @@
                                         /></b>
                               </div>
                           </section>
-                          <section style="margin-top:40px;padding-right:100px;padding-left:100px;">
+                          <section
+                                style="margin-top:40px;padding-right:100px;padding-left:100px;"
+                            >
                               <div class="col-12 text-center">
                                   est régulièrement inscrit<t
                                         t-if="o.student_id.gender == 'female'"
@@ -543,14 +542,20 @@
                                   </p>
                               </div>
                           </section>
-                          <section style="margin-top:20px;padding-right:100px;padding-left:100px;">
+                          <section
+                                style="margin-top:20px;padding-right:100px;padding-left:100px;"
+                            >
                               <div class="col-12 text-center">
                                   <u>Cours suivis dans la nouvelle structure:</u>
                               </div>
                           </section>
-                          <section style="margin-top:20px;padding-right:100px;padding-left:100px;">
+                          <section
+                                style="margin-top:20px;padding-right:100px;padding-left:100px;"
+                            >
                               <div class="col-12 text-center">
-                                  <b><span t-field="o.source_bloc_id.cycle_id" /> - <span
+                                  <b><span
+                                            t-field="o.source_bloc_id.cycle_id"
+                                        /> - <span
                                             t-field="o.source_bloc_id.level"
                                         /> du domaine <span
                                             t-field="o.source_bloc_domain_id"

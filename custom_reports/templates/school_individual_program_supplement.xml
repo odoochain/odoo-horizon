@@ -304,9 +304,10 @@
             t-value="True if doc.student_id.gender == 'male' else False"
         />
           <t t-set="student_birth_place_city" t-value="doc.student_id.birthplace" />
+          <!-- <t t-set="student_birth_place_country" t-value="doc.student_id.nationality_ids[0].name if doc.student_id.nationality_ids else False"/> -->
           <t
             t-set="student_birth_place_country"
-            t-value="doc.student_id.nationality_ids[0].name if doc.student_id.nationality_ids else False"
+            t-value="doc.student_id.birthcountry.name if doc.student_id.birthcountry else False"
         />
           <t
             t-set="student_birth_date_formatted"

@@ -79,7 +79,10 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                   <div class="page">
-                    <div class="container" style="padding-right:70px;padding-left:70px;">
+                    <div
+                            class="container"
+                            style="padding-right:70px;padding-left:70px;"
+                        >
                         <div class="row" style="margin-bottom:30px;">
                             <div class="col-12 text-center">
                                 <h3>ATTESTATION DE RÉUSSITE</h3>
@@ -225,7 +228,10 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                 <div class="page">
-                    <div class="container" style="padding-right:70px;padding-left:70px;">
+                    <div
+                            class="container"
+                            style="padding-right:70px;padding-left:70px;"
+                        >
                         <div class="row" style="margin-bottom:30px;">
                             <div class="col-12 text-center">
                                 <h3>ATTESTATION DE RÉUSSITE DE CYCLE</h3>
