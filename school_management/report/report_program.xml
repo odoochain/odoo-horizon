@@ -516,13 +516,15 @@
                           </section>
                           <section style="margin-top:40px;">
                               <div class="col-12 text-center">
-                                  <b><span t-field="o.student_id.name" />, né<t
+                                   <b><span t-field="o.student_id.name" />, né<t
                                             t-if="o.student_id.gender == 'female'"
                                         >e</t> le <span
                                             t-field="o.student_id.birthdate_date"
                                         /> à <span
                                             t-field="o.student_id.birthplace"
-                                        /></b>
+                                        /><t t-if="o.student_id.birthcountry"> (<t
+                                                t-esc="o.student_id.birthcountry.name"
+                                            />)</t></b>
                               </div>
                           </section>
                           <section
