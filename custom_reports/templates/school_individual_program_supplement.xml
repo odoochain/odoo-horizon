@@ -529,22 +529,48 @@
                                 t-else=""
                             >111</t> du décret du 07 novembre 2013:
                     <t t-foreach="doc.student_id.access_titles_ids" t-as="at">
-                      <!-- <t t-if="(('CESS' in at.name or 'equivalence' in at.name) and bac)"> -->
-                        <br /><t t-if="at.name">- <t t-esc="at.name" /></t><t
-                                    t-if="at.title"
-                                > - <t t-esc="at.title" /></t> - <t
-                                    t-esc="at.establishment"
-                                /> - <t t-esc="at.city" /> (<t
-                                    t-esc="at.country"
-                                />) - <t t-esc="at.date.strftime('%d/%m/%Y')" />
-                      <!-- </t>
-                      <t t-if="(('Bachelier' in at.name or 'VAE' in at.name) and master)">
-                        <br/><t t-esc="at.title"/> - <t t-esc="at.establishment"/> - <t t-esc="at.city"/> (<t t-esc="at.country"/>) - <t t-esc="at.date.strftime('%d/%m/%Y')"/>
-                      </t> -->
+                      <t t-if="bac">
+                        <t
+                                        t-if="(at.type != 'bachelor' and at.type != 'mastery_of_french')"
+                                    >
+                          <br /><t t-if="at.name">- <t t-esc="at.name" /></t><t
+                                            t-if="at.title"
+                                        > - <t t-esc="at.title" /></t> - <t
+                                            t-esc="at.establishment"
+                                        /> - <t t-esc="at.city" /> (<t
+                                            t-esc="at.country_id.name if at.country_id else at.country"
+                                        />) - <t t-esc="at.date.strftime('%d/%m/%Y')" />
+                        </t>
+                      </t>
+                      <t t-else="">
+                        <t
+                                        t-if="(at.type != 'cess' and at.type != 'mastery_of_french')"
+                                    >
+                          <br /><t t-if="at.name">- <t t-esc="at.name" /></t><t
+                                            t-if="at.title"
+                                        > - <t t-esc="at.title" /></t> - <t
+                                            t-esc="at.establishment"
+                                        /> - <t t-esc="at.city" /> (<t
+                                            t-esc="at.country_id.name if at.country_id else at.country"
+                                        />) - <t t-esc="at.date.strftime('%d/%m/%Y')" />
+                        </t>
+                      </t>
                     </t>
-                    <t t-if="master_dict"><br
+                    <t t-if="master_dict">
+                      <br /><br
                                 />Conformément à l’article 113 du décret du 07 novembre 2013, l’étudiante a apporté une preuve de la maitrise suffisante de la langue française :
-                    <br />à venir...</t>
+                      <t t-foreach="doc.student_id.access_titles_ids" t-as="at">
+                        <t t-if="at.type == 'mastery_of_french'">
+                          <br /><t t-if="at.name">- <t t-esc="at.name" /></t><t
+                                            t-if="at.title"
+                                        > - <t t-esc="at.title" /></t> - <t
+                                            t-esc="at.establishment"
+                                        /> - <t t-esc="at.city" /> (<t
+                                            t-esc="at.country_id.name if at.country_id else at.country"
+                                        />) - <t t-esc="at.date.strftime('%d/%m/%Y')" />
+                        </t>
+                      </t>
+                    </t>
                     </span></li>
                 </ul>
 

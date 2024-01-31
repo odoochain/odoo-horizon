@@ -7,7 +7,8 @@ class Erasmus(models.Model):
 
     establishment = fields.Char(string="Etablissement")
     city = fields.Char(string="Ville")
-    country = fields.Char(string="Pays")
+    country_id = fields.Many2one("res.country", "Pays", ondelete="restrict")
+    country = fields.Char(string="Pays (Ancien champ)", readonly=True)
 
     start_date = fields.Date(string="Date de début")
     end_date = fields.Date(string="Date de fin")
@@ -23,7 +24,8 @@ class Internship(models.Model):
 
     establishment = fields.Char(string="Etablissement")
     city = fields.Char(string="Ville")
-    country = fields.Char(string="Pays")
+    country_id = fields.Many2one("res.country", "Pays", ondelete="restrict")
+    country = fields.Char(string="Pays (Ancien champ)", readonly=True)
 
     start_date = fields.Date(string="Date de début")
     end_date = fields.Date(string="Date de fin")
@@ -45,15 +47,26 @@ class TitleAccess(models.Model):
 
     name = fields.Char(
         string="Name of the access title",
-        help="e.g.: Titre d'accés 1er cycle (art. 107)",
+        help="e.g.: Titre d'accès 1er cycle (art. 107)",
     )
     title = fields.Char(string="Intitulé")
     establishment = fields.Char(string="Etablissement")
     city = fields.Char(string="Ville")
-    country = fields.Char(string="Pays")
+    country_id = fields.Many2one("res.country", "Pays", ondelete="restrict")
+    country = fields.Char(string="Pays (Ancien champ)", readonly=True)
     date = fields.Date(string="Date")
 
     partner_id = fields.Many2one("res.partner", string="Contact")
+
+    type = fields.Selection(
+        [
+            ("mastery_of_french", "Mastery of French"),
+            ("cess", "CESS"),
+            ("bachelor", "Bachelor"),
+        ],
+        string="Type",
+        tracking=True,
+    )
 
 
 class ResPartnerInherit(models.Model):

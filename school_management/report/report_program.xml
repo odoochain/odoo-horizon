@@ -540,7 +540,11 @@
                                         t-field="o.year_id"
                                     />.
                                   <p style="margin-top:10px;">
-                                      Les cours sont donnés du 14 septembre au 30 juin.
+                                      Les cours sont donnés du <t
+                                            t-esc="o.year_id.startdate.day"
+                                        /> septembre au <t
+                                            t-esc="o.year_id.enddate.day"
+                                        /> juin.
                                   </p>
                               </div>
                           </section>

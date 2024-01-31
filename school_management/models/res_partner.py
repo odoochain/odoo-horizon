@@ -74,6 +74,9 @@ class Year(models.Model):
     previous = fields.Many2one("school.year", string="Previous Year")
     next = fields.Many2one("school.year", string="Next Year")
 
+    startdate = fields.Date("Start date")
+    enddate = fields.Date("End date")
+
     @api.model_create_multi
     def create(self, vals_list):
         years = super().create(vals_list)

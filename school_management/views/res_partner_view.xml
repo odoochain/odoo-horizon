@@ -349,6 +349,7 @@
             				    <field name="lang" />
             				    <field name="gender" />
                                 <field name="nationality_ids" widget="many2many_tags" />
+                                <field name="birthcountry" />
             				  </group>
             				  <group>
                                 <field name="birthplace" />

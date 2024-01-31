@@ -26,8 +26,10 @@
                                 <field name="title" />
                                 <field name="establishment" />
                                 <field name="city" />
-                                <field name="country" />
+                                <field name="country_id" />
                                 <field name="date" />
+                                <field name="type" />
+                                <field name="country" />
                             </tree>
                         </field>
                     </group>
@@ -44,19 +46,21 @@
                             <tree>
                                 <field name="establishment" />
                                 <field name="city" />
-                                <field name="country" />
+                                <field name="country_id" />
                                 <field name="start_date" />
                                 <field name="end_date" />
+                                <field name="country" />
                             </tree>
                         </field>
                         <field name="erasmus_ids" mode="tree">
                             <tree>
                                 <field name="establishment" />
                                 <field name="city" />
-                                <field name="country" />
+                                <field name="country_id" />
                                 <field name="start_date" />
                                 <field name="end_date" />
                                 <field name="language" />
+                                <field name="country" />
                             </tree>
                         </field>
                     </group>
