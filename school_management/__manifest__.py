@@ -25,6 +25,7 @@
     "website": "https://github.com/ito-invest-lu/horizon",
     "category": "School Management",
     "depends": [
+        "base",
         "mail",
         "partner_contact_gender",
         "partner_second_lastname",

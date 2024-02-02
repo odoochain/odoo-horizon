@@ -269,6 +269,25 @@ class Partner(models.Model):
                 ]
             )
 
+    # custom_partner_fields
+
+    second_first_name = fields.Char(string="Autre(s) prénom(s)")
+
+    # Section Titre d'acces
+    admission_exam_date = fields.Date(string="Examen d'admission")
+    access_titles_ids = fields.One2many(
+        "custom_partner_fields.access_title", "partner_id", string="Titres d'accés"
+    )
+    memoir_titles_ids = fields.One2many(
+        "custom_partner_fields.memoir_title", "partner_id", string="Titres de mémoires"
+    )
+    internships_ids = fields.One2many(
+        "custom_partner_fields.internship", "partner_id", string="Stage(s)"
+    )
+    erasmus_ids = fields.One2many(
+        "custom_partner_fields.erasmus", "partner_id", string="Erasmus"
+    )
+
 
 class Company(models.Model):
     _inherit = "res.company"
@@ -286,3 +305,74 @@ class Country(models.Model):
     nis_code = fields.Char(string="NIS-code")
 
     in_use = fields.Boolean(string="In Use")
+
+
+# custom_partner_fields
+
+
+class TitleAccess(models.Model):
+    _name = "custom_partner_fields.access_title"
+    _description = "Title Access"
+
+    name = fields.Char(
+        string="Name of the access title",
+        help="e.g.: Titre d'accès 1er cycle (art. 107)",
+    )
+    title = fields.Char(string="Intitulé")
+    establishment = fields.Char(string="Etablissement")
+    city = fields.Char(string="Ville")
+    country_id = fields.Many2one("res.country", "Pays", ondelete="restrict")
+    country = fields.Char(string="Pays (Ancien champ)", readonly=True)
+    date = fields.Date(string="Date")
+
+    partner_id = fields.Many2one("res.partner", string="Contact")
+
+    type = fields.Selection(
+        [
+            ("mastery_of_french", "Mastery of French"),
+            ("cess", "CESS"),
+            ("bachelor", "Bachelor"),
+        ],
+        string="Type",
+        tracking=True,
+    )
+
+
+class Erasmus(models.Model):
+    _name = "custom_partner_fields.erasmus"
+    _description = "Erasmus"
+
+    establishment = fields.Char(string="Etablissement")
+    city = fields.Char(string="Ville")
+    country_id = fields.Many2one("res.country", "Pays", ondelete="restrict")
+    country = fields.Char(string="Pays (Ancien champ)", readonly=True)
+
+    start_date = fields.Date(string="Date de début")
+    end_date = fields.Date(string="Date de fin")
+
+    language = fields.Char(string="Langue")
+
+    partner_id = fields.Many2one("res.partner", string="Contact")
+
+
+class Internship(models.Model):
+    _name = "custom_partner_fields.internship"
+    _description = "Internship"
+
+    establishment = fields.Char(string="Etablissement")
+    city = fields.Char(string="Ville")
+    country_id = fields.Many2one("res.country", "Pays", ondelete="restrict")
+    country = fields.Char(string="Pays (Ancien champ)", readonly=True)
+
+    start_date = fields.Date(string="Date de début")
+    end_date = fields.Date(string="Date de fin")
+
+    partner_id = fields.Many2one("res.partner", string="Contact")
+
+
+class MemoirTitle(models.Model):
+    _name = "custom_partner_fields.memoir_title"
+    _description = "Memoir Title"
+
+    name = fields.Char(string="Titre du mémoire/TFE")
+    partner_id = fields.Many2one("res.partner", string="Contact")
