@@ -201,14 +201,25 @@
                     domain="[('bloc_ids.year_sequence','=','current')]"
                 />
                 <filter
+                    string="Previous Year"
+                    name="previous"
+                    domain="[('bloc_ids.year_sequence','=','previous')]"
+                />
+                <filter
                     string="Next Year"
                     name="next"
                     domain="[('bloc_ids.year_sequence','=','next')]"
                 />
+                <separator />
                 <filter
-                    string="Previous Year"
-                    name="previous"
-                    domain="[('bloc_ids.year_sequence','=','previous')]"
+                    name="music"
+                    string="Musique"
+                    domain="[('bloc_ids.speciality_id.domain_id', 'ilike','MUSIQUE')]"
+                />
+                <filter
+                    name="theatre"
+                    string="Théâtre"
+                    domain="[('bloc_ids.speciality_id.domain_id', 'ilike','THEATRE')]"
                 />
                 <separator />
                 <group expand="1" string="Group By">
@@ -419,16 +430,26 @@
                     domain="[('bloc_ids.year_sequence','=','current')]"
                 />
                 <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('bloc_ids.year_sequence','=','next')]"
-                />
-                <filter
                     string="Previous Year"
                     name="previous"
                     domain="[('bloc_ids.year_sequence','=','previous')]"
                 />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('bloc_ids.year_sequence','=','next')]"
+                />
                 <separator />
+                <filter
+                    name="music"
+                    string="Musique"
+                    domain="[('bloc_ids.speciality_id.domain_id', 'ilike','MUSIQUE')]"
+                />
+                <filter
+                    name="theatre"
+                    string="Théâtre"
+                    domain="[('bloc_ids.speciality_id.domain_id', 'ilike','THEATRE')]"
+                />
                 <!-- <filter
                     string="Is Described"
                     name="described"
@@ -667,25 +688,25 @@
                     domain="[('year_sequence','=','current')]"
                 />
                 <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('year_sequence','=','next')]"
-                />
-                <filter
                     string="Previous Year"
                     name="previous"
                     domain="[('year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('year_sequence','=','next')]"
                 />
                 <separator />
                 <filter
                     string="Musique"
                     name="musique"
-                    domain='[["program_id.speciality_id.domain_id","ilike","MUSIQUE"]]'
+                    domain='[("speciality_id.domain_id","ilike","MUSIQUE")]'  
                 />
                 <filter
-                    string="Théatre"
+                    string="Théâtre"
                     name="theatre"
-                    domain='[["program_id.speciality_id.domain_id","ilike","THEATRE"]]'
+                    domain='[("speciality_id.domain_id","ilike","THEATRE")]'
                 />
                 <separator />
                 <group expand="1" string="Group By">
@@ -970,7 +991,7 @@
         </field>
     </record>
 
-    <record id="view_program_filter" model="ir.ui.view">
+    <record id="view_program_filter" model="ir.ui.view"> <!-- TODO Utilisé ou pas ? -->
         <field name="name">program.select</field>
         <field name="model">school.program</field>
         <field name="arch" type="xml">
@@ -985,14 +1006,14 @@
                     domain="[('year_sequence','=','current')]"
                 />
                 <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('year_sequence','=','next')]"
-                />
-                <filter
                     string="Previous Year"
                     name="previous"
                     domain="[('year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('year_sequence','=','next')]"
                 />
                 <separator />
                 <filter
@@ -1001,7 +1022,7 @@
                     domain='[["speciality_id.domain_id","ilike","MUSIQUE"]]'
                 />
                 <filter
-                    string="Théatre"
+                    string="Théâtre"
                     name="theatre"
                     domain='[["speciality_id.domain_id","ilike","THEATRE"]]'
                 />

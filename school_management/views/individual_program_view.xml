@@ -281,7 +281,7 @@
                 />
                 <filter
                     name="theatre"
-                    string="Théatre"
+                    string="Théâtre"
                     domain="[('domain_id', '=', 2)]"
                 />
                 <separator />
@@ -500,14 +500,14 @@
                     domain="[('year_sequence','=','current')]"
                 />
                 <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('year_sequence','=','next')]"
-                />
-                <filter
                     string="Previous Year"
                     name="previous"
                     domain="[('year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('year_sequence','=','next')]"
                 />
                 <separator />
                 <filter
@@ -892,7 +892,7 @@
                 />
                 <filter
                     name="theatre"
-                    string="Théatre"
+                    string="Théâtre"
                     domain="[('source_bloc_domain_id', '=', 2)]"
                 />
                 <separator />
@@ -902,14 +902,14 @@
                     domain="[('year_sequence','=','current')]"
                 />
                 <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('year_sequence','=','next')]"
-                />
-                <filter
                     string="Previous Year"
                     name="previous"
                     domain="[('year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('year_sequence','=','next')]"
                 />
                 <group expand="1" string="Group By">
                     <filter
@@ -1178,14 +1178,14 @@
                     domain="[('year_sequence','=','current')]"
                 />
                 <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('year_sequence','=','next')]"
-                />
-                <filter
                     string="Previous Year"
                     name="previous"
                     domain="[('year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('year_sequence','=','next')]"
                 />
                 <separator />
                 <group expand="1" string="Group By">

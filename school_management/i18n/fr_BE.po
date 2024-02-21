@@ -1373,7 +1373,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_courses_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 msgid "Next Year"
-msgstr "Année suviante"
+msgstr "Année prochaine"
 
 #. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_courses_filter
@@ -2095,7 +2095,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:school_management.selection__school_program__domain__theatre
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
-msgid "Théatre"
+msgid "Théâtre"
 msgstr "Théâtre"
 
 #. module: school_management

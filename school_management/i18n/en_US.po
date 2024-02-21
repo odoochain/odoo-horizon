@@ -2471,7 +2471,7 @@ msgstr ""
 #. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
-msgid "Théatre"
+msgid "Théâtre"
 msgstr ""
 
 #. module: school_management
