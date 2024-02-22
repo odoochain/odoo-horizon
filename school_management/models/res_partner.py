@@ -131,7 +131,7 @@ class Partner(models.Model):
     marial_status = fields.Selection([("M", "Maried"), ("S", "Single")])
     registration_date = fields.Date("Registration Date")
     email_personnel = fields.Char("Email personnel")
-    reg_number = fields.Char("Registration Number")
+    reg_number = fields.Char("Registration Number", size=11)
     mat_number = fields.Char("Matricule Number")
 
     student_program_ids = fields.One2many(
