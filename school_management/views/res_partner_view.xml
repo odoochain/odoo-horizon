@@ -39,6 +39,8 @@
                         Archiver
                     </button>
                 </xpath>
+                <xpath expr="//button[@name='schedule_meeting']" position="replace">
+                </xpath>
                 <xpath expr="//field[contains(@name, 'image_1920')]" position="replace">
                     <field
                     name="image_1920"
@@ -332,7 +334,7 @@
                                 <group>
                                     <group string="Other Info">
                                         <field name='email_personnel' />
-                                        <field name="phone" widget="phone" />
+                                        <!-- <field name="phone" widget="phone" /> -->
                                         <field name="mobile" widget="phone" />
                                     </group>
                                 </group>
