@@ -778,7 +778,7 @@
         <field name="inherit_id" ref="school_management.view_partners_form_school" />
         <field name="arch" type="xml">
             <xpath expr="//notebook[last()]" position="inside">
-                <page name="access_titles_page" string="Titre d'accès">
+                <page name="access_titles_page" string="Titre d'accès" groups="school_management.group_employee">
                     <group>
                         <field name="admission_exam_date" />
                         <field name="access_titles_ids" mode="tree">
@@ -796,7 +796,7 @@
                     </group>
                 </page>
 
-                <page name="erasmus_page" string="Divers">
+                <page name="erasmus_page" string="Divers" groups="school_management.group_employee">
                     <group>
                         <field name="memoir_titles_ids">
                             <tree>
