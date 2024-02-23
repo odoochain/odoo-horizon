@@ -276,7 +276,7 @@ class Partner(models.Model):
     # Section Titre d'acces
     admission_exam_date = fields.Date(string="Examen d'admission")
     access_titles_ids = fields.One2many(
-        "custom_partner_fields.access_title", "partner_id", string="Titres d'accés"
+        "custom_partner_fields.access_title", "partner_id", string="Titres d'accès"
     )
     memoir_titles_ids = fields.One2many(
         "custom_partner_fields.memoir_title", "partner_id", string="Titres de mémoires"
