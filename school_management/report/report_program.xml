@@ -23,14 +23,14 @@
 <odoo>
 
     <!-- report -->
-    <report
+    <!-- <report
         id="report_program"
         model="school.program"
         string="Program"
         report_type="qweb-pdf"
         name="school_management.report_program_details_content"
         file="school_management.report_program_details_content"
-    />
+    /> -->
 
     <template id="website_program_details_content" name="Program Details Content">
 

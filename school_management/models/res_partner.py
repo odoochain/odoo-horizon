@@ -131,7 +131,7 @@ class Partner(models.Model):
     marial_status = fields.Selection([("M", "Maried"), ("S", "Single")])
     registration_date = fields.Date("Registration Date")
     email_personnel = fields.Char("Email personnel")
-    reg_number = fields.Char("Registration Number")
+    reg_number = fields.Char("Registration Number", size=11)
     mat_number = fields.Char("Matricule Number")
 
     student_program_ids = fields.One2many(
@@ -276,7 +276,7 @@ class Partner(models.Model):
     # Section Titre d'acces
     admission_exam_date = fields.Date(string="Examen d'admission")
     access_titles_ids = fields.One2many(
-        "custom_partner_fields.access_title", "partner_id", string="Titres d'accés"
+        "custom_partner_fields.access_title", "partner_id", string="Titres d'accès"
     )
     memoir_titles_ids = fields.One2many(
         "custom_partner_fields.memoir_title", "partner_id", string="Titres de mémoires"
