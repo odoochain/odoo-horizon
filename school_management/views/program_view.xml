@@ -772,7 +772,7 @@
         <field name="name">school.program.kanban</field>
         <field name="model">school.program</field>
         <field name="arch" type="xml">
-            <kanban class="o_program_kanban" default_group_by="speciality_id">
+            <kanban class="o_program_kanban">
                 <field name="uid" />
                 <field name="title" />
                 <templates>
@@ -991,7 +991,7 @@
         </field>
     </record>
 
-    <record id="view_program_filter" model="ir.ui.view"> <!-- TODO Utilisé ou pas ? -->
+    <record id="view_program_filter" model="ir.ui.view">
         <field name="name">program.select</field>
         <field name="model">school.program</field>
         <field name="arch" type="xml">
@@ -1058,7 +1058,7 @@
         <field name="name">Programs</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">school.program</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
         <field name="context">{"search_default_current":1}</field>
         <field name="search_view_id" ref="view_program_filter" />
         <field name="help" type="html">
