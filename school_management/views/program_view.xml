@@ -222,6 +222,11 @@
                     domain="[('bloc_ids.speciality_id.domain_id', 'ilike','THEATRE')]"
                 />
                 <separator />
+                <filter
+                    name="no_responsible"
+                    string="Pas de responsable"
+                    domain="[('responsible_id', '=', None)]"
+                />
                 <group expand="1" string="Group By">
                     <filter
                         string="Responsible"
@@ -449,6 +454,12 @@
                     name="theatre"
                     string="Théâtre"
                     domain="[('bloc_ids.speciality_id.domain_id', 'ilike','THEATRE')]"
+                />
+                <separator />
+                <filter
+                    name="no_responsible"
+                    string="Pas de responsable"
+                    domain="[('responsible_id', '=', None)]"
                 />
                 <!-- <filter
                     string="Is Described"

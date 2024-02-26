@@ -1236,6 +1236,12 @@
                     domain="[('year_sequence','=','next')]"
                 />
                 <separator />
+                <filter
+                    name="no_responsible"
+                    string="Pas de responsable"
+                    domain="[('responsible_id', '=', None)]"
+                />
+                <separator />
                 <group expand="1" string="Group By">
                     <filter
                         string="Domain"

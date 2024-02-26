@@ -1844,7 +1844,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_courses_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 msgid "Next Year"
-msgstr "Année suviante"
+msgstr "Année suivante"
 
 #. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_courses_filter
