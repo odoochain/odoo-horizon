@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-26 13:58+0000\n"
-"PO-Revision-Date: 2024-02-26 13:58+0000\n"
+"POT-Creation-Date: 2024-02-26 13:57+0000\n"
+"PO-Revision-Date: 2024-02-26 13:57+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,11 +43,18 @@ msgid ""
 "            </div>\n"
 "        "
 msgstr ""
+"<div style=\"font-family:'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif;font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"                <p>Bonjour <t t-out=\"object.responsible_id.name\"/>,\n"
+"                </p><br/>\n"
+"                <p>L'étudiant <t t-out=\"object.student_id.name\"/> a demandé la valorisation de l'unité <t t-out=\"object.name\"/> dont vous êtes le responsable </p><br/>\n"
+"                <p>Merci de vous connecter à Horizon pour analyser la demande et prendre position :</p><p><br/></p><a class=\"btn btn-primary\" target=\"_blank\" t-attf-href=\"{{ object.get_base_url() }}/web#id={{ object.id }}&amp;action=793&amp;model=school.valuation_followup&amp;view_type=form\">Accéder à la valorisation</a><p>\n"
+"                </p><br/>Merci</div>\n"
+"        "
 
 #. module: school_valuations
 #: model:ir.model.fields.selection,name:school_valuations.selection__school_valuation_followup__responsible_decision__accept
 msgid "Accepted"
-msgstr ""
+msgstr "Accepté"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__message_needaction
@@ -62,27 +69,27 @@ msgstr ""
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__administration_comments
 msgid "Administration Comments"
-msgstr ""
+msgstr "Commentaire de l'administration\n"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.view_valuation_filter
 msgid "Archived"
-msgstr ""
+msgstr "Archivé"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "# Documents attachés"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__attachment_ids
 msgid "Attachments"
-msgstr ""
+msgstr "Documents attachés"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.valuation_form
 msgid "Check"
-msgstr ""
+msgstr "Est contrôlé"
 
 #. module: school_valuations
 #: model_terms:ir.actions.act_window,help:school_valuations.action_valuation_form
@@ -92,7 +99,7 @@ msgstr ""
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.valuation_form
 msgid "Confirm valuation"
-msgstr ""
+msgstr "Confirmer"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__create_uid
@@ -112,12 +119,12 @@ msgstr ""
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.view_valuation_filter
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__message_follower_ids
@@ -137,7 +144,7 @@ msgstr ""
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__id
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #. module: school_valuations
 #: model:ir.model.fields,help:school_valuations.field_school_valuation_followup__message_needaction
@@ -160,7 +167,7 @@ msgstr ""
 #: model:ir.model,name:school_valuations.model_school_individual_course_group
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__individual_course_group_id
 msgid "Individual Course Group"
-msgstr ""
+msgstr "Unité d'enseignement individuelle"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__program_id
@@ -175,7 +182,7 @@ msgstr ""
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__write_uid
@@ -240,7 +247,7 @@ msgstr ""
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.view_valuation_filter
 msgid "Published"
-msgstr ""
+msgstr "Publié"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.valuation_form
@@ -250,7 +257,7 @@ msgstr ""
 #. module: school_valuations
 #: model:ir.model.fields.selection,name:school_valuations.selection__school_valuation_followup__responsible_decision__reject
 msgid "Rejected"
-msgstr ""
+msgstr "Rejeté"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.valuation_form
@@ -266,38 +273,38 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__responsible_id
 #: model_terms:ir.ui.view,arch_db:school_valuations.view_valuation_filter
 msgid "Responsible"
-msgstr ""
+msgstr "Responsable"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__responsible_comments
 msgid "Responsible Comments"
-msgstr ""
+msgstr "Commentaire du responsable"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__responsible_decision
 msgid "Responsible Decision"
-msgstr ""
+msgstr "Décision du responsable"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__responsible_uid
 msgid "Responsible Uid"
-msgstr ""
+msgstr "Identifiant du responsable"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.view_valuation_filter
 msgid "Search Valuation"
-msgstr ""
+msgstr "Rechercher une valorisation"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__state
 msgid "Status"
-msgstr ""
+msgstr "Etat"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__student_id
 #: model_terms:ir.ui.view,arch_db:school_valuations.view_valuation_filter
 msgid "Student"
-msgstr ""
+msgstr "Etudiant"
 
 #. module: school_valuations
 #: model:ir.model.fields,help:school_valuations.field_school_valuation_followup__active
@@ -308,37 +315,37 @@ msgstr ""
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__title
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.valuation_form
 msgid "To candidate"
-msgstr ""
+msgstr "En candidat"
 
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__uid
 msgid "UID"
-msgstr ""
+msgstr "Identifiant unique"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.valuation_form
 msgid "Valuate"
-msgstr ""
+msgstr "Valoriser"
 
 #. module: school_valuations
 #: model:ir.model.fields.selection,name:school_valuations.selection__school_valuation_followup__valuation_type__c
 msgid "Valuated based on credits"
-msgstr ""
+msgstr "Valorisation des crédits dans l’enseignement supérieur"
 
 #. module: school_valuations
 #: model:ir.model.fields.selection,name:school_valuations.selection__school_valuation_followup__valuation_type__a
 msgid "Valuated based on experience"
-msgstr ""
+msgstr "Valorisation sur base des acquis de l’expérience"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.valuation_form
 msgid "Valuation"
-msgstr ""
+msgstr "Valorisation"
 
 #. module: school_valuations
 #: model:mail.template,name:school_valuations.email_template_valuation_teacher
@@ -354,13 +361,13 @@ msgstr ""
 #. module: school_valuations
 #: model:ir.model.fields,field_description:school_valuations.field_school_valuation_followup__valuation_type
 msgid "Valuation Type"
-msgstr ""
+msgstr "Type de valorisation"
 
 #. module: school_valuations
 #: model:ir.actions.act_window,name:school_valuations.action_valuation_form
 #: model:ir.ui.menu,name:school_valuations.menu_valuation_form
 msgid "Valuations"
-msgstr ""
+msgstr "Valorisations"
 
 #. module: school_valuations
 #: model_terms:ir.ui.view,arch_db:school_valuations.valuation_form

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-23 08:55+0000\n"
-"PO-Revision-Date: 2024-02-23 08:55+0000\n"
+"POT-Creation-Date: 2024-02-26 13:54+0000\n"
+"PO-Revision-Date: 2024-02-26 13:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -220,6 +220,7 @@ msgstr "Abandonné"
 
 #. module: school_management
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_program__state__abandonned
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 msgid "Abandonned"
 msgstr "Abandonné"
 
@@ -368,6 +369,7 @@ msgstr ""
 
 #. module: school_management
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_program__state__awarded
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 msgid "Awarded"
 msgstr "Diplômé"
 
@@ -465,7 +467,7 @@ msgstr "Blocs annuels"
 #. module: school_management
 #: model:ir.model.fields.selection,name:school_management.selection__custom_partner_fields_access_title__type__cess
 msgid "CESS"
-msgstr "CESS"
+msgstr ""
 
 #. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.report_individual_bloc_content
@@ -951,6 +953,9 @@ msgstr ""
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_course_group__state__9_draft
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_program__state__draft
 #: model:ir.model.fields.selection,name:school_management.selection__school_program__state__draft
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 msgid "Draft"
 msgstr "Brouillon"
@@ -2133,6 +2138,11 @@ msgid "Programs"
 msgstr "Profils d'enseignement"
 
 #. module: school_management
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
+msgid "Progress"
+msgstr "En cours"
+
+#. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.website_school_bloc
 msgid "Pré-requis"
 msgstr "Prérequis"
@@ -2144,6 +2154,9 @@ msgstr "Publier le programme"
 
 #. module: school_management
 #: model:ir.model.fields.selection,name:school_management.selection__school_program__state__published
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 msgid "Published"
 msgstr "Publié"
@@ -2806,7 +2819,7 @@ msgstr ""
 #. module: school_management
 #: model:ir.model,name:school_management.model_res_users
 msgid "User"
-msgstr ""
+msgstr "Utilisateur"
 
 #. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.website_program_details_content

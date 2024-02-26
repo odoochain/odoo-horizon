@@ -269,9 +269,35 @@
             <search string="Search Programs">
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', 'in', ['draft'])]"
+                />
+                <filter
+                    name="published"
+                    string="Published"
+                    domain="[('state', 'not in', ['draft'])]"
+                />
+                <filter
                     string="Archived"
                     name="inactive"
                     domain="[('active','=',False)]"
+                />
+                <separator />
+                    <filter
+                    name="progress"
+                    string="Progress"
+                    domain="[('state', 'in', ['progress'])]"
+                />
+                    <filter
+                    name="awarded"
+                    string="Awarded"
+                    domain="[('state', 'in', ['awarded'])]"
+                />
+                    <filter
+                    name="abandoned"
+                    string="Abandonned"
+                    domain="[('state', 'in', ['abandoned'])]"
                 />
                 <separator />
                 <filter
@@ -848,10 +874,21 @@
             <search string="Search Blocs">
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', 'in', ['draft'])]"
+                />
+                <filter
+                    name="published"
+                    string="Published"
+                    domain="[('state', 'not in', ['draft'])]"
+                />
+                <filter
                     string="Archived"
                     name="inactive"
                     domain="[('active','=',False)]"
                 />
+                <separator />
                 <field name="source_bloc_id" string="Programme" />
                 <field name="source_bloc_domain_id" />
                 <filter
@@ -1141,6 +1178,17 @@
                 <field name="uid" string="UID" />
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <field name="source_course_group_id" string="Activité" />
+                <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', 'in', ['draft'])]"
+                />
+                <filter
+                    name="published"
+                    string="Published"
+                    domain="[('state', 'not in', ['draft'])]"
+                />
+                <separator />
                 <filter
                     name="bloc_1"
                     string="Bloc 1"
