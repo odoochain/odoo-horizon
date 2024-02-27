@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-26 13:54+0000\n"
-"PO-Revision-Date: 2024-02-26 13:54+0000\n"
+"POT-Creation-Date: 2024-02-27 10:03+0000\n"
+"PO-Revision-Date: 2024-02-27 10:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1397,9 +1397,7 @@ msgstr "Cycle individuel"
 
 #. module: school_management
 #: model:ir.actions.act_window,name:school_management.action_individual_bloc_form
-#: model:ir.actions.act_window,name:school_management.action_individual_program_form
 #: model:ir.ui.menu,name:school_management.menu_individual_bloc_form
-#: model:ir.ui.menu,name:school_management.menu_individual_program_form
 msgid "Individual Programs"
 msgstr "Programme Annuel de l'Étudiant (PAE)"
 
@@ -2013,6 +2011,13 @@ msgid "PROGRAMME DES COURS"
 msgstr ""
 
 #. module: school_management
+#: model_terms:ir.ui.view,arch_db:school_management.view_course_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_course_group_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
+msgid "Pas de responsable"
+msgstr ""
+
+#. module: school_management
 #: model:ir.model.fields,field_description:school_management.field_custom_partner_fields_access_title__country_id
 #: model:ir.model.fields,field_description:school_management.field_custom_partner_fields_erasmus__country_id
 #: model:ir.model.fields,field_description:school_management.field_custom_partner_fields_internship__country_id
@@ -2571,6 +2576,12 @@ msgstr "Nom"
 #: model_terms:ir.ui.view,arch_db:school_management.view_res_partner_filter
 msgid "Students"
 msgstr "Etudiants"
+
+#. module: school_management
+#: model:ir.actions.act_window,name:school_management.action_individual_program_form
+#: model:ir.ui.menu,name:school_management.menu_individual_program_form
+msgid "Students Invidivdual Cycles"
+msgstr "Cycles individuels des étudiants"
 
 #. module: school_management
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_course_group__state__6_success
