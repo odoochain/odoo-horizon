@@ -264,7 +264,7 @@
                <xpath
                 expr="//div[contains(@t-attf-class, 'horizon_cgs')]"
                 position="attributes"
-            >-->
+            >
                    <attribute
                     name="t-attf-class"
                 >horizon_cgs horizon_cgs_{{record.state.raw_value}}</attribute>
@@ -957,5 +957,27 @@
         sequence="40"
         groups="school_management.group_teacher"
     />
+
+    <record id="view_individual_course_groups_grades_filter" model="ir.ui.view">
+        <field name="name">school.individual_course_group.grades.filter</field>
+        <field name="model">school.individual_course_group</field>
+        <field name="inherit_id" ref="school_management.view_individual_course_groups_filter"
+        />
+        <field eval="25" name="priority" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='no_responsible']" position="after">
+                <filter
+                name="has_no_grades"
+                string="Pas de notes encodée"
+                domain="[
+                    '&amp;',
+                        '|',('first_session_result', '=', 0), ('first_session_result', '=', None),
+                        '|',('second_session_result', '=', 0), ('second_session_result', '=', None)
+                ]"
+            />
+                <separator />
+            </xpath>
+        </field>
+    </record>
 
 </odoo>
