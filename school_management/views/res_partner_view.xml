@@ -606,7 +606,7 @@
         </record>
 
         <record id="action_student_form" model="ir.actions.act_window">
-            <field name="name">Students</field>
+            <field name="name">Contacts</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
 
@@ -648,10 +648,11 @@
         parent="menu_contacts"
         action="action_student_form"
         sequence="5"
+        name="Students"
     />
 
         <record id="action_teacher_form" model="ir.actions.act_window">
-            <field name="name">Teachers</field>
+            <field name="name">Contacts</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
 
@@ -736,10 +737,11 @@
         parent="menu_contacts"
         action="action_teacher_form"
         sequence="10"
+        name="Teachers"
     />
 
         <record id="action_employee_form" model="ir.actions.act_window">
-            <field name="name">Employees</field>
+            <field name="name">Contacts</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
 
@@ -781,6 +783,7 @@
         parent="menu_contacts"
         action="action_employee_form"
         sequence="20"
+        name="Employees"
     />
 
 
