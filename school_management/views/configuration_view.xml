@@ -462,7 +462,8 @@
             <field eval="25" name="priority" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='sequence']" position="after">
-                    <field name="display_in_home_menu" string="À afficher dans le menu d'accueil" />
+                    <field name="display_in_home_menu" />
+                    <field name="simulated_id" attrs="{'readonly': [('display_in_home_menu', '!=', True)]}" />
                 </xpath>
             </field>
         </record>
