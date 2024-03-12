@@ -269,9 +269,51 @@
             <search string="Search Programs">
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', 'in', ['draft'])]"
+                />
+                <filter
+                    name="published"
+                    string="Published"
+                    domain="[('state', 'not in', ['draft'])]"
+                />
+                <filter
                     string="Archived"
                     name="inactive"
                     domain="[('active','=',False)]"
+                />
+                <separator />
+                    <filter
+                    name="progress"
+                    string="Progress"
+                    domain="[('state', 'in', ['progress'])]"
+                />
+                    <filter
+                    name="awarded"
+                    string="Awarded"
+                    domain="[('state', 'in', ['awarded'])]"
+                />
+                    <filter
+                    name="abandoned"
+                    string="Abandonned"
+                    domain="[('state', 'in', ['abandoned'])]"
+                />
+                <separator />
+                <filter
+                    string="Current Year"
+                    name="current"
+                    domain="[('bloc_ids.year_sequence','=','current')]"
+                />
+                <filter
+                    string="Previous Year"
+                    name="previous"
+                    domain="[('bloc_ids.year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('bloc_ids.year_sequence','=','next')]"
                 />
                 <separator />
                 <filter
@@ -322,12 +364,12 @@
     </record>
 
     <record id="action_individual_program_form" model="ir.actions.act_window">
-        <field name="name">Individual Programs</field>
+        <field name="name">Students Invidivdual Cycles</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">school.individual_program</field>
 
         <field name="view_mode">tree,form</field>
-        <field name="context">{}</field>
+        <field name="context">{"search_default_current":1}</field>
         <field name="search_view_id" ref="view_individual_program_filter" />
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -848,10 +890,21 @@
             <search string="Search Blocs">
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', 'in', ['draft'])]"
+                />
+                <filter
+                    name="published"
+                    string="Published"
+                    domain="[('state', 'not in', ['draft'])]"
+                />
+                <filter
                     string="Archived"
                     name="inactive"
                     domain="[('active','=',False)]"
                 />
+                <separator />
                 <field name="source_bloc_id" string="Programme" />
                 <field name="source_bloc_domain_id" />
                 <filter
@@ -1142,6 +1195,17 @@
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <field name="source_course_group_id" string="Activité" />
                 <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', 'in', ['draft'])]"
+                />
+                <filter
+                    name="published"
+                    string="Published"
+                    domain="[('state', 'not in', ['draft'])]"
+                />
+                <separator />
+                <filter
                     name="bloc_1"
                     string="Bloc 1"
                     domain="[('source_bloc_level', '=', 1)]"
@@ -1186,6 +1250,12 @@
                     string="Next Year"
                     name="next"
                     domain="[('year_sequence','=','next')]"
+                />
+                <separator />
+                <filter
+                    name="no_responsible"
+                    string="Pas de responsable"
+                    domain="[('responsible_id', '=', None)]"
                 />
                 <separator />
                 <group expand="1" string="Group By">

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-23 08:54+0000\n"
-"PO-Revision-Date: 2024-02-23 08:54+0000\n"
+"POT-Creation-Date: 2024-03-11 14:12+0000\n"
+"PO-Revision-Date: 2024-03-11 14:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -200,6 +200,7 @@ msgstr ""
 
 #. module: school_management
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_program__state__abandonned
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 msgid "Abandonned"
 msgstr ""
 
@@ -337,7 +338,7 @@ msgstr ""
 #. module: school_management
 #: model:ir.model.fields,field_description:school_management.field_res_partner__second_first_name
 #: model:ir.model.fields,field_description:school_management.field_res_users__second_first_name
-#: model_terms:ir.ui.view,arch_db:school_management.view_partners_custom_fields
+#: model_terms:ir.ui.view,arch_db:school_management.view_partners_form_school
 msgid "Autre(s) prénom(s)"
 msgstr ""
 
@@ -348,6 +349,7 @@ msgstr ""
 
 #. module: school_management
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_program__state__awarded
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 msgid "Awarded"
 msgstr ""
 
@@ -566,6 +568,9 @@ msgid "Contact"
 msgstr ""
 
 #. module: school_management
+#: model:ir.actions.act_window,name:school_management.action_employee_form
+#: model:ir.actions.act_window,name:school_management.action_student_form
+#: model:ir.actions.act_window,name:school_management.action_teacher_form
 #: model:ir.ui.menu,name:school_management.menu_contacts
 msgid "Contacts"
 msgstr ""
@@ -767,6 +772,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_courses_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_users_form_school
 #: model_terms:ir.ui.view,arch_db:school_management.view_users_form_simple_modif_school
@@ -903,7 +909,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: school_management
-#: model_terms:ir.ui.view,arch_db:school_management.view_student_form_school_pages
+#: model_terms:ir.ui.view,arch_db:school_management.view_partners_form_school
 msgid "Divers"
 msgstr ""
 
@@ -931,6 +937,9 @@ msgstr ""
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_course_group__state__9_draft
 #: model:ir.model.fields.selection,name:school_management.selection__school_individual_program__state__draft
 #: model:ir.model.fields.selection,name:school_management.selection__school_program__state__draft
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 msgid "Draft"
 msgstr ""
@@ -985,7 +994,6 @@ msgid "Employee"
 msgstr ""
 
 #. module: school_management
-#: model:ir.actions.act_window,name:school_management.action_employee_form
 #: model:ir.ui.menu,name:school_management.menu_employee_form
 #: model:res.groups,name:school_management.group_employee
 #: model_terms:ir.ui.view,arch_db:school_management.view_res_partner_filter
@@ -1006,6 +1014,7 @@ msgstr ""
 #: model:ir.model,name:school_management.model_custom_partner_fields_erasmus
 #: model:ir.model.fields,field_description:school_management.field_res_partner__erasmus_ids
 #: model:ir.model.fields,field_description:school_management.field_res_users__erasmus_ids
+#: model_terms:ir.ui.view,arch_db:school_management.view_erasmus_form
 msgid "Erasmus"
 msgstr ""
 
@@ -1372,9 +1381,7 @@ msgstr ""
 
 #. module: school_management
 #: model:ir.actions.act_window,name:school_management.action_individual_bloc_form
-#: model:ir.actions.act_window,name:school_management.action_individual_program_form
 #: model:ir.ui.menu,name:school_management.menu_individual_bloc_form
-#: model:ir.ui.menu,name:school_management.menu_individual_program_form
 msgid "Individual Programs"
 msgstr ""
 
@@ -1815,6 +1822,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_courses_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 msgid "Next Year"
 msgstr ""
@@ -1986,6 +1994,13 @@ msgid "PROGRAMME DES COURS"
 msgstr ""
 
 #. module: school_management
+#: model_terms:ir.ui.view,arch_db:school_management.view_course_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_course_group_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
+msgid "Pas de responsable"
+msgstr ""
+
+#. module: school_management
 #: model:ir.model.fields,field_description:school_management.field_custom_partner_fields_access_title__country_id
 #: model:ir.model.fields,field_description:school_management.field_custom_partner_fields_erasmus__country_id
 #: model:ir.model.fields,field_description:school_management.field_custom_partner_fields_internship__country_id
@@ -2061,6 +2076,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_individual_courses_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 msgid "Previous Year"
 msgstr ""
@@ -2111,6 +2127,11 @@ msgid "Programs"
 msgstr ""
 
 #. module: school_management
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
+msgid "Progress"
+msgstr ""
+
+#. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.website_school_bloc
 msgid "Pré-requis"
 msgstr ""
@@ -2122,6 +2143,9 @@ msgstr ""
 
 #. module: school_management
 #: model:ir.model.fields.selection,name:school_management.selection__school_program__state__published
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_bloc_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_course_groups_filter
+#: model_terms:ir.ui.view,arch_db:school_management.view_individual_program_filter
 #: model_terms:ir.ui.view,arch_db:school_management.view_program_filter
 msgid "Published"
 msgstr ""
@@ -2440,6 +2464,11 @@ msgid "Speciality"
 msgstr ""
 
 #. module: school_management
+#: model_terms:ir.ui.view,arch_db:school_management.view_internship_form
+msgid "Stage"
+msgstr ""
+
+#. module: school_management
 #: model:ir.model.fields,field_description:school_management.field_res_partner__internships_ids
 #: model:ir.model.fields,field_description:school_management.field_res_users__internships_ids
 msgid "Stage(s)"
@@ -2529,12 +2558,17 @@ msgid "Student Name"
 msgstr ""
 
 #. module: school_management
-#: model:ir.actions.act_window,name:school_management.action_student_form
 #: model:ir.model.fields,field_description:school_management.field_school_course_session__student_ids
 #: model:ir.ui.menu,name:school_management.menu_student_form
 #: model:res.groups,name:school_management.group_student
 #: model_terms:ir.ui.view,arch_db:school_management.view_res_partner_filter
 msgid "Students"
+msgstr ""
+
+#. module: school_management
+#: model:ir.actions.act_window,name:school_management.action_individual_program_form
+#: model:ir.ui.menu,name:school_management.menu_individual_program_form
+msgid "Students Invidivdual Cycles"
 msgstr ""
 
 #. module: school_management
@@ -2577,7 +2611,6 @@ msgid "Teacher Choice"
 msgstr ""
 
 #. module: school_management
-#: model:ir.actions.act_window,name:school_management.action_teacher_form
 #: model:ir.model.fields,field_description:school_management.field_school_course__teacher_ids
 #: model:ir.ui.menu,name:school_management.menu_teacher_form
 #: model:res.groups,name:school_management.group_teacher
@@ -2649,7 +2682,7 @@ msgid "Title Access"
 msgstr ""
 
 #. module: school_management
-#: model_terms:ir.ui.view,arch_db:school_management.view_student_form_school_pages
+#: model_terms:ir.ui.view,arch_db:school_management.view_access_title_form
 msgid "Titre d'accès"
 msgstr ""
 
@@ -2661,6 +2694,7 @@ msgstr ""
 #. module: school_management
 #: model:ir.model.fields,field_description:school_management.field_res_partner__access_titles_ids
 #: model:ir.model.fields,field_description:school_management.field_res_users__access_titles_ids
+#: model_terms:ir.ui.view,arch_db:school_management.view_partners_form_school
 msgid "Titres d'accès"
 msgstr ""
 
