@@ -454,17 +454,4 @@
 
         <menuitem id="menu_domain_list" parent="menu_admin_program" action="action_domain_list" sequence="50" />-->
 
-        <!-- Sélection des menus de l'écran d'accueil -->
-        <record id="edit_menu_access_school" model="ir.ui.view">
-            <field name="name">view.ir.ui.menu.form.school</field>
-            <field name="model">ir.ui.menu</field>
-            <field name="inherit_id" ref="base.edit_menu_access" />
-            <field eval="25" name="priority" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='sequence']" position="after">
-                    <field name="display_in_home_menu" />
-                    <field name="simulated_id" attrs="{'readonly': [('display_in_home_menu', '!=', True)]}" />
-                </xpath>
-            </field>
-        </record>
 </odoo>

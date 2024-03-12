@@ -40,6 +40,7 @@
         "views/program_view.xml",
         "views/individual_program_view.xml",
         "views/configuration_view.xml",
+        "views/ir_ui_menu.xml",
         "report/report_program.xml",
         "sequences/school_sequence.xml",
         "security/ir.model.access.csv",
