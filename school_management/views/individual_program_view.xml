@@ -211,7 +211,7 @@
                                                 <div
                                                     class="o_kanban_record_title oe_kanban_details"
                                                 >
-                                                    <strong><field
+                                                    <span id="is_valuated"></span><strong><field
                                                             name="name"
                                                         /></strong>
                                                 </div>
@@ -556,6 +556,11 @@
                     name="my_current_courses"
                     string="My Current Courses"
                     domain="[('teacher_id.user_ids','=',uid),('year_sequence','=','current')]"
+                />
+                <filter
+                name="active"
+                string="Active"
+                domain="[('bloc_id.state','!=','abandoned')]"
                 />
                 <group expand="1" string="Group By">
                     <filter

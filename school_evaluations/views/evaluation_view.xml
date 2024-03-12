@@ -261,6 +261,12 @@
             >
                   <attribute name="default_order">state,uid</attribute>
                 </xpath>
+                <xpath
+                expr="//field[@name='course_group_summaries']//span[@id='is_valuated']"
+                position="inside"
+            >
+                  <t t-if="record.state.raw_value == '0_valuated'">[Valo] </t>
+                </xpath>
                <xpath
                 expr="//div[contains(@t-attf-class, 'horizon_cgs')]"
                 position="attributes"
@@ -909,7 +915,7 @@
           <field name="res_model">school.individual_course</field>
 
           <field name="view_mode">tree,form</field>
-          <field name="context">{"search_default_current":1}</field>
+          <field name="context">{"search_default_current":1, "search_default_active":1}</field>
           <field
             name="search_view_id"
             ref="school_management.view_individual_courses_filter"
