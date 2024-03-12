@@ -31,6 +31,7 @@
         "partner_second_lastname",
         "partner_contact_birthdate",
         "partner_contact_birthplace",
+        "web_responsive",
     ],
     "init_xml": [],
     "data": [
@@ -50,6 +51,7 @@
         ],
         "web.assets_backend": [
             "school_management/static/src/scss/program_management.scss",
+            "school_management/static/src/xml/menu.xml",
         ],
         "web.report_assets_common": [
             "school_management/static/src/css/pure-nr.css",
