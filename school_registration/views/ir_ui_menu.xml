@@ -14,4 +14,14 @@ Copyright 2024 Neodiensis
         <field name="display_in_home_menu">True</field>
         <field name="simulated_id" ref="menu_registration" />
     </record>
+
+    <record id="school_home_menu_administration_forms" model="ir.ui.menu">
+        <field name="name">Paramètres des formulaires</field>
+        <field name="parent_id" ref="school_management.school_home_menu_administration" />
+        <field name="sequence" eval="40" />
+        <field name="action" ref="formio.action_formio_config_settings" />
+        <field name="display_in_home_menu">True</field>
+        <field name="simulated_id" ref="formio.menu_formio_config_settings" />
+    </record>
+
 </odoo>
