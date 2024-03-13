@@ -1367,7 +1367,7 @@ msgstr ""
 #. module: school_management
 #: model:ir.actions.report,name:school_management.report_individual_bloc
 msgid "Individual Bloc Description"
-msgstr "PAE (Programme Annuel de l'Etudiant"
+msgstr "PAE (Programme Annuel de l'Etudiant)"
 
 #. module: school_management
 #: model:mail.template,report_name:school_management.email_template_report_individual_bloc
