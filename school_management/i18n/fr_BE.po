@@ -598,7 +598,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:school_management.action_teacher_form
 #: model:ir.ui.menu,name:school_management.menu_contacts
 msgid "Contacts"
-msgstr "Employés"
+msgstr "Contacts"
 
 #. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.view_partners_form_school
