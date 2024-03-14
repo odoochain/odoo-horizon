@@ -230,8 +230,8 @@
         model="school.individual_bloc"
         string="Individual Bloc Description (Draft)"
         report_type="qweb-pdf"
-        name="school_management.report_individual_bloc_content_draft"
-        file="school_management.report_individual_bloc_content_draft"
+        name="school_management.report_individual_bloc_content"
+        file="school_management.report_individual_bloc_content"
     />
 
     <!--Email template -->
@@ -338,12 +338,6 @@
         </div>
     </template>
 
-    <template id="report_individual_bloc_content_draft">
-        <t t-call="school_management.report_individual_bloc_content">
-            <t t-set="is_draft" t-value="True" />
-        </t>
-    </template>
-
     <template id="report_individual_bloc_content">
         <t t-set="company" t-value="docs.env.company" />
         <t t-call="web.report_layout">
@@ -362,22 +356,6 @@
                     t-att-data-oe-lang="bloc and bloc.env.context.get('lang')"
                     style="margin: 0cm 1.5cm; overflow: visible !important;"
                 >
-                    <t t-if="is_draft">
-                        <div style="position: fixed;
-                                color: #dcdcdc;
-                                font-size:80px;
-                               font-weight: 600;
-                                text-align:center;
-                                z-index:-1;
-                                
-                                -webkit-transform: rotate(-30deg);
-                                top: 150px; left: 0; right: 0;">
-                                <span style="margin-left: auto; margin-right: auto; border: 2px solid #dcdcdc;  padding-left: 2cm;
-                                padding-right: 2cm;">
-                                    Brouillon
-                                </span>
-                        </div>
-                    </t>
                     <h2><t t-esc="bloc.name" /></h2>
                     <h4><t t-esc="bloc.source_bloc_id.name" /></h4>
                     <h5><t t-esc="bloc.uid" /></h5>
