@@ -974,7 +974,7 @@
             <xpath expr="//filter[@name='no_responsible']" position="after">
                 <filter
                 name="has_no_grades"
-                string="Pas de notes encodée"
+                string="Pas de notes encodées"
                 domain="[
                     '&amp;',
                         '|',('first_session_result', '=', 0), ('first_session_result', '=', None),

@@ -6,15 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-21 16:46+0000\n"
-"PO-Revision-Date: 2024-02-21 16:54+0000\n"
+"POT-Creation-Date: 2024-03-14 13:39+0000\n"
+"PO-Revision-Date: 2024-03-14 13:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"Plural-Forms: \n"
 
 #. module: school_prerequisits
 #: model:ir.model.fields,field_description:school_prerequisits.field_school_corequisit__coriquisit_id
@@ -43,6 +42,12 @@ msgstr "Unité d'enseignement"
 #: model:ir.model.fields,field_description:school_prerequisits.field_school_prerequisit__name
 msgid "Course Group Name"
 msgstr "Nom de l'unité d'enseignement"
+
+#. module: school_prerequisits
+#: model:ir.model.fields,field_description:school_prerequisits.field_school_corequisit__uid
+#: model:ir.model.fields,field_description:school_prerequisits.field_school_prerequisit__uid
+msgid "Course Group UID"
+msgstr "UID de l'unité d'enseignement"
 
 #. module: school_prerequisits
 #: model:ir.model,name:school_prerequisits.model_school_course_group
@@ -111,7 +116,7 @@ msgstr ""
 #. module: school_prerequisits
 #: model_terms:ir.ui.view,arch_db:school_prerequisits.course_prerequisit_form
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: school_prerequisits
 #: model_terms:ir.ui.view,arch_db:school_prerequisits.view_corequisit_filter
