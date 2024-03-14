@@ -195,6 +195,14 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
+                <field
+                    name="uid"
+                    filter_domain="[('uid','ilike',self)]"
+                />
+                <field
+                    name="responsible_id"
+                    filter_domain="[('responsible_id','ilike',self)]"
+                />
                 <filter
                     string="Current Year"
                     name="current"
@@ -429,6 +437,14 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
+                <field
+                    name="uid"
+                    filter_domain="[('uid','ilike',self)]"
+                />
+                <field
+                    name="responsible_id"
+                    filter_domain="[('responsible_id','ilike',self)]"
+                />
                 <filter
                     string="Current Year"
                     name="current"
@@ -461,6 +477,13 @@
                     string="Pas de responsable"
                     domain="[('responsible_id', '=', None)]"
                 />
+                <group expand="1" string="Group By">
+                    <filter
+                        string="Responsible"
+                        name="responsible_id"
+                        context="{'group_by':'responsible_id'}"
+                    />
+                </group>
                 <!-- <filter
                     string="Is Described"
                     name="described"
@@ -693,6 +716,10 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
+                <field
+                    name="uid"
+                    filter_domain="[('uid','ilike',self)]"
+                />
                 <filter
                     string="Current Year"
                     name="current"
@@ -721,6 +748,11 @@
                 />
                 <separator />
                 <group expand="1" string="Group By">
+                    <filter
+                        string="Domain"
+                        name="domain_name_group"
+                        context="{'group_by':'domain_name'}"
+                    />
                     <filter
                         string="Cycle"
                         name="cycle_id_group"
@@ -1011,6 +1043,10 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
+                <field
+                    name="uid"
+                    filter_domain="[('uid','ilike',self)]"
+                />
                 <filter
                     string="Current Year"
                     name="current"
@@ -1050,6 +1086,11 @@
                     domain="[('state','=','archived')]"
                 />
                 <group expand="1" string="Group By">
+                    <filter
+                        string="Domain"
+                        name="domain_name_group"
+                        context="{'group_by':'domain_name'}"
+                    />
                     <filter
                         string="Cycle"
                         name="cycle_id_group"

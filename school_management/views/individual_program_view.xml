@@ -267,6 +267,8 @@
         <field name="model">school.individual_program</field>
         <field name="arch" type="xml">
             <search string="Search Programs">
+                <field name="name" string="Nom du programme de cycle" />
+                <field name="uid" />
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <filter
                     name="draft"
@@ -494,6 +496,7 @@
         <field name="model">school.individual_course</field>
         <field name="arch" type="xml">
             <search string="Search Courses">
+                <field name="name" />
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <field name="teacher_id" />
                 <field name="bloc_id" />
@@ -558,9 +561,9 @@
                     domain="[('teacher_id.user_ids','=',uid),('year_sequence','=','current')]"
                 />
                 <filter
-                name="active"
-                string="Active"
-                domain="[('bloc_id.state','!=','abandoned')]"
+                    name="active"
+                    string="Active"
+                    domain="[('bloc_id.state','!=','abandoned')]"
                 />
                 <group expand="1" string="Group By">
                     <filter
@@ -894,6 +897,10 @@
         <field name="arch" type="xml">
             <search string="Search Blocs">
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
+                <field
+                    name="uid"
+                    filter_domain="[('uid','ilike',self)]"
+                />
                 <filter
                     name="draft"
                     string="Draft"
@@ -1199,6 +1206,7 @@
                 <field name="uid" string="UID" />
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <field name="source_course_group_id" string="Activité" />
+                <field name="responsible_id" string="Responsable de l'UE" />
                 <filter
                     name="draft"
                     string="Draft"

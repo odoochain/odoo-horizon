@@ -45,6 +45,10 @@
                         name="name"
                         filter_domain="['|',('course_id.name','ilike',self),('course_id.uid','ilike',self)]"
                     />
+                    <field
+                        name="uid"
+                        filter_domain="[('course_id.uid','ilike',self)]"
+                    />
                     <filter
                         string="Current Year"
                         name="current"
@@ -121,6 +125,10 @@
                     <field
                         name="name"
                         filter_domain="['|',('course_id.name','ilike',self),('course_id.uid','ilike',self)]"
+                    />
+                    <field
+                        name="uid"
+                        filter_domain="[('course_id.uid','ilike',self)]"
                     />
                     <filter
                         string="Current Year"
