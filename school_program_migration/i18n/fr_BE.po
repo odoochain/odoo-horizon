@@ -25,12 +25,12 @@ msgstr ""
 #. module: school_program_migration
 #: model_terms:ir.ui.view,arch_db:school_program_migration.add_bloc_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: school_program_migration
 #: model_terms:ir.ui.view,arch_db:school_program_migration.add_bloc_wizard_form
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #. module: school_program_migration
 #: model:ir.model.fields,field_description:school_program_migration.field_school_add_bloc_wizard__create_uid
@@ -55,7 +55,7 @@ msgstr ""
 #. module: school_program_migration
 #: model:ir.model,name:school_program_migration.model_school_individual_program
 msgid "Individual Program"
-msgstr ""
+msgstr "Cycle individuel"
 
 #. module: school_program_migration
 #: model:ir.model.fields,field_description:school_program_migration.field_school_add_bloc_wizard____last_update
@@ -85,9 +85,9 @@ msgstr ""
 #. module: school_program_migration
 #: model:ir.model.fields,field_description:school_program_migration.field_school_add_bloc_wizard__year_id
 msgid "Year"
-msgstr ""
+msgstr "Année"
 
 #. module: school_program_migration
 #: model_terms:ir.ui.view,arch_db:school_program_migration.add_bloc_wizard_form
 msgid "or"
-msgstr ""
+msgstr "ou"

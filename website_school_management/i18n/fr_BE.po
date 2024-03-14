@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 14:19+0000\n"
-"PO-Revision-Date: 2024-03-14 14:19+0000\n"
+"POT-Creation-Date: 2024-03-14 14:20+0000\n"
+"PO-Revision-Date: 2024-03-14 14:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -257,7 +257,7 @@ msgstr ""
 #. module: website_school_management
 #: model:ir.model,name:website_school_management.model_school_course
 msgid "Course"
-msgstr ""
+msgstr "Activité d'apprentissage"
 
 #. module: website_school_management
 #: model_terms:ir.ui.view,arch_db:website_school_management.cours_fiche_details
@@ -594,7 +594,7 @@ msgstr ""
 #. module: website_school_management
 #: model:ir.model,name:website_school_management.model_school_program
 msgid "Program made of several Blocs"
-msgstr ""
+msgstr "Programme constitutés de plusieurs blocs."
 
 #. module: website_school_management
 #: model:ir.actions.report,name:website_school_management.action_impression_programme_id

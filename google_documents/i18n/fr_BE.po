@@ -18,12 +18,12 @@ msgstr ""
 #. module: google_documents
 #: model:ir.model,name:google_documents.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Sociétés"
 
 #. module: google_documents
 #: model_terms:ir.ui.view,arch_db:google_documents.google_drive_service
 msgid "Connect"
-msgstr ""
+msgstr "Connecter"
 
 #. module: google_documents
 #: model:ir.model,name:google_documents.model_res_partner
@@ -34,19 +34,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_file__create_uid
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_service__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: google_documents
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_file__create_date
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_service__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: google_documents
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_file__display_name
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_service__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Afficher le nom"
 
 #. module: google_documents
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_service__drive_credentials_json
@@ -112,7 +112,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_file__id
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_service__id
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #. module: google_documents
 #: model:ir.model.fields,help:google_documents.field_ir_actions_report__google_drive_enabled
@@ -130,7 +130,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_file____last_update
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_service____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: google_documents
 #: model:ir.model.fields,field_description:google_documents.field_google_drive_file__write_uid
@@ -190,7 +190,7 @@ msgstr ""
 #. module: google_documents
 #: model:ir.model,name:google_documents.model_ir_actions_report
 msgid "Report Action"
-msgstr ""
+msgstr "Rapport"
 
 #. module: google_documents
 #: model:ir.model.fields,field_description:google_documents.field_ir_actions_report__google_drive_enabled

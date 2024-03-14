@@ -22,16 +22,19 @@ msgid ""
 " * The 'Published' status is when a program is published and available for use.\n"
 " * The 'Archived' status is used when a program is obsolete and not publihed anymore."
 msgstr ""
+" * Le statut \"Brouillon\" est utilisé quand un programme n'est pas encore publié.\n"
+" * Le statut \"Publié\" est utilisé quand le programme est disponible et publié sur le site publique.\n"
+" * Le statut \"Archivé\" est utilisé quand le programme ne doit plus être publié."
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "A besoin d'une action"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Activités"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__activity_exception_decoration
@@ -58,17 +61,17 @@ msgstr ""
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_doc_form
 msgid "Add doc"
-msgstr ""
+msgstr "Ajouter un document"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__course_ids
 msgid "All Courses"
-msgstr ""
+msgstr "Activités décrites"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course__documentation_ids
 msgid "All Docs"
-msgstr ""
+msgstr "Tous les docs"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course__all_documentation_ids
@@ -78,23 +81,23 @@ msgstr ""
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 msgid "Archive"
-msgstr ""
+msgstr "Archiver"
 
 #. module: school_course_description
 #: model:ir.model.fields.selection,name:school_course_description.selection__school_course_documentation__state__archived
 msgid "Archived"
-msgstr ""
+msgstr "Archivé"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Nombre de pièces jointes"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard__author_id
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__author_id
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #. module: school_course_description
 #. odoo-javascript
@@ -118,7 +121,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Content"
-msgstr ""
+msgstr "Contenu"
 
 #. module: school_course_description
 #: model:ir.model,name:school_course_description.model_school_course
@@ -127,32 +130,32 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 #: model_terms:ir.ui.view,arch_db:school_course_description.view_course_documentation_list
 msgid "Course"
-msgstr ""
+msgstr "Activité d'apprentissage"
 
 #. module: school_course_description
 #: model:ir.ui.menu,name:school_course_description.menu_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Course Description"
-msgstr ""
+msgstr "Description des activités"
 
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 msgid "Course Description -"
-msgstr ""
+msgstr "Descriptif d'activité"
 
 #. module: school_course_description
 #: model:ir.actions.act_window,name:school_course_description.action_course_documentation_list
 #: model:ir.actions.report,name:school_course_description.report_diploma_for_student
 #: model:ir.ui.menu,name:school_course_description.menu_course_documentation_list
 msgid "Course Documentation"
-msgstr ""
+msgstr "Description des activités"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__course_group_id
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Course Group"
-msgstr ""
+msgstr "Unité d'enseignement"
 
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
@@ -184,20 +187,20 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard__create_uid
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard__create_date
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__credits
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Credits"
-msgstr ""
+msgstr "ECTS"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__cycle_id
@@ -220,7 +223,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard__display_name
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course__documentation_id
@@ -242,19 +245,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. module: school_course_description
 #: model:ir.model.fields.selection,name:school_course_description.selection__school_course_documentation__language__e
 msgid "English"
-msgstr ""
+msgstr "Anglais"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__evaluation_method
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Evaluation method"
-msgstr ""
+msgstr "Méthode d'évaluation"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard__filter_authors
@@ -264,7 +267,7 @@ msgstr ""
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Abonnés"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__message_partner_ids
@@ -279,7 +282,7 @@ msgstr ""
 #. module: school_course_description
 #: model:ir.model.fields.selection,name:school_course_description.selection__school_course_documentation__language__f
 msgid "French"
-msgstr ""
+msgstr "Français"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_individual_course__has_documentation
@@ -296,18 +299,18 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Hours"
-msgstr ""
+msgstr "Heures"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard__id
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__id
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icône"
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__activity_exception_icon
@@ -317,7 +320,7 @@ msgstr ""
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "si elle est cochée, de nouveaux messages requièrent votre attention."
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__message_has_error
@@ -333,12 +336,12 @@ msgstr ""
 #. module: school_course_description
 #: model:ir.model,name:school_course_description.model_school_individual_course
 msgid "Individual Course"
-msgstr ""
+msgstr "Activité d'apprentissage individuelle"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Est un abonné"
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__language
@@ -354,25 +357,25 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__language
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard____last_update
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard__write_uid
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_add_description_wizard__write_date
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__credits
@@ -387,13 +390,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Learning outcomes"
-msgstr ""
+msgstr "Acquis d'apprentissage spécifiques"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__level
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Level"
-msgstr ""
+msgstr "Niveau"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__message_main_attachment_id
@@ -405,7 +408,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Mandatory"
-msgstr ""
+msgstr "Caractère obligatoire"
 
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.view_course_documentation_filter
@@ -427,7 +430,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Method"
-msgstr ""
+msgstr "Méthode"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__my_activity_date_deadline
@@ -437,12 +440,12 @@ msgstr ""
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: school_course_description
 #: model:ir.actions.act_window,name:school_course_description.action_new_course_documentation
 msgid "New Course Documentation"
-msgstr ""
+msgstr "Nouvelle description d'activité"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__activity_calendar_event_id
@@ -483,17 +486,17 @@ msgstr ""
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Nombre d'Actions"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Nombre d'erreurs"
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Nombre de messages demandant une action"
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__message_has_error_counter
@@ -504,7 +507,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:school_course_description.selection__school_course_documentation__language__o
 #: model:ir.model.fields.selection,name:school_course_description.selection__school_course_documentation__schedule__o
 msgid "Other"
-msgstr ""
+msgstr "Autre"
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__partner_id
@@ -519,7 +522,7 @@ msgstr ""
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Period"
-msgstr ""
+msgstr "Période"
 
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_documentation_no_content
@@ -561,23 +564,23 @@ msgstr ""
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 msgid "Pre-Co Requiered"
-msgstr ""
+msgstr "Corequis et/ou Prérequis"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__pre_co_requiered
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Pre-Co requiered"
-msgstr ""
+msgstr "Pre-Co Requis"
 
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 msgid "Publish"
-msgstr ""
+msgstr "Publier"
 
 #. module: school_course_description
 #: model:ir.model.fields.selection,name:school_course_description.selection__school_course_documentation__state__published
 msgid "Published"
-msgstr ""
+msgstr "Publié"
 
 #. module: school_course_description
 #: model:ir.model.fields.selection,name:school_course_description.selection__school_course_documentation__schedule__q1
@@ -599,7 +602,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "References"
-msgstr ""
+msgstr "Références"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__partner_id
@@ -619,7 +622,7 @@ msgstr ""
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 msgid "Reset to Draft"
-msgstr ""
+msgstr "Remettre en brouillon"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__activity_user_id
@@ -630,27 +633,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__schedule
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 msgid "Schedule"
-msgstr ""
+msgstr "Horaire"
 
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Schedule -"
-msgstr ""
+msgstr "Horaire -"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__schedule_text
 msgid "Schedule Text"
-msgstr ""
+msgstr "Détails de l'horaire"
 
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.view_course_documentation_filter
 msgid "Search Groups"
-msgstr ""
+msgstr "Chercher dans les groupes"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__state
 msgid "Status"
-msgstr ""
+msgstr "État"
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__activity_state
@@ -664,18 +667,18 @@ msgstr ""
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Teacher"
-msgstr ""
+msgstr "Enseignant"
 
 #. module: school_course_description
 #: model:ir.model.fields,field_description:school_course_description.field_school_course_documentation__staff_ids
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "Teachers"
-msgstr ""
+msgstr "Enseignants"
 
 #. module: school_course_description
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #. module: school_course_description
 #: model:ir.model.fields,help:school_course_description.field_school_course_documentation__activity_exception_decoration
@@ -714,7 +717,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_group_documentation_content
 msgid "Weight"
-msgstr ""
+msgstr "Poids"
 
 #. module: school_course_description
 #. odoo-javascript
@@ -727,4 +730,4 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_course_description.course_documentation_form
 #: model_terms:ir.ui.view,arch_db:school_course_description.report_course_doc_section
 msgid "by"
-msgstr ""
+msgstr "par"

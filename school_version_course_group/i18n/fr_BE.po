@@ -18,9 +18,9 @@ msgstr ""
 #. module: school_version_course_group
 #: model:ir.model,name:school_version_course_group.model_school_course_group
 msgid "Courses Group"
-msgstr ""
+msgstr "Unité d'enseignement"
 
 #. module: school_version_course_group
 #: model:ir.model.fields,field_description:school_version_course_group.field_school_course_group__version_year_id
 msgid "Version Year"
-msgstr ""
+msgstr "Millésime"

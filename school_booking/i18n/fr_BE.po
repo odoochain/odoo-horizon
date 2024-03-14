@@ -33,18 +33,18 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__abandonned_date
 msgid "Abandonned Date"
-msgstr ""
+msgstr "Date d'abandon"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "A besoin d'une action"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__active
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar__active
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #. module: school_booking
 #. odoo-javascript
@@ -57,35 +57,35 @@ msgstr ""
 #: model:ir.actions.act_window,name:school_booking.action_booking_tree
 #: model:ir.ui.menu,name:school_booking.menu_booking_booking_tree
 msgid "All Bookings"
-msgstr ""
+msgstr "Toutes les réservations"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__asset_id
 #: model_terms:ir.ui.view,arch_db:school_booking.asset_form
 msgid "Asset"
-msgstr ""
+msgstr "Actif"
 
 #. module: school_booking
 #: model:ir.actions.act_window,name:school_booking.school_asset_category_action
 #: model:ir.ui.menu,name:school_booking.menu_asset_category
 #: model_terms:ir.ui.view,arch_db:school_booking.school_asset_category_form_view
 msgid "Asset Categories"
-msgstr ""
+msgstr "Catégories d'actifs"
 
 #. module: school_booking
 #: model:ir.model,name:school_booking.model_school_asset_category
 msgid "Asset Category"
-msgstr ""
+msgstr "Catégorie d'actifs"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_tag__name
 msgid "Asset Tag"
-msgstr ""
+msgstr "Tag sur actif"
 
 #. module: school_booking
 #: model:ir.model,name:school_booking.model_school_asset_tag
 msgid "Asset Tags"
-msgstr ""
+msgstr "Tags sur actif"
 
 #. module: school_booking
 #: model:ir.actions.act_window,name:school_booking.action_asset_type_tree
@@ -94,7 +94,7 @@ msgstr ""
 #: model:ir.ui.menu,name:school_booking.menu_asset_type_tree
 #: model_terms:ir.ui.view,arch_db:school_booking.asset_type_form
 msgid "Asset Type"
-msgstr ""
+msgstr "Type d'actif"
 
 #. module: school_booking
 #: model:ir.actions.act_window,name:school_booking.action_asset_tree
@@ -102,22 +102,22 @@ msgstr ""
 #: model:ir.ui.menu,name:school_booking.menu_asset_tree
 #: model:ir.ui.menu,name:school_booking.menu_assets
 msgid "Assets"
-msgstr ""
+msgstr "Actifs"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Nombre de pièces jointes"
 
 #. module: school_booking
 #: model:ir.model.fields.selection,name:school_booking.selection__school_asset__booking_policy__available
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #. module: school_booking
 #: model:ir.ui.menu,name:school_booking.menu_main_booking
 msgid "Booking"
-msgstr ""
+msgstr "Gestion des Réservations"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__booking_policy
@@ -129,19 +129,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__building_id
 #: model_terms:ir.ui.view,arch_db:school_booking.building_form
 msgid "Building"
-msgstr ""
+msgstr "Bâtiment"
 
 #. module: school_booking
 #: model:ir.actions.act_window,name:school_booking.action_building_tree
 #: model:ir.ui.menu,name:school_booking.menu_building_tree
 msgid "Buildings"
-msgstr ""
+msgstr "Bâtiments"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__calendar_id
 #: model_terms:ir.ui.view,arch_db:school_booking.calendar_form
 msgid "Calendar"
-msgstr ""
+msgstr "Calendrier"
 
 #. module: school_booking
 #: model:ir.model,name:school_booking.model_calendar_event
@@ -151,7 +151,7 @@ msgstr ""
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.school_booking_wizard_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.school_asset_category_action
@@ -164,12 +164,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__category_id
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__category_id
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_category__child_ids
 msgid "Children Categories"
-msgstr ""
+msgstr "Catégorie enfant"
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.action_asset_tree
@@ -196,7 +196,7 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:school_booking.action_booking_stud_tree
 #: model_terms:ir.actions.act_window,help:school_booking.action_booking_teach_tree
 msgid "Click to add a recurring booking."
-msgstr ""
+msgstr "Cliquez pour ajouter une réservation récurrente"
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.school_asset_category_action
@@ -206,7 +206,7 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_tag__color
 msgid "Color Index"
-msgstr ""
+msgstr "Couleur"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__create_uid
@@ -218,7 +218,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__create_uid
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__create_date
@@ -230,12 +230,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__create_date
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_year__calendar_id
 msgid "Default Calendar"
-msgstr ""
+msgstr "Calendrier par défaut"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__description
@@ -253,7 +253,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__display_name
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: school_booking
 #. odoo-python
@@ -274,12 +274,12 @@ msgstr ""
 #: model:ir.ui.menu,name:school_booking.menu_school_booking_wizard
 #: model_terms:ir.ui.view,arch_db:school_booking.school_booking_wizard_view
 msgid "Find a room"
-msgstr ""
+msgstr "Trouver un local"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Abonnés"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_partner_ids
@@ -289,13 +289,13 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__friday
 msgid "Friday"
-msgstr ""
+msgstr "Vendredi"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__friday_from
 #: model:ir.model.fields,field_description:school_booking.field_school_building__friday_to
 msgid "Friday From"
-msgstr ""
+msgstr "Vendredi de"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar__from_date
@@ -305,7 +305,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard__from_date
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard__to_date
 msgid "From Date"
-msgstr ""
+msgstr "De"
 
 #. module: school_booking
 #: model:ir.ui.menu,name:school_booking.school_home_menu_rooms_booking
@@ -316,7 +316,7 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,help:school_booking.field_school_asset_category__sequence
 msgid "Gives the sequence order when displaying a list of asset categories."
-msgstr ""
+msgstr "Donner une séquence pour ordonner les catégories."
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__has_message
@@ -327,34 +327,34 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__has_responsible
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_type__has_responsible
 msgid "Has a responsible"
-msgstr ""
+msgstr "A un responsible"
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.action_asset_type_tree
 msgid "Horizon helps you easily track your asset_types."
-msgstr ""
+msgstr "Horizon vous aide à gérer vos types d'actifs."
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.action_asset_tree
 msgid "Horizon helps you easily track your assets."
-msgstr ""
+msgstr "Horizon vous aide à gérer vos actifs."
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.action_booking_tree
 msgid "Horizon helps you easily track your bookings."
-msgstr ""
+msgstr "Horizon vous aide à gérer vos réservations."
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.action_building_tree
 msgid "Horizon helps you easily track your buildings."
-msgstr ""
+msgstr "Horizon vous aide à gérer vos bâtiments."
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.action_booking_man_tree
 #: model_terms:ir.actions.act_window,help:school_booking.action_booking_stud_tree
 #: model_terms:ir.actions.act_window,help:school_booking.action_booking_teach_tree
 msgid "Horizon helps you easily track your recurring bookings."
-msgstr ""
+msgstr "Horizon vous aide à gérer vos réservations récurrentes."
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__id
@@ -366,12 +366,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__id
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #. module: school_booking
 #: model:ir.model.fields,help:school_booking.field_school_asset__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "si elle est cochée, de nouveaux messages requièrent votre attention."
 
 #. module: school_booking
 #: model:ir.model.fields,help:school_booking.field_school_asset__message_has_error
@@ -381,17 +381,17 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,help:school_booking.field_school_calendar_leave__category_id
 msgid "If set, the leave is only for the asset of this category."
-msgstr ""
+msgstr "Si coché, uniquement pour cette catégories d'actifs."
 
 #. module: school_booking
 #: model:ir.model.fields,help:school_booking.field_school_calendar_leave__asset_id
 msgid "If set, the leave is only for the asset."
-msgstr ""
+msgstr "Si coché, uniquement pour cet actif."
 
 #. module: school_booking
 #: model:ir.model.fields,help:school_booking.field_school_calendar_leave__partner_id
 msgid "If set, the leave is only for the specified partner."
-msgstr ""
+msgstr "Si coché, uniquement pour ce partenaire (étudiant, enseignant,...)"
 
 #. module: school_booking
 #: model_terms:ir.actions.act_window,help:school_booking.school_asset_category_action
@@ -400,6 +400,8 @@ msgid ""
 "                touchscreen interface will automatically. We suggest not to put\n"
 "                a photo on categories for small (1024x768) screens."
 msgstr ""
+"Vous pouvez mettre une photo qui sera présentée sur l'interface "
+"“Touchscreen”."
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__image_1920
@@ -444,24 +446,24 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Est un abonné"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_category__is_leaf
 msgid "Is Leaf"
-msgstr ""
+msgstr "Est une feuille"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__is_room
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_type__is_room
 msgid "Is a room"
-msgstr ""
+msgstr "Est un local"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__linked_to_room
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_type__linked_to_room
 msgid "Is linked to a room"
-msgstr ""
+msgstr "Est lié à un local"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset____last_update
@@ -473,7 +475,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave____last_update
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__write_uid
@@ -485,7 +487,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__write_uid
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__write_date
@@ -497,23 +499,23 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__write_date
 #: model:ir.model.fields,field_description:school_booking.field_school_school_booking_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar__leave_ids
 msgid "Leaves"
-msgstr ""
+msgstr "Congés"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__room_id
 msgid "Linked Room"
-msgstr ""
+msgstr "Local lié"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__location
 #: model_terms:ir.ui.view,arch_db:school_booking.building_form
 msgid "Location"
-msgstr ""
+msgstr "Local"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_main_attachment_id
@@ -523,18 +525,18 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_calendar_event__main_categ_id
 msgid "Main Categ"
-msgstr ""
+msgstr "Identifiant de catégorie principale"
 
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.view_booking_filter
 msgid "Management Booking"
-msgstr ""
+msgstr "Réservation des administrateurs"
 
 #. module: school_booking
 #: model:ir.actions.act_window,name:school_booking.action_booking_man_tree
 #: model:ir.ui.menu,name:school_booking.menu_booking_man_tree
 msgid "Management Bookings"
-msgstr ""
+msgstr "Réservations Direction"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_has_error
@@ -549,13 +551,13 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__monday
 msgid "Monday"
-msgstr ""
+msgstr "Lundi"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__monday_from
 #: model:ir.model.fields,field_description:school_booking.field_school_building__monday_to
 msgid "Monday From"
-msgstr ""
+msgstr "Lundi de"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__name
@@ -568,22 +570,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_booking.building_form
 #: model_terms:ir.ui.view,arch_db:school_booking.calendar_form
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Nombre d'Actions"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Nombre d'erreurs"
 
 #. module: school_booking
 #: model:ir.model.fields,help:school_booking.field_school_asset__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Nombre de messages demandant une action"
 
 #. module: school_booking
 #: model:ir.model.fields,help:school_booking.field_school_asset__message_has_error_counter
@@ -598,12 +600,12 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_category__parent_id
 msgid "Parent Category"
-msgstr ""
+msgstr "Catégorie mère"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar_leave__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: school_booking
 #: model:ir.model.fields.selection,name:school_booking.selection__school_asset__booking_policy__preserved
@@ -619,33 +621,33 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__require_validation
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_type__require_validation
 msgid "Require validation"
-msgstr ""
+msgstr "Demande une validation"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__responsible_id
 msgid "Responsible"
-msgstr ""
+msgstr "Responsable"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_calendar_event__room_id
 msgid "Room"
-msgstr ""
+msgstr "Local"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__saturday
 msgid "Saturday"
-msgstr ""
+msgstr "Samedi"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__saturday_from
 #: model:ir.model.fields,field_description:school_booking.field_school_building__saturday_to
 msgid "Saturday From"
-msgstr ""
+msgstr "Samedi de"
 
 #. module: school_booking
 #: model:ir.model,name:school_booking.model_school_asset
 msgid "School Asset"
-msgstr ""
+msgstr "Actif"
 
 #. module: school_booking
 #: model:ir.model,name:school_booking.model_school_school_booking_wizard
@@ -660,12 +662,12 @@ msgstr ""
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.view_asset_type_filter
 msgid "Search Asset Type"
-msgstr ""
+msgstr "Recherche un type d'actif"
 
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.view_booking_filter
 msgid "Search Booking"
-msgstr ""
+msgstr "Rechercher une réservation"
 
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.view_building_filter
@@ -681,87 +683,87 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__sequence
 #: model:ir.model.fields,field_description:school_booking.field_school_asset_category__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Séquence"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__short_name
 msgid "Short Name"
-msgstr ""
+msgstr "Short name"
 
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.view_booking_filter
 msgid "Student Booking"
-msgstr ""
+msgstr "Réservation étudiante"
 
 #. module: school_booking
 #: model:ir.actions.act_window,name:school_booking.action_booking_stud_tree
 #: model:ir.ui.menu,name:school_booking.menu_booking_rec_tree
 msgid "Student Bookings"
-msgstr ""
+msgstr "Réservations d'étudiants"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__sunday
 msgid "Sunday"
-msgstr ""
+msgstr "Dimanche"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__sunday_from
 #: model:ir.model.fields,field_description:school_booking.field_school_building__sunday_to
 msgid "Sunday From"
-msgstr ""
+msgstr "Dimanche de"
 
 #. module: school_booking
 #: model:ir.model.constraint,message:school_booking.constraint_school_asset_tag_name_uniq
 msgid "Tag name already exists !"
-msgstr ""
+msgstr "Ce nom d'étiquette existe déjà !"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__tag_ids
 msgid "Tags"
-msgstr ""
+msgstr "Étiquettes"
 
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.view_booking_filter
 msgid "Teacher Booking"
-msgstr ""
+msgstr "Réservation - enseignant"
 
 #. module: school_booking
 #: model:ir.actions.act_window,name:school_booking.action_booking_teach_tree
 #: model:ir.ui.menu,name:school_booking.menu_booking_teach_tree
 msgid "Teacher Bookings"
-msgstr ""
+msgstr "Réservations Enseignants"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__thursday
 msgid "Thursday"
-msgstr ""
+msgstr "Jeudi"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__thursday_from
 #: model:ir.model.fields,field_description:school_booking.field_school_building__thursday_to
 msgid "Thursday From"
-msgstr ""
+msgstr "Jeudi de"
 
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.view_booking_filter
 msgid "Today"
-msgstr ""
+msgstr "Aujourd'hui"
 
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.view_booking_filter
 msgid "Tomorrow"
-msgstr ""
+msgstr "Demain"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__tuesday
 msgid "Tuesday"
-msgstr ""
+msgstr "mardi"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__tuesday_from
 #: model:ir.model.fields,field_description:school_booking.field_school_building__tuesday_to
 msgid "Tuesday From"
-msgstr ""
+msgstr "Mardi de"
 
 #. module: school_booking
 #: model:ir.model.constraint,message:school_booking.constraint_school_asset_type_name_uniq
@@ -771,7 +773,7 @@ msgstr ""
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.school_booking_wizard_view
 msgid "Validate"
-msgstr ""
+msgstr "Valider"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_asset__website_message_ids
@@ -786,18 +788,18 @@ msgstr ""
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__wednesday
 msgid "Wednesday"
-msgstr ""
+msgstr "Mercredi"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_building__wednesday_from
 #: model:ir.model.fields,field_description:school_booking.field_school_building__wednesday_to
 msgid "Wednesday From"
-msgstr ""
+msgstr "Mercredi de"
 
 #. module: school_booking
 #: model:ir.model.fields,field_description:school_booking.field_school_calendar__year_id
 msgid "Year"
-msgstr ""
+msgstr "Année académique"
 
 #. module: school_booking
 #. odoo-python
@@ -809,24 +811,24 @@ msgstr ""
 #. module: school_booking
 #: model:ir.ui.menu,name:school_booking.menu_booking_tree
 msgid "menu_booking_tree"
-msgstr ""
+msgstr "Toutes les réservations"
 
 #. module: school_booking
 #: model_terms:ir.ui.view,arch_db:school_booking.school_booking_wizard_view
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #. module: school_booking
 #: model:ir.model,name:school_booking.model_school_calendar
 msgid "school.calendar"
-msgstr ""
+msgstr "Calendrier"
 
 #. module: school_booking
 #: model:ir.model,name:school_booking.model_school_calendar_leave
 msgid "school.calendar.leave"
-msgstr ""
+msgstr "Calendrier d'absence"
 
 #. module: school_booking
 #: model:ir.model,name:school_booking.model_school_year
 msgid "school.year"
-msgstr ""
+msgstr "Année académique"

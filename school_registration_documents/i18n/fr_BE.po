@@ -23,12 +23,12 @@ msgstr ""
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__active
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Activités"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__activity_exception_decoration
@@ -48,7 +48,7 @@ msgstr ""
 #. module: school_registration_documents
 #: model_terms:ir.ui.view,arch_db:school_registration_documents.document_add_view
 msgid "Add Documents"
-msgstr ""
+msgstr "Ajouter des documents"
 
 #. module: school_registration_documents
 #: model:ir.model,name:school_registration_documents.model_school_add_documents_wizard
@@ -63,7 +63,7 @@ msgstr ""
 #. module: school_registration_documents
 #: model_terms:ir.ui.view,arch_db:school_registration_documents.document_add_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: school_registration_documents
 #: model:ir.model,name:school_registration_documents.model_res_partner
@@ -75,19 +75,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__create_uid
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_add_documents_wizard__create_date
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__create_date
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__default_add
 msgid "Default Add"
-msgstr ""
+msgstr "Ajouter par défaut"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__description
@@ -99,7 +99,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__display_name
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: school_registration_documents
 #: model:ir.actions.act_window,name:school_registration_documents.action_document_add_wizard
@@ -117,7 +117,7 @@ msgstr ""
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__expiry_date
 msgid "Expiry Date"
-msgstr ""
+msgstr "Date d'expiration"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,help:school_registration_documents.field_school_official_document__activity_type_icon
@@ -128,19 +128,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__has_expiry_date
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__has_expiry_date
 msgid "Has Expiry Date"
-msgstr ""
+msgstr "A une date d'expiration"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_add_documents_wizard__id
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__id
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__id
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icône"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,help:school_registration_documents.field_school_official_document__activity_exception_icon
@@ -150,28 +150,28 @@ msgstr ""
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__is_available
 msgid "Is Available"
-msgstr ""
+msgstr "Demandé"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_add_documents_wizard____last_update
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document____last_update
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_add_documents_wizard__write_uid
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__write_uid
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_add_documents_wizard__write_date
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__write_date
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: school_registration_documents
 #: model_terms:ir.ui.view,arch_db:school_registration_documents.view_student_kanban_school
@@ -195,7 +195,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__name
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document_type__name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__activity_calendar_event_id
@@ -226,19 +226,19 @@ msgstr ""
 #. module: school_registration_documents
 #: model_terms:ir.ui.view,arch_db:school_registration_documents.view_official_document_form
 msgid "Official Document"
-msgstr ""
+msgstr "Documents officiels"
 
 #. module: school_registration_documents
 #: model:ir.actions.act_window,name:school_registration_documents.action_official_document_type_list
 #: model:ir.ui.menu,name:school_registration_documents.menu_official_document_list
 #: model_terms:ir.ui.view,arch_db:school_registration_documents.view_official_document_type_form
 msgid "Official Document Type"
-msgstr ""
+msgstr "Type de documents officiels"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_add_documents_wizard__document_type_ids
 msgid "Official Document Types"
-msgstr ""
+msgstr "Types de document officiel"
 
 #. module: school_registration_documents
 #: model:ir.actions.act_window,name:school_registration_documents.action_official_document_list
@@ -246,7 +246,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_registration_documents.field_res_users__official_document_ids
 #: model:ir.ui.menu,name:school_registration_documents.menu_official_document_form
 msgid "Official Documents"
-msgstr ""
+msgstr "Documents officiels"
 
 #. module: school_registration_documents
 #: model_terms:ir.ui.view,arch_db:school_registration_documents.document_add_view
@@ -271,7 +271,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_add_documents_wizard__student_id
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__student_id
 msgid "Student"
-msgstr ""
+msgstr "Etudiant"
 
 #. module: school_registration_documents
 #: model:ir.model.fields,field_description:school_registration_documents.field_school_official_document__type_id
@@ -291,7 +291,7 @@ msgstr ""
 #. module: school_registration_documents
 #: model_terms:ir.ui.view,arch_db:school_registration_documents.document_add_view
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #. module: school_registration_documents
 #: model:ir.model,name:school_registration_documents.model_school_official_document
