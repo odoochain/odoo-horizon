@@ -230,8 +230,8 @@
         model="school.individual_bloc"
         string="Individual Bloc Description (Draft)"
         report_type="qweb-pdf"
-        name="school_management.report_individual_bloc_content"
-        file="school_management.report_individual_bloc_content"
+        name="school_management.report_individual_bloc_content_draft"
+        file="school_management.report_individual_bloc_content_draft"
     />
 
     <!--Email template -->
@@ -336,6 +336,10 @@
                 </tbody>
             </table>
         </div>
+    </template>
+
+    <template id="report_individual_bloc_content_draft">
+        <t t-call="school_management.report_individual_bloc_content"/>
     </template>
 
     <template id="report_individual_bloc_content">
