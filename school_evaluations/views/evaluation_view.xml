@@ -915,7 +915,9 @@
           <field name="res_model">school.individual_course</field>
 
           <field name="view_mode">tree,form</field>
-          <field name="context">{"search_default_current":1, "search_default_active":1}</field>
+          <field
+            name="context"
+        >{"search_default_current":1, "search_default_active":1}</field>
           <field
             name="search_view_id"
             ref="school_management.view_individual_courses_filter"
@@ -936,7 +938,9 @@
           <field name="res_model">school.individual_course</field>
 
           <field name="view_mode">tree,form</field>
-          <field name="context">{"search_default_my_current_courses":1, "search_default_active":1}</field>
+          <field
+            name="context"
+        >{"search_default_my_current_courses":1, "search_default_active":1}</field>
           <field
             name="search_view_id"
             ref="school_management.view_individual_courses_filter"
@@ -967,20 +971,22 @@
     <record id="view_individual_course_groups_grades_filter" model="ir.ui.view">
         <field name="name">school.individual_course_group.grades.filter</field>
         <field name="model">school.individual_course_group</field>
-        <field name="inherit_id" ref="school_management.view_individual_course_groups_filter"
+        <field
+            name="inherit_id"
+            ref="school_management.view_individual_course_groups_filter"
         />
         <field eval="25" name="priority" />
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='no_responsible']" position="after">
                 <filter
-                name="has_no_grades"
-                string="Pas de notes encodées"
-                domain="[
+                    name="has_no_grades"
+                    string="Pas de notes encodées"
+                    domain="[
                     '&amp;',
                         '|',('first_session_result', '=', 0), ('first_session_result', '=', None),
                         '|',('second_session_result', '=', 0), ('second_session_result', '=', None)
                 ]"
-            />
+                />
                 <separator />
             </xpath>
         </field>
@@ -989,16 +995,18 @@
     <record id="view_individual_course_grades_filter" model="ir.ui.view">
         <field name="name">school.individual_course.grades.filter</field>
         <field name="model">school.individual_course</field>
-        <field name="inherit_id" ref="school_management.view_individual_courses_filter"
+        <field
+            name="inherit_id"
+            ref="school_management.view_individual_courses_filter"
         />
         <field eval="25" name="priority" />
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='active']" position="after">
                 <filter
-                name="has_no_grades"
-                string="Pas de notes encodées"
-                domain="['&amp;',('partial_result', '=', None),('final_result', '=', None),('second_result', '=', None)]"
-            />
+                    name="has_no_grades"
+                    string="Pas de notes encodées"
+                    domain="['&amp;',('partial_result', '=', None),('final_result', '=', None),('second_result', '=', None)]"
+                />
                 <separator />
             </xpath>
         </field>

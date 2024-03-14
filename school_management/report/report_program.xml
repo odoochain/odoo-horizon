@@ -339,7 +339,7 @@
     </template>
 
     <template id="report_individual_bloc_content_draft">
-        <t t-call="school_management.report_individual_bloc_content"/>
+        <t t-call="school_management.report_individual_bloc_content" />
     </template>
 
     <template id="report_individual_bloc_content">

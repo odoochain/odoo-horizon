@@ -213,27 +213,16 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
-          <field
-              name="uid"
-              filter_domain="[('uid','ilike',self)]"
-          />
+          <field name="uid" filter_domain="[('uid','ilike',self)]" />
           <field name="responsible_id" string="Responsible" />
           <field name="student_id" string="Student" />
+          <filter name="draft" string="Draft" domain="[('state', 'in', ['draft'])]" />
           <filter
-              name="draft"
-              string="Draft"
-              domain="[('state', 'in', ['draft'])]"
-          />
-          <filter
-              name="published"
-              string="Published"
-              domain="[('state', 'not in', ['draft'])]"
-          />
-          <filter
-              string="Archived"
-              name="inactive"
-              domain="[('active','=',False)]"
-          />
+                    name="published"
+                    string="Published"
+                    domain="[('state', 'not in', ['draft'])]"
+                />
+          <filter string="Archived" name="inactive" domain="[('active','=',False)]" />
           <separator />
           <filter
                     name="my_val"
@@ -242,10 +231,10 @@
                 />
           <group expand="1" string="Group By">
               <filter
-                  string="Responsible"
-                  name="responsible_id"
-                  context="{'group_by':'responsible_id'}"
-              />
+                        string="Responsible"
+                        name="responsible_id"
+                        context="{'group_by':'responsible_id'}"
+                    />
           </group>
         </search>
       </field>

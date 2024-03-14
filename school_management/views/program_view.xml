@@ -195,10 +195,7 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
-                <field
-                    name="uid"
-                    filter_domain="[('uid','ilike',self)]"
-                />
+                <field name="uid" filter_domain="[('uid','ilike',self)]" />
                 <field
                     name="responsible_id"
                     filter_domain="[('responsible_id','ilike',self)]"
@@ -437,10 +434,7 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
-                <field
-                    name="uid"
-                    filter_domain="[('uid','ilike',self)]"
-                />
+                <field name="uid" filter_domain="[('uid','ilike',self)]" />
                 <field
                     name="responsible_id"
                     filter_domain="[('responsible_id','ilike',self)]"
@@ -716,10 +710,7 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
-                <field
-                    name="uid"
-                    filter_domain="[('uid','ilike',self)]"
-                />
+                <field name="uid" filter_domain="[('uid','ilike',self)]" />
                 <filter
                     string="Current Year"
                     name="current"
@@ -739,7 +730,7 @@
                 <filter
                     string="Musique"
                     name="musique"
-                    domain='[("speciality_id.domain_id","ilike","MUSIQUE")]'  
+                    domain='[("speciality_id.domain_id","ilike","MUSIQUE")]'
                 />
                 <filter
                     string="Théâtre"
@@ -1043,10 +1034,7 @@
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
-                <field
-                    name="uid"
-                    filter_domain="[('uid','ilike',self)]"
-                />
+                <field name="uid" filter_domain="[('uid','ilike',self)]" />
                 <filter
                     string="Current Year"
                     name="current"

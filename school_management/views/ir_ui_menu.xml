@@ -3,7 +3,6 @@
 Copyright 2024 Neodiensis
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 -->
-
 <odoo>
     <!-- Horizon Home Menu - Racine -->
     <record id="school_home_menu" model="ir.ui.menu">
@@ -11,9 +10,9 @@ Copyright 2024 Neodiensis
         <field name="sequence" eval="1" />
         <field name="action" ref="action_student_form" />
         <field name="display_in_home_menu">True</field>
-        
+
     </record>
-    
+
     <!-- Horizon Home Menu - Niveau 1 -->
     <record id="school_home_menu_students" model="ir.ui.menu">
         <field name="name">Étudiants</field>
@@ -56,9 +55,9 @@ Copyright 2024 Neodiensis
         <field name="display_in_home_menu">True</field>
         <field name="simulated_id" ref="menu_student_form" />
     </record>
-    
+
         <!-- STUDENT 20 - Inscriptions dans SCHOOL_REGISTRATION-->
-    
+
     <record id="school_home_menu_students_individual" model="ir.ui.menu">
         <field name="name">Parcours étudiant</field>
         <field name="parent_id" ref="school_home_menu_students" />
@@ -77,7 +76,7 @@ Copyright 2024 Neodiensis
         <field name="action" ref="action_program_form" />
         <field name="display_in_home_menu">True</field>
         <field name="simulated_id" ref="menu_program_form" />
-    </record>    
+    </record>
 
         <!-- ROOMS 10 - Online Booking dans WEBSITE_BOOKING -->
 
@@ -100,7 +99,7 @@ Copyright 2024 Neodiensis
         <field name="display_in_home_menu">True</field>
         <field name="simulated_id" ref="base_setup.menu_config" />
     </record>
-    
+
         <!-- ADMIN 30 - Paramètres du site Web dans WEBSITE_SCHOOL_MANAGEMENT -->
 
         <!-- ADMIN 40 - Paramètres des formulaires dans SCHOOL_REGISTRATION -->
@@ -114,7 +113,10 @@ Copyright 2024 Neodiensis
         <field name="arch" type="xml">
             <xpath expr="//field[@name='sequence']" position="after">
                 <field name="display_in_home_menu" />
-                <field name="simulated_id" attrs="{'readonly': [('display_in_home_menu', '!=', True)]}" />
+                <field
+                    name="simulated_id"
+                    attrs="{'readonly': [('display_in_home_menu', '!=', True)]}"
+                />
             </xpath>
         </field>
     </record>

@@ -211,9 +211,8 @@
                                                 <div
                                                     class="o_kanban_record_title oe_kanban_details"
                                                 >
-                                                    <span id="is_valuated"></span><strong><field
-                                                            name="name"
-                                                        /></strong>
+                                                    <span id="is_valuated" /><strong
+                                                    ><field name="name" /></strong>
                                                 </div>
                                                 <div class="o_kanban_record_subtitle">
                                                     <small><field name="uid" /></small>
@@ -897,10 +896,7 @@
         <field name="arch" type="xml">
             <search string="Search Blocs">
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
-                <field
-                    name="uid"
-                    filter_domain="[('uid','ilike',self)]"
-                />
+                <field name="uid" filter_domain="[('uid','ilike',self)]" />
                 <filter
                     name="draft"
                     string="Draft"

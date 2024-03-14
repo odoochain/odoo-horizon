@@ -97,7 +97,10 @@
                                 <field name='employee' />
                                 <field name='lastname' />
             					<field name='firstname' />
-                                <field name="second_first_name" string="Autre(s) prénom(s)" />
+                                <field
+                                name="second_first_name"
+                                string="Autre(s) prénom(s)"
+                            />
                                 <field
                                 name="function"
                                 placeholder="e.g. Sales Director"
@@ -351,8 +354,15 @@
             				    <field name="title" options="{&quot;no_open&quot;: True}" />
             				    <field name="lang" />
             				    <field name="gender" />
-                                <field name="nationality_ids" widget="many2many_tags" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
-                                <field name="birthcountry" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                <field
+                                    name="nationality_ids"
+                                    widget="many2many_tags"
+                                    options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                />
+                                <field
+                                    name="birthcountry"
+                                    options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                />
             				  </group>
             				  <group>
                                 <field name="birthplace" />
@@ -362,7 +372,11 @@
             				  </group>
             				</group>
             			</page>
-                        <page name="access_titles_page" string="Titres d'accès" groups="school_management.group_employee">
+                        <page
+                        name="access_titles_page"
+                        string="Titres d'accès"
+                        groups="school_management.group_employee"
+                    >
                             <group>
                                 <field name="admission_exam_date" />
                                 <field name="access_titles_ids" mode="tree">
@@ -380,7 +394,11 @@
                             </group>
                         </page>
 
-                        <page name="erasmus_page" string="Divers" groups="school_management.group_employee">
+                        <page
+                        name="erasmus_page"
+                        string="Divers"
+                        groups="school_management.group_employee"
+                    >
                             <group>
                                 <field name="memoir_titles_ids">
                                     <tree>
@@ -428,11 +446,14 @@
                         <field name="title" />
                         <field name="establishment" />
                         <field name="city" />
-                        <field name="country_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                        <field
+                            name="country_id"
+                            options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                        />
                         <field name="date" />
                         <field name="type" />
                     </group>
-                    </sheet> 
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -448,13 +469,16 @@
                     <group col="2">
                         <field name="establishment" />
                         <field name="city" />
-                        <field name="country_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                        <field
+                            name="country_id"
+                            options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                        />
                         <field name="start_date" />
                         <field name="end_date" />
                         <field name="language" />
                         <field name="country" />
                     </group>
-                    </sheet> 
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -470,17 +494,20 @@
                     <group col="2">
                         <field name="establishment" />
                         <field name="city" />
-                        <field name="country_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                        <field
+                            name="country_id"
+                            options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                        />
                         <field name="start_date" />
                         <field name="end_date" />
                         <field name="country" />
                     </group>
-                    </sheet> 
+                    </sheet>
                 </form>
             </field>
         </record>
 
-       
+
         <!-- Top menu item -->
         <menuitem
         name="Contacts"
