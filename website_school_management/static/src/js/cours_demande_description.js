@@ -1,29 +1,6 @@
 odoo.define("website_school_management.cours_details", function (require) {
     "use strict";
 
-    const btn = document.querySelector("#btn_request_course_details");
-    if (btn) {
-        btn.addEventListener("click", (event) => {
-            event.preventDefault();
-
-            var route = "/cours/cours_demande_description";
-            var vals = {
-                email: document.getElementById("request_email").value,
-                first_name: document.getElementById("request_first_name").value,
-                last_name: document.getElementById("request_last_name").value,
-                course_id: document.getElementById("request_course_id").value,
-            };
-
-            getAjaxJsonRpc(route, vals, function (data) {
-                if (data.result === "success") {
-                    displaySuccessMessage();
-                } else {
-                    displayErrorMessage();
-                }
-            });
-        });
-    }
-
     function getAjaxJsonRpc(route, vals, callback) {
         var ajax = require("web.ajax");
         ajax.jsonRpc(route, "call", vals).then(function (data) {
@@ -46,5 +23,28 @@ odoo.define("website_school_management.cours_details", function (require) {
         if (p) {
             p.innerHTML = "Une erreur est survenue. Veuillez réessayer plus tard.";
         }
+    }
+
+    const btn = document.querySelector("#btn_request_course_details");
+    if (btn) {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            var route = "/cours/cours_demande_description";
+            var vals = {
+                email: document.getElementById("request_email").value,
+                first_name: document.getElementById("request_first_name").value,
+                last_name: document.getElementById("request_last_name").value,
+                course_id: document.getElementById("request_course_id").value,
+            };
+
+            getAjaxJsonRpc(route, vals, function (data) {
+                if (data.result === "success") {
+                    displaySuccessMessage();
+                } else {
+                    displayErrorMessage();
+                }
+            });
+        });
     }
 });
