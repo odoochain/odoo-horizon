@@ -270,22 +270,22 @@
                 <field name="uid" />
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <filter
-                    name="draft"
-                    string="Draft"
-                    domain="[('state', 'in', ['draft'])]"
+                    string="Current Year"
+                    name="current"
+                    domain="[('bloc_ids.year_sequence','=','current')]"
                 />
                 <filter
-                    name="published"
-                    string="Published"
-                    domain="[('state', 'not in', ['draft'])]"
+                    string="Previous Year"
+                    name="previous"
+                    domain="[('bloc_ids.year_sequence','=','previous')]"
                 />
                 <filter
-                    string="Archived"
-                    name="inactive"
-                    domain="[('active','=',False)]"
+                    string="Next Year"
+                    name="next"
+                    domain="[('bloc_ids.year_sequence','=','next')]"
                 />
                 <separator />
-                    <filter
+                <filter
                     name="progress"
                     string="Progress"
                     domain="[('state', 'in', ['progress'])]"
@@ -300,21 +300,15 @@
                     string="Abandonned"
                     domain="[('state', 'in', ['abandoned'])]"
                 />
-                <separator />
                 <filter
-                    string="Current Year"
-                    name="current"
-                    domain="[('bloc_ids.year_sequence','=','current')]"
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', 'in', ['draft'])]"
                 />
                 <filter
-                    string="Previous Year"
-                    name="previous"
-                    domain="[('bloc_ids.year_sequence','=','previous')]"
-                />
-                <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('bloc_ids.year_sequence','=','next')]"
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
                 />
                 <separator />
                 <filter
@@ -502,6 +496,22 @@
                 <field name="source_bloc_id" string="Programme" />
                 <field name="source_course_id" string="Activité" />
                 <filter
+                    string="Current Year"
+                    name="current"
+                    domain="[('year_sequence','=','current')]"
+                />
+                <filter
+                    string="Previous Year"
+                    name="previous"
+                    domain="[('year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('year_sequence','=','next')]"
+                />
+                <separator />
+                <filter
                     name="bloc_1"
                     string="Bloc 1"
                     domain="[('source_bloc_level', '=', 1)]"
@@ -536,22 +546,6 @@
                     string="No teacher"
                     name="no_teacher"
                     domain="[('teacher_id','=', False)]"
-                />
-                <separator />
-                <filter
-                    string="Current Year"
-                    name="current"
-                    domain="[('year_sequence','=','current')]"
-                />
-                <filter
-                    string="Previous Year"
-                    name="previous"
-                    domain="[('year_sequence','=','previous')]"
-                />
-                <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('year_sequence','=','next')]"
                 />
                 <separator />
                 <filter
@@ -898,6 +892,22 @@
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <field name="uid" filter_domain="[('uid','ilike',self)]" />
                 <filter
+                    string="Current Year"
+                    name="current"
+                    domain="[('year_sequence','=','current')]"
+                />
+                <filter
+                    string="Previous Year"
+                    name="previous"
+                    domain="[('year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('year_sequence','=','next')]"
+                />
+                <separator />
+                <filter
                     name="draft"
                     string="Draft"
                     domain="[('state', 'in', ['draft'])]"
@@ -955,22 +965,6 @@
                     name="theatre"
                     string="Théâtre"
                     domain="[('source_bloc_domain_id', '=', 2)]"
-                />
-                <separator />
-                <filter
-                    string="Current Year"
-                    name="current"
-                    domain="[('year_sequence','=','current')]"
-                />
-                <filter
-                    string="Previous Year"
-                    name="previous"
-                    domain="[('year_sequence','=','previous')]"
-                />
-                <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('year_sequence','=','next')]"
                 />
                 <group expand="1" string="Group By">
                     <filter
@@ -1204,6 +1198,22 @@
                 <field name="source_course_group_id" string="Activité" />
                 <field name="responsible_id" string="Responsable de l'UE" />
                 <filter
+                    string="Current Year"
+                    name="current"
+                    domain="[('year_sequence','=','current')]"
+                />
+                <filter
+                    string="Previous Year"
+                    name="previous"
+                    domain="[('year_sequence','=','previous')]"
+                />
+                <filter
+                    string="Next Year"
+                    name="next"
+                    domain="[('year_sequence','=','next')]"
+                />
+                <separator />
+                <filter
                     name="draft"
                     string="Draft"
                     domain="[('state', 'in', ['draft'])]"
@@ -1243,22 +1253,6 @@
                     name="agg"
                     string="Agregation"
                     domain="[('source_bloc_level', '=', 6)]"
-                />
-                <separator />
-                <filter
-                    string="Current Year"
-                    name="current"
-                    domain="[('year_sequence','=','current')]"
-                />
-                <filter
-                    string="Previous Year"
-                    name="previous"
-                    domain="[('year_sequence','=','previous')]"
-                />
-                <filter
-                    string="Next Year"
-                    name="next"
-                    domain="[('year_sequence','=','next')]"
                 />
                 <separator />
                 <filter

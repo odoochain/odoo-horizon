@@ -559,6 +559,9 @@
                     string="Tag"
                     filter_domain="[('category_id','ilike', self)]"
                 />
+                <field
+                    name="id"
+                />
                 </search>
             </field>
         </record>
