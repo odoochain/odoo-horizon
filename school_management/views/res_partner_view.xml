@@ -554,27 +554,6 @@
                     domain="[('active','=',False),('type','=','contact')]"
                 />
                     <separator />
-                    <filter
-                    string="Registered current"
-                    name="registered_cur"
-                    domain="[('year_sequence','=','current')]"
-                />
-                    <filter
-                    string="Registered previous"
-                    name="registered_prev"
-                    domain="[('year_sequence','=','previous')]"
-                />
-                    <filter
-                    string="Registered next"
-                    name="registered_next"
-                    domain="[('year_sequence','=','next')]"
-                />
-                    <filter
-                    string="Never registered"
-                    name="registered_never"
-                    domain="[('year_sequence','=','never')]"
-                />
-                    <separator />
                    <field
                     name="category_id"
                     string="Tag"
