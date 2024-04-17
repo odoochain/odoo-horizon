@@ -555,7 +555,7 @@
                 />
                 <filter
                     name="active"
-                    string="Active"
+                    string="En cours"
                     domain="[('bloc_id.state','!=','abandoned')]"
                 />
                 <group expand="1" string="Group By">
