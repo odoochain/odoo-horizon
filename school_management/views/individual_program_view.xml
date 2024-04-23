@@ -492,9 +492,7 @@
                 <field name="name" />
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <field name="teacher_id" />
-                <field name="bloc_id" />
                 <field name="source_bloc_id" string="Programme" />
-                <field name="source_course_id" string="Activité" />
                 <filter
                     string="Current Year"
                     name="current"
@@ -584,6 +582,11 @@
                         string="Track"
                         name="source_bloc_track_id_group"
                         context="{'group_by':'source_bloc_track_id'}"
+                    />
+                    <filter
+                        string="Speciality"
+                        name="source_bloc_speciality_id_group"
+                        context="{'group_by':'source_bloc_speciality_id'}"
                     />
                 </group>
             </search>
@@ -891,6 +894,7 @@
             <search string="Search Blocs">
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
                 <field name="uid" filter_domain="[('uid','ilike',self)]" />
+                <field name="source_bloc_id" string="Programme" />
                 <filter
                     string="Current Year"
                     name="current"
@@ -908,14 +912,44 @@
                 />
                 <separator />
                 <filter
+                    name="irregular"
+                    string="Irregular"
+                    domain="[('state', 'in', ['irregular'])]"
+                />
+                <filter
                     name="draft"
                     string="Draft"
                     domain="[('state', 'in', ['draft'])]"
                 />
                 <filter
-                    name="published"
-                    string="Published"
-                    domain="[('state', 'not in', ['draft'])]"
+                    name="progress"
+                    string="In progress"
+                    domain="[('state', 'in', ['progress'])]"
+                />
+                <filter
+                    name="postponed"
+                    string="Postponed"
+                    domain="[('state', 'in', ['postponed'])]"
+                />
+                <filter
+                    name="awarded_first_session"
+                    string="Awarded first session"
+                    domain="[('state', 'in', ['awarded_first_session'])]"
+                />
+                <filter
+                    name="awarded_second_session"
+                    string="Awarded second session"
+                    domain="[('state', 'in', ['awarded_second_session'])]"
+                />
+                <filter
+                    name="failed"
+                    string="Failed"
+                    domain="[('state', 'in', ['failed'])]"
+                />
+                <filter
+                    name="abandonned"
+                    string="Abandonned"
+                    domain="[('state', 'in', ['abandonned'])]"
                 />
                 <filter
                     string="Archived"
@@ -923,8 +957,6 @@
                     domain="[('active','=',False)]"
                 />
                 <separator />
-                <field name="source_bloc_id" string="Programme" />
-                <field name="source_bloc_domain_id" />
                 <filter
                     name="bloc_1"
                     string="Bac 1"
@@ -1109,7 +1141,7 @@
         <field name="arch" type="xml">
             <tree create="0">
                 <field name="uid" />
-                <field name="source_course_group_uid" />
+                <field name="source_course_group_uid" string="Code UE" />
                 <field name="year_id" />
                 <field name="student_id" />
                 <field name="name" />
@@ -1193,9 +1225,10 @@
         <field name="model">school.individual_course_group</field>
         <field name="arch" type="xml">
             <search string="Search Courses">
+                <field name="source_course_group_uid" string="Code UE" />
                 <field name="uid" string="UID" />
                 <field name="student_id" domain="[('type', '=', 'contact')]" />
-                <field name="source_course_group_id" string="Activité" />
+                <field name="source_course_group_id" string="Nom" />
                 <field name="responsible_id" string="Responsable de l'UE" />
                 <filter
                     string="Current Year"
@@ -1263,6 +1296,11 @@
                 <separator />
                 <group expand="1" string="Group By">
                     <filter
+                        string="State"
+                        name="state_group"
+                        context="{'group_by':'state'}"
+                    />
+                    <filter
                         string="Domain"
                         name="source_bloc_domain_id_group"
                         context="{'group_by':'source_bloc_domain_id'}"
@@ -1281,6 +1319,11 @@
                         string="Track"
                         name="source_bloc_track_id_group"
                         context="{'group_by':'source_bloc_track_id'}"
+                    />
+                    <filter
+                        string="Speciality"
+                        name="source_bloc_speciality_id_group"
+                        context="{'group_by':'source_bloc_speciality_id'}"
                     />
                 </group>
             </search>
@@ -1322,7 +1365,7 @@
         <field name="res_model">school.individual_course</field>
 
         <field name="view_mode">tree,form</field>
-        <field name="context">{"search_default_current":1}</field>
+        <field name="context">{"search_default_current":1, "search_default_active":1}</field>
         <field name="search_view_id" ref="view_individual_courses_filter" />
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">

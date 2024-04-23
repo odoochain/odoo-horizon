@@ -191,11 +191,11 @@
         <field name="model">school.course_group</field>
         <field name="arch" type="xml">
             <search string="Search Course Group">
+                <field name="uid" string="Code UE" />
                 <field
                     name="name"
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
-                <field name="uid" filter_domain="[('uid','ilike',self)]" />
                 <field
                     name="responsible_id"
                     filter_domain="[('responsible_id','ilike',self)]"
@@ -335,6 +335,7 @@
             <tree create="0">
                 <field name="uid" />
                 <field name="name" />
+                <field name="course_group_uid" />
                 <field name="hours" />
                 <field name="credits" />
                 <field name="teacher_ids" widget="many2many_tags" />
@@ -435,6 +436,7 @@
                     filter_domain="['|',('name','ilike',self),('uid','ilike',self)]"
                 />
                 <field name="uid" filter_domain="[('uid','ilike',self)]" />
+                <field name="course_group_uid" filter_domain="[('course_group_uid','ilike',self)]" />
                 <field
                     name="responsible_id"
                     filter_domain="[('responsible_id','ilike',self)]"
