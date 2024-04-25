@@ -21,16 +21,21 @@
 ##############################################################################
 -->
 <odoo>
-<template
-        id="hz_web_menu"
-        inherit_id="website.layout"
-        name="Horizon Home Page"
-        priority="100"
-    >
-        <xpath expr="//div[hasclass('o_frontend_to_backend_apps_menu')]" position="replace">
-            <div class="dropdown-menu o_frontend_to_backend_apps_menu o_test_tm" role="menu">
-                <a role="menuitem" class="dropdown-item" href="/web">Accès back-office</a>
+    <template id="file_404" name="File not found">
+        <t t-call="website.layout"> <!-- Affiche le layout du site web -->
+            <div class="o_not_editable bg-100 pt40">
+                <div class="container">
+                    <div class="text-center my-5">
+                        <h1>File not found</h1>
+                        <p>Sorry, the file you are trying to access cannot be found.</p>
+                        <a
+                            class="btn btn-primary btn_cta my-5"
+                            href="/"
+                        >Back to home page</a>
+                    </div>
+                </div>
+                <hr/>
             </div>
-        </xpath>
+        </t>
     </template>
 </odoo>

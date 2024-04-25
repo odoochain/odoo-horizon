@@ -231,7 +231,7 @@ class GoogleDriveService(models.Model):
             ).execute()
         except googleapiclient.errors.Error as error:
             raise UserError(
-                _("Error creating the file in Google Drive : %s" % error)
+                _("Error renaming the file in Google Drive : %s" % error)
             ) from error
 
     def delete_file(self, google_drive_file):
@@ -245,8 +245,23 @@ class GoogleDriveService(models.Model):
             ).execute()
         except googleapiclient.errors.Error as error:
             raise UserError(
-                _("Error creating the file in Google Drive : %s" % error)
+                _("Error deleting the file in Google Drive : %s" % error)
             ) from error
+        
+    def get_file(self, google_drive_file):
+        drive = googleapiclient.discovery.build(
+            API_SERVICE_NAME, API_VERSION, credentials=self._get_credential()
+        )
+        _logger.info("Get %s" % (google_drive_file.googe_drive_id))
+        try:
+            content = drive.files().get_media(
+                fileId=google_drive_file.googe_drive_id, supportsAllDrives=True
+            ).execute()
+            return content
+        except googleapiclient.errors.Error as error:
+            raise UserError(
+                _("Error reading the file in Google Drive : %s" % error)
+            ) from error    
 
     def get_files_from_folder_id(self, folderId):
 

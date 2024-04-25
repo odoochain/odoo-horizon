@@ -23,7 +23,12 @@ import logging
 import werkzeug.utils
 
 from odoo import http
-from odoo.http import request
+from odoo.http import Response, request
+import io
+try:
+    from werkzeug.utils import send_file
+except ImportError:
+    from odoo.tools._vendor.send_file import send_file
 
 _logger = logging.getLogger(__name__)
 
@@ -44,3 +49,24 @@ class GoogleServiceController(http.Controller):
     def google_drive_service_refresh_token(self, redirect=None, *args, **kw):
         _logger.info("Refresh Token response : %s" % (request))
         return "done"
+    
+    @http.route(
+        "/google_documents/view_file/<string:google_drive_file_id>",
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def google_drive_view_file(self, google_drive_file_id, redirect=None, **post):
+        google_drive_file = request.env["google_drive_file"].sudo().search([("googe_drive_id", "=", google_drive_file_id)]) # Attention: faute de frappe dans le nom du champ gooGE_drive_id ! 
+        # TODO: Check if the user can access the file (security purpose)
+        if google_drive_file:
+            google_service = request.env.company.google_drive_id
+            try:
+                google_drive_file_bytes = google_service.get_file(google_drive_file)
+                google_drive_file_content = io.BytesIO(google_drive_file_bytes)
+            except:
+                return Response(template="google_documents.file_404", status=404)
+            if google_drive_file_content:
+                return send_file(google_drive_file_content, request.httprequest.environ,google_drive_file.mimeType,False,google_drive_file.name)
+        
+        return Response(template="google_documents.file_404", status=404)
