@@ -63,8 +63,8 @@ class PreRequisit(models.Model):
     name = fields.Char(
         related="course_id.name", string="Course Group Name", store=False
     )  # Pour recherche
-    uid = fields.Char(
-        related="course_id.uid", string="Course Group UID", store=False
+    course_group_uid = fields.Char(
+        related="course_id.uid", string="Code UE", store=False
     )  # Pour recherche
 
 
@@ -78,4 +78,4 @@ class CoRequisit(models.Model):
     name = fields.Char(
         related="course_id.name", string="Course Group Name", store=False
     )  # Pour recherche
-    uid = fields.Char(related="course_id.uid", string="Course Group UID", store=False)
+    course_group_uid = fields.Char(related="course_id.uid", string="Code UE", store=False)
