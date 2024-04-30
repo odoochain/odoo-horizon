@@ -93,6 +93,11 @@ class GoogleDriveFolderMixin(models.AbstractModel):
         "google_drive_file", "res_id", string="Google Drive Files"
     )
 
+    def check_access(self):
+        # By default
+        _logger.debug("check_access() - Default behavior, can be overridden within classes implementing this mixin")
+        return True
+    
 
 class GoogleDriveFile(models.Model):
     _name = "google_drive_file"
@@ -103,7 +108,7 @@ class GoogleDriveFile(models.Model):
     name = fields.Char("Name")
     url = fields.Char("Url")
     mimeType = fields.Char("Mime Type")
-    googe_drive_id = fields.Char("Google Drive Id")
+    googe_drive_id = fields.Char("Google Drive Id") # WARNING TYPO "googe" !
 
     def _auto_init(self):
         res = super(GoogleDriveFile, self)._auto_init()
@@ -114,7 +119,23 @@ class GoogleDriveFile(models.Model):
             ["res_model", "res_id"],
         )
         return res
+    
+    def check_access(self):
+        # Check if the current user can access the referenced object.
+        try:
+            object = self.env[self.res_model].browse(self.res_id)
+        except:
+            object = None 
+        if not object:
+            _logger.warning("User with ID %s cannot access to %s(%s)" % (self.env.context.get('uid'), self.res_model, self.res_id))
+            return False
 
+        # Ask the referenced object itself if the access is granted (Model-dependent business logic).
+        try:
+            return object.check_access()
+        except BaseException as err:
+            _logger.error("Cannot call check_access() on %s, maybe it does not implement google_drive_folder.mixin : %s" % (self.res_model, str(err)))
+            return False
 
 class Company(models.Model):
     _inherit = "res.company"

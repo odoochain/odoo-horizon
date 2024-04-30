@@ -57,9 +57,11 @@ class GoogleServiceController(http.Controller):
         website=True,
     )
     def google_drive_view_file(self, google_drive_file_id, redirect=None, **post):
-        google_drive_file = request.env["google_drive_file"].sudo().search([("googe_drive_id", "=", google_drive_file_id)]) # Attention: faute de frappe dans le nom du champ gooGE_drive_id ! 
-        # TODO: Check if the user can access the file (security purpose)
+        google_drive_file = request.env["google_drive_file"].sudo().search([("googe_drive_id", "=", google_drive_file_id)]) # WARNING TYPO "googe" !
         if google_drive_file:
+            if not google_drive_file.check_access():
+                _logger.error("Forbidden access to Google Drive file %s by user with ID %s" % (google_drive_file.googe_drive_id, request.session.uid))
+                return Response(template="google_documents.file_404", status=404)
             google_service = request.env.company.google_drive_id
             try:
                 google_drive_file_bytes = google_service.get_file(google_drive_file)
