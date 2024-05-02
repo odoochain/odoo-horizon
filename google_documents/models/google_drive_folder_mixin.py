@@ -133,7 +133,7 @@ class GoogleDriveFile(models.Model):
         # Ask the referenced object itself if the access is granted (Model-dependent business logic).
         try:
             return object.check_access()
-        except BaseException as err:
+        except AttributeError as err:
             _logger.error("Cannot call check_access() on %s, maybe it does not implement google_drive_folder.mixin : %s" % (self.res_model, str(err)))
             return False
 
