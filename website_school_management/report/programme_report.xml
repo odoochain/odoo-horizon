@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-      <record id="programme_page" model="report.paperformat">
-            <field name="name">Custom Paper</field>
-            <field name="default" eval="True"/>
-            <field name="format">custom</field>
-            <field name="page_height">297</field>
-            <field name="page_width">210</field>
-            <field name="orientation">Portrait</field>
-            <field name="margin_top">30</field>
-            <field name="margin_bottom">13</field>
-            <field name="margin_left">10</field>
-            <field name="margin_right">10</field>
-            <field name="header_line" eval="False"/>
-            <field name="header_spacing">32</field>
-            <field name="dpi">80</field>
-      </record>
 
-    <!-- Création action report pdf -->
+    <!-- Creation action report pdf -->
       <record id="action_impression_programme_id" model="ir.actions.report">
             <field name="name">Programme de cours PDF</field>
             <field name="model">school.program</field>
@@ -25,10 +10,10 @@
             <field name="print_report_name">'Programme de cours'</field>
             <field name="binding_model_id" ref="model_school_program"/>
             <field name="binding_type">report</field>
-            <field name="paperformat_id" ref="programme_page"/>
+            <field name="paperformat_id" ref="school_management.pdf_a4"/>
       </record>  
 
-     <!-- Tempate PDF report -->
+     <!-- Program report -->
       <template id="report_program">
             <t t-call="web.html_container">
                     <t t-foreach="docs" t-as="program">
@@ -43,7 +28,7 @@
                                           <td class="text-capitalized pt-1 pb-1 pr-2" t-out="program.year_id.name"/>
                                     </tr>
                               </table>
-                              <div class="row" style="gap: 2mm;">
+                              <div class="row">
                                     <div>
                                           <table class="font-size-0_8 mb-5 case mr-3">
                                                 <tr class="border-bottom-grey">
@@ -61,7 +46,7 @@
                                           </table>
                                     </div>
                                     <div>
-                                          <table  class="font-size-0_8 mb-5 case mr-3">
+                                          <table  class="font-size-0_8 mb-5 case">
                                           <tr class="border-bottom-grey">
                                                 <th class="text-align-right pt-1 pl-2 pr-3 colored-secondary">Spécialité</th>
                                                 <td class="w-100 text-capitalized" t-out="program.speciality_id.name.lower()"/>
@@ -130,7 +115,7 @@
                                                       <t t-set="display_header" t-value="True"/>
                                                       <t t-foreach="bloc.course_group_ids.sorted(key=lambda r: r.cg_grouping_sequence)" t-as="course_group">
                                                             <t t-if="(course_group.cg_grouping.id and course_group.cg_grouping.id != course_group_group) or display_header == True">
-                                                                  <tr class="table-row-title border-top-grey border-bottom-grey">
+                                                                  <tr class="table-row-title">
                                                                         <th class="colored-grey font-size-0_9 p-2 text-align-left text-regular" colspan="9">
                                                                               <t t-if="course_group.cg_grouping.id">
                                                                                     <t t-out="course_group.cg_grouping.name"/>
@@ -144,21 +129,24 @@
                                                             </t>
                                                             <tbody class="font-size-0_8">
                                                                   <tr class="border-top-grey">
-                                                                        <td class="p-2 pb-0 text-bold colored-primary font-size-0_9 white-space-nowrap" t-out="course_group.ue_id"/>
-                                                                        <td class="p-2 pb-0 colored-primary"  t-out="course_group.title"/>
-                                                                        <td class="p-2 pb-0 colored-primary text-italic colored-primary font-size-0_8" t-out="course_group.responsible_id.name"/>
-                                                                        <td class="p-2 pb-0 colored-primary" t-out="course_group.total_hours"/>
-                                                                        <td class="p-2 pb-0 colored-primary" t-out="course_group.total_credits"/>
+                                                                        <td class="p-2 text-bold colored-primary white-space-nowrap" t-out="course_group.ue_id"/>
+                                                                        <td class="p-2 colored-primary"  t-out="course_group.title"/>
+                                                                        <td class="p-2 colored-primary text-italic colored-primary" t-out="course_group.responsible_id.name"/>
+                                                                        <td class="p-2 colored-primary" t-out="course_group.total_hours"/>
+                                                                        <td class="p-2 colored-primary" t-out="course_group.total_credits"/>
                                                                         <td></td>
-                                                                        <td class="p-2 pb-0 colored-primary font-size-0_8">
+                                                                        <td class="p-2 colored-primary">
                                                                               <t t-if="course_group.pre_requisit_ids">
-                                                                                    <span t-out="', '.join(map( lambda x: str(x.preriquisit_id.uid), course_group.pre_requisit_ids))"/>
+                                                                                    <t t-foreach="map( lambda x: str(x.preriquisit_id.uid), course_group.pre_requisit_ids)" t-as="pre_requisit">
+                                                                                          <t t-if="pre_requisit_index != 0">, </t>
+                                                                                          <span class="white-space-nowrap" t-out="pre_requisit"/>
+                                                                                    </t>
                                                                               </t>
                                                                               <t t-if="not(course_group.pre_requisit_ids)">
                                                                                     /
                                                                               </t>
                                                                         </td>
-                                                                        <td class="p-2 pb-0 colored-primary font-size-0_8">
+                                                                        <td class="p-2 colored-primary">
                                                                               <t t-if="course_group.co_requisit_ids">
                                                                                     <span t-out="', '.join(map( lambda x: str(x.coriquisit_id.uid), course_group.co_requisit_ids))"/>
                                                                               </t>
@@ -170,15 +158,15 @@
                                                                   </tr>
                                                                   <t t-foreach="course_group.course_ids" t-as="course">
                                                                         <tr>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1"></td>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1" t-out="course.title" t-att-href="'/cours/%s' % slug(course)"      target="new"/>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1"></td>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1" t-out="course.hours"/>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1" t-out="course.credits"/>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1" t-out="course.weight"/>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1"></td>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1"></td>
-                                                                              <td class="pt-1 pl-2 pr-2 pb-1">
+                                                                              <td class="p-2"></td>
+                                                                              <td class="p-2 border-top-light-grey" t-out="course.title" t-att-href="'/cours/%s' % slug(course)"      target="new"/>
+                                                                              <td class="p-2 border-top-light-grey"></td>
+                                                                              <td class="p-2 border-top-light-grey" t-out="course.hours"/>
+                                                                              <td class="p-2 border-top-light-grey" t-out="course.credits"/>
+                                                                              <td class="p-2 border-top-light-grey" t-out="course.weight"/>
+                                                                              <td class="p-2 border-top-light-grey"></td>
+                                                                              <td class="p-2 border-top-light-grey"></td>
+                                                                              <td class="p-2 border-top-light-grey">
                                                                                     <t t-if="course.quadri">
                                                                                           <t t-out="course.quadri"/>
                                                                                     </t>
