@@ -296,25 +296,25 @@
                 vertical-align: top;
             }
             .case {
-                border: 1px solid #acacac;
+                border: 1px solid <t t-out="secondary" />;
             }
             .border-top-light-grey {
-                border-top: 1px solid #dcdcdc !important;
+                border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
             }
             .border-bottom-light-grey {
-                border-bottom: 1px solid #dcdcdc !important;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
             }
             .border-top-grey {
-                border-top: 1px solid #acacac !important;
+                border-top: 1px solid <t t-out="secondary" /> !important;
             }
             .border-bottom-grey {
-                border-bottom: 1px solid #acacac !important;
+                border-bottom: 1px solid <t t-out="secondary" /> !important;
             }
             .border-left-grey {
-                border-left: 1px solid #acacac !important;
+                border-left: 1px solid <t t-out="secondary" /> !important;
             }
             .border-right-grey {
-                border-right: 1px solid #acacac !important;
+                border-right: 1px solid <t t-out="secondary" /> !important;
             }
             .text-capitalized {
                 text-transform: capitalize;
@@ -431,10 +431,11 @@
         name="school_management.report_attendance_for_student_content"
         file="school_management.report_attendance_for_student_content"
         attachment_use="True"
-        attachment="object.name+'-ATT-'+time.strftime('%d-%m-%Y')"
+        attachment="object.name+' - Attestation de frequentation - '+time.strftime('%d-%m-%Y')"
     />
 
     <record id="report_attendance_for_student" model="ir.actions.report">
+        <field name="print_report_name">object.name+' - Attestation de fréquentation - '+time.strftime('%d-%m-%Y')</field>
         <field name="paperformat_id" ref="school_management.pdf_a4"/>
     </record>
 
@@ -512,10 +513,12 @@
     />
 
     <record id="report_individual_bloc_draft" model="ir.actions.report">
+        <field name="print_report_name">object.name+' - PAE Brouillon - '+time.strftime('%d-%m-%Y')</field>
         <field name="paperformat_id" ref="school_management.pdf_a4"/>
     </record>
 
     <record id="report_individual_bloc" model="ir.actions.report">
+        <field name="print_report_name">object.name+' - PAE - '+time.strftime('%d-%m-%Y')</field>
         <field name="paperformat_id" ref="school_management.pdf_a4"/>
     </record>
 
