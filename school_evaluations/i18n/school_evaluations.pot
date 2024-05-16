@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 13:08+0000\n"
-"PO-Revision-Date: 2024-03-14 13:08+0000\n"
+"POT-Creation-Date: 2024-05-14 13:52+0000\n"
+"PO-Revision-Date: 2024-05-14 13:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -60,24 +60,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
 msgid ""
 "<br/>\n"
-"                                  <br/>\n"
-"                                  A réussi en l’année académique"
-msgstr ""
-
-#. module: school_evaluations
-#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
-#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
-msgid ""
-"<br/>\n"
-"                                  <br/>\n"
-"                                  Né"
+"                                Né"
 msgstr ""
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
 msgid ""
 "<br/>\n"
-"                                  son programme en"
+"                                son programme en"
 msgstr ""
 
 #. module: school_evaluations
@@ -125,6 +115,12 @@ msgid "A acquis ou valorisé"
 msgstr ""
 
 #. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "A réussi en l'année académique"
+msgstr ""
+
+#. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
 msgid "A réussi l'ensemble de son PAE."
 msgstr ""
@@ -142,12 +138,8 @@ msgstr ""
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
-msgid "ATTESTATION DE RÉUSSITE"
-msgstr ""
-
-#. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
-msgid "ATTESTATION DE RÉUSSITE DE CYCLE"
+msgid "ATTESTATION DE RÉUSSITE"
 msgstr ""
 
 #. module: school_evaluations
@@ -230,6 +222,11 @@ msgid "Annual Result"
 msgstr ""
 
 #. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
+msgid "Aperçu du cycle"
+msgstr ""
+
+#. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_eval_form
 #: model_terms:ir.ui.view,arch_db:school_evaluations.school_individual_course_form_inherited
 msgid "Archive"
@@ -245,6 +242,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_bloc_filter_eval
 msgid "Awarded"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "Boulevard Piercot, 29 - 4000 Liège"
 msgstr ""
 
 #. module: school_evaluations
@@ -307,11 +310,6 @@ msgid "Comments"
 msgstr ""
 
 #. module: school_evaluations
-#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_program_eval_filter
-msgid "Completed"
-msgstr ""
-
-#. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__type__c
 msgid "Complex"
 msgstr ""
@@ -346,7 +344,7 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
-msgid "Conservatoire royal de Liège<br/>Boulevard Piercot, 29, 4000 LIÈGE"
+msgid "Conservatoire royal de Liège"
 msgstr ""
 
 #. module: school_evaluations
@@ -395,7 +393,7 @@ msgstr ""
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
-msgid "Cycle non réussi, actuellement au stade de :"
+msgid "Cycle non réussi, actuellement au stade «"
 msgstr ""
 
 #. module: school_evaluations
@@ -884,7 +882,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
 msgid ""
-"Je soussigné, NATHANAËL HARCQ, Directeur du Conservatoire Royal de Liège, "
+"Je soussigné, Nathanaël HARCQ, Directeur du Conservatoire Royal de Liège, "
 "certifie que"
 msgstr ""
 
@@ -944,14 +942,10 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: school_evaluations
-#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
-#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
-msgid "Le Directeur"
-msgstr ""
-
-#. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
 msgid "Le Directeur,"
 msgstr ""
 
@@ -984,12 +978,6 @@ msgid "Moyenne :"
 msgstr ""
 
 #. module: school_evaluations
-#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
-#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
-msgid "NATHANAËL HARCQ"
-msgstr ""
-
-#. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__first_session_exception__np
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course__second_session_exception__np
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_group__final_result_exception__np
@@ -1003,6 +991,12 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.evaluation_summary_content
 msgid "Name"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_prog_content
+msgid "Nathanaël HARCQ"
 msgstr ""
 
 #. module: school_evaluations
@@ -1116,12 +1110,8 @@ msgid "Partial Result"
 msgstr ""
 
 #. module: school_evaluations
-#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_course_groups_grades_filter
-msgid "Pas de notes encodée"
-msgstr ""
-
-#. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_course_grades_filter
+#: model_terms:ir.ui.view,arch_db:school_evaluations.view_individual_course_groups_grades_filter
 msgid "Pas de notes encodées"
 msgstr ""
 
@@ -1163,7 +1153,7 @@ msgstr ""
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
-msgid "Programme non réussi, actuellement au stade de :"
+msgid "Programme non réussi, actuellement au stade «"
 msgstr ""
 
 #. module: school_evaluations
@@ -1171,6 +1161,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_course_group_eval_form
 #: model_terms:ir.ui.view,arch_db:school_evaluations.individual_program_eval_form
 msgid "Progress"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_content
+msgid "Rapport de délibération (annexe_content)"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_deliberation_annexe_program
+msgid "Rapport de délibération (annexe_program)"
 msgstr ""
 
 #. module: school_evaluations
@@ -1191,6 +1191,11 @@ msgstr ""
 #. module: school_evaluations
 #: model:ir.model.fields.selection,name:school_evaluations.selection__school_individual_course_summary__state__3_rejected
 msgid "Rejected"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_evaluation_for_student_content
+msgid "Relevé de notes"
 msgstr ""
 
 #. module: school_evaluations
@@ -1572,6 +1577,11 @@ msgid "le"
 msgstr ""
 
 #. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+msgid "nt"
+msgstr ""
+
+#. module: school_evaluations
 #: model:ir.actions.report,print_report_name:school_evaluations.report_success_certificate
 #: model:ir.actions.report,print_report_name:school_evaluations.report_success_certificate_prog
 msgid "object.name+'-CERT-'+time.strftime('%d-%m-%Y')+'.pdf'"
@@ -1615,7 +1625,7 @@ msgstr ""
 
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
-msgid "reste(nt) à obtenir pour compléter le programme."
+msgid "reste"
 msgstr ""
 
 #. module: school_evaluations
@@ -1626,4 +1636,9 @@ msgstr ""
 #. module: school_evaluations
 #: model_terms:ir.ui.view,arch_db:school_evaluations.report_individual_bloc_definition_content
 msgid "Étudiant·e :"
+msgstr ""
+
+#. module: school_evaluations
+#: model_terms:ir.ui.view,arch_db:school_evaluations.report_success_certificate_content
+msgid "à obtenir pour compléter le programme."
 msgstr ""

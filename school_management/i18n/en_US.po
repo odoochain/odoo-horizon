@@ -175,7 +175,7 @@ msgstr ""
 
 #. module: school_management
 #: model_terms:ir.ui.view,arch_db:school_management.report_attendance_for_student_content
-msgid "<u>Cours suivis dans la nouvelle structure:</u>"
+msgid "Cours suivis dans la nouvelle structure&amp;nbsp;:"
 msgstr ""
 
 #. module: school_management
